@@ -1,7 +1,11 @@
 CiviCRM Admin Utilities
 =======================
 
-*CiviCRM Admin Utilities* is a WordPress plugin that modifies CiviCRM's behaviour in single site and multisite installs
+*CiviCRM Admin Utilities* is a WordPress plugin that modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
+
+* Modifies the styling of the CiviCRM menu to fix a number of issues
+* Allows you to choose which Post Types the CiviCRM shortcode button appears on
+* In WordPress multisite, allows you to hide CiviCRM on sub-sites
 
 #### Notes ####
 
