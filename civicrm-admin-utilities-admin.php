@@ -50,7 +50,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	public function activate() {
 		
 		// kick out if we are re-activating
-		//if ( civicrm_admin_utilities_site_option_get( 'civicrm_admin_utilities_installed', 'false' ) == 'true' ) return;
+		if ( civicrm_admin_utilities_site_option_get( 'civicrm_admin_utilities_installed', 'false' ) == 'true' ) return;
 	
 		// store default settings
 		civicrm_admin_utilities_site_option_set( 'civicrm_admin_utilities_settings', $this->settings_get_defaults() );
