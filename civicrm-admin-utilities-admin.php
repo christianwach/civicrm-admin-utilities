@@ -425,6 +425,13 @@ class CiviCRM_Admin_Utilities_Admin {
 				</td>
 			</tr>
 		
+			<tr>
+				<th scope="row">'.__( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ).'</th>
+				<td>
+					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/upgrade&reset=1">' . __( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ).'</a>
+				</td>
+			</tr>
+		
 		</table>
 	
 		<hr>'."\n\n";
