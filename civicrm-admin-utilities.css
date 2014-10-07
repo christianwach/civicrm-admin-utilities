@@ -66,3 +66,17 @@ body #civicrm-menu li#crm-qsearch.activetarget
 	background-color: #000;
 }
 
+
+
+
+/*
+--------------------------------------------------------------------------------
+Misc CiviCRM style fixes for WordPress
+--------------------------------------------------------------------------------
+*/
+
+.crm-queue-runner-form-block
+{
+	margin-top: 20px;
+	margin-right: 20px;
+}
