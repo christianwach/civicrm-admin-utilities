@@ -75,6 +75,11 @@ Misc CiviCRM style fixes for WordPress
 --------------------------------------------------------------------------------
 */
 
+#crm-container, .crm-container 
+{
+	padding-top: 12px;
+}
+
 .crm-queue-runner-form-block
 {
 	margin-top: 20px;
