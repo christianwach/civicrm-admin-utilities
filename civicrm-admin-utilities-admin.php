@@ -312,7 +312,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		echo '
 		<h3>'.__( 'Style Options', 'civicrm-admin-utilities' ).'</h3>
 
-		<p>' . __( 'Personally, I find the CiviCRM menu rather cramped. Also, it does not obscure the underlying WordPress menu entirely. Check this option to apply some styling tweaks that make the menu look a little better.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Personally, I find the CiviCRM menu rather cramped andthe second-level menus do not align properly. Also, it does not obscure the underlying WordPress menu entirely. Check this option to apply some styling tweaks that make the menu look a little better. Requires the custom WordPress.php hook file to work.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
