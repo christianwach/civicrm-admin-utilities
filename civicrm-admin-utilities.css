@@ -4,7 +4,7 @@ CiviCRM admin menu style changes for WordPress
 --------------------------------------------------------------------------------
 */
 
-body #civicrm-menu 
+body #civicrm-menu
 {
 	height: 32px;
 }
@@ -22,7 +22,7 @@ html>body #root-menu-div div.outerbox
 	margin-top: 0;
 }
 
-body #civicrm-menu, 
+body #civicrm-menu,
 body #root-menu-div ul,
 #sort_name_navigation
 {
@@ -40,7 +40,7 @@ body #root-menu-div .menu-ul li.menu-separator
 	padding-bottom: 0;
 }
 
-body #root-menu-div div.menu-item 
+body #root-menu-div div.menu-item
 {
 	padding: 1px 0 1px 4px;
 	margin-right: 30px;
@@ -75,7 +75,7 @@ Misc CiviCRM style fixes for WordPress
 --------------------------------------------------------------------------------
 */
 
-#crm-container, .crm-container 
+#crm-container, .crm-container
 {
 	padding-top: 12px;
 }
