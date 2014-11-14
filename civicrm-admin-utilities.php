@@ -230,11 +230,27 @@ class CiviCRM_Admin_Utilities {
 		// is this a post type we want to allow the button on?
 		if ( ! in_array( $screen->post_type, $selected_types ) ) {
 
-			// not chosen, so remove Civi's actions
-			remove_action( 'media_buttons_context', array( civi_wp(), 'add_form_button' ) );
-			remove_action( 'media_buttons', array( civi_wp(), 'add_form_button' ), 100 );
-			remove_action( 'admin_enqueue_scripts', array( civi_wp(), 'add_form_button_js' ) );
-			remove_action( 'admin_footer', array( civi_wp(), 'add_form_button_html' ) );
+			// get Civi object
+			$civi = civi_wp();
+
+			// do we have the modal object?
+			if ( isset( $civi->modal ) AND is_object( $civi->modal ) ) {
+
+				// not chosen, so remove Civi's actions
+				remove_action( 'media_buttons_context', array( $civi->modal, 'add_form_button' ) );
+				remove_action( 'media_buttons', array( $civi->modal, 'add_form_button' ), 100 );
+				remove_action( 'admin_enqueue_scripts', array( $civi->modal, 'add_form_button_js' ) );
+				remove_action( 'admin_footer', array( $civi->modal, 'add_form_button_html' ) );
+
+			} else {
+
+				// not chosen, so remove Civi's actions
+				remove_action( 'media_buttons_context', array( $civi, 'add_form_button' ) );
+				remove_action( 'media_buttons', array( $civi, 'add_form_button' ), 100 );
+				remove_action( 'admin_enqueue_scripts', array( $civi, 'add_form_button_js' ) );
+				remove_action( 'admin_footer', array( $civi, 'add_form_button_html' ) );
+
+			}
 
 		}
 
