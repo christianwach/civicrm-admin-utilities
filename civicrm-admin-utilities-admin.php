@@ -578,6 +578,9 @@ class CiviCRM_Admin_Utilities_Admin {
 	/**
 	 * Clear CiviCRM caches
 	 *
+	 * Another way to do this might be:
+	 * CRM_Core_Invoke::rebuildMenuAndCaches(TRUE);
+	 *
 	 * @return void
 	 */
 	public function clear_caches() {
