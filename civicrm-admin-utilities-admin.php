@@ -169,7 +169,6 @@ class CiviCRM_Admin_Utilities_Admin {
 			// add the admin page to the Settings menu
 			$this->settings_page = add_options_page(
 
-				'settings.php',
 				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 				'manage_options',
@@ -268,6 +267,9 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * @return void
 	 */
 	public function admin_form_multisite_options() {
+
+		// bail if not network activated
+		if ( ! is_multisite() ) return;
 
 		// init checkbox
 		$main_site_only = '';
