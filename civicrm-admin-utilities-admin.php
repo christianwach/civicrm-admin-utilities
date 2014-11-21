@@ -490,6 +490,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			$civicrm_admin_utilities_main_site = '';
 			$civicrm_admin_utilities_menu = '';
 			$civicrm_admin_utilities_post_types = array();
+			$civicrm_admin_utilities_cache = '';
 
 			// get variables
 			extract( $_POST );
@@ -545,7 +546,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			$this->settings_save();
 
 			// did we ask to clear cache?
-			if ( $civicrm_admin_utilities_menu == '1' ) {
+			if ( $civicrm_admin_utilities_cache == '1' ) {
 
 				// clear them
 				$this->clear_caches();
