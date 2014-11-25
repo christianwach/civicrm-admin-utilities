@@ -169,7 +169,6 @@ class CiviCRM_Admin_Utilities_Admin {
 			// add the admin page to the Settings menu
 			$this->settings_page = add_options_page(
 
-				'settings.php',
 				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 				'manage_options',
