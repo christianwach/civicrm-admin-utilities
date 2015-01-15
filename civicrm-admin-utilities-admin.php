@@ -268,6 +268,9 @@ class CiviCRM_Admin_Utilities_Admin {
 	 */
 	public function admin_form_multisite_options() {
 
+		// bail if not network activated
+		if ( ! is_multisite() ) return;
+
 		// init checkbox
 		$main_site_only = '';
 		if ( $this->setting_get( 'main_site_only' ) == '1' ) $main_site_only = ' checked="checked"';
@@ -311,7 +314,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		echo '
 		<h3>'.__( 'Style Options', 'civicrm-admin-utilities' ).'</h3>
 
-		<p>' . __( 'Personally, I find the CiviCRM menu rather cramped andthe second-level menus do not align properly. Also, it does not obscure the underlying WordPress menu entirely. Check this option to apply some styling tweaks that make the menu look a little better. Requires the custom WordPress.php hook file to work.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Personally, I find the CiviCRM menu rather cramped andthe second-level menus do not align properly. Also, it does not obscure the underlying WordPress menu entirely. Check this option to apply some styling tweaks that make the menu look a little better.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
@@ -577,6 +580,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 	/**
 	 * Clear CiviCRM caches
+	 *
+	 * Another way to do this might be:
+	 * CRM_Core_Invoke::rebuildMenuAndCaches(TRUE);
 	 *
 	 * @return void
 	 */
