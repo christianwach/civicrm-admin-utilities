@@ -57,11 +57,6 @@ class CiviCRM_Admin_Utilities {
 	 */
 	function __construct() {
 
-		// late load Civi so we can prevent it if we want to
-		if ( ! defined( 'CIVICRM_LATE_LOAD' ) ) {
-			define( 'CIVICRM_LATE_LOAD', 9 );
-		}
-
 		// load our Admin utility class
 		require( CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm-admin-utilities-admin.php' );
 
@@ -273,9 +268,6 @@ class CiviCRM_Admin_Utilities {
 
 		// if not on main site
 		if ( is_multisite() AND ! is_main_site() ) {
-
-			// Uncomment the following to prevent Civi from loading at all
-			//remove_action( 'plugins_loaded', 'civi_wp', 9 );
 
 			// unhook menu item, but allow Civi to load
 			remove_action( 'admin_menu', array( civi_wp(), 'add_menu_items' ) );
