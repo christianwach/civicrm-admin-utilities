@@ -8,6 +8,7 @@ Version: 0.1
 Author URI: http://haystack.co.uk
 Text Domain: civicrm-admin-utilities
 Domain Path: /languages
+Depends: CiviCRM
 --------------------------------------------------------------------------------
 */
 
