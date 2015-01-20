@@ -212,13 +212,13 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		<div class="icon32" id="icon-options-general"><br/></div>
 
-		<h2>'.__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ).'</h2>
+		<h2>' . __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ) . '</h2>
 
 		<hr>
 
 		<form method="post" action="' . $url . '">
 
-		'.wp_nonce_field( 'civicrm_admin_utilities_admin_action', 'civicrm_admin_utilities_nonce', true, false ).'
+		' . wp_nonce_field( 'civicrm_admin_utilities_admin_action', 'civicrm_admin_utilities_nonce', true, false ) . '
 
 		';
 
@@ -255,7 +255,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		</form>
 
 		</div>
-		'."\n\n\n\n";
+		' . "\n\n\n\n";
 
 	}
 
@@ -312,23 +312,23 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// show sync
 		echo '
-		<h3>'.__( 'Style Options', 'civicrm-admin-utilities' ).'</h3>
+		<h3>' . __( 'Style Options', 'civicrm-admin-utilities' ) . '</h3>
 
 		<p>' . __( 'Personally, I find the CiviCRM menu rather cramped andthe second-level menus do not align properly. Also, it does not obscure the underlying WordPress menu entirely. Check this option to apply some styling tweaks that make the menu look a little better.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
 			<tr>
-				<th scope="row">'.__( 'Prettify CiviCRM', 'civicrm-admin-utilities' ).'</th>
+				<th scope="row">' . __( 'Prettify CiviCRM', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"' . $prettify_menu . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">'.__( 'Check this to prettify the CiviCRM menu.', 'civicrm-admin-utilities' ).'</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to prettify the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
 		</table>
 
-		<hr>'."\n\n";
+		<hr>' . "\n\n";
 
 	}
 
@@ -385,13 +385,13 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// show sync
 		echo '
-		<h3>'.__( 'Post Type Options', 'civicrm-admin-utilities' ).'</h3>
+		<h3>' . __( 'Post Type Options', 'civicrm-admin-utilities' ) . '</h3>
 
 		<p>' . __( 'Select which post types you want the CiviCRM shortcode button to appear on.', 'civicrm-admin-utilities' ) . '</p>
 
 		' . $options . '
 
-		<hr>'."\n\n";
+		<hr>' . "\n\n";
 
 	}
 
@@ -406,37 +406,37 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// show sync
 		echo '
-		<h3>'.__( 'Miscellaneous Utilities', 'civicrm-admin-utilities' ).'</h3>
+		<h3>' . __( 'Miscellaneous Utilities', 'civicrm-admin-utilities' ) . '</h3>
 
 		<p>' . __( 'Some useful functions.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
 			<tr>
-				<th scope="row">'.__( 'Clear Caches', 'civicrm-admin-utilities' ).'</th>
+				<th scope="row">' . __( 'Clear Caches', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_cache" id="civicrm_admin_utilities_cache" value="1" />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_cache">'.__( 'Check this to clear the CiviCRM caches.', 'civicrm-admin-utilities' ).'</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_cache">' . __( 'Check this to clear the CiviCRM caches.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row">'.__( 'Rebuild Menu', 'civicrm-admin-utilities' ).'</th>
+				<th scope="row">' . __( 'Rebuild Menu', 'civicrm-admin-utilities' ) . '</th>
 				<td>
-					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/menu/rebuild?reset=1">' . __( 'Click this to rebuild the CiviCRM menu.', 'civicrm-admin-utilities' ).'</a>
+					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/menu/rebuild?reset=1">' . __( 'Click this to rebuild the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</a>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row">'.__( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ).'</th>
+				<th scope="row">' . __( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ) . '</th>
 				<td>
-					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/upgrade&reset=1">' . __( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ).'</a>
+					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/upgrade&reset=1">' . __( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ) . '</a>
 				</td>
 			</tr>
 
 		</table>
 
-		<hr>'."\n\n";
+		<hr>' . "\n\n";
 
 	}
 
