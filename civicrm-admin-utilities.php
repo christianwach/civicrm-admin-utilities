@@ -4,7 +4,7 @@ Plugin Name: CiviCRM Admin Utilities
 Plugin URI: http://haystack.co.uk
 Description: Custom code to modify CiviCRM's behaviour
 Author: Christian Wach
-Version: 0.2
+Version: 0.2.1
 Author URI: http://haystack.co.uk
 Text Domain: civicrm-admin-utilities
 Domain Path: /languages
@@ -15,7 +15,7 @@ Depends: CiviCRM
 
 
 // set our version here
-define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.2' );
+define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.2.1' );
 
 // store reference to this file
 if ( !defined( 'CIVICRM_ADMIN_UTILITIES_FILE' ) ) {
