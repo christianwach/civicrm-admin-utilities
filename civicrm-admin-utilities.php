@@ -69,12 +69,6 @@ class CiviCRM_Admin_Utilities {
 		// add actions for plugin init on CiviCRM init
 		add_action( 'civicrm_instance_loaded', array( $this, 'register_civi_hooks' ) );
 
-		// hooked in with a lower priority so it runs before the CiviCRM action is fired
-		add_action( 'plugins_loaded', array( $this, 'civicrm_only_on_main_site_please' ), 8 );
-
-		// admin style tweaks
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
 		// --<
 		return $this;
 
@@ -151,6 +145,12 @@ class CiviCRM_Admin_Utilities {
 
 		// allow plugins to register php and template directories
 		add_action( 'civicrm_config', array( $this, 'register_directories' ), 10, 1 );
+
+		// run after the CiviCRM menu hook has been registered
+		add_action( 'init', array( $this, 'civicrm_only_on_main_site_please' ) );
+
+		// admin style tweaks
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 	}
 
