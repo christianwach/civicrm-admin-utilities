@@ -228,27 +228,41 @@ class CiviCRM_Admin_Utilities {
 		// is this a post type we want to allow the button on?
 		if ( ! in_array( $screen->post_type, $selected_types ) ) {
 
-			// get Civi object
-			$civi = civi_wp();
+			// remove
+			$this->civi_button_remove();
 
-			// do we have the modal object?
-			if ( isset( $civi->modal ) AND is_object( $civi->modal ) ) {
+		}
 
-				// not chosen, so remove Civi's actions
-				remove_action( 'media_buttons_context', array( $civi->modal, 'add_form_button' ) );
-				remove_action( 'media_buttons', array( $civi->modal, 'add_form_button' ), 100 );
-				remove_action( 'admin_enqueue_scripts', array( $civi->modal, 'add_form_button_js' ) );
-				remove_action( 'admin_footer', array( $civi->modal, 'add_form_button_html' ) );
+	}
 
-			} else {
 
-				// not chosen, so remove Civi's actions
-				remove_action( 'media_buttons_context', array( $civi, 'add_form_button' ) );
-				remove_action( 'media_buttons', array( $civi, 'add_form_button' ), 100 );
-				remove_action( 'admin_enqueue_scripts', array( $civi, 'add_form_button_js' ) );
-				remove_action( 'admin_footer', array( $civi, 'add_form_button_html' ) );
 
-			}
+	/**
+	 * Prevent the loading of the CiviCRM shortcode button
+	 *
+	 * @return void
+	 */
+	public function civi_button_remove() {
+
+		// get Civi object
+		$civi = civi_wp();
+
+		// do we have the modal object?
+		if ( isset( $civi->modal ) AND is_object( $civi->modal ) ) {
+
+			// not chosen, so remove Civi's actions
+			remove_action( 'media_buttons_context', array( $civi->modal, 'add_form_button' ) );
+			remove_action( 'media_buttons', array( $civi->modal, 'add_form_button' ), 100 );
+			remove_action( 'admin_enqueue_scripts', array( $civi->modal, 'add_form_button_js' ) );
+			remove_action( 'admin_footer', array( $civi->modal, 'add_form_button_html' ) );
+
+		} else {
+
+			// not chosen, so remove Civi's actions
+			remove_action( 'media_buttons_context', array( $civi, 'add_form_button' ) );
+			remove_action( 'media_buttons', array( $civi, 'add_form_button' ), 100 );
+			remove_action( 'admin_enqueue_scripts', array( $civi, 'add_form_button_js' ) );
+			remove_action( 'admin_footer', array( $civi, 'add_form_button_html' ) );
 
 		}
 
@@ -271,6 +285,9 @@ class CiviCRM_Admin_Utilities {
 
 			// unhook menu item, but allow Civi to load
 			remove_action( 'admin_menu', array( civi_wp(), 'add_menu_items' ) );
+
+			// remove CiviCRM shortcode button
+			add_action( 'admin_head', array( $this, 'civi_button_remove' ) );
 
 		}
 
