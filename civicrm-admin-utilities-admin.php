@@ -279,7 +279,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		echo '
 		<h3>' . __( 'Multisite Options', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'In multisite, CiviCRM currently loads on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item to the main site only.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'In multisite, CiviCRM currently loads on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item and CiviCRM shortcode button to the main site only.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
