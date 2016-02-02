@@ -45,6 +45,10 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 == Changelog ==
 
+= 0.2.3 =
+
+Add link to rebuild database triggers and functions
+
 = 0.2.2 =
 
 Remove shortcode button when restricting Civi to main site in multisite
