@@ -428,6 +428,13 @@ class CiviCRM_Admin_Utilities_Admin {
 			</tr>
 
 			<tr>
+				<th scope="row">' . __( 'Rebuild Database Triggers', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/menu/rebuild?reset=1&triggerRebuild=1">' . __( 'Click this to rebuild the triggers in the CiviCRM database.', 'civicrm-admin-utilities' ) . '</a>
+				</td>
+			</tr>
+
+			<tr>
 				<th scope="row">' . __( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/upgrade&reset=1">' . __( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ) . '</a>
