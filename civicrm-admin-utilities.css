@@ -1,6 +1,18 @@
+/**
+ * CiviCRM style overrides for WordPress.
+ *
+ * Implements more appropriate and consistent styling for the CiviCRM admin menu
+ * as well as other miscellaneous fixes.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+
+
 /*
 --------------------------------------------------------------------------------
-CiviCRM admin menu style changes for WordPress
+CiviCRM admin menu style overrides
 --------------------------------------------------------------------------------
 */
 

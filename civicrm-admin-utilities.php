@@ -34,28 +34,31 @@ if ( !defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 
 
 /**
- * Class definition
+ * CiviCRM Admin Utilities Class.
+ *
+ * A class that encapsulates plugin functionality.
+ *
+ * @since 0.1
  */
-
 class CiviCRM_Admin_Utilities {
 
-
-
 	/**
-	 * Properties
+	 * Admin object.
+	 *
+	 * @since 0.1
+	 * @access public
+	 * @var object $admin The admin object
 	 */
-
-	// Admin class
 	public $admin;
 
 
 
 	/**
-	 * Initialises this object
+	 * Constructor.
 	 *
-	 * @return object
+	 * @since 0.1
 	 */
-	function __construct() {
+	public function __construct() {
 
 		// load our Admin utility class
 		require( CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm-admin-utilities-admin.php' );
@@ -69,15 +72,14 @@ class CiviCRM_Admin_Utilities {
 		// add actions for plugin init on CiviCRM init
 		add_action( 'civicrm_instance_loaded', array( $this, 'register_civi_hooks' ) );
 
-		// --<
-		return $this;
-
 	}
 
 
 
 	/**
-	 * Do stuff on plugin activation
+	 * Do stuff on plugin activation.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -91,7 +93,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Do stuff on plugin deactivation
+	 * Do stuff on plugin deactivation.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -105,7 +109,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Load translation files
+	 * Load translation files.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -134,7 +140,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Register hooks on CiviCRM plugin init
+	 * Register hooks on CiviCRM plugin init.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -157,7 +165,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Register directories that CiviCRM searches for php and template files
+	 * Register directories that CiviCRM searches for php and template files.
+	 *
+	 * @since 0.1
 	 *
 	 * @param object $config The CiviCRM config object
 	 * @return void
@@ -188,7 +198,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Admin style tweaks
+	 * Admin style tweaks.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -213,7 +225,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Do not load the CiviCRM shortcode button unless we explicitly enable it
+	 * Do not load the CiviCRM shortcode button unless we explicitly enable it.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -238,7 +252,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Prevent the loading of the CiviCRM shortcode button
+	 * Prevent the loading of the CiviCRM shortcode button.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -271,7 +287,9 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Do not load the CiviCRM on sites other than the main site
+	 * Do not load the CiviCRM on sites other than the main site.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */

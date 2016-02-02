@@ -1,49 +1,52 @@
-<?php /*
---------------------------------------------------------------------------------
-CiviCRM_Admin_Utilities_Admin Class
---------------------------------------------------------------------------------
-*/
-
-
+<?php
 
 /**
- * Class for encapsulating admin functionality
+ * CiviCRM Admin Utilities Admin Class.
+ *
+ * A class that encapsulates admin functionality.
+ *
+ * @since 0.1
  */
 class CiviCRM_Admin_Utilities_Admin {
 
-
-
 	/**
-	 * Properties
+	 * Settings page reference.
+	 *
+	 * @since 0.1
+	 * @access public
+	 * @var array $settings_page The reference to the settings page
 	 */
-
-	// admin page
 	public $settings_page;
 
-	// settings
+	/**
+	 * Settings data.
+	 *
+	 * @since 0.1
+	 * @access public
+	 * @var array $settings The plugin settings data
+	 */
 	public $settings = array();
 
 
 
 	/**
-	 * Initialise this object
+	 * Constructor.
 	 *
-	 * @return object
+	 * @since 0.1
 	 */
-	function __construct() {
+	public function __construct() {
 
 		// init
 		$this->initialise();
-
-		// --<
-		return $this;
 
 	}
 
 
 
 	/**
-	 * Perform activation tasks
+	 * Perform activation tasks.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -63,7 +66,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Perform deactivation tasks
+	 * Perform deactivation tasks.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -76,7 +81,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Initialise
+	 * Initialise this object.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -108,11 +115,13 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Get default settings values for this plugin
+	 * Get default settings values for this plugin.
+	 *
+	 * @since 0.1
 	 *
 	 * @return array $settings The default values for this plugin
 	 */
-	function settings_get_defaults() {
+	public function settings_get_defaults() {
 
 		// init return
 		$settings = array();
@@ -134,7 +143,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Add an admin page for this plugin
+	 * Add an admin page for this plugin.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -188,7 +199,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Show our admin page
+	 * Show our admin page.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -262,7 +275,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Get multisite options
+	 * Get multisite options.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -300,7 +315,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Get style options
+	 * Get style options.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -335,7 +352,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Get post type options
+	 * Get post type options.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -398,7 +417,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Get utility links
+	 * Get utility links.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -450,7 +471,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Get the URL for the form action
+	 * Get the URL for the form action.
+	 *
+	 * @since 0.1
 	 *
 	 * @return string $target_url The URL for the admin form action
 	 */
@@ -483,7 +506,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Update options supplied by our admin page
+	 * Update options supplied by our admin page.
+	 *
+	 * @since 0.1
 	 *
 	 * @return void
 	 */
@@ -569,7 +594,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Test if CiviCRM plugin is active
+	 * Test if CiviCRM plugin is active.
+	 *
+	 * @since 0.1
 	 *
 	 * @return bool
 	 */
@@ -586,7 +613,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Clear CiviCRM caches
+	 * Clear CiviCRM caches.
+	 *
+	 * @since 0.1
 	 *
 	 * Another way to do this might be:
 	 * CRM_Core_Invoke::rebuildMenuAndCaches(TRUE);
@@ -616,7 +645,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Save array as site option
+	 * Save array as site option.
+	 *
+	 * @since 0.1
 	 *
 	 * @return bool Success or failure
 	 */
@@ -630,7 +661,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Return a value for a specified setting
+	 * Return a value for a specified setting.
+	 *
+	 * @since 0.1
 	 *
 	 * @param string $setting_name The name of the setting
 	 * @return bool Whether or not the setting exists
@@ -650,7 +683,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Return a value for a specified setting
+	 * Return a value for a specified setting.
+	 *
+	 * @since 0.1
 	 *
 	 * @param string $setting_name The name of the setting
 	 * @param mixed $default The default value if the setting does not exist
@@ -671,7 +706,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Sets a value for a specified setting
+	 * Sets a value for a specified setting.
+	 *
+	 * @since 0.1
 	 *
 	 * @param string $setting_name The name of the setting
 	 * @param mixed $value The value of the setting
@@ -697,7 +734,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Deletes a specified setting
+	 * Deletes a specified setting.
+	 *
+	 * @since 0.1
 	 *
 	 * @param string $setting_name The name of the setting
 	 * @return void
@@ -720,24 +759,23 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 
+/**
+ * =============================================================================
+ * Globally-available utility functions
+ * =============================================================================
+ *
+ * The "site_option" functions below are useful because - in multisite - they
+ * access Network Options, while in single-site they access Blog Options.
+ *
+ * =============================================================================
+ */
 
-/*
-================================================================================
-Globally-available utility functions
-================================================================================
-*/
 
-
-
-/*
---------------------------------------------------------------------------------
-The "site_option" functions below are useful because in multisite, they access
-Network Options, while in single-site they access Blog Options.
---------------------------------------------------------------------------------
-*/
 
 /**
- * Test existence of a specified site option
+ * Test existence of a specified site option.
+ *
+ * @since 0.1
  *
  * @param str $option_name The name of the option
  * @return bool $exists Whether or not the option exists
@@ -761,7 +799,9 @@ function civicrm_admin_utilities_site_option_exists( $option_name = '' ) {
 
 
 /**
- * Return a value for a specified site option
+ * Return a value for a specified site option.
+ *
+ * @since 0.1
  *
  * @param str $option_name The name of the option
  * @param str $default The default value of the option if it has no value
@@ -782,7 +822,9 @@ function civicrm_admin_utilities_site_option_get( $option_name = '', $default = 
 
 
 /**
- * Set a value for a specified site option
+ * Set a value for a specified site option.
+ *
+ * @since 0.1
  *
  * @param str $option_name The name of the option
  * @param mixed $value The value to set the option to
@@ -803,7 +845,9 @@ function civicrm_admin_utilities_site_option_set( $option_name = '', $value = ''
 
 
 /**
- * Delete a specified site option
+ * Delete a specified site option.
+ *
+ * @since 0.1
  *
  * @param str $option_name The name of the option
  * @return bool $success If the value of the option was successfully deleted
