@@ -1,136 +1,144 @@
-# Copyright (C) 2015 CiviCRM Admin Utilities
+# Copyright (C) 2016 CiviCRM Admin Utilities
 # This file is distributed under the same license as the CiviCRM Admin Utilities package.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.2\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/civicrm-admin-utilities\n"
-"POT-Creation-Date: 2015-01-16 16:36:58+00:00\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.2.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
+"POT-Creation-Date: 2016-02-02 10:30:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: civicrm-admin-utilities-admin.php:159 civicrm-admin-utilities-admin.php:160
-#: civicrm-admin-utilities-admin.php:172 civicrm-admin-utilities-admin.php:173
-#: civicrm-admin-utilities-admin.php:215
+#: civicrm-admin-utilities-admin.php:170 civicrm-admin-utilities-admin.php:171
+#: civicrm-admin-utilities-admin.php:183 civicrm-admin-utilities-admin.php:184
+#: civicrm-admin-utilities-admin.php:228
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:201
+#: civicrm-admin-utilities-admin.php:214
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:247
+#: civicrm-admin-utilities-admin.php:260
 msgid "Submit"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:280
+#: civicrm-admin-utilities-admin.php:295
 msgid "Multisite Options"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:282
-msgid "In multisite, CiviCRM currently loads on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item to the main site only."
+#: civicrm-admin-utilities-admin.php:297
+msgid "In multisite, CiviCRM currently loads on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item and CiviCRM shortcode button to the main site only."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:287
+#: civicrm-admin-utilities-admin.php:302
 msgid "Restrict CiviCRM"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:290
+#: civicrm-admin-utilities-admin.php:305
 msgid "Restrict CiviCRM to main site only."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:315
+#: civicrm-admin-utilities-admin.php:332
 msgid "Style Options"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:317
+#: civicrm-admin-utilities-admin.php:334
 msgid "Personally, I find the CiviCRM menu rather cramped andthe second-level menus do not align properly. Also, it does not obscure the underlying WordPress menu entirely. Check this option to apply some styling tweaks that make the menu look a little better."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:322
+#: civicrm-admin-utilities-admin.php:339
 msgid "Prettify CiviCRM"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:325
+#: civicrm-admin-utilities-admin.php:342
 msgid "Check this to prettify the CiviCRM menu."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:388
+#: civicrm-admin-utilities-admin.php:407
 msgid "Post Type Options"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:390
+#: civicrm-admin-utilities-admin.php:409
 msgid "Select which post types you want the CiviCRM shortcode button to appear on."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:409
+#: civicrm-admin-utilities-admin.php:430
 msgid "Miscellaneous Utilities"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:411
+#: civicrm-admin-utilities-admin.php:432
 msgid "Some useful functions."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:416
+#: civicrm-admin-utilities-admin.php:437
 msgid "Clear Caches"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:419
+#: civicrm-admin-utilities-admin.php:440
 msgid "Check this to clear the CiviCRM caches."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:424
+#: civicrm-admin-utilities-admin.php:445
 msgid "Rebuild Menu"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:426
+#: civicrm-admin-utilities-admin.php:447
 msgid "Click this to rebuild the CiviCRM menu."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:431
+#: civicrm-admin-utilities-admin.php:452
+msgid "Rebuild Database Triggers"
+msgstr ""
+
+#: civicrm-admin-utilities-admin.php:454
+msgid "Click this to rebuild the triggers in the CiviCRM database."
+msgstr ""
+
+#: civicrm-admin-utilities-admin.php:459
 msgid "Upgrade CiviCRM"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:433
+#: civicrm-admin-utilities-admin.php:461
 msgid "Click this to upgrade CiviCRM."
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:635
+#: civicrm-admin-utilities-admin.php:675
 msgid "You must supply an setting to setting_exists()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:656
+#: civicrm-admin-utilities-admin.php:698
 msgid "You must supply an setting to setting_get()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:677
+#: civicrm-admin-utilities-admin.php:721
 msgid "You must supply an setting to setting_set()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:682
+#: civicrm-admin-utilities-admin.php:726
 msgid "You must supply the setting as a string to setting_set()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:702
+#: civicrm-admin-utilities-admin.php:748
 msgid "You must supply an setting to setting_delete()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:742
+#: civicrm-admin-utilities-admin.php:787
 msgid "You must supply an option to civicrm_admin_utilities_site_option_exists()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:767
+#: civicrm-admin-utilities-admin.php:814
 msgid "You must supply an option to civicrm_admin_utilities_site_option_get()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:788
+#: civicrm-admin-utilities-admin.php:837
 msgid "You must supply an option to civicrm_admin_utilities_site_option_set()"
 msgstr ""
 
-#: civicrm-admin-utilities-admin.php:808
+#: civicrm-admin-utilities-admin.php:859
 msgid "You must supply an option to civicrm_admin_utilities_site_option_delete()"
 msgstr ""
 #. Plugin Name of the plugin/theme
