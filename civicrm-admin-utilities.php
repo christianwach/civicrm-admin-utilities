@@ -85,8 +85,6 @@ class CiviCRM_Admin_Utilities {
 	 * Do stuff on plugin activation.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function activate() {
 
@@ -101,8 +99,6 @@ class CiviCRM_Admin_Utilities {
 	 * Do stuff on plugin deactivation.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function deactivate() {
 
@@ -117,8 +113,6 @@ class CiviCRM_Admin_Utilities {
 	 * Load translation files.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function enable_translation() {
 
@@ -148,8 +142,6 @@ class CiviCRM_Admin_Utilities {
 	 * Register hooks on CiviCRM plugin init.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function register_civi_hooks() {
 
@@ -183,7 +175,6 @@ class CiviCRM_Admin_Utilities {
 	 * @since 0.1
 	 *
 	 * @param object $config The CiviCRM config object
-	 * @return void
 	 */
 	public function register_directories( &$config ) {
 
@@ -214,8 +205,6 @@ class CiviCRM_Admin_Utilities {
 	 * Admin style tweaks.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function enqueue_admin_scripts() {
 
@@ -224,13 +213,11 @@ class CiviCRM_Admin_Utilities {
 
 		// add custom stylesheet
 		wp_enqueue_style(
-
 			'civicrm_admin_utilities_admin_tweaks',
 			plugins_url( 'civicrm-admin-utilities.css', CIVICRM_ADMIN_UTILITIES_FILE ),
 			false,
 			CIVICRM_ADMIN_UTILITIES_VERSION, // version
 			'all' // media
-
 		);
 
 	}
@@ -241,8 +228,6 @@ class CiviCRM_Admin_Utilities {
 	 * Do not load the CiviCRM shortcode button unless we explicitly enable it.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function kill_civi_button() {
 
@@ -268,8 +253,6 @@ class CiviCRM_Admin_Utilities {
 	 * Prevent the loading of the CiviCRM shortcode button.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function civi_button_remove() {
 
@@ -303,8 +286,6 @@ class CiviCRM_Admin_Utilities {
 	 * Do not load the CiviCRM on sites other than the main site.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function civicrm_only_on_main_site_please() {
 
