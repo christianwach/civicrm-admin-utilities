@@ -17,6 +17,11 @@ Depends: CiviCRM
 // set our version here
 define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.2.4' );
 
+// trigger logging of 'civicrm_pre' and 'civicrm_post'
+if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
+	define( 'CIVICRM_ADMIN_UTILITIES_DEBUG', false );
+}
+
 // store reference to this file
 if ( !defined( 'CIVICRM_ADMIN_UTILITIES_FILE' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_FILE', __FILE__ );
@@ -159,6 +164,14 @@ class CiviCRM_Admin_Utilities {
 
 		// admin style tweaks
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+
+		// if the debugging flag is set
+		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
+
+			// log pre and post database operations
+			add_action( 'civicrm_pre', array( $this, 'trace_pre' ), 10, 4 );
+			add_action( 'civicrm_post', array( $this, 'trace_post' ), 10, 4 );
+		}
 
 	}
 
@@ -313,6 +326,52 @@ class CiviCRM_Admin_Utilities {
 
 
 
+	/**
+	 * Utility for tracing calls to hook_civicrm_pre.
+	 *
+	 * @param string $op the type of database operation
+	 * @param string $objectName the type of object
+	 * @param integer $objectId the ID of the object
+	 * @param object $objectRef the object
+	 */
+	public function trace_pre( $op, $objectName, $objectId, $objectRef ) {
+
+		error_log( print_r( array(
+			'method' => __METHOD__,
+			'op' => $op,
+			'objectName' => $objectName,
+			'objectId' => $objectId,
+			'objectRef' => $objectRef,
+			'backtrace' => civicrm_utils_debug_backtrace_summary(),
+		), true ) );
+
+	}
+
+
+
+	/**
+	 * Utility for tracing calls to hook_civicrm_post.
+	 *
+	 * @param string $op the type of database operation
+	 * @param string $objectName the type of object
+	 * @param integer $objectId the ID of the object
+	 * @param object $objectRef the object
+	 */
+	public function trace_post( $op, $objectName, $objectId, $objectRef ) {
+
+		error_log( print_r( array(
+			'method' => __METHOD__,
+			'op' => $op,
+			'objectName' => $objectName,
+			'objectId' => $objectId,
+			'objectRef' => $objectRef,
+			'backtrace' => civicrm_utils_debug_backtrace_summary(),
+		), true ) );
+
+	}
+
+
+
 } // class ends
 
 
@@ -329,6 +388,62 @@ register_deactivation_hook( __FILE__, array( $civicrm_admin_utilities, 'deactiva
 
 // uninstall will use the 'uninstall.php' method when fully built
 // see: http://codex.wordpress.org/Function_Reference/register_uninstall_hook
+
+
+
+/**
+ * Clone of wp_debug_backtrace_summary()
+ *
+ * Return a comma-separated string of functions that have been called to get
+ * to the current point in code.
+ *
+ * @since 0.2.4
+ *
+ * @see https://core.trac.wordpress.org/ticket/19589
+ *
+ * @param string $ignore_class Optional. A class to ignore all function calls within - useful
+ *                             when you want to just give info about the callee. Default null.
+ * @param int    $skip_frames  Optional. A number of stack frames to skip - useful for unwinding
+ *                             back to the source of the issue. Default 0.
+ * @param bool   $pretty       Optional. Whether or not you want a comma separated string or raw
+ *                             array returned. Default true.
+ * @return string|array Either a string containing a reversed comma separated trace or an array
+ *                      of individual calls.
+ */
+function civicrm_utils_debug_backtrace_summary( $ignore_class = null, $skip_frames = 0, $pretty = true ) {
+	if ( version_compare( PHP_VERSION, '5.2.5', '>=' ) )
+		$trace = debug_backtrace( false );
+	else
+		$trace = debug_backtrace();
+
+	$caller = array();
+	$check_class = ! is_null( $ignore_class );
+	$skip_frames++; // skip this function
+
+	foreach ( $trace as $call ) {
+		$line = (isset($call['line']) ? ' line:' . $call['line'] : ' <unknown line>');
+		if ( $skip_frames > 0 ) {
+			$skip_frames--;
+		} elseif ( isset( $call['class'] ) ) {
+			if ( $check_class && $ignore_class == $call['class'] )
+				continue; // Filter out calls
+
+			$caller[] = "{$call['class']}{$call['type']}{$call['function']}" . $line;
+		} else {
+			if ( in_array( $call['function'], array( 'do_action', 'apply_filters' ) ) ) {
+				$caller[] = "{$call['function']}('{$call['args'][0]}')" . $line;
+			} elseif ( in_array( $call['function'], array( 'include', 'include_once', 'require', 'require_once' ) ) ) {
+				$caller[] = $call['function'] . "('" . str_replace( array( WP_CONTENT_DIR, ABSPATH ) , '', $call['args'][0] ) . "')" . $line;
+			} else {
+				$caller[] = $call['function'] . $line;
+			}
+		}
+	}
+	if ( $pretty )
+		return join( ', ', array_reverse( $caller ) );
+	else
+		return $caller;
+}
 
 
 
