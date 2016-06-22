@@ -163,6 +163,7 @@ class CiviCRM_Admin_Utilities {
 			// log pre and post database operations
 			add_action( 'civicrm_pre', array( $this, 'trace_pre' ), 10, 4 );
 			add_action( 'civicrm_post', array( $this, 'trace_post' ), 10, 4 );
+
 		}
 
 	}
@@ -237,12 +238,9 @@ class CiviCRM_Admin_Utilities {
 		// get chosen post types
 		$selected_types = $this->admin->setting_get( 'post_types' );
 
-		// is this a post type we want to allow the button on?
+		// remove button if this is not a post type we want to allow the button on
 		if ( ! in_array( $screen->post_type, $selected_types ) ) {
-
-			// remove
 			$this->civi_button_remove();
-
 		}
 
 	}
@@ -262,7 +260,7 @@ class CiviCRM_Admin_Utilities {
 		// do we have the modal object?
 		if ( isset( $civi->modal ) AND is_object( $civi->modal ) ) {
 
-			// not chosen, so remove Civi's actions
+			// remove current CiviCRM actions
 			remove_action( 'media_buttons_context', array( $civi->modal, 'add_form_button' ) );
 			remove_action( 'media_buttons', array( $civi->modal, 'add_form_button' ), 100 );
 			remove_action( 'admin_enqueue_scripts', array( $civi->modal, 'add_form_button_js' ) );
@@ -270,7 +268,7 @@ class CiviCRM_Admin_Utilities {
 
 		} else {
 
-			// not chosen, so remove Civi's actions
+			// remove legacy CiviCRM actions
 			remove_action( 'media_buttons_context', array( $civi, 'add_form_button' ) );
 			remove_action( 'media_buttons', array( $civi, 'add_form_button' ), 100 );
 			remove_action( 'admin_enqueue_scripts', array( $civi, 'add_form_button_js' ) );
