@@ -235,6 +235,9 @@ class CiviCRM_Admin_Utilities {
 		// get screen
 		$screen = get_current_screen();
 
+		// prevent warning if screen not defined
+		if ( empty( $screen ) ) return;
+
 		// get chosen post types
 		$selected_types = $this->admin->setting_get( 'post_types' );
 
