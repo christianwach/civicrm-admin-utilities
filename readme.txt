@@ -45,6 +45,10 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 == Changelog ==
 
+= 0.2.4 =
+
+Prevent PHP notice during upgrades
+
 = 0.2.3 =
 
 Add link to rebuild database triggers and functions
