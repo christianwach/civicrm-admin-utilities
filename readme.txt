@@ -45,6 +45,10 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 == Changelog ==
 
+= 0.2.6 =
+
+Fix uninstall procedure
+
 = 0.2.5 =
 
 Remove CiviCRM CSS and Javascript when shortcode button is disabled on a post type
