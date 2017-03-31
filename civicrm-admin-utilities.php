@@ -238,6 +238,9 @@ class CiviCRM_Admin_Utilities {
 		// prevent warning if screen not defined
 		if ( empty( $screen ) ) return;
 
+		// bail if there's no post type
+		if ( empty( $screen->post_type ) ) return;
+
 		// get chosen post types
 		$selected_types = $this->admin->setting_get( 'post_types' );
 
