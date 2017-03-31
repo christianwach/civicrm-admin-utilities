@@ -14,15 +14,15 @@ NOTES
 
 
 // kick out if uninstall not called from WordPress
-if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) exit();
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit();
 
 
 
 // delete installed flag
-delete_site_option( 'civicrm_modifier_installed' );
+delete_site_option( 'civicrm_admin_utilities_installed' );
 
 // delete settings
-delete_site_option( 'civicrm_modifier_settings' );
+delete_site_option( 'civicrm_admin_utilities_settings' );
 
 
 
