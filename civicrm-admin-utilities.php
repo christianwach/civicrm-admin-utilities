@@ -269,6 +269,13 @@ class CiviCRM_Admin_Utilities {
 			remove_action( 'admin_enqueue_scripts', array( $civi->modal, 'add_form_button_js' ) );
 			remove_action( 'admin_footer', array( $civi->modal, 'add_form_button_html' ) );
 
+			// also remove core resources
+		    remove_action( 'admin_head', array( $civi, 'wp_head' ), 50 );
+			remove_action( 'load-post.php', array( $civi->modal, 'add_core_resources' ) );
+			remove_action( 'load-post-new.php', array( $civi->modal, 'add_core_resources' ) );
+			remove_action( 'load-page.php', array( $civi->modal, 'add_core_resources' ) );
+			remove_action( 'load-page-new.php', array( $civi->modal, 'add_core_resources' ) );
+
 		} else {
 
 			// remove legacy CiviCRM actions
