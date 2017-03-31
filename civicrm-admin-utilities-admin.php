@@ -47,8 +47,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Perform activation tasks.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function activate() {
 
@@ -69,8 +67,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Perform deactivation tasks.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function deactivate() {
 
@@ -84,8 +80,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Initialise this object.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function initialise() {
 
@@ -146,16 +140,14 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Add an admin page for this plugin.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function admin_menu() {
 
 		// we must be network admin in multisite
-		if ( is_multisite() AND ! is_super_admin() ) return false;
+		if ( is_multisite() AND ! is_super_admin() ) return;
 
 		// check user permissions
-		if ( ! current_user_can( 'manage_options' ) ) return false;
+		if ( ! current_user_can( 'manage_options' ) ) return;
 
 		// try and update options
 		$saved = $this->update_options();
@@ -198,8 +190,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Show our admin page.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function admin_form() {
 
@@ -274,8 +264,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Get multisite options.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function admin_form_multisite_options() {
 
@@ -314,8 +302,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Get style options.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function admin_form_styling_options() {
 
@@ -351,8 +337,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Get post type options.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function admin_form_post_type_options() {
 
@@ -416,8 +400,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Get utility links.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function admin_form_utilities() {
 
@@ -505,8 +487,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Update options supplied by our admin page.
 	 *
 	 * @since 0.1
-	 *
-	 * @return void
 	 */
 	public function update_options() {
 
@@ -594,7 +574,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @return bool
+	 * @return bool True if CiviCRM active, false otherwise
 	 */
 	public function is_active() {
 
@@ -611,12 +591,10 @@ class CiviCRM_Admin_Utilities_Admin {
 	/**
 	 * Clear CiviCRM caches.
 	 *
-	 * @since 0.1
-	 *
 	 * Another way to do this might be:
 	 * CRM_Core_Invoke::rebuildMenuAndCaches(TRUE);
 	 *
-	 * @return void
+	 * @since 0.1
 	 */
 	public function clear_caches() {
 
@@ -708,7 +686,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @param string $setting_name The name of the setting
 	 * @param mixed $value The value of the setting
-	 * @return void
 	 */
 	public function setting_set( $setting_name = '', $value = '' ) {
 
@@ -735,7 +712,6 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * @since 0.1
 	 *
 	 * @param string $setting_name The name of the setting
-	 * @return void
 	 */
 	public function setting_delete( $setting_name = '' ) {
 
@@ -824,7 +800,7 @@ function civicrm_admin_utilities_site_option_get( $option_name = '', $default = 
  *
  * @param str $option_name The name of the option
  * @param mixed $value The value to set the option to
- * @return bool $success If the value of the option was successfully saved
+ * @return bool $success True if the value of the option was successfully saved
  */
 function civicrm_admin_utilities_site_option_set( $option_name = '', $value = '' ) {
 
@@ -846,7 +822,7 @@ function civicrm_admin_utilities_site_option_set( $option_name = '', $value = ''
  * @since 0.1
  *
  * @param str $option_name The name of the option
- * @return bool $success If the value of the option was successfully deleted
+ * @return bool $success True if the value of the option was successfully deleted
  */
 function civicrm_admin_utilities_site_option_delete( $option_name = '' ) {
 
