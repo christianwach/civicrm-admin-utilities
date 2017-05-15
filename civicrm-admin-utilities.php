@@ -163,6 +163,7 @@ class CiviCRM_Admin_Utilities {
 			// log pre and post database operations
 			add_action( 'civicrm_pre', array( $this, 'trace_pre' ), 10, 4 );
 			add_action( 'civicrm_post', array( $this, 'trace_post' ), 10, 4 );
+			add_action( 'civicrm_postProcess', array( $this, 'trace_postProcess' ), 10, 2 );
 
 		}
 
@@ -331,13 +332,15 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function trace_pre( $op, $objectName, $objectId, $objectRef ) {
 
+		$e = new Exception;
+		$trace = $e->getTraceAsString();
 		error_log( print_r( array(
 			'method' => __METHOD__,
 			'op' => $op,
 			'objectName' => $objectName,
 			'objectId' => $objectId,
 			'objectRef' => $objectRef,
-			'backtrace' => civicrm_utils_debug_backtrace_summary(),
+			'backtrace' => $trace,
 		), true ) );
 
 	}
@@ -354,13 +357,36 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function trace_post( $op, $objectName, $objectId, $objectRef ) {
 
+		$e = new Exception;
+		$trace = $e->getTraceAsString();
 		error_log( print_r( array(
 			'method' => __METHOD__,
 			'op' => $op,
 			'objectName' => $objectName,
 			'objectId' => $objectId,
 			'objectRef' => $objectRef,
-			'backtrace' => civicrm_utils_debug_backtrace_summary(),
+			'backtrace' => $trace,
+		), true ) );
+
+	}
+
+
+
+	/**
+	 * Utility for tracing calls to hook_civicrm_postProcess.
+	 *
+	 * @param string $formName The name of the form
+	 * @param object $form The form object
+	 */
+	public function trace_postProcess( $formName, &$form ) {
+
+		$e = new Exception;
+		$trace = $e->getTraceAsString();
+		error_log( print_r( array(
+			'method' => __METHOD__,
+			'formName' => $formName,
+			'form' => $form,
+			'backtrace' => $trace,
 		), true ) );
 
 	}
