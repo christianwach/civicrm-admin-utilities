@@ -294,7 +294,7 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Do not load the CiviCRM on sites other than the main site.
+	 * Do not load CiviCRM on sites other than the main site.
 	 *
 	 * @since 0.1
 	 */
@@ -311,6 +311,9 @@ class CiviCRM_Admin_Utilities {
 
 			// remove CiviCRM shortcode button
 			add_action( 'admin_head', array( $this, 'civi_button_remove' ) );
+
+			// remove notice
+			remove_action( 'admin_notices', array( civi_wp(), 'show_setup_warning' ) );
 
 		}
 
