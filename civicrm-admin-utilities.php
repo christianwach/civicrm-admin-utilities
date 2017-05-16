@@ -74,8 +74,8 @@ class CiviCRM_Admin_Utilities {
 		// use translation files
 		add_action( 'plugins_loaded', array( $this, 'enable_translation' ) );
 
-		// add actions for plugin init on CiviCRM init
-		add_action( 'civicrm_instance_loaded', array( $this, 'register_civi_hooks' ) );
+		// register hooks when all plugins are loaded
+		add_action( 'plugins_loaded', array( $this, 'register_civi_hooks' ) );
 
 	}
 
@@ -139,11 +139,14 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Register hooks on CiviCRM plugin init.
+	 * Register hooks if CiviCRM is present.
 	 *
 	 * @since 0.1
 	 */
 	public function register_civi_hooks() {
+
+		// bail if CiviCRM is not present
+		if ( ! function_exists( 'civi_wp' ) ) return;
 
 		// kill CiviCRM shortcode button
 		add_action( 'admin_head', array( $this, 'kill_civi_button' ) );
