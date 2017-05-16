@@ -461,6 +461,16 @@ class CiviCRM_Admin_Utilities {
 			) );
 		}
 
+		// cases
+		if ( array_key_exists( 'CiviCase', $components ) ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-7',
+				'parent' => $id,
+				'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/case', 'reset=1' ),
+			) );
+		}
+
 		// admin console
 		$wp_admin_bar->add_menu( array(
 			'id' => 'cau-7',
