@@ -45,6 +45,10 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 == Changelog ==
 
+= 0.3 =
+
+Add a CiviCRM shortcuts menu to WordPress admin bar
+
 = 0.2.8 =
 
 Remove install notice from subsites when restricting CiviCRM to main site only
