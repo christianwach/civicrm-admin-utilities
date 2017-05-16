@@ -187,7 +187,7 @@ class CiviCRM_Admin_Utilities {
 	public function register_directories( &$config ) {
 
 		// bail if disabled
-		if ( $this->admin->setting_get( 'prettify_menu' ) == '0' ) return;
+		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '0' ) return;
 
 		// define our custom path
 		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
@@ -217,7 +217,7 @@ class CiviCRM_Admin_Utilities {
 	public function enqueue_admin_scripts() {
 
 		// bail if disabled
-		if ( $this->admin->setting_get( 'prettify_menu' ) == '0' ) return;
+		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '0' ) return;
 
 		// add custom stylesheet
 		wp_enqueue_style(
@@ -249,7 +249,7 @@ class CiviCRM_Admin_Utilities {
 		if ( empty( $screen->post_type ) ) return;
 
 		// get chosen post types
-		$selected_types = $this->admin->setting_get( 'post_types' );
+		$selected_types = $this->admin->setting_get( 'post_types', array() );
 
 		// remove button if this is not a post type we want to allow the button on
 		if ( ! in_array( $screen->post_type, $selected_types ) ) {
@@ -308,7 +308,7 @@ class CiviCRM_Admin_Utilities {
 	public function civicrm_only_on_main_site_please() {
 
 		// bail if disabled
-		if ( $this->admin->setting_get( 'main_site_only' ) == '0' ) return;
+		if ( $this->admin->setting_get( 'main_site_only', '0' ) == '0' ) return;
 
 		// if not on main site
 		if ( is_multisite() AND ! is_main_site() ) {
@@ -352,10 +352,10 @@ class CiviCRM_Admin_Utilities {
 	public function admin_bar_add() {
 
 		// bail if admin bar not enabled
-		if ( $this->admin->setting_get( 'admin_bar' ) == '0' ) return;
+		if ( $this->admin->setting_get( 'admin_bar', '0' ) == '0' ) return;
 
 		// bail if CiviCRM is disabled on subsites
-		if ( $this->admin->setting_get( 'main_site_only' ) == '1' ) return;
+		if ( $this->admin->setting_get( 'main_site_only', '0' ) == '1' ) return;
 
 		// bail if user cannot access CiviCRM
 		if ( ! current_user_can( 'access_civicrm' ) ) return;

@@ -278,7 +278,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// init checkbox
 		$main_site_only = '';
-		if ( $this->setting_get( 'main_site_only' ) == '1' ) $main_site_only = ' checked="checked"';
+		if ( $this->setting_get( 'main_site_only', '0' ) == '1' ) $main_site_only = ' checked="checked"';
 
 		// show sync
 		echo '
@@ -313,7 +313,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// init checkbox
 		$prettify_menu = '';
-		if ( $this->setting_get( 'prettify_menu' ) == '1' ) $prettify_menu = ' checked="checked"';
+		if ( $this->setting_get( 'prettify_menu', '0' ) == '1' ) $prettify_menu = ' checked="checked"';
 
 		// show sync
 		echo '
@@ -348,7 +348,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// init checkbox
 		$admin_bar = '';
-		if ( $this->setting_get( 'admin_bar' ) == '1' ) $admin_bar = ' checked="checked"';
+		if ( $this->setting_get( 'admin_bar', '0' ) == '1' ) $admin_bar = ' checked="checked"';
 
 		// show
 		echo '
@@ -398,7 +398,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		$options = '';
 
 		// get chosen post types
-		$selected_types = $this->setting_get( 'post_types' );
+		$selected_types = $this->setting_get( 'post_types', array() );
 
 		// sanity check
 		if ( count( $post_types ) > 0 ) {
@@ -549,28 +549,16 @@ class CiviCRM_Admin_Utilities_Admin {
 
 			// did we ask to remove the menu on sub-sites?
 			if ( $civicrm_admin_utilities_main_site == '1' ) {
-
-				// set option
 				$this->setting_set( 'main_site_only', '1' );
-
 			} else {
-
-				// set option
 				$this->setting_set( 'main_site_only', '0' );
-
 			}
 
 			// did we ask to prettify the menu?
 			if ( $civicrm_admin_utilities_menu == '1' ) {
-
-				// set option
 				$this->setting_set( 'prettify_menu', '1' );
-
 			} else {
-
-				// set option
 				$this->setting_set( 'prettify_menu', '0' );
-
 			}
 
 			// which post types are we enabling the CiviCRM button on?
@@ -588,34 +576,22 @@ class CiviCRM_Admin_Utilities_Admin {
 				$this->setting_set( 'post_types', $civicrm_admin_utilities_post_types );
 
 			} else {
-
-				// set option
 				$this->setting_set( 'post_types', array() );
-
 			}
 
 			// did we ask to add the shortcuts menu to the admin bar?
 			if ( $civicrm_admin_utilities_admin_bar == '1' ) {
-
-				// set option
 				$this->setting_set( 'admin_bar', '1' );
-
 			} else {
-
-				// set option
 				$this->setting_set( 'admin_bar', '0' );
-
 			}
 
 			// save options
 			$this->settings_save();
 
-			// did we ask to clear cache?
+			// clear caches if asked to
 			if ( $civicrm_admin_utilities_cache == '1' ) {
-
-				// clear them
 				$this->clear_caches();
-
 			}
 
 		}
