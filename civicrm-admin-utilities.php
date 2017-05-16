@@ -389,6 +389,12 @@ class CiviCRM_Admin_Utilities {
 		// access admin bar
 		global $wp_admin_bar;
 
+		// init CiviCRM or bail
+		if ( ! $this->admin->is_active() ) return;
+
+		// get component info
+		$components = CRM_Core_Component::getEnabledComponents();
+
 		// define a menu parent ID
 		$id = 'civicrm-admin-utils';
 
@@ -416,36 +422,44 @@ class CiviCRM_Admin_Utilities {
 		) );
 
 		// contributions
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-3',
-			'parent' => $id,
-			'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
-			'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
-		) );
+		if ( array_key_exists( 'CiviContribute', $components ) ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-3',
+				'parent' => $id,
+				'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
+			) );
+		}
 
 		// membership
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-4',
-			'parent' => $id,
-			'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
-			'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
-		) );
+		if ( array_key_exists( 'CiviMember', $components ) ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-4',
+				'parent' => $id,
+				'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
+			) );
+		}
 
 		// events
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-5',
-			'parent' => $id,
-			'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
-			'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
-		) );
+		if ( array_key_exists( 'CiviEvent', $components ) ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-5',
+				'parent' => $id,
+				'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
+			) );
+		}
 
 		// mailings
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-6',
-			'parent' => $id,
-			'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
-			'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
-		) );
+		if ( array_key_exists( 'CiviMail', $components ) ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-6',
+				'parent' => $id,
+				'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
+			) );
+		}
 
 		// admin console
 		$wp_admin_bar->add_menu( array(
