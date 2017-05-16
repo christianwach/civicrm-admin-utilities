@@ -2,7 +2,7 @@
 Contributors: needle, cuny-academic-commons
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PZSKM8T5ZP3SC
 Tags: civicrm, admin, utility, styling, menu
-Requires at least: 3.9
+Requires at least: 4.4
 Tested up to: 4.7
 Stable tag: 0.2.9
 License: GPLv2 or later
