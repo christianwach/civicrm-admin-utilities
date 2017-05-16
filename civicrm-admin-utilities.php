@@ -426,7 +426,7 @@ class CiviCRM_Admin_Utilities {
 
 		// contributions
 		if ( array_key_exists( 'CiviContribute', $components ) ) {
-			if ( current_user_can( 'access_civicontribute' ) ) {
+			if ( $this->check_permission( 'access CiviContribute' ) ) {
 				$wp_admin_bar->add_menu( array(
 					'id' => 'cau-3',
 					'parent' => $id,
@@ -438,7 +438,7 @@ class CiviCRM_Admin_Utilities {
 
 		// membership
 		if ( array_key_exists( 'CiviMember', $components ) ) {
-			if ( current_user_can( 'access_civimember' ) ) {
+			if ( $this->check_permission( 'access CiviMember' ) ) {
 				$wp_admin_bar->add_menu( array(
 					'id' => 'cau-4',
 					'parent' => $id,
@@ -450,7 +450,7 @@ class CiviCRM_Admin_Utilities {
 
 		// events
 		if ( array_key_exists( 'CiviEvent', $components ) ) {
-			if ( current_user_can( 'access_civievent' ) ) {
+			if ( $this->check_permission( 'access CiviEvent' ) ) {
 				$wp_admin_bar->add_menu( array(
 					'id' => 'cau-5',
 					'parent' => $id,
@@ -462,11 +462,11 @@ class CiviCRM_Admin_Utilities {
 
 		// mailings
 		if ( array_key_exists( 'CiviMail', $components ) ) {
-			if ( current_user_can( 'access_civimail' ) ) {
+			if ( $this->check_permission( 'access CiviMail' ) ) {
 				$wp_admin_bar->add_menu( array(
 					'id' => 'cau-6',
 					'parent' => $id,
-					'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
+					'title' => __( 'Mailings Sent and Scheduled!', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
 				) );
 			}
@@ -474,7 +474,7 @@ class CiviCRM_Admin_Utilities {
 
 		// cases
 		if ( array_key_exists( 'CiviCase', $components ) ) {
-			if ( current_user_can( 'administer_civicase' ) ) {
+			if ( CRM_Case_BAO_Case::accessCiviCase() ) {
 				$wp_admin_bar->add_menu( array(
 					'id' => 'cau-7',
 					'parent' => $id,
@@ -485,9 +485,9 @@ class CiviCRM_Admin_Utilities {
 		}
 
 		// admin console
-		if ( current_user_can( 'administer_civicrm' ) ) {
+		if ( $this->check_permission( 'administer CiviCRM' ) ) {
 			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-7',
+				'id' => 'cau-8',
 				'parent' => $id,
 				'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
 				'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
@@ -542,6 +542,42 @@ class CiviCRM_Admin_Utilities {
 
 		// --<
 		return $link;
+
+	}
+
+
+
+	/**
+	 * Check a CiviCRM permission.
+	 *
+	 * @since 0.3
+	 *
+	 * @param str $permission The permission string
+	 * @return bool $permitted True if allowed, false otherwise
+	 */
+	public function check_permission( $permission ) {
+
+		// always deny if CiviCRM is not active
+		if ( ! $this->admin->is_active() ) return false;
+
+		// deny by default
+		$permitted = false;
+
+		// check CiviCRM permissions
+		if ( CRM_Core_Permission::check( $permission ) ) {
+			$permitted = true;
+		}
+
+		/**
+		 * Return permission but allow overrides.
+		 *
+		 * @since 0.3
+		 *
+		 * @param bool $permitted True if allowed, false otherwise
+		 * @param str $permission The CiviCRM permission string
+		 * @return bool $permitted True if allowed, false otherwise
+		 */
+		return apply_filters( 'civicrm_admin_utilities_permitted', $permitted, $permission );
 
 	}
 
