@@ -333,7 +333,19 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Add a CiviCRM menu to the front-end admin bar.
+	 * Add a CiviCRM menu to the WordPress admin bar.
+	 *
+	 * There is some complexity here because some developers enable CiviCRM on
+	 * subsites by hacking civicrm.settings.php to return appropriate settings
+	 * depending on the domain being requested.
+	 *
+	 * This is quite valid, but does present a problem for generating this menu
+	 * because the default install does not actually work at all on subsites
+	 * when network-enabled. Hence the option in this plugin that restricts
+	 * CiviCRM to the main site only.
+	 *
+	 * The compromise made here is to default to switching to the main site
+	 * and offer a filter for developers to override this plugin's behaviour.
 	 *
 	 * @since 0.3
 	 */
@@ -345,14 +357,30 @@ class CiviCRM_Admin_Utilities {
 		// bail if user cannot access CiviCRM
 		if ( ! current_user_can( 'access_civicrm' ) ) return;
 
+		/**
+		 * Filter the switch-to-blog process for the menu.
+		 *
+		 * Note to developers: if you have enabled CiviCRM on subsites in your
+		 * multisite install, use the following code to disable the switch:
+		 *
+		 * add_filter( 'civicrm_admin_utilities_menu_switch', __return_false );
+		 *
+		 * If you need more granular control over whether to switch to the main
+		 * site or not, create a callback method and inspect the $current_site
+		 * object for whether the appropriate conditions are met.
+		 *
+		 * @since 0.3
+		 */
+		$switch = apply_filters( 'civicrm_admin_utilities_menu_switch', true );
+
 		// if it's multisite, then switch to main site
 		$switch_back = false;
-		if ( is_multisite() AND ! is_main_site() ) {
+		if ( is_multisite() AND ! is_main_site() AND $switch ) {
 
-			// get main site for this blog
+			// get current site data
 			$current_site = get_current_site();
 
-			// switch to it and set flag
+			// switch to the main site and set flag
 			switch_to_blog( $current_site->blog_id );
 			$switch_back = true;
 
