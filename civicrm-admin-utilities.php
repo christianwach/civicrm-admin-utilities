@@ -351,7 +351,10 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function admin_bar_add() {
 
-		// bail if disabled on subsites
+		// bail if admin bar not enabled
+		if ( $this->admin->setting_get( 'admin_bar' ) == '0' ) return;
+
+		// bail if CiviCRM is disabled on subsites
 		if ( $this->admin->setting_get( 'main_site_only' ) == '1' ) return;
 
 		// bail if user cannot access CiviCRM
