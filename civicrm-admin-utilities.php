@@ -482,6 +482,15 @@ class CiviCRM_Admin_Utilities {
 			'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
 		) );
 
+		/**
+		 * Fire action so that others can manipulate this menu.
+		 *
+		 * @since 0.3
+		 *
+		 * @param bool $switch Whether or not a switch to the main site has been made
+		 */
+		do_action( 'civicrm_admin_utilities_menu_after', $switch );
+
 		// if it's multisite, then switch back to current blog
 		if ( $switch_back ) {
 			restore_current_blog();
