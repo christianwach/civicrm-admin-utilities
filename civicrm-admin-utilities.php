@@ -157,6 +157,9 @@ class CiviCRM_Admin_Utilities {
 		// admin style tweaks
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
+		// add admin bar item
+		add_action( 'admin_bar_menu', array( $this, 'admin_bar_add' ), 2000 );
+
 		// if the debugging flag is set
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
@@ -319,6 +322,153 @@ class CiviCRM_Admin_Utilities {
 		}
 
 	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Add a CiviCRM menu to the front-end admin bar.
+	 *
+	 * @since 0.3
+	 */
+	public function admin_bar_add() {
+
+		// bail if disabled on subsites
+		if ( $this->admin->setting_get( 'main_site_only' ) == '1' ) return;
+
+		// bail if user cannot access CiviCRM
+		if ( ! current_user_can( 'access_civicrm' ) ) return;
+
+		// if it's multisite, then switch to main site
+		$switch_back = false;
+		if ( is_multisite() AND ! is_main_site() ) {
+
+			// get main site for this blog
+			$current_site = get_current_site();
+
+			// switch to it and set flag
+			switch_to_blog( $current_site->blog_id );
+			$switch_back = true;
+
+		}
+
+		// access admin bar
+		global $wp_admin_bar;
+
+		// define a menu parent ID
+		$id = 'civicrm-admin-utils';
+
+		// add parent
+		$wp_admin_bar->add_menu( array(
+			'id' => $id,
+			'title' => __( 'CiviCRM', 'civicrm-admin-utilities' ),
+			'href' => admin_url( 'admin.php?page=CiviCRM' ),
+		) );
+
+		// dashboard
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-1',
+			'parent' => $id,
+			'title' => __( 'CiviCRM Dashboard', 'civicrm-admin-utilities' ),
+			'href' => admin_url( 'admin.php?page=CiviCRM' ),
+		) );
+
+		// search
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-2',
+			'parent' => $id,
+			'title' => __( 'Advanced Search', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
+		) );
+
+		// contributions
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-3',
+			'parent' => $id,
+			'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
+		) );
+
+		// membership
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-4',
+			'parent' => $id,
+			'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
+		) );
+
+		// events
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-5',
+			'parent' => $id,
+			'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
+		) );
+
+		// mailings
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-6',
+			'parent' => $id,
+			'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
+		) );
+
+		// admin console
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-7',
+			'parent' => $id,
+			'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
+		) );
+
+		// if it's multisite, then switch back to current blog
+		if ( $switch_back ) {
+			restore_current_blog();
+		}
+
+	}
+
+
+
+	/**
+	 * Get a CiviCRM admin link.
+	 *
+	 * @since 0.3
+	 *
+	 * @param str $path The CiviCRM path
+	 * @param str $params The CiviCRM parameters
+	 * @return string $link The URL of the CiviCRM page
+	 */
+	public function get_link( $path = '', $params = null ) {
+
+		// init link
+		$link = '';
+
+		// init CiviCRM or bail
+		if ( ! $this->admin->is_active() ) return $link;
+
+		// use CiviCRM to construct link
+		$link = CRM_Utils_System::url(
+			$path,
+			$params,
+			TRUE,
+			NULL,
+			TRUE,
+			FALSE,
+			TRUE
+		);
+
+		// --<
+		return $link;
+
+	}
+
+
+
+	//##########################################################################
 
 
 
