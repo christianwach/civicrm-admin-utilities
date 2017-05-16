@@ -426,61 +426,73 @@ class CiviCRM_Admin_Utilities {
 
 		// contributions
 		if ( array_key_exists( 'CiviContribute', $components ) ) {
-			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-3',
-				'parent' => $id,
-				'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
-				'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
-			) );
+			if ( current_user_can( 'access_civicontribute' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'id' => 'cau-3',
+					'parent' => $id,
+					'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
+					'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
+				) );
+			}
 		}
 
 		// membership
 		if ( array_key_exists( 'CiviMember', $components ) ) {
-			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-4',
-				'parent' => $id,
-				'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
-				'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
-			) );
+			if ( current_user_can( 'access_civimember' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'id' => 'cau-4',
+					'parent' => $id,
+					'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
+					'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
+				) );
+			}
 		}
 
 		// events
 		if ( array_key_exists( 'CiviEvent', $components ) ) {
-			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-5',
-				'parent' => $id,
-				'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
-				'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
-			) );
+			if ( current_user_can( 'access_civievent' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'id' => 'cau-5',
+					'parent' => $id,
+					'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
+					'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
+				) );
+			}
 		}
 
 		// mailings
 		if ( array_key_exists( 'CiviMail', $components ) ) {
-			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-6',
-				'parent' => $id,
-				'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
-				'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
-			) );
+			if ( current_user_can( 'access_civimail' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'id' => 'cau-6',
+					'parent' => $id,
+					'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
+					'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
+				) );
+			}
 		}
 
 		// cases
 		if ( array_key_exists( 'CiviCase', $components ) ) {
-			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-7',
-				'parent' => $id,
-				'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
-				'href' => $this->get_link( 'civicrm/case', 'reset=1' ),
-			) );
+			if ( current_user_can( 'administer_civicase' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'id' => 'cau-7',
+					'parent' => $id,
+					'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
+					'href' => $this->get_link( 'civicrm/case', 'reset=1' ),
+				) );
+			}
 		}
 
 		// admin console
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-7',
-			'parent' => $id,
-			'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
-			'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
-		) );
+		if ( current_user_can( 'administer_civicrm' ) ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-7',
+				'parent' => $id,
+				'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
+			) );
+		}
 
 		/**
 		 * Fire action so that others can manipulate this menu.
