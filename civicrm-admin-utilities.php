@@ -466,7 +466,7 @@ class CiviCRM_Admin_Utilities {
 				$wp_admin_bar->add_menu( array(
 					'id' => 'cau-6',
 					'parent' => $id,
-					'title' => __( 'Mailings Sent and Scheduled!', 'civicrm-admin-utilities' ),
+					'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
 				) );
 			}
