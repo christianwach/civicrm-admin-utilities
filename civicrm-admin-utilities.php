@@ -154,8 +154,8 @@ class CiviCRM_Admin_Utilities {
 		// run after the CiviCRM menu hook has been registered
 		add_action( 'init', array( $this, 'civicrm_only_on_main_site_please' ) );
 
-		// admin style tweaks
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+		// style tweaks for CiviCRM
+		add_action( 'admin_print_styles-toplevel_page_CiviCRM', array( $this, 'enqueue_admin_scripts' ) );
 
 		// if the debugging flag is set
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
