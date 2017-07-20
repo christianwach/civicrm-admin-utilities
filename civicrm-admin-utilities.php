@@ -213,11 +213,28 @@ class CiviCRM_Admin_Utilities {
 		// bail if disabled
 		if ( $this->admin->setting_get( 'prettify_menu' ) == '0' ) return;
 
+		// set default CSS file
+		$css = 'civicrm-admin-utilities.css';
+
 		// test for presence of Shoreditch Extension
-		if ( ! function_exists( 'shoreditch_civicrm_config' ) ) {
-			$css = 'civicrm-admin-utilities.css';
-		} else {
-			$css = 'civicrm-admin-utilities-shoreditch.css';
+		if ( function_exists( 'shoreditch_civicrm_config' ) ) {
+
+			// init CiviCRM just in case
+			if ( civi_wp()->initialize() ) {
+
+				// get the current Custom CSS URL
+				$config = CRM_Core_Config::singleton();
+
+				// has the Shoreditch CSS been activated?
+				if ( strstr( $config->customCSSURL, 'org.civicrm.shoreditch' ) !== false ) {
+
+					// use specific CSS file for Shoreditch
+					$css = 'civicrm-admin-utilities-shoreditch.css';
+
+				}
+
+			}
+
 		}
 
 		// add custom stylesheet
