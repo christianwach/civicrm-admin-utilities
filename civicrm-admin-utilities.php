@@ -213,10 +213,17 @@ class CiviCRM_Admin_Utilities {
 		// bail if disabled
 		if ( $this->admin->setting_get( 'prettify_menu' ) == '0' ) return;
 
+		// test for presence of Shoreditch Extension
+		if ( ! function_exists( 'shoreditch_civicrm_config' ) ) {
+			$css = 'civicrm-admin-utilities.css';
+		} else {
+			$css = 'civicrm-admin-utilities-shoreditch.css';
+		}
+
 		// add custom stylesheet
 		wp_enqueue_style(
 			'civicrm_admin_utilities_admin_tweaks',
-			plugins_url( 'civicrm-admin-utilities.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+			plugins_url( $css, CIVICRM_ADMIN_UTILITIES_FILE ),
 			false,
 			CIVICRM_ADMIN_UTILITIES_VERSION, // version
 			'all' // media

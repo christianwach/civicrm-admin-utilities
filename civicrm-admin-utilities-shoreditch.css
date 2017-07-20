@@ -1,0 +1,115 @@
+/**
+ * CiviCRM style overrides for WordPress when the Shoreditch Extension is present.
+ *
+ * Implements more appropriate and consistent styling for the CiviCRM admin menu
+ * as well as other miscellaneous fixes.
+ *
+ * Worth noting that the Shoreditch stylesheet file loads after this file, so any
+ * overrides must use greater specificity than Shoreditch does.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+
+
+/*
+--------------------------------------------------------------------------------
+CiviCRM admin menu style overrides
+--------------------------------------------------------------------------------
+*/
+
+/* Font selection */
+body #civicrm-menu,
+body #root-menu-div ul,
+body #root-menu-div .menu-ul
+{
+	/* Match WordPress admin */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* The dropdown Javascript determines the placement of the first-level dropdown by the height of this element */
+body #civicrm-menu li.menumain
+{
+	height: 32px !important;
+	/* Other tweaks */
+	outline: none;
+	padding: 0 10px;
+	line-height: 32px;
+}
+
+/* Ensure dropdowns appear directly below item */
+html>body #root-menu-div div.outerbox
+{
+	margin-top: 0;
+	padding: 0;
+}
+
+/* Tweak drop-shadow */
+body #root-menu-div .menu-ul
+{
+	box-shadow: 2px 2px 2px 0px rgba(48,40,40,0.1);
+}
+
+/* Give menu item arrow more space */
+div.menu-item img.menu-item-arrow
+{
+	right: 10px;
+	top: 10px;
+}
+
+/* The dropdown Javascript determines placement of the fly-out menus by the width of this element */
+body #root-menu-div div.menu-item
+{
+	/* Adjust padding to tweak placement */
+	padding-right: 30px;
+	padding-left: 10px;
+}
+
+/* Do not let this element interfere with placement */
+body #root-menu-div .menu-ul li:not(.menu-separator)
+{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+/* Drop search form font size */
+#sort_name_navigation
+{
+	font-size: 12px;
+}
+
+/*  */
+body #civicrm-menu li#crm-qsearch
+{
+	height: 32px !important;
+	padding: 0 2px;
+}
+
+/* Vertically centre the form */
+body #civicrm-menu li#crm-qsearch > form
+{
+	margin-top: 2px;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Misc CiviCRM style fixes for WordPress
+--------------------------------------------------------------------------------
+*/
+
+#crm-container, .crm-container
+{
+	padding-top: 12px;
+}
+
+.crm-queue-runner-form-block
+{
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+
