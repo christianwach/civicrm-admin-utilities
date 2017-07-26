@@ -80,7 +80,7 @@ body #root-menu-div .menu-ul li:not(.menu-separator)
 	font-size: 12px;
 }
 
-/*  */
+/* Adjust appearance of Search box */
 body #civicrm-menu li#crm-qsearch
 {
 	height: 32px !important;
@@ -104,6 +104,7 @@ Misc CiviCRM style fixes for WordPress
 #crm-container, .crm-container
 {
 	padding-top: 12px;
+	padding-right: 20px;
 }
 
 .crm-queue-runner-form-block
@@ -113,3 +114,27 @@ Misc CiviCRM style fixes for WordPress
 }
 
 
+
+/*
+--------------------------------------------------------------------------------
+Temporary style fixes for Shoreditch
+--------------------------------------------------------------------------------
+*/
+
+/* Remove the bottom margin on overidden navs */
+body #bootstrap-theme .nav-pills > li
+{
+	margin-bottom: 0;
+}
+
+/* Give the action links room to breathe */
+body .crm-container .action-link
+{
+	height: 44px;
+}
+
+/* Vertically centre the text in the action buttons */
+body .crm-container #crm-main-content-wrapper div.action-link a.button
+{
+	padding-bottom: 27px;
+}
