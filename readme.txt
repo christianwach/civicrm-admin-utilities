@@ -2,9 +2,9 @@
 Contributors: needle, cuny-academic-commons
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PZSKM8T5ZP3SC
 Tags: civicrm, admin, utility, styling, menu
-Requires at least: 3.9
+Requires at least: 4.4
 Tested up to: 4.8
-Stable tag: 0.2.9
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 
 == Changelog ==
+
+= 0.3 =
+
+Add a CiviCRM shortcuts menu to WordPress admin bar
 
 = 0.2.9 =
 
