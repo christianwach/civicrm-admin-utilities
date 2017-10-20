@@ -701,3 +701,44 @@ register_deactivation_hook( __FILE__, array( $civicrm_admin_utilities, 'deactiva
 
 
 
+/**
+ * Utility to add link to settings page.
+ *
+ * @since 0.3
+ *
+ * @param array $links The existing links array
+ * @param str $file The name of the plugin file
+ * @return array $links The modified links array
+ */
+function civicrm_admin_utilities_action_links( $links, $file ) {
+
+	// add settings link
+	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {
+
+		// is this Network Admin?
+		if ( is_network_admin() ) {
+			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities' ), network_admin_url( 'settings.php' ) );
+		} else {
+			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities' ), admin_url( 'options-general.php' ) );
+		}
+
+		// add settings link
+		$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
+
+		// add Paypal link
+		$paypal = 'https://www.paypal.me/interactivist';
+		$links[] = '<a href="' . $paypal . '" target="_blank">' . __( 'Donate!', 'civicrm-admin-utilities' ) . '</a>';
+
+	}
+
+	// --<
+	return $links;
+
+}
+
+// add filters for the above
+add_filter( 'network_admin_plugin_action_links', 'civicrm_admin_utilities_action_links', 10, 2 );
+add_filter( 'plugin_action_links', 'civicrm_admin_utilities_action_links', 10, 2 );
+
+
+
