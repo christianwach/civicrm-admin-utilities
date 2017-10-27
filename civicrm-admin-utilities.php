@@ -163,6 +163,9 @@ class CiviCRM_Admin_Utilities {
 		// add admin bar item
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_add' ), 2000 );
 
+		// filter the WordPress Permissions Form
+		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
+
 		// if the debugging flag is set
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
@@ -602,6 +605,52 @@ class CiviCRM_Admin_Utilities {
 		 * @return bool $permitted True if allowed, false otherwise
 		 */
 		return apply_filters( 'civicrm_admin_utilities_permitted', $permitted, $permission );
+
+	}
+
+
+
+	/**
+	 * Fixes the WordPress Access Control form by building a single table.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $formName The name of the form.
+	 * @param CRM_Core_Form $form The form object.
+	 */
+	public function fix_permissions_form( $formName, &$form ) {
+
+		// bail if not the form we want
+		if ( $formName != 'CRM_ACL_Form_WordPress_Permissions' ) return;
+
+		// get vars
+		$vars = $form->get_template_vars();
+
+		// build array keyed by permission
+		$table = array();
+		foreach( $vars['permDesc'] AS $perm => $desc ) {
+
+			// init row with permission description
+			$table[$perm] = array(
+				'desc' => $desc,
+				'roles' => array(),
+			);
+
+			// add permission label and role names
+			foreach( $vars['roles'] AS $key => $label ) {
+				if ( isset( $vars['rolePerms'][$key][$perm] ) ) {
+					$table[$perm]['label'] = $vars['rolePerms'][$key][$perm];
+				}
+				$table[$perm]['roles'][] = $key;
+			}
+
+		}
+
+		// assign to form
+		$form->assign( 'table', $table );
+
+		// camelcase dammit
+		CRM_Utils_System::setTitle(  __( 'WordPress Access Control', 'civicrm-admin-utilities' )  );
 
 	}
 
