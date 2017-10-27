@@ -319,7 +319,12 @@ class CiviCRM_Admin_Utilities_Admin {
 		echo '
 		<h3>' . __( 'Style Options', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'Personally, I find the CiviCRM menu rather cramped andthe second-level menus do not align properly. Also, it does not obscure the underlying WordPress menu entirely. Check this option to apply some styling tweaks that make the menu look a little better. As an added bonus, chercking this also fixes the WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Checking this option has two effects:', 'civicrm-admin-utilities' ) . '</p>
+
+		<ol>
+			<li>' . __( 'Applies some styling tweaks that make the CiviCRM menu look a little better.', 'civicrm-admin-utilities' ) . '</li>
+			<li>' . __( 'Fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</li>
+		</ol>
 
 		<table class="form-table">
 
@@ -327,7 +332,7 @@ class CiviCRM_Admin_Utilities_Admin {
 				<th scope="row">' . __( 'Prettify CiviCRM', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"' . $prettify_menu . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to prettify the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to prettify the CiviCRM menu and WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
@@ -448,7 +453,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		echo '
 		<h3>' . __( 'Miscellaneous Utilities', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'Some useful functions.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Some useful functions and shortcuts to various commonly used CiviCRM admin pages.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
