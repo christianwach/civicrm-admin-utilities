@@ -3,7 +3,7 @@ Contributors: needle, cuny-academic-commons
 Donate link: https://www.paypal.me/interactivist
 Tags: civicrm, admin, utility, styling, menu
 Requires at least: 4.4
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,6 +17,8 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour and appearance in single si
 CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
 * Modifies the styling of the CiviCRM menu to fix a number of issues
+* Fixes the appearance of the WordPress Access Control form
+* Adds a handy CiviCRM Shortcuts menu to the WordPress Admin Bar
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
 
@@ -37,7 +39,7 @@ This plugin is in active development. For feature requests and bug reports (or i
 1. Make sure CiviCRM is activated and properly configured
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
-In single-site installs, you can ajust this plugin's settings by visiting "Settings" --> "CiviCRM Admin Utilities". If you install this plugin in multisite and have CiviCRM network-enabled, then you should also network-enable this plugin. You'll then find its settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities".
+In single-site installs, you can adjust this plugin's settings by visiting "Settings" --> "CiviCRM Admin Utilities". If you install this plugin in multisite and have CiviCRM network-enabled, then you should also network-enable this plugin. You'll then find its settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities".
 
 This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For versions of CiviCRM prior to 4.6-alpha1, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in CiviCRM file. Please refer to the each repo for further instructions.
 
@@ -47,7 +49,8 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 = 0.3 =
 
-Add a CiviCRM shortcuts menu to WordPress admin bar
+* Add a CiviCRM shortcuts menu to WordPress admin bar
+* Fix the appearance of the WordPress Access Control form
 
 = 0.2.9 =
 

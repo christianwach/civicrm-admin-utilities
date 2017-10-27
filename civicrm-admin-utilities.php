@@ -1,8 +1,8 @@
 <?php /*
 --------------------------------------------------------------------------------
 Plugin Name: CiviCRM Admin Utilities
-Plugin URI: http://haystack.co.uk
-Description: Custom code to modify CiviCRM's behaviour
+Plugin URI: https://github.com/christianwach/civicrm-admin-utilities
+Description: Custom code to modify CiviCRM's behaviour.
 Author: Christian Wach
 Version: 0.3
 Author URI: http://haystack.co.uk
@@ -52,7 +52,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var object $admin The admin object
+	 * @var object $admin The admin object.
 	 */
 	public $admin;
 
@@ -185,7 +185,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.1
 	 *
-	 * @param object $config The CiviCRM config object
+	 * @param object $config The CiviCRM config object.
 	 */
 	public function register_directories( &$config ) {
 
@@ -544,9 +544,9 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.3
 	 *
-	 * @param str $path The CiviCRM path
-	 * @param str $params The CiviCRM parameters
-	 * @return string $link The URL of the CiviCRM page
+	 * @param str $path The CiviCRM path.
+	 * @param str $params The CiviCRM parameters.
+	 * @return string $link The URL of the CiviCRM page.
 	 */
 	public function get_link( $path = '', $params = null ) {
 
@@ -579,8 +579,8 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.3
 	 *
-	 * @param str $permission The permission string
-	 * @return bool $permitted True if allowed, false otherwise
+	 * @param str $permission The permission string.
+	 * @return bool $permitted True if allowed, false otherwise.
 	 */
 	public function check_permission( $permission ) {
 
@@ -600,9 +600,9 @@ class CiviCRM_Admin_Utilities {
 		 *
 		 * @since 0.3
 		 *
-		 * @param bool $permitted True if allowed, false otherwise
-		 * @param str $permission The CiviCRM permission string
-		 * @return bool $permitted True if allowed, false otherwise
+		 * @param bool $permitted True if allowed, false otherwise.
+		 * @param str $permission The CiviCRM permission string.
+		 * @return bool $permitted True if allowed, false otherwise.
 		 */
 		return apply_filters( 'civicrm_admin_utilities_permitted', $permitted, $permission );
 
@@ -663,10 +663,10 @@ class CiviCRM_Admin_Utilities {
 	/**
 	 * Utility for tracing calls to hook_civicrm_pre.
 	 *
-	 * @param string $op the type of database operation
-	 * @param string $objectName the type of object
-	 * @param integer $objectId the ID of the object
-	 * @param object $objectRef the object
+	 * @param string $op the type of database operation.
+	 * @param string $objectName the type of object.
+	 * @param integer $objectId the ID of the object.
+	 * @param object $objectRef the object.
 	 */
 	public function trace_pre( $op, $objectName, $objectId, $objectRef ) {
 
@@ -688,10 +688,10 @@ class CiviCRM_Admin_Utilities {
 	/**
 	 * Utility for tracing calls to hook_civicrm_post.
 	 *
-	 * @param string $op the type of database operation
-	 * @param string $objectName the type of object
-	 * @param integer $objectId the ID of the object
-	 * @param object $objectRef the object
+	 * @param string $op the type of database operation.
+	 * @param string $objectName the type of object.
+	 * @param integer $objectId the ID of the object.
+	 * @param object $objectRef the object.
 	 */
 	public function trace_post( $op, $objectName, $objectId, $objectRef ) {
 
@@ -713,8 +713,8 @@ class CiviCRM_Admin_Utilities {
 	/**
 	 * Utility for tracing calls to hook_civicrm_postProcess.
 	 *
-	 * @param string $formName The name of the form
-	 * @param object $form The form object
+	 * @param string $formName The name of the form.
+	 * @param object $form The form object.
 	 */
 	public function trace_postProcess( $formName, &$form ) {
 
@@ -755,9 +755,9 @@ register_deactivation_hook( __FILE__, array( $civicrm_admin_utilities, 'deactiva
  *
  * @since 0.3
  *
- * @param array $links The existing links array
- * @param str $file The name of the plugin file
- * @return array $links The modified links array
+ * @param array $links The existing links array.
+ * @param str $file The name of the plugin file.
+ * @return array $links The modified links array.
  */
 function civicrm_admin_utilities_action_links( $links, $file ) {
 

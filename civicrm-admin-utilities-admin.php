@@ -14,7 +14,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var array $settings_page The reference to the settings page
+	 * @var array $settings_page The reference to the settings page.
 	 */
 	public $settings_page;
 
@@ -23,7 +23,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var array $settings The plugin settings data
+	 * @var array $settings The plugin settings data.
 	 */
 	public $settings = array();
 
@@ -113,7 +113,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array $settings The default values for this plugin
+	 * @return array $settings The default values for this plugin.
 	 */
 	public function settings_get_defaults() {
 
@@ -499,7 +499,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string $target_url The URL for the admin form action
+	 * @return string $target_url The URL for the admin form action.
 	 */
 	public function admin_form_url_get() {
 
@@ -610,7 +610,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @return bool True if CiviCRM active, false otherwise
+	 * @return bool True if CiviCRM active, false otherwise.
 	 */
 	public function is_active() {
 
@@ -659,7 +659,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @return bool Success or failure
+	 * @return bool Success or failure.
 	 */
 	public function settings_save() {
 
@@ -675,8 +675,8 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $setting_name The name of the setting
-	 * @return bool Whether or not the setting exists
+	 * @param string $setting_name The name of the setting.
+	 * @return bool Whether or not the setting exists.
 	 */
 	public function setting_exists( $setting_name = '' ) {
 
@@ -697,9 +697,9 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $setting_name The name of the setting
-	 * @param mixed $default The default value if the setting does not exist
-	 * @return mixed The setting or the default
+	 * @param string $setting_name The name of the setting.
+	 * @param mixed $default The default value if the setting does not exist.
+	 * @return mixed The setting or the default.
 	 */
 	public function setting_get( $setting_name = '', $default = false ) {
 
@@ -720,8 +720,8 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $setting_name The name of the setting
-	 * @param mixed $value The value of the setting
+	 * @param string $setting_name The name of the setting.
+	 * @param mixed $value The value of the setting.
 	 */
 	public function setting_set( $setting_name = '', $value = '' ) {
 
@@ -747,7 +747,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $setting_name The name of the setting
+	 * @param string $setting_name The name of the setting.
 	 */
 	public function setting_delete( $setting_name = '' ) {
 
@@ -785,8 +785,8 @@ class CiviCRM_Admin_Utilities_Admin {
  *
  * @since 0.1
  *
- * @param str $option_name The name of the option
- * @return bool $exists Whether or not the option exists
+ * @param str $option_name The name of the option.
+ * @return bool $exists Whether or not the option exists.
  */
 function civicrm_admin_utilities_site_option_exists( $option_name = '' ) {
 
@@ -811,9 +811,9 @@ function civicrm_admin_utilities_site_option_exists( $option_name = '' ) {
  *
  * @since 0.1
  *
- * @param str $option_name The name of the option
- * @param str $default The default value of the option if it has no value
- * @return mixed $value the value of the option
+ * @param str $option_name The name of the option.
+ * @param str $default The default value of the option if it has no value.
+ * @return mixed $value the value of the option.
  */
 function civicrm_admin_utilities_site_option_get( $option_name = '', $default = false ) {
 
@@ -834,9 +834,9 @@ function civicrm_admin_utilities_site_option_get( $option_name = '', $default = 
  *
  * @since 0.1
  *
- * @param str $option_name The name of the option
- * @param mixed $value The value to set the option to
- * @return bool $success True if the value of the option was successfully saved
+ * @param str $option_name The name of the option.
+ * @param mixed $value The value to set the option to.
+ * @return bool $success True if the value of the option was successfully saved.
  */
 function civicrm_admin_utilities_site_option_set( $option_name = '', $value = '' ) {
 
@@ -857,8 +857,8 @@ function civicrm_admin_utilities_site_option_set( $option_name = '', $value = ''
  *
  * @since 0.1
  *
- * @param str $option_name The name of the option
- * @return bool $success True if the value of the option was successfully deleted
+ * @param str $option_name The name of the option.
+ * @return bool $success True if the value of the option was successfully deleted.
  */
 function civicrm_admin_utilities_site_option_delete( $option_name = '' ) {
 

@@ -1,9 +1,13 @@
 CiviCRM Admin Utilities
 =======================
 
+Please note: this is the development repository for *CiviCRM Admin Utilities*. It can be found in [the WordPress Plugin Directory](https://wordpress.org/plugins/civicrm-admin-utilities/), which is the best place to get it from if you're not a developer.
+
 *CiviCRM Admin Utilities* is a WordPress plugin that modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
 * Modifies the styling of the CiviCRM menu to fix a number of issues
+* Fixes the appearance of the WordPress Access Control form
+* Adds a handy CiviCRM Shortcuts menu to the WordPress Admin Bar
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
 
