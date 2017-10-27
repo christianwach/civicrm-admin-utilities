@@ -4,7 +4,7 @@ Plugin Name: CiviCRM Admin Utilities
 Plugin URI: https://github.com/christianwach/civicrm-admin-utilities
 Description: Custom code to modify CiviCRM's behaviour.
 Author: Christian Wach
-Version: 0.3
+Version: 0.3.1
 Author URI: http://haystack.co.uk
 Text Domain: civicrm-admin-utilities
 Domain Path: /languages
@@ -15,7 +15,7 @@ Depends: CiviCRM
 
 
 // set our version here
-define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.3' );
+define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.3.1' );
 
 // trigger logging of 'civicrm_pre' and 'civicrm_post'
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
