@@ -499,11 +499,21 @@ class CiviCRM_Admin_Utilities {
 			}
 		}
 
+      // Reports
+        if ( $this->check_permission( 'access_civireport' ) ) {
+          $wp_admin_bar->add_menu( array(
+            'id' => 'cau-7',
+            'parent' => $id,
+            'title' => __( 'Report Listing', 'civicrm-admin-utilities' ),
+            'href' => $this->get_link( 'civicrm/report/list', '&reset=1' ),
+          ) );
+        }
+
 		// cases
 		if ( array_key_exists( 'CiviCase', $components ) ) {
 			if ( CRM_Case_BAO_Case::accessCiviCase() ) {
 				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-7',
+					'id' => 'cau-8',
 					'parent' => $id,
 					'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/case', 'reset=1' ),
@@ -514,7 +524,7 @@ class CiviCRM_Admin_Utilities {
 		// admin console
 		if ( $this->check_permission( 'administer CiviCRM' ) ) {
 			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-8',
+				'id' => 'cau-9',
 				'parent' => $id,
 				'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
 				'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
