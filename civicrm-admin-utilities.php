@@ -307,7 +307,7 @@ class CiviCRM_Admin_Utilities {
 			remove_action( 'admin_footer', array( $civi->modal, 'add_form_button_html' ) );
 
 			// also remove core resources
-		    remove_action( 'admin_head', array( $civi, 'wp_head' ), 50 );
+			remove_action( 'admin_head', array( $civi, 'wp_head' ), 50 );
 			remove_action( 'load-post.php', array( $civi->modal, 'add_core_resources' ) );
 			remove_action( 'load-post-new.php', array( $civi->modal, 'add_core_resources' ) );
 			remove_action( 'load-page.php', array( $civi->modal, 'add_core_resources' ) );
@@ -378,132 +378,152 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function admin_bar_add() {
 
-		// bail if admin bar not enabled
-		if ( $this->admin->setting_get( 'admin_bar', '0' ) == '0' ) return;
+	  // bail if admin bar not enabled
+	  if ($this->admin->setting_get('admin_bar', '0') == '0') {
+		return;
+	  }
 
-		// bail if CiviCRM is disabled on subsites
-		if ( $this->admin->setting_get( 'main_site_only', '0' ) == '1' ) return;
+	  // bail if CiviCRM is disabled on subsites
+	  if ($this->admin->setting_get('main_site_only', '0') == '1') {
+		return;
+	  }
 
-		// bail if user cannot access CiviCRM
-		if ( ! current_user_can( 'access_civicrm' ) ) return;
+	  // bail if user cannot access CiviCRM
+	  if (!current_user_can('access_civicrm')) {
+		return;
+	  }
 
-		/**
-		 * Filter the switch-to-blog process for the menu.
-		 *
-		 * Note to developers: if you have enabled CiviCRM on subsites in your
-		 * multisite install, use the following code to disable the switch:
-		 *
-		 * add_filter( 'civicrm_admin_utilities_menu_switch', __return_false );
-		 *
-		 * If you need more granular control over whether to switch to the main
-		 * site or not, create a callback method and inspect the $current_site
-		 * object for whether the appropriate conditions are met.
-		 *
-		 * @since 0.3
-		 */
-		$switch = apply_filters( 'civicrm_admin_utilities_menu_switch', true );
+	  /**
+	   * Filter the switch-to-blog process for the menu.
+	   *
+	   * Note to developers: if you have enabled CiviCRM on subsites in your
+	   * multisite install, use the following code to disable the switch:
+	   *
+	   * add_filter( 'civicrm_admin_utilities_menu_switch', __return_false );
+	   *
+	   * If you need more granular control over whether to switch to the main
+	   * site or not, create a callback method and inspect the $current_site
+	   * object for whether the appropriate conditions are met.
+	   *
+	   * @since 0.3
+	   */
+	  $switch = apply_filters('civicrm_admin_utilities_menu_switch', TRUE);
 
-		// if it's multisite, then switch to main site
-		$switch_back = false;
-		if ( is_multisite() AND ! is_main_site() AND $switch ) {
+	  // if it's multisite, then switch to main site
+	  $switch_back = FALSE;
+	  if (is_multisite() AND !is_main_site() AND $switch) {
 
-			// get current site data
-			$current_site = get_current_site();
+		// get current site data
+		$current_site = get_current_site();
 
-			// switch to the main site and set flag
-			switch_to_blog( $current_site->blog_id );
-			$switch_back = true;
+		// switch to the main site and set flag
+		switch_to_blog($current_site->blog_id);
+		$switch_back = TRUE;
 
-		}
+	  }
 
-		// access admin bar
-		global $wp_admin_bar;
+	  // access admin bar
+	  global $wp_admin_bar;
 
-		// init CiviCRM or bail
-		if ( ! $this->admin->is_active() ) return;
+	  // init CiviCRM or bail
+	  if (!$this->admin->is_active()) {
+		return;
+	  }
 
-		// get component info
-		$components = CRM_Core_Component::getEnabledComponents();
+	  // get component info
+	  $components = CRM_Core_Component::getEnabledComponents();
 
-		// define a menu parent ID
-		$id = 'civicrm-admin-utils';
+	  // define a menu parent ID
+	  $id = 'civicrm-admin-utils';
 
-		// add parent
-		$wp_admin_bar->add_menu( array(
-			'id' => $id,
-			'title' => __( 'CiviCRM', 'civicrm-admin-utilities' ),
-			'href' => admin_url( 'admin.php?page=CiviCRM' ),
-		) );
+	  // add parent
+	  $wp_admin_bar->add_menu(array(
+		'id'    => $id,
+		'title' => __('CiviCRM', 'civicrm-admin-utilities'),
+		'href'  => admin_url('admin.php?page=CiviCRM'),
+	  ));
 
-		// dashboard
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-1',
+	  // dashboard
+	  $wp_admin_bar->add_menu(array(
+		'id'     => 'cau-1',
+		'parent' => $id,
+		'title'  => __('CiviCRM Dashboard', 'civicrm-admin-utilities'),
+		'href'   => admin_url('admin.php?page=CiviCRM'),
+	  ));
+
+	  // search
+	  $wp_admin_bar->add_menu(array(
+		'id'     => 'cau-2',
+		'parent' => $id,
+		'title'  => __('Advanced Search', 'civicrm-admin-utilities'),
+		'href'   => $this->get_link('civicrm/contact/search/advanced', 'reset=1'),
+	  ));
+
+	  // contributions
+	  if (array_key_exists('CiviContribute', $components)) {
+		if ($this->check_permission('access CiviContribute')) {
+		  $wp_admin_bar->add_menu(array(
+			'id'     => 'cau-3',
 			'parent' => $id,
-			'title' => __( 'CiviCRM Dashboard', 'civicrm-admin-utilities' ),
-			'href' => admin_url( 'admin.php?page=CiviCRM' ),
-		) );
+			'title'  => __('Contribution Dashboard', 'civicrm-admin-utilities'),
+			'href'   => $this->get_link('civicrm/contribute', 'reset=1'),
+		  ));
+		}
+	  }
 
-		// search
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-2',
+	  // membership
+	  if (array_key_exists('CiviMember', $components)) {
+		if ($this->check_permission('access CiviMember')) {
+		  $wp_admin_bar->add_menu(array(
+			'id'     => 'cau-4',
 			'parent' => $id,
-			'title' => __( 'Advanced Search', 'civicrm-admin-utilities' ),
-			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
-		) );
-
-		// contributions
-		if ( array_key_exists( 'CiviContribute', $components ) ) {
-			if ( $this->check_permission( 'access CiviContribute' ) ) {
-				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-3',
-					'parent' => $id,
-					'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
-					'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
-				) );
-			}
+			'title'  => __('Membership Dashboard', 'civicrm-admin-utilities'),
+			'href'   => $this->get_link('civicrm/member', 'reset=1'),
+		  ));
 		}
+	  }
 
-		// membership
-		if ( array_key_exists( 'CiviMember', $components ) ) {
-			if ( $this->check_permission( 'access CiviMember' ) ) {
-				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-4',
-					'parent' => $id,
-					'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
-					'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
-				) );
-			}
+	  // events
+	  if (array_key_exists('CiviEvent', $components)) {
+		if ($this->check_permission('access CiviEvent')) {
+		  $wp_admin_bar->add_menu(array(
+			'id'     => 'cau-5',
+			'parent' => $id,
+			'title'  => __('Events Dashboard', 'civicrm-admin-utilities'),
+			'href'   => $this->get_link('civicrm/event', 'reset=1'),
+		  ));
 		}
+	  }
 
-		// events
-		if ( array_key_exists( 'CiviEvent', $components ) ) {
-			if ( $this->check_permission( 'access CiviEvent' ) ) {
-				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-5',
-					'parent' => $id,
-					'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
-					'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
-				) );
-			}
+	  // mailings
+	  if (array_key_exists('CiviMail', $components)) {
+		if ($this->check_permission('access CiviMail')) {
+		  $wp_admin_bar->add_menu(array(
+			'id'     => 'cau-6',
+			'parent' => $id,
+			'title'  => __('Mailings Sent and Scheduled', 'civicrm-admin-utilities'),
+			'href'   => $this->get_link('civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true'),
+		  ));
 		}
+	  }
 
-		// mailings
-		if ( array_key_exists( 'CiviMail', $components ) ) {
-			if ( $this->check_permission( 'access CiviMail' ) ) {
-				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-6',
-					'parent' => $id,
-					'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
-					'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
-				) );
-			}
+	  // Reports
+	  if ( array_key_exists( 'CiviReport', $components ) ) {
+		if ($this->check_permission('access CiviReport')) {
+		  $wp_admin_bar->add_menu(array(
+			'id'     => 'cau-7',
+			'parent' => $id,
+			'title'  => __('Report Listing', 'civicrm-admin-utilities'),
+			'href'   => $this->get_link('civicrm/report/list', '&reset=1'),
+		  ));
 		}
+	  }
 
 		// cases
 		if ( array_key_exists( 'CiviCase', $components ) ) {
 			if ( CRM_Case_BAO_Case::accessCiviCase() ) {
 				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-7',
+					'id' => 'cau-8',
 					'parent' => $id,
 					'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/case', 'reset=1' ),
@@ -514,7 +534,7 @@ class CiviCRM_Admin_Utilities {
 		// admin console
 		if ( $this->check_permission( 'administer CiviCRM' ) ) {
 			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-8',
+				'id' => 'cau-9',
 				'parent' => $id,
 				'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
 				'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
