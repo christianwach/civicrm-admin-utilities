@@ -451,11 +451,19 @@ class CiviCRM_Admin_Utilities {
 			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
 		) );
 
+		// groups
+		$wp_admin_bar->add_menu( array(
+			'id' => 'cau-3',
+			'parent' => $id,
+			'title' => __( 'Manage Groups', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/group', 'reset=1' ),
+		) );
+
 		// contributions
 		if ( array_key_exists( 'CiviContribute', $components ) ) {
 			if ( $this->check_permission( 'access CiviContribute' ) ) {
 				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-3',
+					'id' => 'cau-4',
 					'parent' => $id,
 					'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
@@ -467,7 +475,7 @@ class CiviCRM_Admin_Utilities {
 		if ( array_key_exists( 'CiviMember', $components ) ) {
 			if ( $this->check_permission( 'access CiviMember' ) ) {
 				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-4',
+					'id' => 'cau-5',
 					'parent' => $id,
 					'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
@@ -479,7 +487,7 @@ class CiviCRM_Admin_Utilities {
 		if ( array_key_exists( 'CiviEvent', $components ) ) {
 			if ( $this->check_permission( 'access CiviEvent' ) ) {
 				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-5',
+					'id' => 'cau-6',
 					'parent' => $id,
 					'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
@@ -491,7 +499,7 @@ class CiviCRM_Admin_Utilities {
 		if ( array_key_exists( 'CiviMail', $components ) ) {
 			if ( $this->check_permission( 'access CiviMail' ) ) {
 				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-6',
+					'id' => 'cau-7',
 					'parent' => $id,
 					'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
@@ -501,13 +509,13 @@ class CiviCRM_Admin_Utilities {
 
 		// reports
 		if ( array_key_exists( 'CiviReport', $components ) ) {
-			if ($this->check_permission('access CiviReport')) {
-				$wp_admin_bar->add_menu(array(
-					'id'     => 'cau-7',
+			if ( $this->check_permission( 'access CiviReport' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'id'     => 'cau-8',
 					'parent' => $id,
-					'title'  => __('Report Listing', 'civicrm-admin-utilities'),
-					'href'   => $this->get_link('civicrm/report/list', '&reset=1'),
-				));
+					'title'  => __( 'Report Listing', 'civicrm-admin-utilities' ),
+					'href'   => $this->get_link( 'civicrm/report/list', '&reset=1' ),
+				) );
 			}
 		}
 
@@ -515,7 +523,7 @@ class CiviCRM_Admin_Utilities {
 		if ( array_key_exists( 'CiviCase', $components ) ) {
 			if ( CRM_Case_BAO_Case::accessCiviCase() ) {
 				$wp_admin_bar->add_menu( array(
-					'id' => 'cau-8',
+					'id' => 'cau-9',
 					'parent' => $id,
 					'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/case', 'reset=1' ),
@@ -526,7 +534,7 @@ class CiviCRM_Admin_Utilities {
 		// admin console
 		if ( $this->check_permission( 'administer CiviCRM' ) ) {
 			$wp_admin_bar->add_menu( array(
-				'id' => 'cau-9',
+				'id' => 'cau-10',
 				'parent' => $id,
 				'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
 				'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
