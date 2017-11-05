@@ -23,16 +23,16 @@ if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
 }
 
 // store reference to this file
-if ( !defined( 'CIVICRM_ADMIN_UTILITIES_FILE' ) ) {
+if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_FILE' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_FILE', __FILE__ );
 }
 
 // store URL to this plugin's directory
-if ( !defined( 'CIVICRM_ADMIN_UTILITIES_URL' ) ) {
+if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_URL' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_URL', plugin_dir_url( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
 // store PATH to this plugin's directory
-if ( !defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
+if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_PATH', plugin_dir_path( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
 
@@ -116,18 +116,11 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function enable_translation() {
 
-		// there are no translations as yet, here for completeness
+		// enable translation
 		load_plugin_textdomain(
-
-			// unique name
-			'civicrm-admin-utilities',
-
-			// deprecated argument
-			false,
-
-			// relative path to directory containing translation files
-			dirname( plugin_basename( __FILE__ ) ) . '/languages/'
-
+			'civicrm-admin-utilities', // unique name
+			false, // deprecated argument
+			dirname( plugin_basename( __FILE__ ) ) . '/languages/' // relative path to files
 		);
 
 	}
