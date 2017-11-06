@@ -51,6 +51,7 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 * Add link to Reports Listing to CiviCRM shortcuts menu
 * Add link to Manage Groups to CiviCRM shortcuts menu
+* Set sensible plugin defaults
 
 = 0.3 =
 
