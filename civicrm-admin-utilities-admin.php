@@ -120,17 +120,17 @@ class CiviCRM_Admin_Utilities_Admin {
 		// init return
 		$settings = array();
 
-		// do not restrict
+		// do not restrict to main site only
 		$settings['main_site_only'] = '0';
 
-		// do not include styles
-		$settings['prettify_menu'] = '0';
+		// include styles
+		$settings['prettify_menu'] = '1';
 
-		// init post types as empty
-		$settings['post_types'] = array();
+		// init post types with defaults
+		$settings['post_types'] = array( 'post', 'page' );
 
-		// do not add menu to admin bar
-		$settings['admin_bar'] = '0';
+		// add menu to admin bar
+		$settings['admin_bar'] = '1';
 
 		// --<
 		return $settings;
