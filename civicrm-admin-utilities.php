@@ -186,14 +186,14 @@ class CiviCRM_Admin_Utilities {
 		// bail if disabled
 		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '0' ) return;
 
-		// define our custom path
-		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
-
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
 		// get template instance
 		$template = CRM_Core_Smarty::singleton();
+
+		// define our custom path
+		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
 
 		// add our custom template directory
 		$template->addTemplateDir( $custom_path );
@@ -218,14 +218,17 @@ class CiviCRM_Admin_Utilities {
 		// bail if disabled
 		if ( $this->admin->setting_get( 'prettify_access', '0' ) == '0' ) return;
 
-		// define our custom path
-		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_access_templates';
-
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
+		// TODO: bail if CiviCRM has been fixed
+		//if ( $this->admin->access_form_fixed() ) return;
+
 		// get template instance
 		$template = CRM_Core_Smarty::singleton();
+
+		// define our custom path
+		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_access_templates';
 
 		// add our custom template directory
 		$template->addTemplateDir( $custom_path );
