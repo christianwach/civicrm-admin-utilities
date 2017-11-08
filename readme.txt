@@ -47,6 +47,10 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 == Changelog ==
 
+= 0.3.2 =
+
+* Reinstates missing permissions rows
+
 = 0.3.1 =
 
 * Add link to Reports Listing to CiviCRM shortcuts menu
