@@ -144,8 +144,8 @@ class CiviCRM_Admin_Utilities {
 		// kill CiviCRM shortcode button
 		add_action( 'admin_head', array( $this, 'kill_civi_button' ) );
 
-		// allow plugins to register php and template directories
-		add_action( 'civicrm_config', array( $this, 'register_directories' ), 10, 1 );
+		// register template directory for menu amends
+		add_action( 'civicrm_config', array( $this, 'register_menu_directory' ), 10, 1 );
 
 		// run after the CiviCRM menu hook has been registered
 		add_action( 'init', array( $this, 'civicrm_only_on_main_site_please' ) );
@@ -157,6 +157,7 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_add' ), 2000 );
 
 		// filter the WordPress Permissions Form
+		add_action( 'civicrm_config', array( $this, 'register_access_directory' ), 10, 1 );
 		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
 
 		// if the debugging flag is set
@@ -174,19 +175,51 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Register directories that CiviCRM searches for php and template files.
+	 * Register directory that CiviCRM searches for the menu template file.
 	 *
-	 * @since 0.1
+	 * @since 0.3.2
 	 *
 	 * @param object $config The CiviCRM config object.
 	 */
-	public function register_directories( &$config ) {
+	public function register_menu_directory( &$config ) {
 
 		// bail if disabled
 		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '0' ) return;
 
 		// define our custom path
 		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
+
+		// kick out if no CiviCRM
+		if ( ! $this->admin->is_active() ) return;
+
+		// get template instance
+		$template = CRM_Core_Smarty::singleton();
+
+		// add our custom template directory
+		$template->addTemplateDir( $custom_path );
+
+		// register template directories
+		$template_include_path = $custom_path . PATH_SEPARATOR . get_include_path();
+		set_include_path( $template_include_path );
+
+	}
+
+
+
+	/**
+	 * Register directory that CiviCRM searches for the WordPress Access Control template file.
+	 *
+	 * @since 0.3.2
+	 *
+	 * @param object $config The CiviCRM config object.
+	 */
+	public function register_access_directory( &$config ) {
+
+		// bail if disabled
+		if ( $this->admin->setting_get( 'prettify_access', '0' ) == '0' ) return;
+
+		// define our custom path
+		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_access_templates';
 
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
@@ -633,11 +666,17 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function fix_permissions_form( $formName, &$form ) {
 
+		// bail if disabled
+		if ( $this->admin->setting_get( 'prettify_access', '0' ) == '0' ) return;
+
 		// bail if not the form we want
 		if ( $formName != 'CRM_ACL_Form_WordPress_Permissions' ) return;
 
 		// get vars
 		$vars = $form->get_template_vars();
+
+		// bail if $permDesc does not exist
+		if ( ! isset( $vars['permDesc'] ) ) return;
 
 		// build array keyed by permission
 		$table = array();
@@ -663,7 +702,7 @@ class CiviCRM_Admin_Utilities {
 		$form->assign( 'table', $table );
 
 		// camelcase dammit
-		CRM_Utils_System::setTitle(  __( 'WordPress Access Control', 'civicrm-admin-utilities' )  );
+		CRM_Utils_System::setTitle( __( 'WordPress Access Control', 'civicrm-admin-utilities' ) );
 
 	}
 

@@ -123,8 +123,11 @@ class CiviCRM_Admin_Utilities_Admin {
 		// do not restrict to main site only
 		$settings['main_site_only'] = '0';
 
-		// include styles
+		// prettify menu
 		$settings['prettify_menu'] = '1';
+
+		// fix WordPress Access Control table
+		$settings['prettify_access'] = '1';
 
 		// init post types with defaults
 		$settings['post_types'] = array( 'post', 'page' );
@@ -233,6 +236,9 @@ class CiviCRM_Admin_Utilities_Admin {
 		// styling
 		$this->admin_form_styling_options();
 
+		// access form
+		$this->admin_form_access_options();
+
 		// admin bar
 		$this->admin_form_admin_bar_options();
 
@@ -305,7 +311,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Get style options.
+	 * Render "Prettify Menu" options.
 	 *
 	 * @since 0.1
 	 */
@@ -317,22 +323,53 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// show sync
 		echo '
-		<h3>' . __( 'Style Options', 'civicrm-admin-utilities' ) . '</h3>
+		<h3>' . __( 'Prettify CiviCRM Menu', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'Checking this option has two effects:', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Checking this option applies some styling tweaks that make the CiviCRM menu look a little better.', 'civicrm-admin-utilities' ) . '</p>
 
-		<ol>
-			<li>' . __( 'Applies some styling tweaks that make the CiviCRM menu look a little better.', 'civicrm-admin-utilities' ) . '</li>
-			<li>' . __( 'Fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</li>
+		<table class="form-table">
+
+			<tr>
+				<th scope="row">' . __( 'Prettify CiviCRM Menu', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"' . $prettify_menu . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to prettify the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+
+		</table>
+
+		<hr>' . "\n\n";
+
+	}
+
+
+
+	/**
+	 * Render "WordPress Access Control" options.
+	 *
+	 * @since 0.3.2
+	 */
+	public function admin_form_access_options() {
+
+		// init checkbox
+		$prettify_access = '';
+		if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) $prettify_access = ' checked="checked"';
+
+		// show sync
+		echo '
+		<h3>' . __( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ) . '</h3>
+
+		<p>' . __( 'Checking this option fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</li>
 		</ol>
 
 		<table class="form-table">
 
 			<tr>
-				<th scope="row">' . __( 'Prettify CiviCRM', 'civicrm-admin-utilities' ) . '</th>
+				<th scope="row">' . __( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ) . '</th>
 				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"' . $prettify_menu . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to prettify the CiviCRM menu and WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</label>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_access" id="civicrm_admin_utilities_access" value="1"' . $prettify_access . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_access">' . __( 'Check this to fix the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
@@ -545,12 +582,16 @@ class CiviCRM_Admin_Utilities_Admin {
 			// init vars
 			$civicrm_admin_utilities_main_site = '';
 			$civicrm_admin_utilities_menu = '';
+			$civicrm_admin_utilities_access = '';
 			$civicrm_admin_utilities_post_types = array();
 			$civicrm_admin_utilities_cache = '';
 			$civicrm_admin_utilities_admin_bar = '';
 
 			// get variables
 			extract( $_POST );
+
+			// init force cache-lcearing flag
+			$force = false;
 
 			// did we ask to remove the menu on sub-sites?
 			if ( $civicrm_admin_utilities_main_site == '1' ) {
@@ -559,11 +600,30 @@ class CiviCRM_Admin_Utilities_Admin {
 				$this->setting_set( 'main_site_only', '0' );
 			}
 
+			// get existing menu setting
+			$existing_menu = $this->setting_get( 'prettify_menu', '0' );
+			if ( $civicrm_admin_utilities_menu != $existing_menu ) {
+				$force = true;
+			}
+
 			// did we ask to prettify the menu?
 			if ( $civicrm_admin_utilities_menu == '1' ) {
 				$this->setting_set( 'prettify_menu', '1' );
 			} else {
 				$this->setting_set( 'prettify_menu', '0' );
+			}
+
+			// get existing access setting
+			$existing_access = $this->setting_get( 'prettify_access', '0' );
+			if ( $civicrm_admin_utilities_access != $existing_access ) {
+				$force = true;
+			}
+
+			// did we ask to fix the access form?
+			if ( $civicrm_admin_utilities_access == '1' ) {
+				$this->setting_set( 'prettify_access', '1' );
+			} else {
+				$this->setting_set( 'prettify_access', '0' );
 			}
 
 			// which post types are we enabling the CiviCRM button on?
@@ -594,8 +654,8 @@ class CiviCRM_Admin_Utilities_Admin {
 			// save options
 			$this->settings_save();
 
-			// clear caches if asked to
-			if ( $civicrm_admin_utilities_cache == '1' ) {
+			// clear caches if asked to - or if forced to do so
+			if ( $civicrm_admin_utilities_cache == '1' OR $force ) {
 				$this->clear_caches();
 			}
 
@@ -619,6 +679,39 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// try and init CiviCRM
 		return civi_wp()->initialize();
+
+	}
+
+
+
+	/**
+	 * Check if CiviCRM's WordPress Access Control template has been fixed.
+	 *
+	 * @since 0.3.2
+	 *
+	 * @return bool $fixed True if fixed, false otherwise.
+	 */
+	public function access_form_fixed() {
+
+		// init return
+		$fixed = false;
+
+		// get current version
+		$version = CRM_Utils_System::version();
+
+		// find major version
+		$parts = explode( '.', $version );
+		$major_version = $parts[0] . '.' . $parts[1];
+
+		// CiviCRM 4.6 is LTS and may have the fix back-ported
+		if ( version_compare( $major_version, '4.6', '=' ) ) {
+			if ( version_compare( $version, '4.6.34', '>=' ) ) $fixed = true;
+		} else {
+			if ( version_compare( $version, '4.7.28', '>=' ) ) $fixed = true;
+		}
+
+		// --<
+		return $fixed;
 
 	}
 
