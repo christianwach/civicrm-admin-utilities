@@ -681,20 +681,27 @@ class CiviCRM_Admin_Utilities {
 		// bail if $permDesc does not exist
 		if ( ! isset( $vars['permDesc'] ) ) return;
 
+		// build replacement for permDesc array
+		foreach( $vars['rolePerms'] AS $role => $perms ) {
+			foreach( $perms AS $name => $title ) {
+				$permissions[$name] = $title;
+			}
+		}
+
 		// build array keyed by permission
 		$table = array();
-		foreach( $vars['permDesc'] AS $perm => $desc ) {
+		foreach( $permissions AS $perm => $label ) {
 
 			// init row with permission description
 			$table[$perm] = array(
-				'desc' => $desc,
+				'label' => $label,
 				'roles' => array(),
 			);
 
 			// add permission label and role names
 			foreach( $vars['roles'] AS $key => $label ) {
-				if ( isset( $vars['rolePerms'][$key][$perm] ) ) {
-					$table[$perm]['label'] = $vars['rolePerms'][$key][$perm];
+				if ( isset( $vars['permDesc'][$perm] ) ) {
+					$table[$perm]['desc'] = $vars['permDesc'][$perm];
 				}
 				$table[$perm]['roles'][] = $key;
 			}
