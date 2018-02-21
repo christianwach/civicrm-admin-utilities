@@ -1,14 +1,14 @@
-# Copyright (C) 2017 CiviCRM Admin Utilities
+# Copyright (C) 2018 CiviCRM Admin Utilities
 # This file is distributed under the same license as the CiviCRM Admin Utilities package.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.3.2\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
-"POT-Creation-Date: 2017-11-08 22:37:15+00:00\n"
+"POT-Creation-Date: 2018-02-21 13:01:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
