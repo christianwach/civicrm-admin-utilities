@@ -19,6 +19,12 @@ CiviCRM admin menu style overrides
 --------------------------------------------------------------------------------
 */
 
+/* No need for top padding */
+html body:not(.toolbar)
+{
+	padding-top: 0 !important;
+}
+
 /* Font selection */
 body #civicrm-menu,
 body #root-menu-div ul,
@@ -27,6 +33,18 @@ body #root-menu-div .menu-ul
 	/* Match WordPress admin */
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Ensure menu sits on top of WordPress menu */
+body #civicrm-menu
+{
+	z-index: 100000;
+}
+
+/* Remove padding on dropdowns */
+body #root-menu-div .menu-ul
+{
+	padding: 0;
 }
 
 /* The dropdown Javascript determines the placement of the first-level dropdown by the height of this element */
@@ -53,7 +71,7 @@ body #root-menu-div .menu-ul
 }
 
 /* Give menu item arrow more space */
-div.menu-item img.menu-item-arrow
+body #root-menu-div .menu-item-arrow
 {
 	right: 10px;
 	top: 10px;
@@ -84,13 +102,26 @@ body #root-menu-div .menu-ul li:not(.menu-separator)
 body #civicrm-menu li#crm-qsearch
 {
 	height: 32px !important;
-	padding: 0 2px;
+	padding: 0 24px 0 12px;
+	margin-right: 8px;
 }
 
 /* Vertically centre the form */
 body #civicrm-menu li#crm-qsearch > form
 {
 	margin-top: 2px;
+}
+
+/* Give the input some padding */
+body #civicrm-menu #crm-qsearch .form-text
+{
+	padding: 4px 0;
+}
+
+/* Adjust logo position */
+body #civicrm-menu .crm-logo-sm
+{
+	vertical-align: text-bottom;
 }
 
 
@@ -100,6 +131,11 @@ body #civicrm-menu li#crm-qsearch > form
 Misc CiviCRM style fixes for WordPress
 --------------------------------------------------------------------------------
 */
+
+body #crm-container div#printer-friendly
+{
+	margin: 0;
+}
 
 #crm-container, .crm-container
 {
@@ -138,3 +174,22 @@ body .crm-container #crm-main-content-wrapper div.action-link a.button
 {
 	padding-bottom: 27px;
 }
+
+/* Give submit button container some extra height */
+body .crm-container .crm-submit-buttons
+{
+	height: 40px;
+}
+
+/* Tweak submit buttons */
+body .crm-container a.button
+{
+	height: 36px;
+}
+
+/* Anything but black on rollover! */
+body .crm-container a.button:hover
+{
+	color: #fff;
+}
+
