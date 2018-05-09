@@ -410,9 +410,6 @@ class CiviCRM_Admin_Utilities {
 		// bail if admin bar not enabled
 		if ( $this->admin->setting_get( 'admin_bar', '0' ) == '0' ) return;
 
-		// bail if CiviCRM is disabled on subsites
-		if ( $this->admin->setting_get( 'main_site_only', '0' ) == '1' ) return;
-
 		// bail if user cannot access CiviCRM
 		if ( ! current_user_can( 'access_civicrm' ) ) return;
 
@@ -435,6 +432,9 @@ class CiviCRM_Admin_Utilities {
 		// if it's multisite, then switch to main site
 		$switch_back = false;
 		if ( is_multisite() AND ! is_main_site() AND $switch ) {
+
+			// bail if CiviCRM is disabled on subsites
+			if ( $this->admin->setting_get( 'main_site_only', '0' ) == '1' ) return;
 
 			// get current site data
 			$current_site = get_current_site();
