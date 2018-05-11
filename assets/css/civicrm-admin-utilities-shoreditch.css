@@ -26,12 +26,13 @@ html body:not(.toolbar)
 }
 
 /* Font selection */
+html body.wp-admin:not(.toolbar),
 body #civicrm-menu,
 body #root-menu-div ul,
 body #root-menu-div .menu-ul
 {
 	/* Match WordPress admin */
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 

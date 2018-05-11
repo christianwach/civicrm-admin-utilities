@@ -66,7 +66,7 @@ class CiviCRM_Admin_Utilities {
 	public function __construct() {
 
 		// load our Admin utility class
-		require( CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm-admin-utilities-admin.php' );
+		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-admin.php' );
 
 		// instantiate
 		$this->admin = new CiviCRM_Admin_Utilities_Admin();
@@ -262,7 +262,7 @@ class CiviCRM_Admin_Utilities {
 		// add custom stylesheet
 		wp_enqueue_style(
 			'civicrm_admin_utilities_admin_tweaks',
-			plugins_url( $css, CIVICRM_ADMIN_UTILITIES_FILE ),
+			plugins_url( 'assets/css/' . $css, CIVICRM_ADMIN_UTILITIES_FILE ),
 			false,
 			CIVICRM_ADMIN_UTILITIES_VERSION, // version
 			'all' // media
