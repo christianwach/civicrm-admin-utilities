@@ -146,10 +146,9 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * network activated. There is a conundrum here, however:
 	 *
 	 * If this plugin is active on more than one site, then it will only be the
-	 * first site where the plugin loads that gets the migrated settings.
-	 *
-	 * As a result, other sites will need to reconfigure their settings for this
-	 * plugin. To this end, an admin notice will be shown.
+	 * first site where the plugin loads that gets the migrated settings. Other
+	 * sites will need to reconfigure their settings for this plugin since they
+	 * will have been reset to the defaults.
 	 *
 	 * @since 0.3.4
 	 */

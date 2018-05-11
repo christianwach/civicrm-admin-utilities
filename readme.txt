@@ -24,7 +24,7 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisit
 
 ### Requirements
 
-This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. Please refer to the installation page for configuration instructions as well as for how to use this plugin with versions of CiviCRM prior to 4.6-alpha1.
+This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6*. Please refer to the installation page for configuration instructions as well as for how to use this plugin with versions of CiviCRM prior to 4.6.
 
 ### Plugin Development
 
@@ -41,7 +41,15 @@ This plugin is in active development. For feature requests and bug reports (or i
 
 In single-site installs, you can adjust this plugin's settings by visiting "Settings" --> "CiviCRM Admin Utilities". If you install this plugin in multisite and have CiviCRM network-enabled, then you should also network-enable this plugin. You'll then find its settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities".
 
-This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For versions of CiviCRM prior to 4.6-alpha1, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in CiviCRM file. Please refer to the each repo for further instructions.
+This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6*. For versions of CiviCRM prior to 4.6, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in CiviCRM file. Please refer to the each repo for further instructions.
+
+<h4>Upgrading from 0.3.3 or earlier</h4>
+
+If you have this plugin installed on WordPress Multisite and this plugin is *not* network activated, then read on.
+
+Prior to version 0.3.4, this plugin stored its settings in the *network options* rather than in the *site's options*. This meant that separate sites *shared* their settings rather than being individually configurable. Version 0.3.4 changed the location where the plugin's settings are stored to be appropriate to the install location and, as a result, each site can be configured differently.
+
+If you are upgrading from 0.3.3, therefore, you may need to review the settings for each site where CiviCRM Admin Utilities is activated.
 
 
 
