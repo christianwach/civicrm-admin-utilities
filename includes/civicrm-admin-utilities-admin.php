@@ -51,13 +51,13 @@ class CiviCRM_Admin_Utilities_Admin {
 	public function activate() {
 
 		// kick out if we are re-activating
-		if ( civicrm_admin_utilities_site_option_get( 'civicrm_admin_utilities_installed', 'false' ) == 'true' ) return;
+		if ( $this->option_get( 'civicrm_admin_utilities_installed', 'false' ) == 'true' ) return;
 
 		// store default settings
-		civicrm_admin_utilities_site_option_set( 'civicrm_admin_utilities_settings', $this->settings_get_defaults() );
+		$this->option_set( 'civicrm_admin_utilities_settings', $this->settings_get_defaults() );
 
 		// store installed flag
-		civicrm_admin_utilities_site_option_set( 'civicrm_admin_utilities_installed', 'true' );
+		$this->option_set( 'civicrm_admin_utilities_installed', 'true' );
 
 	}
 
@@ -84,13 +84,13 @@ class CiviCRM_Admin_Utilities_Admin {
 	public function initialise() {
 
 		// load settings array
-		$this->settings = civicrm_admin_utilities_site_option_get( 'civicrm_admin_utilities_settings', $this->settings );
+		$this->settings = $this->option_get( 'civicrm_admin_utilities_settings', $this->settings );
 
 		// is this the back end?
 		if ( is_admin() ) {
 
-			// multisite?
-			if ( is_multisite() ) {
+			// if multisite and network activated
+			if ( $this->is_network_activated() ) {
 
 				// add admin page to Network menu
 				add_action( 'network_admin_menu', array( $this, 'admin_menu' ), 30 );
@@ -158,8 +158,8 @@ class CiviCRM_Admin_Utilities_Admin {
 		// try and update options
 		$saved = $this->update_options();
 
-		// multisite?
-		if ( is_multisite() ) {
+		// multisite and network activated?
+		if ( $this->is_network_activated() ) {
 
 			// add the admin page to the Network Settings menu
 			$this->settings_page = add_submenu_page(
@@ -757,7 +757,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	public function settings_save() {
 
 		// save array as site option
-		return civicrm_admin_utilities_site_option_set( 'civicrm_admin_utilities_settings', $this->settings );
+		return $this->option_set( 'civicrm_admin_utilities_settings', $this->settings );
 
 	}
 
@@ -856,114 +856,178 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 
+	/**
+	 * Test if this plugin is network activated.
+	 *
+	 * @since 0.3.4
+	 *
+	 * @return bool $is_network_active True if network activated, false otherwise.
+	 */
+	public function is_network_activated() {
+
+		// only need to test once
+		static $is_network_active;
+
+		// have we done this already?
+		if ( isset( $is_network_active ) ) return $is_network_active;
+
+		// if not multisite, it cannot be
+		if ( ! is_multisite() ) {
+
+			// set flag
+			$is_network_active = false;
+
+			// kick out
+			return $is_network_active;
+
+		}
+
+		// make sure plugin file is included when outside admin
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
+
+		// get path from 'plugins' directory to this plugin
+		$this_plugin = plugin_basename( CIVICRM_ADMIN_UTILITIES_FILE );
+
+		// test if network active
+		$is_network_active = is_plugin_active_for_network( $this_plugin );
+
+		// --<
+		return $is_network_active;
+
+	}
+
+
+
+	/**
+	 * Test existence of a specified site option.
+	 *
+	 * @since 0.1
+	 *
+	 * @param str $option_name The name of the option.
+	 * @return bool $exists Whether or not the option exists.
+	 */
+	public function option_exists( $option_name = '' ) {
+
+		// test for empty
+		if ( $option_name == '' ) {
+			die( __( 'You must supply an option to option_exists()', 'civicrm-admin-utilities' ) );
+		}
+
+		// test by getting option with unlikely default
+		if ( $this->option_get( $option_name, 'fenfgehgefdfdjgrkj' ) == 'fenfgehgefdfdjgrkj' ) {
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+
+
+
+	/**
+	 * Return a value for a specified site option.
+	 *
+	 * @since 0.1
+	 *
+	 * @param str $option_name The name of the option.
+	 * @param str $default The default value of the option if it has no value.
+	 * @return mixed $value the value of the option.
+	 */
+	public function option_get( $option_name = '', $default = false ) {
+
+		// test for empty
+		if ( $option_name == '' ) {
+			die( __( 'You must supply an option to option_get()', 'civicrm-admin-utilities' ) );
+		}
+
+		// if multisite and network activated
+		if ( $this->is_network_activated() ) {
+
+			// get site option
+			$value = get_site_option( $option_name, $default );
+
+		} else {
+
+			// get option
+			$value = get_option( $option_name, $default );
+
+		}
+
+		// --<
+		return $value;
+
+	}
+
+
+
+	/**
+	 * Set a value for a specified site option.
+	 *
+	 * @since 0.1
+	 *
+	 * @param str $option_name The name of the option.
+	 * @param mixed $value The value to set the option to.
+	 * @return bool $success True if the value of the option was successfully saved.
+	 */
+	public function option_set( $option_name = '', $value = '' ) {
+
+		// test for empty
+		if ( $option_name == '' ) {
+			die( __( 'You must supply an option to option_set()', 'civicrm-admin-utilities' ) );
+		}
+
+		// if multisite and network activated
+		if ( $this->is_network_activated() ) {
+
+			// update site option
+			return update_site_option( $option_name, $value );
+
+		} else {
+
+			// update option
+			return update_option( $option_name, $value );
+
+		}
+
+	}
+
+
+
+	/**
+	 * Delete a specified site option.
+	 *
+	 * @since 0.1
+	 *
+	 * @param str $option_name The name of the option.
+	 * @return bool $success True if the value of the option was successfully deleted.
+	 */
+	public function option_delete( $option_name = '' ) {
+
+		// test for empty
+		if ( $option_name == '' ) {
+			die( __( 'You must supply an option to option_delete()', 'civicrm-admin-utilities' ) );
+		}
+
+		// if multisite and network activated
+		if ( $this->is_network_activated() ) {
+
+			// delete site option
+			return delete_site_option( $option_name );
+
+		} else {
+
+			// delete option
+			return delete_option( $option_name );
+
+		}
+
+	}
+
+
+
 } // class ends
-
-
-
-/**
- * =============================================================================
- * Globally-available utility functions
- * =============================================================================
- *
- * The "site_option" functions below are useful because - in multisite - they
- * access Network Options, while in single-site they access Blog Options.
- *
- * =============================================================================
- */
-
-
-
-/**
- * Test existence of a specified site option.
- *
- * @since 0.1
- *
- * @param str $option_name The name of the option.
- * @return bool $exists Whether or not the option exists.
- */
-function civicrm_admin_utilities_site_option_exists( $option_name = '' ) {
-
-	// test for empty
-	if ( $option_name == '' ) {
-		die( __( 'You must supply an option to civicrm_admin_utilities_site_option_exists()', 'civicrm-admin-utilities' ) );
-	}
-
-	// test by getting option with unlikely default
-	if ( civicrm_admin_utilities_site_option_get( $option_name, 'fenfgehgefdfdjgrkj' ) == 'fenfgehgefdfdjgrkj' ) {
-		return false;
-	} else {
-		return true;
-	}
-
-}
-
-
-
-/**
- * Return a value for a specified site option.
- *
- * @since 0.1
- *
- * @param str $option_name The name of the option.
- * @param str $default The default value of the option if it has no value.
- * @return mixed $value the value of the option.
- */
-function civicrm_admin_utilities_site_option_get( $option_name = '', $default = false ) {
-
-	// test for empty
-	if ( $option_name == '' ) {
-		die( __( 'You must supply an option to civicrm_admin_utilities_site_option_get()', 'civicrm-admin-utilities' ) );
-	}
-
-	// get option
-	return get_site_option( $option_name, $default );
-
-}
-
-
-
-/**
- * Set a value for a specified site option.
- *
- * @since 0.1
- *
- * @param str $option_name The name of the option.
- * @param mixed $value The value to set the option to.
- * @return bool $success True if the value of the option was successfully saved.
- */
-function civicrm_admin_utilities_site_option_set( $option_name = '', $value = '' ) {
-
-	// test for empty
-	if ( $option_name == '' ) {
-		die( __( 'You must supply an option to civicrm_admin_utilities_site_option_set()', 'civicrm-admin-utilities' ) );
-	}
-
-	// set option
-	return update_site_option( $option_name, $value );
-
-}
-
-
-
-/**
- * Delete a specified site option.
- *
- * @since 0.1
- *
- * @param str $option_name The name of the option.
- * @return bool $success True if the value of the option was successfully deleted.
- */
-function civicrm_admin_utilities_site_option_delete( $option_name = '' ) {
-
-	// test for empty
-	if ( $option_name == '' ) {
-		die( __( 'You must supply an option to civicrm_admin_utilities_site_option_delete()', 'civicrm-admin-utilities' ) );
-	}
-
-	// delete option
-	return delete_site_option( $option_name );
-
-}
 
 
 
