@@ -65,11 +65,8 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function __construct() {
 
-		// use translation files
-		add_action( 'plugins_loaded', array( $this, 'enable_translation' ) );
-
 		// initialise
-		add_action( 'plugins_loaded', array( $this, 'initialise' ) );
+		$this->initialise();
 
 	}
 
@@ -128,24 +125,17 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function initialise() {
 
-		// bail if CiviCRM plugin is not present
-		if ( ! function_exists( 'civi_wp' ) ) return;
-
 		// include files
 		$this->include_files();
 
 		// set up objects and references
 		$this->setup_objects();
 
-		// register hooks when all plugins are loaded
-		$this->register_civi_hooks();
+		// enable translation
+		add_action( 'plugins_loaded', array( $this, 'enable_translation' ) );
 
-		/**
-		 * Broadcast that this plugin is now loaded.
-		 *
-		 * @since 0.3.4
-		 */
-		do_action( 'civicrm_admin_utilities_loaded' );
+		// finally, register hooks
+		add_action( 'plugins_loaded', array( $this, 'register_hooks' ) );
 
 	}
 
@@ -198,11 +188,14 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Register hooks if CiviCRM is present.
+	 * Register hooks.
 	 *
 	 * @since 0.1
 	 */
-	public function register_civi_hooks() {
+	public function register_hooks() {
+
+		// bail if CiviCRM plugin is not present
+		if ( ! function_exists( 'civi_wp' ) ) return;
 
 		// kill CiviCRM shortcode button
 		add_action( 'admin_head', array( $this, 'kill_civi_button' ) );
@@ -232,6 +225,13 @@ class CiviCRM_Admin_Utilities {
 			add_action( 'civicrm_postProcess', array( $this, 'trace_postProcess' ), 10, 2 );
 
 		}
+
+		/**
+		 * Broadcast that this plugin is now loaded.
+		 *
+		 * @since 0.3.4
+		 */
+		do_action( 'civicrm_admin_utilities_loaded' );
 
 	}
 
