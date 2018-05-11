@@ -47,6 +47,11 @@ This plugin requires a minimum of *WordPress 3.9* and *CiviCRM 4.6-alpha1*. For 
 
 == Changelog ==
 
+= 0.3.4 =
+
+* Fixes appearance of Shortcuts menu on main site when CiviCRM is disabled on subsites
+* Further fixes for the Shoreditch theme for CiviCRM
+
 = 0.3.3 =
 
 * Fix styles for the Shoreditch theme for CiviCRM
