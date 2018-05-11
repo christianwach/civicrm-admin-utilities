@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities package.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.3.3\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.3.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
-"POT-Creation-Date: 2018-02-21 13:01:03+00:00\n"
+"POT-Creation-Date: 2018-05-11 14:07:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,214 +12,218 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: civicrm-admin-utilities-admin.php:167 civicrm-admin-utilities-admin.php:168
-#: civicrm-admin-utilities-admin.php:178 civicrm-admin-utilities-admin.php:179
-#: civicrm-admin-utilities-admin.php:220
-msgid "CiviCRM Admin Utilities"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:206
-msgid "You do not have permission to access this page."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:258
-msgid "Submit"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:291
-msgid "Multisite Options"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:293
-msgid "In multisite, CiviCRM currently loads on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item and CiviCRM shortcode button to the main site only."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:298
-msgid "Restrict CiviCRM"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:301
-msgid "Restrict CiviCRM to main site only."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:326 civicrm-admin-utilities-admin.php:333
-msgid "Prettify CiviCRM Menu"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:328
-msgid "Checking this option applies some styling tweaks that make the CiviCRM menu look a little better."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:336
-msgid "Check this to prettify the CiviCRM menu."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:361 civicrm-admin-utilities-admin.php:369
-msgid "Fix WordPress Access Control form"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:363
-msgid "Checking this option fixes the appearance of the WordPress Access Control form."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:372
-msgid "Check this to fix the appearance of the WordPress Access Control form."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:397
-msgid "Admin Bar Options"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:399
-msgid "Some people find it helpful to have links directly to CiviCRM components available from the WordPress admin bar."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:404
-msgid "Shortcuts Menu"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:407
-msgid "Check this to add a CiviCRM Shortcuts Menu to the WordPress admin bar."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:470
-msgid "Post Type Options"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:472
-msgid "Select which post types you want the CiviCRM shortcode button to appear on."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:491
-msgid "Miscellaneous Utilities"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:493
-msgid "Some useful functions and shortcuts to various commonly used CiviCRM admin pages."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:498
-msgid "Clear Caches"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:501
-msgid "Check this to clear the CiviCRM caches."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:506
-msgid "Rebuild Menu"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:508
-msgid "Click this to rebuild the CiviCRM menu."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:513
-msgid "Rebuild Database Triggers"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:515
-msgid "Click this to rebuild the triggers in the CiviCRM database."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:520
-msgid "Upgrade CiviCRM"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:522
-msgid "Click this to upgrade CiviCRM."
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:778
-msgid "You must supply an setting to setting_exists()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:801
-msgid "You must supply an setting to setting_get()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:823
-msgid "You must supply an setting to setting_set()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:828
-msgid "You must supply the setting as a string to setting_set()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:849
-msgid "You must supply an setting to setting_delete()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:888
-msgid "You must supply an option to civicrm_admin_utilities_site_option_exists()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:915
-msgid "You must supply an option to civicrm_admin_utilities_site_option_get()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:938
-msgid "You must supply an option to civicrm_admin_utilities_site_option_set()"
-msgstr ""
-
-#: civicrm-admin-utilities-admin.php:960
-msgid "You must supply an option to civicrm_admin_utilities_site_option_delete()"
-msgstr ""
-
-#: civicrm-admin-utilities.php:463
+#: civicrm-admin-utilities.php:550
 msgid "CiviCRM"
 msgstr ""
 
-#: civicrm-admin-utilities.php:471
+#: civicrm-admin-utilities.php:558
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:479
+#: civicrm-admin-utilities.php:566
 msgid "Advanced Search"
 msgstr ""
 
-#: civicrm-admin-utilities.php:487
+#: civicrm-admin-utilities.php:574
 msgid "Manage Groups"
 msgstr ""
 
-#: civicrm-admin-utilities.php:497
+#: civicrm-admin-utilities.php:584
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:509
+#: civicrm-admin-utilities.php:596
 msgid "Membership Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:521
+#: civicrm-admin-utilities.php:608
 msgid "Events Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:533
+#: civicrm-admin-utilities.php:620
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: civicrm-admin-utilities.php:545
+#: civicrm-admin-utilities.php:632
 msgid "Report Listing"
 msgstr ""
 
-#: civicrm-admin-utilities.php:557
+#: civicrm-admin-utilities.php:644
 msgid "Cases Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:568
+#: civicrm-admin-utilities.php:655
 msgid "Admin Console"
 msgstr ""
 
-#: civicrm-admin-utilities.php:715
+#: civicrm-admin-utilities.php:802
 msgid "WordPress Access Control"
 msgstr ""
 
-#: civicrm-admin-utilities.php:837
+#: civicrm-admin-utilities.php:939
 msgid "Settings"
 msgstr ""
 
-#: civicrm-admin-utilities.php:841
+#: civicrm-admin-utilities.php:943
 msgid "Donate!"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:162
+#: includes/civicrm-admin-utilities-admin.php:163
+#: includes/civicrm-admin-utilities-admin.php:173
+#: includes/civicrm-admin-utilities-admin.php:174
+#: includes/civicrm-admin-utilities-admin.php:215
+msgid "CiviCRM Admin Utilities"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:201
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:253
+msgid "Submit"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:286
+msgid "Multisite Options"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:288
+msgid "In multisite, CiviCRM currently loads on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item and CiviCRM shortcode button to the main site only."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:293
+msgid "Restrict CiviCRM"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:296
+msgid "Restrict CiviCRM to main site only."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:321
+#: includes/civicrm-admin-utilities-admin.php:328
+msgid "Prettify CiviCRM Menu"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:323
+msgid "Checking this option applies some styling tweaks that make the CiviCRM menu look a little better."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:331
+msgid "Check this to prettify the CiviCRM menu."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:356
+#: includes/civicrm-admin-utilities-admin.php:364
+msgid "Fix WordPress Access Control form"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:358
+msgid "Checking this option fixes the appearance of the WordPress Access Control form."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:367
+msgid "Check this to fix the appearance of the WordPress Access Control form."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:392
+msgid "Admin Bar Options"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:394
+msgid "Some people find it helpful to have links directly to CiviCRM components available from the WordPress admin bar."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:399
+msgid "Shortcuts Menu"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:402
+msgid "Check this to add a CiviCRM Shortcuts Menu to the WordPress admin bar."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:465
+msgid "Post Type Options"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:467
+msgid "Select which post types you want the CiviCRM shortcode button to appear on."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:486
+msgid "Miscellaneous Utilities"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:488
+msgid "Some useful functions and shortcuts to various commonly used CiviCRM admin pages."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:493
+msgid "Clear Caches"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:496
+msgid "Check this to clear the CiviCRM caches."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:501
+msgid "Rebuild Menu"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:503
+msgid "Click this to rebuild the CiviCRM menu."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:508
+msgid "Rebuild Database Triggers"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:510
+msgid "Click this to rebuild the triggers in the CiviCRM database."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:515
+msgid "Upgrade CiviCRM"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:517
+msgid "Click this to upgrade CiviCRM."
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:773
+msgid "You must supply an setting to setting_exists()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:796
+msgid "You must supply an setting to setting_get()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:818
+msgid "You must supply an setting to setting_set()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:823
+msgid "You must supply the setting as a string to setting_set()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:844
+msgid "You must supply an setting to setting_delete()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:910
+msgid "You must supply an option to option_exists()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:937
+msgid "You must supply an option to option_get()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:973
+msgid "You must supply an option to option_set()"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-admin.php:1005
+msgid "You must supply an option to option_delete()"
 msgstr ""
 #. Plugin Name of the plugin/theme
 msgid "CiviCRM Admin Utilities"
