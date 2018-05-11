@@ -65,17 +65,11 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function __construct() {
 
-		// load our Admin utility class
-		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-admin.php' );
-
-		// instantiate
-		$this->admin = new CiviCRM_Admin_Utilities_Admin();
-
 		// use translation files
 		add_action( 'plugins_loaded', array( $this, 'enable_translation' ) );
 
-		// register hooks when all plugins are loaded
-		add_action( 'plugins_loaded', array( $this, 'register_civi_hooks' ) );
+		// initialise
+		add_action( 'plugins_loaded', array( $this, 'initialise' ) );
 
 	}
 
@@ -127,6 +121,78 @@ class CiviCRM_Admin_Utilities {
 
 
 
+	/**
+	 * Do stuff on plugin init.
+	 *
+	 * @since 0.3.4
+	 */
+	public function initialise() {
+
+		// bail if CiviCRM plugin is not present
+		if ( ! function_exists( 'civi_wp' ) ) return;
+
+		// include files
+		$this->include_files();
+
+		// set up objects and references
+		$this->setup_objects();
+
+		// register hooks when all plugins are loaded
+		$this->register_civi_hooks();
+
+		/**
+		 * Broadcast that this plugin is now loaded.
+		 *
+		 * @since 0.3.4
+		 */
+		do_action( 'civicrm_admin_utilities_loaded' );
+
+	}
+
+
+
+	/**
+	 * Include files.
+	 *
+	 * @since 0.3.4
+	 */
+	public function include_files() {
+
+		// only do this once
+		static $done;
+		if ( isset( $done ) AND $done === true ) return;
+
+		// load our Admin utility class
+		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-admin.php' );
+
+		// we're done
+		$done = true;
+
+	}
+
+
+
+	/**
+	 * Set up this plugin's objects.
+	 *
+	 * @since 0.3.4
+	 */
+	public function setup_objects() {
+
+		// only do this once
+		static $done;
+		if ( isset( $done ) AND $done === true ) return;
+
+		// initialise objects
+		$this->admin = new CiviCRM_Admin_Utilities_Admin();
+
+		// we're done
+		$done = true;
+
+	}
+
+
+
 	//##########################################################################
 
 
@@ -137,9 +203,6 @@ class CiviCRM_Admin_Utilities {
 	 * @since 0.1
 	 */
 	public function register_civi_hooks() {
-
-		// bail if CiviCRM is not present
-		if ( ! function_exists( 'civi_wp' ) ) return;
 
 		// kill CiviCRM shortcode button
 		add_action( 'admin_head', array( $this, 'kill_civi_button' ) );
@@ -824,6 +887,21 @@ class CiviCRM_Admin_Utilities {
 // init plugin
 global $civicrm_admin_utilities;
 $civicrm_admin_utilities = new CiviCRM_Admin_Utilities;
+
+/**
+ * Utility to get a reference to this plugin.
+ *
+ * @since 0.3.4
+ *
+ * @return object $civicrm_admin_utilities The plugin reference.
+ */
+function civicrm_au() {
+
+	// return instance
+	global $civicrm_admin_utilities;
+	return $civicrm_admin_utilities;
+
+}
 
 // activation
 register_activation_hook( __FILE__, array( $civicrm_admin_utilities, 'activate' ) );

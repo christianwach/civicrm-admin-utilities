@@ -86,21 +86,16 @@ class CiviCRM_Admin_Utilities_Admin {
 		// load settings array
 		$this->settings = $this->option_get( 'civicrm_admin_utilities_settings', $this->settings );
 
-		// is this the back end?
-		if ( is_admin() ) {
+		// if multisite and network activated
+		if ( $this->is_network_activated() ) {
 
-			// if multisite and network activated
-			if ( $this->is_network_activated() ) {
+			// add admin page to Network menu
+			add_action( 'network_admin_menu', array( $this, 'admin_menu' ), 30 );
 
-				// add admin page to Network menu
-				add_action( 'network_admin_menu', array( $this, 'admin_menu' ), 30 );
+		} else {
 
-			} else {
-
-				// add admin page to menu
-				add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-
-			}
+			// add admin page to menu
+			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
 		}
 
