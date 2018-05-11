@@ -10,6 +10,15 @@
 class CiviCRM_Admin_Utilities_Admin {
 
 	/**
+	 * Plugin version.
+	 *
+	 * @since 0.3.4
+	 * @access public
+	 * @var str $plugin_version The plugin version. (numeric string)
+	 */
+	public $plugin_version;
+
+	/**
 	 * Settings page reference.
 	 *
 	 * @since 0.1
@@ -36,41 +45,8 @@ class CiviCRM_Admin_Utilities_Admin {
 	 */
 	public function __construct() {
 
-		// init
-		$this->initialise();
-
-	}
-
-
-
-	/**
-	 * Perform activation tasks.
-	 *
-	 * @since 0.1
-	 */
-	public function activate() {
-
-		// kick out if we are re-activating
-		if ( $this->option_get( 'civicrm_admin_utilities_installed', 'false' ) == 'true' ) return;
-
-		// store default settings
-		$this->option_set( 'civicrm_admin_utilities_settings', $this->settings_get_defaults() );
-
-		// store installed flag
-		$this->option_set( 'civicrm_admin_utilities_installed', 'true' );
-
-	}
-
-
-
-	/**
-	 * Perform deactivation tasks.
-	 *
-	 * @since 0.1
-	 */
-	public function deactivate() {
-
-		// we delete our options in uninstall.php
+		// initialise
+		add_action( 'civicrm_admin_utilities_loaded', array( $this, 'initialise' ) );
 
 	}
 
@@ -83,8 +59,146 @@ class CiviCRM_Admin_Utilities_Admin {
 	 */
 	public function initialise() {
 
+		// assign plugin version
+		$this->plugin_version = $this->option_get( 'civicrm_admin_utilities_version', false );
+
+		// do upgrade tasks
+		$this->upgrade_tasks();
+
+		// store version for later reference if there has been a change
+		if ( $this->plugin_version != CIVICRM_ADMIN_UTILITIES_VERSION ) {
+			$this->store_version();
+		}
+
+		// store default settings if none exist
+		if ( ! $this->option_exists( 'civicrm_admin_utilities_settings' ) ) {
+			$this->option_set( 'civicrm_admin_utilities_settings', $this->settings_get_defaults() );
+		}
+
 		// load settings array
 		$this->settings = $this->option_get( 'civicrm_admin_utilities_settings', $this->settings );
+
+		// register hooks
+		$this->register_hooks();
+
+	}
+
+
+
+	/**
+	 * Utility to do stuff when an upgrade is required.
+	 *
+	 * @since 0.3.4
+	 */
+	public function upgrade_tasks() {
+
+		// if this is a new install (or an upgrade from a version prior to 0.3.4)
+		if ( $this->plugin_version === false ) {
+
+			// delete the legacy "installed" option
+			$this->delete_installed_option();
+
+			// maybe move settings
+			$this->maybe_move_settings();
+
+		}
+
+		/*
+		// for future upgrades, use something like the following
+		if ( version_compare( CIVICRM_ADMIN_UTILITIES_VERSION, '0.3.4', '>=' ) ) {
+			// do something
+		}
+		*/
+
+	}
+
+
+
+	/**
+	 * Delete the legacy "installed" option.
+	 *
+	 * @since 0.3.4
+	 */
+	public function delete_installed_option() {
+
+		// in multisite, this will delete the "global" site option, whilst in
+		// single site, it will delete the "local" blog option
+		if ( 'fefdfdjgrkj' != get_site_option( 'civicrm_admin_utilities_installed', 'fefdfdjgrkj' ) ) {
+			delete_site_option( 'civicrm_admin_utilities_installed' );
+		}
+
+		// bail if single site
+		if ( ! is_multisite() ) return;
+
+		// we also need to look at the "local" blog options in multisite
+		if ( 'fefdfdjgrkj' != get_option( 'civicrm_admin_utilities_installed', 'fefdfdjgrkj' ) ) {
+			delete_option( 'civicrm_admin_utilities_installed' );
+		}
+
+	}
+
+
+
+	/**
+	 * Move the settings to the correct location.
+	 *
+	 * This only applies to multisite instances and only when the plugin is not
+	 * network activated. There is a conundrum here, however:
+	 *
+	 * If this plugin is active on more than one site, then it will only be the
+	 * first site where the plugin loads that gets the migrated settings.
+	 *
+	 * As a result, other sites will need to reconfigure their settings for this
+	 * plugin. To this end, an admin notice will be shown.
+	 *
+	 * @since 0.3.4
+	 */
+	public function maybe_move_settings() {
+
+		// bail if single site
+		if ( ! is_multisite() ) return;
+
+		// bail if network activated
+		if ( $this->is_network_activated() ) return;
+
+		// get current settings
+		$settings = get_site_option( 'civicrm_admin_utilities_settings', 'fefdfdjgrkj' );
+
+		// if we have some
+		if ( $settings != 'fefdfdjgrkj' ) {
+
+			// save them where they are supposed to be
+			$this->option_set( 'civicrm_admin_utilities_settings', $settings );
+
+			// delete the "global" site option
+			delete_site_option( 'civicrm_admin_utilities_settings' );
+
+		}
+
+	}
+
+
+
+	/**
+	 * Store the plugin version.
+	 *
+	 * @since 0.3.4
+	 */
+	public function store_version() {
+
+		// store version
+		$this->option_set( 'civicrm_admin_utilities_version', CIVICRM_ADMIN_UTILITIES_VERSION );
+
+	}
+
+
+
+	/**
+	 * Register hooks.
+	 *
+	 * @since 0.3.4
+	 */
+	public function register_hooks() {
 
 		// if multisite and network activated
 		if ( $this->is_network_activated() ) {
@@ -275,7 +389,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	public function admin_form_multisite_options() {
 
 		// bail if not network activated
-		if ( ! is_multisite() ) return;
+		if ( ! $this->is_network_activated() ) return;
 
 		// init checkbox
 		$main_site_only = '';

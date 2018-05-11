@@ -65,36 +65,11 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function __construct() {
 
+		// enable translation
+		add_action( 'plugins_loaded', array( $this, 'enable_translation' ) );
+
 		// initialise
-		$this->initialise();
-
-	}
-
-
-
-	/**
-	 * Do stuff on plugin activation.
-	 *
-	 * @since 0.1
-	 */
-	public function activate() {
-
-		// admin stuff that needs to be done on activation
-		$this->admin->activate();
-
-	}
-
-
-
-	/**
-	 * Do stuff on plugin deactivation.
-	 *
-	 * @since 0.1
-	 */
-	public function deactivate() {
-
-		// admin stuff that needs to be done on deactivation
-		$this->admin->deactivate();
+		add_action( 'plugins_loaded', array( $this, 'initialise' ) );
 
 	}
 
@@ -131,11 +106,8 @@ class CiviCRM_Admin_Utilities {
 		// set up objects and references
 		$this->setup_objects();
 
-		// enable translation
-		add_action( 'plugins_loaded', array( $this, 'enable_translation' ) );
-
 		// finally, register hooks
-		add_action( 'plugins_loaded', array( $this, 'register_hooks' ) );
+		$this->register_hooks();
 
 	}
 
@@ -180,10 +152,6 @@ class CiviCRM_Admin_Utilities {
 		$done = true;
 
 	}
-
-
-
-	//##########################################################################
 
 
 
@@ -234,6 +202,10 @@ class CiviCRM_Admin_Utilities {
 		do_action( 'civicrm_admin_utilities_loaded' );
 
 	}
+
+
+
+	//##########################################################################
 
 
 
@@ -903,11 +875,7 @@ function civicrm_au() {
 
 }
 
-// activation
-register_activation_hook( __FILE__, array( $civicrm_admin_utilities, 'activate' ) );
 
-// deactivation
-register_deactivation_hook( __FILE__, array( $civicrm_admin_utilities, 'deactivate' ) );
 
 // uninstall will use the 'uninstall.php' method when fully built
 // see: http://codex.wordpress.org/Function_Reference/register_uninstall_hook
@@ -928,17 +896,19 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 	// add settings link
 	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {
 
-		// is this Network Admin?
-		if ( is_network_admin() ) {
+		// add settings link if network activated and viewing network admin
+		if ( civicrm_au()->admin->is_network_activated() AND is_network_admin() ) {
 			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities' ), network_admin_url( 'settings.php' ) );
-		} else {
-			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities' ), admin_url( 'options-general.php' ) );
+			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
-		// add settings link
-		$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
+		// add settings link if not network activated and not viewing network admin
+		if ( ! civicrm_au()->admin->is_network_activated() AND ! is_network_admin() ) {
+			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities' ), admin_url( 'options-general.php' ) );
+			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
+		}
 
-		// add Paypal link
+		// always add Paypal link
 		$paypal = 'https://www.paypal.me/interactivist';
 		$links[] = '<a href="' . $paypal . '" target="_blank">' . __( 'Donate!', 'civicrm-admin-utilities' ) . '</a>';
 
