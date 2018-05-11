@@ -55,6 +55,10 @@ If you are upgrading from 0.3.3, therefore, you may need to review the settings 
 
 == Changelog ==
 
+= 0.4 =
+
+* Fixes location of settings on WordPress Multisite when plugin is not network activated
+
 = 0.3.4 =
 
 * Fixes appearance of Shortcuts menu on main site when CiviCRM is disabled on subsites

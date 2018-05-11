@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 Plugin Name: CiviCRM Admin Utilities
 Plugin URI: https://github.com/christianwach/civicrm-admin-utilities
-Description: Modifies CiviCRM's behaviour and appearance in single site and multisite installs.
+Description: Optionally modifies CiviCRM's behaviour and appearance in single site and multisite installs.
 Author: Christian Wach
 Version: 0.4
 Author URI: http://haystack.co.uk
