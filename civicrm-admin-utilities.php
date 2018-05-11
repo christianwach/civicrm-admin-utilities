@@ -151,7 +151,7 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'init', array( $this, 'civicrm_only_on_main_site_please' ) );
 
 		// style tweaks for CiviCRM
-		add_action( 'admin_print_styles-toplevel_page_CiviCRM', array( $this, 'enqueue_admin_scripts' ) );
+		add_action( 'admin_print_styles', array( $this, 'enqueue_admin_scripts' ) );
 
 		// add admin bar item
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_add' ), 2000 );
@@ -254,6 +254,36 @@ class CiviCRM_Admin_Utilities {
 		// set default CSS file
 		$css = 'civicrm-admin-utilities.css';
 
+		// use specific CSS file for Shoreditch if active
+		if ( $this->shoreditch_css_active() ) {
+			$css = 'civicrm-admin-utilities-shoreditch.css';
+		}
+
+		// add custom stylesheet
+		wp_enqueue_style(
+			'civicrm_admin_utilities_admin_tweaks',
+			plugins_url( $css, CIVICRM_ADMIN_UTILITIES_FILE ),
+			false,
+			CIVICRM_ADMIN_UTILITIES_VERSION, // version
+			'all' // media
+		);
+
+	}
+
+
+
+	/**
+	 * Determine if the Shoreditch CSS file is being used.
+	 *
+	 * @since 0.3.4
+	 *
+	 * @return bool $shoreditch True if Shoreditch CSS file is used, false otherwise.
+	 */
+	public function shoreditch_css_active() {
+
+		// assume not
+		$shoreditch = false;
+
 		// test for presence of Shoreditch Extension
 		if ( function_exists( 'shoreditch_civicrm_config' ) ) {
 
@@ -266,8 +296,8 @@ class CiviCRM_Admin_Utilities {
 				// has the Shoreditch CSS been activated?
 				if ( strstr( $config->customCSSURL, 'org.civicrm.shoreditch' ) !== false ) {
 
-					// use specific CSS file for Shoreditch
-					$css = 'civicrm-admin-utilities-shoreditch.css';
+					// Shoreditch CSS is active
+					$shoreditch = true;
 
 				}
 
@@ -275,14 +305,8 @@ class CiviCRM_Admin_Utilities {
 
 		}
 
-		// add custom stylesheet
-		wp_enqueue_style(
-			'civicrm_admin_utilities_admin_tweaks',
-			plugins_url( $css, CIVICRM_ADMIN_UTILITIES_FILE ),
-			false,
-			CIVICRM_ADMIN_UTILITIES_VERSION, // version
-			'all' // media
-		);
+		// --<
+		return $shoreditch;
 
 	}
 
