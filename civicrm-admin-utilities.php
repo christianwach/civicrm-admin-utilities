@@ -100,7 +100,7 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function initialise() {
 
-		// only init when CiviCRM is fully installed
+		// init only when CiviCRM is fully installed
 		if ( ! defined( 'CIVICRM_INSTALLED' ) ) return;
 		if ( ! CIVICRM_INSTALLED ) return;
 
@@ -896,6 +896,10 @@ function civicrm_au() {
  * @return array $links The modified links array.
  */
 function civicrm_admin_utilities_action_links( $links, $file ) {
+
+	// add links only when CiviCRM is fully installed
+	if ( ! defined( 'CIVICRM_INSTALLED' ) ) return $links;
+	if ( ! CIVICRM_INSTALLED ) return $links;
 
 	// add settings link
 	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {
