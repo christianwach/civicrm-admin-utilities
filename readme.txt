@@ -58,6 +58,7 @@ If you are upgrading from 0.3.3, therefore, you may need to review the settings 
 = 0.4 =
 
 * Fixes location of settings on WordPress Multisite when plugin is not network activated
+* Prevent plugin init unless CiviCRM is fully installed
 
 = 0.3.4 =
 
