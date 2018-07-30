@@ -100,6 +100,10 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function initialise() {
 
+		// only init when CiviCRM is fully installed
+		if ( ! defined( 'CIVICRM_INSTALLED' ) ) return;
+		if ( ! CIVICRM_INSTALLED ) return;
+
 		// include files
 		$this->include_files();
 
