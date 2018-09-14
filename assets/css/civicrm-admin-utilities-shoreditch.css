@@ -119,6 +119,13 @@ body #civicrm-menu #crm-qsearch .form-text
 	padding: 4px 0;
 }
 
+/* Fix placement of Results List */
+body #root-menu-div + .crm-quickSearch-results
+{
+	top: 31.5px !important;
+	box-shadow: 2px 2px 2px 0px rgba(48,40,40,0.1);
+}
+
 /* Adjust logo position */
 body #civicrm-menu .crm-logo-sm
 {
