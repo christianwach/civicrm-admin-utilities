@@ -14,7 +14,7 @@ Please note: this is the development repository for *CiviCRM Admin Utilities*. I
 
 #### Notes ####
 
-This plugin has been developed using a minimum of *WordPress 3.9* and *CiviCRM 4.4.5*. For versions of *CiviCRM* prior to 4.6-alpha1, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in *CiviCRM* file. Please refer to the each repo for further instructions.
+This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.6*. For versions of CiviCRM prior to 4.6, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in CiviCRM file. Please refer to the each repo for further instructions.
 
 #### Installation ####
 
@@ -28,7 +28,10 @@ If you have downloaded *CiviCRM Admin Utilities* as a ZIP file from the GitHub r
 2. Activate the plugin (in multisite, network activate)
 3. You are done!
 
-
 ###### git clone ######
 
 If you have cloned the code from GitHub, it is assumed that you know what you're doing.
+
+#### Setup ####
+
+In single-site installs, you can adjust this plugin's settings by visiting "Settings" --> "CiviCRM Admin Utilities". If you install this plugin in multisite and have CiviCRM network-enabled, then you should also network-enable this plugin. You'll then find its settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities".
