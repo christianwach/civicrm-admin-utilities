@@ -154,6 +154,53 @@ body #crm-container div#printer-friendly
 
 /*
 --------------------------------------------------------------------------------
+Temporary style fixes for Upgrade Screen with Shoreditch active
+--------------------------------------------------------------------------------
+*/
+
+/* Fix appearance of Upgrade button */
+.crm-container > form > button.crm-button[type=submit]
+{
+	color: #fff;
+	background-color: #0071bd;
+	border-color: #0062a4;
+	padding: 7px 19px;
+	line-height: 20px;
+}
+
+.crm-container > form > button.crm-button:hover[type=submit]
+{
+	background-color: #005c99;
+}
+
+.crm-container > form > button.crm-button[type=submit] > i
+{
+	display: none;
+}
+
+/* Fix appearance of Upgrade Cancel button */
+.crm-container > form > a.button.cancel
+{
+	background: #fff;
+    border: 1px solid #4d4d69;
+    color: #363342;
+}
+
+.crm-container > form > a.button.cancel:hover
+{
+	background: #3e3e54;
+    color: #fff !important;
+}
+
+.crm-container > form > a.button.cancel > i
+{
+	display: none;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
 Temporary style fixes for Shoreditch
 --------------------------------------------------------------------------------
 */
