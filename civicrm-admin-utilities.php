@@ -323,24 +323,17 @@ class CiviCRM_Admin_Utilities {
 		// assume not
 		$shoreditch = false;
 
-		// test for presence of Shoreditch Extension
-		if ( function_exists( 'shoreditch_civicrm_config' ) ) {
+		// init CiviCRM
+		if ( ! civi_wp()->initialize() ) return $shoreditch;
 
-			// init CiviCRM just in case
-			if ( civi_wp()->initialize() ) {
+		// get the current Custom CSS URL
+		$config = CRM_Core_Config::singleton();
 
-				// get the current Custom CSS URL
-				$config = CRM_Core_Config::singleton();
+		// has the Shoreditch CSS been activated?
+		if ( strstr( $config->customCSSURL, 'org.civicrm.shoreditch' ) !== false ) {
 
-				// has the Shoreditch CSS been activated?
-				if ( strstr( $config->customCSSURL, 'org.civicrm.shoreditch' ) !== false ) {
-
-					// Shoreditch CSS is active
-					$shoreditch = true;
-
-				}
-
-			}
+			// Shoreditch CSS is active
+			$shoreditch = true;
 
 		}
 
