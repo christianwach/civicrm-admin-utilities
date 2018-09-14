@@ -208,7 +208,7 @@ $('#civicrm-menu').ready(function() {
   // Close menu after selecting an item
   $('#root-menu-div').on('click', 'a', $.Menu.closeAll);
 });
-$('#civicrm-menu').menuBar({arrowSrc: CRM.config.resourceBase + 'packages/jquery/css/images/arrow.png'});
+$('#civicrm-menu').menuBar({arrowClass: 'crm-i fa-caret-right'});
 $(window).on("beforeunload", function() {
   $('.crm-logo-sm').addClass('crm-i fa-spin fa-pulse');
 });

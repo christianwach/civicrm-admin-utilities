@@ -76,6 +76,7 @@ body #root-menu-div .menu-item-arrow
 {
 	right: 10px;
 	top: 10px;
+	margin-right: 0;
 }
 
 /* The dropdown Javascript determines placement of the fly-out menus by the width of this element */

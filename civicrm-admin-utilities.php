@@ -231,8 +231,15 @@ class CiviCRM_Admin_Utilities {
 		// get template instance
 		$template = CRM_Core_Smarty::singleton();
 
-		// define our custom path
-		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
+		// get current version
+		$version = CRM_Utils_System::version();
+
+		// define our custom path based on CiviCRM version
+		if ( version_compare( $version, '5.5', '>=' ) ) {
+			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_nav_template';
+		} else {
+			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
+		}
 
 		// add our custom template directory
 		$template->addTemplateDir( $custom_path );
