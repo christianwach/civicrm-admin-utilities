@@ -141,7 +141,7 @@ body #crm-container div#printer-friendly
 #crm-container, .crm-container
 {
 	padding-top: 12px;
-	padding-right: 20px;
+	margin-right: 20px;
 }
 
 .crm-queue-runner-form-block
