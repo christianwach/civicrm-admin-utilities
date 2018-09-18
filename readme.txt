@@ -17,7 +17,7 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour and appearance in single si
 CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
 * Modifies the styling of the CiviCRM menu to fix a number of issues
-* Fixes the appearance of the Shoreditch extension under WordPress
+* Fixes the appearance of the Shoreditch extension in WordPress admin
 * Fixes the appearance of the WordPress Access Control form
 * Adds a handy CiviCRM Shortcuts menu to the WordPress Admin Bar
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
@@ -26,6 +26,10 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisit
 ### Requirements
 
 This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.6*. Please refer to the installation page for configuration instructions as well as for how to use this plugin with versions of CiviCRM prior to 4.6.
+
+### Notes
+
+If you have installed the Shoreditch extension for CiviCRM, then this plugin does its best to make it compatible with WordPress. Unfortunately, Shoreditch version 0.1-alpha25 makes it very difficult to override the margin applied to the body tag on the front end of your site, so you will have to do this yourself.
 
 ### Plugin Development
 
