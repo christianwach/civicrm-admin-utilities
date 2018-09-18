@@ -19,10 +19,12 @@ CiviCRM admin menu style overrides
 --------------------------------------------------------------------------------
 */
 
-/* No need for top padding */
-html body:not(.toolbar)
+/* No need for top padding or margin */
+html body:not(.toolbar),
+html body.wp-admin:not(.toolbar)
 {
 	padding-top: 0 !important;
+	margin-top: 0 !important;
 }
 
 /* Font selection */
