@@ -309,7 +309,7 @@ class CiviCRM_Admin_Utilities {
 		wp_enqueue_style(
 			'civicrm_admin_utilities_admin_tweaks',
 			plugins_url( 'assets/css/' . $css, CIVICRM_ADMIN_UTILITIES_FILE ),
-			false,
+			null,
 			CIVICRM_ADMIN_UTILITIES_VERSION, // version
 			'all' // media
 		);
