@@ -543,7 +543,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			'show_ui' => true,
 		);
 
-		$output = 'names'; // names or objects, note names is the default
+		$output = 'objects'; // names or objects, note names is the default
 		$operator = 'and'; // 'and' or 'or'
 
 		// get post types
@@ -562,13 +562,13 @@ class CiviCRM_Admin_Utilities_Admin {
 			foreach( $post_types AS $post_type ) {
 
 				// filter only those which have an editor
-				if ( post_type_supports( $post_type, 'editor' ) ) {
+				if ( post_type_supports( $post_type->name, 'editor' ) ) {
 
 					$checked = '';
-					if ( in_array( $post_type, $selected_types ) ) $checked = ' checked="checked"';
+					if ( in_array( $post_type->name, $selected_types ) ) $checked = ' checked="checked"';
 
 					// add checkbox
-					$output[] = '<p><input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_post_types[]" value="' . $post_type . '"' . $checked . ' /> <label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_post_types">' . $post_type . '</label></p>';
+					$output[] = '<p><input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_post_types[]" value="' . esc_attr( $post_type->name ) . '"' . $checked . ' /> <label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_post_types">' . esc_html( $post_type->labels->singular_name ) . ' (' . esc_html( $post_type->name ) . ')</label></p>';
 
 				}
 
