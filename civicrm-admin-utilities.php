@@ -267,8 +267,8 @@ class CiviCRM_Admin_Utilities {
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
-		// TODO: bail if CiviCRM has been fixed
-		//if ( $this->admin->access_form_fixed() ) return;
+		// bail if CiviCRM has been fixed
+		if ( $this->admin->access_form_fixed() ) return;
 
 		// get template instance
 		$template = CRM_Core_Smarty::singleton();
@@ -734,6 +734,9 @@ class CiviCRM_Admin_Utilities {
 
 		// bail if disabled
 		if ( $this->admin->setting_get( 'prettify_access', '0' ) == '0' ) return;
+
+		// bail if CiviCRM has been fixed
+		if ( $this->admin->access_form_fixed() ) return;
 
 		// bail if not the form we want
 		if ( $formName != 'CRM_ACL_Form_WordPress_Permissions' ) return;

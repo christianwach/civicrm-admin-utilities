@@ -29,7 +29,7 @@ This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.6*. Please refe
 
 ### Notes
 
-If you have installed the Shoreditch extension for CiviCRM, then this plugin does its best to make it compatible with WordPress. Unfortunately, Shoreditch version 0.1-alpha25 makes it very difficult to override the margin applied to the body tag on the front end of your site, so you will have to do this yourself.
+If you have installed the Shoreditch extension for CiviCRM, then this plugin does its best to make it compatible with WordPress. Unfortunately, Shoreditch version 0.1-alpha25 now makes it very difficult to override the margin applied to the body tag on the front end of your site, so you will have to do this yourself.
 
 ### Plugin Development
 

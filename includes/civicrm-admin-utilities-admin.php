@@ -237,6 +237,9 @@ class CiviCRM_Admin_Utilities_Admin {
 		// fix WordPress Access Control table
 		$settings['prettify_access'] = '1';
 
+		// do not assume WordPress Access Control table is fixed
+		$settings['access_fixed'] = '0';
+
 		// init post types with defaults
 		$settings['post_types'] = array( 'post', 'page' );
 
@@ -459,6 +462,9 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * @since 0.3.2
 	 */
 	public function admin_form_access_options() {
+
+		// bail if CiviCRM has been fixed
+		if ( $this->access_form_fixed() ) return;
 
 		// init checkbox
 		$prettify_access = '';
@@ -698,7 +704,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			// get variables
 			extract( $_POST );
 
-			// init force cache-lcearing flag
+			// init force cache-clearing flag
 			$force = false;
 
 			// did we ask to remove the menu on sub-sites?
@@ -801,8 +807,14 @@ class CiviCRM_Admin_Utilities_Admin {
 	 */
 	public function access_form_fixed() {
 
-		// init return
-		$fixed = false;
+		// always true if already fixed in CiviCRM
+		if ( $this->setting_get( 'access_fixed', '0' ) == '1' ) return true;
+
+		// avoid recalculation
+		if ( isset( $this->fixed ) ) return $this->fixed;
+
+		// init property
+		$this->fixed = false;
 
 		// get current version
 		$version = CRM_Utils_System::version();
@@ -811,15 +823,21 @@ class CiviCRM_Admin_Utilities_Admin {
 		$parts = explode( '.', $version );
 		$major_version = $parts[0] . '.' . $parts[1];
 
-		// CiviCRM 4.6 is LTS and may have the fix back-ported
+		// CiviCRM 4.6 is LTS and may have the fix back-ported at some point
 		if ( version_compare( $major_version, '4.6', '=' ) ) {
-			if ( version_compare( $version, '4.6.34', '>=' ) ) $fixed = true;
+			//if ( version_compare( $version, '4.6.38', '>=' ) ) $this->fixed = true;
 		} else {
-			if ( version_compare( $version, '4.7.28', '>=' ) ) $fixed = true;
+			if ( version_compare( $version, '4.7.30', '>=' ) ) $this->fixed = true;
+		}
+
+		// save setting if fixed
+		if ( $this->fixed ) {
+			$this->setting_set( 'access_fixed', '1' );
+			$this->settings_save();
 		}
 
 		// --<
-		return $fixed;
+		return $this->fixed;
 
 	}
 
@@ -883,7 +901,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// test for null
 		if ( $setting_name == '' ) {
-			die( __( 'You must supply an setting to setting_exists()', 'civicrm-admin-utilities' ) );
+			die( __( 'You must supply a setting to setting_exists()', 'civicrm-admin-utilities' ) );
 		}
 
 		// get existence of setting in array
@@ -906,7 +924,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// test for null
 		if ( $setting_name == '' ) {
-			die( __( 'You must supply an setting to setting_get()', 'civicrm-admin-utilities' ) );
+			die( __( 'You must supply a setting to setting_get()', 'civicrm-admin-utilities' ) );
 		}
 
 		// get setting
@@ -928,7 +946,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// test for null
 		if ( $setting_name == '' ) {
-			die( __( 'You must supply an setting to setting_set()', 'civicrm-admin-utilities' ) );
+			die( __( 'You must supply a setting to setting_set()', 'civicrm-admin-utilities' ) );
 		}
 
 		// test for other than string
@@ -954,7 +972,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// test for null
 		if ( $setting_name == '' ) {
-			die( __( 'You must supply an setting to setting_delete()', 'civicrm-admin-utilities' ) );
+			die( __( 'You must supply a setting to setting_delete()', 'civicrm-admin-utilities' ) );
 		}
 
 		// unset setting
