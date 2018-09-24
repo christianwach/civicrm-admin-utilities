@@ -160,6 +160,12 @@ body #crm-container div#printer-friendly
 	margin-right: 20px;
 }
 
+/* Remove green background from dialogs */
+.crm-container.ui-dialog .ui-dialog-content .crm-block
+{
+	background-color: #fff;
+}
+
 
 
 /*
