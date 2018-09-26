@@ -60,6 +60,10 @@ If you are upgrading from 0.3.3, therefore, you may need to review the settings 
 
 == Changelog ==
 
+= 0.4.1 =
+
+* Allows CiviCRM and Shoreditch stylesheets to be disabled on front-end
+
 = 0.4 =
 
 * Fixes location of settings on WordPress Multisite when plugin is not network activated
