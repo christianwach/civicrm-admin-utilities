@@ -348,17 +348,26 @@ class CiviCRM_Admin_Utilities {
 			$this->disable_resource( 'civicrm', 'css/civicrmNavigation.css' );
 		}
 
-		// bail if Shoreditch not present
-		if ( ! $this->shoreditch_css_active() ) return;
+		// if Shoreditch present
+		if ( $this->shoreditch_css_active() ) {
 
-		// maybe disable Shoreditch stylesheet
-		if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
-			$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
-		}
+			// maybe disable Shoreditch stylesheet
+			if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
+				$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+			}
 
-		// maybe disable Shoreditch Bootstrap stylesheet
-		if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
-			$this->disable_resource( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
+			// maybe disable Shoreditch Bootstrap stylesheet
+			if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
+				$this->disable_resource( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
+			}
+
+		} else {
+
+			// maybe disable custom stylesheet (not provided by Shoreditch)
+			if ( $this->admin->setting_get( 'css_custom', '0' ) == '1' ) {
+				$this->disable_custom_css();
+			}
+
 		}
 
 	}
@@ -380,6 +389,38 @@ class CiviCRM_Admin_Utilities {
 
 		// get registered URL
 		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
+
+		// get registration data from region
+		$registration = CRM_Core_Region::instance('html-header')->get( $url );
+
+		// bail if not registered
+		if ( empty ( $registration ) ) return;
+
+		// set to disabled
+		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
+
+	}
+
+
+
+	/**
+	 * Disable any custom CSS file enqueued by CiviCRM.
+	 *
+	 * @since 0.4.2
+	 */
+	public function disable_custom_css() {
+
+		// kick out if no CiviCRM
+		if ( ! $this->admin->is_active() ) return;
+
+		// get CiviCRM config
+		$config = CRM_Core_Config::singleton();
+
+		// bail if there's no custom CSS file
+		if ( empty( $config->customCSSURL ) ) return;
+
+		// get registered URL
+		$url = CRM_Core_Resources::singleton()->addCacheCode( $config->customCSSURL );
 
 		// get registration data from region
 		$registration = CRM_Core_Region::instance('html-header')->get( $url );

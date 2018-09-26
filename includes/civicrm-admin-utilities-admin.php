@@ -210,6 +210,16 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		}
 
+		// Custom CSS setting may not exist
+		if ( ! $this->setting_exists( 'css_custom' ) ) {
+
+			// add it from defaults
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'css_custom', $settings['css_custom'] );
+			$this->settings_save();
+
+		}
+
 	}
 
 
@@ -275,6 +285,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		$settings['css_navigation'] = '1'; // do not load CiviCRM menu
 		$settings['css_shoreditch'] = '0'; // load Shoreditch
 		$settings['css_bootstrap'] = '0'; // load Shoreditch Bootstrap
+		$settings['css_custom'] = '0'; // load Custom Stylesheet
 
 		// fix WordPress Access Control table
 		$settings['prettify_access'] = '1';
@@ -538,11 +549,47 @@ class CiviCRM_Admin_Utilities_Admin {
 				</td>
 			</tr>
 
+			' . $this->admin_form_restrict_custom_stylesheet() . '
+
 			' . $this->admin_form_restrict_shoreditch_stylesheet() . '
 
 		</table>
 
 		<hr>' . "\n\n";
+
+	}
+
+
+
+	/**
+	 * Render "Restrict Custom Stylesheet" option.
+	 *
+	 * @since 0.4.1
+	 */
+	public function admin_form_restrict_custom_stylesheet() {
+
+		global $civicrm_admin_utilities;
+
+		// bail if Shoreditch CSS is present
+		if ( $civicrm_admin_utilities->shoreditch_css_active() ) return;
+
+		// init checkbox
+		$custom_css = '';
+		if ( $this->setting_get( 'css_custom', '0' ) == '1' ) $custom_css = ' checked="checked"';
+
+		// define section markup
+		$section = '
+			<tr>
+				<th scope="row">' . __( 'Custom stylesheet', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom" id="civicrm_admin_utilities_styles_custom" value="1"' . $custom_css . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom">' . __( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading.', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+		';
+
+		// --<
+		return $section;
 
 	}
 
@@ -840,6 +887,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			$civicrm_admin_utilities_styles_nav = '';
 			$civicrm_admin_utilities_styles_shoreditch = '';
 			$civicrm_admin_utilities_styles_bootstrap = '';
+			$civicrm_admin_utilities_styles_custom = '';
 
 			// get variables
 			extract( $_POST );
@@ -893,6 +941,13 @@ class CiviCRM_Admin_Utilities_Admin {
 				$this->setting_set( 'css_bootstrap', '1' );
 			} else {
 				$this->setting_set( 'css_bootstrap', '0' );
+			}
+
+			// did we ask to prevent CiviCRM custom styleheet?
+			if ( $civicrm_admin_utilities_styles_custom == '1' ) {
+				$this->setting_set( 'css_custom', '1' );
+			} else {
+				$this->setting_set( 'css_custom', '0' );
 			}
 
 			// get existing access setting
