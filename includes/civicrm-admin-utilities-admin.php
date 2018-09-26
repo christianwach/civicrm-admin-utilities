@@ -78,6 +78,9 @@ class CiviCRM_Admin_Utilities_Admin {
 		// load settings array
 		$this->settings = $this->option_get( 'civicrm_admin_utilities_settings', $this->settings );
 
+		// settings upgrade tasks
+		$this->upgrade_settings();
+
 		// register hooks
 		$this->register_hooks();
 
@@ -179,6 +182,29 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
+	 * Utility to do stuff when a settings upgrade is required.
+	 *
+	 * @since 0.4.1
+	 */
+	public function upgrade_settings() {
+
+		// CSS settings may not exist
+		if ( ! $this->setting_exists( 'css_default' ) ) {
+
+			// add them from defaults
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'css_default', $settings['css_default'] );
+			$this->setting_set( 'css_navigation', $settings['css_navigation'] );
+			$this->setting_set( 'css_shoreditch', $settings['css_shoreditch'] );
+			$this->settings_save();
+
+		}
+
+	}
+
+
+
+	/**
 	 * Store the plugin version.
 	 *
 	 * @since 0.3.4
@@ -233,6 +259,11 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// prettify menu
 		$settings['prettify_menu'] = '1';
+
+		// restrict CSS files from front-end
+		$settings['css_default'] = '0'; // load default
+		$settings['css_navigation'] = '1'; // do not load CiviCRM menu
+		$settings['css_shoreditch'] = '0'; // load Shoreditch
 
 		// fix WordPress Access Control table
 		$settings['prettify_access'] = '1';
@@ -347,6 +378,9 @@ class CiviCRM_Admin_Utilities_Admin {
 		// styling
 		$this->admin_form_styling_options();
 
+		// restrict stylesheets on front-end
+		$this->admin_form_restrict_stylesheets();
+
 		// access form
 		$this->admin_form_access_options();
 
@@ -451,6 +485,87 @@ class CiviCRM_Admin_Utilities_Admin {
 		</table>
 
 		<hr>' . "\n\n";
+
+	}
+
+
+
+	/**
+	 * Render "Restrict Stylesheets" options.
+	 *
+	 * @since 0.4.1
+	 */
+	public function admin_form_restrict_stylesheets() {
+
+		// init checkboxes
+		$default_css = '';
+		if ( $this->setting_get( 'css_default', '0' ) == '1' ) $default_css = ' checked="checked"';
+		$navigation_css = '';
+		if ( $this->setting_get( 'css_navigation', '0' ) == '1' ) $navigation_css = ' checked="checked"';
+
+		// show sync
+		echo '
+		<h3>' . __( 'Prevent CiviCRM Stylesheets from loading', 'civicrm-admin-utilities' ) . '</h3>
+
+		<p>' . __( 'This section allows you to prevent various CiviCRM stylesheets from loading on the public pages of your website. This is useful if you have created custom styles for CiviCRM in your theme, for example. By default, this plugin prevents the CiviCRM menu stylesheet from loading on the front-end, since the CiviCRM menu itself is only ever present in WordPress admin.', 'civicrm-admin-utilities' ) . '</p>
+
+		<table class="form-table">
+
+			<tr>
+				<th scope="row">' . __( 'Default CiviCRM stylesheet', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_default" id="civicrm_admin_utilities_styles_default" value="1"' . $default_css . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_default">' . __( 'Check this to prevent the default CiviCRM stylesheet from loading (civicrm.css).', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row">' . __( 'CiviCRM menu stylesheet', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_nav" id="civicrm_admin_utilities_styles_nav" value="1"' . $navigation_css . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_nav">' . __( 'Check this to prevent the CiviCRM menu stylesheet from loading (civicrmNavigation.css).', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+
+			' . $this->admin_form_restrict_shoreditch_stylesheet() . '
+
+		</table>
+
+		<hr>' . "\n\n";
+
+	}
+
+
+
+	/**
+	 * Render "Restrict Shoreditch Stylesheet" option.
+	 *
+	 * @since 0.4.1
+	 */
+	public function admin_form_restrict_shoreditch_stylesheet() {
+
+		global $civicrm_admin_utilities;
+
+		// bail if no Shoreditch CSS
+		if ( ! $civicrm_admin_utilities->shoreditch_css_active() ) return;
+
+		// init checkbox
+		$shoreditch_css = '';
+		if ( $this->setting_get( 'css_shoreditch', '0' ) == '1' ) $shoreditch_css = ' checked="checked"';
+
+		// define section markup
+		$section = '
+			<tr>
+				<th scope="row">' . __( 'Shoreditch stylesheet', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_shoreditch" id="civicrm_admin_utilities_styles_shoreditch" value="1"' . $shoreditch_css . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_shoreditch">' . __( 'Check this to prevent the Shoreditch extension stylesheet from loading (civicrm-custom.css).', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+		';
+
+		// --<
+		return $section;
 
 	}
 
@@ -700,6 +815,9 @@ class CiviCRM_Admin_Utilities_Admin {
 			$civicrm_admin_utilities_post_types = array();
 			$civicrm_admin_utilities_cache = '';
 			$civicrm_admin_utilities_admin_bar = '';
+			$civicrm_admin_utilities_styles_default = '';
+			$civicrm_admin_utilities_styles_nav = '';
+			$civicrm_admin_utilities_styles_shoreditch = '';
 
 			// get variables
 			extract( $_POST );
@@ -725,6 +843,27 @@ class CiviCRM_Admin_Utilities_Admin {
 				$this->setting_set( 'prettify_menu', '1' );
 			} else {
 				$this->setting_set( 'prettify_menu', '0' );
+			}
+
+			// did we ask to prevent default styleheet?
+			if ( $civicrm_admin_utilities_styles_default == '1' ) {
+				$this->setting_set( 'css_default', '1' );
+			} else {
+				$this->setting_set( 'css_default', '0' );
+			}
+
+			// did we ask to prevent navigation styleheet?
+			if ( $civicrm_admin_utilities_styles_nav == '1' ) {
+				$this->setting_set( 'css_navigation', '1' );
+			} else {
+				$this->setting_set( 'css_navigation', '0' );
+			}
+
+			// did we ask to prevent Shoreditch styleheet?
+			if ( $civicrm_admin_utilities_styles_shoreditch == '1' ) {
+				$this->setting_set( 'css_shoreditch', '1' );
+			} else {
+				$this->setting_set( 'css_shoreditch', '0' );
 			}
 
 			// get existing access setting

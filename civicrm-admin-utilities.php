@@ -188,6 +188,9 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'civicrm_config', array( $this, 'register_access_directory' ), 10, 1 );
 		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
 
+		// hook in just before CiviCRM does to disable stylesheets
+		add_action( 'wp_head', array( $this, 'disable_stylesheets' ), 9 );
+
 		// if the debugging flag is set
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
@@ -313,6 +316,75 @@ class CiviCRM_Admin_Utilities {
 			CIVICRM_ADMIN_UTILITIES_VERSION, // version
 			'all' // media
 		);
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Disable CiviCRM stylesheets from front-end.
+	 *
+	 * @since 0.4.1
+	 */
+	public function disable_stylesheets() {
+
+		// only on front-end
+		if ( is_admin() ) return;
+
+		// kick out if no CiviCRM
+		if ( ! $this->admin->is_active() ) return;
+
+		// maybe disable core stylesheet
+		if ( $this->admin->setting_get( 'css_default', '0' ) == '1' ) {
+			$this->disable_stylesheet( 'civicrm', 'css/civicrm.css' );
+		}
+
+		// maybe disable navigation stylesheet (there's no menu on the front-end)
+		if ( $this->admin->setting_get( 'css_navigation', '0' ) == '1' ) {
+			$this->disable_stylesheet( 'civicrm', 'css/civicrmNavigation.css' );
+		}
+
+		// bail if Shoreditch not present
+		if ( ! $this->shoreditch_css_active() ) return;
+
+		// bail if not preventing Shoreditch stylesheet
+		if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '0' ) return;
+
+		// disable Shoreditch stylesheet
+		$this->disable_stylesheet( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+
+	}
+
+
+
+	/**
+	 * Disable a stylesheet enqueued by CiviCRM.
+	 *
+	 * @since 0.4.1
+	 *
+	 * @param str $extension The name of the extension e.g. 'org.civicrm.shoreditch'. Default is CiviCRM core.
+	 * @param str $file The relative path to the stylesheet. Default is core stylesheet.
+	 */
+	public function disable_stylesheet( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
+
+		// kick out if no CiviCRM
+		if ( ! $this->admin->is_active() ) return;
+
+		// get registered URL
+		$css_url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
+
+		// get registration data from region
+		$registration = CRM_Core_Region::instance('html-header')->get( $css_url );
+
+		// bail if not registered
+		if ( empty ( $registration ) ) return;
+
+		// set to disabled
+		CRM_Core_Region::instance('html-header')->update( $css_url, array( 'disabled' => TRUE ) );
 
 	}
 
