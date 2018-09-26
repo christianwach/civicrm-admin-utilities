@@ -351,11 +351,15 @@ class CiviCRM_Admin_Utilities {
 		// bail if Shoreditch not present
 		if ( ! $this->shoreditch_css_active() ) return;
 
-		// bail if not preventing Shoreditch stylesheet
-		if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '0' ) return;
+		// maybe disable Shoreditch stylesheet
+		if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
+			$this->disable_stylesheet( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+		}
 
-		// disable Shoreditch stylesheet
-		$this->disable_stylesheet( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+		// maybe disable Shoreditch Bootstrap stylesheet
+		if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
+			$this->disable_stylesheet( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
+		}
 
 	}
 

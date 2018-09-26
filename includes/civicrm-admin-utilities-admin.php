@@ -200,6 +200,16 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		}
 
+		// Shoreditch Bootstrap CSS setting may not exist
+		if ( ! $this->setting_exists( 'css_bootstrap' ) ) {
+
+			// add it from defaults
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'css_bootstrap', $settings['css_bootstrap'] );
+			$this->settings_save();
+
+		}
+
 	}
 
 
@@ -264,6 +274,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		$settings['css_default'] = '0'; // load default
 		$settings['css_navigation'] = '1'; // do not load CiviCRM menu
 		$settings['css_shoreditch'] = '0'; // load Shoreditch
+		$settings['css_bootstrap'] = '0'; // load Shoreditch Bootstrap
 
 		// fix WordPress Access Control table
 		$settings['prettify_access'] = '1';
@@ -552,6 +563,8 @@ class CiviCRM_Admin_Utilities_Admin {
 		// init checkbox
 		$shoreditch_css = '';
 		if ( $this->setting_get( 'css_shoreditch', '0' ) == '1' ) $shoreditch_css = ' checked="checked"';
+		$bootstrap_css = '';
+		if ( $this->setting_get( 'css_bootstrap', '0' ) == '1' ) $bootstrap_css = ' checked="checked"';
 
 		// define section markup
 		$section = '
@@ -560,6 +573,14 @@ class CiviCRM_Admin_Utilities_Admin {
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_shoreditch" id="civicrm_admin_utilities_styles_shoreditch" value="1"' . $shoreditch_css . ' />
 					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_shoreditch">' . __( 'Check this to prevent the Shoreditch extension stylesheet from loading (civicrm-custom.css).', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row">' . __( 'Shoreditch Bootstrap stylesheet', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_bootstrap" id="civicrm_admin_utilities_styles_bootstrap" value="1"' . $bootstrap_css . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_bootstrap">' . __( 'Check this to prevent the Shoreditch extension Bootstrap stylesheet from loading (bootstrap.css).', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 		';
@@ -818,6 +839,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			$civicrm_admin_utilities_styles_default = '';
 			$civicrm_admin_utilities_styles_nav = '';
 			$civicrm_admin_utilities_styles_shoreditch = '';
+			$civicrm_admin_utilities_styles_bootstrap = '';
 
 			// get variables
 			extract( $_POST );
@@ -864,6 +886,13 @@ class CiviCRM_Admin_Utilities_Admin {
 				$this->setting_set( 'css_shoreditch', '1' );
 			} else {
 				$this->setting_set( 'css_shoreditch', '0' );
+			}
+
+			// did we ask to prevent Shoreditch Bootstrap styleheet?
+			if ( $civicrm_admin_utilities_styles_bootstrap == '1' ) {
+				$this->setting_set( 'css_bootstrap', '1' );
+			} else {
+				$this->setting_set( 'css_bootstrap', '0' );
 			}
 
 			// get existing access setting
