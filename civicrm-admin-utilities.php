@@ -379,16 +379,16 @@ class CiviCRM_Admin_Utilities {
 		if ( ! $this->admin->is_active() ) return;
 
 		// get registered URL
-		$css_url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
+		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
 
 		// get registration data from region
-		$registration = CRM_Core_Region::instance('html-header')->get( $css_url );
+		$registration = CRM_Core_Region::instance('html-header')->get( $url );
 
 		// bail if not registered
 		if ( empty ( $registration ) ) return;
 
 		// set to disabled
-		CRM_Core_Region::instance('html-header')->update( $css_url, array( 'disabled' => TRUE ) );
+		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
 
 	}
 
