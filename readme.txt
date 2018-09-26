@@ -61,6 +61,10 @@ If you are upgrading from 0.3.3, therefore, you may need to review the settings 
 
 == Changelog ==
 
+= 0.4.2 =
+
+* Allows user-defined custom CiviCRM stylesheets to be disabled on front-end
+
 = 0.4.1 =
 
 * Allows CiviCRM and Shoreditch stylesheets to be disabled on front-end
