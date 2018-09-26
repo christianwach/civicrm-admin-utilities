@@ -188,8 +188,8 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'civicrm_config', array( $this, 'register_access_directory' ), 10, 1 );
 		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
 
-		// hook in just before CiviCRM does to disable stylesheets
-		add_action( 'wp_head', array( $this, 'disable_stylesheets' ), 9 );
+		// hook in just before CiviCRM does to disable resources
+		add_action( 'wp_head', array( $this, 'disable_resources' ), 9 );
 
 		// if the debugging flag is set
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
@@ -326,11 +326,11 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Disable CiviCRM stylesheets from front-end.
+	 * Disable CiviCRM resources from front-end.
 	 *
 	 * @since 0.4.1
 	 */
-	public function disable_stylesheets() {
+	public function disable_resources() {
 
 		// only on front-end
 		if ( is_admin() ) return;
@@ -340,12 +340,12 @@ class CiviCRM_Admin_Utilities {
 
 		// maybe disable core stylesheet
 		if ( $this->admin->setting_get( 'css_default', '0' ) == '1' ) {
-			$this->disable_stylesheet( 'civicrm', 'css/civicrm.css' );
+			$this->disable_resource( 'civicrm', 'css/civicrm.css' );
 		}
 
 		// maybe disable navigation stylesheet (there's no menu on the front-end)
 		if ( $this->admin->setting_get( 'css_navigation', '0' ) == '1' ) {
-			$this->disable_stylesheet( 'civicrm', 'css/civicrmNavigation.css' );
+			$this->disable_resource( 'civicrm', 'css/civicrmNavigation.css' );
 		}
 
 		// bail if Shoreditch not present
@@ -353,12 +353,12 @@ class CiviCRM_Admin_Utilities {
 
 		// maybe disable Shoreditch stylesheet
 		if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
-			$this->disable_stylesheet( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+			$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
 		}
 
 		// maybe disable Shoreditch Bootstrap stylesheet
 		if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
-			$this->disable_stylesheet( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
+			$this->disable_resource( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
 		}
 
 	}
@@ -366,14 +366,14 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
-	 * Disable a stylesheet enqueued by CiviCRM.
+	 * Disable a resource enqueued by CiviCRM.
 	 *
 	 * @since 0.4.1
 	 *
 	 * @param str $extension The name of the extension e.g. 'org.civicrm.shoreditch'. Default is CiviCRM core.
-	 * @param str $file The relative path to the stylesheet. Default is core stylesheet.
+	 * @param str $file The relative path to the resource. Default is CiviCRM core stylesheet.
 	 */
-	public function disable_stylesheet( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
+	public function disable_resource( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
