@@ -220,6 +220,16 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		}
 
+		// Override  CiviCRM Default CSS setting may not exist
+		if ( ! $this->setting_exists( 'css_admin' ) ) {
+
+			// add it from defaults
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'css_admin', $settings['css_admin'] );
+			$this->settings_save();
+
+		}
+
 	}
 
 
@@ -286,6 +296,12 @@ class CiviCRM_Admin_Utilities_Admin {
 		$settings['css_shoreditch'] = '0'; // load Shoreditch
 		$settings['css_bootstrap'] = '0'; // load Shoreditch Bootstrap
 		$settings['css_custom'] = '0'; // load Custom Stylesheet
+
+		// override CiviCRM Default in wp-admin
+		$settings['css_admin'] = '0'; // load CiviCRM Default Stylesheet
+
+		// override default CiviCRM CSS in wp-admin
+		$settings['css_admin'] = '0'; // do not override by default
 
 		// fix WordPress Access Control table
 		$settings['prettify_access'] = '1';
@@ -488,11 +504,15 @@ class CiviCRM_Admin_Utilities_Admin {
 		$prettify_menu = '';
 		if ( $this->setting_get( 'prettify_menu', '0' ) == '1' ) $prettify_menu = ' checked="checked"';
 
+		// init checkbox
+		$admin_css = '';
+		if ( $this->setting_get( 'css_admin', '0' ) == '1' ) $admin_css = ' checked="checked"';
+
 		// show sync
 		echo '
-		<h3>' . __( 'Prettify CiviCRM Menu', 'civicrm-admin-utilities' ) . '</h3>
+		<h3>' . __( 'Prettify CiviCRM', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'Checking this option applies some styling tweaks that make the CiviCRM menu look a little better.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Checking this option applies some styling tweaks that make CiviCRM look a little better.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
@@ -501,6 +521,14 @@ class CiviCRM_Admin_Utilities_Admin {
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"' . $prettify_menu . ' />
 					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to prettify the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row">' . __( 'Prettify CiviCRM Admin', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_admin" id="civicrm_admin_utilities_styles_admin" value="1"' . $admin_css . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_admin">' . __( 'Check this to prettify CiviCRM Admin.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
@@ -888,6 +916,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			$civicrm_admin_utilities_styles_shoreditch = '';
 			$civicrm_admin_utilities_styles_bootstrap = '';
 			$civicrm_admin_utilities_styles_custom = '';
+			$civicrm_admin_utilities_styles_admin = '';
 
 			// get variables
 			extract( $_POST );
@@ -948,6 +977,13 @@ class CiviCRM_Admin_Utilities_Admin {
 				$this->setting_set( 'css_custom', '1' );
 			} else {
 				$this->setting_set( 'css_custom', '0' );
+			}
+
+			// did we ask to override CiviCRM Default styleheet?
+			if ( $civicrm_admin_utilities_styles_admin == '1' ) {
+				$this->setting_set( 'css_admin', '1' );
+			} else {
+				$this->setting_set( 'css_admin', '0' );
 			}
 
 			// get existing access setting

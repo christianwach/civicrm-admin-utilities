@@ -189,6 +189,7 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
 
 		// hook in just before CiviCRM does to disable resources
+		add_action( 'admin_head', array( $this, 'disable_resources' ), 9 );
 		add_action( 'wp_head', array( $this, 'disable_resources' ), 9 );
 
 		// if the debugging flag is set
@@ -298,24 +299,40 @@ class CiviCRM_Admin_Utilities {
 	public function enqueue_admin_scripts() {
 
 		// bail if disabled
-		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '0' ) return;
+		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '1' ) {
 
-		// set default CSS file
-		$css = 'civicrm-admin-utilities.css';
+			// set default CSS file
+			$css = 'civicrm-admin-utilities.css';
 
-		// use specific CSS file for Shoreditch if active
-		if ( $this->shoreditch_css_active() ) {
-			$css = 'civicrm-admin-utilities-shoreditch.css';
+			// use specific CSS file for Shoreditch if active
+			if ( $this->shoreditch_css_active() ) {
+				$css = 'civicrm-admin-utilities-shoreditch.css';
+			}
+
+			// add menu stylesheet
+			wp_enqueue_style(
+				'civicrm_admin_utilities_admin_tweaks',
+				plugins_url( 'assets/css/' . $css, CIVICRM_ADMIN_UTILITIES_FILE ),
+				null,
+				CIVICRM_ADMIN_UTILITIES_VERSION, // version
+				'all' // media
+			);
+
 		}
 
-		// add custom stylesheet
-		wp_enqueue_style(
-			'civicrm_admin_utilities_admin_tweaks',
-			plugins_url( 'assets/css/' . $css, CIVICRM_ADMIN_UTILITIES_FILE ),
-			null,
-			CIVICRM_ADMIN_UTILITIES_VERSION, // version
-			'all' // media
-		);
+		// maybe load core override stylesheet
+		if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
+
+			// add core override stylesheet
+			wp_enqueue_style(
+				'civicrm_admin_utilities_admin_override',
+				plugins_url( 'assets/css/civicrm-admin-utilities-admin.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+				null,
+				CIVICRM_ADMIN_UTILITIES_VERSION, // version
+				'all' // media
+			);
+
+		}
 
 	}
 
@@ -332,11 +349,16 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function disable_resources() {
 
-		// only on front-end
-		if ( is_admin() ) return;
-
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
+
+		// maybe disable core stylesheet
+		if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
+			$this->disable_resource( 'civicrm', 'css/civicrm.css' );
+		}
+
+		// only on front-end
+		if ( is_admin() ) return;
 
 		// maybe disable core stylesheet
 		if ( $this->admin->setting_get( 'css_default', '0' ) == '1' ) {
