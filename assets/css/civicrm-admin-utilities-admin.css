@@ -1473,15 +1473,11 @@ input.crm-form-entityref {
 	top: -2px;
 	color: inherit;
 }
+
 .crm-container .crm-hover-button:hover,
 .crm-container a.crm-hover-button:hover,
-.crm-container a.crm-hover-button:active {
-	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(1, #ccc));
-	background-image: -webkit-linear-gradient(center bottom, #eee 0%, #ccc 100%);
-	background-image: -moz-linear-gradient(center bottom, #eee 0%, #ccc 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#cccccc', endColorstr = '#eeeeee', GradientType = 0);
-	background-image: linear-gradient(top, #eee 0%, #ccc 100%);
-	border: 1px solid #AAAAAA;
+.crm-container a.crm-hover-button:active
+{
 	opacity: 1;
 	color: #2786C2;
 }
@@ -3938,22 +3934,34 @@ dashboard.css overrides
 --------------------------------------------------------------------------------
 */
 
-body #crm-container .widget-content .crm-accordion-header
+body #crm-container #civicrm-dashboard .widget-content
+{
+	border-left: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;
+}
+
+body #crm-container #civicrm-dashboard .widget-content .crm-accordion-header
 {
 	background-color: #eee;
 }
 
-body #crm-container .widget-content .crm-accordion-header:hover
+body #crm-container #civicrm-dashboard .widget-content .crm-accordion-header:hover
 {
 	background-color: #ddd;
 }
 
-body #crm-container .widget-wrapper
+body #crm-container #civicrm-dashboard .widget-wrapper
 {
 	border-radius: 0;
+	box-shadow: none;
 }
 
-body #crm-container .widget-controls
+body #crm-container #civicrm-dashboard .widget-wrapper.db-hover-handle
+{
+	box-shadow: none;
+}
+
+body #crm-container #civicrm-dashboard .widget-controls
 {
 	padding: 8px;
 	color: #23282d;
@@ -3963,13 +3971,13 @@ body #crm-container .widget-controls
 	box-shadow: 0 1px 1px rgba(0,0,0,.04);
 }
 
-body #crm-container .widget-controls:hover
+body #crm-container #civicrm-dashboard .widget-controls:hover
 {
 	background-color: #eee;
 }
 
-body #crm-container .widget-controls .crm-i,
-body #crm-container .widget-header
+body #crm-container #civicrm-dashboard .widget-controls .crm-i,
+body #crm-container #civicrm-dashboard .widget-header
 {
 	color: #000;
 }
