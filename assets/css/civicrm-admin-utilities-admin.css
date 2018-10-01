@@ -4022,6 +4022,12 @@ body #crm-container #civicrm-dashboard .widget-content
 	border-right: 1px solid #e5e5e5;
 }
 
+/* enable bold overrides for unread items in dashboard */
+body #civicrm-news-feed .crm-accordion-header
+{
+	font-weight: normal;
+}
+
 body #crm-container #civicrm-dashboard .widget-content .crm-accordion-header
 {
 	background-color: #eee;
