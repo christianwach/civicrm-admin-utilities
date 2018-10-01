@@ -1813,11 +1813,18 @@ input.crm-form-entityref {
 
 /* Set/alter ICONS */
 
-#crm-container div#printer-friendly {
+#crm-container div#printer-friendly
+{
 	float: right;
 	position: relative;
+	margin: 0 0.5em 0 0;
+}
+
+#crm-container .breadcrumb + div#printer-friendly
+{
 	margin: -1.5em 0.5em 0 0;
 }
+
 /* For Joomla, margin 0 works correctly */
 #crm-container table#crm-content div#printer-friendly {
 	margin: 0;
@@ -3460,6 +3467,7 @@ span.crm-select-item-color {
 	right: 15px;
 	z-index: 999999;
 }
+
 #crm-notification-container div.ui-notify-message {
 	padding: 10px;
 	margin-bottom: 15px;
@@ -3473,48 +3481,57 @@ span.crm-select-item-color {
 	margin: 0;
 	padding: 4px;
 	font-weight: bold;
-	color: #fff;
 }
+
 #crm-notification-container div.ui-notify-message p {
 	margin: 3px 0;
 	padding: 0;
 	line-height: 18px;
 }
+
 #crm-notification-container div.ui-notify-message:last-child {
 	margin-bottom: 0;
 }
-#crm-notification-container div.ui-notify-message-style {
-	background: rgba(0,0,0,0.8);
-	box-shadow: 0 0 6px #000;
+
+#crm-notification-container div.ui-notify-message-style
+{
+    background: #fff;
+    box-shadow: 0 3px 18px 0 rgba(48,40,40,0.25);
+    color: #4d4d69;
 }
+
 .crm-container div.ui-notify-message-style a,
 .crm-container div.ui-notify-message-style a:link {
-	color: #edce5c;
 	text-decoration: underline;
 }
+
 .crm-container div.ui-notify-message-style a:hover,
 .crm-container div.ui-notify-message-style a:focus {
-	color: yellow;
 }
-.crm-container div.ui-notify-message-style .ui-button .ui-button-text {
+
+.crm-container div.ui-notify-message-style .ui-button .ui-button-text
+{
 	color: #edce5c;
 	text-decoration: none;
 }
+
 #crm-notification-container .ui-notify-message .ui-notify-close {
 	cursor: pointer;
 }
-#crm-notification-container .ui-notify-message a.ui-notify-cross {
+
+#crm-notification-container .ui-notify-message a.ui-notify-cross
+{
 	margin-top: -4px;
 	float: right;
 	text-decoration: none;
 	font-weight: bold;
 	text-shadow: 0 1px 1px #fff;
 	padding: 2px;
-	color: #fff;
+	color: #000;
 }
 #crm-notification-container .ui-notify-message .ui-notify-cross:hover,
 #crm-notification-container .ui-notify-message .ui-notify-cross:focus {
-	color: #fff;
+	color: #000;
 }
 .crm-container div.ui-notify-message table,
 .crm-container div.ui-notify-message tbody,
