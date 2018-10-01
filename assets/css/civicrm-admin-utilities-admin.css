@@ -2214,20 +2214,23 @@ div.crm-master-accordion-header a.helpicon {
 }
 
 /* accordion styles */
-
-.crm-container .crm-accordion-header {
+.crm-container .crm-accordion-header
+{
   background-image: url("../../../civicrm/civicrm/i/TreeMinusWhite.gif");
   background-repeat: no-repeat;
   background-position: 2px center;
   cursor: pointer;
-  color: #F5F6F1;
-  font-weight: normal;
   padding: 8px 8px 8px 20px;
-  background-color: #5D677B;
+  color: #23282d;
+  font-weight: bold;
+  background-color: #fafafa;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
 }
 
-.crm-container .crm-accordion-header:hover {
-  background-color: #32414f;
+.crm-container .crm-accordion-header:hover
+{
+  background-color: #eee;
 }
 
 .crm-container .collapsed .crm-accordion-header {
@@ -2264,10 +2267,10 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container .crm-accordion-body
 {
-  border: 1px solid #70716B;
-  border-top: 0;
-  padding: 8px 8px 1px;
-  background: #fff;
+	padding: 8px 8px 1px;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	border-top: none;
 }
 
 .crm-container .crm-collapsible .collapsible-title {
