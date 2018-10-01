@@ -4028,6 +4028,11 @@ body #civicrm-news-feed .crm-accordion-header
 	font-weight: normal;
 }
 
+body #civicrm-news-feed .crm-accordion-wrapper:last-child
+{
+	    margin-bottom: 0;
+}
+
 body #crm-container #civicrm-dashboard .widget-content .crm-accordion-header
 {
 	background-color: #eee;
@@ -4070,6 +4075,19 @@ body #crm-container #civicrm-dashboard .widget-header
 	color: #000;
 	font-size: 1.2em;
 	line-height: 1;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+API Explorer overrides
+--------------------------------------------------------------------------------
+*/
+
+body #mainTabContainer ul.ui-tabs-nav
+{
+	margin-bottom: 0;
 }
 
 
