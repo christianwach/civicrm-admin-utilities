@@ -19,7 +19,7 @@ Misc CiviCRM style fixes for WordPress
 #crm-container, .crm-container
 {
 	padding-top: 12px;
-    padding-right: 12px;
+	padding-right: 12px;
 }
 
 /* Progress bar */
@@ -310,7 +310,7 @@ input.crm-form-entityref {
 
 .crm-container input.crm-form-text.ng-invalid.ng-dirty
 {
-    border: 1px solid #FF0000;
+	border: 1px solid #FF0000;
 }
 .crm-container input.crm-form-text,
 .crm-container .crm-icon-picker-button,
@@ -629,11 +629,13 @@ input.crm-form-entityref {
   border-bottom: 1px solid #DDDDDD;
 }
 
-.crm-container .status {
-	background: #fff;
-    border-left: 4px solid #FFFF66;
-    box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
-    padding: 12px;
+.crm-container .status,
+.crm-container .form-layout-compressed td.status
+{
+	background: #fafafa;
+	border-left: 4px solid #ffa500;
+	box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+	padding: 12px;
 }
 
 .crm-container .status dl {
@@ -811,12 +813,12 @@ input.crm-form-entityref {
 /* Page and form-level 'help' */
 .crm-container .help,
 .crm-container #help {
-	background: #fff;
-    border-left: 4px solid #46b450;
-    box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
-    margin: 5px 0 15px 2px;
-    padding: 10px 15px;
-    line-height: 1.5;
+	background: #fafafa;
+	border-left: 4px solid #46b450;
+	box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+	margin: 5px 0 15px 2px;
+	padding: 10px 15px;
+	line-height: 1.5;
 }
 
 .crm-container .help p {
@@ -1587,7 +1589,9 @@ input.crm-form-entityref {
   padding: 3px;
 }
 
-.crm-container ul li.crm-tab-button {
+/*
+.crm-container ul li.crm-tab-button
+{
   border-bottom: 0 none;
   float: left;
   margin: 0 0.2em 1px 0;
@@ -1596,9 +1600,14 @@ input.crm-form-entityref {
   top: 1px;
   white-space: nowrap;
 }
+*/
 
-.crm-container .ui-tabs .ui-tabs-nav {
-  padding: 4px;
+.crm-container .ui-tabs .ui-tabs-nav
+{
+	border-radius: 0;
+	border: 0;
+	background: none;
+	padding: 0;
 }
 
 .crm-container .crm-tab-button a,
@@ -1608,9 +1617,11 @@ input.crm-form-entityref {
   /* font-size: 0.9em; */
 }
 
+/*
 .crm-container li.crm-tab-button {
   margin: 0 2px 2px 0;
 }
+*/
 
 .crm-container .ui-tabs .ui-tabs-nav li.ui-tabs-selected {
   padding-bottom: 0;
@@ -1618,8 +1629,9 @@ input.crm-form-entityref {
 }
 
 .crm-container .crm-tab-button a,
-.crm-container .ui-tabs .ui-tabs-nav li a {
-  padding: 5px !important;
+.crm-container .ui-tabs .ui-tabs-nav li a
+{
+  padding: 7px 9px;
 }
 
 .crm-container .crm-tab-button a em {
@@ -1631,9 +1643,12 @@ input.crm-form-entityref {
   padding: .5em 1em !important;
 }
 
-#crm-container .ui-tabs-panel {
+#crm-container .ui-tabs-panel
+{
   padding: 8px;
   min-height: 12em;
+  border: 1px solid #aaa;
+  background: #fff;
 }
 
 #crm-container div.contact_details {
@@ -2273,12 +2288,16 @@ div.crm-master-accordion-header a.helpicon {
 	border-top: none;
 }
 
-.crm-container .crm-collapsible .collapsible-title {
-  padding-left: 19px;
+.crm-container .crm-collapsible .collapsible-title
+{
+  padding: 4px 0 4px 19px;
   text-decoration: none;
   background-repeat: no-repeat;
   background-position: 0 center;
   cursor: pointer;
+  color: #23282d;
+  background-color: #fafafa;
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
 }
 
 .crm-container .crm-master-accordion-header + .crm-accordion-body
@@ -2290,8 +2309,7 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container .crm-collapsible .collapsible-title:hover
 {
-  background-color: transparent;
-  color: #0200A0;
+  background-color: #eee;
 }
 
 .crm-container .crm-child-row > td {
@@ -2895,32 +2913,32 @@ tbody.scrollContent tr.alternateRow {
 .crm-container button.crm-button,
 .crm-container button.crmMailing-btn-primary.crm-button
 {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 13px;
-    line-height: 26px;
-    height: 28px;
-    margin: 0;
-    padding: 0 10px 1px;
-    cursor: pointer;
-    border-width: 1px;
-    border-style: solid;
-    -webkit-appearance: none;
-    border-radius: 3px;
-    white-space: nowrap;
-    box-sizing: border-box;
-    background: #0085ba;
-    border-color: #0073aa #006799 #006799;
-    box-shadow: 0 1px 0 #006799;
-    color: #fff;
-    text-decoration: none;
-    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 26px;
+	height: 28px;
+	margin: 0;
+	padding: 0 10px 1px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	background: #0085ba;
+	border-color: #0073aa #006799 #006799;
+	box-shadow: 0 1px 0 #006799;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799
 }
 
 .crm-container button.crm-button,
 .crm-container button.crmMailing-btn-primary.crm-button
 {
-    margin-top: 0.5em;
+	margin-top: 0.5em;
 }
 
 .crm-container a.button.delete-button
@@ -3475,7 +3493,7 @@ span.crm-select-item-color {
 }
 .crm-container div.ui-notify-message-style a,
 .crm-container div.ui-notify-message-style a:link {
-  color: yellow;
+  color: #edce5c;
   text-decoration: underline;
 }
 .crm-container div.ui-notify-message-style a:hover,
@@ -3483,7 +3501,7 @@ span.crm-select-item-color {
   color: yellow;
 }
 .crm-container div.ui-notify-message-style .ui-button .ui-button-text {
-  color: yellow;
+  color: #edce5c;
   text-decoration: none;
 }
 #crm-notification-container .ui-notify-message .ui-notify-close {
@@ -3810,7 +3828,7 @@ span.crm-status-icon {
 .crm-container input.ng-invalid.ng-dirty,
 .crm-container select.ng-invalid.ng-dirty,
 .crm-container textarea.ng-invalid.ng-dirty {
-    border: 1px solid red;
+	border: 1px solid red;
 }
 .crm-container input.ng-valid,
 .crm-container input.ng-pristine,
@@ -3818,7 +3836,7 @@ span.crm-status-icon {
 .crm-container textarea.ng-pristine,
 .crm-container select.ng-valid,
 .crm-container select.ng-pristine{
-    border: 1px solid #666;
+	border: 1px solid #666;
 }
 
 /* block-ui */
@@ -3945,10 +3963,71 @@ jQuery UI overrides
 	font-size: inherit;
 }
 
+#crm-container #mainTabContainer
+{
+	border: none;
+	background: transparent;
+}
+
+#crm-container .ui-tabs .ui-tabs-nav
+{
+	border-radius: 0;
+	border: none;
+	background: transparent;
+}
+
+#crm-container .ui-tabs .ui-tabs-nav li
+{
+	background: #e6e6e6;
+}
+
+#crm-container .ui-tabs .ui-tabs-nav li.ui-tabs-active,
+#crm-container .ui-tabs .ui-tabs-nav li.ui-state-active,
+#crm-container .ui-tabs .ui-tabs-nav li.ui-state-hover
+{
+	background: #fff;
+}
+
+#crm-container .ui-tabs .ui-tabs-nav li a,
+#crm-container .ui-tabs .ui-tabs-nav li a:active
+{
+	outline: 0;
+	box-shadow: none;
+}
+
 #crm-container .ui-widget input,
 #crm-container .ui-widget select,
 #crm-container .ui-widget textarea,
 #crm-container .ui-widget button
 {
 	font-size: 13px;
+}
+
+#crm-container .ui-corner-all,
+#crm-container .ui-corner-bottom,
+#crm-container .ui-corner-right,
+#crm-container .ui-corner-br
+{
+	border-bottom-right-radius: 0;
+}
+#crm-container .ui-corner-all,
+#crm-container .ui-corner-bottom,
+#crm-container .ui-corner-left,
+#crm-container .ui-corner-bl
+{
+	border-bottom-left-radius: 0;
+}
+#crm-container .ui-corner-all,
+#crm-container .ui-corner-top,
+#crm-container .ui-corner-right,
+#crm-container .ui-corner-tr
+{
+	border-top-right-radius: 0;
+}
+#crm-container .ui-corner-all,
+#crm-container .ui-corner-top,
+#crm-container .ui-corner-left,
+#crm-container .ui-corner-tl
+{
+	border-top-left-radius: 0;
 }
