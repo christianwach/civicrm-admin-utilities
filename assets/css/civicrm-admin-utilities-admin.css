@@ -746,7 +746,7 @@ input.crm-form-entityref {
 .crm-container h3.nobackground,
 .crm-container .crm-form-block h3 {
 	background-color: transparent;
-	margin-top: 0;
+	margin: 0.5em 0;
 }
 
 #crm-container .col1 {
@@ -2320,7 +2320,7 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container .crm-master-accordion-header + .crm-accordion-body
 {
-	border: none;
+	/* border: none; scrapped due to "Find Contacts" */
 	padding: 8px;
 	background-color: #fff;
 }
@@ -2394,21 +2394,26 @@ div.crm-master-accordion-header a.helpicon {
 	display: block;
 }
 
-.crm-container .crm-tooltip {
+.crm-container .crm-tooltip
+{
 	padding: 4px;
 	background-color: #2f2f2e;
 	color: #FFF;
 	margin-left: 11px;
 	min-width: 20px;
 	min-height: 20px;
+	font-size: 13px;
 }
+
 #crm-container .crm-tooltip table,
-#crm-container .crm-tooltip table tr td {
+#crm-container .crm-tooltip table tr td
+{
 	background-color: #2f2f2e;
 	border: none;
 	color: #FFF;
 	word-wrap: break-word;
 }
+
 .crm-container .crm-tooltip .crm-summary-group {
 	width: 700px;
 	margin-bottom: 0;
@@ -3200,12 +3205,18 @@ span.crm-select-item-color {
 	bottom: 0;
 	right: 0;
 }
-.crm-container .ui-dialog-title {
+.crm-container .ui-dialog-title
+{
 	background: url("../../../civicrm/civicrm/i/item_sprites.png") no-repeat scroll -79px -47px;
 	margin-left: -5px;
 	padding-left: 25px;
+	font-size: 16px;
+    line-height: 1.2;
+    font-weight: 400;
 }
-.crm-container .ui-dialog-titlebar .ui-button {
+
+.crm-container .ui-dialog-titlebar .ui-button
+{
 	background-color: transparent;
 	background-image: none;
 	border: 1px none;
@@ -3486,7 +3497,7 @@ span.crm-select-item-color {
 #crm-notification-container div.ui-notify-message
 {
 	padding: 10px;
-	margin-bottom: 15px;
+	margin: 0 0 15px;
 	color: #fff;
 	max-height: 600px;
 	overflow: auto;
@@ -3560,6 +3571,7 @@ span.crm-select-item-color {
 	text-shadow: 0 1px 1px #fff;
 	padding: 2px;
 	color: #000;
+	font-size: 18px;
 }
 
 #crm-notification-container .ui-notify-message .ui-notify-cross:hover,
@@ -4033,7 +4045,7 @@ body #crm-container #civicrm-dashboard .widget-wrapper.db-hover-handle
 
 body #crm-container #civicrm-dashboard .widget-controls
 {
-	padding: 8px;
+	padding: 12px 8px;
 	color: #23282d;
 	font-weight: bold;
 	background-color: #fafafa;
@@ -4050,6 +4062,8 @@ body #crm-container #civicrm-dashboard .widget-controls .crm-i,
 body #crm-container #civicrm-dashboard .widget-header
 {
 	color: #000;
+	font-size: 1.2em;
+	line-height: 1;
 }
 
 
