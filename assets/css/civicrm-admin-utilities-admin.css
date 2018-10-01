@@ -676,6 +676,7 @@ input.crm-form-entityref {
 	border: none;
 	color: #8A1F11;
 }
+
 .crm-container .crm-error {
 	padding: 4px;
 }
@@ -1451,7 +1452,6 @@ input.crm-form-entityref {
 	display: inline-block;
 	white-space: nowrap;
 	border: 1px solid transparent;
-	border-radius: 4px;
 	text-decoration: none;
 	color: #000;
 	padding: 1px 3px;
@@ -1645,6 +1645,15 @@ input.crm-form-entityref {
 	min-height: 12em;
 	border: 1px solid #aaa;
 	background: #fff;
+}
+
+#crm-container .ui-tabs-panel:after
+{
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
 }
 
 #crm-container div.contact_details {
@@ -1895,6 +1904,7 @@ input.crm-form-entityref {
 .crm-container a.button:visited {
 }
 
+/*
 .crm-container .crm-button:hover,
 .crm-container .crm-button:focus,
 .crm-container input[type=submit]:hover,
@@ -1905,6 +1915,7 @@ input.crm-form-entityref {
 .crm-container a.button:focus {
 	background-position: 0 -25px;
 }
+*/
 
 .crm-container .crm-button-disabled,
 .crm-container .crm-button.crm-button-disabled,
@@ -2915,6 +2926,9 @@ tbody.scrollContent tr.alternateRow {
 /* .crm-container .crm-button, */
 .crm-container a.button,
 .crm-container a.button:link,
+.crm-container a.button:hover,
+.crm-container a.button:focus,
+.crm-container a.button:active,
 .crm-container input.crm-form-submit,
 .crm-container input[type=button],
 .crm-container button.crm-button,
@@ -3468,28 +3482,42 @@ span.crm-select-item-color {
 	z-index: 999999;
 }
 
-#crm-notification-container div.ui-notify-message {
+#crm-notification-container div.ui-notify-message
+{
 	padding: 10px;
 	margin-bottom: 15px;
 	color: #fff;
-	border-radius: 8px;
 	max-height: 600px;
 	overflow: auto;
 }
-#crm-notification-container div.ui-notify-message h1 {
+
+#crm-notification-container div.ui-notify-message.info
+{
+	border-left: 4px solid #46b450;
+}
+
+#crm-notification-container div.ui-notify-message.alert
+{
+	border-left: 4px solid #dc3232;
+}
+
+#crm-notification-container div.ui-notify-message h1
+{
 	font-size: 14px;
 	margin: 0;
-	padding: 4px;
+	padding: 4px 0;
 	font-weight: bold;
 }
 
-#crm-notification-container div.ui-notify-message p {
-	margin: 3px 0;
+#crm-notification-container div.ui-notify-message p
+{
+	margin: 0.4em 0;
 	padding: 0;
 	line-height: 18px;
 }
 
-#crm-notification-container div.ui-notify-message:last-child {
+#crm-notification-container div.ui-notify-message:last-child
+{
 	margin-bottom: 0;
 }
 
@@ -3501,12 +3529,14 @@ span.crm-select-item-color {
 }
 
 .crm-container div.ui-notify-message-style a,
-.crm-container div.ui-notify-message-style a:link {
+.crm-container div.ui-notify-message-style a:link
+{
 	text-decoration: underline;
 }
 
 .crm-container div.ui-notify-message-style a:hover,
-.crm-container div.ui-notify-message-style a:focus {
+.crm-container div.ui-notify-message-style a:focus
+{
 }
 
 .crm-container div.ui-notify-message-style .ui-button .ui-button-text
@@ -3515,7 +3545,8 @@ span.crm-select-item-color {
 	text-decoration: none;
 }
 
-#crm-notification-container .ui-notify-message .ui-notify-close {
+#crm-notification-container .ui-notify-message .ui-notify-close
+{
 	cursor: pointer;
 }
 
@@ -3529,10 +3560,13 @@ span.crm-select-item-color {
 	padding: 2px;
 	color: #000;
 }
+
 #crm-notification-container .ui-notify-message .ui-notify-cross:hover,
-#crm-notification-container .ui-notify-message .ui-notify-cross:focus {
-	color: #000;
+#crm-notification-container .ui-notify-message .ui-notify-cross:focus
+{
+	color: #333;
 }
+
 .crm-container div.ui-notify-message table,
 .crm-container div.ui-notify-message tbody,
 .crm-container div.ui-notify-message tr {
@@ -3554,12 +3588,25 @@ span.crm-select-item-color {
 .crm-container div.ui-notify-message table a.action-item {
 	margin-right: 5px;
 }
+
 .crm-container div.ui-notify-message ul,
-.crm-container div.ui-notify-message ol {
-	margin: 0.5em 0 1em;
+.crm-container div.ui-notify-message ol
+{
+	margin: 0.5em 0 1em 1em;
 	padding: 0 0 0 0.5em;
 }
 
+.crm-container div.ui-notify-message ol
+{
+	list-style: decimal;
+}
+
+.crm-container div.ui-notify-message ul
+{
+	list-style: disc;
+}
+
+/*
 .crm-container div.ui-notify-message div.icon,
 .crm-status-icon {
 	background: transparent url("../../../civicrm/civicrm/i/message-icons.png") no-repeat 0 0;
@@ -3580,6 +3627,11 @@ span.crm-select-item-color {
 	background-position: -72px 0;
 }
 .crm-container div.ui-notify-message.none div.icon {
+	display: none;
+}
+*/
+#crm-notification-container .ui-notify-message .icon.ui-notify-close
+{
 	display: none;
 }
 
