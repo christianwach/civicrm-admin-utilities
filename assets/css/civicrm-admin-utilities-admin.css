@@ -54,6 +54,7 @@ div.crm-container label
 {
 	font-weight: normal;
 	display: inline;
+	word-break: break-word;
 }
 
 div.crm-container fieldset label
@@ -4074,6 +4075,7 @@ body #crm-container div.crm-summary-row div.crm-label
 {
 	font-weight: bold;
 	width: 128px;
+	word-break: break-word;
 }
 
 body #crm-container div.crm-inline-edit .crm-edit-help,
