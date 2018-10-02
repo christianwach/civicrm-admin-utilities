@@ -364,11 +364,34 @@ class CiviCRM_Admin_Utilities {
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
-		// maybe disable core stylesheet
-		if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
+		// only on back-end
+		if ( is_admin() ) {
 
-			// disable core stylesheet
-			$this->disable_resource( 'civicrm', 'css/civicrm.css' );
+			// maybe disable core stylesheet
+			if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
+
+				// disable core stylesheet
+				$this->disable_resource( 'civicrm', 'css/civicrm.css' );
+
+				// also disable Shoreditch if present
+				if ( $this->shoreditch_css_active() ) {
+					$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+				}
+
+			}
+
+		// only on front-end
+		} else {
+
+			// maybe disable core stylesheet
+			if ( $this->admin->setting_get( 'css_default', '0' ) == '1' ) {
+				$this->disable_resource( 'civicrm', 'css/civicrm.css' );
+			}
+
+			// maybe disable navigation stylesheet (there's no menu on the front-end)
+			if ( $this->admin->setting_get( 'css_navigation', '0' ) == '1' ) {
+				$this->disable_resource( 'civicrm', 'css/civicrmNavigation.css' );
+			}
 
 			// if Shoreditch present
 			if ( $this->shoreditch_css_active() ) {
@@ -383,41 +406,13 @@ class CiviCRM_Admin_Utilities {
 					$this->disable_resource( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
 				}
 
-			}
+			} else {
 
-		}
+				// maybe disable custom stylesheet (not provided by Shoreditch)
+				if ( $this->admin->setting_get( 'css_custom', '0' ) == '1' ) {
+					$this->disable_custom_css();
+				}
 
-		// only on front-end
-		if ( is_admin() ) return;
-
-		// maybe disable core stylesheet
-		if ( $this->admin->setting_get( 'css_default', '0' ) == '1' ) {
-			$this->disable_resource( 'civicrm', 'css/civicrm.css' );
-		}
-
-		// maybe disable navigation stylesheet (there's no menu on the front-end)
-		if ( $this->admin->setting_get( 'css_navigation', '0' ) == '1' ) {
-			$this->disable_resource( 'civicrm', 'css/civicrmNavigation.css' );
-		}
-
-		// if Shoreditch present
-		if ( $this->shoreditch_css_active() ) {
-
-			// maybe disable Shoreditch stylesheet
-			if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
-				$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
-			}
-
-			// maybe disable Shoreditch Bootstrap stylesheet
-			if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
-				$this->disable_resource( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
-			}
-
-		} else {
-
-			// maybe disable custom stylesheet (not provided by Shoreditch)
-			if ( $this->admin->setting_get( 'css_custom', '0' ) == '1' ) {
-				$this->disable_custom_css();
 			}
 
 		}
