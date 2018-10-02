@@ -2208,6 +2208,16 @@ div.crm-master-accordion-header a.helpicon {
 	/* for accessibility reason, put the name of the type/subtype in the icon div (it will be hidden and replaced by the icon) */
 }
 
+/* Icons in selector tables need to be centred */
+.crm-container table.selector .crm-icon {
+	margin-right: 0;
+}
+
+/* Checkboxes in selector tables need to be centred */
+.crm-container table.selector td > input[type="checkbox"] {
+	margin-right: 0;
+}
+
 .select2-results .select2-highlighted .Individual-icon,
 .crm-container .Individual-icon {
 	background-position: 0 0;
@@ -2406,28 +2416,28 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container a.crm-tooltip-down .crm-tooltip-wrapper::before
 {
-    border-bottom: 12px solid #cccbcb !important;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    content: '';
-    height: 0;
-    left: 30px;
-    position: relative;
-    top: -11px;
-    width: 0;
+	border-bottom: 12px solid #cccbcb !important;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	content: '';
+	height: 0;
+	left: 30px;
+	position: relative;
+	top: -11px;
+	width: 0;
 }
 
 .crm-container a:not(.crm-tooltip-down) .crm-tooltip-wrapper::after
 {
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #cccbcb !important;
-    bottom: 1px;
-    content: '';
-    height: 0;
-    left: 30px;
-    position: absolute;
-    width: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-top: 12px solid #cccbcb !important;
+	bottom: 1px;
+	content: '';
+	height: 0;
+	left: 30px;
+	position: absolute;
+	width: 0;
 }
 
 .crm-container .crm-tooltip-active {
@@ -4333,36 +4343,38 @@ Alpha filter overrides
 
 body .crm-container div#alpha-filter
 {
-    background-color: transparent;
-    margin: 4px 0 5px;
-    padding: 2px;
-    text-align: left;
+	background-color: transparent;
+	margin: 4px 0 5px;
+	padding: 2px;
+	text-align: left;
 }
 
 body .crm-container #alpha-filter li
 {
-    background-color: transparent;
-    background-image: none;
-    border: none;
-    color: #aaa;
-    display: inline;
-    font-weight: normal;
-    height: auto;
-    margin: 0;
-    padding: 0px;
+	background-color: transparent;
+	background-image: none;
+	border: none;
+	color: #aaa;
+	display: inline-block;
+	font-weight: normal;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	min-width: 1em;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 
 body .crm-container #alpha-filter a
 {
-    border: none;
-    font-weight: normal;
-    text-decoration: none;
-    display: inline-block;
-    padding: 3px 7px;
-    background: #fafafa;
-    /* border-radius: 14px; */
+	border: none;
+	font-weight: normal;
+	text-decoration: none;
+	display: inline-block;
+	padding: 3px 7px;
+	background: #fafafa;
+	/* border-radius: 14px; */
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.1);
 }
 
 
@@ -4375,7 +4387,7 @@ Bootstrap overrides for Mosaico
 
 #bootstrap-theme .nav-pills > li
 {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 
