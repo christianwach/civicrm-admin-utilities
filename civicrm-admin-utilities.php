@@ -354,7 +354,25 @@ class CiviCRM_Admin_Utilities {
 
 		// maybe disable core stylesheet
 		if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
+
+			// disable core stylesheet
 			$this->disable_resource( 'civicrm', 'css/civicrm.css' );
+
+			// if Shoreditch present
+			if ( $this->shoreditch_css_active() ) {
+
+				// maybe disable Shoreditch stylesheet
+				if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
+					$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+				}
+
+				// maybe disable Shoreditch Bootstrap stylesheet
+				if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
+					$this->disable_resource( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
+				}
+
+			}
+
 		}
 
 		// only on front-end
