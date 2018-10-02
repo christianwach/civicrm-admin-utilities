@@ -306,7 +306,12 @@ class CiviCRM_Admin_Utilities {
 
 			// use specific CSS file for Shoreditch if active
 			if ( $this->shoreditch_css_active() ) {
-				$css = 'civicrm-admin-utilities-shoreditch.css';
+
+				// but not when prettifying CiviCRM admin
+				if ( $this->admin->setting_get( 'css_admin', '0' ) == '0' ) {
+					$css = 'civicrm-admin-utilities-shoreditch.css';
+				}
+
 			}
 
 			// add menu stylesheet
