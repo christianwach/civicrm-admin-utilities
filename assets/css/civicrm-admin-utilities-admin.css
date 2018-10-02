@@ -716,6 +716,7 @@ input.crm-form-entityref {
 	border-top: 1px solid #ddd;
 	padding: 0.8em;
 	text-align: center;
+	line-height: 2;
 }
 
 .crm-container #civicrm-footer.crm-public-footer {
@@ -1769,7 +1770,7 @@ input.crm-form-entityref {
 
 #crm-container .report-contents-right {
 	border: 1px solid #CDCDC3;
-	padding: 4px;
+	padding: 8px 10px;
 	text-align: right;
 }
 
@@ -2179,6 +2180,7 @@ a.crm-i:hover {
 .crm-container a.helpicon {
 	opacity: .8;
 	text-decoration: none;
+	color: #0073aa;
 }
 
 .crm-container	a.helpicon:hover,
@@ -3244,8 +3246,8 @@ span.crm-select-item-color {
 	margin-left: -5px;
 	padding-left: 25px;
 	font-size: 16px;
-    line-height: 1.2;
-    font-weight: 400;
+	line-height: 1.2;
+	font-weight: 400;
 }
 
 .crm-container .ui-dialog-titlebar .ui-button
@@ -3568,9 +3570,9 @@ span.crm-select-item-color {
 
 #crm-notification-container div.ui-notify-message-style
 {
-    background: #fff;
-    box-shadow: 0 3px 18px 0 rgba(48,40,40,0.25);
-    color: #4d4d69;
+	background: #fff;
+	box-shadow: 0 3px 18px 0 rgba(48,40,40,0.25);
+	color: #4d4d69;
 }
 
 .crm-container div.ui-notify-message-style a,
@@ -3971,6 +3973,7 @@ span.crm-status-icon {
 	padding: 1px 5px;
 	border-radius: 3px;
 	border: 1px solid grey;
+	background: #fff;
 }
 
 
@@ -3990,6 +3993,17 @@ body #crm-status-list h3
 #crm-status-list .ui-widget.ui-widget-content
 {
 	border: none;
+}
+
+#crm-status-list .crm-status-item ul
+{
+    list-style: disc;
+    margin-left: 1.3em;
+}
+
+#crm-status-list .crm-status-item .hush-menu button
+{
+    line-height: 1.3;
 }
 
 
@@ -4018,6 +4032,12 @@ body #crm-container div.crm-summary-row
 	background-color: transparent;
 	border-top: none;
 	margin-bottom: 0;
+}
+
+body #crm-container .crm-inline-edit-form div.crm-summary-row,
+body #crm-container .crm-inline-edit-form div.crm-summary-row div.crm-label
+{
+	background-color: #fff;
 }
 
 body #crm-container div.crm-summary-contactname-block
@@ -4053,6 +4073,7 @@ body #crm-container div.contact_panel .crm-summary-block
 body #crm-container div.crm-summary-row div.crm-label
 {
 	font-weight: bold;
+	width: 128px;
 }
 
 body #crm-container div.crm-inline-edit .crm-edit-help,
@@ -4079,6 +4100,13 @@ body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
 	background: #0085ba;
 }
 
+#contact-summary-relationship-tab > .label.font-red
+{
+	font-size: 1.3em;
+	margin: 1em 0;
+	font-weight: bold;
+}
+
 
 
 /*
@@ -4101,7 +4129,7 @@ body #civicrm-news-feed .crm-accordion-header
 
 body #civicrm-news-feed .crm-accordion-wrapper:last-child
 {
-	    margin-bottom: 0;
+		margin-bottom: 0;
 }
 
 body #crm-container #civicrm-dashboard .widget-content .crm-accordion-header
@@ -4177,13 +4205,13 @@ body #bootstrap-theme #contactLayoutEditor .panel-heading
 body #bootstrap-theme #contactLayoutEditor h2.panel-title
 {
 	margin: 0;
-    line-height: 2;
-    color: #000;
+	line-height: 2;
+	color: #000;
 }
 
 body #bootstrap-theme #contactLayoutEditor .panel-primary > .panel-heading h2.panel-title
 {
-    color: #fff;
+	color: #fff;
 }
 
 body #bootstrap-theme #contactLayoutEditor .panel-inner
@@ -4253,7 +4281,7 @@ body #cse-block-container .cse-block
 
 #contact-summary .crm-block .crm-summary-block
 {
-    line-height: 2;
+	line-height: 2;
 }
 
 
