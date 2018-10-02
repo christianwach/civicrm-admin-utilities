@@ -1519,16 +1519,12 @@ input.crm-form-entityref {
 }
 
 /* theming for panel and context menus */
-.crm-container td ul.panel li {
-	background-color: #2F2F2E;
-}
-
 .crm-container .btn-slide .panel li a:hover,
 .crm-container .crm-participant-list-inner li a:hover,
 .crm-container .crm-event-links-list-inner li a:hover,
 .crm-container .crm-contribpage-links-list-inner li a:hover {
-	color: #3e3e3e;
-	background-color: #F5F6F1;
+	color: #000;
+	background-color: #f1f1f1;
 	text-decoration: none;
 }
 
@@ -1537,11 +1533,11 @@ input.crm-form-entityref {
 	z-index: 9999;
 	position: absolute;
 	border-bottom: 0;
-	background: transparent url(../../../civicrm/civicrm/i/dropdown-pointer.gif) no-repeat scroll 150px 1px;
 	text-align: left;
-	padding-top: 5px;
 	margin: 0;
+	margin-top: 5px;
 	width: 180px;
+	box-shadow: 0 3px 18px 0 rgba(48,40,40,0.25);
 }
 
 .crm-container td ul.panel {
@@ -1550,8 +1546,9 @@ input.crm-form-entityref {
 }
 
 .crm-container td ul.panel li {
+	background-color: #fff;
 	margin: 0;
-	padding: 2px;
+	padding: 0;
 	list-style: none;
 	background-image: none;
 	width: auto;
@@ -1565,6 +1562,7 @@ input.crm-form-entityref {
 	padding-right: 15px !important;
 	display: inline;
 }
+
 .crm-container .btn-slide:after {
 	content: "";
 	display: block;
@@ -1594,10 +1592,10 @@ input.crm-form-entityref {
 
 .crm-container .btn-slide .panel li a {
 	text-decoration: none;
-	padding: 4px;
+	padding: 8px;
 	display: block;
 	cursor: pointer;
-	color: #DFDFDF;
+	color: #333;
 }
 
 /*class for CMS user name check used in profile*/
@@ -2394,20 +2392,42 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container .crm-tooltip-wrapper {
 	position: absolute;
-	bottom: 0;
-	left: -36px;
-	overflow: hidden;
+	bottom: 6px;
+	left: -24px;
+	overflow: visible;
 	z-index: 1000;
-	padding-bottom: 10px;
-	background: transparent url('../../../civicrm/civicrm/i/overlay-pointer.png') no-repeat bottom left;
+	padding: 0;
 	display: none;
 }
 
 .crm-container .crm-tooltip-down .crm-tooltip-wrapper {
-	top: 20px;
-	padding-top: 10px;
-	background: transparent url('../../../civicrm/civicrm/i/overlay-pointer.png') no-repeat top left;
-	overflow: visible;
+	top: 30px;
+}
+
+.crm-container a.crm-tooltip-down .crm-tooltip-wrapper::before
+{
+    border-bottom: 12px solid #cccbcb !important;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    content: '';
+    height: 0;
+    left: 30px;
+    position: relative;
+    top: -11px;
+    width: 0;
+}
+
+.crm-container a:not(.crm-tooltip-down) .crm-tooltip-wrapper::after
+{
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #cccbcb !important;
+    bottom: 1px;
+    content: '';
+    height: 0;
+    left: 30px;
+    position: absolute;
+    width: 0;
 }
 
 .crm-container .crm-tooltip-active {
@@ -2420,22 +2440,30 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container .crm-tooltip
 {
-	padding: 4px;
-	background-color: #2f2f2e;
-	color: #FFF;
+	padding: 0;
+	background-color: #fff;
+	color: #000;
 	margin-left: 11px;
 	min-width: 20px;
 	min-height: 20px;
 	font-size: 13px;
+	box-shadow: 0 3px 18px 0 rgba(48,40,40,0.4);
 }
 
 #crm-container .crm-tooltip table,
 #crm-container .crm-tooltip table tr td
 {
-	background-color: #2f2f2e;
+	background-color: #fff;
 	border: none;
-	color: #FFF;
+	color: #000;
 	word-wrap: break-word;
+}
+
+#crm-container .crm-tooltip table tr:first-child td:first-child
+{
+	background-color: #cccbcb;
+	font-weight: bold;
+	font-size: 1.1em;
 }
 
 .crm-container .crm-tooltip .crm-summary-group {
@@ -2496,6 +2524,10 @@ div.crm-master-accordion-header a.helpicon {
 	background-repeat: no-repeat;
 	background-image: url("../../../civicrm/civicrm/i/stop-icon.png");
 	float: right;
+}
+
+#crm-container div.contact_panel span.privacy-flag
+{
 	margin-top: 6px;
 }
 
@@ -3549,6 +3581,11 @@ span.crm-select-item-color {
 	border-left: 4px solid #dc3232;
 }
 
+#crm-notification-container div.ui-notify-message.success
+{
+	border-left: 4px solid #dc3232;
+}
+
 #crm-notification-container div.ui-notify-message h1
 {
 	font-size: 14px;
@@ -3998,13 +4035,13 @@ body #crm-status-list h3
 
 #crm-status-list .crm-status-item ul
 {
-    list-style: disc;
-    margin-left: 1.3em;
+	list-style: disc;
+	margin-left: 1.3em;
 }
 
 #crm-status-list .crm-status-item .hush-menu button
 {
-    line-height: 1.3;
+	line-height: 1.3;
 }
 
 
@@ -4284,6 +4321,61 @@ body #cse-block-container .cse-block
 #contact-summary .crm-block .crm-summary-block
 {
 	line-height: 2;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Alpha filter overrides
+--------------------------------------------------------------------------------
+*/
+
+body .crm-container div#alpha-filter
+{
+    background-color: transparent;
+    margin: 4px 0 5px;
+    padding: 2px;
+    text-align: left;
+}
+
+body .crm-container #alpha-filter li
+{
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    color: #aaa;
+    display: inline;
+    font-weight: normal;
+    height: auto;
+    margin: 0;
+    padding: 0px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+body .crm-container #alpha-filter a
+{
+    border: none;
+    font-weight: normal;
+    text-decoration: none;
+    display: inline-block;
+    padding: 3px 7px;
+    background: #fafafa;
+    /* border-radius: 14px; */
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Bootstrap overrides for Mosaico
+--------------------------------------------------------------------------------
+*/
+
+#bootstrap-theme .nav-pills > li
+{
+    margin-bottom: 0;
 }
 
 
