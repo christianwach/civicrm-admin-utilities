@@ -337,6 +337,13 @@ class CiviCRM_Admin_Utilities {
 				'all' // media
 			);
 
+			/**
+			 * Broadcast that we are loading a custom CiviCRM stylesheet.
+			 *
+			 * @since 0.4.2
+			 */
+			do_action( 'civicrm_admin_utilities_admin_overridden' );
+
 		}
 
 	}
