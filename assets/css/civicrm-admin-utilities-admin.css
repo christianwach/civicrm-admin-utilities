@@ -2901,7 +2901,9 @@ div.crm-container form {
 /* Table overflows */
 @media screen and (max-width: 782px) {
 	div.crm-contact-contribute-contributions,
-	div.crm-search-results
+	div.crm-search-results,
+	#extensions-main,
+	#extensions-addnew
 	{
 		overflow-y: scroll;
 	}
