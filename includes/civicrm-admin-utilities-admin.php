@@ -1149,7 +1149,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Return a value for a specified setting.
+	 * Check whether a specified setting exists.
 	 *
 	 * @since 0.1
 	 *
