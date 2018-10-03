@@ -1483,9 +1483,21 @@ input.crm-form-entityref {
 
 #crm-container .ac_results li {
 	float: none;
-	padding: 4px;
+	padding: 8px 0 8px 8px;
 	margin: 0;
 	line-height: 15px;
+}
+
+#crm-container #crm-contact-actions-list .crm-contact_activities-list ul,
+#crm-container #crm-contact-actions-list .crm-contact_actions-list ul,
+#crm-container #crm-contact-actions-list .crm-contact_print-list ul
+{
+	padding: 0;
+}
+
+#crm-container #crm-contact-actions-list
+{
+	width: auto;
 }
 
 .crm-container .action-item-wrap {
@@ -2022,7 +2034,8 @@ input.crm-form-entityref {
 #crm-contribpage-links-list,
 #crm-create-new-list,
 #crm-contact-actions-list,
-#crm-participant-list {
+#crm-participant-list
+{
 	position: absolute;
 	display: none;
 	top: 30px;
@@ -3152,9 +3165,10 @@ tbody.scrollContent tr.alternateRow {
 .crm-participant-list-inner,
 .crm-event-links-list-inner,
 .crm-contribpage-links-list-inner,
-.crm-contact-actions-list-inner {
-	background-color: #23282d;
-	padding: 4px;
+.crm-contact-actions-list-inner
+{
+	background-color: #fff;
+	box-shadow: 0 3px 18px 0 rgba(48,40,40,0.25);
 }
 
 .crm-create-new-list-inner, .crm-create-new-list-inner ul {
@@ -3167,8 +3181,9 @@ tbody.scrollContent tr.alternateRow {
 
 .crm-container .ac_results li,
 .crm-container .ac_results li a,
-.crm-container .ac_results li a:visited {
-	color: #DFDFDF;
+.crm-container .ac_results li a:visited
+{
+	color: #333;
 	text-decoration: none;
 }
 
@@ -3672,7 +3687,7 @@ span.crm-select-item-color {
 
 #crm-notification-container div.ui-notify-message
 {
-	padding: 10px;
+	padding: 10px 15px;
 	margin: 0 0 15px;
 	color: #fff;
 	max-height: 600px;
@@ -3746,12 +3761,10 @@ span.crm-select-item-color {
 
 #crm-notification-container .ui-notify-message a.ui-notify-cross
 {
-	margin-top: -4px;
 	float: right;
 	text-decoration: none;
 	font-weight: bold;
 	text-shadow: 0 1px 1px #fff;
-	padding: 2px;
 	color: #000;
 	font-size: 18px;
 }
