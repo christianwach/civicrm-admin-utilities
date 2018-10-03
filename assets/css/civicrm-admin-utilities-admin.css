@@ -879,6 +879,7 @@ input.crm-form-entityref {
 #crm-container table.report,
 #crm-container table.chart {
 	width: auto;
+	margin: 20px;
 }
 
 #crm-container .crm-flashchart {
@@ -936,9 +937,23 @@ input.crm-form-entityref {
 	padding: 10px 10px 4px 10px;
 }
 
-#crm-container .report td {
-	border: 1px solid #999999;
+#crm-container .report tr.columnheader-dark th
+{
+	background-color: #e6e6e6;
+    border-left: none;
+    border-right: none;
+    color: #333;
+    padding: 8px 10px;
+    border-color: e6e6e6;
+}
+
+#crm-container .report td
+{
+	border: 1px solid #e6e6e6;
+	border-left: none;
+	border-right: none;
 	background-color: #F6F6F6;
+	padding: 8px 10px;
 }
 
 /* double line right border for last cell in a horizontal grouping */
@@ -954,7 +969,7 @@ input.crm-form-entityref {
 }
 
 #crm-container .chart td {
-	border: 2px solid #999999;
+	border: none;
 }
 
 #crm-container .float-left {
@@ -2762,10 +2777,48 @@ div.crm-container form {
 	overflow: visible;
 }
 
-/*chart */
-#chartData {
+/* Contribution Summary */
+#chartData
+{
 	overflow: auto;
-	padding: 8px 8px 1px 8px;
+	background: white;
+}
+
+#chartData .form-layout-compressed table
+{
+	margin: 0;
+	border: none;
+}
+
+#crm-container .chart
+{
+	border: none;
+}
+
+#crm-container .CRM_Contribute_Form_ContributionCharts #mainTabContainer > #chartData
+{
+	border: 1px solid #d3d3d3;
+}
+
+#crm-container .CRM_Contribute_Form_ContributionCharts #mainTabContainer.ui-tabs .ui-tabs-nav
+{
+	position: relative;
+	line-height: 2.5;
+}
+
+#crm-container .CRM_Contribute_Form_ContributionCharts #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-state-active
+{
+	border: 1px solid #d3d3d3;
+	border-bottom-width: 0;
+	margin-bottom: -1px;
+    padding-bottom: 1px;
+}
+
+#crm-container .CRM_Contribute_Form_ContributionCharts #mainTabContainer.ui-tabs .float-right
+{
+	position: absolute;
+	top: -8px;
+	right: 0;
 }
 
 #crm-container .signature {
