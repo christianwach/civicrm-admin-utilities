@@ -879,6 +879,9 @@ input.crm-form-entityref {
 #crm-container table.report,
 #crm-container table.chart {
 	width: auto;
+}
+
+#crm-container #chartData table.chart {
 	margin: 20px;
 }
 
@@ -1812,6 +1815,11 @@ input.crm-form-entityref {
 	white-space: nowrap;
 }
 
+#crm-container table.report-layout a
+{
+	text-decoration: none;
+}
+
 /*override default pager for report*/
 .crm-container .report-pager .crm-pager-nav a {
 	color: #000000;
@@ -1887,7 +1895,7 @@ input.crm-form-entityref {
 .crm-container .crm-submit-buttons,
 .crm-container .action-link {
 	height: 27px;
-	margin: 4px 0 8px 2px;
+	margin: 4px 0 8px 4px;
 }
 
 .crm-container .action-link a.button,
@@ -2176,6 +2184,11 @@ a.crm-i:hover {
 .crm-inline-button .crm-i-button > .crm-i,
 .crm-i-button.crm-button-type-refresh > .crm-i,
 .crm-submit-buttons .crm-i-button > .crm-i
+{
+	top: 0.15em;
+}
+
+.form-item > .crm-i-button > .crm-i
 {
 	top: 0.15em;
 }
@@ -3724,16 +3737,18 @@ span.crm-select-item-color {
 .crm-container div.ui-notify-message table {
 	margin: 10px 0;
 }
-.crm-container div.ui-notify-message td {
+.crm-container div.ui-notify-message td
+{
 	background: rgba(255,255,255,0.1);
 	border: 1px solid #111;
-	color: #fff;
 }
-.crm-container div.ui-notify-message th {
+
+.crm-container div.ui-notify-message th
+{
 	background: rgba(200,200,200,0.2);
 	border: 1px solid #111;
-	color: #eee;
 }
+
 .crm-container div.ui-notify-message table a.action-item {
 	margin-right: 5px;
 }
