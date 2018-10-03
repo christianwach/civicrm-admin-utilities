@@ -29,6 +29,7 @@ body #civicrm-menu li.menumain
 	height: 32px !important;
 	outline: none;
 	border-right: 1px solid #32373c;
+	color: #eee;
 }
 
 html>body #root-menu-div div.outerbox
