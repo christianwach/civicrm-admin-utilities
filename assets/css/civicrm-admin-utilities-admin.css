@@ -255,7 +255,7 @@ input.crm-form-entityref {
 
 .crm-container .solid-border-top
 {
-	border-top: 1px solid #696969;
+	border-top: 1px solid #dcdcdc;
 }
 
 /* Size the verticle heights in crm-containers by class. */
@@ -881,7 +881,7 @@ input.crm-form-entityref {
 	width: auto;
 }
 
-#crm-container #chartData table.chart {
+#crm-container #chartData table.report {
 	margin: 20px;
 }
 
@@ -2354,6 +2354,23 @@ div.crm-master-accordion-header a.helpicon {
 	margin-bottom: 1em;
 }
 
+.crm-container .crm-inline-edit-form .crm-accordion-wrapper
+{
+	margin-bottom: 0;
+}
+
+.crm-inline-edit .crm-container-snippet
+{
+    padding: 8px;
+    background: #fff;
+    border: none;
+}
+
+#crm-container div.contact_panel .crm-inline-edit table
+{
+    border: none;
+}
+
 .crm-container .crm-accordion-body
 {
 	padding: 8px 8px 1px;
@@ -2703,7 +2720,7 @@ div.crm-container form {
 }
 
 .crm-container table.display thead th {
-	padding: 3px 18px 3px 10px;
+	padding: 8px 10px;
 	border-bottom: 1px solid black;
 	font-weight: bold;
 	cursor: pointer;
@@ -2995,7 +3012,8 @@ tbody.scrollContent tr.alternateRow {
 
 .crm-container div.contact_panel td.label,
 .crm-container #customFields div.contact_panel td.label,
-.crm-container table.crm-info-panel td.label {
+.crm-container table.crm-info-panel td.label
+{
 	background-color: #fafafa;
 	width: 120px;
 	text-align: left;
@@ -4304,6 +4322,25 @@ API Explorer overrides
 body #mainTabContainer ul.ui-tabs-nav
 {
 	margin-bottom: 0;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Contact Summary overrides
+--------------------------------------------------------------------------------
+*/
+
+#crm-container div.contact_panel div.contactCardLeft .label,
+#crm-container div.contact_panel div.contactCardRight .label
+{
+	font-size: 13px;
+}
+
+#crm-container #customFields div.contact_panel .crm-inline-edit-form td
+{
+	background-color: #fff;
 }
 
 
