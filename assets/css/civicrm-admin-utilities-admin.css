@@ -120,6 +120,7 @@ div.crm-container fieldset label
 .crm-container table.selector thead.sticky th
 {
 	padding: 8px 0;
+	white-space: nowrap; /* try and keep header slim */
 }
 
 .crm-container table thead.sticky .sticky-header
