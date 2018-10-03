@@ -111,9 +111,15 @@ div.crm-container fieldset label
 	color: #A7A7A7;
 	font-weight: bold;
 	padding: 8px 0;
+	padding: 8px 10px;
 	text-align: left;
 	vertical-align: top;
 	line-height: 1.4em;
+}
+
+.crm-container table.selector thead.sticky th
+{
+	padding: 8px 0;
 }
 
 .crm-container table thead.sticky .sticky-header
@@ -1896,6 +1902,7 @@ input.crm-form-entityref {
 .crm-container .action-link {
 	height: 27px;
 	margin: 4px 0 8px 4px;
+	white-space: nowrap;
 }
 
 .crm-container .action-link a.button,
@@ -2357,6 +2364,12 @@ div.crm-master-accordion-header a.helpicon {
 .crm-container .crm-inline-edit-form .crm-accordion-wrapper
 {
 	margin-bottom: 0;
+}
+
+.crm-container .crm-inline-edit-form .crm-accordion-body
+{
+	padding: 0;
+	border: none;
 }
 
 .crm-inline-edit .crm-container-snippet
@@ -3665,6 +3678,7 @@ span.crm-select-item-color {
 	overflow: auto;
 }
 
+#crm-notification-container div.ui-notify-message.success,
 #crm-notification-container div.ui-notify-message.info
 {
 	border-left: 4px solid #46b450;
@@ -3675,9 +3689,9 @@ span.crm-select-item-color {
 	border-left: 4px solid #dc3232;
 }
 
-#crm-notification-container div.ui-notify-message.success
+#crm-notification-container div.ui-notify-message.warning
 {
-	border-left: 4px solid #dc3232;
+	border-left: 4px solid #ffb900;
 }
 
 #crm-notification-container div.ui-notify-message h1
@@ -4110,6 +4124,19 @@ span.crm-status-icon {
 	background: #fff;
 }
 
+#browseValues_Household,
+#browseValues_Individual,
+#browseValues_Organization
+{
+	margin-bottom: 3.5em;
+}
+
+#browseValues_Household > div:last-child,
+#browseValues_Individual > div:last-child,
+#browseValues_Organization > div:last-child
+{
+	margin-top: 0.4em;
+}
 
 
 
@@ -4480,6 +4507,51 @@ body .crm-container #alpha-filter a
 	background: #fafafa;
 	/* border-radius: 14px; */
 	box-shadow: 0px 0px 3px rgba(0,0,0,0.1);
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Upgrade screen overrides
+--------------------------------------------------------------------------------
+*/
+
+/* Fix appearance of Upgrade button */
+.crm-container > form > button.crm-button[type=submit],
+.crm-container > form > a.button.cancel
+{
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 26px;
+	height: 28px;
+	margin: 0;
+	padding: 0 10px 1px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	background: #0085ba;
+	border-color: #0073aa #006799 #006799;
+	box-shadow: 0 1px 0 #006799;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+}
+
+/* Fix appearance of Upgrade Cancel button */
+.crm-container > form > a.button.cancel
+{
+	margin-right: 10px;
+}
+
+.crm-container > form > p > .crm-status-icon.info
+{
+	vertical-align: middle;
 }
 
 
