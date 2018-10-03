@@ -4507,6 +4507,7 @@ body .crm-container #alpha-filter li
 	margin: 0;
 	padding: 0;
 	min-width: 1em;
+	text-align: center;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 	-webkit-font-smoothing: subpixel-antialiased;
 }
