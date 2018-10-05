@@ -734,12 +734,12 @@ input.crm-form-entityref {
 
 .crm-container #civicrm-footer .status.crm-error
 {
-	background: #8A1F11;
+	background: #ea5a49;
 }
 
 .crm-container #civicrm-footer .status.crm-warning
 {
-	background: #ffa500;
+	background: #eeb147;
 }
 
 .crm-container #civicrm-footer .status.crm-ok
