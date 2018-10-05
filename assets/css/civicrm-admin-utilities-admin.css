@@ -4408,7 +4408,8 @@ body #crm-container #dashlets-header-col-1
 	padding: 0 2% 0 0;
 }
 
-body #crm-container #available-dashlets .ui-sortable-placeholder
+body #crm-container #available-dashlets .ui-sortable-placeholder,
+body #crm-container .dash-column .ui-sortable-placeholder
 {
 	background: #fafafa;
     margin: -3px 0 0 0;
@@ -4417,6 +4418,17 @@ body #crm-container #available-dashlets .ui-sortable-placeholder
     height: auto !important;
     padding: 0 0 36px 0;
     vertical-align: middle;
+}
+
+body #crm-container #existing-dashlets-col-0.dash-column .ui-sortable-placeholder,
+body #crm-container #existing-dashlets-col-1.dash-column .ui-sortable-placeholder
+{
+	background: #fafafa;
+    margin: 0.5em;
+    height: auto !important;
+    padding: 0 0 36px 0;
+    vertical-align: middle;
+    width: 75% !important;
 }
 
 
