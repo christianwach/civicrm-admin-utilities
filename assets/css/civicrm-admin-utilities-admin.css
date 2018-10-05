@@ -4278,12 +4278,8 @@ body #crm-container .crm-inline-edit.add-new .crm-edit-help
 body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
 body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
 {
-  display: block;
-  background-color: #DFE1FF;
-}
-
-{
 	background: #0085ba;
+	background-color: #0085ba;
 }
 
 #contact-summary-relationship-tab > .label.font-red
