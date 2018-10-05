@@ -685,10 +685,6 @@ input.crm-form-entityref {
 	color: #8A1F11;
 }
 
-.crm-container .crm-error {
-	padding: 4px;
-}
-
 .crm-container .messages.crm-error
 {
 	border-left: 4px solid #dc3232;
@@ -710,7 +706,8 @@ input.crm-form-entityref {
 	margin-bottom: 0;
 }
 
-.crm-container .status.crm-ok {
+.crm-container .status.crm-ok
+{
 	border-color: #B0D730;
 	background-color: #F1F8EB;
 	color: #3E3E3E;
@@ -725,6 +722,35 @@ input.crm-form-entityref {
 	padding: 0.8em;
 	text-align: center;
 	line-height: 2;
+}
+
+.crm-container #civicrm-footer .status
+{
+	padding: 3px 4px 3px 6px;
+	border: none;
+	background: transparent;
+	margin: 0 5px 0 3px;
+}
+
+.crm-container #civicrm-footer .status.crm-error
+{
+	background: #8A1F11;
+}
+
+.crm-container #civicrm-footer .status.crm-warning
+{
+	background: #ffa500;
+}
+
+.crm-container #civicrm-footer .status.crm-ok
+{
+	background: #2aaa67;
+}
+
+.crm-container #civicrm-footer .status a
+{
+	color: #fff;
+	text-decoration: none;
 }
 
 .crm-container #civicrm-footer.crm-public-footer {
