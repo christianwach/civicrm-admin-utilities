@@ -4354,6 +4354,60 @@ body #crm-container #civicrm-dashboard .widget-header
 	line-height: 1;
 }
 
+body #crm-container #available-dashlets
+{
+	background-color: #fff;
+    border: 1px dashed #4d4d69;
+    min-height: 40px;
+    padding: 15px;
+    width: auto;
+}
+
+body .crm-container #configure-dashlet .dashlets-header
+{
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+}
+
+body .crm-container #configure-dashlet .portlet-header
+{
+    background: #f3f6f7;
+    border-color: #d3dee2;
+    color: #4d4d69;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    padding: 8px;
+}
+
+body #crm-container .dash-column
+{
+	padding: 1%;
+	background-color: #fff;
+	border: none;
+}
+
+body #crm-container #dashlets-header-col-0,
+body #crm-container #existing-dashlets-col-0
+{
+	width: 47%;
+	clear: left;
+}
+
+body #crm-container #dashlets-header-col-1,
+body #crm-container #existing-dashlets-col-1
+{
+	float: right;
+    width: 47%;
+    margin: 0;
+}
+
+body #crm-container #dashlets-header-col-1
+{
+    width: 47%;
+	padding: 0 2% 0 0;
+}
+
 
 
 /*
