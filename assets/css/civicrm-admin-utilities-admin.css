@@ -4408,6 +4408,17 @@ body #crm-container #dashlets-header-col-1
 	padding: 0 2% 0 0;
 }
 
+body #crm-container #available-dashlets .ui-sortable-placeholder
+{
+	background: #fafafa;
+    margin: -3px 0 0 0;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    height: auto !important;
+    padding: 0 0 36px 0;
+    vertical-align: middle;
+}
+
 
 
 /*
