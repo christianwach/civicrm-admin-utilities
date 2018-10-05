@@ -950,11 +950,11 @@ input.crm-form-entityref {
 #crm-container .report tr.columnheader-dark th
 {
 	background-color: #e6e6e6;
-    border-left: none;
-    border-right: none;
-    color: #333;
-    padding: 8px 10px;
-    border-color: e6e6e6;
+	 border-left: none;
+	 border-right: none;
+	 color: #333;
+	 padding: 8px 10px;
+	 border-color: e6e6e6;
 }
 
 #crm-container .report td
@@ -2388,14 +2388,14 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-inline-edit .crm-container-snippet
 {
-    padding: 8px;
-    background: #fff;
-    border: none;
+	 padding: 8px;
+	 background: #fff;
+	 border: none;
 }
 
 #crm-container div.contact_panel .crm-inline-edit table
 {
-    border: none;
+	 border: none;
 }
 
 .crm-container .crm-accordion-body
@@ -2868,7 +2868,7 @@ div.crm-container form {
 	border: 1px solid #d3d3d3;
 	border-bottom-width: 0;
 	margin-bottom: -1px;
-    padding-bottom: 1px;
+	 padding-bottom: 1px;
 }
 
 #crm-container .CRM_Contribute_Form_ContributionCharts #mainTabContainer.ui-tabs .float-right
@@ -4362,27 +4362,27 @@ body #crm-container #civicrm-dashboard .widget-header
 body #crm-container #available-dashlets
 {
 	background-color: #fff;
-    border: 1px dashed #4d4d69;
-    min-height: 40px;
-    padding: 15px;
-    width: auto;
+	 border: 1px dashed #4d4d69;
+	 min-height: 40px;
+	 padding: 15px;
+	 width: auto;
 }
 
 body .crm-container #configure-dashlet .dashlets-header
 {
-    font-size: 1.3em;
-    margin-bottom: 0.5em;
+	 font-size: 1.3em;
+	 margin-bottom: 0.5em;
 }
 
 body .crm-container #configure-dashlet .portlet-header
 {
-    background: #f3f6f7;
-    border-color: #d3dee2;
-    color: #4d4d69;
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0;
-    padding: 8px;
+	 background: #f3f6f7;
+	 border-color: #d3dee2;
+	 color: #4d4d69;
+	 font-size: 14px;
+	 font-weight: 600;
+	 margin: 0;
+	 padding: 8px;
 }
 
 body #crm-container .dash-column
@@ -4403,13 +4403,13 @@ body #crm-container #dashlets-header-col-1,
 body #crm-container #existing-dashlets-col-1
 {
 	float: right;
-    width: 47%;
-    margin: 0;
+	 width: 47%;
+	 margin: 0;
 }
 
 body #crm-container #dashlets-header-col-1
 {
-    width: 47%;
+	 width: 47%;
 	padding: 0 2% 0 0;
 }
 
@@ -4417,23 +4417,23 @@ body #crm-container #available-dashlets .ui-sortable-placeholder,
 body #crm-container .dash-column .ui-sortable-placeholder
 {
 	background: #fafafa;
-    margin: -3px 0 0 0;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    height: auto !important;
-    padding: 0 0 36px 0;
-    vertical-align: middle;
+	 margin: -3px 0 0 0;
+	 margin-left: 0.5em;
+	 margin-right: 0.5em;
+	 height: auto !important;
+	 padding: 0 0 36px 0;
+	 vertical-align: middle;
 }
 
 body #crm-container #existing-dashlets-col-0.dash-column .ui-sortable-placeholder,
 body #crm-container #existing-dashlets-col-1.dash-column .ui-sortable-placeholder
 {
 	background: #fafafa;
-    margin: 0.5em;
-    height: auto !important;
-    padding: 0 0 36px 0;
-    vertical-align: middle;
-    width: 75% !important;
+	 margin: 0.5em;
+	 height: auto !important;
+	 padding: 0 0 36px 0;
+	 vertical-align: middle;
+	 width: 75% !important;
 }
 
 
@@ -4821,3 +4821,278 @@ jQuery UI overrides
 {
 	margin-top: 0;
 }
+
+
+
+/*
+--------------------------------------------------------------------------------
+WordPress Admin Themes support
+--------------------------------------------------------------------------------
+*/
+
+/* light */
+body.admin-color-light .crm-container a.button,
+body.admin-color-light .crm-container a.button:link,
+body.admin-color-light .crm-container a.button:hover,
+body.admin-color-light .crm-container a.button:focus,
+body.admin-color-light .crm-container a.button:active,
+body.admin-color-light .crm-container input.crm-form-submit,
+body.admin-color-light .crm-container input[type=button],
+body.admin-color-light .crm-container button.crm-button,
+body.admin-color-light .crm-container button.crmMailing-btn-primary.crm-button,
+body.admin-color-light .ui-dialog .ui-dialog-buttonpane button,
+body.admin-color-light .crm-container > form > button.crm-button[type=submit],
+body.admin-color-light .crm-container > form > a.button.cancel,
+body.admin-color-light .ui-widget.crm-container .crm-container button.ui-widget,
+body.admin-color-light #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.admin-color-light #crm-container div.crm-inline-edit .crm-edit-help,
+body.admin-color-light #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	 background: #04a4cc;
+	 border-color: #037c9a #036881 #036881;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #036881;
+	 text-shadow: 0 -1px 1px #036881, 1px 0 1px #036881, 0 1px 1px #036881, -1px 0 1px #036881;
+}
+
+body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:hover,
+body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:focus,
+body.admin-color-light #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-light #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	 background: #04b0db;
+	 border-color: #036881;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #036881;
+}
+
+
+
+/* blue */
+body.admin-color-blue .crm-container a.button,
+body.admin-color-blue .crm-container a.button:link,
+body.admin-color-blue .crm-container a.button:hover,
+body.admin-color-blue .crm-container a.button:focus,
+body.admin-color-blue .crm-container a.button:active,
+body.admin-color-blue .crm-container input.crm-form-submit,
+body.admin-color-blue .crm-container input[type=button],
+body.admin-color-blue .crm-container button.crm-button,
+body.admin-color-blue .crm-container button.crmMailing-btn-primary.crm-button,
+body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button,
+body.admin-color-blue .crm-container > form > button.crm-button[type=submit],
+body.admin-color-blue .crm-container > form > a.button.cancel,
+body.admin-color-blue .ui-widget.crm-container .crm-container button.ui-widget,
+body.admin-color-blue #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.admin-color-blue #crm-container div.crm-inline-edit .crm-edit-help,
+body.admin-color-blue #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	 background: #e1a948;
+	 border-color: #d39323 #bd831f #bd831f;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #bd831f;
+	 text-shadow: 0 -1px 1px #bd831f, 1px 0 1px #bd831f, 0 1px 1px #bd831f, -1px 0 1px #bd831f;
+}
+
+body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:hover,
+body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:focus,
+body.admin-color-blue #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-blue #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	 background: #e3af55;
+	 border-color: #bd831f;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #bd831f;
+}
+
+
+
+/* coffee */
+body.admin-color-coffee .crm-container a.button,
+body.admin-color-coffee .crm-container a.button:link,
+body.admin-color-coffee .crm-container a.button:hover,
+body.admin-color-coffee .crm-container a.button:focus,
+body.admin-color-coffee .crm-container a.button:active,
+body.admin-color-coffee .crm-container input.crm-form-submit,
+body.admin-color-coffee .crm-container input[type=button],
+body.admin-color-coffee .crm-container button.crm-button,
+body.admin-color-coffee .crm-container button.crmMailing-btn-primary.crm-button,
+body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button,
+body.admin-color-coffee .crm-container > form > button.crm-button[type=submit],
+body.admin-color-coffee .crm-container > form > a.button.cancel,
+body.admin-color-coffee .ui-widget.crm-container .crm-container button.ui-widget,
+body.admin-color-coffee #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.admin-color-coffee #crm-container div.crm-inline-edit .crm-edit-help,
+body.admin-color-coffee #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	 background: #c7a589;
+	 border-color: #b78b66 #ae7d55 #ae7d55;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #ae7d55;
+	 text-shadow: 0 -1px 1px #ae7d55, 1px 0 1px #ae7d55, 0 1px 1px #ae7d55, -1px 0 1px #ae7d55;
+}
+
+body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:hover,
+body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:focus,
+body.admin-color-coffee #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-coffee #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	 background: #ccad93;
+	 border-color: #ae7d55;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #ae7d55;
+}
+
+
+
+/* ectoplasm */
+body.admin-color-ectoplasm .crm-container a.button,
+body.admin-color-ectoplasm .crm-container a.button:link,
+body.admin-color-ectoplasm .crm-container a.button:hover,
+body.admin-color-ectoplasm .crm-container a.button:focus,
+body.admin-color-ectoplasm .crm-container a.button:active,
+body.admin-color-ectoplasm .crm-container input.crm-form-submit,
+body.admin-color-ectoplasm .crm-container input[type=button],
+body.admin-color-ectoplasm .crm-container button.crm-button,
+body.admin-color-ectoplasm .crm-container button.crmMailing-btn-primary.crm-button,
+body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button,
+body.admin-color-ectoplasm .crm-container > form > button.crm-button[type=submit],
+body.admin-color-ectoplasm .crm-container > form > a.button.cancel,
+body.admin-color-ectoplasm .ui-widget.crm-container .crm-container button.ui-widget,
+body.admin-color-ectoplasm #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.admin-color-ectoplasm #crm-container div.crm-inline-edit .crm-edit-help,
+body.admin-color-ectoplasm #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	 background: #a3b745;
+	 border-color: #829237 #727f30 #727f30;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #727f30;
+	 text-shadow: 0 -1px 1px #727f30, 1px 0 1px #727f30, 0 1px 1px #727f30, -1px 0 1px #727f30;
+}
+
+body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:hover,
+body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:focus,
+body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	 background: #a9bd4f;
+	 border-color: #727f30;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #727f30;
+}
+
+
+
+/* midnight */
+body.admin-color-midnight .crm-container a.button,
+body.admin-color-midnight .crm-container a.button:link,
+body.admin-color-midnight .crm-container a.button:hover,
+body.admin-color-midnight .crm-container a.button:focus,
+body.admin-color-midnight .crm-container a.button:active,
+body.admin-color-midnight .crm-container input.crm-form-submit,
+body.admin-color-midnight .crm-container input[type=button],
+body.admin-color-midnight .crm-container button.crm-button,
+body.admin-color-midnight .crm-container button.crmMailing-btn-primary.crm-button,
+body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button,
+body.admin-color-midnight .crm-container > form > button.crm-button[type=submit],
+body.admin-color-midnight .crm-container > form > a.button.cancel,
+body.admin-color-midnight .ui-widget.crm-container .crm-container button.ui-widget,
+body.admin-color-midnight #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.admin-color-midnight #crm-container div.crm-inline-edit .crm-edit-help,
+body.admin-color-midnight #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	 background: #e14d43;
+	 border-color: #d02c21 #ba281e #ba281e;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #ba281e;
+	 text-shadow: 0 -1px 1px #ba281e, 1px 0 1px #ba281e, 0 1px 1px #ba281e, -1px 0 1px #ba281e;
+}
+
+body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:hover,
+body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:focus,
+body.admin-color-midnight #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-midnight #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	 background: #e35950;
+	 border-color: #ba281e;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #ba281e;
+}
+
+
+
+/* ocean */
+body.admin-color-ocean .crm-container a.button,
+body.admin-color-ocean .crm-container a.button:link,
+body.admin-color-ocean .crm-container a.button:hover,
+body.admin-color-ocean .crm-container a.button:focus,
+body.admin-color-ocean .crm-container a.button:active,
+body.admin-color-ocean .crm-container input.crm-form-submit,
+body.admin-color-ocean .crm-container input[type=button],
+body.admin-color-ocean .crm-container button.crm-button,
+body.admin-color-ocean .crm-container button.crmMailing-btn-primary.crm-button,
+body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button,
+body.admin-color-ocean .crm-container > form > button.crm-button[type=submit],
+body.admin-color-ocean .crm-container > form > a.button.cancel,
+body.admin-color-ocean .ui-widget.crm-container .crm-container button.ui-widget,
+body.admin-color-ocean #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.admin-color-ocean #crm-container div.crm-inline-edit .crm-edit-help,
+body.admin-color-ocean #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	 background: #9ebaa0;
+	 border-color: #80a583 #719a74 #719a74;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #719a74;
+	 text-shadow: 0 -1px 1px #719a74, 1px 0 1px #719a74, 0 1px 1px #719a74, -1px 0 1px #719a74;
+}
+
+body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:hover,
+body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:focus,
+body.admin-color-ocean #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-ocean #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	 background: #a7c0a9;
+	 border-color: #719a74;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #719a74;
+}
+
+
+
+/* sunrise */
+body.admin-color-sunrise .crm-container a.button,
+body.admin-color-sunrise .crm-container a.button:link,
+body.admin-color-sunrise .crm-container a.button:hover,
+body.admin-color-sunrise .crm-container a.button:focus,
+body.admin-color-sunrise .crm-container a.button:active,
+body.admin-color-sunrise .crm-container input.crm-form-submit,
+body.admin-color-sunrise .crm-container input[type=button],
+body.admin-color-sunrise .crm-container button.crm-button,
+body.admin-color-sunrise .crm-container button.crmMailing-btn-primary.crm-button,
+body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button,
+body.admin-color-sunrise .crm-container > form > button.crm-button[type=submit],
+body.admin-color-sunrise .crm-container > form > a.button.cancel,
+body.admin-color-sunrise .ui-widget.crm-container .crm-container button.ui-widget,
+body.admin-color-sunrise #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.admin-color-sunrise #crm-container div.crm-inline-edit .crm-edit-help,
+body.admin-color-sunrise #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	 background: #dd823b;
+	 border-color: #c36922 #ad5d1e #ad5d1e;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #ad5d1e;
+	 text-shadow: 0 -1px 1px #ad5d1e, 1px 0 1px #ad5d1e, 0 1px 1px #ad5d1e, -1px 0 1px #ad5d1e;
+}
+
+body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:hover,
+body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:focus,
+body.admin-color-sunrise #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-sunrise #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	 background: #df8a48;
+	 border-color: #ad5d1e;
+	 color: #fff;
+	 box-shadow: 0 1px 0 #ad5d1e;
+}
+
+
+

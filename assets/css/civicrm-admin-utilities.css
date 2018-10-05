@@ -28,7 +28,7 @@ body #civicrm-menu li.menumain
 	padding: 0 10px;
 	height: 32px !important;
 	outline: none;
-	border-right: 1px solid #32373c;
+	border-right: none;
 	color: #eee;
 }
 
@@ -121,4 +121,346 @@ html>body #root-menu-div div.outerbox:first-child
 {
 	margin-top: 0;
 }
+
+
+
+/*
+--------------------------------------------------------------------------------
+WordPress Admin Themes support
+--------------------------------------------------------------------------------
+*/
+
+/* light */
+body.admin-color-light #civicrm-menu
+{
+	background: #e5e5e5;
+}
+
+body.admin-color-light #civicrm-menu li.menumain
+{
+	color: #333;
+}
+
+body.admin-color-light #root-menu-div ul,
+body.admin-color-light li.menu-separator
+{
+	border-color: #ededed;
+}
+
+body.admin-color-light #root-menu-div ul,
+body.admin-color-light #root-menu-div .menu-ul li.active
+{
+	background: #fff;
+	background-color: #fff;
+}
+
+body.admin-color-light #civicrm-menu li.menumain.activetarget,
+body.admin-color-light #civicrm-menu li#crm-qsearch.activetarget
+{
+	color: #04a4cc;
+	background: #fff;
+	background-color: #fff;
+}
+
+body.admin-color-light #root-menu-div li div.menu-item,
+body.admin-color-light #civicrm-menu li a,
+body.admin-color-light #root-menu-div li a
+{
+	color: #686868;
+}
+
+body.admin-color-light #civicrm-menu li a:hover,
+body.admin-color-light #root-menu-div li a:hover,
+body.admin-color-light #root-menu-div li.active div.menu-item
+{
+	color: #04a4cc;
+}
+
+
+
+/* blue */
+body.admin-color-blue #civicrm-menu
+{
+	 background: #52accc;
+}
+
+body.admin-color-blue #civicrm-menu li.menumain
+{
+	 color: #fff;
+}
+
+body.admin-color-blue #root-menu-div ul,
+body.admin-color-blue li.menu-separator
+{
+	border-color: #3b85a0;
+}
+
+body.admin-color-blue #root-menu-div ul,
+body.admin-color-blue #root-menu-div .menu-ul li.active
+{
+	background: #4796b3;
+	background-color: #4796b3;
+}
+
+body.admin-color-blue #civicrm-menu li.menumain.activetarget,
+body.admin-color-blue #civicrm-menu li#crm-qsearch.activetarget
+{
+	color: #fff;
+	background: #4796b3;
+	background-color: #4796b3;
+}
+
+body.admin-color-blue #root-menu-div li div.menu-item,
+body.admin-color-blue #civicrm-menu li a,
+body.admin-color-blue #root-menu-div li a
+{
+	 color: #e2ecf1;
+}
+
+body.admin-color-blue #civicrm-menu li a:hover,
+body.admin-color-blue #root-menu-div li a:hover,
+body.admin-color-blue #root-menu-div li.active div.menu-item
+{
+	color: #fff;
+}
+
+
+
+/* coffee */
+body.admin-color-coffee #civicrm-menu
+{
+	background: #59524c;
+}
+
+body.admin-color-coffee #civicrm-menu li.menumain
+{
+	 color: #fff;
+}
+
+body.admin-color-coffee #root-menu-div ul,
+body.admin-color-coffee li.menu-separator
+{
+	border-color: #2f2b28;
+}
+
+body.admin-color-coffee #root-menu-div ul,
+body.admin-color-coffee #root-menu-div .menu-ul li.active
+{
+	 background: #46403c;
+	background-color: #46403c;
+}
+
+body.admin-color-coffee #civicrm-menu li.menumain.activetarget,
+body.admin-color-coffee #civicrm-menu li#crm-qsearch.activetarget
+{
+	color: #c7a589;
+	 background: #46403c;
+	background-color: #46403c;
+}
+
+body.admin-color-coffee #civicrm-menu li a,
+body.admin-color-coffee #root-menu-div li a
+{
+	color: #cdcbc9;
+}
+
+body.admin-color-coffee #civicrm-menu li a:hover,
+body.admin-color-coffee #root-menu-div li a:hover,
+body.admin-color-coffee #root-menu-div li.active div.menu-item
+{
+	color: #c7a589;
+}
+
+
+
+/* ectoplasm */
+body.admin-color-ectoplasm #civicrm-menu
+{
+	 background: #523f6d;
+}
+
+body.admin-color-ectoplasm #civicrm-menu li.menumain
+{
+	 color: #fff;
+}
+
+body.admin-color-ectoplasm #root-menu-div ul,
+body.admin-color-ectoplasm li.menu-separator
+{
+	border-color: #322645;
+}
+
+body.admin-color-ectoplasm #root-menu-div ul,
+body.admin-color-ectoplasm #root-menu-div .menu-ul li.active
+{
+	background: #413256;
+	background-color: #413256;
+}
+
+body.admin-color-ectoplasm #civicrm-menu li.menumain.activetarget,
+body.admin-color-ectoplasm #civicrm-menu li#crm-qsearch.activetarget
+{
+	color: #a3b745;
+	 background: #413256;
+	background-color: #413256;
+}
+
+body.admin-color-ectoplasm #root-menu-div li div.menu-item,
+body.admin-color-ectoplasm #civicrm-menu li a,
+body.admin-color-ectoplasm #root-menu-div li a
+{
+	 color: #cbc5d3;
+}
+
+body.admin-color-ectoplasm #civicrm-menu li a:hover,
+body.admin-color-ectoplasm #root-menu-div li a:hover,
+body.admin-color-ectoplasm #root-menu-div li.active div.menu-item
+{
+	color: #a3b745;
+}
+
+
+
+/* midnight */
+body.admin-color-midnight #civicrm-menu
+{
+	 background: #363b3f;
+}
+
+body.admin-color-midnight #civicrm-menu li.menumain
+{
+	 color: #fff;
+}
+
+body.admin-color-midnight #root-menu-div ul,
+body.admin-color-midnight li.menu-separator
+{
+	border-color: #000;
+}
+
+body.admin-color-midnight #root-menu-div ul,
+body.admin-color-midnight #root-menu-div .menu-ul li.active
+{
+	background: #26292c;
+	background-color: #26292c;
+}
+
+body.admin-color-midnight #civicrm-menu li.menumain.activetarget,
+body.admin-color-midnight #civicrm-menu li#crm-qsearch.activetarget
+{
+	color: #e14d43;
+	 background: #26292c;
+	background-color: #26292c;
+}
+
+body.admin-color-midnight #root-menu-div li div.menu-item,
+body.admin-color-midnight #civicrm-menu li a,
+body.admin-color-midnight #root-menu-div li a
+{
+	 color: #c3c4c5;
+}
+
+body.admin-color-midnight #civicrm-menu li a:hover,
+body.admin-color-midnight #root-menu-div li a:hover,
+body.admin-color-midnight #root-menu-div li.active div.menu-item
+{
+	color: #e14d43;
+}
+
+
+
+/* ocean */
+body.admin-color-ocean #civicrm-menu
+{
+	 background: #738e96;
+}
+
+body.admin-color-ocean #civicrm-menu li.menumain
+{
+	 color: #fff;
+}
+
+body.admin-color-ocean #root-menu-div ul,
+body.admin-color-ocean li.menu-separator
+{
+	border-color: #556c72;
+}
+
+body.admin-color-ocean #root-menu-div ul,
+body.admin-color-ocean #root-menu-div .menu-ul li.active
+{
+	background: #627c83;
+	background-color: #627c83;
+}
+
+body.admin-color-ocean #civicrm-menu li.menumain.activetarget,
+body.admin-color-ocean #civicrm-menu li#crm-qsearch.activetarget
+{
+	color: #9ebaa0;
+	 background: #627c83;
+	background-color: #627c83;
+}
+
+body.admin-color-ocean #root-menu-div li div.menu-item,
+body.admin-color-ocean #civicrm-menu li a,
+body.admin-color-ocean #root-menu-div li a
+{
+	 color: #d5dde0;
+}
+
+body.admin-color-ocean #civicrm-menu li a:hover,
+body.admin-color-ocean #root-menu-div li a:hover,
+body.admin-color-ocean #root-menu-div li.active div.menu-item
+{
+	color: #9ebaa0;
+}
+
+
+
+/* sunrise */
+body.admin-color-sunrise #civicrm-menu
+{
+	background: #cf4944;
+}
+
+body.admin-color-sunrise #civicrm-menu li.menumain
+{
+	 color: #fff;
+}
+
+body.admin-color-sunrise #root-menu-div ul,
+body.admin-color-sunrise li.menu-separator
+{
+	border-color: #a12c26;
+}
+
+body.admin-color-sunrise #root-menu-div ul,
+body.admin-color-sunrise #root-menu-div .menu-ul li.active
+{
+	background: #be3631;
+	background-color: #be3631;
+}
+
+body.admin-color-sunrise #civicrm-menu li.menumain.activetarget,
+body.admin-color-sunrise #civicrm-menu li#crm-qsearch.activetarget
+{
+	color: #f7e3d3;
+	background: #be3631;
+	background-color: #be3631;
+}
+
+body.admin-color-sunrise #civicrm-menu li a,
+body.admin-color-sunrise #root-menu-div li a
+{
+	color: #f1c8c7;
+}
+
+body.admin-color-sunrise #civicrm-menu li a:hover,
+body.admin-color-sunrise #root-menu-div li a:hover,
+body.admin-color-sunrise #root-menu-div li.active div.menu-item
+{
+	color: #f7e3d3;
+}
+
+
 
