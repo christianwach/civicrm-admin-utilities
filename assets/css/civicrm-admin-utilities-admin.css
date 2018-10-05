@@ -730,6 +730,7 @@ input.crm-form-entityref {
 	border: none;
 	background: transparent;
 	margin: 0 5px 0 3px;
+	font-size: 80%;
 }
 
 .crm-container #civicrm-footer .status.crm-error
