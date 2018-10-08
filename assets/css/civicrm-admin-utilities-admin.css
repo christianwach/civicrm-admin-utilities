@@ -4853,6 +4853,68 @@ jQuery UI overrides
 
 /*
 --------------------------------------------------------------------------------
+CiviCRM API v4 support
+--------------------------------------------------------------------------------
+*/
+
+#bootstrap-theme.api4-explorer-page > .row > div
+{
+	box-sizing: border-box;
+	position: relative;
+    min-height: 1px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+@media (min-width: 992px) {
+	#bootstrap-theme.api4-explorer-page > .row > div
+	{
+		float: left;
+	}
+	#bootstrap-theme.api4-explorer-page > .row > div.col-md-8
+	{
+		width: 66%;
+	}
+	#bootstrap-theme.api4-explorer-page > .row > div.col-md-4
+	{
+		width: 33%;
+	}
+	#bootstrap-theme.api4-explorer-page > .row > div.col-md-6
+	{
+		width: 50%;
+	}
+}
+
+#bootstrap-theme.api4-explorer-page .row .panel-heading
+{
+    background: #e6e6e6;
+    padding: 12px;
+}
+
+#bootstrap-theme.api4-explorer-page .row .panel-heading .form-inline
+{
+    padding-top: 12px;
+}
+
+#bootstrap-theme.api4-explorer-page .row .panel-body
+{
+    background: #fff;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+#bootstrap-theme.api4-explorer-page .row .panel-body pre
+{
+    background: #fafafa;
+    padding: 12px;
+    margin: 0;
+    border: 1px solid #aaa;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
 WordPress Admin Themes support
 --------------------------------------------------------------------------------
 */
