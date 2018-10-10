@@ -510,25 +510,25 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// show sync
 		echo '
-		<h3>' . __( 'Prettify CiviCRM', 'civicrm-admin-utilities' ) . '</h3>
+		<h3>' . __( 'CiviCRM Style Settings', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'Checking this option applies some styling tweaks that make CiviCRM look a little better.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Checking these options applies styles that make CiviCRM look better. If you only want to fix the appearance of the CiviCRM menu and keep the default CiviCRM admin styles, only check the box for "CiviCRM Menu".', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
 			<tr>
-				<th scope="row">' . __( 'Prettify CiviCRM Menu', 'civicrm-admin-utilities' ) . '</th>
+				<th scope="row">' . __( 'CiviCRM Menu', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"' . $prettify_menu . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to prettify the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to apply to the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row">' . __( 'Prettify CiviCRM Admin', 'civicrm-admin-utilities' ) . '</th>
+				<th scope="row">' . __( 'CiviCRM Admin', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_admin" id="civicrm_admin_utilities_styles_admin" value="1"' . $admin_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_admin">' . __( 'Check this to prettify CiviCRM Admin.', 'civicrm-admin-utilities' ) . '</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_admin">' . __( 'Check this to apply to CiviCRM Admin.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
