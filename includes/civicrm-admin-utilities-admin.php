@@ -220,6 +220,16 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		}
 
+		// Custom CSS Public setting may not exist
+		if ( ! $this->setting_exists( 'css_custom_public' ) ) {
+
+			// add it from defaults
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'css_custom_public', $settings['css_custom_public'] );
+			$this->settings_save();
+
+		}
+
 		// Override  CiviCRM Default CSS setting may not exist
 		if ( ! $this->setting_exists( 'css_admin' ) ) {
 
@@ -295,7 +305,8 @@ class CiviCRM_Admin_Utilities_Admin {
 		$settings['css_navigation'] = '1'; // do not load CiviCRM menu
 		$settings['css_shoreditch'] = '0'; // load Shoreditch
 		$settings['css_bootstrap'] = '0'; // load Shoreditch Bootstrap
-		$settings['css_custom'] = '0'; // load Custom Stylesheet
+		$settings['css_custom'] = '0'; // load Custom Stylesheet on front-end
+		$settings['css_custom_public'] = '0'; // load Custom Stylesheet on admin
 
 		// override CiviCRM Default in wp-admin
 		$settings['css_admin'] = '0'; // load CiviCRM Default Stylesheet
@@ -417,7 +428,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		$this->admin_form_styling_options();
 
 		// restrict stylesheets on front-end
-		$this->admin_form_restrict_stylesheets();
+		$this->admin_form_stylesheets();
 
 		// access form
 		$this->admin_form_access_options();
@@ -494,7 +505,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Render "Prettify Menu" options.
+	 * Render "CiviCRM Style Settings" options.
 	 *
 	 * @since 0.1
 	 */
@@ -510,9 +521,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// show sync
 		echo '
-		<h3>' . __( 'CiviCRM Style Settings', 'civicrm-admin-utilities' ) . '</h3>
+		<h3>' . __( 'CiviCRM Admin Appearance', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'Checking these options applies styles that make CiviCRM look better. If you only want to fix the appearance of the CiviCRM menu and keep the default CiviCRM admin styles, only check the box for "CiviCRM Menu".', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'Checking these options applies styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin styles, then check the box for "CiviCRM Menu" and leave "CiviCRM Admin" unchecked.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
@@ -541,11 +552,11 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Render "Restrict Stylesheets" options.
+	 * Render "Stylesheet Options" options.
 	 *
 	 * @since 0.4.1
 	 */
-	public function admin_form_restrict_stylesheets() {
+	public function admin_form_stylesheets() {
 
 		// init checkboxes
 		$default_css = '';
@@ -555,9 +566,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// show sync
 		echo '
-		<h3>' . __( 'Prevent CiviCRM Stylesheets from loading', 'civicrm-admin-utilities' ) . '</h3>
+		<h3>' . __( 'CiviCRM Stylesheets', 'civicrm-admin-utilities' ) . '</h3>
 
-		<p>' . __( 'This section allows you to prevent various CiviCRM stylesheets from loading on the public pages of your website. This is useful if you have created custom styles for CiviCRM in your theme, for example. By default, this plugin prevents the CiviCRM menu stylesheet from loading on the front-end, since the CiviCRM menu itself is only ever present in WordPress admin.', 'civicrm-admin-utilities' ) . '</p>
+		<p>' . __( 'This section allows you to configure how various CiviCRM stylesheets are loaded on your website. This is useful if you have created custom styles for CiviCRM in your theme, for example. By default, this plugin prevents the CiviCRM menu stylesheet from loading on the front-end, since the CiviCRM menu itself is only ever present in WordPress admin.', 'civicrm-admin-utilities' ) . '</p>
 
 		<table class="form-table">
 
@@ -570,7 +581,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			</tr>
 
 			<tr>
-				<th scope="row">' . __( 'CiviCRM menu stylesheet', 'civicrm-admin-utilities' ) . '</th>
+				<th scope="row">' . __( 'CiviCRM Menu stylesheet', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_nav" id="civicrm_admin_utilities_styles_nav" value="1"' . $navigation_css . ' />
 					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_nav">' . __( 'Check this to prevent the CiviCRM menu stylesheet from loading (civicrmNavigation.css).', 'civicrm-admin-utilities' ) . '</label>
@@ -590,7 +601,7 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Render "Restrict Custom Stylesheet" option.
+	 * Render "Custom Stylesheet" options.
 	 *
 	 * @since 0.4.1
 	 */
@@ -601,17 +612,27 @@ class CiviCRM_Admin_Utilities_Admin {
 		// bail if Shoreditch CSS is present
 		if ( $civicrm_admin_utilities->shoreditch_css_active() ) return;
 
-		// init checkbox
+		// init checkboxes
 		$custom_css = '';
 		if ( $this->setting_get( 'css_custom', '0' ) == '1' ) $custom_css = ' checked="checked"';
+		$custom_public_css = '';
+		if ( $this->setting_get( 'css_custom_public', '0' ) == '1' ) $custom_public_css = ' checked="checked"';
 
 		// define section markup
 		$section = '
 			<tr>
-				<th scope="row">' . __( 'Custom stylesheet', 'civicrm-admin-utilities' ) . '</th>
+				<th scope="row">' . __( 'Custom Stylesheet on Public Pages', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom" id="civicrm_admin_utilities_styles_custom" value="1"' . $custom_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom">' . __( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading.', 'civicrm-admin-utilities' ) . '</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom">' . __( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading on Public Pages.', 'civicrm-admin-utilities' ) . '</label>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row">' . __( 'Custom Stylesheet in CiviCRM Admin', 'civicrm-admin-utilities' ) . '</th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom_public" id="civicrm_admin_utilities_styles_custom_public" value="1"' . $custom_public_css . ' />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom_public">' . __( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading in CiviCRM Admin.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 		';
@@ -916,6 +937,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			$civicrm_admin_utilities_styles_shoreditch = '';
 			$civicrm_admin_utilities_styles_bootstrap = '';
 			$civicrm_admin_utilities_styles_custom = '';
+			$civicrm_admin_utilities_styles_custom_public = '';
 			$civicrm_admin_utilities_styles_admin = '';
 
 			// get variables
@@ -972,11 +994,18 @@ class CiviCRM_Admin_Utilities_Admin {
 				$this->setting_set( 'css_bootstrap', '0' );
 			}
 
-			// did we ask to prevent CiviCRM custom styleheet?
+			// did we ask to prevent CiviCRM custom styleheet from front-end?
 			if ( $civicrm_admin_utilities_styles_custom == '1' ) {
 				$this->setting_set( 'css_custom', '1' );
 			} else {
 				$this->setting_set( 'css_custom', '0' );
+			}
+
+			// did we ask to prevent CiviCRM custom styleheet from admin?
+			if ( $civicrm_admin_utilities_styles_custom_public == '1' ) {
+				$this->setting_set( 'css_custom_public', '1' );
+			} else {
+				$this->setting_set( 'css_custom_public', '0' );
 			}
 
 			// did we ask to override CiviCRM Default styleheet?

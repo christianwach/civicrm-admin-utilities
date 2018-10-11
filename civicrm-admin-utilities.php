@@ -380,6 +380,11 @@ class CiviCRM_Admin_Utilities {
 
 			}
 
+			// maybe disable custom stylesheet (not provided by Shoreditch)
+			if ( $this->admin->setting_get( 'css_custom_public', '0' ) == '1' ) {
+				$this->disable_custom_css();
+			}
+
 		// only on front-end
 		} else {
 
