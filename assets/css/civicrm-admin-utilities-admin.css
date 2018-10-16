@@ -2090,6 +2090,15 @@ input.crm-form-entityref {
 	padding: 0;
 }
 
+/* Find Participants dropdown needs special handling */
+#crm-participant-wrapper .ac_results li a
+{
+	white-space: normal;
+	line-height: 20px;
+}
+
+
+
 /* setup for icons */
 
 .ac_results ul li {
