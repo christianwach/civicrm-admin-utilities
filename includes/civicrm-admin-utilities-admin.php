@@ -588,9 +588,9 @@ class CiviCRM_Admin_Utilities_Admin {
 				</td>
 			</tr>
 
-			' . $this->admin_form_restrict_custom_stylesheet() . '
+			' . $this->admin_form_custom_stylesheet_options() . '
 
-			' . $this->admin_form_restrict_shoreditch_stylesheet() . '
+			' . $this->admin_form_shoreditch_stylesheet_options() . '
 
 		</table>
 
@@ -605,7 +605,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @since 0.4.1
 	 */
-	public function admin_form_restrict_custom_stylesheet() {
+	public function admin_form_custom_stylesheet_options() {
 
 		global $civicrm_admin_utilities;
 
@@ -645,11 +645,11 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Render "Restrict Shoreditch Stylesheet" option.
+	 * Render "Shoreditch Stylesheet" options.
 	 *
 	 * @since 0.4.1
 	 */
-	public function admin_form_restrict_shoreditch_stylesheet() {
+	public function admin_form_shoreditch_stylesheet_options() {
 
 		global $civicrm_admin_utilities;
 
