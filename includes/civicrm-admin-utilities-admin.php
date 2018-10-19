@@ -576,7 +576,7 @@ class CiviCRM_Admin_Utilities_Admin {
 				<th scope="row">' . __( 'Default CiviCRM stylesheet', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_default" id="civicrm_admin_utilities_styles_default" value="1"' . $default_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_default">' . __( 'Check this to prevent the default CiviCRM stylesheet from loading (civicrm.css).', 'civicrm-admin-utilities' ) . '</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_default">' . __( 'Check this to prevent the default CiviCRM stylesheet (civicrm.css) from loading on Public Pages.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
@@ -584,7 +584,7 @@ class CiviCRM_Admin_Utilities_Admin {
 				<th scope="row">' . __( 'CiviCRM Menu stylesheet', 'civicrm-admin-utilities' ) . '</th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_nav" id="civicrm_admin_utilities_styles_nav" value="1"' . $navigation_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_nav">' . __( 'Check this to prevent the CiviCRM menu stylesheet from loading (civicrmNavigation.css).', 'civicrm-admin-utilities' ) . '</label>
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_nav">' . __( 'Check this to prevent the CiviCRM menu stylesheet (civicrmNavigation.css) from loading on Public Pages.', 'civicrm-admin-utilities' ) . '</label>
 				</td>
 			</tr>
 
