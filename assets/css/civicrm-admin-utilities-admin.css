@@ -4729,6 +4729,44 @@ jQuery UI overrides
 	background: transparent;
 }
 
+#mainTabContainer
+{
+	padding: .2em;
+}
+
+#mainTabContainer ul
+{
+	padding: 0;
+	margin: 0;
+}
+
+#mainTabContainer ul:after
+{
+    clear: both;
+}
+#mainTabContainer ul:before,
+#mainTabContainer ul:after
+{
+    content: "";
+    display: table;
+    border-collapse: collapse;
+}
+
+#mainTabContainer ul li
+{
+	display: inline-block;
+	margin-top: 1px;
+	margin-bottom: -1px;
+}
+
+#mainTabContainer ul li a
+{
+	color: #212121;
+	text-decoration: none;
+	padding: 8px 9px;
+	display: block;
+}
+
 #crm-container .ui-tabs .ui-tabs-nav
 {
 	border-radius: 0;
