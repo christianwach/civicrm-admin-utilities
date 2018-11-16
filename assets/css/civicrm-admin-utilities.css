@@ -123,6 +123,11 @@ html>body #root-menu-div div.outerbox:first-child
 	margin-top: 0;
 }
 
+body #civicrm-menu .crm-logo-sm
+{
+	vertical-align: text-bottom;
+}
+
 
 
 /*
