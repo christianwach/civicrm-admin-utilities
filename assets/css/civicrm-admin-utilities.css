@@ -18,7 +18,7 @@ CiviCRM admin menu style overrides
 
 body #civicrm-menu
 {
-	height: 32px;
+	height: auto;
 	background: #23282d;
 }
 
@@ -109,7 +109,8 @@ body #root-menu-div div.menu-item
 
 body #civicrm-menu li#crm-qsearch
 {
-	height: 30px;
+	height: 31px !important;
+	padding-top: 0;
 }
 
 body #civicrm-menu li#crm-qsearch > form
