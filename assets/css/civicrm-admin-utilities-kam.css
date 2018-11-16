@@ -23,6 +23,71 @@ body #civicrm-menu-nav
 	z-index: 100000;
 }
 
+/* Remove padding on search */
+.sm-civicrm li#crm-qsearch > a {
+	padding: 2px 4px;
+}
+
+.sm-civicrm li#crm-qsearch > a input
+{
+	height: 17px;
+}
+
+/* All top-level items need to be 32px tall */
+.sm-civicrm > li > a
+{
+	height: 32px;
+	line-height: 20px;
+}
+
+/* Search dropdown can be a little wider */
+.sm-civicrm li#crm-qsearch > ul
+{
+	min-width: 12em !important;
+}
+
+.sm-civicrm li#crm-qsearch > ul li
+{
+	padding: 3px 0;
+}
+
+#civicrm-menu.sm-civicrm .crm-logo-sm
+{
+	vertical-align: text-bottom;
+}
+
+/* Don't underline */
+#civicrm-menu.sm-civicrm a
+{
+    text-decoration: none;
+}
+
+/* Remove padding from top of sub-menus */
+#civicrm-menu.sm-civicrm ul > li:first-child a
+{
+	margin-top: 0;
+}
+
+/* Remove padding from bottom of sub-menus */
+#civicrm-menu.sm-civicrm ul li:last-child a
+{
+	margin-bottom: 0;
+}
+
+/* Remove padding from separator */
+#civicrm-menu.sm-civicrm li.menu-separator
+{
+	margin: 0;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Responsiveness amends
+--------------------------------------------------------------------------------
+*/
+
 @media (max-width: 768px) {
 
 	body #civicrm-menu-nav
@@ -62,59 +127,6 @@ body #civicrm-menu-nav
 		vertical-align: middle;
     }
 
-}
-
-/* Remove padding on search */
-.sm-civicrm li#crm-qsearch > a {
-	padding: 2px 4px;
-}
-
-.sm-civicrm li#crm-qsearch > a input
-{
-	height: 17px;
-}
-
-/* All top-level items need to be 32px */
-/* .sm-civicrm > li, */
-.sm-civicrm > li > a
-{
-	height: 32px;
-	line-height: 20px;
-}
-
-/* Search dropdown can be a little wider */
-.sm-civicrm li#crm-qsearch > ul
-{
-	min-width: 12em !important;
-}
-
-.sm-civicrm li#crm-qsearch > ul li
-{
-	padding: 3px 0;
-}
-
-/* Don't underline */
-#civicrm-menu.sm-civicrm a
-{
-    text-decoration: none;
-}
-
-/* Remove padding from top of sub-menus */
-#civicrm-menu.sm-civicrm ul > li:first-child a
-{
-	margin-top: 0;
-}
-
-/* Remove padding from bottom of sub-menus */
-#civicrm-menu.sm-civicrm ul li:last-child a
-{
-	margin-bottom: 0;
-}
-
-/* Remove padding from separator */
-#civicrm-menu.sm-civicrm li.menu-separator
-{
-	margin: 0;
 }
 
 
