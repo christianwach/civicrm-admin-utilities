@@ -567,10 +567,15 @@ class CiviCRM_Admin_Utilities {
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return $kam;
 
-		// get a KAM-registered URL
+		// get original KAM-registered URL
 		$url = $this->resource_get_url( 'uk.squiffle.kam', 'js/sm-civicrm.js' );
 
-		// kick out if not enqueued
+		// if not present, check for newer JS file
+		if ( $url === false ) {
+			$url = $this->resource_get_url( 'uk.squiffle.kam', 'js/crm.menubar.js' );
+		}
+
+		// kick out if neither is enqueued
 		if ( $url === false ) return $kam;
 
 		// KAM is present
