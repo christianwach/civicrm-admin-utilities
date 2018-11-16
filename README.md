@@ -13,6 +13,10 @@ Please note: this is the development repository for *CiviCRM Admin Utilities*. I
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
 
+#### CiviCRM Admin Theme ####
+
+Version 0.5 introduces a new theme for CiviCRM admin screens. It can be enabled on the CiviCRM Admin Utilities settings page. Feedback is welcome - please [open an issue](https://github.com/christianwach/civicrm-admin-utilities/issues) if you find any bugs or have suggestions for improvements.
+
 #### Notes ####
 
 This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.6*. For versions of CiviCRM prior to 4.6, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in CiviCRM file. Please refer to the each repo for further instructions.
