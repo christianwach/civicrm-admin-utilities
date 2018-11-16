@@ -610,7 +610,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		global $civicrm_admin_utilities;
 
 		// bail if Shoreditch CSS is present
-		if ( $civicrm_admin_utilities->shoreditch_css_active() ) return;
+		if ( $civicrm_admin_utilities->shoreditch_is_active() ) return;
 
 		// init checkboxes
 		$custom_css = '';
@@ -654,7 +654,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		global $civicrm_admin_utilities;
 
 		// bail if no Shoreditch CSS
-		if ( ! $civicrm_admin_utilities->shoreditch_css_active() ) return;
+		if ( ! $civicrm_admin_utilities->shoreditch_is_active() ) return;
 
 		// init checkbox
 		$shoreditch_css = '';
