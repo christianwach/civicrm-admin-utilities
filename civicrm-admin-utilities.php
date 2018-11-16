@@ -567,6 +567,9 @@ class CiviCRM_Admin_Utilities {
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return $kam;
 
+		// kick out if no KAM function
+		if ( ! function_exists( 'kam_civicrm_coreResourceList' ) ) return $kam;
+
 		// get original KAM-registered URL
 		$url = $this->resource_get_url( 'uk.squiffle.kam', 'js/sm-civicrm.js' );
 
