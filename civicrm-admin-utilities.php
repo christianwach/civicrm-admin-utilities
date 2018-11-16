@@ -314,6 +314,11 @@ class CiviCRM_Admin_Utilities {
 
 			}
 
+			// use specific CSS file for KAM if active
+			if ( $this->kam_is_active() ) {
+				$css = 'civicrm-admin-utilities-kam.css';
+			}
+
 			// add menu stylesheet
 			wp_enqueue_style(
 				'civicrm_admin_utilities_admin_tweaks',
@@ -439,17 +444,44 @@ class CiviCRM_Admin_Utilities {
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
+		// get the resource URL
+		$url = $this->get_resource_url( $extension, $file );
+
+		// kick out if not enqueued
+		if ( $url === false ) return;
+
+		// set to disabled
+		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
+
+	}
+
+
+
+	/**
+	 * Get the URL of a resource if it is enqueued by CiviCRM.
+	 *
+	 * @since 0.4.3
+	 *
+	 * @param str $extension The name of the extension e.g. 'org.civicrm.shoreditch'. Default is CiviCRM core.
+	 * @param str $file The relative path to the resource. Default is CiviCRM core stylesheet.
+	 * @return bool|str $url The URL if the resource is enqueued, false otherwise.
+	 */
+	public function get_resource_url( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
+
+		// kick out if no CiviCRM
+		if ( ! $this->admin->is_active() ) return false;
+
 		// get registered URL
 		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
 
 		// get registration data from region
-		$registration = CRM_Core_Region::instance('html-header')->get( $url );
+		$registration = CRM_Core_Region::instance( 'html-header' )->get( $url );
 
 		// bail if not registered
-		if ( empty ( $registration ) ) return;
+		if ( empty( $registration ) ) return false;
 
-		// set to disabled
-		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
+		// is enqueued
+		return $url;
 
 	}
 
@@ -500,7 +532,7 @@ class CiviCRM_Admin_Utilities {
 		$shoreditch = false;
 
 		// init CiviCRM
-		if ( ! civi_wp()->initialize() ) return $shoreditch;
+		if ( ! $this->admin->is_active() ) return $shoreditch;
 
 		// get the current Custom CSS URL
 		$config = CRM_Core_Config::singleton();
@@ -515,6 +547,37 @@ class CiviCRM_Admin_Utilities {
 
 		// --<
 		return $shoreditch;
+
+	}
+
+
+
+	/**
+	 * Determine if the Keyboard Accessible Menu Extension is being used.
+	 *
+	 * @since 0.4.3
+	 *
+	 * @return bool $kam True if KAM Extension is active, false otherwise.
+	 */
+	public function kam_is_active() {
+
+		// init return
+		$kam = false;
+
+		// kick out if no CiviCRM
+		if ( ! $this->admin->is_active() ) return $kam;
+
+		// get a KAM-registered URL
+		$url = $this->get_resource_url( 'uk.squiffle.kam', 'js/sm-civicrm.js' );
+
+		// kick out if not enqueued
+		if ( $url === false ) return $kam;
+
+		// KAM is present
+		$kam = true;
+
+		// --<
+		return $kam;
 
 	}
 
