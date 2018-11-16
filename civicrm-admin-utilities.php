@@ -179,7 +179,7 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'init', array( $this, 'civicrm_only_on_main_site_please' ) );
 
 		// style tweaks for CiviCRM
-		add_action( 'admin_print_styles', array( $this, 'enqueue_admin_scripts' ) );
+		add_action( 'admin_print_styles', array( $this, 'admin_scripts_enqueue' ) );
 
 		// add admin bar item
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_add' ), 2000 );
@@ -189,8 +189,8 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
 
 		// hook in just before CiviCRM does to disable resources
-		add_action( 'admin_head', array( $this, 'disable_resources' ), 9 );
-		add_action( 'wp_head', array( $this, 'disable_resources' ), 9 );
+		add_action( 'admin_head', array( $this, 'resources_disable' ), 9 );
+		add_action( 'wp_head', array( $this, 'resources_disable' ), 9 );
 
 		// if the debugging flag is set
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
@@ -296,7 +296,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.1
 	 */
-	public function enqueue_admin_scripts() {
+	public function admin_scripts_enqueue() {
 
 		// bail if disabled
 		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '1' ) {
@@ -305,7 +305,7 @@ class CiviCRM_Admin_Utilities {
 			$css = 'civicrm-admin-utilities.css';
 
 			// use specific CSS file for Shoreditch if active
-			if ( $this->shoreditch_css_active() ) {
+			if ( $this->shoreditch_is_active() ) {
 
 				// but not when prettifying CiviCRM admin
 				if ( $this->admin->setting_get( 'css_admin', '0' ) == '0' ) {
@@ -364,7 +364,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.4.1
 	 */
-	public function disable_resources() {
+	public function resources_disable() {
 
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
@@ -376,18 +376,18 @@ class CiviCRM_Admin_Utilities {
 			if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
 
 				// disable core stylesheet
-				$this->disable_resource( 'civicrm', 'css/civicrm.css' );
+				$this->resource_disable( 'civicrm', 'css/civicrm.css' );
 
 				// also disable Shoreditch if present
-				if ( $this->shoreditch_css_active() ) {
-					$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+				if ( $this->shoreditch_is_active() ) {
+					$this->resource_disable( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
 				}
 
 			}
 
 			// maybe disable custom stylesheet (not provided by Shoreditch)
 			if ( $this->admin->setting_get( 'css_custom_public', '0' ) == '1' ) {
-				$this->disable_custom_css();
+				$this->custom_css_disable();
 			}
 
 		// only on front-end
@@ -395,32 +395,32 @@ class CiviCRM_Admin_Utilities {
 
 			// maybe disable core stylesheet
 			if ( $this->admin->setting_get( 'css_default', '0' ) == '1' ) {
-				$this->disable_resource( 'civicrm', 'css/civicrm.css' );
+				$this->resource_disable( 'civicrm', 'css/civicrm.css' );
 			}
 
 			// maybe disable navigation stylesheet (there's no menu on the front-end)
 			if ( $this->admin->setting_get( 'css_navigation', '0' ) == '1' ) {
-				$this->disable_resource( 'civicrm', 'css/civicrmNavigation.css' );
+				$this->resource_disable( 'civicrm', 'css/civicrmNavigation.css' );
 			}
 
 			// if Shoreditch present
-			if ( $this->shoreditch_css_active() ) {
+			if ( $this->shoreditch_is_active() ) {
 
 				// maybe disable Shoreditch stylesheet
 				if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
-					$this->disable_resource( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
+					$this->resource_disable( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
 				}
 
 				// maybe disable Shoreditch Bootstrap stylesheet
 				if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
-					$this->disable_resource( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
+					$this->resource_disable( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
 				}
 
 			} else {
 
 				// maybe disable custom stylesheet (not provided by Shoreditch)
 				if ( $this->admin->setting_get( 'css_custom', '0' ) == '1' ) {
-					$this->disable_custom_css();
+					$this->custom_css_disable();
 				}
 
 			}
@@ -439,13 +439,13 @@ class CiviCRM_Admin_Utilities {
 	 * @param str $extension The name of the extension e.g. 'org.civicrm.shoreditch'. Default is CiviCRM core.
 	 * @param str $file The relative path to the resource. Default is CiviCRM core stylesheet.
 	 */
-	public function disable_resource( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
+	public function resource_disable( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
 		// get the resource URL
-		$url = $this->get_resource_url( $extension, $file );
+		$url = $this->resource_get_url( $extension, $file );
 
 		// kick out if not enqueued
 		if ( $url === false ) return;
@@ -466,7 +466,7 @@ class CiviCRM_Admin_Utilities {
 	 * @param str $file The relative path to the resource. Default is CiviCRM core stylesheet.
 	 * @return bool|str $url The URL if the resource is enqueued, false otherwise.
 	 */
-	public function get_resource_url( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
+	public function resource_get_url( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return false;
@@ -492,7 +492,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.4.2
 	 */
-	public function disable_custom_css() {
+	public function custom_css_disable() {
 
 		// kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
@@ -526,7 +526,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @return bool $shoreditch True if Shoreditch CSS file is used, false otherwise.
 	 */
-	public function shoreditch_css_active() {
+	public function shoreditch_is_active() {
 
 		// assume not
 		$shoreditch = false;
@@ -568,7 +568,7 @@ class CiviCRM_Admin_Utilities {
 		if ( ! $this->admin->is_active() ) return $kam;
 
 		// get a KAM-registered URL
-		$url = $this->get_resource_url( 'uk.squiffle.kam', 'js/sm-civicrm.js' );
+		$url = $this->resource_get_url( 'uk.squiffle.kam', 'js/sm-civicrm.js' );
 
 		// kick out if not enqueued
 		if ( $url === false ) return $kam;
