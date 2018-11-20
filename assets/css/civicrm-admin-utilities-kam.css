@@ -142,10 +142,23 @@ Responsiveness amends
 		vertical-align: middle;
     }
 
+	/* Remove box-shadow on sub-menus */
+	#civicrm-menu.sm-civicrm ul
+	{
+		box-shadow: none;
+	}
+
+	/* Add box-shadow on sub-sub-menus */
+	#civicrm-menu.sm-civicrm ul ul
+	{
+		box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+	}
+
 }
 
 
 
+/* WordPress admin menu is not fixed below 600px */
 @media screen and (max-width: 600px) {
 
 	body #civicrm-menu-nav
@@ -181,11 +194,12 @@ body #civicrm-menu.sm-civicrm a
 
 body #civicrm-menu .crm-quickSearchField,
 body #civicrm-menu.sm-civicrm ul li a,
+body #civicrm-menu.sm-civicrm li .sub-arrow:before,
+body #civicrm-menu.sm-civicrm li a.highlighted .sub-arrow:before,
 body #civicrm-menu.sm-civicrm li li .sub-arrow:before,
 body #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #b4b9be;
-	color: rgba(240,245,250,0.7);
 }
 
 body #civicrm-menu .crm-quickSearchField:hover,
@@ -240,7 +254,8 @@ body.admin-color-light #civicrm-menu.sm-civicrm a
 body.admin-color-light #civicrm-menu .crm-quickSearchField,
 body.admin-color-light #civicrm-menu.sm-civicrm ul li a,
 body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-light #civicrm-menu.sm-civicrm li a.highlighted .sub-arrow:before
 {
 	color: #686868;
 }
