@@ -319,6 +319,7 @@ class CiviCRM_Admin_Utilities {
 				$css = 'civicrm-admin-utilities-kam.css';
 			}
 
+			///*
 			// add menu stylesheet
 			wp_enqueue_style(
 				'civicrm_admin_utilities_admin_tweaks',
@@ -327,6 +328,7 @@ class CiviCRM_Admin_Utilities {
 				CIVICRM_ADMIN_UTILITIES_VERSION, // version
 				'all' // media
 			);
+			//*/
 
 		}
 
@@ -569,17 +571,6 @@ class CiviCRM_Admin_Utilities {
 
 		// kick out if no KAM function
 		if ( ! function_exists( 'kam_civicrm_coreResourceList' ) ) return $kam;
-
-		// get original KAM-registered URL
-		$url = $this->resource_get_url( 'uk.squiffle.kam', 'js/sm-civicrm.js' );
-
-		// if not present, check for newer JS file
-		if ( $url === false ) {
-			$url = $this->resource_get_url( 'uk.squiffle.kam', 'js/crm.menubar.js' );
-		}
-
-		// kick out if neither is enqueued
-		if ( $url === false ) return $kam;
 
 		// KAM is present
 		$kam = true;
