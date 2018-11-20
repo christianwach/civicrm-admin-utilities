@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities package.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.5.2\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.5.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
-"POT-Creation-Date: 2018-11-16 15:53:41+00:00\n"
+"POT-Creation-Date: 2018-11-20 11:23:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,59 +12,59 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: civicrm-admin-utilities.php:766
+#: civicrm-admin-utilities.php:757
 msgid "CiviCRM"
 msgstr ""
 
-#: civicrm-admin-utilities.php:774
+#: civicrm-admin-utilities.php:765
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:782
+#: civicrm-admin-utilities.php:773
 msgid "Advanced Search"
 msgstr ""
 
-#: civicrm-admin-utilities.php:790
+#: civicrm-admin-utilities.php:781
 msgid "Manage Groups"
 msgstr ""
 
-#: civicrm-admin-utilities.php:800
+#: civicrm-admin-utilities.php:791
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:812
+#: civicrm-admin-utilities.php:803
 msgid "Membership Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:824
+#: civicrm-admin-utilities.php:815
 msgid "Events Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:836
+#: civicrm-admin-utilities.php:827
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: civicrm-admin-utilities.php:848
+#: civicrm-admin-utilities.php:839
 msgid "Report Listing"
 msgstr ""
 
-#: civicrm-admin-utilities.php:860
+#: civicrm-admin-utilities.php:851
 msgid "Cases Dashboard"
 msgstr ""
 
-#: civicrm-admin-utilities.php:871
+#: civicrm-admin-utilities.php:862
 msgid "Admin Console"
 msgstr ""
 
-#: civicrm-admin-utilities.php:1021
+#: civicrm-admin-utilities.php:1012
 msgid "WordPress Access Control"
 msgstr ""
 
-#: civicrm-admin-utilities.php:1153 civicrm-admin-utilities.php:1159
+#: civicrm-admin-utilities.php:1144 civicrm-admin-utilities.php:1150
 msgid "Settings"
 msgstr ""
 
-#: civicrm-admin-utilities.php:1164
+#: civicrm-admin-utilities.php:1155
 msgid "Donate!"
 msgstr ""
 
