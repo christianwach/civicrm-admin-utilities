@@ -60,7 +60,7 @@ body #civicrm-menu-nav
 /* Don't underline */
 #civicrm-menu.sm-civicrm a
 {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 /* Match box-shadow of sub-menus to WordPress default setting */
@@ -91,6 +91,11 @@ body #civicrm-menu-nav
 #civicrm-menu.sm-civicrm li li .sub-arrow:before
 {
 	margin-top: 2px;
+}
+
+#civicrm-menu.sm-civicrm i
+{
+	margin-right: 1px;
 }
 
 
@@ -140,7 +145,7 @@ Responsiveness amends
 	{
 		display: inline-block;
 		vertical-align: middle;
-    }
+	}
 
 	/* Remove box-shadow on sub-menus */
 	#civicrm-menu.sm-civicrm ul
