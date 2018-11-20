@@ -65,6 +65,10 @@ If you are upgrading from 0.3.3, therefore, you may need to review the settings 
 
 == Changelog ==
 
+= 0.5.3 =
+
+* Better detection of KAM extension
+
 = 0.5.2 =
 
 * Prevent fatal error when KAM extension not present
