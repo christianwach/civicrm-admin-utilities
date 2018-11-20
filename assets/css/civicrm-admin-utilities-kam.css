@@ -24,7 +24,8 @@ body #civicrm-menu-nav
 }
 
 /* Remove padding on search */
-.sm-civicrm li#crm-qsearch > a {
+.sm-civicrm li#crm-qsearch > a
+{
 	padding: 2px 4px;
 }
 
@@ -62,6 +63,12 @@ body #civicrm-menu-nav
     text-decoration: none;
 }
 
+/* Match box-shadow of sub-menus to WordPress default setting */
+#civicrm-menu.sm-civicrm ul
+{
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
 /* Remove padding from top of sub-menus */
 #civicrm-menu.sm-civicrm ul > li:first-child a
 {
@@ -78,6 +85,12 @@ body #civicrm-menu-nav
 #civicrm-menu.sm-civicrm li.menu-separator
 {
 	margin: 0;
+}
+
+/* Align sub-arrow */
+#civicrm-menu.sm-civicrm li li .sub-arrow:before
+{
+	margin-top: 2px;
 }
 
 
@@ -107,8 +120,10 @@ Responsiveness amends
 
 	body #civicrm-menu
 	{
-		position: absolute !important;
-		margin-top: 46px;
+		position: relative !important;
+		margin-top: 0;
+		overflow-y: scroll;
+		max-height: 400px;
 	}
 
 	#civicrm-menu.sm-civicrm > li > a
@@ -126,6 +141,17 @@ Responsiveness amends
 		display: inline-block;
 		vertical-align: middle;
     }
+
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+	body #civicrm-menu-nav
+	{
+		position: absolute;
+	}
 
 }
 
@@ -155,7 +181,8 @@ body #civicrm-menu.sm-civicrm a
 
 body #civicrm-menu .crm-quickSearchField,
 body #civicrm-menu.sm-civicrm ul li a,
-body #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #b4b9be;
 	color: rgba(240,245,250,0.7);
@@ -163,7 +190,8 @@ body #civicrm-menu.sm-civicrm li li .sub-arrow::after
 
 body #civicrm-menu .crm-quickSearchField:hover,
 body #civicrm-menu.sm-civicrm ul li a:hover,
-body #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #00b9eb;
 }
@@ -177,9 +205,11 @@ body #civicrm-menu.sm-civicrm li a:hover
 	background-color: #32373c;
 }
 
-body #civicrm-menu.sm-civicrm li.menu-separator
+body #civicrm-menu.sm-civicrm li.menu-separator,
+body #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #000;
+	border-width: 1px;
 }
 
 
@@ -209,14 +239,16 @@ body.admin-color-light #civicrm-menu.sm-civicrm a
 
 body.admin-color-light #civicrm-menu .crm-quickSearchField,
 body.admin-color-light #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #686868;
 }
 
 body.admin-color-light #civicrm-menu .crm-quickSearchField:hover,
 body.admin-color-light #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-light #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body.admin-color-light #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-light #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #04a4cc;
 }
@@ -231,7 +263,8 @@ body.admin-color-light #civicrm-menu.sm-civicrm li a:hover
 	background-color: #fff;
 }
 
-body.admin-color-light #civicrm-menu.sm-civicrm li.menu-separator
+body.admin-color-light #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-light #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #ededed;
 }
@@ -257,14 +290,16 @@ body.admin-color-blue #civicrm-menu.sm-civicrm a
 
 body.admin-color-blue #civicrm-menu .crm-quickSearchField,
 body.admin-color-blue #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-blue #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body.admin-color-blue #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-blue #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #e2ecf1;
 }
 
 body.admin-color-blue #civicrm-menu .crm-quickSearchField:hover,
 body.admin-color-blue #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-blue #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body.admin-color-blue #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-blue #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #fff;
 }
@@ -279,7 +314,8 @@ body.admin-color-blue #civicrm-menu.sm-civicrm li a:hover
 	background-color: #4796b3;
 }
 
-body.admin-color-blue #civicrm-menu.sm-civicrm li.menu-separator
+body.admin-color-blue #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-blue #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #3b85a0;
 }
@@ -305,14 +341,16 @@ body.admin-color-coffee #civicrm-menu.sm-civicrm a
 
 body.admin-color-coffee #civicrm-menu .crm-quickSearchField,
 body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-coffee #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body.admin-color-coffee #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-coffee #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #cdcbc9;
 }
 
 body.admin-color-coffee #civicrm-menu .crm-quickSearchField:hover,
 body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #c7a589;
 }
@@ -327,7 +365,8 @@ body.admin-color-coffee #civicrm-menu.sm-civicrm li a:hover
 	background-color: #46403c;
 }
 
-body.admin-color-coffee #civicrm-menu.sm-civicrm li.menu-separator
+body.admin-color-coffee #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-coffee #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #2f2b28;
 }
@@ -353,14 +392,16 @@ body.admin-color-ectoplasm #civicrm-menu.sm-civicrm a
 
 body.admin-color-ectoplasm #civicrm-menu .crm-quickSearchField,
 body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #cbc5d3;
 }
 
 body.admin-color-ectoplasm #civicrm-menu .crm-quickSearchField:hover,
 body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #a3b745;
 }
@@ -375,7 +416,8 @@ body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li a:hover
 	background-color: #413256;
 }
 
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li.menu-separator
+body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #2f2b28;
 }
@@ -401,14 +443,16 @@ body.admin-color-midnight #civicrm-menu.sm-civicrm a
 
 body.admin-color-midnight #civicrm-menu .crm-quickSearchField,
 body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-midnight #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body.admin-color-midnight #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-midnight #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #cbc5d3;
 }
 
 body.admin-color-midnight #civicrm-menu .crm-quickSearchField:hover,
 body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #e14d43;
 }
@@ -423,7 +467,8 @@ body.admin-color-midnight #civicrm-menu.sm-civicrm li a:hover
 	background-color: #26292c;
 }
 
-body.admin-color-midnight #civicrm-menu.sm-civicrm li.menu-separator
+body.admin-color-midnight #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-midnight #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #000;
 }
@@ -449,14 +494,16 @@ body.admin-color-ocean #civicrm-menu.sm-civicrm a
 
 body.admin-color-ocean #civicrm-menu .crm-quickSearchField,
 body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-ocean #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body.admin-color-ocean #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-ocean #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #d5dde0;
 }
 
 body.admin-color-ocean #civicrm-menu .crm-quickSearchField:hover,
 body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #9ebaa0;
 }
@@ -471,7 +518,8 @@ body.admin-color-ocean #civicrm-menu.sm-civicrm li a:hover
 	background-color: #627c83;
 }
 
-body.admin-color-ocean #civicrm-menu.sm-civicrm li.menu-separator
+body.admin-color-ocean #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-ocean #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #556c72;
 }
@@ -497,14 +545,16 @@ body.admin-color-sunrise #civicrm-menu.sm-civicrm a
 
 body.admin-color-sunrise #civicrm-menu .crm-quickSearchField,
 body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li li .sub-arrow::after
+body.admin-color-sunrise #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-sunrise #civicrm-menu.sm-civicrm li li .sub-arrow:after
 {
 	color: #f1c8c7;
 }
 
 body.admin-color-sunrise #civicrm-menu .crm-quickSearchField:hover,
 body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow::after
+body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
 {
 	color: #f7e3d3;
 }
@@ -519,7 +569,8 @@ body.admin-color-sunrise #civicrm-menu.sm-civicrm li a:hover
 	background-color: #be3631;
 }
 
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li.menu-separator
+body.admin-color-sunrise #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-sunrise #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #a12c26;
 }
