@@ -14,24 +14,24 @@ Depends: CiviCRM
 
 
 
-// set our version here
+// Set our version here
 define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.5.3' );
 
-// trigger logging of 'civicrm_pre' and 'civicrm_post'
+// Trigger logging of 'civicrm_pre' and 'civicrm_post'
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_DEBUG', false );
 }
 
-// store reference to this file
+// Store reference to this file
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_FILE' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_FILE', __FILE__ );
 }
 
-// store URL to this plugin's directory
+// Store URL to this plugin's directory
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_URL' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_URL', plugin_dir_url( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
-// store PATH to this plugin's directory
+// Store PATH to this plugin's directory
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_PATH', plugin_dir_path( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
@@ -65,10 +65,10 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function __construct() {
 
-		// enable translation
+		// Enable translation
 		add_action( 'plugins_loaded', array( $this, 'enable_translation' ) );
 
-		// initialise
+		// Initialise
 		add_action( 'plugins_loaded', array( $this, 'initialise' ) );
 
 	}
@@ -82,11 +82,11 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function enable_translation() {
 
-		// enable translation
+		// Enable translation
 		load_plugin_textdomain(
-			'civicrm-admin-utilities', // unique name
-			false, // deprecated argument
-			dirname( plugin_basename( __FILE__ ) ) . '/languages/' // relative path to files
+			'civicrm-admin-utilities', // Unique name
+			false, // Deprecated argument
+			dirname( plugin_basename( __FILE__ ) ) . '/languages/' // Relative path to files
 		);
 
 	}
@@ -100,17 +100,17 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function initialise() {
 
-		// init only when CiviCRM is fully installed
+		// Init only when CiviCRM is fully installed
 		if ( ! defined( 'CIVICRM_INSTALLED' ) ) return;
 		if ( ! CIVICRM_INSTALLED ) return;
 
-		// include files
+		// Include files
 		$this->include_files();
 
-		// set up objects and references
+		// Set up objects and references
 		$this->setup_objects();
 
-		// finally, register hooks
+		// Finally, register hooks
 		$this->register_hooks();
 
 	}
@@ -124,14 +124,14 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function include_files() {
 
-		// only do this once
+		// Only do this once
 		static $done;
 		if ( isset( $done ) AND $done === true ) return;
 
-		// load our Admin utility class
+		// Load our Admin utility class
 		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-admin.php' );
 
-		// we're done
+		// We're done
 		$done = true;
 
 	}
@@ -145,14 +145,14 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function setup_objects() {
 
-		// only do this once
+		// Only do this once
 		static $done;
 		if ( isset( $done ) AND $done === true ) return;
 
-		// initialise objects
+		// Initialise objects
 		$this->admin = new CiviCRM_Admin_Utilities_Admin();
 
-		// we're done
+		// We're done
 		$done = true;
 
 	}
@@ -166,36 +166,36 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function register_hooks() {
 
-		// bail if CiviCRM plugin is not present
+		// Bail if CiviCRM plugin is not present
 		if ( ! function_exists( 'civi_wp' ) ) return;
 
-		// kill CiviCRM shortcode button
+		// Kill CiviCRM shortcode button
 		add_action( 'admin_head', array( $this, 'kill_civi_button' ) );
 
-		// register template directory for menu amends
+		// Register template directory for menu amends
 		add_action( 'civicrm_config', array( $this, 'register_menu_directory' ), 10, 1 );
 
-		// run after the CiviCRM menu hook has been registered
+		// Run after the CiviCRM menu hook has been registered
 		add_action( 'init', array( $this, 'civicrm_only_on_main_site_please' ) );
 
-		// style tweaks for CiviCRM
+		// Style tweaks for CiviCRM
 		add_action( 'admin_print_styles', array( $this, 'admin_scripts_enqueue' ) );
 
-		// add admin bar item
+		// Add admin bar item
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_add' ), 2000 );
 
-		// filter the WordPress Permissions Form
+		// Filter the WordPress Permissions Form
 		add_action( 'civicrm_config', array( $this, 'register_access_directory' ), 10, 1 );
 		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
 
-		// hook in just before CiviCRM does to disable resources
+		// Hook in just before CiviCRM does to disable resources
 		add_action( 'admin_head', array( $this, 'resources_disable' ), 9 );
 		add_action( 'wp_head', array( $this, 'resources_disable' ), 9 );
 
-		// if the debugging flag is set
+		// If the debugging flag is set
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
-			// log pre and post database operations
+			// Log pre and post database operations
 			add_action( 'civicrm_pre', array( $this, 'trace_pre' ), 10, 4 );
 			add_action( 'civicrm_post', array( $this, 'trace_post' ), 10, 4 );
 			add_action( 'civicrm_postProcess', array( $this, 'trace_postProcess' ), 10, 2 );
@@ -226,29 +226,29 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function register_menu_directory( &$config ) {
 
-		// bail if disabled
+		// Bail if disabled
 		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '0' ) return;
 
-		// kick out if no CiviCRM
+		// Kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
-		// get template instance
+		// Get template instance
 		$template = CRM_Core_Smarty::singleton();
 
-		// get current version
+		// Get current version
 		$version = CRM_Utils_System::version();
 
-		// define our custom path based on CiviCRM version
+		// Define our custom path based on CiviCRM version
 		if ( version_compare( $version, '5.5', '>=' ) ) {
 			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_nav_template';
 		} else {
 			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
 		}
 
-		// add our custom template directory
+		// Add our custom template directory
 		$template->addTemplateDir( $custom_path );
 
-		// register template directories
+		// Register template directories
 		$template_include_path = $custom_path . PATH_SEPARATOR . get_include_path();
 		set_include_path( $template_include_path );
 
@@ -265,25 +265,25 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function register_access_directory( &$config ) {
 
-		// bail if disabled
+		// Bail if disabled
 		if ( $this->admin->setting_get( 'prettify_access', '0' ) == '0' ) return;
 
-		// kick out if no CiviCRM
+		// Kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
-		// bail if CiviCRM has been fixed
+		// Bail if CiviCRM has been fixed
 		if ( $this->admin->access_form_fixed() ) return;
 
-		// get template instance
+		// Get template instance
 		$template = CRM_Core_Smarty::singleton();
 
-		// define our custom path
+		// Define our custom path
 		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_access_templates';
 
-		// add our custom template directory
+		// Add our custom template directory
 		$template->addTemplateDir( $custom_path );
 
-		// register template directories
+		// Register template directories
 		$template_include_path = $custom_path . PATH_SEPARATOR . get_include_path();
 		set_include_path( $template_include_path );
 
@@ -298,48 +298,48 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function admin_scripts_enqueue() {
 
-		// bail if disabled
+		// Bail if disabled
 		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '1' ) {
 
-			// set default CSS file
+			// Set default CSS file
 			$css = 'civicrm-admin-utilities.css';
 
-			// use specific CSS file for Shoreditch if active
+			// Use specific CSS file for Shoreditch if active
 			if ( $this->shoreditch_is_active() ) {
 
-				// but not when prettifying CiviCRM admin
+				// But not when prettifying CiviCRM admin
 				if ( $this->admin->setting_get( 'css_admin', '0' ) == '0' ) {
 					$css = 'civicrm-admin-utilities-shoreditch.css';
 				}
 
 			}
 
-			// use specific CSS file for KAM if active
+			// Use specific CSS file for KAM if active
 			if ( $this->kam_is_active() ) {
 				$css = 'civicrm-admin-utilities-kam.css';
 			}
 
-			// add menu stylesheet
+			// Add menu stylesheet
 			wp_enqueue_style(
 				'civicrm_admin_utilities_admin_tweaks',
 				plugins_url( 'assets/css/' . $css, CIVICRM_ADMIN_UTILITIES_FILE ),
 				null,
-				CIVICRM_ADMIN_UTILITIES_VERSION, // version
-				'all' // media
+				CIVICRM_ADMIN_UTILITIES_VERSION, // Version
+				'all' // Media
 			);
 
 		}
 
-		// maybe load core override stylesheet
+		// Maybe load core override stylesheet
 		if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
 
-			// add core override stylesheet
+			// Add core override stylesheet
 			wp_enqueue_style(
 				'civicrm_admin_utilities_admin_override',
 				plugins_url( 'assets/css/civicrm-admin-utilities-admin.css', CIVICRM_ADMIN_UTILITIES_FILE ),
 				null,
-				CIVICRM_ADMIN_UTILITIES_VERSION, // version
-				'all' // media
+				CIVICRM_ADMIN_UTILITIES_VERSION, // Version
+				'all' // Media
 			);
 
 			/**
@@ -366,59 +366,59 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function resources_disable() {
 
-		// kick out if no CiviCRM
+		// Kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
-		// only on back-end
+		// Only on back-end
 		if ( is_admin() ) {
 
-			// maybe disable core stylesheet
+			// Maybe disable core stylesheet
 			if ( $this->admin->setting_get( 'css_admin', '0' ) == '1' ) {
 
-				// disable core stylesheet
+				// Disable core stylesheet
 				$this->resource_disable( 'civicrm', 'css/civicrm.css' );
 
-				// also disable Shoreditch if present
+				// Also disable Shoreditch if present
 				if ( $this->shoreditch_is_active() ) {
 					$this->resource_disable( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
 				}
 
 			}
 
-			// maybe disable custom stylesheet (not provided by Shoreditch)
+			// Maybe disable custom stylesheet (not provided by Shoreditch)
 			if ( $this->admin->setting_get( 'css_custom_public', '0' ) == '1' ) {
 				$this->custom_css_disable();
 			}
 
-		// only on front-end
+		// Only on front-end
 		} else {
 
-			// maybe disable core stylesheet
+			// Maybe disable core stylesheet
 			if ( $this->admin->setting_get( 'css_default', '0' ) == '1' ) {
 				$this->resource_disable( 'civicrm', 'css/civicrm.css' );
 			}
 
-			// maybe disable navigation stylesheet (there's no menu on the front-end)
+			// Maybe disable navigation stylesheet (there's no menu on the front-end)
 			if ( $this->admin->setting_get( 'css_navigation', '0' ) == '1' ) {
 				$this->resource_disable( 'civicrm', 'css/civicrmNavigation.css' );
 			}
 
-			// if Shoreditch present
+			// If Shoreditch present
 			if ( $this->shoreditch_is_active() ) {
 
-				// maybe disable Shoreditch stylesheet
+				// Maybe disable Shoreditch stylesheet
 				if ( $this->admin->setting_get( 'css_shoreditch', '0' ) == '1' ) {
 					$this->resource_disable( 'org.civicrm.shoreditch', 'css/custom-civicrm.css' );
 				}
 
-				// maybe disable Shoreditch Bootstrap stylesheet
+				// Maybe disable Shoreditch Bootstrap stylesheet
 				if ( $this->admin->setting_get( 'css_bootstrap', '0' ) == '1' ) {
 					$this->resource_disable( 'org.civicrm.shoreditch', 'css/bootstrap.css' );
 				}
 
 			} else {
 
-				// maybe disable custom stylesheet (not provided by Shoreditch)
+				// Maybe disable custom stylesheet (not provided by Shoreditch)
 				if ( $this->admin->setting_get( 'css_custom', '0' ) == '1' ) {
 					$this->custom_css_disable();
 				}
@@ -441,16 +441,16 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function resource_disable( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
-		// kick out if no CiviCRM
+		// Kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
-		// get the resource URL
+		// Get the resource URL
 		$url = $this->resource_get_url( $extension, $file );
 
-		// kick out if not enqueued
+		// Kick out if not enqueued
 		if ( $url === false ) return;
 
-		// set to disabled
+		// Set to disabled
 		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
 
 	}
@@ -468,19 +468,19 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function resource_get_url( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
-		// kick out if no CiviCRM
+		// Kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return false;
 
-		// get registered URL
+		// Get registered URL
 		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
 
-		// get registration data from region
+		// Get registration data from region
 		$registration = CRM_Core_Region::instance( 'html-header' )->get( $url );
 
-		// bail if not registered
+		// Bail if not registered
 		if ( empty( $registration ) ) return false;
 
-		// is enqueued
+		// Is enqueued
 		return $url;
 
 	}
@@ -494,25 +494,25 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function custom_css_disable() {
 
-		// kick out if no CiviCRM
+		// Kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return;
 
-		// get CiviCRM config
+		// Get CiviCRM config
 		$config = CRM_Core_Config::singleton();
 
-		// bail if there's no custom CSS file
+		// Bail if there's no custom CSS file
 		if ( empty( $config->customCSSURL ) ) return;
 
-		// get registered URL
+		// Get registered URL
 		$url = CRM_Core_Resources::singleton()->addCacheCode( $config->customCSSURL );
 
-		// get registration data from region
+		// Get registration data from region
 		$registration = CRM_Core_Region::instance('html-header')->get( $url );
 
-		// bail if not registered
+		// Bail if not registered
 		if ( empty ( $registration ) ) return;
 
-		// set to disabled
+		// Set to disabled
 		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
 
 	}
@@ -528,16 +528,16 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function shoreditch_is_active() {
 
-		// assume not
+		// Assume not
 		$shoreditch = false;
 
-		// init CiviCRM
+		// Init CiviCRM
 		if ( ! $this->admin->is_active() ) return $shoreditch;
 
-		// get the current Custom CSS URL
+		// Get the current Custom CSS URL
 		$config = CRM_Core_Config::singleton();
 
-		// has the Shoreditch CSS been activated?
+		// Has the Shoreditch CSS been activated?
 		if ( strstr( $config->customCSSURL, 'org.civicrm.shoreditch' ) !== false ) {
 
 			// Shoreditch CSS is active
@@ -561,13 +561,13 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function kam_is_active() {
 
-		// init return
+		// Init return
 		$kam = false;
 
-		// kick out if no CiviCRM
+		// Kick out if no CiviCRM
 		if ( ! $this->admin->is_active() ) return $kam;
 
-		// kick out if no KAM function
+		// Kick out if no KAM function
 		if ( ! function_exists( 'kam_civicrm_coreResourceList' ) ) return $kam;
 
 		// KAM is present
@@ -587,19 +587,19 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function kill_civi_button() {
 
-		// get screen
+		// Get screen
 		$screen = get_current_screen();
 
-		// prevent warning if screen not defined
+		// Prevent warning if screen not defined
 		if ( empty( $screen ) ) return;
 
-		// bail if there's no post type
+		// Bail if there's no post type
 		if ( empty( $screen->post_type ) ) return;
 
-		// get chosen post types
+		// Get chosen post types
 		$selected_types = $this->admin->setting_get( 'post_types', array() );
 
-		// remove button if this is not a post type we want to allow the button on
+		// Remove button if this is not a post type we want to allow the button on
 		if ( ! in_array( $screen->post_type, $selected_types ) ) {
 			$this->civi_button_remove();
 		}
@@ -615,19 +615,19 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function civi_button_remove() {
 
-		// get Civi object
+		// Get Civi object
 		$civi = civi_wp();
 
-		// do we have the modal object?
+		// Do we have the modal object?
 		if ( isset( $civi->modal ) AND is_object( $civi->modal ) ) {
 
-			// remove current CiviCRM actions
+			// Remove current CiviCRM actions
 			remove_action( 'media_buttons_context', array( $civi->modal, 'add_form_button' ) );
 			remove_action( 'media_buttons', array( $civi->modal, 'add_form_button' ), 100 );
 			remove_action( 'admin_enqueue_scripts', array( $civi->modal, 'add_form_button_js' ) );
 			remove_action( 'admin_footer', array( $civi->modal, 'add_form_button_html' ) );
 
-			// also remove core resources
+			// Also remove core resources
 			remove_action( 'admin_head', array( $civi, 'wp_head' ), 50 );
 			remove_action( 'load-post.php', array( $civi->modal, 'add_core_resources' ) );
 			remove_action( 'load-post-new.php', array( $civi->modal, 'add_core_resources' ) );
@@ -636,7 +636,7 @@ class CiviCRM_Admin_Utilities {
 
 		} else {
 
-			// remove legacy CiviCRM actions
+			// Remove legacy CiviCRM actions
 			remove_action( 'media_buttons_context', array( $civi, 'add_form_button' ) );
 			remove_action( 'media_buttons', array( $civi, 'add_form_button' ), 100 );
 			remove_action( 'admin_enqueue_scripts', array( $civi, 'add_form_button_js' ) );
@@ -655,19 +655,19 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function civicrm_only_on_main_site_please() {
 
-		// bail if disabled
+		// Bail if disabled
 		if ( $this->admin->setting_get( 'main_site_only', '0' ) == '0' ) return;
 
-		// if not on main site
+		// If not on main site
 		if ( is_multisite() AND ! is_main_site() ) {
 
-			// unhook menu item, but allow Civi to load
+			// Unhook menu item, but allow Civi to load
 			remove_action( 'admin_menu', array( civi_wp(), 'add_menu_items' ) );
 
-			// remove CiviCRM shortcode button
+			// Remove CiviCRM shortcode button
 			add_action( 'admin_head', array( $this, 'civi_button_remove' ) );
 
-			// remove notice
+			// Remove notice
 			remove_action( 'admin_notices', array( civi_wp(), 'show_setup_warning' ) );
 
 		}
@@ -699,10 +699,10 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function admin_bar_add() {
 
-		// bail if admin bar not enabled
+		// Bail if admin bar not enabled
 		if ( $this->admin->setting_get( 'admin_bar', '0' ) == '0' ) return;
 
-		// bail if user cannot access CiviCRM
+		// Bail if user cannot access CiviCRM
 		if ( ! current_user_can( 'access_civicrm' ) ) return;
 
 		/**
@@ -721,42 +721,42 @@ class CiviCRM_Admin_Utilities {
 		 */
 		$switch = apply_filters( 'civicrm_admin_utilities_menu_switch', true );
 
-		// if it's multisite, then switch to main site
+		// If it's multisite, then switch to main site
 		$switch_back = false;
 		if ( is_multisite() AND ! is_main_site() AND $switch ) {
 
-			// bail if CiviCRM is disabled on subsites
+			// Bail if CiviCRM is disabled on subsites
 			if ( $this->admin->setting_get( 'main_site_only', '0' ) == '1' ) return;
 
-			// get current site data
+			// Get current site data
 			$current_site = get_current_site();
 
-			// switch to the main site and set flag
+			// Switch to the main site and set flag
 			switch_to_blog( $current_site->blog_id );
 			$switch_back = true;
 
 		}
 
-		// access admin bar
+		// Access admin bar
 		global $wp_admin_bar;
 
-		// init CiviCRM or bail
+		// Init CiviCRM or bail
 		if ( ! $this->admin->is_active() ) return;
 
-		// get component info
+		// Get component info
 		$components = CRM_Core_Component::getEnabledComponents();
 
-		// define a menu parent ID
+		// Define a menu parent ID
 		$id = 'civicrm-admin-utils';
 
-		// add parent
+		// Add parent
 		$wp_admin_bar->add_menu( array(
 			'id' => $id,
 			'title' => __( 'CiviCRM', 'civicrm-admin-utilities' ),
 			'href' => admin_url( 'admin.php?page=CiviCRM' ),
 		) );
 
-		// dashboard
+		// Dashboard
 		$wp_admin_bar->add_menu( array(
 			'id' => 'cau-1',
 			'parent' => $id,
@@ -764,7 +764,7 @@ class CiviCRM_Admin_Utilities {
 			'href' => admin_url( 'admin.php?page=CiviCRM' ),
 		) );
 
-		// search
+		// Search
 		$wp_admin_bar->add_menu( array(
 			'id' => 'cau-2',
 			'parent' => $id,
@@ -772,7 +772,7 @@ class CiviCRM_Admin_Utilities {
 			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
 		) );
 
-		// groups
+		// Groups
 		$wp_admin_bar->add_menu( array(
 			'id' => 'cau-3',
 			'parent' => $id,
@@ -780,7 +780,7 @@ class CiviCRM_Admin_Utilities {
 			'href' => $this->get_link( 'civicrm/group', 'reset=1' ),
 		) );
 
-		// contributions
+		// Contributions
 		if ( array_key_exists( 'CiviContribute', $components ) ) {
 			if ( $this->check_permission( 'access CiviContribute' ) ) {
 				$wp_admin_bar->add_menu( array(
@@ -792,7 +792,7 @@ class CiviCRM_Admin_Utilities {
 			}
 		}
 
-		// membership
+		// Membership
 		if ( array_key_exists( 'CiviMember', $components ) ) {
 			if ( $this->check_permission( 'access CiviMember' ) ) {
 				$wp_admin_bar->add_menu( array(
@@ -804,7 +804,7 @@ class CiviCRM_Admin_Utilities {
 			}
 		}
 
-		// events
+		// Events
 		if ( array_key_exists( 'CiviEvent', $components ) ) {
 			if ( $this->check_permission( 'access CiviEvent' ) ) {
 				$wp_admin_bar->add_menu( array(
@@ -816,7 +816,7 @@ class CiviCRM_Admin_Utilities {
 			}
 		}
 
-		// mailings
+		// Mailings
 		if ( array_key_exists( 'CiviMail', $components ) ) {
 			if ( $this->check_permission( 'access CiviMail' ) ) {
 				$wp_admin_bar->add_menu( array(
@@ -828,7 +828,7 @@ class CiviCRM_Admin_Utilities {
 			}
 		}
 
-		// reports
+		// Reports
 		if ( array_key_exists( 'CiviReport', $components ) ) {
 			if ( $this->check_permission( 'access CiviReport' ) ) {
 				$wp_admin_bar->add_menu( array(
@@ -840,7 +840,7 @@ class CiviCRM_Admin_Utilities {
 			}
 		}
 
-		// cases
+		// Cases
 		if ( array_key_exists( 'CiviCase', $components ) ) {
 			if ( CRM_Case_BAO_Case::accessCiviCase() ) {
 				$wp_admin_bar->add_menu( array(
@@ -852,7 +852,7 @@ class CiviCRM_Admin_Utilities {
 			}
 		}
 
-		// admin console
+		// Admin console
 		if ( $this->check_permission( 'administer CiviCRM' ) ) {
 			$wp_admin_bar->add_menu( array(
 				'id' => 'cau-10',
@@ -871,7 +871,7 @@ class CiviCRM_Admin_Utilities {
 		 */
 		do_action( 'civicrm_admin_utilities_menu_after', $switch );
 
-		// if it's multisite, then switch back to current blog
+		// If it's multisite, then switch back to current blog
 		if ( $switch_back ) {
 			restore_current_blog();
 		}
@@ -891,13 +891,13 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function get_link( $path = '', $params = null ) {
 
-		// init link
+		// Init link
 		$link = '';
 
-		// init CiviCRM or bail
+		// Init CiviCRM or bail
 		if ( ! $this->admin->is_active() ) return $link;
 
-		// use CiviCRM to construct link
+		// Use CiviCRM to construct link
 		$link = CRM_Utils_System::url(
 			$path,
 			$params,
@@ -925,13 +925,13 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function check_permission( $permission ) {
 
-		// always deny if CiviCRM is not active
+		// Always deny if CiviCRM is not active
 		if ( ! $this->admin->is_active() ) return false;
 
-		// deny by default
+		// Deny by default
 		$permitted = false;
 
-		// check CiviCRM permissions
+		// Check CiviCRM permissions
 		if ( CRM_Core_Permission::check( $permission ) ) {
 			$permitted = true;
 		}
@@ -961,39 +961,39 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function fix_permissions_form( $formName, &$form ) {
 
-		// bail if disabled
+		// Bail if disabled
 		if ( $this->admin->setting_get( 'prettify_access', '0' ) == '0' ) return;
 
-		// bail if CiviCRM has been fixed
+		// Bail if CiviCRM has been fixed
 		if ( $this->admin->access_form_fixed() ) return;
 
-		// bail if not the form we want
+		// Bail if not the form we want
 		if ( $formName != 'CRM_ACL_Form_WordPress_Permissions' ) return;
 
-		// get vars
+		// Get vars
 		$vars = $form->get_template_vars();
 
-		// bail if $permDesc does not exist
+		// Bail if $permDesc does not exist
 		if ( ! isset( $vars['permDesc'] ) ) return;
 
-		// build replacement for permDesc array
+		// Build replacement for permDesc array
 		foreach( $vars['rolePerms'] AS $role => $perms ) {
 			foreach( $perms AS $name => $title ) {
 				$permissions[$name] = $title;
 			}
 		}
 
-		// build array keyed by permission
+		// Build array keyed by permission
 		$table = array();
 		foreach( $permissions AS $perm => $label ) {
 
-			// init row with permission description
+			// Init row with permission description
 			$table[$perm] = array(
 				'label' => $label,
 				'roles' => array(),
 			);
 
-			// add permission label and role names
+			// Add permission label and role names
 			foreach( $vars['roles'] AS $key => $label ) {
 				if ( isset( $vars['permDesc'][$perm] ) ) {
 					$table[$perm]['desc'] = $vars['permDesc'][$perm];
@@ -1003,10 +1003,10 @@ class CiviCRM_Admin_Utilities {
 
 		}
 
-		// assign to form
+		// Assign to form
 		$form->assign( 'table', $table );
 
-		// camelcase dammit
+		// Camelcase dammit
 		CRM_Utils_System::setTitle( __( 'WordPress Access Control', 'civicrm-admin-utilities' ) );
 
 	}
@@ -1088,11 +1088,11 @@ class CiviCRM_Admin_Utilities {
 
 
 
-} // class ends
+} // Class ends
 
 
 
-// init plugin
+// Init plugin
 global $civicrm_admin_utilities;
 $civicrm_admin_utilities = new CiviCRM_Admin_Utilities;
 
@@ -1105,7 +1105,7 @@ $civicrm_admin_utilities = new CiviCRM_Admin_Utilities;
  */
 function civicrm_au() {
 
-	// return instance
+	// Return instance
 	global $civicrm_admin_utilities;
 	return $civicrm_admin_utilities;
 
@@ -1113,8 +1113,8 @@ function civicrm_au() {
 
 
 
-// uninstall will use the 'uninstall.php' method when fully built
-// see: http://codex.wordpress.org/Function_Reference/register_uninstall_hook
+// Uninstall will use the 'uninstall.php' method when fully built
+// See: http://codex.wordpress.org/Function_Reference/register_uninstall_hook
 
 
 
@@ -1129,26 +1129,26 @@ function civicrm_au() {
  */
 function civicrm_admin_utilities_action_links( $links, $file ) {
 
-	// add links only when CiviCRM is fully installed
+	// Add links only when CiviCRM is fully installed
 	if ( ! defined( 'CIVICRM_INSTALLED' ) ) return $links;
 	if ( ! CIVICRM_INSTALLED ) return $links;
 
-	// add settings link
+	// Add settings link
 	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {
 
-		// add settings link if network activated and viewing network admin
+		// Add settings link if network activated and viewing network admin
 		if ( civicrm_au()->admin->is_network_activated() AND is_network_admin() ) {
 			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities' ), network_admin_url( 'settings.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
-		// add settings link if not network activated and not viewing network admin
+		// Add settings link if not network activated and not viewing network admin
 		if ( ! civicrm_au()->admin->is_network_activated() AND ! is_network_admin() ) {
 			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities' ), admin_url( 'options-general.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
-		// always add Paypal link
+		// Always add Paypal link
 		$paypal = 'https://www.paypal.me/interactivist';
 		$links[] = '<a href="' . $paypal . '" target="_blank">' . __( 'Donate!', 'civicrm-admin-utilities' ) . '</a>';
 
@@ -1159,7 +1159,7 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 
 }
 
-// add filters for the above
+// Add filters for the above
 add_filter( 'network_admin_plugin_action_links', 'civicrm_admin_utilities_action_links', 10, 2 );
 add_filter( 'plugin_action_links', 'civicrm_admin_utilities_action_links', 10, 2 );
 
