@@ -15,7 +15,7 @@
 		</div>
 	<?php endif; ?>
 
-	<form method="post" id="civicrm_admin_utilities_multisite_form" action="<?php echo $this->admin_form_url_get(); ?>">
+	<form method="post" id="civicrm_admin_utilities_multisite_form" action="<?php echo $this->page_submit_url_get(); ?>">
 
 		<?php wp_nonce_field( 'civicrm_admin_utilities_multisite_action', 'civicrm_admin_utilities_multisite_nonce' ); ?>
 

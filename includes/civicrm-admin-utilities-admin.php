@@ -19,6 +19,33 @@ class CiviCRM_Admin_Utilities_Admin {
 	public $plugin_version;
 
 	/**
+	 * Network parent page reference.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var array $network_parent_page The reference to the network parent page.
+	 */
+	public $network_parent_page;
+
+	/**
+	 * Network settings page reference.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var array $network_settings_page The reference to the network settings page.
+	 */
+	public $network_settings_page;
+
+	/**
+	 * Parent page reference.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var array $parent_page The reference to the parent page.
+	 */
+	public $parent_page;
+
+	/**
 	 * Settings page reference.
 	 *
 	 * @since 0.1
@@ -30,7 +57,7 @@ class CiviCRM_Admin_Utilities_Admin {
 	/**
 	 * Multisite Page.
 	 *
-	 * @since 0.1
+	 * @since 0.5.4
 	 * @access public
 	 * @var str $multisite_page The multisite page.
 	 */
@@ -274,18 +301,16 @@ class CiviCRM_Admin_Utilities_Admin {
 	 */
 	public function register_hooks() {
 
-		// If multisite and network activated
+		// If network activated
 		if ( $this->is_network_activated() ) {
 
-			// Add admin page to Network menu
-			add_action( 'network_admin_menu', array( $this, 'admin_menu' ), 30 );
-
-		} else {
-
-			// Add admin page to menu
-			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+			// Add admin page to Network Settings menu
+			add_action( 'network_admin_menu', array( $this, 'admin_menu_network' ), 30 );
 
 		}
+
+		// Add admin page to Settings menu
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
 	}
 
@@ -296,43 +321,76 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Add an admin page for this plugin.
+	 * Add a network admin menu item for this plugin.
+	 *
+	 * @since 0.5.4
+	 */
+	public function admin_menu_network() {
+
+		// Bail if not network activated
+		if ( ! $this->is_network_activated() ) return;
+
+		// We must be network admin in multisite
+		if ( ! is_super_admin() ) return;
+
+		// Set capability
+		$capability = 'manage_network_plugins';
+
+		// Add the parent page to the Network Settings menu
+		$this->network_parent_page = add_submenu_page(
+			'settings.php', // target menu
+			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // page title
+			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // menu title
+			$capability, // required caps
+			'civicrm_admin_utilities_network_parent', // slug name
+			array( $this, 'page_network_settings' ) // callback
+		);
+
+		// Add scripts and styles
+		add_action( 'admin_head-' . $this->network_parent_page, array( $this, 'admin_head' ), 50 );
+		//add_action( 'admin_print_styles-' . $this->network_parent_page, array( $this, 'admin_css' ) );
+
+		// Add settings page
+		$this->network_settings_page = add_submenu_page(
+			'civicrm_admin_utilities_network_parent', // parent slug
+			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // page title
+			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // menu title
+			$capability, // required caps
+			'civicrm_admin_utilities_network_settings', // slug name
+			array( $this, 'page_network_settings' ) // callback
+		);
+
+		// Add scripts and styles
+		add_action( 'admin_head-' . $this->network_settings_page, array( $this, 'admin_menu_highlight' ), 50 );
+		add_action( 'admin_head-' . $this->network_settings_page, array( $this, 'admin_head' ), 50 );
+		//add_action( 'admin_print_styles-' . $this->network_settings_page, array( $this, 'admin_css' ) );
+
+	}
+
+
+
+	/**
+	 * Add an admin menu item(s) for this plugin.
 	 *
 	 * @since 0.1
 	 */
 	public function admin_menu() {
 
-		// We must be network admin in multisite
-		if ( is_multisite() AND ! is_super_admin() ) return;
+		// Set capability
+		// TODO: will depend on network admin checkbox
+		$capability = 'manage_options';
 
 		// Check user permissions
-		if ( ! current_user_can( 'manage_options' ) ) return;
+		if ( ! current_user_can( $capability ) ) return;
 
-		// Multisite and network activated?
-		if ( $this->is_network_activated() ) {
-
-			// Add the admin page to the Network Settings menu
-			$this->parent_page = add_submenu_page(
-				'settings.php',
-				__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ),
-				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				'manage_options',
-				'civicrm_admin_utilities_parent',
-				array( $this, 'page_settings' )
-			);
-
-		} else {
-
-			// Add the admin page to the Settings menu
-			$this->parent_page = add_options_page(
-				__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ),
-				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				'manage_options',
-				'civicrm_admin_utilities_parent',
-				array( $this, 'page_settings' )
-			);
-
-		}
+		// Add the admin page to the Settings menu
+		$this->parent_page = add_options_page(
+			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ),
+			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
+			$capability,
+			'civicrm_admin_utilities_parent',
+			array( $this, 'page_settings' )
+		);
 
 		// Add scripts and styles
 		add_action( 'admin_head-' . $this->parent_page, array( $this, 'admin_head' ), 50 );
@@ -343,7 +401,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			'civicrm_admin_utilities_parent', // parent slug
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // page title
 			__( 'Settings', 'civicrm-admin-utilities' ), // menu title
-			'manage_options', // required caps
+			$capability, // required caps
 			'civicrm_admin_utilities_settings', // slug name
 			array( $this, 'page_settings' ) // callback
 		);
@@ -358,7 +416,7 @@ class CiviCRM_Admin_Utilities_Admin {
 			'civicrm_admin_utilities_parent', // parent slug
 			__( 'CiviCRM Admin Utilities: Manual Sync', 'civicrm-admin-utilities' ), // page title
 			__( 'Manual Sync', 'civicrm-admin-utilities' ), // menu title
-			'manage_options', // required caps
+			$capability, // required caps
 			'civicrm_admin_utilities_multisite', // slug name
 			array( $this, 'page_multisite' ) // callback
 		);
@@ -392,16 +450,32 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		global $plugin_page, $submenu_file;
 
-		// define subpages
+		// Define subpages
 		$subpages = array(
 		 	'civicrm_admin_utilities_settings',
 		 	'civicrm_admin_utilities_multisite',
 		 );
 
+		// If network admin
+		if ( is_network_admin() ) {
+
+			// Override with network admin subpages
+			$subpages = array(
+				'civicrm_admin_utilities_network_settings',
+			 );
+
+		}
+
+		// Set network admin string
+		$network = '';
+		if ( is_network_admin() ) {
+			$network = '_network';
+		}
+
 		// This tweaks the Settings subnav menu to show only one menu item
 		if ( in_array( $plugin_page, $subpages ) ) {
-			$plugin_page = 'civicrm_admin_utilities_parent';
-			$submenu_file = 'civicrm_admin_utilities_parent';
+			$plugin_page = 'civicrm_admin_utilities' . $network . '_parent';
+			$submenu_file = 'civicrm_admin_utilities' . $network . '_parent';
 		}
 
 	}
@@ -490,19 +564,138 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
+	 * Show our network settings page.
+	 *
+	 * @since 0.5.4
+	 */
+	public function page_network_settings() {
+
+		// Disallow if not network admin in multisite
+		if ( is_network_admin() AND ! is_super_admin() ) {
+			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
+		}
+
+		// Check user permissions
+		if ( ! current_user_can( 'manage_network_plugins' ) ) return;
+
+		// Get admin page URLs
+		$urls = $this->page_get_network_urls();
+
+		// If CiviCRM is network activated
+		if ( $this->is_civicrm_network_activated() ) {
+
+			// Init main site only checkbox
+			$main_site_only = '';
+			if ( $this->setting_get( 'main_site_only', '0' ) == '1' ) {
+				$main_site_only = ' checked="checked"';
+			}
+
+		}
+
+		// Init menu CSS checkbox
+		$prettify_menu = '';
+		if ( $this->setting_get( 'prettify_menu', '0' ) == '1' ) {
+			$prettify_menu = ' checked="checked"';
+		}
+
+		// Init admin CSS checkbox
+		$admin_css = '';
+		if ( $this->setting_get( 'css_admin', '0' ) == '1' ) {
+			$admin_css = ' checked="checked"';
+		}
+
+		// Init default CSS checkbox
+		$default_css = '';
+		if ( $this->setting_get( 'css_default', '0' ) == '1' ) {
+			$default_css = ' checked="checked"';
+		}
+
+		// Init navigation CSS checkbox
+		$navigation_css = '';
+		if ( $this->setting_get( 'css_navigation', '0' ) == '1' ) {
+			$navigation_css = ' checked="checked"';
+		}
+
+		// Check if Shoreditch CSS is present
+		global $civicrm_admin_utilities;
+		if ( $civicrm_admin_utilities->shoreditch_is_active() ) {
+
+			// Set flag
+			$shoreditch = true;
+
+			// Init Shoreditch CSS checkbox
+			$shoreditch_css = '';
+			if ( $this->setting_get( 'css_shoreditch', '0' ) == '1' ) {
+				$shoreditch_css = ' checked="checked"';
+			}
+
+			// Init Shoreditch Bootstrap CSS checkbox
+			$bootstrap_css = '';
+			if ( $this->setting_get( 'css_bootstrap', '0' ) == '1' ) {
+				$bootstrap_css = ' checked="checked"';
+			}
+
+		} else {
+
+			// Set flag
+			$shoreditch = false;
+
+			// Init custom CSS checkbox
+			$custom_css = '';
+			if ( $this->setting_get( 'css_custom', '0' ) == '1' ) {
+				$custom_css = ' checked="checked"';
+			}
+
+			// Init custom CSS on front end checkbox
+			$custom_public_css = '';
+			if ( $this->setting_get( 'css_custom_public', '0' ) == '1' ) {
+				$custom_public_css = ' checked="checked"';
+			}
+
+		}
+
+		// Assume access form has been fixed
+		$access_form_fixed = true;
+
+		// If CiviCRM has not been fixed
+		if ( ! $this->access_form_fixed() ) {
+
+			// Set flag
+			$access_form_fixed = false;
+
+			// Init access form checkbox
+			$prettify_access = '';
+			if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) {
+				$prettify_access = ' checked="checked"';
+			}
+
+		}
+
+		// Init admin bar checkbox
+		$admin_bar = '';
+		if ( $this->setting_get( 'admin_bar', '0' ) == '1' ) {
+			$admin_bar = ' checked="checked"';
+		}
+
+		// Get post type options from main site
+		$options = $this->post_type_options_get();
+
+		// Do not show tabs by default
+		$show_tabs = false;
+
+		// Include template
+		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/settings-network.php' );
+
+	}
+
+
+
+	/**
 	 * Show our settings page.
 	 *
 	 * @since 0.1
 	 */
 	public function page_settings() {
-
-		// We must be network admin in multisite
-		if ( is_multisite() AND ! is_super_admin() ) {
-
-			// Disallow
-			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
-
-		}
 
 		// Check user permissions
 		if ( ! current_user_can( 'manage_options' ) ) return;
@@ -606,8 +799,9 @@ class CiviCRM_Admin_Utilities_Admin {
 			$show_tabs = true;
 		}
 
-		// include template file
+		// Include template
 		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/settings.php' );
+
 	}
 
 
@@ -615,20 +809,9 @@ class CiviCRM_Admin_Utilities_Admin {
 	/**
 	 * Show our multisite settings page.
 	 *
-	 * @since 0.1
+	 * @since 0.5.4
 	 */
 	public function page_multisite() {
-
-		// Bail if not network activated
-		//if ( ! $this->is_network_activated() ) return;
-
-		// We must be network admin in multisite
-		if ( is_multisite() AND ! is_super_admin() ) {
-
-			// Disallow
-			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
-
-		}
 
 		// Check user permissions
 		if ( ! current_user_can( 'manage_options' ) ) return;
@@ -652,35 +835,50 @@ class CiviCRM_Admin_Utilities_Admin {
 	/**
 	 * Get admin page URLs.
 	 *
-	 * @since 0.1
+	 * @since 0.5.4
 	 *
-	 * @return array $admin_urls The array of admin page URLs.
+	 * @return array $urls The array of admin page URLs.
 	 */
 	public function page_get_urls() {
 
-		// only calculate once
+		// Only calculate once
 		if ( isset( $this->urls ) ) { return $this->urls; }
 
-		// init return
+		// Init return
 		$this->urls = array();
 
-		// multisite?
-		if ( $this->is_network_activated() ) {
-
-			// get admin page URLs via our adapted method
-			$this->urls['settings'] = $this->network_menu_page_url( 'civicrm_admin_utilities_settings', false );
-			$this->urls['multisite'] = $this->network_menu_page_url( 'civicrm_admin_utilities_multisite', false );
-
-		} else {
-
-			// get admin page URLs
-			$this->urls['settings'] = menu_page_url( 'civicrm_admin_utilities_settings', false );
-			$this->urls['multisite'] = menu_page_url( 'civicrm_admin_utilities_multisite', false );
-
-		}
+		// Get admin page URLs
+		$this->urls['settings'] = menu_page_url( 'civicrm_admin_utilities_settings', false );
+		$this->urls['multisite'] = menu_page_url( 'civicrm_admin_utilities_multisite', false );
 
 		// --<
 		return $this->urls;
+
+	}
+
+
+
+	/**
+	 * Get network admin page URLs.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return array $network_urls The array of network admin page URLs.
+	 */
+	public function page_get_network_urls() {
+
+		// Only calculate once
+		if ( isset( $this->network_urls ) ) { return $this->network_urls; }
+
+		// Init return
+		$this->network_urls = array();
+
+		// Get admin page URLs via our adapted method
+		$this->network_urls['settings'] = $this->network_menu_page_url( 'civicrm_admin_utilities_network_settings', false );
+		//$this->urls['multisite'] = $this->network_menu_page_url( 'civicrm_admin_utilities_network_multisite', false );
+
+		// --<
+		return $this->network_urls;
 
 	}
 
@@ -726,13 +924,8 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// If not multisite, it cannot be
 		if ( ! is_multisite() ) {
-
-			// Set flag
 			$is_network_active = false;
-
-			// Kick out
 			return $is_network_active;
-
 		}
 
 		// Make sure plugin file is included when outside admin
@@ -748,6 +941,53 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// --<
 		return $is_network_active;
+
+	}
+
+
+
+	/**
+	 * Test if CiviCRM is network activated.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return bool $civicrm_network_active True if network activated, false otherwise.
+	 */
+	public function is_civicrm_network_activated() {
+
+		// Only need to test once
+		static $civicrm_network_active;
+
+		// Have we done this already?
+		if ( isset( $civicrm_network_active ) ) {
+			return $civicrm_network_active;
+		}
+
+		// If not multisite, it cannot be
+		if ( ! is_multisite() ) {
+			$civicrm_network_active = false;
+			return $civicrm_network_active;
+		}
+
+		// If CiviCRM's constant is not defined, we'll never know
+		if ( ! defined( 'CIVICRM_PLUGIN_FILE' ) ) {
+			$civicrm_network_active = false;
+			return $civicrm_network_active;
+		}
+
+		// Make sure plugin file is included when outside admin
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
+
+		// Get path from 'plugins' directory to CiviCRM's directory
+		$civicrm = plugin_basename( CIVICRM_PLUGIN_FILE );
+
+		// Test if network active
+		$civicrm_network_active = is_plugin_active_for_network( $civicrm );
+
+		// --<
+		return $civicrm_network_active;
 
 	}
 
@@ -859,20 +1099,16 @@ class CiviCRM_Admin_Utilities_Admin {
 	 *
 	 * @return string $target_url The URL for the admin form action.
 	 */
-	public function admin_form_url_get() {
+	public function page_submit_url_get() {
 
 		// Sanitise admin page url
 		$target_url = $_SERVER['REQUEST_URI'];
 		$url_array = explode( '&', $target_url );
 
+		// Strip flag, if present, and rebuild
 		if ( ! empty( $url_array ) ) {
-
-			// Strip flag if present
 			$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
-
-			// Rebuild
 			$target_url = htmlentities( $url_raw . '&updated=true' );
-
 		}
 
 		// --<
@@ -914,15 +1150,6 @@ class CiviCRM_Admin_Utilities_Admin {
 			if ( version_compare( $version, '4.7.30', '>=' ) ) $this->fixed = true;
 		}
 
-		$e = new Exception;
-		$trace = $e->getTraceAsString();
-		error_log( print_r( array(
-			'method' => __METHOD__,
-			'version' => $version,
-			'major_version' => $major_version,
-			//'backtrace' => $trace,
-		), true ) );
-
 		// Save setting if fixed
 		if ( $this->fixed ) {
 			$this->setting_set( 'access_fixed', '1' );
@@ -946,16 +1173,16 @@ class CiviCRM_Admin_Utilities_Admin {
 	 */
 	public function clear_caches() {
 
-		// Init or die
+		// Bail if no CiviCRM
 		if ( ! $this->civicrm_is_active() ) return;
 
 		// Access config object
 		$config = CRM_Core_Config::singleton();
 
-		// Clear db cache
+		// Clear database cache
 		CRM_Core_Config::clearDBCache();
 
-		// Cleanup the templates_c directory
+		// Cleanup the "templates_c" directory
 		$config->cleanup( 1, TRUE );
 
 		// Cleanup the session object
@@ -972,6 +1199,9 @@ class CiviCRM_Admin_Utilities_Admin {
 
 	/**
 	 * Get default settings values for this plugin.
+	 *
+	 * In a multisite context, these defaults are used for both network defaults
+	 * and individual sites.
 	 *
 	 * @since 0.1
 	 *
@@ -1033,14 +1263,19 @@ class CiviCRM_Admin_Utilities_Admin {
 		// Init return
 		$result = false;
 
+		// was the "Network Settings" form submitted?
+		if ( isset( $_POST['civicrm_admin_utilities_network_settings_submit'] ) ) {
+			return $this->settings_network_update();
+		}
+
 		// was the "Settings" form submitted?
 		if ( isset( $_POST['civicrm_admin_utilities_settings_submit'] ) ) {
-			$result = $this->settings_general_update();
+			return $this->settings_general_update();
 		}
 
 	 	// was the "Multisite" form submitted?
 		if ( isset( $_POST['civicrm_admin_utilities_multisite_submit'] ) ) {
-			$result = $this->settings_multisite_update();
+			return $this->settings_multisite_update();
 		}
 
 		// --<
@@ -1051,9 +1286,145 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
+	 * Update options supplied by our Network Settings admin page.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return bool True if successful, false otherwise (always true at present).
+	 */
+	public function settings_network_update() {
+
+		// Check that we trust the source of the data
+		check_admin_referer( 'civicrm_admin_utilities_network_settings_action', 'civicrm_admin_utilities_network_settings_nonce' );
+
+		// Init vars
+		$civicrm_admin_utilities_main_site = '';
+		$civicrm_admin_utilities_menu = '';
+		$civicrm_admin_utilities_access = '';
+		$civicrm_admin_utilities_post_types = array();
+		$civicrm_admin_utilities_admin_bar = '';
+		$civicrm_admin_utilities_styles_default = '';
+		$civicrm_admin_utilities_styles_nav = '';
+		$civicrm_admin_utilities_styles_shoreditch = '';
+		$civicrm_admin_utilities_styles_bootstrap = '';
+		$civicrm_admin_utilities_styles_custom = '';
+		$civicrm_admin_utilities_styles_custom_public = '';
+		$civicrm_admin_utilities_styles_admin = '';
+
+		// Get variables
+		extract( $_POST );
+
+		// Should we remove the visible traces of CiviCRM on sub-sites?
+		if ( $civicrm_admin_utilities_main_site == '1' ) {
+			$this->setting_set( 'main_site_only', '1' );
+		} else {
+			$this->setting_set( 'main_site_only', '0' );
+		}
+
+		// Did we ask to prettify the menu?
+		if ( $civicrm_admin_utilities_menu == '1' ) {
+			$this->setting_set( 'prettify_menu', '1' );
+		} else {
+			$this->setting_set( 'prettify_menu', '0' );
+		}
+
+		// Did we ask to prevent default styleheet?
+		if ( $civicrm_admin_utilities_styles_default == '1' ) {
+			$this->setting_set( 'css_default', '1' );
+		} else {
+			$this->setting_set( 'css_default', '0' );
+		}
+
+		// Did we ask to prevent navigation styleheet?
+		if ( $civicrm_admin_utilities_styles_nav == '1' ) {
+			$this->setting_set( 'css_navigation', '1' );
+		} else {
+			$this->setting_set( 'css_navigation', '0' );
+		}
+
+		// Did we ask to prevent Shoreditch styleheet?
+		if ( $civicrm_admin_utilities_styles_shoreditch == '1' ) {
+			$this->setting_set( 'css_shoreditch', '1' );
+		} else {
+			$this->setting_set( 'css_shoreditch', '0' );
+		}
+
+		// Did we ask to prevent Shoreditch Bootstrap styleheet?
+		if ( $civicrm_admin_utilities_styles_bootstrap == '1' ) {
+			$this->setting_set( 'css_bootstrap', '1' );
+		} else {
+			$this->setting_set( 'css_bootstrap', '0' );
+		}
+
+		// Did we ask to prevent CiviCRM custom styleheet from front-end?
+		if ( $civicrm_admin_utilities_styles_custom == '1' ) {
+			$this->setting_set( 'css_custom', '1' );
+		} else {
+			$this->setting_set( 'css_custom', '0' );
+		}
+
+		// Did we ask to prevent CiviCRM custom styleheet from admin?
+		if ( $civicrm_admin_utilities_styles_custom_public == '1' ) {
+			$this->setting_set( 'css_custom_public', '1' );
+		} else {
+			$this->setting_set( 'css_custom_public', '0' );
+		}
+
+		// Did we ask to override CiviCRM Default styleheet?
+		if ( $civicrm_admin_utilities_styles_admin == '1' ) {
+			$this->setting_set( 'css_admin', '1' );
+		} else {
+			$this->setting_set( 'css_admin', '0' );
+		}
+
+		// Did we ask to fix the access form?
+		if ( $civicrm_admin_utilities_access == '1' ) {
+			$this->setting_set( 'prettify_access', '1' );
+		} else {
+			$this->setting_set( 'prettify_access', '0' );
+		}
+
+		// Which post types are we enabling the CiviCRM button on?
+		if ( count( $civicrm_admin_utilities_post_types ) > 0 ) {
+
+			// Sanitise array
+			array_walk(
+				$civicrm_admin_utilities_post_types,
+				function( &$item ) {
+					$item = esc_sql( trim( $item ) );
+				}
+			);
+
+			// Set option
+			$this->setting_set( 'post_types', $civicrm_admin_utilities_post_types );
+
+		} else {
+			$this->setting_set( 'post_types', array() );
+		}
+
+		// Did we ask to add the shortcuts menu to the admin bar?
+		if ( $civicrm_admin_utilities_admin_bar == '1' ) {
+			$this->setting_set( 'admin_bar', '1' );
+		} else {
+			$this->setting_set( 'admin_bar', '0' );
+		}
+
+		// Save options
+		$this->settings_save();
+
+		// --<
+		return true;
+
+	}
+
+
+
+	/**
 	 * Update options supplied by our Settings admin page.
 	 *
 	 * @since 0.5.4
+	 *
+	 * @return bool True if successful, false otherwise (always true at present).
 	 */
 	public function settings_general_update() {
 
@@ -1199,6 +1570,8 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Update options supplied by our Multisite admin page.
 	 *
 	 * @since 0.5.4
+	 *
+	 * @return bool True if successful, false otherwise (always true at present).
 	 */
 	public function settings_multisite_update() {
 
@@ -1341,11 +1714,13 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Test existence of a specified site option.
 	 *
 	 * @since 0.1
+	 * @since 0.5.4 Introduced $network param.
 	 *
 	 * @param str $option_name The name of the option.
+	 * @param str $network Whether to target network or site option - values can be 'network', 'site' or 'auto'.
 	 * @return bool $exists Whether or not the option exists.
 	 */
-	public function option_exists( $option_name = '' ) {
+	public function option_exists( $option_name = '', $network = 'auto' ) {
 
 		// Test for empty
 		if ( $option_name == '' ) {
@@ -1353,7 +1728,7 @@ class CiviCRM_Admin_Utilities_Admin {
 		}
 
 		// Test by getting option with unlikely default
-		if ( $this->option_get( $option_name, 'fenfgehgefdfdjgrkj' ) == 'fenfgehgefdfdjgrkj' ) {
+		if ( $this->option_get( $option_name, 'fenfgehgefdfdjgrkj', $network ) == 'fenfgehgefdfdjgrkj' ) {
 			return false;
 		} else {
 			return true;
@@ -1367,20 +1742,22 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Return a value for a specified site option.
 	 *
 	 * @since 0.1
+	 * @since 0.5.4 Introduced $network param.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @param str $default The default value of the option if it has no value.
+	 * @param str $network Whether to target network or site option - values can be 'network', 'site' or 'auto'.
 	 * @return mixed $value the value of the option.
 	 */
-	public function option_get( $option_name = '', $default = false ) {
+	public function option_get( $option_name = '', $default = false, $network = 'auto' ) {
 
 		// Test for empty
 		if ( $option_name == '' ) {
 			die( __( 'You must supply an option to option_get()', 'civicrm-admin-utilities' ) );
 		}
 
-		// If multisite and network activated
-		if ( $this->is_network_activated() ) {
+		// If network activated and not forcing a request
+		if ( $this->is_network_activated() AND ( $network === 'auto' OR $network === 'network' ) ) {
 
 			// Get site option
 			$value = get_site_option( $option_name, $default );
@@ -1403,20 +1780,22 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Set a value for a specified site option.
 	 *
 	 * @since 0.1
+	 * @since 0.5.4 Introduced $network param.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @param mixed $value The value to set the option to.
+	 * @param str $network Whether to target network or site option - values can be 'network', 'site' or 'auto'.
 	 * @return bool $success True if the value of the option was successfully saved.
 	 */
-	public function option_set( $option_name = '', $value = '' ) {
+	public function option_set( $option_name = '', $value = '', $network = 'auto' ) {
 
 		// Test for empty
 		if ( $option_name == '' ) {
 			die( __( 'You must supply an option to option_set()', 'civicrm-admin-utilities' ) );
 		}
 
-		// If multisite and network activated
-		if ( $this->is_network_activated() ) {
+		// If network activated and not forcing a request
+		if ( $this->is_network_activated() AND ( $network === 'auto' OR $network === 'network' ) ) {
 
 			// Update site option
 			return update_site_option( $option_name, $value );
@@ -1436,19 +1815,21 @@ class CiviCRM_Admin_Utilities_Admin {
 	 * Delete a specified site option.
 	 *
 	 * @since 0.1
+	 * @since 0.5.4 Introduced $network param.
 	 *
 	 * @param str $option_name The name of the option.
+	 * @param str $network Whether to target network or site option - values can be 'network', 'site' or 'auto'.
 	 * @return bool $success True if the value of the option was successfully deleted.
 	 */
-	public function option_delete( $option_name = '' ) {
+	public function option_delete( $option_name = '', $network = 'auto' ) {
 
 		// Test for empty
 		if ( $option_name == '' ) {
 			die( __( 'You must supply an option to option_delete()', 'civicrm-admin-utilities' ) );
 		}
 
-		// If multisite and network activated
-		if ( $this->is_network_activated() ) {
+		// If network activated and not forcing a request
+		if ( $this->is_network_activated() AND ( $network === 'auto' OR $network === 'network' ) ) {
 
 			// Delete site option
 			return delete_site_option( $option_name );
