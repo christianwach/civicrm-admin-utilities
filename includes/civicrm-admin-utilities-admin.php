@@ -28,6 +28,15 @@ class CiviCRM_Admin_Utilities_Admin {
 	public $settings_page;
 
 	/**
+	 * Multisite Page.
+	 *
+	 * @since 0.1
+	 * @access public
+	 * @var str $multisite_page The multisite page.
+	 */
+	public $multisite_page;
+
+	/**
 	 * Settings data.
 	 *
 	 * @since 0.1
@@ -282,6 +291,677 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 
+	//##########################################################################
+
+
+
+	/**
+	 * Add an admin page for this plugin.
+	 *
+	 * @since 0.1
+	 */
+	public function admin_menu() {
+
+		// We must be network admin in multisite
+		if ( is_multisite() AND ! is_super_admin() ) return;
+
+		// Check user permissions
+		if ( ! current_user_can( 'manage_options' ) ) return;
+
+		// Multisite and network activated?
+		if ( $this->is_network_activated() ) {
+
+			// Add the admin page to the Network Settings menu
+			$this->parent_page = add_submenu_page(
+				'settings.php',
+				__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ),
+				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
+				'manage_options',
+				'civicrm_admin_utilities_parent',
+				array( $this, 'page_settings' )
+			);
+
+		} else {
+
+			// Add the admin page to the Settings menu
+			$this->parent_page = add_options_page(
+				__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ),
+				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
+				'manage_options',
+				'civicrm_admin_utilities_parent',
+				array( $this, 'page_settings' )
+			);
+
+		}
+
+		// Add scripts and styles
+		add_action( 'admin_head-' . $this->parent_page, array( $this, 'admin_head' ), 50 );
+		//add_action( 'admin_print_styles-' . $this->parent_page, array( $this, 'admin_css' ) );
+
+		// Add settings page
+		$this->settings_page = add_submenu_page(
+			'civicrm_admin_utilities_parent', // parent slug
+			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // page title
+			__( 'Settings', 'civicrm-admin-utilities' ), // menu title
+			'manage_options', // required caps
+			'civicrm_admin_utilities_settings', // slug name
+			array( $this, 'page_settings' ) // callback
+		);
+
+		// Add scripts and styles
+		add_action( 'admin_head-' . $this->settings_page, array( $this, 'admin_menu_highlight' ), 50 );
+		add_action( 'admin_head-' . $this->settings_page, array( $this, 'admin_head' ), 50 );
+		//add_action( 'admin_print_styles-' . $this->settings_page, array( $this, 'admin_css' ) );
+
+		// Add Multisite page
+		$this->multisite_page = add_submenu_page(
+			'civicrm_admin_utilities_parent', // parent slug
+			__( 'CiviCRM Admin Utilities: Manual Sync', 'civicrm-admin-utilities' ), // page title
+			__( 'Manual Sync', 'civicrm-admin-utilities' ), // menu title
+			'manage_options', // required caps
+			'civicrm_admin_utilities_multisite', // slug name
+			array( $this, 'page_multisite' ) // callback
+		);
+
+		// Add scripts and styles
+		add_action( 'admin_head-' . $this->multisite_page, array( $this, 'admin_menu_highlight' ), 50 );
+		add_action( 'admin_head-' . $this->multisite_page, array( $this, 'admin_head' ), 50 );
+		/*
+		add_action( 'admin_print_scripts-' . $this->multisite_page, array( $this, 'admin_js_multisite_page' ) );
+		add_action( 'admin_print_styles-' . $this->multisite_page, array( $this, 'admin_css' ) );
+		add_action( 'admin_print_styles-' . $this->multisite_page, array( $this, 'admin_css_multisite_page' ) );
+		*/
+
+		// Try and update options
+		$saved = $this->settings_update_router();
+
+	}
+
+
+
+	/**
+	 * Tell WordPress to highlight the plugin's menu item, regardless of which
+	 * actual admin screen we are on.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @global string $plugin_page The current plugin page.
+	 * @global array $submenu The current submenu.
+	 */
+	public function admin_menu_highlight() {
+
+		global $plugin_page, $submenu_file;
+
+		// define subpages
+		$subpages = array(
+		 	'civicrm_admin_utilities_settings',
+		 	'civicrm_admin_utilities_multisite',
+		 );
+
+		// This tweaks the Settings subnav menu to show only one menu item
+		if ( in_array( $plugin_page, $subpages ) ) {
+			$plugin_page = 'civicrm_admin_utilities_parent';
+			$submenu_file = 'civicrm_admin_utilities_parent';
+		}
+
+	}
+
+
+
+	/**
+	 * Initialise plugin help.
+	 *
+	 * @since 0.5.4
+	 */
+	public function admin_head() {
+
+		// Get screen object
+		$screen = get_current_screen();
+
+		// Pass to method in this class
+		$this->admin_help( $screen );
+
+	}
+
+
+
+	/**
+	 * Adds help copy to admin page.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @param object $screen The existing WordPress screen object.
+	 * @return object $screen The amended WordPress screen object.
+	 */
+	public function admin_help( $screen ) {
+
+		// Init suffix
+		$page = '';
+
+		// The page ID is different in multisite
+		if ( $this->is_network_activated() ) {
+			$page = '-network';
+		}
+
+		// Init page IDs
+		$pages = array(
+			$this->settings_page . $page,
+			$this->multisite_page . $page,
+		);
+
+		// Kick out if not our screen
+		if ( ! in_array( $screen->id, $pages ) ) return $screen;
+
+		// Add a tab - we can add more later
+		$screen->add_help_tab( array(
+			'id'      => 'civicrm_admin_utilities',
+			'title'   => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
+			'content' => $this->admin_help_get(),
+		));
+
+		// --<
+		return $screen;
+
+	}
+
+
+
+	/**
+	 * Get help text.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return string $help The help text formatted as HTML.
+	 */
+	public function admin_help_get() {
+
+		// Stub help text, to be developed further...
+		$help = '<p>' . __( 'For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin.', 'civicrm-admin-utilities' ) . '</p>';
+
+		// --<
+		return $help;
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Show our settings page.
+	 *
+	 * @since 0.1
+	 */
+	public function page_settings() {
+
+		// We must be network admin in multisite
+		if ( is_multisite() AND ! is_super_admin() ) {
+
+			// Disallow
+			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
+
+		}
+
+		// Check user permissions
+		if ( ! current_user_can( 'manage_options' ) ) return;
+
+		// Get admin page URLs
+		$urls = $this->page_get_urls();
+
+		// Init menu CSS checkbox
+		$prettify_menu = '';
+		if ( $this->setting_get( 'prettify_menu', '0' ) == '1' ) {
+			$prettify_menu = ' checked="checked"';
+		}
+
+		// Init admin CSS checkbox
+		$admin_css = '';
+		if ( $this->setting_get( 'css_admin', '0' ) == '1' ) {
+			$admin_css = ' checked="checked"';
+		}
+
+		// Init default CSS checkbox
+		$default_css = '';
+		if ( $this->setting_get( 'css_default', '0' ) == '1' ) {
+			$default_css = ' checked="checked"';
+		}
+
+		// Init navigation CSS checkbox
+		$navigation_css = '';
+		if ( $this->setting_get( 'css_navigation', '0' ) == '1' ) {
+			$navigation_css = ' checked="checked"';
+		}
+
+		// Check if Shoreditch CSS is present
+		global $civicrm_admin_utilities;
+		if ( $civicrm_admin_utilities->shoreditch_is_active() ) {
+
+			// Set flag
+			$shoreditch = true;
+
+			// Init Shoreditch CSS checkbox
+			$shoreditch_css = '';
+			if ( $this->setting_get( 'css_shoreditch', '0' ) == '1' ) {
+				$shoreditch_css = ' checked="checked"';
+			}
+
+			// Init Shoreditch Bootstrap CSS checkbox
+			$bootstrap_css = '';
+			if ( $this->setting_get( 'css_bootstrap', '0' ) == '1' ) {
+				$bootstrap_css = ' checked="checked"';
+			}
+
+		} else {
+
+			// Set flag
+			$shoreditch = false;
+
+			// Init custom CSS checkbox
+			$custom_css = '';
+			if ( $this->setting_get( 'css_custom', '0' ) == '1' ) {
+				$custom_css = ' checked="checked"';
+			}
+
+			// Init custom CSS on front end checkbox
+			$custom_public_css = '';
+			if ( $this->setting_get( 'css_custom_public', '0' ) == '1' ) {
+				$custom_public_css = ' checked="checked"';
+			}
+
+		}
+
+		// Assume access form has been fixed
+		$access_form_fixed = true;
+
+		// If CiviCRM has not been fixed
+		if ( ! $this->access_form_fixed() ) {
+
+			// Set flag
+			$access_form_fixed = false;
+
+			// Init access form checkbox
+			$prettify_access = '';
+			if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) {
+				$prettify_access = ' checked="checked"';
+			}
+
+		}
+
+		// Init admin bar checkbox
+		$admin_bar = '';
+		if ( $this->setting_get( 'admin_bar', '0' ) == '1' ) {
+			$admin_bar = ' checked="checked"';
+		}
+
+		// Get post type options
+		$options = $this->post_type_options_get();
+
+		// include template file
+		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/settings.php' );
+	}
+
+
+
+	/**
+	 * Show our multisite settings page.
+	 *
+	 * @since 0.1
+	 */
+	public function page_multisite() {
+
+		// Bail if not network activated
+		//if ( ! $this->is_network_activated() ) return;
+
+		// We must be network admin in multisite
+		if ( is_multisite() AND ! is_super_admin() ) {
+
+			// Disallow
+			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
+
+		}
+
+		// Check user permissions
+		if ( ! current_user_can( 'manage_options' ) ) return;
+
+		// Get admin page URLs
+		$urls = $this->page_get_urls();
+
+		// Init checkbox
+		$main_site_only = '';
+		if ( $this->setting_get( 'main_site_only', '0' ) == '1' ) {
+			$main_site_only = ' checked="checked"';
+		}
+
+		// Include template file
+		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/multisite.php' );
+
+	}
+
+
+
+	/**
+	 * Get admin page URLs.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array $admin_urls The array of admin page URLs.
+	 */
+	public function page_get_urls() {
+
+		// only calculate once
+		if ( isset( $this->urls ) ) { return $this->urls; }
+
+		// init return
+		$this->urls = array();
+
+		// multisite?
+		if ( $this->is_network_activated() ) {
+
+			// get admin page URLs via our adapted method
+			$this->urls['settings'] = $this->network_menu_page_url( 'civicrm_admin_utilities_settings', false );
+			$this->urls['multisite'] = $this->network_menu_page_url( 'civicrm_admin_utilities_multisite', false );
+
+		} else {
+
+			// get admin page URLs
+			$this->urls['settings'] = menu_page_url( 'civicrm_admin_utilities_settings', false );
+			$this->urls['multisite'] = menu_page_url( 'civicrm_admin_utilities_multisite', false );
+
+		}
+
+		// --<
+		return $this->urls;
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Test if CiviCRM plugin is active.
+	 *
+	 * @since 0.1
+	 *
+	 * @return bool True if CiviCRM active, false otherwise.
+	 */
+	public function civicrm_is_active() {
+
+		// Bail if no CiviCRM init function
+		if ( ! function_exists( 'civi_wp' ) ) return false;
+
+		// Try and init CiviCRM
+		return civi_wp()->initialize();
+
+	}
+
+
+
+	/**
+	 * Test if this plugin is network activated.
+	 *
+	 * @since 0.3.4
+	 *
+	 * @return bool $is_network_active True if network activated, false otherwise.
+	 */
+	public function is_network_activated() {
+
+		// Only need to test once
+		static $is_network_active;
+
+		// Have we done this already?
+		if ( isset( $is_network_active ) ) return $is_network_active;
+
+		// If not multisite, it cannot be
+		if ( ! is_multisite() ) {
+
+			// Set flag
+			$is_network_active = false;
+
+			// Kick out
+			return $is_network_active;
+
+		}
+
+		// Make sure plugin file is included when outside admin
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
+
+		// Get path from 'plugins' directory to this plugin
+		$this_plugin = plugin_basename( CIVICRM_ADMIN_UTILITIES_FILE );
+
+		// Test if network active
+		$is_network_active = is_plugin_active_for_network( $this_plugin );
+
+		// --<
+		return $is_network_active;
+
+	}
+
+
+
+	/**
+	 * Get the URL to access a particular menu page.
+	 *
+	 * The URL based on the slug it was registered with. If the slug hasn't been
+	 * registered properly no url will be returned.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @param string $menu_slug The slug name to refer to this menu by (should be unique for this menu).
+	 * @param bool $echo Whether or not to echo the url - default is true.
+	 * @return string $url The URL.
+	 */
+	public function network_menu_page_url( $menu_slug, $echo = true ) {
+
+		global $_parent_pages;
+
+		if ( isset( $_parent_pages[$menu_slug] ) ) {
+			$parent_slug = $_parent_pages[$menu_slug];
+			if ( $parent_slug && ! isset( $_parent_pages[$parent_slug] ) ) {
+				$url = network_admin_url( add_query_arg( 'page', $menu_slug, $parent_slug ) );
+			} else {
+				$url = network_admin_url( 'admin.php?page=' . $menu_slug );
+			}
+		} else {
+			$url = '';
+		}
+
+		$url = esc_url( $url );
+
+		if ( $echo ) echo $url;
+
+		// --<
+		return $url;
+
+	}
+
+
+
+	/**
+	 * Get post type options.
+	 *
+	 * @since 0.1
+	 * @since 0.5.4 Return checkboxes as HTML.
+	 *
+	 * @return str $options The post type options rendered as checkboxes.
+	 */
+	public function post_type_options_get() {
+
+		// Get CPTs with admin UI
+		$args = array(
+			'public'   => true,
+			'show_ui' => true,
+		);
+
+		$output = 'objects'; // Names or objects, note names is the default
+		$operator = 'and'; // 'and' or 'or'
+
+		// Get post types
+		$post_types = get_post_types( $args, $output, $operator );
+
+		// Init outputs
+		$output = array();
+		$options = '';
+
+		// Get chosen post types
+		$selected_types = $this->setting_get( 'post_types', array() );
+
+		// Sanity check
+		if ( count( $post_types ) > 0 ) {
+
+			foreach( $post_types AS $post_type ) {
+
+				// Filter only those which have an editor
+				if ( post_type_supports( $post_type->name, 'editor' ) ) {
+
+					$checked = '';
+					if ( in_array( $post_type->name, $selected_types ) ) {
+						$checked = ' checked="checked"';
+					}
+
+					// Add checkbox
+					$output[] = '<p><input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_post_types[]" value="' . esc_attr( $post_type->name ) . '"' . $checked . ' /> <label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_post_types">' . esc_html( $post_type->labels->singular_name ) . ' (' . esc_html( $post_type->name ) . ')</label></p>';
+
+				}
+
+			}
+
+			// Implode
+			$options = implode( "\n", $output );
+
+		}
+
+		// --<
+		return $options;
+
+	}
+
+
+
+	/**
+	 * Get the URL for the form action.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string $target_url The URL for the admin form action.
+	 */
+	public function admin_form_url_get() {
+
+		// Sanitise admin page url
+		$target_url = $_SERVER['REQUEST_URI'];
+		$url_array = explode( '&', $target_url );
+
+		if ( ! empty( $url_array ) ) {
+
+			// Strip flag if present
+			$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
+
+			// Rebuild
+			$target_url = htmlentities( $url_raw . '&updated=true' );
+
+		}
+
+		// --<
+		return $target_url;
+
+	}
+
+
+
+	/**
+	 * Check if CiviCRM's WordPress Access Control template has been fixed.
+	 *
+	 * @since 0.3.2
+	 *
+	 * @return bool $fixed True if fixed, false otherwise.
+	 */
+	public function access_form_fixed() {
+
+		// Always true if already fixed in CiviCRM
+		if ( $this->setting_get( 'access_fixed', '0' ) == '1' ) return true;
+
+		// Avoid recalculation
+		if ( isset( $this->fixed ) ) return $this->fixed;
+
+		// Init property
+		$this->fixed = false;
+
+		// Get current version
+		$version = CRM_Utils_System::version();
+
+		// Find major version
+		$parts = explode( '.', $version );
+		$major_version = $parts[0] . '.' . $parts[1];
+
+		// CiviCRM 4.6 is LTS and may have the fix back-ported at some point
+		if ( version_compare( $major_version, '4.6', '=' ) ) {
+			//if ( version_compare( $version, '4.6.38', '>=' ) ) $this->fixed = true;
+		} else {
+			if ( version_compare( $version, '4.7.30', '>=' ) ) $this->fixed = true;
+		}
+
+		$e = new Exception;
+		$trace = $e->getTraceAsString();
+		error_log( print_r( array(
+			'method' => __METHOD__,
+			'version' => $version,
+			'major_version' => $major_version,
+			//'backtrace' => $trace,
+		), true ) );
+
+		// Save setting if fixed
+		if ( $this->fixed ) {
+			$this->setting_set( 'access_fixed', '1' );
+			$this->settings_save();
+		}
+
+		// --<
+		return $this->fixed;
+
+	}
+
+
+
+	/**
+	 * Clear CiviCRM caches.
+	 *
+	 * Another way to do this might be:
+	 * CRM_Core_Invoke::rebuildMenuAndCaches(TRUE);
+	 *
+	 * @since 0.1
+	 */
+	public function clear_caches() {
+
+		// Init or die
+		if ( ! $this->civicrm_is_active() ) return;
+
+		// Access config object
+		$config = CRM_Core_Config::singleton();
+
+		// Clear db cache
+		CRM_Core_Config::clearDBCache();
+
+		// Cleanup the templates_c directory
+		$config->cleanup( 1, TRUE );
+
+		// Cleanup the session object
+		$session = CRM_Core_Session::singleton();
+		$session->reset( 1 );
+
+	}
+
+
+
+	//##########################################################################
+
+
+
 	/**
 	 * Get default settings values for this plugin.
 	 *
@@ -334,828 +1014,207 @@ class CiviCRM_Admin_Utilities_Admin {
 
 
 	/**
-	 * Add an admin page for this plugin.
+	 * Route settings updates to relevant methods.
 	 *
-	 * @since 0.1
+	 * @since 0.5.4
+	 *
+	 * @return bool $result True on success, false otherwise.
 	 */
-	public function admin_menu() {
+	public function settings_update_router() {
 
-		// We must be network admin in multisite
-		if ( is_multisite() AND ! is_super_admin() ) return;
+		// Init return
+		$result = false;
 
-		// Check user permissions
-		if ( ! current_user_can( 'manage_options' ) ) return;
+		// was the "Settings" form submitted?
+		if ( isset( $_POST['civicrm_admin_utilities_settings_submit'] ) ) {
+			$result = $this->settings_general_update();
+		}
 
-		// Try and update options
-		$saved = $this->update_options();
+	 	// was the "Multisite" form submitted?
+		if ( isset( $_POST['civicrm_admin_utilities_multisite_submit'] ) ) {
+			$result = $this->settings_multisite_update();
+		}
 
-		// Multisite and network activated?
-		if ( $this->is_network_activated() ) {
+		// --<
+		return $result;
 
-			// Add the admin page to the Network Settings menu
-			$this->settings_page = add_submenu_page(
-				'settings.php',
-				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				'manage_options',
-				'civicrm_admin_utilities',
-				array( $this, 'admin_form' )
-			);
+	}
 
+
+
+	/**
+	 * Update options supplied by our Settings admin page.
+	 *
+	 * @since 0.5.4
+	 */
+	public function settings_general_update() {
+
+		// Check that we trust the source of the data
+		check_admin_referer( 'civicrm_admin_utilities_settings_action', 'civicrm_admin_utilities_settings_nonce' );
+
+		// Init vars
+		$civicrm_admin_utilities_menu = '';
+		$civicrm_admin_utilities_access = '';
+		$civicrm_admin_utilities_post_types = array();
+		$civicrm_admin_utilities_cache = '';
+		$civicrm_admin_utilities_admin_bar = '';
+		$civicrm_admin_utilities_styles_default = '';
+		$civicrm_admin_utilities_styles_nav = '';
+		$civicrm_admin_utilities_styles_shoreditch = '';
+		$civicrm_admin_utilities_styles_bootstrap = '';
+		$civicrm_admin_utilities_styles_custom = '';
+		$civicrm_admin_utilities_styles_custom_public = '';
+		$civicrm_admin_utilities_styles_admin = '';
+
+		// Get variables
+		extract( $_POST );
+
+		// Init force cache-clearing flag
+		$force = false;
+
+		// Get existing menu setting
+		$existing_menu = $this->setting_get( 'prettify_menu', '0' );
+		if ( $civicrm_admin_utilities_menu != $existing_menu ) {
+			$force = true;
+		}
+
+		// Did we ask to prettify the menu?
+		if ( $civicrm_admin_utilities_menu == '1' ) {
+			$this->setting_set( 'prettify_menu', '1' );
 		} else {
-
-			// Add the admin page to the Settings menu
-			$this->settings_page = add_options_page(
-				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				'manage_options',
-				'civicrm_admin_utilities',
-				array( $this, 'admin_form' )
-			);
-
+			$this->setting_set( 'prettify_menu', '0' );
 		}
 
-		// Add styles only on our admin page, see:
-		// Http://codex.wordpress.org/Function_Reference/wp_enqueue_script#Load_scripts_only_on_plugin_pages
-		//add_action( 'admin_print_styles-' . $this->settings_page, array( $this, 'add_admin_styles' ) );
-
-	}
-
-
-
-	/**
-	 * Show our admin page.
-	 *
-	 * @since 0.1
-	 */
-	public function admin_form() {
-
-		// We must be network admin in multisite
-		if ( is_multisite() AND ! is_super_admin() ) {
-
-			// Disallow
-			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
-
+		// Did we ask to prevent default styleheet?
+		if ( $civicrm_admin_utilities_styles_default == '1' ) {
+			$this->setting_set( 'css_default', '1' );
+		} else {
+			$this->setting_set( 'css_default', '0' );
 		}
 
-		// Get sanitised admin page url
-		$url = $this->admin_form_url_get();
-
-		// Open admin page
-		echo '
-
-		<div class="wrap" id="civicrm_admin_utilities_wrapper">
-
-		<div class="icon32" id="icon-options-general"><br/></div>
-
-		<h2>' . __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ) . '</h2>
-
-		<hr>
-
-		<form method="post" action="' . $url . '">
-
-		' . wp_nonce_field( 'civicrm_admin_utilities_admin_action', 'civicrm_admin_utilities_nonce', true, false ) . '
-
-		';
-
-		// Open div
-		echo '<div id="civicrm_admin_utilities_admin_options">';
-
-		// Multisite
-		$this->admin_form_multisite_options();
-
-		// Styling
-		$this->admin_form_styling_options();
-
-		// Restrict stylesheets on front-end
-		$this->admin_form_stylesheets();
-
-		// Access form
-		$this->admin_form_access_options();
-
-		// Admin bar
-		$this->admin_form_admin_bar_options();
-
-		// Post types
-		$this->admin_form_post_type_options();
-
-		// Useful utilities
-		$this->admin_form_utilities();
-
-		// Close div
-		echo '</div>';
-
-		// Show submit button
-		echo '
-
-		<p class="submit">
-			<input type="submit" id="civicrm_admin_utilities_submit" name="civicrm_admin_utilities_submit" value="' . __( 'Submit', 'civicrm-admin-utilities' ) . '" class="button-primary" />
-		</p>
-
-		';
-
-		// Close form
-		echo '
-
-		</form>
-
-		</div>
-		' . "\n\n\n\n";
-
-	}
-
-
-
-	/**
-	 * Get multisite options.
-	 *
-	 * @since 0.1
-	 */
-	public function admin_form_multisite_options() {
-
-		// Bail if not network activated
-		if ( ! $this->is_network_activated() ) return;
-
-		// Init checkbox
-		$main_site_only = '';
-		if ( $this->setting_get( 'main_site_only', '0' ) == '1' ) $main_site_only = ' checked="checked"';
-
-		// Show sync
-		echo '
-		<h3>' . __( 'Multisite Options', 'civicrm-admin-utilities' ) . '</h3>
-
-		<p>' . __( 'In multisite, CiviCRM currently loads on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item and CiviCRM shortcode button to the main site only.', 'civicrm-admin-utilities' ) . '</p>
-
-		<table class="form-table">
-
-			<tr>
-				<th scope="row">' . __( 'Restrict CiviCRM', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_main_site" id="civicrm_admin_utilities_main_site" value="1"' . $main_site_only . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_main_site">' . __( 'Restrict CiviCRM to main site only.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-		</table>
-
-		<hr>' . "\n\n";
-
-	}
-
-
-
-	/**
-	 * Render "CiviCRM Style Settings" options.
-	 *
-	 * @since 0.1
-	 */
-	public function admin_form_styling_options() {
-
-		// Init checkbox
-		$prettify_menu = '';
-		if ( $this->setting_get( 'prettify_menu', '0' ) == '1' ) $prettify_menu = ' checked="checked"';
-
-		// Init checkbox
-		$admin_css = '';
-		if ( $this->setting_get( 'css_admin', '0' ) == '1' ) $admin_css = ' checked="checked"';
-
-		// Show sync
-		echo '
-		<h3>' . __( 'CiviCRM Admin Appearance', 'civicrm-admin-utilities' ) . '</h3>
-
-		<p>' . __( 'Checking these options applies styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin styles, then check the box for "CiviCRM Menu" and leave "CiviCRM Admin" unchecked.', 'civicrm-admin-utilities' ) . '</p>
-
-		<table class="form-table">
-
-			<tr>
-				<th scope="row">' . __( 'CiviCRM Menu', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"' . $prettify_menu . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu">' . __( 'Check this to apply to the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">' . __( 'CiviCRM Admin', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_admin" id="civicrm_admin_utilities_styles_admin" value="1"' . $admin_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_admin">' . __( 'Check this to apply to CiviCRM Admin.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-		</table>
-
-		<hr>' . "\n\n";
-
-	}
-
-
-
-	/**
-	 * Render "Stylesheet Options" options.
-	 *
-	 * @since 0.4.1
-	 */
-	public function admin_form_stylesheets() {
-
-		// Init checkboxes
-		$default_css = '';
-		if ( $this->setting_get( 'css_default', '0' ) == '1' ) $default_css = ' checked="checked"';
-		$navigation_css = '';
-		if ( $this->setting_get( 'css_navigation', '0' ) == '1' ) $navigation_css = ' checked="checked"';
-
-		// Show sync
-		echo '
-		<h3>' . __( 'CiviCRM Stylesheets', 'civicrm-admin-utilities' ) . '</h3>
-
-		<p>' . __( 'This section allows you to configure how various CiviCRM stylesheets are loaded on your website. This is useful if you have created custom styles for CiviCRM in your theme, for example. By default, this plugin prevents the CiviCRM menu stylesheet from loading on the front-end, since the CiviCRM menu itself is only ever present in WordPress admin.', 'civicrm-admin-utilities' ) . '</p>
-
-		<table class="form-table">
-
-			<tr>
-				<th scope="row">' . __( 'Default CiviCRM stylesheet', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_default" id="civicrm_admin_utilities_styles_default" value="1"' . $default_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_default">' . __( 'Check this to prevent the default CiviCRM stylesheet (civicrm.css) from loading on Public Pages.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">' . __( 'CiviCRM Menu stylesheet', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_nav" id="civicrm_admin_utilities_styles_nav" value="1"' . $navigation_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_nav">' . __( 'Check this to prevent the CiviCRM menu stylesheet (civicrmNavigation.css) from loading on Public Pages.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-			' . $this->admin_form_custom_stylesheet_options() . '
-
-			' . $this->admin_form_shoreditch_stylesheet_options() . '
-
-		</table>
-
-		<hr>' . "\n\n";
-
-	}
-
-
-
-	/**
-	 * Render "Custom Stylesheet" options.
-	 *
-	 * @since 0.4.1
-	 */
-	public function admin_form_custom_stylesheet_options() {
-
-		global $civicrm_admin_utilities;
-
-		// Bail if Shoreditch CSS is present
-		if ( $civicrm_admin_utilities->shoreditch_is_active() ) return;
-
-		// Init checkboxes
-		$custom_css = '';
-		if ( $this->setting_get( 'css_custom', '0' ) == '1' ) $custom_css = ' checked="checked"';
-		$custom_public_css = '';
-		if ( $this->setting_get( 'css_custom_public', '0' ) == '1' ) $custom_public_css = ' checked="checked"';
-
-		// Define section markup
-		$section = '
-			<tr>
-				<th scope="row">' . __( 'Custom Stylesheet on Public Pages', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom" id="civicrm_admin_utilities_styles_custom" value="1"' . $custom_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom">' . __( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading on Public Pages.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">' . __( 'Custom Stylesheet in CiviCRM Admin', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom_public" id="civicrm_admin_utilities_styles_custom_public" value="1"' . $custom_public_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom_public">' . __( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading in CiviCRM Admin.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-		';
-
-		// --<
-		return $section;
-
-	}
-
-
-
-	/**
-	 * Render "Shoreditch Stylesheet" options.
-	 *
-	 * @since 0.4.1
-	 */
-	public function admin_form_shoreditch_stylesheet_options() {
-
-		global $civicrm_admin_utilities;
-
-		// Bail if no Shoreditch CSS
-		if ( ! $civicrm_admin_utilities->shoreditch_is_active() ) return;
-
-		// Init checkbox
-		$shoreditch_css = '';
-		if ( $this->setting_get( 'css_shoreditch', '0' ) == '1' ) $shoreditch_css = ' checked="checked"';
-		$bootstrap_css = '';
-		if ( $this->setting_get( 'css_bootstrap', '0' ) == '1' ) $bootstrap_css = ' checked="checked"';
-
-		// Define section markup
-		$section = '
-			<tr>
-				<th scope="row">' . __( 'Shoreditch stylesheet', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_shoreditch" id="civicrm_admin_utilities_styles_shoreditch" value="1"' . $shoreditch_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_shoreditch">' . __( 'Check this to prevent the Shoreditch extension stylesheet from loading (civicrm-custom.css).', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">' . __( 'Shoreditch Bootstrap stylesheet', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_bootstrap" id="civicrm_admin_utilities_styles_bootstrap" value="1"' . $bootstrap_css . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_bootstrap">' . __( 'Check this to prevent the Shoreditch extension Bootstrap stylesheet from loading (bootstrap.css).', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-		';
-
-		// --<
-		return $section;
-
-	}
-
-
-
-	/**
-	 * Render "WordPress Access Control" options.
-	 *
-	 * @since 0.3.2
-	 */
-	public function admin_form_access_options() {
-
-		// Bail if CiviCRM has been fixed
-		if ( $this->access_form_fixed() ) return;
-
-		// Init checkbox
-		$prettify_access = '';
-		if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) $prettify_access = ' checked="checked"';
-
-		// Show sync
-		echo '
-		<h3>' . __( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ) . '</h3>
-
-		<p>' . __( 'Checking this option fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</li>
-		</ol>
-
-		<table class="form-table">
-
-			<tr>
-				<th scope="row">' . __( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_access" id="civicrm_admin_utilities_access" value="1"' . $prettify_access . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_access">' . __( 'Check this to fix the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-		</table>
-
-		<hr>' . "\n\n";
-
-	}
-
-
-
-	/**
-	 * Get admin bar options.
-	 *
-	 * @since 0.1
-	 */
-	public function admin_form_admin_bar_options() {
-
-		// Init checkbox
-		$admin_bar = '';
-		if ( $this->setting_get( 'admin_bar', '0' ) == '1' ) $admin_bar = ' checked="checked"';
-
-		// Show
-		echo '
-		<h3>' . __( 'Admin Bar Options', 'civicrm-admin-utilities' ) . '</h3>
-
-		<p>' . __( 'Some people find it helpful to have links directly to CiviCRM components available from the WordPress admin bar.', 'civicrm-admin-utilities' ) . '</p>
-
-		<table class="form-table">
-
-			<tr>
-				<th scope="row">' . __( 'Shortcuts Menu', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_admin_bar" id="civicrm_admin_utilities_admin_bar" value="1"' . $admin_bar . ' />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_admin_bar">' . __( 'Check this to add a CiviCRM Shortcuts Menu to the WordPress admin bar.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-		</table>
-
-		<hr>' . "\n\n";
-
-	}
-
-
-
-	/**
-	 * Get post type options.
-	 *
-	 * @since 0.1
-	 */
-	public function admin_form_post_type_options() {
-
-		// Get CPTs with admin UI
-		$args = array(
-			'public'   => true,
-			'show_ui' => true,
-		);
-
-		$output = 'objects'; // Names or objects, note names is the default
-		$operator = 'and'; // 'and' or 'or'
-
-		// Get post types
-		$post_types = get_post_types( $args, $output, $operator );
-
-		// Init outputs
-		$output = array();
-		$options = '';
-
-		// Get chosen post types
-		$selected_types = $this->setting_get( 'post_types', array() );
-
-		// Sanity check
-		if ( count( $post_types ) > 0 ) {
-
-			foreach( $post_types AS $post_type ) {
-
-				// Filter only those which have an editor
-				if ( post_type_supports( $post_type->name, 'editor' ) ) {
-
-					$checked = '';
-					if ( in_array( $post_type->name, $selected_types ) ) $checked = ' checked="checked"';
-
-					// Add checkbox
-					$output[] = '<p><input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_post_types[]" value="' . esc_attr( $post_type->name ) . '"' . $checked . ' /> <label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_post_types">' . esc_html( $post_type->labels->singular_name ) . ' (' . esc_html( $post_type->name ) . ')</label></p>';
-
+		// Did we ask to prevent navigation styleheet?
+		if ( $civicrm_admin_utilities_styles_nav == '1' ) {
+			$this->setting_set( 'css_navigation', '1' );
+		} else {
+			$this->setting_set( 'css_navigation', '0' );
+		}
+
+		// Did we ask to prevent Shoreditch styleheet?
+		if ( $civicrm_admin_utilities_styles_shoreditch == '1' ) {
+			$this->setting_set( 'css_shoreditch', '1' );
+		} else {
+			$this->setting_set( 'css_shoreditch', '0' );
+		}
+
+		// Did we ask to prevent Shoreditch Bootstrap styleheet?
+		if ( $civicrm_admin_utilities_styles_bootstrap == '1' ) {
+			$this->setting_set( 'css_bootstrap', '1' );
+		} else {
+			$this->setting_set( 'css_bootstrap', '0' );
+		}
+
+		// Did we ask to prevent CiviCRM custom styleheet from front-end?
+		if ( $civicrm_admin_utilities_styles_custom == '1' ) {
+			$this->setting_set( 'css_custom', '1' );
+		} else {
+			$this->setting_set( 'css_custom', '0' );
+		}
+
+		// Did we ask to prevent CiviCRM custom styleheet from admin?
+		if ( $civicrm_admin_utilities_styles_custom_public == '1' ) {
+			$this->setting_set( 'css_custom_public', '1' );
+		} else {
+			$this->setting_set( 'css_custom_public', '0' );
+		}
+
+		// Did we ask to override CiviCRM Default styleheet?
+		if ( $civicrm_admin_utilities_styles_admin == '1' ) {
+			$this->setting_set( 'css_admin', '1' );
+		} else {
+			$this->setting_set( 'css_admin', '0' );
+		}
+
+		// Get existing access setting
+		$existing_access = $this->setting_get( 'prettify_access', '0' );
+		if ( $civicrm_admin_utilities_access != $existing_access ) {
+			$force = true;
+		}
+
+		// Did we ask to fix the access form?
+		if ( $civicrm_admin_utilities_access == '1' ) {
+			$this->setting_set( 'prettify_access', '1' );
+		} else {
+			$this->setting_set( 'prettify_access', '0' );
+		}
+
+		// Which post types are we enabling the CiviCRM button on?
+		if ( count( $civicrm_admin_utilities_post_types ) > 0 ) {
+
+			// Sanitise array
+			array_walk(
+				$civicrm_admin_utilities_post_types,
+				function( &$item ) {
+					$item = esc_sql( trim( $item ) );
 				}
+			);
 
-			}
+			// Set option
+			$this->setting_set( 'post_types', $civicrm_admin_utilities_post_types );
 
-			// Implode
-			$options = implode( "\n", $output );
-
-		}
-
-		// Show sync
-		echo '
-		<h3>' . __( 'Post Type Options', 'civicrm-admin-utilities' ) . '</h3>
-
-		<p>' . __( 'Select which post types you want the CiviCRM shortcode button to appear on.', 'civicrm-admin-utilities' ) . '</p>
-
-		' . $options . '
-
-		<hr>' . "\n\n";
-
-	}
-
-
-
-	/**
-	 * Get utility links.
-	 *
-	 * @since 0.1
-	 */
-	public function admin_form_utilities() {
-
-		// Show sync
-		echo '
-		<h3>' . __( 'Miscellaneous Utilities', 'civicrm-admin-utilities' ) . '</h3>
-
-		<p>' . __( 'Some useful functions and shortcuts to various commonly used CiviCRM admin pages.', 'civicrm-admin-utilities' ) . '</p>
-
-		<table class="form-table">
-
-			<tr>
-				<th scope="row">' . __( 'Clear Caches', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_cache" id="civicrm_admin_utilities_cache" value="1" />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_cache">' . __( 'Check this to clear the CiviCRM caches.', 'civicrm-admin-utilities' ) . '</label>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">' . __( 'Rebuild Menu', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/menu/rebuild?reset=1">' . __( 'Click this to rebuild the CiviCRM menu.', 'civicrm-admin-utilities' ) . '</a>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">' . __( 'Rebuild Database Triggers', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/menu/rebuild?reset=1&triggerRebuild=1">' . __( 'Click this to rebuild the triggers in the CiviCRM database.', 'civicrm-admin-utilities' ) . '</a>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">' . __( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ) . '</th>
-				<td>
-					<a href="' . admin_url( 'admin.php' ) . '?page=CiviCRM&q=civicrm/upgrade&reset=1">' . __( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ) . '</a>
-				</td>
-			</tr>
-
-		</table>
-
-		<hr>' . "\n\n";
-
-	}
-
-
-
-	/**
-	 * Get the URL for the form action.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string $target_url The URL for the admin form action.
-	 */
-	public function admin_form_url_get() {
-
-		// Sanitise admin page url
-		$target_url = $_SERVER['REQUEST_URI'];
-		$url_array = explode( '&', $target_url );
-
-		if ( $url_array ) {
-
-			// Strip flag if present
-			$url_array[0] = str_replace( '&amp;updated=true', '', $url_array[0] );
-
-			// Rebuild
-			$target_url = htmlentities( $url_array[0] . '&updated=true' );
-
-		}
-
-		// --<
-		return $target_url;
-
-	}
-
-
-
-
-	//##########################################################################
-
-
-
-	/**
-	 * Update options supplied by our admin page.
-	 *
-	 * @since 0.1
-	 */
-	public function update_options() {
-
-	 	// Was the form submitted?
-		if( isset( $_POST['civicrm_admin_utilities_submit'] ) ) {
-
-			// Check that we trust the source of the data
-			check_admin_referer( 'civicrm_admin_utilities_admin_action', 'civicrm_admin_utilities_nonce' );
-
-			// Init vars
-			$civicrm_admin_utilities_main_site = '';
-			$civicrm_admin_utilities_menu = '';
-			$civicrm_admin_utilities_access = '';
-			$civicrm_admin_utilities_post_types = array();
-			$civicrm_admin_utilities_cache = '';
-			$civicrm_admin_utilities_admin_bar = '';
-			$civicrm_admin_utilities_styles_default = '';
-			$civicrm_admin_utilities_styles_nav = '';
-			$civicrm_admin_utilities_styles_shoreditch = '';
-			$civicrm_admin_utilities_styles_bootstrap = '';
-			$civicrm_admin_utilities_styles_custom = '';
-			$civicrm_admin_utilities_styles_custom_public = '';
-			$civicrm_admin_utilities_styles_admin = '';
-
-			// Get variables
-			extract( $_POST );
-
-			// Init force cache-clearing flag
-			$force = false;
-
-			// Did we ask to remove the menu on sub-sites?
-			if ( $civicrm_admin_utilities_main_site == '1' ) {
-				$this->setting_set( 'main_site_only', '1' );
-			} else {
-				$this->setting_set( 'main_site_only', '0' );
-			}
-
-			// Get existing menu setting
-			$existing_menu = $this->setting_get( 'prettify_menu', '0' );
-			if ( $civicrm_admin_utilities_menu != $existing_menu ) {
-				$force = true;
-			}
-
-			// Did we ask to prettify the menu?
-			if ( $civicrm_admin_utilities_menu == '1' ) {
-				$this->setting_set( 'prettify_menu', '1' );
-			} else {
-				$this->setting_set( 'prettify_menu', '0' );
-			}
-
-			// Did we ask to prevent default styleheet?
-			if ( $civicrm_admin_utilities_styles_default == '1' ) {
-				$this->setting_set( 'css_default', '1' );
-			} else {
-				$this->setting_set( 'css_default', '0' );
-			}
-
-			// Did we ask to prevent navigation styleheet?
-			if ( $civicrm_admin_utilities_styles_nav == '1' ) {
-				$this->setting_set( 'css_navigation', '1' );
-			} else {
-				$this->setting_set( 'css_navigation', '0' );
-			}
-
-			// Did we ask to prevent Shoreditch styleheet?
-			if ( $civicrm_admin_utilities_styles_shoreditch == '1' ) {
-				$this->setting_set( 'css_shoreditch', '1' );
-			} else {
-				$this->setting_set( 'css_shoreditch', '0' );
-			}
-
-			// Did we ask to prevent Shoreditch Bootstrap styleheet?
-			if ( $civicrm_admin_utilities_styles_bootstrap == '1' ) {
-				$this->setting_set( 'css_bootstrap', '1' );
-			} else {
-				$this->setting_set( 'css_bootstrap', '0' );
-			}
-
-			// Did we ask to prevent CiviCRM custom styleheet from front-end?
-			if ( $civicrm_admin_utilities_styles_custom == '1' ) {
-				$this->setting_set( 'css_custom', '1' );
-			} else {
-				$this->setting_set( 'css_custom', '0' );
-			}
-
-			// Did we ask to prevent CiviCRM custom styleheet from admin?
-			if ( $civicrm_admin_utilities_styles_custom_public == '1' ) {
-				$this->setting_set( 'css_custom_public', '1' );
-			} else {
-				$this->setting_set( 'css_custom_public', '0' );
-			}
-
-			// Did we ask to override CiviCRM Default styleheet?
-			if ( $civicrm_admin_utilities_styles_admin == '1' ) {
-				$this->setting_set( 'css_admin', '1' );
-			} else {
-				$this->setting_set( 'css_admin', '0' );
-			}
-
-			// Get existing access setting
-			$existing_access = $this->setting_get( 'prettify_access', '0' );
-			if ( $civicrm_admin_utilities_access != $existing_access ) {
-				$force = true;
-			}
-
-			// Did we ask to fix the access form?
-			if ( $civicrm_admin_utilities_access == '1' ) {
-				$this->setting_set( 'prettify_access', '1' );
-			} else {
-				$this->setting_set( 'prettify_access', '0' );
-			}
-
-			// Which post types are we enabling the CiviCRM button on?
-			if ( count( $civicrm_admin_utilities_post_types ) > 0 ) {
-
-				// Sanitise array
-				array_walk(
-					$civicrm_admin_utilities_post_types,
-					function( &$item ) {
-						$item = esc_sql( trim( $item ) );
-					}
-				);
-
-				// Set option
-				$this->setting_set( 'post_types', $civicrm_admin_utilities_post_types );
-
-			} else {
-				$this->setting_set( 'post_types', array() );
-			}
-
-			// Did we ask to add the shortcuts menu to the admin bar?
-			if ( $civicrm_admin_utilities_admin_bar == '1' ) {
-				$this->setting_set( 'admin_bar', '1' );
-			} else {
-				$this->setting_set( 'admin_bar', '0' );
-			}
-
-			// Save options
-			$this->settings_save();
-
-			// Clear caches if asked to - or if forced to do so
-			if ( $civicrm_admin_utilities_cache == '1' OR $force ) {
-				$this->clear_caches();
-			}
-
-		}
-
-	}
-
-
-
-	/**
-	 * Test if CiviCRM plugin is active.
-	 *
-	 * @since 0.1
-	 *
-	 * @return bool True if CiviCRM active, false otherwise.
-	 */
-	public function is_active() {
-
-		// Bail if no CiviCRM init function
-		if ( ! function_exists( 'civi_wp' ) ) return false;
-
-		// Try and init CiviCRM
-		return civi_wp()->initialize();
-
-	}
-
-
-
-	/**
-	 * Check if CiviCRM's WordPress Access Control template has been fixed.
-	 *
-	 * @since 0.3.2
-	 *
-	 * @return bool $fixed True if fixed, false otherwise.
-	 */
-	public function access_form_fixed() {
-
-		// Always true if already fixed in CiviCRM
-		if ( $this->setting_get( 'access_fixed', '0' ) == '1' ) return true;
-
-		// Avoid recalculation
-		if ( isset( $this->fixed ) ) return $this->fixed;
-
-		// Init property
-		$this->fixed = false;
-
-		// Get current version
-		$version = CRM_Utils_System::version();
-
-		// Find major version
-		$parts = explode( '.', $version );
-		$major_version = $parts[0] . '.' . $parts[1];
-
-		// CiviCRM 4.6 is LTS and may have the fix back-ported at some point
-		if ( version_compare( $major_version, '4.6', '=' ) ) {
-			//if ( version_compare( $version, '4.6.38', '>=' ) ) $this->fixed = true;
 		} else {
-			if ( version_compare( $version, '4.7.30', '>=' ) ) $this->fixed = true;
+			$this->setting_set( 'post_types', array() );
 		}
 
-		// Save setting if fixed
-		if ( $this->fixed ) {
-			$this->setting_set( 'access_fixed', '1' );
-			$this->settings_save();
+		// Did we ask to add the shortcuts menu to the admin bar?
+		if ( $civicrm_admin_utilities_admin_bar == '1' ) {
+			$this->setting_set( 'admin_bar', '1' );
+		} else {
+			$this->setting_set( 'admin_bar', '0' );
 		}
+
+		// Save options
+		$this->settings_save();
+
+		// Clear caches if asked to - or if forced to do so
+		if ( $civicrm_admin_utilities_cache == '1' OR $force ) {
+			$this->clear_caches();
+		}
+
 
 		// --<
-		return $this->fixed;
-
+		return true;
 	}
 
 
 
 	/**
-	 * Clear CiviCRM caches.
+	 * Update options supplied by our Multisite admin page.
 	 *
-	 * Another way to do this might be:
-	 * CRM_Core_Invoke::rebuildMenuAndCaches(TRUE);
-	 *
-	 * @since 0.1
+	 * @since 0.5.4
 	 */
-	public function clear_caches() {
+	public function settings_multisite_update() {
 
-		// Init or die
-		if ( ! $this->is_active() ) return;
+		// Check that we trust the source of the data
+		check_admin_referer( 'civicrm_admin_utilities_multisite_action', 'civicrm_admin_utilities_multisite_nonce' );
 
-		// Access config object
-		$config = CRM_Core_Config::singleton();
+		// Init vars
+		$civicrm_admin_utilities_main_site = '';
 
-		// Clear db cache
-		CRM_Core_Config::clearDBCache();
+		// Get variables
+		extract( $_POST );
 
-		// Cleanup the templates_c directory
-		$config->cleanup( 1, TRUE );
+		// Did we ask to remove the CiviCRM menu on sub-sites?
+		if ( $civicrm_admin_utilities_main_site == '1' ) {
+			$this->setting_set( 'main_site_only', '1' );
+		} else {
+			$this->setting_set( 'main_site_only', '0' );
+		}
 
-		// Cleanup the session object
-		$session = CRM_Core_Session::singleton();
-		$session->reset( 1 );
+		// Save options
+		$this->settings_save();
+
+		// --<
+		return true;
 
 	}
 
@@ -1265,50 +1324,6 @@ class CiviCRM_Admin_Utilities_Admin {
 
 		// Unset setting
 		unset( $this->settings[$setting_name] );
-
-	}
-
-
-
-	/**
-	 * Test if this plugin is network activated.
-	 *
-	 * @since 0.3.4
-	 *
-	 * @return bool $is_network_active True if network activated, false otherwise.
-	 */
-	public function is_network_activated() {
-
-		// Only need to test once
-		static $is_network_active;
-
-		// Have we done this already?
-		if ( isset( $is_network_active ) ) return $is_network_active;
-
-		// If not multisite, it cannot be
-		if ( ! is_multisite() ) {
-
-			// Set flag
-			$is_network_active = false;
-
-			// Kick out
-			return $is_network_active;
-
-		}
-
-		// Make sure plugin file is included when outside admin
-		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-		}
-
-		// Get path from 'plugins' directory to this plugin
-		$this_plugin = plugin_basename( CIVICRM_ADMIN_UTILITIES_FILE );
-
-		// Test if network active
-		$is_network_active = is_plugin_active_for_network( $this_plugin );
-
-		// --<
-		return $is_network_active;
 
 	}
 

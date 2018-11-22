@@ -230,7 +230,7 @@ class CiviCRM_Admin_Utilities {
 		if ( $this->admin->setting_get( 'prettify_menu', '0' ) == '0' ) return;
 
 		// Kick out if no CiviCRM
-		if ( ! $this->admin->is_active() ) return;
+		if ( ! $this->admin->civicrm_is_active() ) return;
 
 		// Get template instance
 		$template = CRM_Core_Smarty::singleton();
@@ -269,7 +269,7 @@ class CiviCRM_Admin_Utilities {
 		if ( $this->admin->setting_get( 'prettify_access', '0' ) == '0' ) return;
 
 		// Kick out if no CiviCRM
-		if ( ! $this->admin->is_active() ) return;
+		if ( ! $this->admin->civicrm_is_active() ) return;
 
 		// Bail if CiviCRM has been fixed
 		if ( $this->admin->access_form_fixed() ) return;
@@ -367,7 +367,7 @@ class CiviCRM_Admin_Utilities {
 	public function resources_disable() {
 
 		// Kick out if no CiviCRM
-		if ( ! $this->admin->is_active() ) return;
+		if ( ! $this->admin->civicrm_is_active() ) return;
 
 		// Only on back-end
 		if ( is_admin() ) {
@@ -442,7 +442,7 @@ class CiviCRM_Admin_Utilities {
 	public function resource_disable( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// Kick out if no CiviCRM
-		if ( ! $this->admin->is_active() ) return;
+		if ( ! $this->admin->civicrm_is_active() ) return;
 
 		// Get the resource URL
 		$url = $this->resource_get_url( $extension, $file );
@@ -469,7 +469,7 @@ class CiviCRM_Admin_Utilities {
 	public function resource_get_url( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// Kick out if no CiviCRM
-		if ( ! $this->admin->is_active() ) return false;
+		if ( ! $this->admin->civicrm_is_active() ) return false;
 
 		// Get registered URL
 		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
@@ -495,7 +495,7 @@ class CiviCRM_Admin_Utilities {
 	public function custom_css_disable() {
 
 		// Kick out if no CiviCRM
-		if ( ! $this->admin->is_active() ) return;
+		if ( ! $this->admin->civicrm_is_active() ) return;
 
 		// Get CiviCRM config
 		$config = CRM_Core_Config::singleton();
@@ -532,7 +532,7 @@ class CiviCRM_Admin_Utilities {
 		$shoreditch = false;
 
 		// Init CiviCRM
-		if ( ! $this->admin->is_active() ) return $shoreditch;
+		if ( ! $this->admin->civicrm_is_active() ) return $shoreditch;
 
 		// Get the current Custom CSS URL
 		$config = CRM_Core_Config::singleton();
@@ -565,7 +565,7 @@ class CiviCRM_Admin_Utilities {
 		$kam = false;
 
 		// Kick out if no CiviCRM
-		if ( ! $this->admin->is_active() ) return $kam;
+		if ( ! $this->admin->civicrm_is_active() ) return $kam;
 
 		// Kick out if no KAM function
 		if ( ! function_exists( 'kam_civicrm_coreResourceList' ) ) return $kam;
@@ -741,7 +741,7 @@ class CiviCRM_Admin_Utilities {
 		global $wp_admin_bar;
 
 		// Init CiviCRM or bail
-		if ( ! $this->admin->is_active() ) return;
+		if ( ! $this->admin->civicrm_is_active() ) return;
 
 		// Get component info
 		$components = CRM_Core_Component::getEnabledComponents();
@@ -895,7 +895,7 @@ class CiviCRM_Admin_Utilities {
 		$link = '';
 
 		// Init CiviCRM or bail
-		if ( ! $this->admin->is_active() ) return $link;
+		if ( ! $this->admin->civicrm_is_active() ) return $link;
 
 		// Use CiviCRM to construct link
 		$link = CRM_Utils_System::url(
@@ -926,7 +926,7 @@ class CiviCRM_Admin_Utilities {
 	public function check_permission( $permission ) {
 
 		// Always deny if CiviCRM is not active
-		if ( ! $this->admin->is_active() ) return false;
+		if ( ! $this->admin->civicrm_is_active() ) return false;
 
 		// Deny by default
 		$permitted = false;
