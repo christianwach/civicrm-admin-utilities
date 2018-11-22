@@ -598,6 +598,14 @@ class CiviCRM_Admin_Utilities_Admin {
 		// Get post type options
 		$options = $this->post_type_options_get();
 
+		// Do not show tabs by default
+		$show_tabs = false;
+
+		// Check if we need to show tabs
+		if ( is_multisite() ) {
+			$show_tabs = true;
+		}
+
 		// include template file
 		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/settings.php' );
 	}
@@ -1180,9 +1188,9 @@ class CiviCRM_Admin_Utilities_Admin {
 			$this->clear_caches();
 		}
 
-
 		// --<
 		return true;
+
 	}
 
 

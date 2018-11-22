@@ -1,15 +1,17 @@
 <!-- assets/templates/settings.php -->
 <div class="wrap">
 
-	<h1 class="nav-tab-wrapper">
-		<a href="<?php echo $urls['settings']; ?>" class="nav-tab nav-tab-active"><?php _e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
-		<a href="<?php echo $urls['multisite']; ?>" class="nav-tab"><?php _e( 'Multisite', 'civicrm-admin-utilities' ); ?></a>
-	</h1>
+	<?php if ( $show_tabs ) : ?>
+		<h1 class="nav-tab-wrapper">
+			<a href="<?php echo $urls['settings']; ?>" class="nav-tab nav-tab-active"><?php _e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
+			<a href="<?php echo $urls['multisite']; ?>" class="nav-tab"><?php _e( 'Multisite', 'civicrm-admin-utilities' ); ?></a>
+		</h1>
+	<?php else : ?>
+		<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
+		<hr>
+	<?php endif; ?>
 
-	<?php
-
-	// If we've updated, show message
-	if ( $this->is_network_activated() AND isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) : ?>
+	<?php if ( isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) : ?>
 		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
 			<p><strong><?php _e( 'Settings saved.', 'civicrm-admin-utilities' ); ?></strong></p>
 			<button type="button" class="notice-dismiss">

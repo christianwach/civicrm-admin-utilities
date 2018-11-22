@@ -6,19 +6,14 @@
 		<a href="<?php echo $urls['multisite']; ?>" class="nav-tab nav-tab-active"><?php _e( 'Multisite', 'civicrm-admin-utilities' ); ?></a>
 	</h1>
 
-	<?php
-
-	// If we've updated, show message
-	if ( $this->is_network_activated() AND isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) {
-		echo '<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">' .
-				'<p><strong>' . __( 'Settings saved.', 'civicrm-admin-utilities' ) . '</strong></p>' .
-				'<button type="button" class="notice-dismiss">' .
-					'<span class="screen-reader-text">' . __( 'Dismiss this notice.', 'civicrm-admin-utilities' ) . '</span>' .
-				'</button>' .
-			 '</div>';
-	}
-
-	?>
+	<?php if ( isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) : ?>
+		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
+			<p><strong><?php _e( 'Settings saved.', 'civicrm-admin-utilities' ); ?></strong></p>
+			<button type="button" class="notice-dismiss">
+				<span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'civicrm-admin-utilities' ); ?></span>
+			</button>
+		</div>
+	<?php endif; ?>
 
 	<form method="post" id="civicrm_admin_utilities_multisite_form" action="<?php echo $this->admin_form_url_get(); ?>">
 
