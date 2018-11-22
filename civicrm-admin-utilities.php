@@ -15,7 +15,7 @@ Depends: CiviCRM
 
 
 // Set our version here
-define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.5.3' );
+define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.5.4' );
 
 // Trigger logging of 'civicrm_pre' and 'civicrm_post'
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
