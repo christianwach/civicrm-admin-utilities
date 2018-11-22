@@ -8,7 +8,7 @@
 		</h1>
 	<?php else : ?>
 		<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
-		<hr>
+		<hr />
 	<?php endif; ?>
 
 	<?php if ( isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) : ?>
@@ -18,6 +18,16 @@
 				<span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'civicrm-admin-utilities' ); ?></span>
 			</button>
 		</div>
+	<?php endif; ?>
+
+	<?php if ( is_network_admin() AND $this->is_network_activated() ) : ?>
+		<h2><?php _e( 'Default Settings for Multisite', 'civicrm-admin-utilities' ); ?></h2>
+
+		<div class="cau-defaults-notice">
+			<p style="font-weight: bold; color: green; font-size: larger;"><?php _e( 'NETWORK ADMINS PLEASE NOTE: The settings that you choose here will be used as the defaults on all sub-sites where CiviCRM is activated. Each sub-site where CiviCRM is active has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site.', 'civicrm-admin-utilities' ); ?></p>
+		</div>
+
+		<hr />
 	<?php endif; ?>
 
 	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->admin_form_url_get(); ?>">
@@ -48,7 +58,7 @@
 
 		</table>
 
-		<hr>
+		<hr />
 
 		<h3><?php _e( 'CiviCRM Stylesheets', 'civicrm-admin-utilities' ); ?></h3>
 
@@ -112,7 +122,7 @@
 
 		</table>
 
-		<hr>
+		<hr />
 
 		<?php if ( $access_form_fixed === false ) : ?>
 
@@ -133,7 +143,7 @@
 
 			</table>
 
-			<hr>
+			<hr />
 
 		<?php endif; ?>
 
@@ -153,7 +163,7 @@
 
 		</table>
 
-		<hr>
+		<hr />
 
 		<h3><?php _e( 'Post Type Options', 'civicrm-admin-utilities' ); ?></h3>
 
@@ -161,7 +171,7 @@
 
 		<?php echo $options; ?>
 
-		<hr>
+		<hr />
 
 		<h3><?php _e( 'Miscellaneous Utilities', 'civicrm-admin-utilities' ); ?></h3>
 
@@ -200,7 +210,7 @@
 
 		</table>
 
-		<hr>
+		<hr />
 
 		<p class="submit">
 			<input class="button-primary" type="submit" id="civicrm_admin_utilities_settings_submit" name="civicrm_admin_utilities_settings_submit" value="<?php _e( 'Save Changes', 'civicrm-admin-utilities' ); ?>" />
