@@ -16,6 +16,14 @@ Misc CiviCRM style fixes for WordPress
 --------------------------------------------------------------------------------
 */
 
+/* Shoreditch CSS may load on Upgrade screen, so always override top padding or margin */
+html body:not(.toolbar),
+html body.wp-admin:not(.toolbar)
+{
+	padding-top: 0 !important;
+	margin-top: 0 !important;
+}
+
 #crm-container, .crm-container
 {
 	padding-top: 12px;
