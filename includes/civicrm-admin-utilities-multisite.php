@@ -137,6 +137,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * Store the plugin version.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Version is stored in network settings.
 	 */
 	public function store_version() {
 
@@ -151,6 +152,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * Utility to do stuff when an upgrade is required.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Moved from admin class.
 	 */
 	public function upgrade_tasks() {
 
@@ -180,6 +182,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * Delete the legacy "installed" option.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Only deletes network option.
 	 */
 	public function delete_legacy_option() {
 
@@ -206,6 +209,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * will have been reset to the defaults.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Moved from admin class.
 	 */
 	public function maybe_move_settings() {
 
@@ -234,6 +238,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * Utility to do stuff when a settings upgrade is required.
 	 *
 	 * @since 0.4.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 */
 	public function upgrade_settings() {
 
@@ -314,7 +319,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Register hooks.
 	 *
-	 * @since 0.3.4
+	 * @since 0.5.4
 	 */
 	public function register_hooks() {
 
@@ -1034,7 +1039,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * Do not load CiviCRM on sites other than the main site.
 	 *
 	 * @since 0.1
-	 * @since 0.5.4 Relocated here.
+	 * @since 0.5.4 Moved from admin class.
 	 */
 	public function civicrm_on_main_site_only() {
 
@@ -1412,7 +1417,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Save array as site option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @return bool Success or failure.
 	 */
@@ -1428,7 +1434,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Check whether a specified setting exists.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 * @return bool Whether or not the setting exists.
@@ -1450,7 +1457,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Return a value for a specified setting.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 * @param mixed $default The default value if the setting does not exist.
@@ -1473,7 +1481,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Sets a value for a specified setting.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 * @param mixed $value The value of the setting.
@@ -1500,7 +1509,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Deletes a specified setting.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 */
@@ -1525,7 +1535,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Test existence of a specified network option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @return bool $exists Whether or not the option exists.
@@ -1551,7 +1562,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Return a value for a specified network option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @param str $default The default value of the option if it has no value.
@@ -1577,7 +1589,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Set a value for a specified network option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @param mixed $value The value to set the option to.
@@ -1600,7 +1613,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 	/**
 	 * Delete a specified network option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made network-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @return bool $success True if the value of the option was successfully deleted.

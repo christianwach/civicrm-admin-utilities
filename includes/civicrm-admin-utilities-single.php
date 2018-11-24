@@ -115,6 +115,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Store the plugin version.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Moved from admin class.
 	 */
 	public function store_version() {
 
@@ -129,6 +130,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Utility to do stuff when an upgrade is required.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 */
 	public function upgrade_tasks() {
 
@@ -155,6 +157,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Delete the legacy "installed" option.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 */
 	public function delete_legacy_option() {
 
@@ -171,6 +174,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Utility to do stuff when a settings upgrade is required.
 	 *
 	 * @since 0.4.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 */
 	public function upgrade_settings() {
 
@@ -241,7 +245,7 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Register hooks.
 	 *
-	 * @since 0.3.4
+	 * @since 0.5.4
 	 */
 	public function register_hooks() {
 
@@ -632,8 +636,9 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Get post type options.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
 	 * @since 0.5.4 Return checkboxes as HTML.
+	 * @since 0.5.4 Moved from plugin class and made site-specific.
 	 *
 	 * @param array $selected_types The selected post types.
 	 * @return str $options The post type options rendered as checkboxes.
@@ -723,6 +728,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Check if CiviCRM's WordPress Access Control template has been fixed.
 	 *
 	 * @since 0.3.2
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @return bool $fixed True if fixed, false otherwise.
 	 */
@@ -780,7 +786,8 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Another way to do this might be:
 	 * CRM_Core_Invoke::rebuildMenuAndCaches(TRUE);
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class.
 	 */
 	public function clear_caches() {
 
@@ -812,6 +819,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Register directory that CiviCRM searches for the menu template file.
 	 *
 	 * @since 0.3.2
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param object $config The CiviCRM config object.
 	 */
@@ -851,6 +859,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Register directory that CiviCRM searches for the WordPress Access Control template file.
 	 *
 	 * @since 0.3.2
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param object $config The CiviCRM config object.
 	 */
@@ -886,6 +895,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Admin style tweaks.
 	 *
 	 * @since 0.1
+	 * @since 0.5.4 Moved from plugin class.
 	 */
 	public function admin_scripts_enqueue() {
 
@@ -954,6 +964,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Disable CiviCRM resources from front-end.
 	 *
 	 * @since 0.4.1
+	 * @since 0.5.4 Moved from plugin class.
 	 */
 	public function resources_disable() {
 
@@ -1026,6 +1037,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Disable a resource enqueued by CiviCRM.
 	 *
 	 * @since 0.4.1
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param str $extension The name of the extension e.g. 'org.civicrm.shoreditch'. Default is CiviCRM core.
 	 * @param str $file The relative path to the resource. Default is CiviCRM core stylesheet.
@@ -1052,6 +1064,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Get the URL of a resource if it is enqueued by CiviCRM.
 	 *
 	 * @since 0.4.3
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param str $extension The name of the extension e.g. 'org.civicrm.shoreditch'. Default is CiviCRM core.
 	 * @param str $file The relative path to the resource. Default is CiviCRM core stylesheet.
@@ -1082,6 +1095,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Disable any custom CSS file enqueued by CiviCRM.
 	 *
 	 * @since 0.4.2
+	 * @since 0.5.4 Moved from plugin class.
 	 */
 	public function custom_css_disable() {
 
@@ -1114,6 +1128,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Determine if the Shoreditch CSS file is being used.
 	 *
 	 * @since 0.3.4
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @return bool $shoreditch True if Shoreditch CSS file is used, false otherwise.
 	 */
@@ -1147,6 +1162,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Determine if the Keyboard Accessible Menu Extension is being used.
 	 *
 	 * @since 0.4.3
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @return bool $kam True if KAM Extension is active, false otherwise.
 	 */
@@ -1175,6 +1191,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Do not load the CiviCRM shortcode button unless we explicitly enable it.
 	 *
 	 * @since 0.1
+	 * @since 0.5.4 Moved from plugin class.
 	 */
 	public function kill_civi_button() {
 
@@ -1203,6 +1220,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Prevent the loading of the CiviCRM shortcode button.
 	 *
 	 * @since 0.1
+	 * @since 0.5.4 Moved from plugin class.
 	 */
 	public function civi_button_remove() {
 
@@ -1265,6 +1283,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @see CiviCRM_Admin_Utilities_Multisite::shortcuts_menu_switch_back()
 	 *
 	 * @since 0.3
+	 * @since 0.5.4 Moved from plugin class.
 	 */
 	public function shortcuts_menu_add() {
 
@@ -1424,6 +1443,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Get a CiviCRM admin link.
 	 *
 	 * @since 0.3
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param str $path The CiviCRM path.
 	 * @param str $params The CiviCRM parameters.
@@ -1459,6 +1479,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Check a CiviCRM permission.
 	 *
 	 * @since 0.3
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param str $permission The permission string.
 	 * @return bool $permitted True if allowed, false otherwise.
@@ -1495,6 +1516,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Fixes the WordPress Access Control form by building a single table.
 	 *
 	 * @since 0.3
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param string $formName The name of the form.
 	 * @param CRM_Core_Form $form The form object.
@@ -1560,6 +1582,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Utility for tracing calls to hook_civicrm_pre.
 	 *
+	 * @since 0.5.4 Moved from plugin class.
+	 *
 	 * @param string $op the type of database operation.
 	 * @param string $objectName the type of object.
 	 * @param integer $objectId the ID of the object.
@@ -1585,6 +1609,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Utility for tracing calls to hook_civicrm_post.
 	 *
+	 * @since 0.5.4 Moved from plugin class.
+	 *
 	 * @param string $op the type of database operation.
 	 * @param string $objectName the type of object.
 	 * @param integer $objectId the ID of the object.
@@ -1609,6 +1635,8 @@ class CiviCRM_Admin_Utilities_Single {
 
 	/**
 	 * Utility for tracing calls to hook_civicrm_postProcess.
+	 *
+	 * @since 0.5.4 Moved from plugin class.
 	 *
 	 * @param string $formName The name of the form.
 	 * @param object $form The form object.
@@ -1718,6 +1746,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * Update options supplied by our Settings admin page.
 	 *
 	 * @since 0.5.4
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @return bool True if successful, false otherwise (always true at present).
 	 */
@@ -1868,7 +1897,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Save array as option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @return bool Success or failure.
 	 */
@@ -1884,7 +1914,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Check whether a specified setting exists.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 * @return bool Whether or not the setting exists.
@@ -1906,7 +1937,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Return a value for a specified setting.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 * @param mixed $default The default value if the setting does not exist.
@@ -1929,7 +1961,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Sets a value for a specified setting.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 * @param mixed $value The value of the setting.
@@ -1956,7 +1989,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Deletes a specified setting.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param string $setting_name The name of the setting.
 	 */
@@ -1981,7 +2015,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Test existence of a specified option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @return bool $exists Whether or not the option exists.
@@ -2007,7 +2042,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Return a value for a specified option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @param str $default The default value of the option if it has no value.
@@ -2033,7 +2069,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Set a value for a specified option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @param mixed $value The value to set the option to.
@@ -2056,7 +2093,8 @@ class CiviCRM_Admin_Utilities_Single {
 	/**
 	 * Delete a specified option.
 	 *
-	 * @since 0.5.4
+	 * @since 0.1
+	 * @since 0.5.4 Moved from admin class and made site-specific.
 	 *
 	 * @param str $option_name The name of the option.
 	 * @return bool $success True if the option was successfully deleted.
