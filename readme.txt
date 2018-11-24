@@ -65,6 +65,11 @@ If you are upgrading from 0.3.3, therefore, you may need to review the settings 
 
 == Changelog ==
 
+= 0.5.4 =
+
+* Plugin refactor to separate network functionality and for greater extensibility
+* Added option to restrict access to site settings pages
+
 = 0.5.3 =
 
 * Better detection of KAM extension
