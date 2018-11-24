@@ -1,4 +1,4 @@
-<!-- assets/templates/settings.php -->
+<!-- assets/templates/settings-network.php -->
 <div class="wrap">
 
 	<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
