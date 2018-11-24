@@ -41,7 +41,7 @@
 
 			<h3><?php _e( 'Network-wide Settings', 'civicrm-admin-utilities' ); ?></h3>
 
-			<p><?php _e( 'In multisite, when CiviCRM is network-activated, it will load on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item and CiviCRM shortcode button to the main site only.', 'civicrm-admin-utilities' ); ?></p>
+			<p><?php _e( 'When CiviCRM is network-activated in WordPress multisite, it will load on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result there are a number of problems with CiviCRM. So check the following option to restrict the appearance of the CiviCRM UI elements to the main site only.', 'civicrm-admin-utilities' ); ?></p>
 
 			<table class="form-table">
 
@@ -49,7 +49,21 @@
 					<th scope="row"><?php _e( 'Restrict CiviCRM', 'civicrm-admin-utilities' ); ?></th>
 					<td>
 						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_main_site" id="civicrm_admin_utilities_main_site" value="1"<?php echo $main_site_only; ?> />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_main_site"><?php _e( 'Restrict CiviCRM to main site only.', 'civicrm-admin-utilities' ); ?></label>
+						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_main_site"><?php _e( 'Restrict CiviCRM UI elements to main site only.', 'civicrm-admin-utilities' ); ?></label>
+					</td>
+				</tr>
+
+			</table>
+
+			<p><?php _e( 'When CiviCRM is network-activated in WordPress multisite and you have <em>not</em> restricted it to the main site only, you may want to restrict who has access to the CiviCRM Admin Utilities settings page on each site. This is useful if the indvidual site administrators on your network should be prevented from changing the settings that you define here.', 'civicrm-admin-utilities' ); ?></p>
+
+			<table class="form-table">
+
+				<tr>
+					<th scope="row"><?php _e( 'Settings page access', 'civicrm-admin-utilities' ); ?></th>
+					<td>
+						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_restrict_settings_access" id="civicrm_admin_utilities_restrict_settings_access" value="1"<?php echo $restrict_settings_access; ?> />
+						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_main_site"><?php _e( 'Restrict access to CiviCRM Admin Utilities settings page to Network Admins only.', 'civicrm-admin-utilities' ); ?></label>
 					</td>
 				</tr>
 

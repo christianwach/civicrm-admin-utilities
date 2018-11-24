@@ -293,9 +293,15 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function admin_menu() {
 
-		// Set capability
-		// TODO: Will depend on network admin checkbox.
-		$capability = 'manage_options';
+		/**
+		 * Set capability but allow overrides.
+		 *
+		 * @since 0.5.4
+		 *
+		 * @param str The default capability for access to menu items.
+		 * @return str The modified capability for access to menu items.
+		 */
+		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
 
 		// Check user permissions.
 		if ( ! current_user_can( $capability ) ) return;
@@ -462,9 +468,15 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function page_settings() {
 
-		// Set capability.
-		// TODO: Will depend on network admin checkbox.
-		$capability = 'manage_options';
+		/**
+		 * Set capability but allow overrides.
+		 *
+		 * @since 0.5.4
+		 *
+		 * @param str The default capability for access to menu items.
+		 * @return str The modified capability for access to menu items.
+		 */
+		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
 
 		// Check user permissions
 		if ( ! current_user_can( $capability ) ) return;

@@ -237,6 +237,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public function upgrade_settings() {
 
+		// Don't save by default.
+		$save = false;
+
 		// CSS settings may not exist.
 		if ( ! $this->setting_exists( 'css_default' ) ) {
 
@@ -245,7 +248,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'css_default', $settings['css_default'] );
 			$this->setting_set( 'css_navigation', $settings['css_navigation'] );
 			$this->setting_set( 'css_shoreditch', $settings['css_shoreditch'] );
-			$this->settings_save();
+			$save = true;
 
 		}
 
@@ -255,7 +258,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			// Add it from defaults.
 			$settings = $this->settings_get_defaults();
 			$this->setting_set( 'css_bootstrap', $settings['css_bootstrap'] );
-			$this->settings_save();
+			$save = true;
 
 		}
 
@@ -265,7 +268,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			// Add it from defaults.
 			$settings = $this->settings_get_defaults();
 			$this->setting_set( 'css_custom', $settings['css_custom'] );
-			$this->settings_save();
+			$save = true;
 
 		}
 
@@ -275,7 +278,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			// Add it from defaults.
 			$settings = $this->settings_get_defaults();
 			$this->setting_set( 'css_custom_public', $settings['css_custom_public'] );
-			$this->settings_save();
+			$save = true;
 
 		}
 
@@ -285,8 +288,23 @@ class CiviCRM_Admin_Utilities_Multisite {
 			// Add it from defaults.
 			$settings = $this->settings_get_defaults();
 			$this->setting_set( 'css_admin', $settings['css_admin'] );
-			$this->settings_save();
+			$save = true;
 
+		}
+
+		// Restrict settings access setting may not exist.
+		if ( ! $this->setting_exists( 'restrict_settings_access' ) ) {
+
+			// Add it from defaults.
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'restrict_settings_access', $settings['restrict_settings_access'] );
+			$save = true;
+
+		}
+
+		// Save settings if need be.
+		if ( $save === true ) {
+			$this->settings_save();
 		}
 
 	}
@@ -313,6 +331,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 			// Add admin page to Network Settings menu.
 			add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ), 30 );
+
+			// Maybe restrict access to site settings pages.
+			add_filter( 'civicrm_admin_utilities_admin_menu_cap', array( $this, 'page_access_cap' ), 10, 2 );
 
 		}
 
@@ -472,8 +493,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Init page IDs.
 		$pages = array(
-			$this->network_parent_page,
-			$this->network_settings_page,
+			$this->network_parent_page . '-network',
+			$this->network_settings_page . '-network',
 		);
 
 		// Kick out if not our screen.
@@ -481,7 +502,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Add a tab - we can add more later.
 		$screen->add_help_tab( array(
-			'id'      => 'civicrm_admin_utilities',
+			'id'      => 'civicrm_admin_utilities_network',
 			'title'   => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 			'content' => $this->network_admin_help_get(),
 		));
@@ -503,7 +524,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function network_admin_help_get() {
 
 		// Stub help text, to be developed further.
-		$help = '<p>' . __( 'Network Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin.', 'civicrm-admin-utilities' ) . '</p>';
+		$help = '<p>' . __( 'For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin.', 'civicrm-admin-utilities' ) . '</p>';
 
 		// --<
 		return $help;
@@ -523,9 +544,15 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public function admin_menu() {
 
-		// Set capability
-		// TODO: will depend on network admin checkbox.
-		$capability = 'manage_options';
+		/**
+		 * Set capability but allow overrides.
+		 *
+		 * @since 0.5.4
+		 *
+		 * @param str The default capability for access to menu items.
+		 * @return str The modified capability for access to menu items.
+		 */
+		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
 
 		// Check user permissions.
 		if ( ! current_user_can( $capability ) ) return;
@@ -682,6 +709,12 @@ class CiviCRM_Admin_Utilities_Multisite {
 				$main_site_only = ' checked="checked"';
 			}
 
+			// Init settings access checkbox.
+			$restrict_settings_access = '';
+			if ( $this->setting_get( 'restrict_settings_access', '0' ) == '1' ) {
+				$restrict_settings_access = ' checked="checked"';
+			}
+
 		}
 
 		// Init menu CSS checkbox.
@@ -767,8 +800,18 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public function page_multisite() {
 
+		/**
+		 * Set capability but allow overrides.
+		 *
+		 * @since 0.5.4
+		 *
+		 * @param str The default capability for access to menu items.
+		 * @return str The modified capability for access to menu items.
+		 */
+		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
+
 		// Check user permissions.
-		if ( ! current_user_can( 'manage_options' ) ) return;
+		if ( ! current_user_can( $capability ) ) return;
 
 		// Get admin page URLs.
 		$urls = $this->plugin->single->page_get_urls();
@@ -878,7 +921,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Define title.
 		$title = __( 'Multisite', 'civicrm-admin-utilities' );
 
-		// Default to inactive
+		// Default to inactive.
 		$active = '';
 
 		// Make active if it's our subpage.
@@ -888,6 +931,28 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Render tab.
 		echo '<a href="' . $urls['multisite'] . '" class="nav-tab' . $active . '">' . $title . '</a>' . "\n";
+
+	}
+
+
+
+	/**
+	 * Maybe restrict access to site settings pages.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @param str $capability The existing access capability.
+	 * @return str $capability The modified access capability.
+	 */
+	public function page_access_cap( $capability ) {
+
+		// Assign network admin capability if we are restricting access.
+		if ( $this->setting_get( 'restrict_settings_access', '0' ) == '1' ) {
+			$capability = 'manage_network_plugins';
+		}
+
+		// --<
+		return $capability;
 
 	}
 
@@ -1057,6 +1122,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Do not restrict to main site only.
 		$settings['main_site_only'] = '0';
 
+		// Allow site admins access to site settings page.
+		$settings['restrict_settings_access'] = '0';
+
 		// Prettify menu.
 		$settings['prettify_menu'] = '1';
 
@@ -1172,6 +1240,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Init vars.
 		$civicrm_admin_utilities_main_site = '';
+		$civicrm_admin_utilities_restrict_settings_access = '';
 		$civicrm_admin_utilities_menu = '';
 		$civicrm_admin_utilities_access = '';
 		$civicrm_admin_utilities_post_types = array();
@@ -1192,6 +1261,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'main_site_only', '1' );
 		} else {
 			$this->setting_set( 'main_site_only', '0' );
+		}
+
+		// Should we restrict access to site settings pages?
+		if ( $civicrm_admin_utilities_restrict_settings_access == '1' ) {
+			$this->setting_set( 'restrict_settings_access', '1' );
+		} else {
+			$this->setting_set( 'restrict_settings_access', '0' );
 		}
 
 		// Did we ask to prettify the menu?
