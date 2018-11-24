@@ -6,6 +6,19 @@
 	<?php if ( $show_tabs ) : ?>
 		<h1 class="nav-tab-wrapper">
 			<a href="<?php echo $urls['settings']; ?>" class="nav-tab nav-tab-active"><?php _e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
+			<?php
+
+			/**
+			 * Allow others to add tabs.
+			 *
+			 * @since 0.5.4
+			 *
+			 * @param array $urls The array of subpage URLs.
+			 * @param str The key of the active tab in the subpage URLs array.
+			 */
+			do_action( 'civicrm_admin_utilities_network_nav_tabs', $urls, 'settings' );
+
+			?>
 		</h1>
 	<?php else : ?>
 		<hr />
@@ -24,7 +37,7 @@
 
 		<?php wp_nonce_field( 'civicrm_admin_utilities_network_settings_action', 'civicrm_admin_utilities_network_settings_nonce' ); ?>
 
-		<?php if ( $this->is_civicrm_network_activated() ) : ?>
+		<?php if ( $this->plugin->is_civicrm_network_activated() ) : ?>
 
 			<h3><?php _e( 'Network-wide Settings', 'civicrm-admin-utilities' ); ?></h3>
 
@@ -49,7 +62,7 @@
 		<h2><?php _e( 'Default Settings for All Sites', 'civicrm-admin-utilities' ); ?></h2>
 
 		<div class="cau-defaults-notice">
-			<p style="font-weight: bold; color: green; font-size: larger;"><?php _e( 'NETWORK ADMINS PLEASE NOTE: The settings that you choose below will be used as the defaults on all sub-sites where CiviCRM is activated. Each sub-site where CiviCRM is active has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site.', 'civicrm-admin-utilities' ); ?></p>
+			<p style="font-weight: bold; color: green; font-size: larger;"><?php _e( 'NETWORK ADMINS PLEASE NOTE: The settings that you choose below will be used as the initial defaults on all sub-sites where CiviCRM is activated. Each sub-site where CiviCRM is active has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site.', 'civicrm-admin-utilities' ); ?></p>
 		</div>
 
 		<hr />
@@ -102,70 +115,60 @@
 				</td>
 			</tr>
 
-			<?php if ( $shoreditch === false ) : ?>
+			<tr>
+				<th scope="row"><?php _e( 'Custom Stylesheet on Public Pages', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom" id="civicrm_admin_utilities_styles_custom" value="1"<?php echo $custom_css; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom"><?php _e( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading on Public Pages.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
 
-				<tr>
-					<th scope="row"><?php _e( 'Custom Stylesheet on Public Pages', 'civicrm-admin-utilities' ); ?></th>
-					<td>
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom" id="civicrm_admin_utilities_styles_custom" value="1"<?php echo $custom_css; ?> />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom"><?php _e( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading on Public Pages.', 'civicrm-admin-utilities' ); ?></label>
-					</td>
-				</tr>
+			<tr>
+				<th scope="row"><?php _e( 'Custom Stylesheet in CiviCRM Admin', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom_public" id="civicrm_admin_utilities_styles_custom_public" value="1"<?php echo $custom_public_css; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom_public"><?php _e( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading in CiviCRM Admin.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
 
-				<tr>
-					<th scope="row"><?php _e( 'Custom Stylesheet in CiviCRM Admin', 'civicrm-admin-utilities' ); ?></th>
-					<td>
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_custom_public" id="civicrm_admin_utilities_styles_custom_public" value="1"<?php echo $custom_public_css; ?> />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_custom_public"><?php _e( 'Check this to prevent the user-defined CiviCRM custom stylesheet from loading in CiviCRM Admin.', 'civicrm-admin-utilities' ); ?></label>
-					</td>
-				</tr>
+			<tr>
+				<th scope="row"><?php _e( 'Shoreditch stylesheet', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_shoreditch" id="civicrm_admin_utilities_styles_shoreditch" value="1"<?php echo $shoreditch_css; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_shoreditch"><?php _e( 'Check this to prevent the Shoreditch extension stylesheet (civicrm-custom.css) from loading on Public Pages.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
 
-			<?php else : ?>
-
-				<tr>
-					<th scope="row"><?php _e( 'Shoreditch stylesheet', 'civicrm-admin-utilities' ); ?></th>
-					<td>
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_shoreditch" id="civicrm_admin_utilities_styles_shoreditch" value="1"<?php echo $shoreditch_css; ?> />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_shoreditch"><?php _e( 'Check this to prevent the Shoreditch extension stylesheet (civicrm-custom.css) from loading on Public Pages.', 'civicrm-admin-utilities' ); ?></label>
-					</td>
-				</tr>
-
-				<tr>
-					<th scope="row"><?php _e( 'Shoreditch Bootstrap stylesheet', 'civicrm-admin-utilities' ); ?></th>
-					<td>
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_bootstrap" id="civicrm_admin_utilities_styles_bootstrap" value="1"<?php echo $bootstrap_css; ?> />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_bootstrap"><?php _e( 'Check this to prevent the Shoreditch extension Bootstrap stylesheet (bootstrap.css) from loading on Public Pages.', 'civicrm-admin-utilities' ); ?></label>
-					</td>
-				</tr>
-
-			<?php endif; ?>
+			<tr>
+				<th scope="row"><?php _e( 'Shoreditch Bootstrap stylesheet', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_bootstrap" id="civicrm_admin_utilities_styles_bootstrap" value="1"<?php echo $bootstrap_css; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_bootstrap"><?php _e( 'Check this to prevent the Shoreditch extension Bootstrap stylesheet (bootstrap.css) from loading on Public Pages.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
 
 		</table>
 
 		<hr />
 
-		<?php if ( $access_form_fixed === false ) : ?>
+		<h3><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></h3>
 
-			<h3><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></h3>
+		<p><?php _e( 'Checking this option fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></li>
+		</ol>
 
-			<p><?php _e( 'Checking this option fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></li>
-			</ol>
+		<table class="form-table">
 
-			<table class="form-table">
+			<tr>
+				<th scope="row"><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_access" id="civicrm_admin_utilities_access" value="1"<?php echo $prettify_access; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_access"><?php _e( 'Check this to fix the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
 
-				<tr>
-					<th scope="row"><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></th>
-					<td>
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_access" id="civicrm_admin_utilities_access" value="1"<?php echo $prettify_access; ?> />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_access"><?php _e( 'Check this to fix the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></label>
-					</td>
-				</tr>
+		</table>
 
-			</table>
-
-			<hr />
-
-		<?php endif; ?>
+		<hr />
 
 		<h3><?php _e( 'Admin Bar Options', 'civicrm-admin-utilities' ); ?></h3>
 
@@ -185,13 +188,17 @@
 
 		<hr />
 
-		<h3><?php _e( 'Post Type Options', 'civicrm-admin-utilities' ); ?></h3>
+		<?php if ( ! empty( $options ) ) : ?>
 
-		<p><?php _e( 'Select which post types you want the CiviCRM shortcode button to appear on.', 'civicrm-admin-utilities' ); ?></p>
+			<h3><?php _e( 'Post Type Options', 'civicrm-admin-utilities' ); ?></h3>
 
-		<?php echo $options; ?>
+			<p><?php _e( 'Select which post types you want the CiviCRM shortcode button to appear on.', 'civicrm-admin-utilities' ); ?></p>
 
-		<hr />
+			<?php echo $options; ?>
+
+			<hr />
+
+		<?php endif; ?>
 
 		<p class="submit">
 			<input class="button-primary" type="submit" id="civicrm_admin_utilities_network_settings_submit" name="civicrm_admin_utilities_network_settings_submit" value="<?php _e( 'Save Changes', 'civicrm-admin-utilities' ); ?>" />

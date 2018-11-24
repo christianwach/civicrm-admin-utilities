@@ -6,7 +6,19 @@
 	<?php if ( $show_tabs ) : ?>
 		<h2 class="nav-tab-wrapper">
 			<a href="<?php echo $urls['settings']; ?>" class="nav-tab nav-tab-active"><?php _e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
-			<a href="<?php echo $urls['multisite']; ?>" class="nav-tab"><?php _e( 'Multisite', 'civicrm-admin-utilities' ); ?></a>
+			<?php
+
+			/**
+			 * Allow others to add tabs.
+			 *
+			 * @since 0.5.4
+			 *
+			 * @param array $urls The array of subpage URLs.
+			 * @param str The key of the active tab in the subpage URLs array.
+			 */
+			do_action( 'civicrm_admin_utilities_settings_nav_tabs', $urls, 'settings' );
+
+			?>
 		</h2>
 	<?php else : ?>
 		<hr />
