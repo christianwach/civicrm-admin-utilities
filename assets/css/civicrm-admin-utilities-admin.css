@@ -1,8 +1,7 @@
 /**
- * CiviCRM style overrides for WordPress.
+ * CiviCRM admin theme for WordPress.
  *
- * Implements more appropriate and consistent styling for the CiviCRM admin menu
- * as well as other miscellaneous fixes.
+ * Implements a theme for CiviCRM that is more in keeping with WordPress.
  *
  * @package WordPress
  * @subpackage CiviCRM_Admin_Utilities
@@ -46,8 +45,6 @@ Replacement for CiviCRM default styles for WordPress
 */
 
 /**
- * @file: CiviCRM Stylesheet
- *
  * NOTE: The main civicrm container has both class and id of crm-container
  * Other civi blocks outside the main container also have the class crm-container (but not the id)
  * All styles should start with .crm-container unless they are specific to the main div only
