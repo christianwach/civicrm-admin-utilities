@@ -46,15 +46,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public $network_settings_page;
 
 	/**
-	 * Multisite Settings page reference.
-	 *
-	 * @since 0.5.4
-	 * @access public
-	 * @var array $multisite_page The reference to the multisite settings page.
-	 */
-	public $multisite_page;
-
-	/**
 	 * Network Settings data.
 	 *
 	 * @since 0.5.4
@@ -342,21 +333,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
-		// Add Multisite subpage to Single Site Settings menu.
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-
-		// Filter the list of single site subpages when in multisite.
-		add_filter( 'civicrm_admin_utilities_subpages', array( $this, 'admin_subpages_filter' ) );
-
-		// Filter the list of single site page URLs when in multisite.
-		add_filter( 'civicrm_admin_utilities_page_urls', array( $this, 'page_urls_filter' ) );
-
-		// Filter the "show tabs" flag for setting templates.
-		add_filter( 'civicrm_admin_utilities_show_tabs', array( $this, 'page_show_tabs' ) );
-
-		// Add tab to setting templates.
-		add_filter( 'civicrm_admin_utilities_settings_nav_tabs', array( $this, 'page_add_tab' ), 10, 2 );
-
 		// Maybe switch to main site for Shortcuts Menu.
 		// TODO: Are there any situations where we'd like to switch?
 		//add_action( 'civicrm_admin_utilities_menu_before', array( $this, 'shortcuts_menu_switch_to' ) );
@@ -400,7 +376,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_action( 'admin_head-' . $this->network_parent_page, array( $this, 'network_admin_head' ), 50 );
 
 		// Add scripts and styles.
-		//add_action( 'admin_print_styles-' . $this->network_parent_page, array( $this, 'admin_css' ) );
+		//add_action( 'admin_print_scripts-' . $this->network_parent_page, array( $this, 'network_admin_js' ) );
+		//add_action( 'admin_print_styles-' . $this->network_parent_page, array( $this, 'network_admin_css' ) );
 
 		// Add settings page.
 		$this->network_settings_page = add_submenu_page(
@@ -419,7 +396,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_action( 'admin_head-' . $this->network_settings_page, array( $this, 'network_admin_head' ), 50 );
 
 		// Add scripts and styles.
-		//add_action( 'admin_print_styles-' . $this->network_settings_page, array( $this, 'admin_css' ) );
+		//add_action( 'admin_print_scripts-' . $this->network_settings_page, array( $this, 'network_admin_js' ) );
+		//add_action( 'admin_print_styles-' . $this->network_settings_page, array( $this, 'network_admin_css' ) );
 
 		// Try and update options.
 		$saved = $this->settings_update_router();
@@ -530,151 +508,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Stub help text, to be developed further.
 		$help = '<p>' . __( 'For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin.', 'civicrm-admin-utilities' ) . '</p>';
-
-		// --<
-		return $help;
-
-	}
-
-
-
-	//##########################################################################
-
-
-
-	/**
-	 * Add admin menu item(s) for this plugin.
-	 *
-	 * @since 0.5.4
-	 */
-	public function admin_menu() {
-
-		/**
-		 * Set capability but allow overrides.
-		 *
-		 * @since 0.5.4
-		 *
-		 * @param str The default capability for access to menu items.
-		 * @return str The modified capability for access to menu items.
-		 */
-		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
-
-		// Check user permissions.
-		if ( ! current_user_can( $capability ) ) return;
-
-		// Add Multisite page
-		$this->multisite_page = add_submenu_page(
-			'civicrm_admin_utilities_parent', // Parent slug.
-			__( 'CiviCRM Admin Utilities: Multisite', 'civicrm-admin-utilities' ), // Page title.
-			__( 'Multisite', 'civicrm-admin-utilities' ), // Menu title.
-			$capability, // Required caps.
-			'civicrm_admin_utilities_multisite', // Slug name.
-			array( $this, 'page_multisite' ) // Callback.
-		);
-
-		// Ensure correct menu item is highlighted.
-		add_action( 'admin_head-' . $this->multisite_page, array( $this->plugin->single, 'admin_menu_highlight' ), 50 );
-
-		// Add help text.
-		add_action( 'admin_head-' . $this->multisite_page, array( $this, 'admin_head' ), 50 );
-
-		/*
-		// Add scripts and styles.
-		add_action( 'admin_print_scripts-' . $this->multisite_page, array( $this, 'admin_js_multisite_page' ) );
-		add_action( 'admin_print_styles-' . $this->multisite_page, array( $this, 'admin_css' ) );
-		add_action( 'admin_print_styles-' . $this->multisite_page, array( $this, 'admin_css_multisite_page' ) );
-		*/
-
-		// Try and update options.
-		$saved = $this->settings_update_router();
-
-	}
-
-
-
-	/**
-	 * Append the multisite settings page to single site subpages.
-	 *
-	 * This ensures that the correct menu item is highlighted for our Multisite
-	 * subpage in Single Site installs.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @param array $subpages The existing list of subpages.
-	 * @return array $subpages The modified list of subpages.
-	 */
-	public function admin_subpages_filter( $subpages ) {
-
-		// Add multisite settings page.
-		$subpages[] = 'civicrm_admin_utilities_multisite';
-
-		// --<
-		return $subpages;
-
-	}
-
-
-
-	/**
-	 * Initialise plugin help.
-	 *
-	 * @since 0.5.4
-	 */
-	public function admin_head() {
-
-		// Get screen object.
-		$screen = get_current_screen();
-
-		// Pass to method in this class.
-		$this->admin_help( $screen );
-
-	}
-
-
-
-	/**
-	 * Adds help copy to admin page.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @param object $screen The existing WordPress screen object.
-	 * @return object $screen The amended WordPress screen object.
-	 */
-	public function admin_help( $screen ) {
-
-		// Init page IDs.
-		$pages = array(
-			$this->multisite_page,
-		);
-
-		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) return $screen;
-
-		// Add a tab - we can add more later.
-		$screen->add_help_tab( array(
-			'id'      => 'civicrm_admin_utilities_multisite',
-			'title'   => __( 'CiviCRM Admin Utilities Multisite', 'civicrm-admin-utilities' ),
-			'content' => $this->admin_help_get(),
-		));
-
-		// --<
-		return $screen;
-
-	}
-
-
-
-	/**
-	 * Get help text.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @return string $help The help text formatted as HTML.
-	 */
-	public function admin_help_get() {
-
-		// Stub help text, to be developed further.
-		$help = '<p>' . __( 'Multisite Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin.', 'civicrm-admin-utilities' ) . '</p>';
 
 		// --<
 		return $help;
@@ -799,53 +632,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 	/**
-	 * Show our multisite settings page.
-	 *
-	 * @since 0.5.4
-	 */
-	public function page_multisite() {
-
-		/**
-		 * Set capability but allow overrides.
-		 *
-		 * @since 0.5.4
-		 *
-		 * @param str The default capability for access to menu items.
-		 * @return str The modified capability for access to menu items.
-		 */
-		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
-
-		// Check user permissions.
-		if ( ! current_user_can( $capability ) ) return;
-
-		// Get admin page URLs.
-		$urls = $this->plugin->single->page_get_urls();
-
-		// Get CiviCRM domain ID
-		$domain_id = defined( 'CIVICRM_DOMAIN_ID' ) ? CIVICRM_DOMAIN_ID : 1;
-
-		// Get CiviCRM domain group ID
-		$domain_group_id = defined( 'CIVICRM_DOMAIN_GROUP_ID' ) ? CIVICRM_DOMAIN_GROUP_ID : __( 'None set', 'civicrm-admin-utilities' );
-
-		// Get CiviCRM domain group ID
-		$domain_org_id = defined( 'CIVICRM_DOMAIN_ORG_ID' ) ? CIVICRM_DOMAIN_ORG_ID : __( 'None set', 'civicrm-admin-utilities' );
-
-		/*
-		// Init checkbox.
-		$main_site_only = '';
-		if ( $this->setting_get( 'main_site_only', '0' ) == '1' ) {
-			$main_site_only = ' checked="checked"';
-		}
-		*/
-
-		// Include template file.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-multisite.php' );
-
-	}
-
-
-
-	/**
 	 * Get network admin page URLs.
 	 *
 	 * @since 0.5.4
@@ -877,74 +663,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// --<
 		return $this->network_urls;
-
-	}
-
-
-
-	/**
-	 * Append the multisite settings page URL to single site subpage URLs.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @param array $urls The existing list of URLs.
-	 * @return array $urls The modified list of URLs.
-	 */
-	public function page_urls_filter( $urls ) {
-
-		// Add multisite settings page.
-		$urls['multisite'] = menu_page_url( 'civicrm_admin_utilities_multisite', false );
-
-		// --<
-		return $urls;
-
-	}
-
-
-
-	/**
-	 * Show subpage tabs on settings pages.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @param bool $show_tabs True if tabs are shown, false otherwise.
-	 * @return bool $show_tabs True if tabs are to be shown, false otherwise.
-	 */
-	public function page_show_tabs( $show_tabs ) {
-
-		// Always show tabs.
-		$show_tabs = true;
-
-		// --<
-		return $show_tabs;
-
-	}
-
-
-
-	/**
-	 * Add subpage tab to tabs on settings pages.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @param array $urls The array of subpage URLs.
-	 * @param str The key of the active tab in the subpage URLs array.
-	 */
-	public function page_add_tab( $urls, $active_tab ) {
-
-		// Define title.
-		$title = __( 'Multisite', 'civicrm-admin-utilities' );
-
-		// Default to inactive.
-		$active = '';
-
-		// Make active if it's our subpage.
-		if ( $active_tab === 'multisite' ) {
-			$active = ' nav-tab-active';
-		}
-
-		// Render tab.
-		echo '<a href="' . $urls['multisite'] . '" class="nav-tab' . $active . '">' . $title . '</a>' . "\n";
 
 	}
 
@@ -1228,11 +946,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 			return $this->settings_network_update();
 		}
 
-	 	// was the "Multisite" form submitted?
-		if ( isset( $_POST['civicrm_admin_utilities_multisite_submit'] ) ) {
-			return $this->settings_multisite_update();
-		}
-
 		// --<
 		return $result;
 
@@ -1374,43 +1087,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Save options.
 		$this->settings_save();
-
-		// --<
-		return true;
-
-	}
-
-
-
-	/**
-	 * Update options supplied by our Multisite admin page.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @return bool True if successful, false otherwise (always true at present).
-	 */
-	public function settings_multisite_update() {
-
-		// Check that we trust the source of the data.
-		check_admin_referer( 'civicrm_admin_utilities_multisite_action', 'civicrm_admin_utilities_multisite_nonce' );
-
-		/*
-		// Init vars.
-		$civicrm_admin_utilities_main_site = '';
-
-		// Get variables.
-		extract( $_POST );
-
-		// Did we ask to remove the CiviCRM menu on sub-sites?
-		if ( $civicrm_admin_utilities_main_site == '1' ) {
-			$this->plugin->single->setting_set( 'main_site_only', '1' );
-		} else {
-			$this->plugin->single->setting_set( 'main_site_only', '0' );
-		}
-
-		// Save options.
-		$this->plugin->single->settings_save();
-		*/
 
 		// --<
 		return true;

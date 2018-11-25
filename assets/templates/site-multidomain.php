@@ -1,4 +1,4 @@
-<!-- assets/templates/multisite.php -->
+<!-- assets/templates/site-multidomain.php -->
 <div class="wrap">
 
 	<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
@@ -15,7 +15,7 @@
 		 * @param array $urls The array of subpage URLs.
 		 * @param str The key of the active tab in the subpage URLs array.
 		 */
-		do_action( 'civicrm_admin_utilities_settings_nav_tabs', $urls, 'multisite' );
+		do_action( 'civicrm_admin_utilities_settings_nav_tabs', $urls, 'multidomain' );
 
 		?>
 	</h2>
@@ -29,9 +29,9 @@
 		</div>
 	<?php endif; ?>
 
-	<form method="post" id="civicrm_admin_utilities_multisite_form" action="<?php echo $this->page_submit_url_get(); ?>">
+	<form method="post" id="civicrm_admin_utilities_multidomain_form" action="<?php echo $this->page_submit_url_get(); ?>">
 
-		<?php wp_nonce_field( 'civicrm_admin_utilities_multisite_action', 'civicrm_admin_utilities_multisite_nonce' ); ?>
+		<?php wp_nonce_field( 'civicrm_admin_utilities_multidomain_action', 'civicrm_admin_utilities_multidomain_nonce' ); ?>
 
 		<h3><?php _e( 'Multisite Options', 'civicrm-admin-utilities' ); ?></h3>
 
@@ -63,7 +63,7 @@
 		</table>
 
 		<p class="submit">
-			<input class="button-primary" type="submit" id="civicrm_admin_utilities_multisite_submit" name="civicrm_admin_utilities_multisite_submit" value="<?php _e( 'Save Changes', 'civicrm-admin-utilities' ); ?>" />
+			<input class="button-primary" type="submit" id="civicrm_admin_utilities_multidomain_submit" name="civicrm_admin_utilities_multidomain_submit" value="<?php _e( 'Save Changes', 'civicrm-admin-utilities' ); ?>" />
 		</p>
 
 	</form>

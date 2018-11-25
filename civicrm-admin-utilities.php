@@ -65,6 +65,15 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public $multisite;
 
+	/**
+	 * Multidomain CiviCRM object.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var object $admin The multidomain object.
+	 */
+	public $multidomain;
+
 
 
 	/**
@@ -138,6 +147,7 @@ class CiviCRM_Admin_Utilities {
 		// Load our Multisite class.
 		if ( is_multisite() ) {
 			require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multisite.php' );
+			require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multidomain.php' );
 		}
 
 	}
@@ -154,9 +164,10 @@ class CiviCRM_Admin_Utilities {
 		// Always instantiate Single Site class.
 		$this->single = new CiviCRM_Admin_Utilities_Single( $this );
 
-		// Maybe instantiate Multisite class.
+		// Maybe instantiate Multisite classes.
 		if ( is_multisite() ) {
 			$this->multisite = new CiviCRM_Admin_Utilities_Multisite( $this );
+			$this->multidomain = new CiviCRM_Admin_Utilities_Multidomain( $this );
 		}
 
 	}
