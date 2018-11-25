@@ -33,30 +33,30 @@
 
 		<?php wp_nonce_field( 'civicrm_admin_utilities_multidomain_action', 'civicrm_admin_utilities_multidomain_nonce' ); ?>
 
-		<h3><?php _e( 'Multisite Options', 'civicrm-admin-utilities' ); ?></h3>
+		<h3><?php _e( 'CiviCRM Domain Options', 'civicrm-admin-utilities' ); ?></h3>
 
 		<p><?php _e( 'Create or edit the CiviCRM Domain here.', 'civicrm-admin-utilities' ); ?></p>
 
 		<table class="form-table">
 
 			<tr>
-				<th scope="row"><?php _e( 'Domain ID', 'civicrm-admin-utilities' ); ?></th>
+				<th scope="row"><?php _e( 'Domain', 'civicrm-admin-utilities' ); ?></th>
 				<td>
-					<p><?php echo $domain_id; ?></p>
+					<p><?php echo sprintf( __( '%1$s (ID: %2$d)', 'civicrm-admin-utilities' ), $domain_name, $domain_id ); ?></p>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row"><?php _e( 'Domain Group ID', 'civicrm-admin-utilities' ); ?></th>
+				<th scope="row"><?php _e( 'Domain Group', 'civicrm-admin-utilities' ); ?></th>
 				<td>
-					<p><?php echo $domain_group_id; ?></p>
+					<p><?php echo sprintf( __( '%1$s (ID: %2$d)', 'civicrm-admin-utilities' ), $domain_group_name, $domain_group_id ); ?></p>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row"><?php _e( 'Domain Org ID', 'civicrm-admin-utilities' ); ?></th>
+				<th scope="row"><?php _e( 'Domain Org', 'civicrm-admin-utilities' ); ?></th>
 				<td>
-					<p><?php echo $domain_org_id; ?></p>
+					<p><?php echo sprintf( __( '%1$s (ID: %2$d)', 'civicrm-admin-utilities' ), $domain_org_name, $domain_org_id ); ?></p>
 				</td>
 			</tr>
 
