@@ -792,7 +792,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$show_tabs = false;
 
 		// Include template.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/settings-network.php' );
+		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-settings.php' );
 
 	}
 
@@ -830,7 +830,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		*/
 
 		// Include template file.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/multisite.php' );
+		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-multisite.php' );
 
 	}
 

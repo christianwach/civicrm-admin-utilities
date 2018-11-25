@@ -586,7 +586,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$show_tabs = apply_filters( 'civicrm_admin_utilities_show_tabs', false );
 
 		// Include template.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/settings.php' );
+		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-settings.php' );
 
 	}
 
