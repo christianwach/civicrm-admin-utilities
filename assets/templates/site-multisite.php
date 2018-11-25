@@ -40,9 +40,23 @@
 		<table class="form-table">
 
 			<tr>
-				<th scope="row"><?php _e( 'CiviCRM Domain', 'civicrm-admin-utilities' ); ?></th>
+				<th scope="row"><?php _e( 'Domain ID', 'civicrm-admin-utilities' ); ?></th>
 				<td>
-					<p><?php _e( 'Domain stuff here', 'civicrm-admin-utilities' ); ?></p>
+					<p><?php echo $domain_id; ?></p>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row"><?php _e( 'Domain Group ID', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<p><?php echo $domain_group_id; ?></p>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row"><?php _e( 'Domain Org ID', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<p><?php echo $domain_org_id; ?></p>
 				</td>
 			</tr>
 

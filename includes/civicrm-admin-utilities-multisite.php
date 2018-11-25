@@ -821,6 +821,15 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Get admin page URLs.
 		$urls = $this->plugin->single->page_get_urls();
 
+		// Get CiviCRM domain ID
+		$domain_id = defined( 'CIVICRM_DOMAIN_ID' ) ? CIVICRM_DOMAIN_ID : 1;
+
+		// Get CiviCRM domain group ID
+		$domain_group_id = defined( 'CIVICRM_DOMAIN_GROUP_ID' ) ? CIVICRM_DOMAIN_GROUP_ID : __( 'None set', 'civicrm-admin-utilities' );
+
+		// Get CiviCRM domain group ID
+		$domain_org_id = defined( 'CIVICRM_DOMAIN_ORG_ID' ) ? CIVICRM_DOMAIN_ORG_ID : __( 'None set', 'civicrm-admin-utilities' );
+
 		/*
 		// Init checkbox.
 		$main_site_only = '';
