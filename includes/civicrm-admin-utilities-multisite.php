@@ -217,7 +217,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->option_set( 'civicrm_admin_utilities_settings', $settings );
 
 			// Delete the "global" site option.
-			delete_site_option( 'civicrm_admin_utilities_settings' );
+			//delete_site_option( 'civicrm_admin_utilities_settings' );
 
 		}
 
@@ -332,19 +332,14 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
-		// If network activated.
-		if ( $this->plugin->is_network_activated() ) {
+		// Add admin page to Network Settings menu.
+		add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ), 30 );
 
-			// Add admin page to Network Settings menu.
-			add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ), 30 );
+		// Maybe restrict access to site settings pages.
+		add_filter( 'civicrm_admin_utilities_admin_menu_cap', array( $this, 'page_access_cap' ), 10, 2 );
 
-			// Maybe restrict access to site settings pages.
-			add_filter( 'civicrm_admin_utilities_admin_menu_cap', array( $this, 'page_access_cap' ), 10, 2 );
-
-			// Filter CiviCRM Permissions.
-			add_action( 'civicrm_permission_check', array( $this, 'permission_check' ), 10, 2 );
-
-		}
+		// Filter CiviCRM Permissions.
+		add_action( 'civicrm_permission_check', array( $this, 'permission_check' ), 10, 2 );
 
 		// Maybe switch to main site for Shortcuts Menu.
 		// TODO: Are there any situations where we'd like to switch?
@@ -365,9 +360,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * @since 0.5.4
 	 */
 	public function network_admin_menu() {
-
-		// Bail if not network activated.
-		if ( ! $this->plugin->is_network_activated() ) return;
 
 		// We must be network admin in multisite.
 		if ( ! is_super_admin() ) return;
