@@ -153,9 +153,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 			// Delete the legacy "installed" option.
 			$this->delete_legacy_option();
 
-			// Maybe move settings.
-			$this->maybe_move_settings();
-
 		}
 
 		/*
@@ -180,45 +177,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Delete the legacy option if it exists.
 		if ( $this->option_exists( 'civicrm_admin_utilities_installed' ) ) {
 			$this->option_delete( 'civicrm_admin_utilities_installed' );
-		}
-
-	}
-
-
-
-	/**
-	 * Move the settings to the correct location.
-	 *
-	 * This only applies to multisite instances and only when the plugin is not
-	 * network-activated.
-	 *
-	 * There is a conundrum here, however:
-	 *
-	 * If this plugin is active on more than one site, then it will only be the
-	 * first site where the plugin loads that gets the migrated settings. Other
-	 * sites will need to reconfigure their settings for this plugin since they
-	 * will have been reset to the defaults.
-	 *
-	 * @since 0.3.4
-	 * @since 0.5.4 Moved from admin class.
-	 */
-	public function maybe_move_settings() {
-
-		// Bail if network activated.
-		if ( $this->plugin->is_network_activated() ) return;
-
-		// Get current settings.
-		$settings = get_site_option( 'civicrm_admin_utilities_settings', 'fefdfdjgrkj' );
-
-		// If we have some.
-		if ( $settings != 'fefdfdjgrkj' ) {
-
-			// Save them where they are supposed to be.
-			$this->option_set( 'civicrm_admin_utilities_settings', $settings );
-
-			// Delete the "global" site option.
-			//delete_site_option( 'civicrm_admin_utilities_settings' );
-
 		}
 
 	}
