@@ -298,6 +298,16 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
+		// Restrict administer CiviCRM setting may not exist.
+		if ( ! $this->setting_exists( 'restrict_administer' ) ) {
+
+			// Add it from defaults.
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'restrict_administer', $settings['restrict_administer'] );
+			$save = true;
+
+		}
+
 		// Save settings if need be.
 		if ( $save === true ) {
 			$this->settings_save();
@@ -330,6 +340,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 			// Maybe restrict access to site settings pages.
 			add_filter( 'civicrm_admin_utilities_admin_menu_cap', array( $this, 'page_access_cap' ), 10, 2 );
+
+			// Filter CiviCRM Permissions.
+			add_action( 'civicrm_permission_check', array( $this, 'permission_check' ), 10, 2 );
 
 		}
 
@@ -553,6 +566,12 @@ class CiviCRM_Admin_Utilities_Multisite {
 				$restrict_settings_access = ' checked="checked"';
 			}
 
+		}
+
+		// Init administer CiviCRM checkbox.
+		$restrict_administer = '';
+		if ( $this->setting_get( 'restrict_administer', '0' ) == '1' ) {
+			$restrict_administer = ' checked="checked"';
 		}
 
 		// Init menu CSS checkbox.
@@ -837,6 +856,47 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 	/**
+	 * Filter CiviCRM permissions.
+	 *
+	 * We filter permissions in order to prevent Site Admins from administering
+	 * CiviCRM in situations where that's not desired. It has to be done via a
+	 * filter since there's no way to edit the capabilities of site admins in
+	 * CiviCRM at present.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @param str $permission The requested permission.
+	 * @param bool $granted True if permission granted, false otherwise.
+	 */
+	public function permission_check( $permission, &$granted ) {
+
+		// Only check "administer CiviCRM".
+		if ( $permission !== 'administer CiviCRM' ) return;
+
+		// Bail if we're not restricting.
+		if ( $this->setting_get( 'restrict_administer', '0' ) == '0' ) return;
+
+		// Get current user.
+		$user = wp_get_current_user();
+
+	    // Sanity check.
+		if ( ! ( $user instanceof WP_User ) ) return;
+
+		// Are we a network admin?
+		if ( $user->has_cap( 'manage_network_plugins' ) ) return;
+
+		// Disallow everyone else.
+		$granted = 0;
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
 	 * Get default network settings values for this plugin.
 	 *
 	 * In a multisite context, these defaults are used for both network defaults
@@ -856,6 +916,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Allow site admins access to site settings page.
 		$settings['restrict_settings_access'] = '0';
+
+		// Allow site admins to administer CiviCRM.
+		$settings['restrict_administer'] = '0';
 
 		// Prettify menu.
 		$settings['prettify_menu'] = '1';
@@ -968,6 +1031,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Init vars.
 		$civicrm_admin_utilities_main_site = '';
 		$civicrm_admin_utilities_restrict_settings_access = '';
+		$civicrm_admin_utilities_restrict_administer = '';
 		$civicrm_admin_utilities_menu = '';
 		$civicrm_admin_utilities_access = '';
 		$civicrm_admin_utilities_post_types = array();
@@ -995,6 +1059,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'restrict_settings_access', '1' );
 		} else {
 			$this->setting_set( 'restrict_settings_access', '0' );
+		}
+
+		// Should we restrict administer CiviCRM capability?
+		if ( $civicrm_admin_utilities_restrict_administer == '1' ) {
+			$this->setting_set( 'restrict_administer', '1' );
+		} else {
+			$this->setting_set( 'restrict_administer', '0' );
 		}
 
 		// Did we ask to prettify the menu?

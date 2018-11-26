@@ -20,15 +20,6 @@
 		?>
 	</h2>
 
-	<?php if ( isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) : ?>
-		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
-			<p><strong><?php _e( 'Settings saved.', 'civicrm-admin-utilities' ); ?></strong></p>
-			<button type="button" class="notice-dismiss">
-				<span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'civicrm-admin-utilities' ); ?></span>
-			</button>
-		</div>
-	<?php endif; ?>
-
 	<form method="post" id="civicrm_admin_utilities_multidomain_form" action="<?php echo $this->page_submit_url_get(); ?>">
 
 		<?php wp_nonce_field( 'civicrm_admin_utilities_multidomain_action', 'civicrm_admin_utilities_multidomain_nonce' ); ?>
