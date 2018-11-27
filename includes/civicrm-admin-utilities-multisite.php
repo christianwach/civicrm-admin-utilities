@@ -821,7 +821,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function permission_check( $permission, &$granted ) {
 
 		// Only check "administer CiviCRM".
-		if ( $permission !== 'administer CiviCRM' ) return;
+		if ( strtolower( $permission ) !== 'administer civicrm' ) return;
 
 		// Bail if we're not restricting.
 		if ( $this->setting_get( 'restrict_administer', '0' ) == '0' ) return;
