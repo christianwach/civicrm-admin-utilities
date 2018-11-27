@@ -128,8 +128,7 @@ body #civicrm-menu .crm-logo-sm
 	vertical-align: text-bottom;
 }
 
-body #civicrm-menu i,
-body #root-menu-div i
+body #civicrm-menu i.crm-i
 {
     margin-right: 4px;
 }
