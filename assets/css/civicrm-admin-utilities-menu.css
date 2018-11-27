@@ -25,7 +25,7 @@ body #civicrm-menu
 body #civicrm-menu li.menumain
 {
 	line-height: 2.5;
-	padding: 0 10px;
+	padding: 0 8px;
 	height: 32px !important;
 	outline: none;
 	border-right: none;
@@ -126,6 +126,12 @@ html>body #root-menu-div div.outerbox:first-child
 body #civicrm-menu .crm-logo-sm
 {
 	vertical-align: text-bottom;
+}
+
+body #civicrm-menu i,
+body #root-menu-div i
+{
+    margin-right: 4px;
 }
 
 
