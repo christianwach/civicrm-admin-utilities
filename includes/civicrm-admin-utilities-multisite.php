@@ -256,6 +256,16 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
+		// Restrict domain access setting may not exist.
+		if ( ! $this->setting_exists( 'restrict_domain_access' ) ) {
+
+			// Add it from defaults.
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'restrict_domain_access', $settings['restrict_domain_access'] );
+			$save = true;
+
+		}
+
 		// Restrict administer CiviCRM setting may not exist.
 		if ( ! $this->setting_exists( 'restrict_administer' ) ) {
 
@@ -293,8 +303,11 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Add admin page to Network Settings menu.
 		add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ), 30 );
 
-		// Maybe restrict access to site settings pages.
-		add_filter( 'civicrm_admin_utilities_admin_menu_cap', array( $this, 'page_access_cap' ), 10, 2 );
+		// Maybe restrict access to site settings page.
+		add_filter( 'civicrm_admin_utilities_page_settings_cap', array( $this, 'page_settings_cap' ), 10, 2 );
+
+		// Maybe restrict access to site domain page.
+		add_filter( 'civicrm_admin_utilities_page_domain_cap', array( $this, 'page_domain_cap' ), 10, 2 );
 
 		// Filter CiviCRM Permissions.
 		add_action( 'civicrm_permission_check', array( $this, 'permission_check' ), 10, 2 );
@@ -339,7 +352,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_action( 'admin_head-' . $this->network_parent_page, array( $this, 'network_admin_head' ), 50 );
 
 		// Add scripts and styles.
-		//add_action( 'admin_print_scripts-' . $this->network_parent_page, array( $this, 'network_admin_js' ) );
+		add_action( 'admin_print_scripts-' . $this->network_parent_page, array( $this, 'network_admin_js' ) );
 		//add_action( 'admin_print_styles-' . $this->network_parent_page, array( $this, 'network_admin_css' ) );
 
 		// Add settings page.
@@ -359,7 +372,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_action( 'admin_head-' . $this->network_settings_page, array( $this, 'network_admin_head' ), 50 );
 
 		// Add scripts and styles.
-		//add_action( 'admin_print_scripts-' . $this->network_settings_page, array( $this, 'network_admin_js' ) );
+		add_action( 'admin_print_scripts-' . $this->network_settings_page, array( $this, 'network_admin_js' ) );
 		//add_action( 'admin_print_styles-' . $this->network_settings_page, array( $this, 'network_admin_css' ) );
 
 		// Try and update options.
@@ -405,6 +418,45 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$plugin_page = 'civicrm_admin_utilities_network_parent';
 			$submenu_file = 'civicrm_admin_utilities_network_parent';
 		}
+
+	}
+
+
+
+	/**
+	 * Enqueue stylesheet for this plugin's "Manual Sync" page.
+	 *
+	 * @since 0.5.4
+	 */
+	public function network_admin_css() {
+
+		// Add stylesheet.
+		wp_enqueue_style(
+			'civicrm_admin_utilities_network_settings_css',
+			plugins_url( 'assets/css/civicrm-admin-utilities-network-settings.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+			false,
+			CIVICRM_ADMIN_UTILITIES_VERSION, // version
+			'all' // media
+		);
+
+	}
+
+
+
+	/**
+	 * Enqueue Javascript on the Network Admin Settings page.
+	 *
+	 * @since 0.5.4
+	 */
+	public function network_admin_js() {
+
+		// Add Javascript plus dependencies.
+		wp_enqueue_script(
+			'civicrm_admin_utilities_network_settings_js',
+			plugins_url( 'assets/js/civicrm-admin-utilities-network-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
+			array( 'jquery' ),
+			CIVICRM_ADMIN_UTILITIES_VERSION // version
+		);
 
 	}
 
@@ -501,6 +553,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Get admin page URLs.
 		$urls = $this->page_get_network_urls();
 
+		// Init visibility flag for sections dependent on CiviCRM restriction.
+		$civicrm_restricted = '';
+
 		// If CiviCRM is network activated.
 		if ( $this->plugin->is_civicrm_network_activated() ) {
 
@@ -510,12 +565,31 @@ class CiviCRM_Admin_Utilities_Multisite {
 				$main_site_only = ' checked="checked"';
 			}
 
-			// Init settings access checkbox.
-			$restrict_settings_access = '';
-			if ( $this->setting_get( 'restrict_settings_access', '0' ) == '1' ) {
-				$restrict_settings_access = ' checked="checked"';
+			// Maybe override visibility flag for sections dependent on CiviCRM restriction.
+			if ( ! empty( $main_site_only ) ) {
+				$civicrm_restricted = ' style="display: none;"';
 			}
 
+		}
+
+		// Init visibility flag for sections dependent on Settings Page restriction.
+		$settings_restricted = '';
+
+		// Init settings access checkbox.
+		$restrict_settings_access = '';
+		if ( $this->setting_get( 'restrict_settings_access', '0' ) == '1' ) {
+			$restrict_settings_access = ' checked="checked"';
+		}
+
+		// Maybe override visibility flag for sections dependent on CiviCRM restriction.
+		if ( ! empty( $restrict_settings_access ) ) {
+			$settings_restricted = ' style="display: none;"';
+		}
+
+		// Init domain access checkbox.
+		$restrict_domain_access = '';
+		if ( $this->setting_get( 'restrict_domain_access', '0' ) == '1' ) {
+			$restrict_domain_access = ' checked="checked"';
 		}
 
 		// Init administer CiviCRM checkbox.
@@ -645,10 +719,32 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * @param str $capability The existing access capability.
 	 * @return str $capability The modified access capability.
 	 */
-	public function page_access_cap( $capability ) {
+	public function page_settings_cap( $capability ) {
 
 		// Assign network admin capability if we are restricting access.
 		if ( $this->setting_get( 'restrict_settings_access', '0' ) == '1' ) {
+			$capability = 'manage_network_plugins';
+		}
+
+		// --<
+		return $capability;
+
+	}
+
+
+
+	/**
+	 * Maybe restrict access to site domain pages.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @param str $capability The existing access capability.
+	 * @return str $capability The modified access capability.
+	 */
+	public function page_domain_cap( $capability ) {
+
+		// Assign network admin capability if we are restricting access.
+		if ( $this->setting_get( 'restrict_domain_access', '0' ) == '1' ) {
 			$capability = 'manage_network_plugins';
 		}
 
@@ -832,11 +928,42 @@ class CiviCRM_Admin_Utilities_Multisite {
 	    // Sanity check.
 		if ( ! ( $user instanceof WP_User ) ) return;
 
-		// Are we a network admin?
-		if ( $user->has_cap( 'manage_network_plugins' ) ) return;
+		// Always allow network admins.
+		if ( $user->has_cap( 'manage_network_plugins' ) ) {
+			$granted = 1;
+			return;
+		}
 
 		// Disallow everyone else.
 		$granted = 0;
+
+	}
+
+
+
+	/**
+	 * Check if Site Admins have access to the "Plugins" menu on a Site.
+	 *
+	 * This is determined by the checkbox at the foot of the "Network Settings"
+	 * page in WordPress network admin.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return bool $granted True if permission granted, false otherwise.
+	 */
+	public function site_admin_has_plugins_menu_access() {
+
+		// Init return
+		$granted = false;
+
+		// Override if individual Site Admins can see the "Plugins" menu.
+		$menu_perms = get_site_option( 'menu_items', array() );
+		if ( ! empty( $menu_perms['plugins'] ) ) {
+			$granted = true;
+		}
+
+		// --<
+		return $granted;
 
 	}
 
@@ -866,6 +993,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Allow site admins access to site settings page.
 		$settings['restrict_settings_access'] = '0';
+
+		// Do not allow site admins access to site domain page.
+		$settings['restrict_domain_access'] = '1';
 
 		// Allow site admins to administer CiviCRM.
 		$settings['restrict_administer'] = '0';
@@ -981,6 +1111,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Init vars.
 		$civicrm_admin_utilities_main_site = '';
 		$civicrm_admin_utilities_restrict_settings_access = '';
+		$civicrm_admin_utilities_restrict_domain_access = '';
 		$civicrm_admin_utilities_restrict_administer = '';
 		$civicrm_admin_utilities_menu = '';
 		$civicrm_admin_utilities_access = '';
@@ -1009,6 +1140,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'restrict_settings_access', '1' );
 		} else {
 			$this->setting_set( 'restrict_settings_access', '0' );
+		}
+
+		// Should we restrict access to site domain pages?
+		if ( $civicrm_admin_utilities_restrict_domain_access == '1' ) {
+			$this->setting_set( 'restrict_domain_access', '1' );
+		} else {
+			$this->setting_set( 'restrict_domain_access', '0' );
 		}
 
 		// Should we restrict administer CiviCRM capability?

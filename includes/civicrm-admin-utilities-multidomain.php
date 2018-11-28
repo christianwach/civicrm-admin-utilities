@@ -72,18 +72,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Add Domain subpage to Single Site Settings menu.
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
-		// Filter the list of single site subpages and add multidomain page.
-		add_filter( 'civicrm_admin_utilities_subpages', array( $this, 'admin_subpages_filter' ) );
-
-		// Filter the list of single site page URLs and add multidomain page URL.
-		add_filter( 'civicrm_admin_utilities_page_urls', array( $this, 'page_urls_filter' ) );
-
-		// Filter the "show tabs" flag for setting templates.
-		add_filter( 'civicrm_admin_utilities_show_tabs', array( $this, 'page_show_tabs' ) );
-
-		// Add tab to setting templates.
-		add_filter( 'civicrm_admin_utilities_settings_nav_tabs', array( $this, 'page_add_tab' ), 10, 2 );
-
 	}
 
 
@@ -105,10 +93,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 *
 		 * @since 0.5.4
 		 *
-		 * @param str The default capability for access to menu items.
-		 * @return str The modified capability for access to menu items.
+		 * @param str The default capability for access to domain page.
+		 * @return str The modified capability for access to domain page.
 		 */
-		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
+		$capability = apply_filters( 'civicrm_admin_utilities_page_domain_cap', 'manage_options' );
 
 		// Check user permissions.
 		if ( ! current_user_can( $capability ) ) return;
@@ -135,6 +123,18 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Try and update options.
 		$saved = $this->settings_update_router();
+
+		// Filter the list of single site subpages and add multidomain page.
+		add_filter( 'civicrm_admin_utilities_subpages', array( $this, 'admin_subpages_filter' ) );
+
+		// Filter the list of single site page URLs and add multidomain page URL.
+		add_filter( 'civicrm_admin_utilities_page_urls', array( $this, 'page_urls_filter' ) );
+
+		// Filter the "show tabs" flag for setting templates.
+		add_filter( 'civicrm_admin_utilities_show_tabs', array( $this, 'page_show_tabs' ) );
+
+		// Add tab to setting templates.
+		add_filter( 'civicrm_admin_utilities_settings_nav_tabs', array( $this, 'page_add_tab' ), 10, 2 );
 
 	}
 
@@ -247,10 +247,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 *
 		 * @since 0.5.4
 		 *
-		 * @param str The default capability for access to menu items.
-		 * @return str The modified capability for access to menu items.
+		 * @param str The default capability for access to domain page.
+		 * @return str The modified capability for access to domain page.
 		 */
-		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
+		$capability = apply_filters( 'civicrm_admin_utilities_page_domain_cap', 'manage_options' );
 
 		// Check user permissions.
 		if ( ! current_user_can( $capability ) ) return;

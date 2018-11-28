@@ -190,15 +190,25 @@
 
 		<h3><?php _e( 'Post Type Options', 'civicrm-admin-utilities' ); ?></h3>
 
-		<p><?php _e( 'Select which post types you want the CiviCRM shortcode button to appear on.', 'civicrm-admin-utilities' ); ?></p>
+		<table class="form-table">
 
-		<?php echo $options; ?>
+			<tr>
+				<th scope="row"><?php _e( 'Shortcode Button', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<?php echo $options; ?>
+					<p class="description"><?php _e( 'Select which post types you want the CiviCRM shortcode button to appear on.', 'civicrm-admin-utilities' ); ?></p>
+				</td>
+			</tr>
+
+		</table>
 
 		<hr />
 
 		<h3><?php _e( 'Miscellaneous Utilities', 'civicrm-admin-utilities' ); ?></h3>
 
-		<p><?php _e( 'Some useful functions and shortcuts to various commonly used CiviCRM admin pages.', 'civicrm-admin-utilities' ); ?></p>
+		<?php if ( $administer_civicrm ) : ?>
+			<p><?php _e( 'Some useful functions and shortcuts to various commonly used CiviCRM admin pages.', 'civicrm-admin-utilities' ); ?></p>
+		<?php endif; ?>
 
 		<table class="form-table">
 
@@ -210,26 +220,30 @@
 				</td>
 			</tr>
 
-			<tr>
-				<th scope="row"><?php _e( 'Rebuild Menu', 'civicrm-admin-utilities' ); ?></th>
-				<td>
-					<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/menu/rebuild' ) . '?reset=1' ); ?>"><?php _e( 'Click this to rebuild the CiviCRM menu.', 'civicrm-admin-utilities' ); ?></a>
-				</td>
-			</tr>
+			<?php if ( $administer_civicrm ) : ?>
 
-			<tr>
-				<th scope="row"><?php _e( 'Rebuild Database Triggers', 'civicrm-admin-utilities' ); ?></th>
-				<td>
-					<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/menu/rebuild' ) . '?reset=1&triggerRebuild=1' ); ?>"><?php _e( 'Click this to rebuild the triggers in the CiviCRM database.', 'civicrm-admin-utilities' ); ?></a>
-				</td>
-			</tr>
+				<tr>
+					<th scope="row"><?php _e( 'Rebuild Menu', 'civicrm-admin-utilities' ); ?></th>
+					<td>
+						<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/menu/rebuild' ) . '?reset=1' ); ?>"><?php _e( 'Click this to rebuild the CiviCRM menu.', 'civicrm-admin-utilities' ); ?></a>
+					</td>
+				</tr>
 
-			<tr>
-				<th scope="row"><?php _e( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ); ?></th>
-				<td>
-					<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/upgrade' ) . '&reset=1' ); ?>"><?php _e( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ); ?></a>
-				</td>
-			</tr>
+				<tr>
+					<th scope="row"><?php _e( 'Rebuild Database Triggers', 'civicrm-admin-utilities' ); ?></th>
+					<td>
+						<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/menu/rebuild' ) . '?reset=1&triggerRebuild=1' ); ?>"><?php _e( 'Click this to rebuild the triggers in the CiviCRM database.', 'civicrm-admin-utilities' ); ?></a>
+					</td>
+				</tr>
+
+				<tr>
+					<th scope="row"><?php _e( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ); ?></th>
+					<td>
+						<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/upgrade' ) . '&reset=1' ); ?>"><?php _e( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ); ?></a>
+					</td>
+				</tr>
+
+			<?php endif; ?>
 
 		</table>
 

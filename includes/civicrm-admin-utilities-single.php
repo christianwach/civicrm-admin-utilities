@@ -302,10 +302,10 @@ class CiviCRM_Admin_Utilities_Single {
 		 *
 		 * @since 0.5.4
 		 *
-		 * @param str The default capability for access to menu items.
-		 * @return str The modified capability for access to menu items.
+		 * @param str The default capability for access to settings page.
+		 * @return str The modified capability for access to settings page.
 		 */
-		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
+		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
 		// Check user permissions.
 		if ( ! current_user_can( $capability ) ) return;
@@ -477,10 +477,10 @@ class CiviCRM_Admin_Utilities_Single {
 		 *
 		 * @since 0.5.4
 		 *
-		 * @param str The default capability for access to menu items.
-		 * @return str The modified capability for access to menu items.
+		 * @param str The default capability for access to settings page.
+		 * @return str The modified capability for access to settings page.
 		 */
-		$capability = apply_filters( 'civicrm_admin_utilities_admin_menu_cap', 'manage_options' );
+		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
 		// Check user permissions
 		if ( ! current_user_can( $capability ) ) return;
@@ -574,6 +574,14 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Get post type options.
 		$options = $this->post_type_options_get();
+
+		// Init administer CiviCRM flag.
+		$administer_civicrm = false;
+
+		// Override if this user can administer CiviCRM.
+		if ( $this->check_permission( 'administer CiviCRM' ) ) {
+			$administer_civicrm = true;
+		}
 
 		/**
 		 * Do not show tabs by default but allow overrides.
