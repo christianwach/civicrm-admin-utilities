@@ -3204,7 +3204,15 @@ tbody.scrollContent tr.alternateRow {
 .crm-container a.button.cancel:link,
 .crm-container a.button.cancel:hover,
 .crm-container a.button.cancel:focus,
-.crm-container a.button.cancel:active
+.crm-container a.button.cancel:active,
+.crm-container input.crm-form-submit.cancel,
+.crm-container input.crm-form-submit.cancel:hover,
+.crm-container input.crm-form-submit.cancel:focus,
+.crm-container input.crm-form-submit.cancel:active,
+.crm-container button.ui-button[data-identifier*="_cancel"],
+.crm-container button.ui-button[data-identifier*="_cancel"]:hover,
+.crm-container button.ui-button[data-identifier*="_cancel"]:focus,
+.crm-container button.ui-button[data-identifier*="_cancel"]:active
 {
 	color: #555;
 	border-color: #cccccc;
@@ -3219,10 +3227,27 @@ tbody.scrollContent tr.alternateRow {
 .crm-container a.button.delete:active,
 .crm-container a.button.cancel:hover,
 .crm-container a.button.cancel:focus,
-.crm-container a.button.cancel:active
+.crm-container a.button.cancel:active,
+.crm-container input.crm-form-submit.cancel:hover,
+.crm-container input.crm-form-submit.cancel:focus,
+.crm-container input.crm-form-submit.cancel:active,
+.crm-container button.ui-button[data-identifier*="_cancel"]:hover,
+.crm-container button.ui-button[data-identifier*="_cancel"]:focus,
+.crm-container button.ui-button[data-identifier*="_cancel"]:active
 {
     background: #fafafa;
     border-color: #999;
+    color: #23282d;
+}
+
+/* Alter colour of cancel button icon */
+.crm-button.crm-button-type-cancel .crm-i.fa-times
+{
+    color: #555;
+}
+
+.crm-button.crm-button-type-cancel:hover .crm-i.fa-times
+{
     color: #23282d;
 }
 
