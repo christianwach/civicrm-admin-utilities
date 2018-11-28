@@ -3194,12 +3194,17 @@ tbody.scrollContent tr.alternateRow {
 	padding-left: 5px;
 }
 
-/* Make delete buttons less prominent */
+/* Make cancel and delete buttons less prominent */
 .crm-container a.button.delete,
 .crm-container a.button.delete:link,
 .crm-container a.button.delete:hover,
 .crm-container a.button.delete:focus,
-.crm-container a.button.delete:active
+.crm-container a.button.delete:active,
+.crm-container a.button.cancel,
+.crm-container a.button.cancel:link,
+.crm-container a.button.cancel:hover,
+.crm-container a.button.cancel:focus,
+.crm-container a.button.cancel:active
 {
 	color: #555;
 	border-color: #cccccc;
@@ -3211,7 +3216,10 @@ tbody.scrollContent tr.alternateRow {
 
 .crm-container a.button.delete:hover,
 .crm-container a.button.delete:focus,
-.crm-container a.button.delete:active
+.crm-container a.button.delete:active,
+.crm-container a.button.cancel:hover,
+.crm-container a.button.cancel:focus,
+.crm-container a.button.cancel:active
 {
     background: #fafafa;
     border-color: #999;
