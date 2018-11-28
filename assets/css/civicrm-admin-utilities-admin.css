@@ -3209,6 +3209,15 @@ tbody.scrollContent tr.alternateRow {
 	text-shadow: none;
 }
 
+.crm-container a.button.delete:hover,
+.crm-container a.button.delete:focus,
+.crm-container a.button.delete:active
+{
+    background: #fafafa;
+    border-color: #999;
+    color: #23282d;
+}
+
 
 
 /* deprecated autocomplete styles */
