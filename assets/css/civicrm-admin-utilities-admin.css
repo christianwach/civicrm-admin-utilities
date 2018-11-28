@@ -3241,12 +3241,14 @@ tbody.scrollContent tr.alternateRow {
 }
 
 /* Alter colour of cancel button icon */
-.crm-button.crm-button-type-cancel .crm-i.fa-times
+.crm-button.crm-button-type-cancel .crm-i.fa-times,
+.crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
     color: #555;
 }
 
-.crm-button.crm-button-type-cancel:hover .crm-i.fa-times
+.crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
+.crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
     color: #23282d;
 }
