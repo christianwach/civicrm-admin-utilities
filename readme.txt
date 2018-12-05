@@ -16,7 +16,7 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour and appearance in single si
 
 CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
-* Suppplies an alternative theme for CiviCRM admin screens (see below)
+* Supplies an alternative theme for CiviCRM admin screens (see below)
 * Modifies the styling of the CiviCRM menu to fix a number of issues
 * Fixes the appearance of the Shoreditch extension in WordPress admin
 * Fixes the appearance of the WordPress Access Control form where necessary
@@ -24,10 +24,11 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisit
 * Adds a handy CiviCRM Shortcuts menu to the WordPress Admin Bar
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
+* Allows you to remove "administer CiviCRM" capabilities from sub-site administrators
 
 ### CiviCRM Admin Theme
 
-Version 0.5 introduces a new theme for CiviCRM admin screens. It can be enabled on the CiviCRM Admin Utilities settings page. Feedback is welcome - please open an issue on the plugin's [GitHub repository](https://github.com/christianwach/civicrm-admin-utilities) if you find any bugs or have suggestions for improvements.
+Version 0.5 introduces a new theme for CiviCRM admin screens that is more in keeping with WordPress. It can be enabled on the CiviCRM Admin Utilities settings page. Feedback is welcome - please open an issue on the plugin's [GitHub repository](https://github.com/christianwach/civicrm-admin-utilities) if you find any bugs or have suggestions for improvements.
 
 ### Requirements
 
