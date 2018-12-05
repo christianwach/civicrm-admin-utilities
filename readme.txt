@@ -16,6 +16,7 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour and appearance in single si
 
 CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
+* Suppplies an alternative theme for CiviCRM admin screens (see below)
 * Modifies the styling of the CiviCRM menu to fix a number of issues
 * Fixes the appearance of the Shoreditch extension in WordPress admin
 * Fixes the appearance of the WordPress Access Control form where necessary
@@ -30,7 +31,7 @@ Version 0.5 introduces a new theme for CiviCRM admin screens. It can be enabled 
 
 ### Requirements
 
-This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.6*. Please refer to the installation page for configuration instructions as well as for how to use this plugin with versions of CiviCRM prior to 4.6.
+This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.7*.
 
 ### Notes
 
@@ -49,9 +50,7 @@ This plugin is in active development. For feature requests and bug reports (or i
 1. Make sure CiviCRM is activated and properly configured
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
-In single-site installs, you can adjust this plugin's settings by visiting "Settings" --> "CiviCRM Admin Utilities". If you install this plugin in multisite and have CiviCRM network-enabled, then you should also network-enable this plugin. You'll then find its settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities".
-
-This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.6*. For versions of CiviCRM prior to 4.6, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in CiviCRM file. Please refer to the each repo for further instructions.
+In single-site installs, you can adjust this plugin's settings by visiting "Settings" --> "CiviCRM Admin Utilities". In WordPress Multisite, you will find the network settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities". If you install this plugin in WordPress Multisite and have CiviCRM network-activated, then you should also network-activate this plugin.
 
 <h4>Upgrading from 0.3.3 or earlier</h4>
 
@@ -61,9 +60,17 @@ Prior to version 0.3.4, this plugin stored its settings in the *network options*
 
 If you are upgrading from 0.3.3, therefore, you may need to review the settings for each site where CiviCRM Admin Utilities is activated.
 
+Version 0.6 introduces further changes to configuration in WordPress Multisite which you should be aware of. When the plugin is activated on any site on the network, Network Administrators will then have access to a Settings Page in WordPress Network Admin at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities". This means that there are settings at both the site level and the network level.
+
+Network Administrators can now set site defaults for any further activations of this plugin across the network. There are also network-specific settings that can be set. Of particular note are new permissions settings which allow you to remove "administer CiviCRM" capabilities from individual site administrators if that's how you want to configure your network.
+
 
 
 == Changelog ==
+
+= 0.6 =
+
+* Public release of changes made in 0.5.4
 
 = 0.5.4 =
 
