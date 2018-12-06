@@ -4799,32 +4799,32 @@ jQuery UI overrides
 	padding: .2em;
 }
 
-#mainTabContainer ul
+#mainTabContainer ul.crm-contact-tabs-list
 {
 	padding: 0;
 	margin: 0;
 }
 
-#mainTabContainer ul:after
+#mainTabContainer ul.crm-contact-tabs-list:after
 {
     clear: both;
 }
-#mainTabContainer ul:before,
-#mainTabContainer ul:after
+#mainTabContainer ul.crm-contact-tabs-list:before,
+#mainTabContainer ul.crm-contact-tabs-list:after
 {
     content: "";
     display: table;
     border-collapse: collapse;
 }
 
-#mainTabContainer ul li
+#mainTabContainer ul.crm-contact-tabs-list li
 {
 	display: inline-block;
 	margin-top: 1px;
 	margin-bottom: -1px;
 }
 
-#mainTabContainer ul li a
+#mainTabContainer ul.crm-contact-tabs-list li a
 {
 	color: #212121;
 	text-decoration: none;
