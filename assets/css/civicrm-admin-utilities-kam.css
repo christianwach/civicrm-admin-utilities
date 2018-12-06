@@ -30,7 +30,7 @@ body #civicrm-menu-nav .crm-menubar-toggle-btn
 
 /* Don't show bottom border */
 @media (min-width: 768px) {
-	body #civicrm-menu {
+	body > #civicrm-menu-nav #civicrm-menu {
 		border-bottom: none;
 	}
 }
