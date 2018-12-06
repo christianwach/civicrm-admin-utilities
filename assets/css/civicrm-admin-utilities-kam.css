@@ -10,169 +10,30 @@
 
 
 
-/*
---------------------------------------------------------------------------------
-CiviCRM admin menu style overrides
---------------------------------------------------------------------------------
-*/
-
-/* Ensure menu sits above WordPress menu */
-body #civicrm-menu-nav
+/* When menu in content area, give page some room */
+body #crm-container > #civicrm-menu-nav
 {
-	position: fixed;
-	z-index: 100000;
+	margin-bottom: 12px;
 }
 
-/* Remove padding on search */
-.sm-civicrm li#crm-qsearch > a
-{
-	padding: 2px 4px;
-}
-
-.sm-civicrm li#crm-qsearch > a input
-{
-	height: 17px;
-}
-
-/* All top-level items need to be 32px tall */
-.sm-civicrm > li > a
-{
-	height: 32px;
-	line-height: 20px;
-}
-
-/* Search dropdown can be a little wider */
-.sm-civicrm li#crm-qsearch > ul
-{
-	min-width: 12em !important;
-}
-
-.sm-civicrm li#crm-qsearch > ul li
-{
-	padding: 3px 0;
-}
-
-#civicrm-menu.sm-civicrm .crm-logo-sm
-{
-	vertical-align: text-bottom;
-}
-
-/* Don't underline */
-#civicrm-menu.sm-civicrm a
-{
-	text-decoration: none;
-}
-
-/* Match box-shadow of sub-menus to WordPress default setting */
-#civicrm-menu.sm-civicrm ul
-{
-	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-}
-
-/* Remove padding from top of sub-menus */
-#civicrm-menu.sm-civicrm ul > li:first-child a
-{
-	margin-top: 0;
-}
-
-/* Remove padding from bottom of sub-menus */
-#civicrm-menu.sm-civicrm ul li:last-child a
-{
-	margin-bottom: 0;
-}
-
-/* Remove padding from separator */
-#civicrm-menu.sm-civicrm li.menu-separator
-{
-	margin: 0;
-}
-
-/* Align sub-arrow */
-#civicrm-menu.sm-civicrm li li .sub-arrow:before
+/* Sub-arrows could do with a slight tweak */
+body #civicrm-menu li li .sub-arrow:before
 {
 	margin-top: 2px;
 }
 
-#civicrm-menu.sm-civicrm i
+/* Transparent background for toggle button */
+body #civicrm-menu-nav .crm-menubar-toggle-btn
 {
-	margin-right: 1px;
+	background: transparent;
 }
 
-
-
-/*
---------------------------------------------------------------------------------
-Responsiveness amends
---------------------------------------------------------------------------------
-*/
-
-@media (max-width: 768px) {
-
-	body #civicrm-menu-nav
-	{
-		position: fixed;
-		z-index: 1000000;
-		height: 46px;
-		margin: 0 0 0 10%;
-		margin-left: 52px;
+/* Don't show bottom border */
+@media (min-width: 768px) {
+	body #civicrm-menu {
+		border-bottom: none;
 	}
-
-	#civicrm-menu-nav .main-menu-btn
-	{
-		margin-left: 20px;
-		margin-top: 8px;
-	}
-
-	body #civicrm-menu
-	{
-		position: relative !important;
-		margin-top: 0;
-		overflow-y: scroll;
-		max-height: 400px;
-	}
-
-	#civicrm-menu.sm-civicrm > li > a
-	{
-		height: auto;
-	}
-
-	#civicrm-menu.sm-civicrm li
-	{
-		padding: 0;
-	}
-
-	#id_search_block
-	{
-		display: inline-block;
-		vertical-align: middle;
-	}
-
-	/* Remove box-shadow on sub-menus */
-	#civicrm-menu.sm-civicrm ul
-	{
-		box-shadow: none;
-	}
-
-	/* Add box-shadow on sub-sub-menus */
-	#civicrm-menu.sm-civicrm ul ul
-	{
-		box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-	}
-
 }
-
-
-
-/* WordPress admin menu is not fixed below 600px */
-@media screen and (max-width: 600px) {
-
-	body #civicrm-menu-nav
-	{
-		position: absolute;
-	}
-
-}
-
 
 
 /*
@@ -181,51 +42,47 @@ Default Colours
 --------------------------------------------------------------------------------
 */
 
-body #civicrm-menu.sm-civicrm
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background-color: #23282d;
 }
 
-@media (max-width: 768px) {
-	body #civicrm-menu-nav {
-		background: #23282d;
-	}
-}
-
-body #civicrm-menu.sm-civicrm a
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	color: #eee;
 }
 
-body #civicrm-menu .crm-quickSearchField,
-body #civicrm-menu.sm-civicrm ul li a,
-body #civicrm-menu.sm-civicrm li .sub-arrow:before,
-body #civicrm-menu.sm-civicrm li a.highlighted .sub-arrow:before,
-body #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a.highlighted .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #b4b9be;
 }
 
-body #civicrm-menu .crm-quickSearchField:hover,
-body #civicrm-menu.sm-civicrm ul li a:hover,
-body #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #00b9eb;
 }
 
 /* Remove hover behaviour */
-body #civicrm-menu.sm-civicrm ul,
-body #civicrm-menu li a.highlighted,
-body #civicrm-menu.sm-civicrm li a:focus,
-body #civicrm-menu.sm-civicrm li a:hover
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	background-color: #32373c;
 }
 
-body #civicrm-menu.sm-civicrm li.menu-separator,
-body #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #000;
 	border-width: 1px;
@@ -240,51 +97,47 @@ WordPress Admin Themes support
 */
 
 /* light */
-body.admin-color-light #civicrm-menu.sm-civicrm
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #e5e5e5;
 }
 
-@media (max-width: 768px) {
-	body.admin-color-light #civicrm-menu-nav {
-		background: #e5e5e5;
-	}
-}
-
-body.admin-color-light #civicrm-menu.sm-civicrm a
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	color: #333;
 }
 
-body.admin-color-light #civicrm-menu .crm-quickSearchField,
-body.admin-color-light #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-light #civicrm-menu.sm-civicrm li li .sub-arrow:after,
-body.admin-color-light #civicrm-menu.sm-civicrm li a.highlighted .sub-arrow:before
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a.highlighted .sub-arrow:before,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #686868;
 }
 
-body.admin-color-light #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-light #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-light #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-light #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #04a4cc;
 }
 
 /* Remove hover behaviour */
-body.admin-color-light #civicrm-menu.sm-civicrm ul,
-body.admin-color-light #civicrm-menu li a.highlighted,
-body.admin-color-light #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-light #civicrm-menu.sm-civicrm li a:hover
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	color: #04a4cc;
 	background-color: #fff;
 }
 
-body.admin-color-light #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-light #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #ededed;
 }
@@ -292,50 +145,46 @@ body.admin-color-light #civicrm-menu.sm-civicrm li.crm-menu-border-top
 
 
 /* blue */
-body.admin-color-blue #civicrm-menu.sm-civicrm
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #52accc;
 }
 
-@media (max-width: 768px) {
-	body.admin-color-blue #civicrm-menu-nav {
-		background: #52accc;
-	}
-}
-
-body.admin-color-blue #civicrm-menu.sm-civicrm a
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	color: #fff;
 }
 
-body.admin-color-blue #civicrm-menu .crm-quickSearchField,
-body.admin-color-blue #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-blue #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-blue #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #e2ecf1;
 }
 
-body.admin-color-blue #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-blue #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-blue #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-blue #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #fff;
 }
 
 /* Remove hover behaviour */
-body.admin-color-blue #civicrm-menu.sm-civicrm ul,
-body.admin-color-blue #civicrm-menu li a.highlighted,
-body.admin-color-blue #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-blue #civicrm-menu.sm-civicrm li a:hover
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	color: #fff;
 	background-color: #4796b3;
 }
 
-body.admin-color-blue #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-blue #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #3b85a0;
 }
@@ -343,50 +192,46 @@ body.admin-color-blue #civicrm-menu.sm-civicrm li.crm-menu-border-top
 
 
 /* coffee */
-body.admin-color-coffee #civicrm-menu.sm-civicrm
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #59524c;
 }
 
-@media (max-width: 768px) {
-	body.admin-color-coffee #civicrm-menu-nav {
-		background: #59524c;
-	}
-}
-
-body.admin-color-coffee #civicrm-menu.sm-civicrm a
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	 color: #fff;
 }
 
-body.admin-color-coffee #civicrm-menu .crm-quickSearchField,
-body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-coffee #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-coffee #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #cdcbc9;
 }
 
-body.admin-color-coffee #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-coffee #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #c7a589;
 }
 
 /* Remove hover behaviour */
-body.admin-color-coffee #civicrm-menu.sm-civicrm ul,
-body.admin-color-coffee #civicrm-menu li a.highlighted,
-body.admin-color-coffee #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-coffee #civicrm-menu.sm-civicrm li a:hover
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	color: #c7a589;
 	background-color: #46403c;
 }
 
-body.admin-color-coffee #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-coffee #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #2f2b28;
 }
@@ -394,50 +239,46 @@ body.admin-color-coffee #civicrm-menu.sm-civicrm li.crm-menu-border-top
 
 
 /* ectoplasm */
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	 background: #523f6d;
 }
 
-@media (max-width: 768px) {
-	body.admin-color-ectoplasm #civicrm-menu-nav {
-		background: #523f6d;
-	}
-}
-
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm a
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	 color: #fff;
 }
 
-body.admin-color-ectoplasm #civicrm-menu .crm-quickSearchField,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #cbc5d3;
 }
 
-body.admin-color-ectoplasm #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #a3b745;
 }
 
 /* Remove hover behaviour */
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm ul,
-body.admin-color-ectoplasm #civicrm-menu li a.highlighted,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li a:hover
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	color: #a3b745;
 	background-color: #413256;
 }
 
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #2f2b28;
 }
@@ -445,50 +286,46 @@ body.admin-color-ectoplasm #civicrm-menu.sm-civicrm li.crm-menu-border-top
 
 
 /* midnight */
-body.admin-color-midnight #civicrm-menu.sm-civicrm
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	 background: #363b3f;
 }
 
-@media (max-width: 768px) {
-	body.admin-color-midnight #civicrm-menu-nav {
-		background: #363b3f;
-	}
-}
-
-body.admin-color-midnight #civicrm-menu.sm-civicrm a
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	 color: #fff;
 }
 
-body.admin-color-midnight #civicrm-menu .crm-quickSearchField,
-body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-midnight #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-midnight #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #cbc5d3;
 }
 
-body.admin-color-midnight #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-midnight #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #e14d43;
 }
 
 /* Remove hover behaviour */
-body.admin-color-midnight #civicrm-menu.sm-civicrm ul,
-body.admin-color-midnight #civicrm-menu li a.highlighted,
-body.admin-color-midnight #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-midnight #civicrm-menu.sm-civicrm li a:hover
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	color: #e14d43;
 	background-color: #26292c;
 }
 
-body.admin-color-midnight #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-midnight #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #000;
 }
@@ -496,50 +333,46 @@ body.admin-color-midnight #civicrm-menu.sm-civicrm li.crm-menu-border-top
 
 
 /* ocean */
-body.admin-color-ocean #civicrm-menu.sm-civicrm
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	 background: #738e96;
 }
 
-@media (max-width: 768px) {
-	body.admin-color-ocean #civicrm-menu-nav {
-		background: #738e96;
-	}
-}
-
-body.admin-color-ocean #civicrm-menu.sm-civicrm a
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	 color: #fff;
 }
 
-body.admin-color-ocean #civicrm-menu .crm-quickSearchField,
-body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-ocean #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-ocean #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #d5dde0;
 }
 
-body.admin-color-ocean #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-ocean #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #9ebaa0;
 }
 
 /* Remove hover behaviour */
-body.admin-color-ocean #civicrm-menu.sm-civicrm ul,
-body.admin-color-ocean #civicrm-menu li a.highlighted,
-body.admin-color-ocean #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-ocean #civicrm-menu.sm-civicrm li a:hover
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	color: #9ebaa0;
 	background-color: #627c83;
 }
 
-body.admin-color-ocean #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-ocean #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #556c72;
 }
@@ -547,50 +380,46 @@ body.admin-color-ocean #civicrm-menu.sm-civicrm li.crm-menu-border-top
 
 
 /* sunrise */
-body.admin-color-sunrise #civicrm-menu.sm-civicrm
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #cf4944;
 }
 
-@media (max-width: 768px) {
-	body.admin-color-sunrise #civicrm-menu-nav {
-		background: #cf4944;
-	}
-}
-
-body.admin-color-sunrise #civicrm-menu.sm-civicrm a
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	 color: #fff;
 }
 
-body.admin-color-sunrise #civicrm-menu .crm-quickSearchField,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li li .sub-arrow:after
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
 	color: #f1c8c7;
 }
 
-body.admin-color-sunrise #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
 	color: #f7e3d3;
 }
 
 /* Remove hover behaviour */
-body.admin-color-sunrise #civicrm-menu.sm-civicrm ul,
-body.admin-color-sunrise #civicrm-menu li a.highlighted,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li a:hover
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
 	color: #f7e3d3;
 	background-color: #be3631;
 }
 
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-sunrise #civicrm-menu.sm-civicrm li.crm-menu-border-top
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top
 {
 	border-color: #a12c26;
 }
