@@ -24,9 +24,9 @@
 
 		<?php wp_nonce_field( 'civicrm_admin_utilities_multidomain_action', 'civicrm_admin_utilities_multidomain_nonce' ); ?>
 
-		<h3><?php _e( 'CiviCRM Domain Options', 'civicrm-admin-utilities' ); ?></h3>
+		<h3><?php _e( 'CiviCRM Domain Information', 'civicrm-admin-utilities' ); ?></h3>
 
-		<p><?php _e( 'Create or edit the CiviCRM Domain here.', 'civicrm-admin-utilities' ); ?></p>
+		<?php /* ?><p><?php _e( 'Create or edit the CiviCRM Domain here.', 'civicrm-admin-utilities' ); ?></p><?php */ ?>
 
 		<table class="form-table">
 
@@ -53,9 +53,9 @@
 
 		</table>
 
-		<p class="submit">
+		<?php /* ?><p class="submit">
 			<input class="button-primary" type="submit" id="civicrm_admin_utilities_multidomain_submit" name="civicrm_admin_utilities_multidomain_submit" value="<?php _e( 'Save Changes', 'civicrm-admin-utilities' ); ?>" />
-		</p>
+		</p><?php */ ?>
 
 	</form>
 
