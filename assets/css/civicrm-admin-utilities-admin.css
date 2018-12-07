@@ -3199,65 +3199,6 @@ tbody.scrollContent tr.alternateRow {
 	padding-left: 5px;
 }
 
-/* Make cancel and delete buttons less prominent */
-.crm-container a.button.delete,
-.crm-container a.button.delete:link,
-.crm-container a.button.delete:hover,
-.crm-container a.button.delete:focus,
-.crm-container a.button.delete:active,
-.crm-container a.button.cancel,
-.crm-container a.button.cancel:link,
-.crm-container a.button.cancel:hover,
-.crm-container a.button.cancel:focus,
-.crm-container a.button.cancel:active,
-.crm-container input.crm-form-submit.cancel,
-.crm-container input.crm-form-submit.cancel:hover,
-.crm-container input.crm-form-submit.cancel:focus,
-.crm-container input.crm-form-submit.cancel:active,
-.crm-container button.ui-button[data-identifier*="_cancel"],
-.crm-container button.ui-button[data-identifier*="_cancel"]:hover,
-.crm-container button.ui-button[data-identifier*="_cancel"]:focus,
-.crm-container button.ui-button[data-identifier*="_cancel"]:active
-{
-	color: #555;
-	border-color: #cccccc;
-	background: #f7f7f7;
-	box-shadow: 0 1px 0 #cccccc;
-	vertical-align: top;
-	text-shadow: none;
-}
-
-.crm-container a.button.delete:hover,
-.crm-container a.button.delete:focus,
-.crm-container a.button.delete:active,
-.crm-container a.button.cancel:hover,
-.crm-container a.button.cancel:focus,
-.crm-container a.button.cancel:active,
-.crm-container input.crm-form-submit.cancel:hover,
-.crm-container input.crm-form-submit.cancel:focus,
-.crm-container input.crm-form-submit.cancel:active,
-.crm-container button.ui-button[data-identifier*="_cancel"]:hover,
-.crm-container button.ui-button[data-identifier*="_cancel"]:focus,
-.crm-container button.ui-button[data-identifier*="_cancel"]:active
-{
-    background: #fafafa;
-    border-color: #999;
-    color: #23282d;
-}
-
-/* Alter colour of cancel button icon */
-.crm-button.crm-button-type-cancel .crm-i.fa-times,
-.crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
-{
-    color: #555;
-}
-
-.crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
-.crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
-{
-    color: #23282d;
-}
-
 
 
 /* deprecated autocomplete styles */
@@ -3372,6 +3313,7 @@ tbody.scrollContent tr.alternateRow {
 }
 .crm-container .select2-search-choice-close {
 	top: 2px;
+	transition: none;
 }
 .crm-container .select2-container .select2-choice abbr {
 	top: 6px;
@@ -4945,7 +4887,7 @@ jQuery UI overrides
 	line-height: 26px;
 	height: 28px;
 	margin: 0;
-	padding: 0 10px 1px;
+	padding: 0 10px 1px 8px;
 	cursor: pointer;
 	border-width: 1px;
 	border-style: solid;
@@ -5061,6 +5003,9 @@ body.admin-color-light #crm-container .crm-inline-edit.add-new .crm-edit-help
 	 text-shadow: 0 -1px 1px #036881, 1px 0 1px #036881, 0 1px 1px #036881, -1px 0 1px #036881;
 }
 
+body.admin-color-light .crm-container a.button:hover,
+body.admin-color-light .crm-container a.button:focus,
+body.admin-color-light .crm-container a.button:active,
 body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-light #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
@@ -5301,4 +5246,63 @@ body.admin-color-sunrise #crm-container .crm-edit-ready .crm-inline-edit:hover .
 }
 
 
+
+/* Make cancel and delete buttons less prominent */
+body.wp-admin #crm-container.crm-container a.button.delete,
+body.wp-admin #crm-container.crm-container a.button.delete:link,
+body.wp-admin #crm-container.crm-container a.button.delete:hover,
+body.wp-admin #crm-container.crm-container a.button.delete:focus,
+body.wp-admin #crm-container.crm-container a.button.delete:active,
+body.wp-admin #crm-container.crm-container a.button.cancel,
+body.wp-admin #crm-container.crm-container a.button.cancel:link,
+body.wp-admin #crm-container.crm-container a.button.cancel:hover,
+body.wp-admin #crm-container.crm-container a.button.cancel:focus,
+body.wp-admin #crm-container.crm-container a.button.cancel:active,
+body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel,
+body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:hover,
+body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:focus,
+body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:active,
+body.wp-admin button.ui-button[data-identifier*="_cancel"],
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:hover,
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:focus,
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:active
+{
+	color: #555;
+	border-color: #cccccc;
+	background: #f7f7f7;
+	box-shadow: 0 1px 0 #cccccc;
+	vertical-align: top;
+	text-shadow: none;
+}
+
+body.wp-admin #crm-container.crm-container a.button.delete:hover,
+body.wp-admin #crm-container.crm-container a.button.delete:focus,
+body.wp-admin #crm-container.crm-container a.button.delete:active,
+body.wp-admin #crm-container.crm-container a.button.cancel:hover,
+body.wp-admin #crm-container.crm-container a.button.cancel:focus,
+body.wp-admin #crm-container.crm-container a.button.cancel:active,
+body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:hover,
+body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:focus,
+body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:active,
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:hover,
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:focus,
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:active
+{
+    background: #fafafa;
+    border-color: #999;
+    color: #23282d;
+}
+
+/* Alter colour of cancel button icon */
+body.wp-admin #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
+body.wp-admin .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
+{
+    color: #555;
+}
+
+body.wp-admin #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
+body.wp-admin .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
+{
+    color: #23282d;
+}
 
