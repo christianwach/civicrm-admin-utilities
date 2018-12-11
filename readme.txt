@@ -69,6 +69,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.6.1 =
+
+* Fixes various issues with CiviCRM admin theme
+* Adds link to CiviCRM Admin Utilities settings page to Shortcuts menu
+
 = 0.6 =
 
 * Public release of changes made in 0.5.4
