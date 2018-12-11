@@ -5044,6 +5044,9 @@ body.admin-color-blue #crm-container .crm-inline-edit.add-new .crm-edit-help
 	 text-shadow: 0 -1px 1px #bd831f, 1px 0 1px #bd831f, 0 1px 1px #bd831f, -1px 0 1px #bd831f;
 }
 
+body.admin-color-blue .crm-container a.button:hover,
+body.admin-color-blue .crm-container a.button:focus,
+body.admin-color-blue .crm-container a.button:active,
 body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-blue #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
@@ -5082,6 +5085,9 @@ body.admin-color-coffee #crm-container .crm-inline-edit.add-new .crm-edit-help
 	 text-shadow: 0 -1px 1px #ae7d55, 1px 0 1px #ae7d55, 0 1px 1px #ae7d55, -1px 0 1px #ae7d55;
 }
 
+body.admin-color-coffee .crm-container a.button:hover,
+body.admin-color-coffee .crm-container a.button:focus,
+body.admin-color-coffee .crm-container a.button:active,
 body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-coffee #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
@@ -5120,6 +5126,9 @@ body.admin-color-ectoplasm #crm-container .crm-inline-edit.add-new .crm-edit-hel
 	 text-shadow: 0 -1px 1px #727f30, 1px 0 1px #727f30, 0 1px 1px #727f30, -1px 0 1px #727f30;
 }
 
+body.admin-color-ectoplasm .crm-container a.button:hover,
+body.admin-color-ectoplasm .crm-container a.button:focus,
+body.admin-color-ectoplasm .crm-container a.button:active,
 body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
@@ -5158,6 +5167,9 @@ body.admin-color-midnight #crm-container .crm-inline-edit.add-new .crm-edit-help
 	 text-shadow: 0 -1px 1px #ba281e, 1px 0 1px #ba281e, 0 1px 1px #ba281e, -1px 0 1px #ba281e;
 }
 
+body.admin-color-midnight .crm-container a.button:hover,
+body.admin-color-midnight .crm-container a.button:focus,
+body.admin-color-midnight .crm-container a.button:active,
 body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-midnight #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
@@ -5196,6 +5208,9 @@ body.admin-color-ocean #crm-container .crm-inline-edit.add-new .crm-edit-help
 	 text-shadow: 0 -1px 1px #719a74, 1px 0 1px #719a74, 0 1px 1px #719a74, -1px 0 1px #719a74;
 }
 
+body.admin-color-ocean .crm-container a.button:hover,
+body.admin-color-ocean .crm-container a.button:focus,
+body.admin-color-ocean .crm-container a.button:active,
 body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-ocean #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
@@ -5234,6 +5249,9 @@ body.admin-color-sunrise #crm-container .crm-inline-edit.add-new .crm-edit-help
 	 text-shadow: 0 -1px 1px #ad5d1e, 1px 0 1px #ad5d1e, 0 1px 1px #ad5d1e, -1px 0 1px #ad5d1e;
 }
 
+body.admin-color-sunrise .crm-container a.button:hover,
+body.admin-color-sunrise .crm-container a.button:focus,
+body.admin-color-sunrise .crm-container a.button:active,
 body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-sunrise #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
