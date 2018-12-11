@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities package.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.6\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
-"POT-Creation-Date: 2018-12-06 13:52:58+00:00\n"
+"POT-Creation-Date: 2018-12-11 14:32:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,6 +19,7 @@ msgstr ""
 #: includes/civicrm-admin-utilities-multisite.php:504
 #: includes/civicrm-admin-utilities-single.php:316
 #: includes/civicrm-admin-utilities-single.php:434
+#: includes/civicrm-admin-utilities-single.php:1455
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -375,47 +376,47 @@ msgid "You do not have permission to access this page."
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1291
-#: includes/civicrm-admin-utilities-single.php:1935
+#: includes/civicrm-admin-utilities-single.php:1956
 msgid "You must supply a setting to setting_exists()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1315
-#: includes/civicrm-admin-utilities-single.php:1959
+#: includes/civicrm-admin-utilities-single.php:1980
 msgid "You must supply a setting to setting_get()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1338
-#: includes/civicrm-admin-utilities-single.php:1982
+#: includes/civicrm-admin-utilities-single.php:2003
 msgid "You must supply a setting to setting_set()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1343
-#: includes/civicrm-admin-utilities-single.php:1987
+#: includes/civicrm-admin-utilities-single.php:2008
 msgid "You must supply the setting as a string to setting_set()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1365
-#: includes/civicrm-admin-utilities-single.php:2009
+#: includes/civicrm-admin-utilities-single.php:2030
 msgid "You must supply a setting to setting_delete()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1392
-#: includes/civicrm-admin-utilities-single.php:2036
+#: includes/civicrm-admin-utilities-single.php:2057
 msgid "You must supply an option to option_exists()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1420
-#: includes/civicrm-admin-utilities-single.php:2064
+#: includes/civicrm-admin-utilities-single.php:2085
 msgid "You must supply an option to option_get()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1447
-#: includes/civicrm-admin-utilities-single.php:2091
+#: includes/civicrm-admin-utilities-single.php:2112
 msgid "You must supply an option to option_set()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1470
-#: includes/civicrm-admin-utilities-single.php:2114
+#: includes/civicrm-admin-utilities-single.php:2135
 msgid "You must supply an option to option_delete()"
 msgstr ""
 
@@ -467,7 +468,7 @@ msgstr ""
 msgid "Admin Console"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1580
+#: includes/civicrm-admin-utilities-single.php:1601
 msgid "WordPress Access Control"
 msgstr ""
 #. Plugin Name of the plugin/theme
