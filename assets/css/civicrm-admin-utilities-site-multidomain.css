@@ -1,0 +1,28 @@
+/**
+ * CiviCRM styles for for CiviCRM Admin Utilities Site Domain page.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+
+
+/* Hide edit sections initially */
+.cau-domain-group-edit,
+.cau-domain-org-edit
+{
+	/* display: none; */
+}
+
+/* Give Select2 room to breathe */
+.select2-container
+{
+    min-width: 300px;
+}
+
+/* Give input element room to breathe */
+.cau_text_input
+{
+    min-width: 300px;
+}
+

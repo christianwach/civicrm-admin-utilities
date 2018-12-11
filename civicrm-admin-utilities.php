@@ -319,6 +319,55 @@ class CiviCRM_Admin_Utilities {
 
 
 
+	/**
+	 * Check if a CiviCRM Extension is installed and active.
+	 *
+	 * @since 0.6.2
+	 *
+	 * @param str $full_name The full name of the extension.
+	 * @return bool $installed True if extension is installed, false otherwise.
+	 */
+	public function is_extension_enabled( $full_name ) {
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->is_civicrm_initialised() ) {
+			return false;
+		}
+
+		// Assume not installed.
+		$installed = false;
+
+		// Query API for extension.
+		$result = civicrm_api( 'extension', 'get', array(
+			'version' => 3,
+			'sequential' => 1,
+			'full_name' => $full_name,
+		));
+
+		// Bail if there's an error.
+		if ( ! empty( $result['is_error'] ) AND $result['is_error'] == 1 ) {
+			return $installed;
+		}
+
+		// Bail if not found.
+		if ( empty( $result['values'] ) ) {
+			return $installed;
+		}
+
+		// Double check.
+		foreach( $result['values'] AS $extension ) {
+			if ( $extension['key'] == $full_name ) {
+				$installed = true;
+			}
+		}
+
+		// --<
+		return $installed;
+
+	}
+
+
+
 } // Class ends.
 
 

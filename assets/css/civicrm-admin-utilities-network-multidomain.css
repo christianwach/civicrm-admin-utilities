@@ -1,0 +1,21 @@
+/**
+ * CiviCRM styles for for CiviCRM Admin Utilities Network Admin Domains page.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+
+
+/* Give input element room to breathe */
+.cau_text_input
+{
+    min-width: 300px;
+}
+
+/* Inline heading */
+h3.wp-heading-inline
+{
+	display: inline-block;
+	margin-right: 5px;
+}

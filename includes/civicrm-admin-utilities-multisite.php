@@ -352,8 +352,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_action( 'admin_head-' . $this->network_parent_page, array( $this, 'network_admin_head' ), 50 );
 
 		// Add scripts and styles.
-		add_action( 'admin_print_scripts-' . $this->network_parent_page, array( $this, 'network_admin_js' ) );
-		//add_action( 'admin_print_styles-' . $this->network_parent_page, array( $this, 'network_admin_css' ) );
+		add_action( 'admin_print_scripts-' . $this->network_parent_page, array( $this, 'page_network_settings_js' ) );
+		//add_action( 'admin_print_styles-' . $this->network_parent_page, array( $this, 'page_network_settings_css' ) );
 
 		// Add settings page.
 		$this->network_settings_page = add_submenu_page(
@@ -372,91 +372,11 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_action( 'admin_head-' . $this->network_settings_page, array( $this, 'network_admin_head' ), 50 );
 
 		// Add scripts and styles.
-		add_action( 'admin_print_scripts-' . $this->network_settings_page, array( $this, 'network_admin_js' ) );
-		//add_action( 'admin_print_styles-' . $this->network_settings_page, array( $this, 'network_admin_css' ) );
+		add_action( 'admin_print_scripts-' . $this->network_settings_page, array( $this, 'page_network_settings_js' ) );
+		//add_action( 'admin_print_styles-' . $this->network_settings_page, array( $this, 'page_network_settings_css' ) );
 
 		// Try and update options.
 		$saved = $this->settings_update_router();
-
-	}
-
-
-
-	/**
-	 * Highlight the plugin's parent menu item.
-	 *
-	 * Regardless of the actual admin screen we are on, we need the parent menu
-	 * item to be highlighted so that the appropriate menu is open by default
-	 * when the subpage is viewed.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @global string $plugin_page The current plugin page.
-	 * @global string $submenu_file The current submenu.
-	 */
-	public function network_menu_highlight() {
-
-		global $plugin_page, $submenu_file;
-
-		// Define subpages.
-		$subpages = array(
-			'civicrm_admin_utilities_network_settings',
-		);
-
-		/**
-		 * Filter the list of network subpages.
-		 *
-		 * @since 0.5.4
-		 *
-		 * @param array $subpages The existing list of network subpages.
-		 * @return array $subpages The modified list of network subpages.
-		 */
-		$subpages = apply_filters( 'civicrm_admin_utilities_network_subpages', $subpages );
-
-		// This tweaks the Settings subnav menu to show only one menu item.
-		if ( in_array( $plugin_page, $subpages ) ) {
-			$plugin_page = 'civicrm_admin_utilities_network_parent';
-			$submenu_file = 'civicrm_admin_utilities_network_parent';
-		}
-
-	}
-
-
-
-	/**
-	 * Enqueue stylesheet for the Network Admin Settings page.
-	 *
-	 * @since 0.5.4
-	 */
-	public function network_admin_css() {
-
-		// Add stylesheet.
-		wp_enqueue_style(
-			'civicrm_admin_utilities_network_settings_css',
-			plugins_url( 'assets/css/civicrm-admin-utilities-network-settings.css', CIVICRM_ADMIN_UTILITIES_FILE ),
-			false,
-			CIVICRM_ADMIN_UTILITIES_VERSION, // version
-			'all' // media
-		);
-
-	}
-
-
-
-	/**
-	 * Enqueue Javascript on the Network Admin Settings page.
-	 *
-	 * @since 0.5.4
-	 */
-	public function network_admin_js() {
-
-		// Add Javascript plus dependencies.
-		wp_enqueue_script(
-			'civicrm_admin_utilities_network_settings_js',
-			plugins_url( 'assets/js/civicrm-admin-utilities-network-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
-			array( 'jquery' ),
-			CIVICRM_ADMIN_UTILITIES_VERSION // version
-		);
 
 	}
 
@@ -526,6 +446,85 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// --<
 		return $help;
+
+	}
+
+
+
+	/**
+	 * Get the URL to access a particular menu page.
+	 *
+	 * The URL based on the slug it was registered with. If the slug hasn't been
+	 * registered properly no url will be returned.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @param string $menu_slug The slug name to refer to this menu by (should be unique for this menu).
+	 * @param bool $echo Whether or not to echo the url - default is true.
+	 * @return string $url The URL.
+	 */
+	public function network_menu_page_url( $menu_slug, $echo = true ) {
+
+		global $_parent_pages;
+
+		if ( isset( $_parent_pages[$menu_slug] ) ) {
+			$parent_slug = $_parent_pages[$menu_slug];
+			if ( $parent_slug && ! isset( $_parent_pages[$parent_slug] ) ) {
+				$url = network_admin_url( add_query_arg( 'page', $menu_slug, $parent_slug ) );
+			} else {
+				$url = network_admin_url( 'admin.php?page=' . $menu_slug );
+			}
+		} else {
+			$url = '';
+		}
+
+		$url = esc_url( $url );
+
+		if ( $echo ) echo $url;
+
+		// --<
+		return $url;
+
+	}
+
+
+
+	/**
+	 * Highlight the plugin's parent menu item.
+	 *
+	 * Regardless of the actual admin screen we are on, we need the parent menu
+	 * item to be highlighted so that the appropriate menu is open by default
+	 * when the subpage is viewed.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @global string $plugin_page The current plugin page.
+	 * @global string $submenu_file The current submenu.
+	 */
+	public function network_menu_highlight() {
+
+		global $plugin_page, $submenu_file;
+
+		// Define subpages.
+		$subpages = array(
+			'civicrm_admin_utilities_network_settings',
+		);
+
+		/**
+		 * Filter the list of network subpages.
+		 *
+		 * @since 0.5.4
+		 *
+		 * @param array $subpages The existing list of network subpages.
+		 * @return array $subpages The modified list of network subpages.
+		 */
+		$subpages = apply_filters( 'civicrm_admin_utilities_network_subpages', $subpages );
+
+		// This tweaks the Settings subnav menu to show only one menu item.
+		if ( in_array( $plugin_page, $subpages ) ) {
+			$plugin_page = 'civicrm_admin_utilities_network_parent';
+			$submenu_file = 'civicrm_admin_utilities_network_parent';
+		}
 
 	}
 
@@ -664,11 +663,57 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Get post type options.
 		$options = $this->plugin->single->post_type_options_get( $selected_types );
 
-		// Do not show tabs by default.
-		$show_tabs = false;
+		/**
+		 * Do not show tabs by default but allow overrides.
+		 *
+		 * @since 0.6.2
+		 *
+		 * @param bool False by default - do not show tabs.
+		 * @return bool Modified flag for whether or not to show tabs.
+		 */
+		$show_tabs = apply_filters( 'civicrm_admin_utilities_network_show_tabs', false );
 
 		// Include template.
 		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-settings.php' );
+
+	}
+
+
+
+	/**
+	 * Enqueue stylesheet for the Network Admin Settings page.
+	 *
+	 * @since 0.5.4
+	 */
+	public function page_network_settings_css() {
+
+		// Add stylesheet.
+		wp_enqueue_style(
+			'civicrm_admin_utilities_network_settings_css',
+			plugins_url( 'assets/css/civicrm-admin-utilities-network-settings.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+			false,
+			CIVICRM_ADMIN_UTILITIES_VERSION, // version
+			'all' // media
+		);
+
+	}
+
+
+
+	/**
+	 * Enqueue Javascript on the Network Admin Settings page.
+	 *
+	 * @since 0.5.4
+	 */
+	public function page_network_settings_js() {
+
+		// Add Javascript plus dependencies.
+		wp_enqueue_script(
+			'civicrm_admin_utilities_network_settings_js',
+			plugins_url( 'assets/js/civicrm-admin-utilities-network-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
+			array( 'jquery' ),
+			CIVICRM_ADMIN_UTILITIES_VERSION // version
+		);
 
 	}
 
@@ -750,48 +795,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// --<
 		return $capability;
-
-	}
-
-
-
-	//##########################################################################
-
-
-
-	/**
-	 * Get the URL to access a particular menu page.
-	 *
-	 * The URL based on the slug it was registered with. If the slug hasn't been
-	 * registered properly no url will be returned.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @param string $menu_slug The slug name to refer to this menu by (should be unique for this menu).
-	 * @param bool $echo Whether or not to echo the url - default is true.
-	 * @return string $url The URL.
-	 */
-	public function network_menu_page_url( $menu_slug, $echo = true ) {
-
-		global $_parent_pages;
-
-		if ( isset( $_parent_pages[$menu_slug] ) ) {
-			$parent_slug = $_parent_pages[$menu_slug];
-			if ( $parent_slug && ! isset( $_parent_pages[$parent_slug] ) ) {
-				$url = network_admin_url( add_query_arg( 'page', $menu_slug, $parent_slug ) );
-			} else {
-				$url = network_admin_url( 'admin.php?page=' . $menu_slug );
-			}
-		} else {
-			$url = '';
-		}
-
-		$url = esc_url( $url );
-
-		if ( $echo ) echo $url;
-
-		// --<
-		return $url;
 
 	}
 
