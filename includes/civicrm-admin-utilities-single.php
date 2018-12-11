@@ -1437,6 +1437,27 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		/**
+		 * Set capability but allow overrides.
+		 *
+		 * @since 0.5.4
+		 * @since 0.6.1 Added here to check access to menu item.
+		 *
+		 * @param str The default capability for access to settings page.
+		 * @return str The modified capability for access to settings page.
+		 */
+		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
+
+		// Admin Utilities settings page.
+		if ( current_user_can( $capability ) ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-11',
+				'parent' => $id,
+				'title' => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
+				'href' => menu_page_url( 'civicrm_admin_utilities_settings', false ),
+			) );
+		}
+
+		/**
 		 * Fires after Shortcuts Menu has been defined.
 		 *
 		 * @since 0.3
