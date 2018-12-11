@@ -424,7 +424,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 	/**
-	 * Enqueue stylesheet for this plugin's "Manual Sync" page.
+	 * Enqueue stylesheet for the Network Admin Settings page.
 	 *
 	 * @since 0.5.4
 	 */
