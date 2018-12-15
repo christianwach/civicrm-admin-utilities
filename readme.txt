@@ -69,6 +69,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.6.2 =
+
+* Better management of CiviCRM Domains
+
 = 0.6.1 =
 
 * Fixes various issues with CiviCRM admin theme
