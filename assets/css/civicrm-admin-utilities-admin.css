@@ -5283,7 +5283,11 @@ body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:active,
 body.wp-admin button.ui-button[data-identifier*="_cancel"],
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:hover,
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:focus,
-body.wp-admin button.ui-button[data-identifier*="_cancel"]:active
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:active,
+body.wp-admin button.crm-button[crm-icon="fa-trash"],
+body.wp-admin button.crm-button[crm-icon="fa-trash"]:hover,
+body.wp-admin button.crm-button[crm-icon="fa-trash"]:focus,
+body.wp-admin button.crm-button[crm-icon="fa-trash"]:active
 {
 	color: #555;
 	border-color: #cccccc;
@@ -5304,7 +5308,10 @@ body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:focus,
 body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:active,
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:hover,
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:focus,
-body.wp-admin button.ui-button[data-identifier*="_cancel"]:active
+body.wp-admin button.ui-button[data-identifier*="_cancel"]:active,
+body.wp-admin button.crm-button[crm-icon="fa-trash"]:hover,
+body.wp-admin button.crm-button[crm-icon="fa-trash"]:focus,
+body.wp-admin button.crm-button[crm-icon="fa-trash"]:active
 {
     background: #fafafa;
     border-color: #999;
