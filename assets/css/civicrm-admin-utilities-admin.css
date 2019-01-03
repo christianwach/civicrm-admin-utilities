@@ -4768,7 +4768,7 @@ jQuery UI overrides
 {
 	display: inline-block;
 	margin-top: 1px;
-	margin-bottom: -1px;
+	/*margin-bottom: -1px;*/
 }
 
 #mainTabContainer ul.crm-contact-tabs-list li a
