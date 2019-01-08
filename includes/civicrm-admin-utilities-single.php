@@ -1381,13 +1381,27 @@ class CiviCRM_Admin_Utilities_Single {
 			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
 		) );
 
+		/**
+		 * Allow or deny access to the "Manage Groups" item.
+		 *
+		 * @see https://github.com/christianwach/civicrm-admin-utilities/issues/8
+		 *
+		 * @since 0.6.3
+		 *
+		 * @param bool True allows access by default.
+		 * @return bool Modified access flag - return boolean "false" to deny.
+		 */
+		$allowed = apply_filters( 'civicrm_admin_utilities_manage_groups_menu_item', true );
+
 		// Groups.
-		$wp_admin_bar->add_menu( array(
-			'id' => 'cau-3',
-			'parent' => $id,
-			'title' => __( 'Manage Groups', 'civicrm-admin-utilities' ),
-			'href' => $this->get_link( 'civicrm/group', 'reset=1' ),
-		) );
+		if ( $allowed ) {
+			$wp_admin_bar->add_menu( array(
+				'id' => 'cau-3',
+				'parent' => $id,
+				'title' => __( 'Manage Groups', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/group', 'reset=1' ),
+			) );
+		}
 
 		// Contributions.
 		if ( array_key_exists( 'CiviContribute', $components ) ) {
