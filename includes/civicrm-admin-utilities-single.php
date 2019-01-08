@@ -305,6 +305,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Bail if we can't edit this user.
 		if ( ! current_user_can( 'edit_user', $user->ID ) ) return;
 
+		// Bail if user cannot access CiviCRM.
+		if ( ! current_user_can( 'access_civicrm' ) ) return;
+
 		// Perform further checks if we can't view all contacts.
 		if ( ! $this->check_permission( 'view all contacts' ) ) {
 
