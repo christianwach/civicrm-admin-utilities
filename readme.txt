@@ -73,6 +73,7 @@ Network Administrators can now set site defaults for any further activations of 
 
 * Adds link to CiviCRM Contact on WordPress user edit screen
 * Fixes tab alignment when tabs wrap on to multiple rows
+* Allows "Manage Groups" menu item to be restricted or hidden
 
 = 0.6.2 =
 
