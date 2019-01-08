@@ -69,6 +69,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.6.3 =
+
+* Adds link to CiviCRM Contact on WordPress user edit screen
+* Fixes tab alignment when tabs wrap on to multiple rows
+
 = 0.6.2 =
 
 * Better management of CiviCRM Domains
