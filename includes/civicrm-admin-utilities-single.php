@@ -272,6 +272,9 @@ class CiviCRM_Admin_Utilities_Single {
 		add_action( 'admin_head', array( $this, 'resources_disable' ), 9 );
 		add_action( 'wp_head', array( $this, 'resources_disable' ), 9 );
 
+		// Add contact link to the 'user-edit.php' page.
+		add_action( 'personal_options', array( $this, 'profile_extras' ) );
+
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
@@ -281,6 +284,38 @@ class CiviCRM_Admin_Utilities_Single {
 			add_action( 'civicrm_postProcess', array( $this, 'trace_postProcess' ), 10, 2 );
 
 		}
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Add link to CiviCRM Contact on User Edit screen.
+	 *
+	 * @since 0.6.3
+	 *
+	 * @param object $user The displayed WordPress user object.
+	 */
+	public function profile_extras( $user ) {
+
+		// Bail if we can't edit this user.
+		if ( ! current_user_can( 'edit_user', $user->ID ) ) return;
+
+		// Get contact ID.
+		$contact_id = $this->contact_id_get_by_user_id( $user->ID );
+
+		// Bail if we don't get one for some reason.
+		if ( $contact_id === false ) return;
+
+		// Get the link to the Contact.
+		$link = $this->get_link( 'civicrm/contact/view', 'reset=1&cid=' . $contact_id );
+
+		// Include template.
+		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/user-edit.php' );
 
 	}
 
@@ -1536,6 +1571,39 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @return bool $permitted True if allowed, false otherwise.
 		 */
 		return apply_filters( 'civicrm_admin_utilities_permitted', $permitted, $permission );
+
+	}
+
+
+
+	/**
+	 * Get a CiviCRM contact ID for a given WordPress user ID.
+	 *
+	 * @since 0.6.3
+	 *
+	 * @param int $user_id The numeric WordPress user ID.
+	 * @return int|bool $contact_id The CiviCRM contact ID, or false on failure.
+	 */
+	public function contact_id_get_by_user_id( $user_id ) {
+
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
+
+		// Make sure CiviCRM file is included.
+		require_once( 'CRM/Core/BAO/UFMatch.php' );
+
+		// Search using CiviCRM's logic.
+		$contact_id = CRM_Core_BAO_UFMatch::getContactId( $user_id );
+
+		// Cast contact ID as boolean if we didn't get one.
+		if ( empty( $contact_id ) ) {
+			$contact_id = false;
+		}
+
+		// --<
+		return $contact_id;
 
 	}
 
