@@ -69,6 +69,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.6.4 =
+
+* Respect CiviCRM permissions when showing link to CiviCRM Contact
+
 = 0.6.3 =
 
 * Adds link to CiviCRM Contact on WordPress user edit screen
