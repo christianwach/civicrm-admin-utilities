@@ -305,6 +305,27 @@ class CiviCRM_Admin_Utilities_Single {
 		// Bail if we can't edit this user.
 		if ( ! current_user_can( 'edit_user', $user->ID ) ) return;
 
+		// Perform further checks if we can't view all contacts.
+		if ( ! $this->check_permission( 'view all contacts' ) ) {
+
+			//  Get current user.
+			$current_user = wp_get_current_user();
+
+			// Is this their profile?
+			if ( $user->ID === $current_user->ID ) {
+
+				// Bail if they can't view their own contact.
+				if ( ! $this->check_permission( 'view my contact' ) ) return;
+
+			} else {
+
+				// Not allowed.
+				return;
+
+			}
+
+		}
+
 		// Get contact ID.
 		$contact_id = $this->contact_id_get_by_user_id( $user->ID );
 
