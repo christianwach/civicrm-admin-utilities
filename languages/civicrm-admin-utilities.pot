@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities package.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.6.3\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.6.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
-"POT-Creation-Date: 2019-01-08 13:50:15+00:00\n"
+"POT-Creation-Date: 2019-01-08 14:44:53+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,9 +19,9 @@ msgstr ""
 #: includes/civicrm-admin-utilities-multisite.php:345
 #: includes/civicrm-admin-utilities-multisite.php:362
 #: includes/civicrm-admin-utilities-multisite.php:424
-#: includes/civicrm-admin-utilities-single.php:351
-#: includes/civicrm-admin-utilities-single.php:469
-#: includes/civicrm-admin-utilities-single.php:1504
+#: includes/civicrm-admin-utilities-single.php:375
+#: includes/civicrm-admin-utilities-single.php:493
+#: includes/civicrm-admin-utilities-single.php:1528
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 #: assets/templates/network-settings.php:8
 #: assets/templates/site-multidomain.php:7 assets/templates/site-settings.php:8
 #: civicrm-admin-utilities.php:425 civicrm-admin-utilities.php:431
-#: includes/civicrm-admin-utilities-single.php:367
+#: includes/civicrm-admin-utilities-single.php:391
 msgid "Settings"
 msgstr ""
 
@@ -477,105 +477,105 @@ msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:344
 #: includes/civicrm-admin-utilities-multisite.php:361
-#: includes/civicrm-admin-utilities-single.php:350
-#: includes/civicrm-admin-utilities-single.php:366
+#: includes/civicrm-admin-utilities-single.php:374
+#: includes/civicrm-admin-utilities-single.php:390
 msgid "CiviCRM Admin Utilities: Settings"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1294
-#: includes/civicrm-admin-utilities-single.php:2038
+#: includes/civicrm-admin-utilities-single.php:2062
 msgid "You must supply a setting to setting_exists()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1318
-#: includes/civicrm-admin-utilities-single.php:2062
+#: includes/civicrm-admin-utilities-single.php:2086
 msgid "You must supply a setting to setting_get()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1341
-#: includes/civicrm-admin-utilities-single.php:2085
+#: includes/civicrm-admin-utilities-single.php:2109
 msgid "You must supply a setting to setting_set()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1346
-#: includes/civicrm-admin-utilities-single.php:2090
+#: includes/civicrm-admin-utilities-single.php:2114
 msgid "You must supply the setting as a string to setting_set()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1368
-#: includes/civicrm-admin-utilities-single.php:2112
+#: includes/civicrm-admin-utilities-single.php:2136
 msgid "You must supply a setting to setting_delete()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1395
-#: includes/civicrm-admin-utilities-single.php:2139
+#: includes/civicrm-admin-utilities-single.php:2163
 msgid "You must supply an option to option_exists()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1423
-#: includes/civicrm-admin-utilities-single.php:2167
+#: includes/civicrm-admin-utilities-single.php:2191
 msgid "You must supply an option to option_get()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1450
-#: includes/civicrm-admin-utilities-single.php:2194
+#: includes/civicrm-admin-utilities-single.php:2218
 msgid "You must supply an option to option_set()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:1473
-#: includes/civicrm-admin-utilities-single.php:2217
+#: includes/civicrm-admin-utilities-single.php:2241
 msgid "You must supply an option to option_delete()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:490
+#: includes/civicrm-admin-utilities-single.php:514
 msgid "Site Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1364
+#: includes/civicrm-admin-utilities-single.php:1388
 msgid "CiviCRM"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1372
+#: includes/civicrm-admin-utilities-single.php:1396
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1380
+#: includes/civicrm-admin-utilities-single.php:1404
 msgid "Advanced Search"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1401
+#: includes/civicrm-admin-utilities-single.php:1425
 msgid "Manage Groups"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1412
+#: includes/civicrm-admin-utilities-single.php:1436
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1424
+#: includes/civicrm-admin-utilities-single.php:1448
 msgid "Membership Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1436
+#: includes/civicrm-admin-utilities-single.php:1460
 msgid "Events Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1448
+#: includes/civicrm-admin-utilities-single.php:1472
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1460
+#: includes/civicrm-admin-utilities-single.php:1484
 msgid "Report Listing"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1472
+#: includes/civicrm-admin-utilities-single.php:1496
 msgid "Cases Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1483
+#: includes/civicrm-admin-utilities-single.php:1507
 msgid "Admin Console"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1683
+#: includes/civicrm-admin-utilities-single.php:1707
 msgid "WordPress Access Control"
 msgstr ""
 #. Plugin Name of the plugin/theme
