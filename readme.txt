@@ -25,6 +25,7 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisit
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
 * Allows you to remove "administer CiviCRM" capabilities from sub-site administrators
+* Allows suppression of the "change of email" notification when a CiviCRM Contact's primary email is changed
 
 ### CiviCRM Admin Theme
 
@@ -68,6 +69,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 
 == Changelog ==
+
+= 0.6.5 =
+
+* Enable suppression of email notification when a CiviCRM Contact's primary email is changed
 
 = 0.6.4 =
 
