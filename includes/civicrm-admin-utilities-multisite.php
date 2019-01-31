@@ -276,6 +276,16 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
+		// Suppress Email setting may not exist.
+		if ( ! $this->setting_exists( 'email_suppress' ) ) {
+
+			// Add it from defaults.
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'email_suppress', $settings['email_suppress'] );
+			$save = true;
+
+		}
+
 		// Save settings if need be.
 		if ( $save === true ) {
 			$this->settings_save();
@@ -651,6 +661,12 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$prettify_access = ' checked="checked"';
 		}
 
+		// Init suppress email checkbox.
+		$email_suppress = '';
+		if ( $this->setting_get( 'email_suppress', '0' ) == '1' ) {
+			$email_suppress = ' checked="checked"';
+		}
+
 		// Init admin bar checkbox.
 		$admin_bar = '';
 		if ( $this->setting_get( 'admin_bar', '0' ) == '1' ) {
@@ -1017,6 +1033,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Override default CiviCRM CSS in wp-admin.
 		$settings['css_admin'] = '0'; // Do not override by default.
 
+		// Suppress notification email.
+		$settings['email_suppress'] = '0'; // Do not suppress by default.
+
 		// Fix WordPress Access Control table.
 		$settings['prettify_access'] = '1';
 
@@ -1127,6 +1146,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$civicrm_admin_utilities_styles_custom = '';
 		$civicrm_admin_utilities_styles_custom_public = '';
 		$civicrm_admin_utilities_styles_admin = '';
+		$civicrm_admin_utilities_email_suppress = '';
 
 		// Get variables.
 		extract( $_POST );
@@ -1213,6 +1233,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'css_admin', '1' );
 		} else {
 			$this->setting_set( 'css_admin', '0' );
+		}
+
+		// Did we ask to suppress Notification Emails?
+		if ( $civicrm_admin_utilities_email_suppress == '1' ) {
+			$this->setting_set( 'email_suppress', '1' );
+		} else {
+			$this->setting_set( 'email_suppress', '0' );
 		}
 
 		// Did we ask to fix the access form?

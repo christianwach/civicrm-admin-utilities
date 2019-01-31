@@ -223,12 +223,22 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
-		// Override  CiviCRM Default CSS setting may not exist.
+		// Override CiviCRM Default CSS setting may not exist.
 		if ( ! $this->setting_exists( 'css_admin' ) ) {
 
 			// Add it from defaults.
 			$settings = $this->settings_get_defaults();
 			$this->setting_set( 'css_admin', $settings['css_admin'] );
+			$save = true;
+
+		}
+
+		// Suppress Email setting may not exist.
+		if ( ! $this->setting_exists( 'email_suppress' ) ) {
+
+			// Add it from defaults.
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'email_suppress', $settings['email_suppress'] );
 			$save = true;
 
 		}
@@ -274,6 +284,12 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Add contact link to the 'user-edit.php' page.
 		add_action( 'personal_options', array( $this, 'profile_extras' ) );
+
+		// Intercept email updates in CiviCRM.
+		add_action( 'civicrm_pre', array( $this, 'email_pre_update' ), 10, 4 );
+
+		// Maybe suppress notification emails.
+		add_filter( 'send_email_change_email', array( $this, 'email_suppress' ), 10, 3 );
 
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
@@ -340,6 +356,66 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Include template.
 		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/user-edit.php' );
+
+	}
+
+
+
+	/**
+	 * Set property when a CiviCRM contact's primary email address is updated.
+	 *
+	 * @since 0.6.5
+	 *
+	 * @param string $op The type of database operation.
+	 * @param string $objectName The type of object.
+	 * @param integer $objectId The ID of the object.
+	 * @param object $objectRef The object.
+	 */
+	public function email_pre_update( $op, $objectName, $objectId, $objectRef ) {
+
+		// Target our operation.
+		if ( $op != 'edit' ) return;
+
+		// Target our object type.
+		if ( $objectName != 'Email' ) return;
+
+		// Bail if we have no email.
+		if ( ! isset( $objectRef['email'] ) ) return;
+
+		// Set a property to check in `email_suppress()` below.
+		$this->email_sync = true;
+
+	}
+
+
+
+	/**
+	 * Suppress notification email when WordPress user email changes.
+	 *
+	 * @since 0.6.5
+	 *
+	 * @param bool $send Whether to send the email.
+	 * @param array $user The original user array.
+	 * @param array $userdata The updated user array.
+	 */
+	public function email_suppress( $send, $user, $userdata ) {
+
+		// Bail if email suppression is not enabled.
+		if ( $this->setting_get( 'email_suppress', '0' ) == '0' ) return $send;
+
+		// Did this change originate with CiviCRM?
+		if ( isset( $this->email_sync ) AND $this->email_sync === true ) {
+
+			// Unset property.
+			unset( $this->email_sync );
+
+			// Do not notify.
+			$send = false;
+
+		}
+
+		// --<
+		return $send;
 
 	}
 
@@ -606,6 +682,12 @@ class CiviCRM_Admin_Utilities_Single {
 				$custom_public_css = ' checked="checked"';
 			}
 
+		}
+
+		// Init suppress email checkbox.
+		$email_suppress = '';
+		if ( $this->setting_get( 'email_suppress', '0' ) == '1' ) {
+			$email_suppress = ' checked="checked"';
 		}
 
 		// Assume access form has been fixed.
@@ -1821,8 +1903,11 @@ class CiviCRM_Admin_Utilities_Single {
 		// Override CiviCRM Default in wp-admin.
 		$settings['css_admin'] = '0'; // Load CiviCRM Default Stylesheet.
 
-		// Override default CiviCRM CSS in wp-admin
+		// Override default CiviCRM CSS in wp-admin.
 		$settings['css_admin'] = '0'; // Do not override by default.
+
+		// Suppress notification email.
+		$settings['email_suppress'] = '0'; // Do not suppress by default.
 
 		// Fix WordPress Access Control table.
 		$settings['prettify_access'] = '1';
@@ -1903,6 +1988,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$civicrm_admin_utilities_styles_custom = '';
 		$civicrm_admin_utilities_styles_custom_public = '';
 		$civicrm_admin_utilities_styles_admin = '';
+		$civicrm_admin_utilities_email_suppress = '';
 
 		// Get variables.
 		extract( $_POST );
@@ -1970,6 +2056,13 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'css_admin', '1' );
 		} else {
 			$this->setting_set( 'css_admin', '0' );
+		}
+
+		// Did we ask to suppress Notification Emails?
+		if ( $civicrm_admin_utilities_email_suppress == '1' ) {
+			$this->setting_set( 'email_suppress', '1' );
+		} else {
+			$this->setting_set( 'email_suppress', '0' );
 		}
 
 		// Get existing access setting.

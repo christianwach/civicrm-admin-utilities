@@ -205,6 +205,24 @@
 
 		<hr />
 
+		<h3><?php _e( 'User Options', 'civicrm-admin-utilities' ); ?></h3>
+
+		<p><?php _e( 'When the primary email for a CiviCRM Contact is changed, CiviCRM updates the email address of the corresponding  WordPress user. This triggers an email to be sent to the user.', 'civicrm-admin-utilities' ); ?></p>
+
+		<table class="form-table">
+
+			<tr>
+				<th scope="row"><?php _e( 'User notification', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_email_suppress" id="civicrm_admin_utilities_email_suppress" value="1"<?php echo $email_suppress; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_email_suppress"><?php _e( 'Check this to suppress the email to the WordPress user.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
+
+		</table>
+
+		<hr />
+
 		<h3><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></h3>
 
 		<p><?php _e( 'Checking this option fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></li>
