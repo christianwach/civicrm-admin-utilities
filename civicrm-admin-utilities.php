@@ -104,10 +104,6 @@ class CiviCRM_Admin_Utilities {
 		// Enable translation.
 		$this->enable_translation();
 
-		// Init only when CiviCRM is fully installed.
-		if ( ! defined( 'CIVICRM_INSTALLED' ) ) return;
-		if ( ! CIVICRM_INSTALLED ) return;
-
 		// Bail if CiviCRM plugin is not present.
 		if ( ! function_exists( 'civi_wp' ) ) return;
 
@@ -261,6 +257,10 @@ class CiviCRM_Admin_Utilities {
 	 * @return bool True if CiviCRM initialised, false otherwise.
 	 */
 	public function is_civicrm_initialised() {
+
+		// Init only when CiviCRM is fully installed.
+		if ( ! defined( 'CIVICRM_INSTALLED' ) ) return false;
+		if ( ! CIVICRM_INSTALLED ) return false;
 
 		// Bail if no CiviCRM init function.
 		if ( ! function_exists( 'civi_wp' ) ) return false;
