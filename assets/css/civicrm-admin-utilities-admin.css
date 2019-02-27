@@ -4918,6 +4918,11 @@ CiviCRM API v4 support
 --------------------------------------------------------------------------------
 */
 
+#bootstrap-theme.api4-explorer-page
+{
+    background: transparent;
+}
+
 #bootstrap-theme.api4-explorer-page > .row > div
 {
 	box-sizing: border-box;
@@ -4952,9 +4957,9 @@ CiviCRM API v4 support
     padding: 12px;
 }
 
-#bootstrap-theme.api4-explorer-page .row .panel-heading .form-inline
+#bootstrap-theme.api4-explorer-page .panel-info > .panel-heading
 {
-    padding-top: 12px;
+    color: #464354;
 }
 
 #bootstrap-theme.api4-explorer-page .row .panel-body
@@ -4972,6 +4977,29 @@ CiviCRM API v4 support
     border: 1px solid #aaa;
 }
 
+#bootstrap-theme.api4-explorer-page .panel-title
+{
+   line-height: 1.5;
+}
+
+#bootstrap-theme.api4-explorer-page .explorer-params-panel .panel-heading button.btn
+{
+	text-shadow: none;
+	line-height: 1.1;
+	top: 0;
+	box-shadow: none;
+}
+
+#bootstrap-theme.api4-explorer-page label
+{
+	margin-bottom: 0;
+}
+
+#bootstrap-theme.api4-explorer-page input[type="radio"],
+#bootstrap-theme.api4-explorer-page input[type="checkbox"]
+{
+	margin-top: 0;
+}
 
 
 /*
