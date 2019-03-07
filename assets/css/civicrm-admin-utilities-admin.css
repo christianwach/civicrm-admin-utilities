@@ -4918,6 +4918,7 @@ CiviCRM API v4 support
 --------------------------------------------------------------------------------
 */
 
+#crm-container #bootstrap-theme,
 #bootstrap-theme.api4-explorer-page
 {
     background: transparent;
@@ -5004,13 +5005,18 @@ CiviCRM API v4 support
 
 /*
 --------------------------------------------------------------------------------
-Contact Summary Editor extension support
+Contact Layout Editor extension support
 --------------------------------------------------------------------------------
 */
 
 #bootstrap-theme #contactLayoutEditor .panel-heading .btn
 {
 	margin-top: 9px;
+}
+
+body #crm-container div.crm-summary-row div.crm-content
+{
+    margin-left: 134px;
 }
 
 
