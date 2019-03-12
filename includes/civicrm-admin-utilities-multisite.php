@@ -1106,7 +1106,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Init return.
 		$result = false;
 
-		// was the "Network Settings" form submitted?
+		// Was the "Network Settings" form submitted?
 		if ( isset( $_POST['civicrm_admin_utilities_network_settings_submit'] ) ) {
 			return $this->settings_network_update();
 		}
@@ -1370,7 +1370,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Test for other than string.
 		if ( ! is_string( $setting_name ) ) {
-			die( __( 'You must supply the setting as a string to setting_set()', 'civicrm-admin-utilities' ) );
+			die( __( 'The setting name must be passed as a string to setting_set()', 'civicrm-admin-utilities' ) );
 		}
 
 		// Set setting.
