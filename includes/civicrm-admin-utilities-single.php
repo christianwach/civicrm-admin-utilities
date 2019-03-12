@@ -1317,20 +1317,33 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function kam_is_active() {
 
-		// Init return.
-		$kam = false;
-
 		// Kick out if no CiviCRM.
 		if ( ! $this->plugin->is_civicrm_initialised() ) return $kam;
 
+		// Get current version of CiviCRM.
+		$civicrm_version = CRM_Utils_System::version();
+
+		// Init parsed version.
+		$version = $civicrm_version;
+
+		// We only need the major and minor parts.
+		$version_tmp = explode( '.', $civicrm_version );
+		if ( isset( $version_tmp[1] ) ) {
+			$version = $version_tmp[0] . '.' . $version_tmp[1];
+		}
+
+		// KAM is included in core from 5.12 onwards.
+		if ( version_compare( $version, '5.12', '>=' ) ) {
+			return true;
+		}
+
 		// Kick out if no KAM function.
-		if ( ! function_exists( 'kam_civicrm_coreResourceList' ) ) return $kam;
+		if ( ! function_exists( 'kam_civicrm_coreResourceList' ) ) {
+			return false;
+		}
 
-		// KAM is present.
-		$kam = true;
-
-		// --<
-		return $kam;
+		// KAM must be present.
+		return true;
 
 	}
 
