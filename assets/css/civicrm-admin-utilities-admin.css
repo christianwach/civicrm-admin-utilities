@@ -2909,6 +2909,7 @@ div.crm-container form {
 {
 	position: relative;
 	line-height: 2.5;
+	font-weight: normal;
 }
 
 #crm-container .CRM_Contribute_Form_ContributionCharts #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-state-active
@@ -2916,7 +2917,7 @@ div.crm-container form {
 	border: 1px solid #d3d3d3;
 	border-bottom-width: 0;
 	margin-bottom: -1px;
-	 padding-bottom: 1px;
+	padding-bottom: 1px;
 }
 
 #crm-container .CRM_Contribute_Form_ContributionCharts #mainTabContainer.ui-tabs .float-right
@@ -4756,14 +4757,14 @@ jQuery UI overrides
 
 #mainTabContainer ul.crm-contact-tabs-list:after
 {
-    clear: both;
+	clear: both;
 }
 #mainTabContainer ul.crm-contact-tabs-list:before,
 #mainTabContainer ul.crm-contact-tabs-list:after
 {
-    content: "";
-    display: table;
-    border-collapse: collapse;
+	content: "";
+	display: table;
+	border-collapse: collapse;
 }
 
 #mainTabContainer ul.crm-contact-tabs-list li
@@ -4921,16 +4922,16 @@ CiviCRM API v4 support
 #crm-container #bootstrap-theme,
 #bootstrap-theme.api4-explorer-page
 {
-    background: transparent;
+	background: transparent;
 }
 
 #bootstrap-theme.api4-explorer-page > .row > div
 {
 	box-sizing: border-box;
 	position: relative;
-    min-height: 1px;
-    padding-left: 8px;
-    padding-right: 8px;
+	min-height: 1px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 @media (min-width: 992px) {
@@ -4954,28 +4955,28 @@ CiviCRM API v4 support
 
 #bootstrap-theme.api4-explorer-page .row .panel-heading
 {
-    background: #e6e6e6;
-    padding: 12px;
+	background: #e6e6e6;
+	padding: 12px;
 }
 
 #bootstrap-theme.api4-explorer-page .panel-info > .panel-heading
 {
-    color: #464354;
+	color: #464354;
 }
 
 #bootstrap-theme.api4-explorer-page .row .panel-body
 {
-    background: #fff;
-    padding: 12px;
-    margin-bottom: 16px;
+	background: #fff;
+	padding: 12px;
+	margin-bottom: 16px;
 }
 
 #bootstrap-theme.api4-explorer-page .row .panel-body pre
 {
-    background: #fafafa;
-    padding: 12px;
-    margin: 0;
-    border: 1px solid #aaa;
+	background: #fafafa;
+	padding: 12px;
+	margin: 0;
+	border: 1px solid #aaa;
 }
 
 #bootstrap-theme.api4-explorer-page .panel-title
@@ -5016,7 +5017,7 @@ Contact Layout Editor extension support
 
 body #crm-container div.crm-summary-row div.crm-content
 {
-    margin-left: 134px;
+	margin-left: 134px;
 }
 
 
@@ -5369,21 +5370,21 @@ body.wp-admin button.crm-button[crm-icon="fa-trash"]:hover,
 body.wp-admin button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin button.crm-button[crm-icon="fa-trash"]:active
 {
-    background: #fafafa;
-    border-color: #999;
-    color: #23282d;
+	background: #fafafa;
+	border-color: #999;
+	color: #23282d;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-    color: #555;
+	color: #555;
 }
 
 body.wp-admin #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-    color: #23282d;
+	color: #23282d;
 }
 
