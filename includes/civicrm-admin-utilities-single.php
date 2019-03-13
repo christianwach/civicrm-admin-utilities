@@ -197,7 +197,9 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( ! $this->setting_exists( 'css_bootstrap' ) ) {
 
 			// Add it from defaults.
-			$settings = $this->settings_get_defaults();
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
 			$this->setting_set( 'css_bootstrap', $settings['css_bootstrap'] );
 			$save = true;
 
@@ -207,7 +209,9 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( ! $this->setting_exists( 'css_custom' ) ) {
 
 			// Add it from defaults.
-			$settings = $this->settings_get_defaults();
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
 			$this->setting_set( 'css_custom', $settings['css_custom'] );
 			$save = true;
 
@@ -217,7 +221,9 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( ! $this->setting_exists( 'css_custom_public' ) ) {
 
 			// Add it from defaults.
-			$settings = $this->settings_get_defaults();
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
 			$this->setting_set( 'css_custom_public', $settings['css_custom_public'] );
 			$save = true;
 
@@ -227,7 +233,9 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( ! $this->setting_exists( 'css_admin' ) ) {
 
 			// Add it from defaults.
-			$settings = $this->settings_get_defaults();
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
 			$this->setting_set( 'css_admin', $settings['css_admin'] );
 			$save = true;
 
@@ -237,8 +245,22 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( ! $this->setting_exists( 'email_suppress' ) ) {
 
 			// Add it from defaults.
-			$settings = $this->settings_get_defaults();
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
 			$this->setting_set( 'email_suppress', $settings['email_suppress'] );
+			$save = true;
+
+		}
+
+		// Hide "Manage Groups" menu item setting may not exist.
+		if ( ! $this->setting_exists( 'admin_bar_groups' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'admin_bar_groups', $settings['admin_bar_groups'] );
 			$save = true;
 
 		}
@@ -711,6 +733,12 @@ class CiviCRM_Admin_Utilities_Single {
 		$admin_bar = '';
 		if ( $this->setting_get( 'admin_bar', '0' ) == '1' ) {
 			$admin_bar = ' checked="checked"';
+		}
+
+		// Init hide "Manage Groups" admin bar menu item checkbox.
+		$admin_bar_groups = '';
+		if ( $this->setting_get( 'admin_bar_groups', '0' ) == '1' ) {
+			$admin_bar_groups = ' checked="checked"';
 		}
 
 		// Get post type options.
@@ -1500,8 +1528,16 @@ class CiviCRM_Admin_Utilities_Single {
 			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
 		) );
 
+		// Maybe hide "Manage Groups" menu item.
+		if ( $this->setting_get( 'admin_bar_groups', '0' ) == '1' ) {
+			add_filter( 'civicrm_admin_utilities_manage_groups_menu_item', '__return_false' );
+		}
+
 		/**
 		 * Allow or deny access to the "Manage Groups" item.
+		 *
+		 * This now has a setting per site which adds a callback to this filter
+		 * at the default priority. See above.
 		 *
 		 * @see https://github.com/christianwach/civicrm-admin-utilities/issues/8
 		 *
@@ -1931,8 +1967,11 @@ class CiviCRM_Admin_Utilities_Single {
 		// Init post types with defaults.
 		$settings['post_types'] = array( 'post', 'page' );
 
-		// Add menu to admin bar.
+		// Add Shortcuts Menu to admin bar.
 		$settings['admin_bar'] = '1';
+
+		// Do not hide "Manage Groups" menu item from Shortcuts Menu.
+		$settings['admin_bar_groups'] = '0';
 
 		/**
 		 * Filter default settings.
@@ -1994,6 +2033,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$civicrm_admin_utilities_post_types = array();
 		$civicrm_admin_utilities_cache = '';
 		$civicrm_admin_utilities_admin_bar = '';
+		$civicrm_admin_utilities_admin_bar_groups = '';
 		$civicrm_admin_utilities_styles_default = '';
 		$civicrm_admin_utilities_styles_nav = '';
 		$civicrm_admin_utilities_styles_shoreditch = '';
@@ -2114,6 +2154,13 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'admin_bar', '1' );
 		} else {
 			$this->setting_set( 'admin_bar', '0' );
+		}
+
+		// Did we ask to hide the "Manage Groups" menu item from the shortcuts menu?
+		if ( $civicrm_admin_utilities_admin_bar_groups == '1' ) {
+			$this->setting_set( 'admin_bar_groups', '1' );
+		} else {
+			$this->setting_set( 'admin_bar_groups', '0' );
 		}
 
 		// Save options.
