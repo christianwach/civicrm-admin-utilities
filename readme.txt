@@ -73,6 +73,8 @@ Network Administrators can now set site defaults for any further activations of 
 = 0.6.5 =
 
 * Enable suppression of email notification when a CiviCRM Contact's primary email is changed
+* Introduce setting to hide "Manage Groups" menu item
+* Compatibility with new menu in CiviCRM 5.12.x
 
 = 0.6.4 =
 
