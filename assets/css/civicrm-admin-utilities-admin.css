@@ -4923,6 +4923,7 @@ CiviCRM API v4 support
 #bootstrap-theme.api4-explorer-page
 {
 	background: transparent;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 #bootstrap-theme.api4-explorer-page > .row > div
