@@ -4954,7 +4954,8 @@ CiviCRM API v4 support
 	}
 }
 
-#bootstrap-theme.api4-explorer-page .row .panel-heading
+#bootstrap-theme.api4-explorer-page .row .panel-heading,
+#bootstrap-theme.api4-explorer-page .api4-explorer-row .panel-heading
 {
 	background: #e6e6e6;
 	padding: 12px;
