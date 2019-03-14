@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities package.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.6.4\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.6.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
-"POT-Creation-Date: 2019-01-08 14:44:53+00:00\n"
+"POT-Creation-Date: 2019-03-14 16:51:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,12 +16,12 @@ msgstr ""
 #: assets/templates/network-settings.php:4
 #: assets/templates/site-multidomain.php:4 assets/templates/site-settings.php:4
 #: includes/civicrm-admin-utilities-multidomain.php:110
-#: includes/civicrm-admin-utilities-multisite.php:345
-#: includes/civicrm-admin-utilities-multisite.php:362
-#: includes/civicrm-admin-utilities-multisite.php:424
-#: includes/civicrm-admin-utilities-single.php:375
-#: includes/civicrm-admin-utilities-single.php:493
-#: includes/civicrm-admin-utilities-single.php:1528
+#: includes/civicrm-admin-utilities-multisite.php:378
+#: includes/civicrm-admin-utilities-multisite.php:395
+#: includes/civicrm-admin-utilities-multisite.php:457
+#: includes/civicrm-admin-utilities-single.php:473
+#: includes/civicrm-admin-utilities-single.php:591
+#: includes/civicrm-admin-utilities-single.php:1659
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 #: assets/templates/network-settings.php:8
 #: assets/templates/site-multidomain.php:7 assets/templates/site-settings.php:8
 #: civicrm-admin-utilities.php:425 civicrm-admin-utilities.php:431
-#: includes/civicrm-admin-utilities-single.php:391
+#: includes/civicrm-admin-utilities-single.php:489
 msgid "Settings"
 msgstr ""
 
@@ -247,55 +247,90 @@ msgid "Check this to prevent the Shoreditch extension Bootstrap stylesheet (boot
 msgstr ""
 
 #: assets/templates/network-settings.php:208
-#: assets/templates/network-settings.php:216
-#: assets/templates/site-settings.php:152
-#: assets/templates/site-settings.php:160
-msgid "Fix WordPress Access Control form"
+#: assets/templates/site-settings.php:150
+msgid "User Options"
 msgstr ""
 
 #: assets/templates/network-settings.php:210
-#: assets/templates/site-settings.php:154
+#: assets/templates/site-settings.php:152
+msgid "When the primary email for a CiviCRM Contact is changed, CiviCRM updates the email address of the corresponding  WordPress user. This triggers an email to be sent to the user."
+msgstr ""
+
+#: assets/templates/network-settings.php:215
+#: assets/templates/site-settings.php:157
+msgid "User notification"
+msgstr ""
+
+#: assets/templates/network-settings.php:218
+#: assets/templates/site-settings.php:160
+msgid "Check this to suppress the email to the WordPress user."
+msgstr ""
+
+#: assets/templates/network-settings.php:226
+#: assets/templates/network-settings.php:233
+#: assets/templates/site-settings.php:170
+#: assets/templates/site-settings.php:177
+msgid "Fix WordPress Access Control form"
+msgstr ""
+
+#: assets/templates/network-settings.php:228
+#: assets/templates/site-settings.php:172
 msgid "Checking this option fixes the appearance of the WordPress Access Control form."
 msgstr ""
 
-#: assets/templates/network-settings.php:219
-#: assets/templates/site-settings.php:163
+#: assets/templates/network-settings.php:236
+#: assets/templates/site-settings.php:180
 msgid "Check this to fix the appearance of the WordPress Access Control form."
 msgstr ""
 
-#: assets/templates/network-settings.php:227
-#: assets/templates/site-settings.php:173
+#: assets/templates/network-settings.php:244
+#: assets/templates/site-settings.php:190
 msgid "Admin Bar Options"
 msgstr ""
 
-#: assets/templates/network-settings.php:229
-#: assets/templates/site-settings.php:175
+#: assets/templates/network-settings.php:246
+#: assets/templates/site-settings.php:192
 msgid "Some people find it helpful to have links directly to CiviCRM components available from the WordPress admin bar."
 msgstr ""
 
-#: assets/templates/network-settings.php:234
-#: assets/templates/site-settings.php:180
+#: assets/templates/network-settings.php:251
+#: assets/templates/site-settings.php:197
 msgid "Shortcuts Menu"
 msgstr ""
 
-#: assets/templates/network-settings.php:237
-#: assets/templates/site-settings.php:183
+#: assets/templates/network-settings.php:254
+#: assets/templates/site-settings.php:200
 msgid "Check this to add a CiviCRM Shortcuts Menu to the WordPress admin bar."
 msgstr ""
 
-#: assets/templates/network-settings.php:247
-#: assets/templates/site-settings.php:191
+#: assets/templates/network-settings.php:259
+#: assets/templates/site-settings.php:205
+msgid "Hide \"Manage Groups\""
+msgstr ""
+
+#: assets/templates/network-settings.php:262
+#: assets/templates/site-settings.php:208
+msgid "Check this to hide the \"Manage Groups\" menu item from the CiviCRM Shortcuts Menu."
+msgstr ""
+
+#: assets/templates/network-settings.php:263
+#: assets/templates/site-settings.php:209
+msgid "There is no permission or capability that can be checked to find out if a user has access to the \"Manage Groups\" screen. Check this to hide the menu item. More granular permissions can be applied via the <code style=\"font-style: normal\">civicrm_admin_utilities_manage_groups_menu_item</code> filter if they are required, for example, on a per-user basis."
+msgstr ""
+
+#: assets/templates/network-settings.php:273
+#: assets/templates/site-settings.php:217
 msgid "Post Type Options"
 msgstr ""
 
-#: assets/templates/network-settings.php:249
-#: assets/templates/site-settings.php:199
+#: assets/templates/network-settings.php:275
+#: assets/templates/site-settings.php:225
 msgid "Select which post types you want the CiviCRM shortcode button to appear on."
 msgstr ""
 
-#: assets/templates/network-settings.php:258
+#: assets/templates/network-settings.php:284
 #: assets/templates/site-multidomain.php:115
-#: assets/templates/site-settings.php:253
+#: assets/templates/site-settings.php:279
 msgid "Save Changes"
 msgstr ""
 
@@ -359,47 +394,47 @@ msgstr ""
 msgid "NETWORK ADMINS PLEASE NOTE: The settings that you choose below will be used as the defaults on all sub-sites where CiviCRM is activated. Each sub-site where CiviCRM is active has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site."
 msgstr ""
 
-#: assets/templates/site-settings.php:196
+#: assets/templates/site-settings.php:222
 msgid "Shortcode Button"
 msgstr ""
 
-#: assets/templates/site-settings.php:207
+#: assets/templates/site-settings.php:233
 msgid "Miscellaneous Utilities"
 msgstr ""
 
-#: assets/templates/site-settings.php:210
+#: assets/templates/site-settings.php:236
 msgid "Some useful functions and shortcuts to various commonly used CiviCRM admin pages."
 msgstr ""
 
-#: assets/templates/site-settings.php:216
+#: assets/templates/site-settings.php:242
 msgid "Clear Caches"
 msgstr ""
 
-#: assets/templates/site-settings.php:219
+#: assets/templates/site-settings.php:245
 msgid "Check this to clear the CiviCRM caches."
 msgstr ""
 
-#: assets/templates/site-settings.php:226
+#: assets/templates/site-settings.php:252
 msgid "Rebuild Menu"
 msgstr ""
 
-#: assets/templates/site-settings.php:228
+#: assets/templates/site-settings.php:254
 msgid "Click this to rebuild the CiviCRM menu."
 msgstr ""
 
-#: assets/templates/site-settings.php:233
+#: assets/templates/site-settings.php:259
 msgid "Rebuild Database Triggers"
 msgstr ""
 
-#: assets/templates/site-settings.php:235
+#: assets/templates/site-settings.php:261
 msgid "Click this to rebuild the triggers in the CiviCRM database."
 msgstr ""
 
-#: assets/templates/site-settings.php:240
+#: assets/templates/site-settings.php:266
 msgid "Upgrade CiviCRM"
 msgstr ""
 
-#: assets/templates/site-settings.php:242
+#: assets/templates/site-settings.php:268
 msgid "Click this to upgrade CiviCRM."
 msgstr ""
 
@@ -426,12 +461,12 @@ msgid "CiviCRM Admin Utilities Domain"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multidomain.php:227
-#: includes/civicrm-admin-utilities-multisite.php:445
+#: includes/civicrm-admin-utilities-multisite.php:478
 msgid "For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multidomain.php:249
-#: includes/civicrm-admin-utilities-multisite.php:546
+#: includes/civicrm-admin-utilities-multisite.php:579
 msgid "You do not have permission to access this page."
 msgstr ""
 
@@ -475,108 +510,111 @@ msgstr ""
 msgid "Could not find a Domain Org ID."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:344
-#: includes/civicrm-admin-utilities-multisite.php:361
-#: includes/civicrm-admin-utilities-single.php:374
-#: includes/civicrm-admin-utilities-single.php:390
+#: includes/civicrm-admin-utilities-multisite.php:377
+#: includes/civicrm-admin-utilities-multisite.php:394
+#: includes/civicrm-admin-utilities-single.php:472
+#: includes/civicrm-admin-utilities-single.php:488
 msgid "CiviCRM Admin Utilities: Settings"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1294
-#: includes/civicrm-admin-utilities-single.php:2062
+#: includes/civicrm-admin-utilities-multisite.php:1361
+#: includes/civicrm-admin-utilities-single.php:2215
 msgid "You must supply a setting to setting_exists()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1318
-#: includes/civicrm-admin-utilities-single.php:2086
+#: includes/civicrm-admin-utilities-multisite.php:1385
+#: includes/civicrm-admin-utilities-single.php:2239
 msgid "You must supply a setting to setting_get()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1341
-#: includes/civicrm-admin-utilities-single.php:2109
+#: includes/civicrm-admin-utilities-multisite.php:1408
+#: includes/civicrm-admin-utilities-single.php:2262
 msgid "You must supply a setting to setting_set()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1346
-#: includes/civicrm-admin-utilities-single.php:2114
-msgid "You must supply the setting as a string to setting_set()"
+#: includes/civicrm-admin-utilities-multisite.php:1413
+msgid "The setting name must be passed as a string to setting_set()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1368
-#: includes/civicrm-admin-utilities-single.php:2136
+#: includes/civicrm-admin-utilities-multisite.php:1435
+#: includes/civicrm-admin-utilities-single.php:2289
 msgid "You must supply a setting to setting_delete()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1395
-#: includes/civicrm-admin-utilities-single.php:2163
+#: includes/civicrm-admin-utilities-multisite.php:1462
+#: includes/civicrm-admin-utilities-single.php:2316
 msgid "You must supply an option to option_exists()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1423
-#: includes/civicrm-admin-utilities-single.php:2191
+#: includes/civicrm-admin-utilities-multisite.php:1490
+#: includes/civicrm-admin-utilities-single.php:2344
 msgid "You must supply an option to option_get()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1450
-#: includes/civicrm-admin-utilities-single.php:2218
+#: includes/civicrm-admin-utilities-multisite.php:1517
+#: includes/civicrm-admin-utilities-single.php:2371
 msgid "You must supply an option to option_set()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:1473
-#: includes/civicrm-admin-utilities-single.php:2241
+#: includes/civicrm-admin-utilities-multisite.php:1540
+#: includes/civicrm-admin-utilities-single.php:2394
 msgid "You must supply an option to option_delete()"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:514
+#: includes/civicrm-admin-utilities-single.php:612
 msgid "Site Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1388
+#: includes/civicrm-admin-utilities-single.php:1511
 msgid "CiviCRM"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1396
+#: includes/civicrm-admin-utilities-single.php:1519
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1404
+#: includes/civicrm-admin-utilities-single.php:1527
 msgid "Advanced Search"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1425
+#: includes/civicrm-admin-utilities-single.php:1556
 msgid "Manage Groups"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1436
+#: includes/civicrm-admin-utilities-single.php:1567
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1448
+#: includes/civicrm-admin-utilities-single.php:1579
 msgid "Membership Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1460
+#: includes/civicrm-admin-utilities-single.php:1591
 msgid "Events Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1472
+#: includes/civicrm-admin-utilities-single.php:1603
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1484
+#: includes/civicrm-admin-utilities-single.php:1615
 msgid "Report Listing"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1496
+#: includes/civicrm-admin-utilities-single.php:1627
 msgid "Cases Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1507
+#: includes/civicrm-admin-utilities-single.php:1638
 msgid "Admin Console"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1707
+#: includes/civicrm-admin-utilities-single.php:1838
 msgid "WordPress Access Control"
+msgstr ""
+
+#: includes/civicrm-admin-utilities-single.php:2267
+msgid "You must supply the setting as a string to setting_set()"
 msgstr ""
 #. Plugin Name of the plugin/theme
 msgid "CiviCRM Admin Utilities"
