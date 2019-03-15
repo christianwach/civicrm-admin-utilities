@@ -4667,6 +4667,18 @@ Upgrade screen overrides
 --------------------------------------------------------------------------------
 */
 
+/* Give screen room to breathe */
+body.civicrm-upgrade #wpbody-content > h2 {
+	margin-top: 2em;
+}
+
+/* Remove colour scheme from Upgrade success screen */
+body.civicrm-upgrade #wpbody-content > .crm-container {
+	background: transparent !important;
+	padding: 0 !important;
+	border: none !important;
+}
+
 /* Fix appearance of Upgrade button */
 .crm-container > form > button.crm-button[type=submit],
 .crm-container > form > a.button.cancel
