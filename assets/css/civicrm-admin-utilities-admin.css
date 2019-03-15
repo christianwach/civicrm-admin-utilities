@@ -4938,6 +4938,10 @@ CiviCRM API v4 support
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
+#bootstrap-theme.api4-explorer-page > h1 {
+	font-size: 130%;
+}
+
 #bootstrap-theme.api4-explorer-page > .row > div
 {
 	box-sizing: border-box;
