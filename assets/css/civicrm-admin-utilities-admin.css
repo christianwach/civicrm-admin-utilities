@@ -289,6 +289,13 @@ input.crm-form-entityref {
 	color: inherit;
 }
 
+div.crm-container .crm-content label.error
+{
+	vertical-align: top;
+	margin-left: 0.5em;
+	color: #8A1F11;
+}
+
 /* CRM form layout classes (from www.realworldstyle.com) */
 .crm-container .spacer {
 	clear: left;
@@ -5029,6 +5036,7 @@ CiviCRM API v4 support
 {
 	border: none;
 }
+
 
 
 /*
