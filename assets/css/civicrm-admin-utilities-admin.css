@@ -5045,11 +5045,6 @@ Contact Layout Editor extension support
 --------------------------------------------------------------------------------
 */
 
-#bootstrap-theme #contactLayoutEditor .panel-heading .btn
-{
-	margin-top: 9px;
-}
-
 body #crm-container div.crm-summary-row div.crm-content
 {
 	margin-left: 134px;
