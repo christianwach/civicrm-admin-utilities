@@ -60,6 +60,7 @@ body > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
 	color: #eee;
+	background-color: transparent;
 }
 
 body > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
