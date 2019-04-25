@@ -4675,15 +4675,34 @@ Upgrade screen overrides
 */
 
 /* Give screen room to breathe */
-body.civicrm-upgrade #wpbody-content > h2 {
+body.civicrm-upgrade #wpbody-content > h2
+{
 	margin-top: 2em;
 }
 
-/* Remove colour scheme from Upgrade success screen */
-body.civicrm-upgrade #wpbody-content > .crm-container {
+/* Remove colour scheme from Upgrade screens */
+body #wpbody-content > .crm-container:not(#crm-container),
+body.civicrm-upgrade #wpbody-content > .crm-container:not(#crm-container)
+{
 	background: transparent !important;
-	padding: 0 !important;
+	padding: 0 20px 0 0 !important;
 	border: none !important;
+}
+
+/* Remove colour scheme from Upgrade screens */
+body #wpbody-content > .crm-container:not(#crm-container) > form > p:first-child
+{
+	font-size: 130%;
+	font-weight: bold;
+	line-height: 1.5;
+	/* text-transform: uppercase; */
+	color: #23282d;
+}
+
+/* Fix link colour on Upgrade screens */
+body #wpbody-content > .crm-container:not(#crm-container) > form > div a
+{
+	color: #0073aa !important;
 }
 
 /* Fix appearance of Upgrade button */
@@ -4716,11 +4735,34 @@ body.civicrm-upgrade #wpbody-content > .crm-container {
 .crm-container > form > a.button.cancel
 {
 	margin-right: 10px;
+	color: #555;
+	border-color: #cccccc;
+	background: #f7f7f7;
+	box-shadow: 0 1px 0 #cccccc;
+	vertical-align: top;
+	text-shadow: none;
 }
 
-.crm-container > form > p > .crm-status-icon.info
+.crm-container > form > a.button.cancel:hover,
+.crm-container > form > a.button.cancel:focus,
+.crm-container > form > a.button.cancel:active
+{
+	background: #fafafa;
+	border-color: #999;
+	color: #23282d;
+}
+
+/* Align icons */
+.crm-container > form > p > .crm-status-icon.info,
+.crm-container > form > div > .crm-status-icon
 {
 	vertical-align: middle;
+}
+
+/* Warning icon needs space */
+.crm-container > form > div > .crm-status-icon
+{
+	margin-bottom: 6px;
 }
 
 
