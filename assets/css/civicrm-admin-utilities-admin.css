@@ -3472,7 +3472,7 @@ span.crm-select-item-color {
 	background-image: none;
 	border: 1px none;
 	color: inherit;
-	font-size: 1.2em;
+	font-size: 16px;
 }
 .crm-container .ui-dialog-titlebar .ui-button:hover {
 	background-color: #cdcdcd;
@@ -4887,6 +4887,7 @@ jQuery UI overrides
 	border-left: none;
 	border-right: none;
 	border: none;
+	height: auto;
 }
 
 .crm-container.ui-dialog.ui-widget-content
