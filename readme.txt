@@ -70,6 +70,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.6.6 =
+
+* Restores theming of menu in CiviCRM 5.12.1+ back to WordPress admin colours
+
 = 0.6.5 =
 
 * Enable suppression of email notification when a CiviCRM Contact's primary email is changed
