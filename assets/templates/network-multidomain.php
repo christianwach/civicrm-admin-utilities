@@ -20,7 +20,7 @@
 		?>
 	</h2>
 
-	<h3 class="wp-heading-inline"><?php _e( 'CiviCRM Domains', 'civicrm-admin-utilities' ); ?></h3> 		<?php if ( $multisite ) : ?><a href="#cau-create-new" class="page-title-action"><?php _e( 'Add new', 'civicrm-admin-utilities' ); ?></a><? endif; ?>
+	<h3 class="wp-heading-inline"><?php _e( 'CiviCRM Domains', 'civicrm-admin-utilities' ); ?></h3> <?php if ( $multisite ) : ?><a href="#cau-create-new" class="page-title-action"><?php _e( 'Add new', 'civicrm-admin-utilities' ); ?></a><?php endif; ?>
 
 	<div class="updated">
 		<?php if ( $this->plugin->is_civicrm_network_activated() ) : ?>
