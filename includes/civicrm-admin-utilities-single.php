@@ -1082,16 +1082,6 @@ class CiviCRM_Admin_Utilities_Single {
 			// Set default CSS file.
 			$css = 'civicrm-admin-utilities-menu.css';
 
-			// Use specific CSS file for Shoreditch if active.
-			if ( $this->shoreditch_is_active() ) {
-
-				// But not when prettifying CiviCRM admin.
-				if ( $this->setting_get( 'css_admin', '0' ) == '0' ) {
-					$css = 'civicrm-admin-utilities-shoreditch.css';
-				}
-
-			}
-
 			// Use specific CSS file for KAM if active.
 			if ( $this->kam_is_active() ) {
 				$css = 'civicrm-admin-utilities-kam.css';
@@ -1105,6 +1095,25 @@ class CiviCRM_Admin_Utilities_Single {
 				CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
 				'all' // Media.
 			);
+
+		}
+
+		// Use specific CSS file for Shoreditch if active.
+		if ( $this->shoreditch_is_active() ) {
+
+			// But not when prettifying CiviCRM admin.
+			if ( $this->setting_get( 'css_admin', '0' ) == '0' ) {
+
+				// Add Shoreditch stylesheet.
+				wp_enqueue_style(
+					'civicrm_admin_utilities_shoreditch_tweaks',
+					plugins_url( 'assets/css/civicrm-admin-utilities-shoreditch.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+					null,
+					CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+					'all' // Media.
+				);
+
+			}
 
 		}
 

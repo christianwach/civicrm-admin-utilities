@@ -15,7 +15,7 @@
 
 /*
 --------------------------------------------------------------------------------
-CiviCRM admin menu style overrides
+Misc CiviCRM style fixes for WordPress
 --------------------------------------------------------------------------------
 */
 
@@ -26,6 +26,37 @@ html body.wp-admin:not(.toolbar)
 	padding-top: 0 !important;
 	margin-top: 0 !important;
 }
+
+body #crm-container div#printer-friendly
+{
+	margin: 0;
+}
+
+#crm-container, .crm-container
+{
+	padding-top: 12px;
+	margin-right: 20px;
+}
+
+.crm-queue-runner-form-block
+{
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+/* Remove green background from dialogs */
+.crm-container.ui-dialog .ui-dialog-content .crm-block
+{
+	background-color: #fff;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+CiviCRM admin menu style overrides
+--------------------------------------------------------------------------------
+*/
 
 /* Font selection */
 html body.wp-admin:not(.toolbar),
@@ -108,6 +139,7 @@ body #civicrm-menu li#crm-qsearch
 	height: 32px !important;
 	padding: 0 24px 0 12px;
 	margin-right: 8px;
+	background: transparent;
 }
 
 /* Vertically centre the form */
@@ -133,37 +165,6 @@ body #root-menu-div + .crm-quickSearch-results
 body #civicrm-menu .crm-logo-sm
 {
 	vertical-align: text-bottom;
-}
-
-
-
-/*
---------------------------------------------------------------------------------
-Misc CiviCRM style fixes for WordPress
---------------------------------------------------------------------------------
-*/
-
-body #crm-container div#printer-friendly
-{
-	margin: 0;
-}
-
-#crm-container, .crm-container
-{
-	padding-top: 12px;
-	margin-right: 20px;
-}
-
-.crm-queue-runner-form-block
-{
-	margin-top: 20px;
-	margin-right: 20px;
-}
-
-/* Remove green background from dialogs */
-.crm-container.ui-dialog .ui-dialog-content .crm-block
-{
-	background-color: #fff;
 }
 
 
