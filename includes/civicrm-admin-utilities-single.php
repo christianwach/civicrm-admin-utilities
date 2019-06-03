@@ -978,7 +978,7 @@ class CiviCRM_Admin_Utilities_Single {
 		CRM_Core_Config::clearDBCache();
 
 		// Cleanup the "templates_c" directory.
-		$config->cleanup( 1, TRUE );
+		$config->cleanup( 1, true );
 
 		// Cleanup the session object.
 		$session = CRM_Core_Session::singleton();
@@ -1240,7 +1240,7 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( $url === false ) return;
 
 		// Set to disabled.
-		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
+		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => true ) );
 
 	}
 
@@ -1262,7 +1262,7 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( ! $this->plugin->is_civicrm_initialised() ) return false;
 
 		// Get registered URL.
-		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, TRUE );
+		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, true );
 
 		// Get registration data from region.
 		$registration = CRM_Core_Region::instance( 'html-header' )->get( $url );
@@ -1304,7 +1304,7 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( empty ( $registration ) ) return;
 
 		// Set to disabled.
-		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => TRUE ) );
+		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => true ) );
 
 	}
 
@@ -1703,11 +1703,11 @@ class CiviCRM_Admin_Utilities_Single {
 		$link = CRM_Utils_System::url(
 			$path,
 			$params,
-			TRUE,
-			NULL,
-			TRUE,
-			FALSE,
-			TRUE
+			true,
+			null,
+			true,
+			false,
+			true
 		);
 
 		// --<
