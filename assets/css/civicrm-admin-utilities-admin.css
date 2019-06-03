@@ -3174,7 +3174,8 @@ tbody.scrollContent tr.alternateRow {
 .crm-container input.crm-form-submit,
 .crm-container input[type=button],
 .crm-container button.crm-button,
-.crm-container button.crmMailing-btn-primary.crm-button
+.crm-container button.crmMailing-btn-primary.crm-button,
+.crm-container a.button.crmMailing-submit-button
 {
 	display: inline-block;
 	text-decoration: none;
@@ -3195,7 +3196,25 @@ tbody.scrollContent tr.alternateRow {
 	box-shadow: 0 1px 0 #006799;
 	color: #fff;
 	text-decoration: none;
-	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799
+	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+}
+
+.crm-container a.button:hover,
+.crm-container a.button:focus
+.crm-container input.crm-form-submit:hover,
+.crm-container input.crm-form-submit:focus,
+.crm-container input[type=button]:hover,
+.crm-container input[type=button]:focus,
+.crm-container button.crm-button:hover,
+.crm-container button.crm-button:focus,
+.crm-container button.crmMailing-btn-primary.crm-button:hover,
+.crm-container button.crmMailing-btn-primary.crm-button:focus,
+.crm-container a.button.crmMailing-submit-button:hover,
+.crm-container a.button.crmMailing-submit-button:focus
+{
+    background: #008ec2;
+    border-color: #006799;
+    color: #fff;
 }
 
 .crm-container button.crm-button,
@@ -4341,6 +4360,16 @@ body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
 	background-color: #0085ba;
 }
 
+body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:hover,
+body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:focus,
+body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:hover,
+body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
+{
+    background: #008ec2;
+    border-color: #006799;
+    color: #fff;
+}
+
 #contact-summary-relationship-tab > .label.font-red
 {
 	font-size: 1.3em;
@@ -4966,6 +4995,14 @@ jQuery UI overrides
 	color: #fff;
 	text-decoration: none;
 	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+}
+
+.ui-dialog .ui-dialog-buttonpane button:hover,
+.ui-dialog .ui-dialog-buttonpane button:focus
+{
+    background: #008ec2;
+    border-color: #006799;
+    color: #fff;
 }
 
 .ui-dialog .ui-dialog-buttonpane button .ui-icon[class*=" fa-"]
