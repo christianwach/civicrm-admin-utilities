@@ -70,6 +70,12 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.6.7 =
+
+* Fixes button jitter in Mosaico
+* Fixes Network Domains template logic
+* Applies Shoreditch fixes regardless of menu fix setting
+
 = 0.6.6 =
 
 * Restores theming of menu in CiviCRM 5.12.1+ back to WordPress admin colours
