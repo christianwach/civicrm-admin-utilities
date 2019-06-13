@@ -1350,12 +1350,12 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @since 0.4.3
 	 * @since 0.5.4 Moved from plugin class.
 	 *
-	 * @return bool $kam True if KAM Extension is active, false otherwise.
+	 * @return bool True if KAM Extension is active, false otherwise.
 	 */
 	public function kam_is_active() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return $kam;
+		if ( ! $this->plugin->is_civicrm_initialised() ) return false;
 
 		// Get current version of CiviCRM.
 		$civicrm_version = CRM_Utils_System::version();
