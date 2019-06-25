@@ -28,31 +28,23 @@
 
 		<?php wp_nonce_field( 'civicrm_admin_utilities_settings_action', 'civicrm_admin_utilities_settings_nonce' ); ?>
 
-		<?php if ( is_network_admin() AND $this->is_network_activated() ) : ?>
+		<?php if ( ! $restricted ) : ?>
 
-			<h3><?php _e( 'Global Multisite Settings', 'civicrm-admin-utilities' ); ?></h3>
+			<h3><?php _e( 'CiviCRM Access', 'civicrm-admin-utilities' ); ?></h3>
 
-			<p><?php _e( 'In multisite, when CiviCRM is network-activated, it will load on every sub-site. This may not be what you want - especially when multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result the CiviCRM menu always bounces users to the main site. Furthermore, public-facing pages will not distinguish between sub-sites and the main site and will always appear on the main site. So check this option to restrict the appearance of the CiviCRM menu item and CiviCRM shortcode button to the main site only.', 'civicrm-admin-utilities' ); ?></p>
+			<p><?php _e( 'In multisite, you may not want users of this site to be able to access CiviCRM. If that is the case, check the box below and CiviCRM will be hidden from view.', 'civicrm-admin-utilities' ); ?></p>
 
 			<table class="form-table">
 
 				<tr>
-					<th scope="row"><?php _e( 'Restrict CiviCRM', 'civicrm-admin-utilities' ); ?></th>
+					<th scope="row"><?php _e( 'Hide CiviCRM', 'civicrm-admin-utilities' ); ?></th>
 					<td>
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_main_site" id="civicrm_admin_utilities_main_site" value="1"<?php echo $main_site_only; ?> />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_main_site"><?php _e( 'Restrict CiviCRM to main site only.', 'civicrm-admin-utilities' ); ?></label>
+						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_hide_civicrm" id="civicrm_admin_utilities_hide_civicrm" value="1"<?php echo $hide_civicrm; ?> />
+						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_hide_civicrm"><?php _e( 'Hide CiviCRM on this site.', 'civicrm-admin-utilities' ); ?></label>
 					</td>
 				</tr>
 
 			</table>
-
-			<hr />
-
-			<h2><?php _e( 'Default Settings for All Sites', 'civicrm-admin-utilities' ); ?></h2>
-
-			<div class="cau-defaults-notice">
-				<p style="font-weight: bold; color: green; font-size: larger;"><?php _e( 'NETWORK ADMINS PLEASE NOTE: The settings that you choose below will be used as the defaults on all sub-sites where CiviCRM is activated. Each sub-site where CiviCRM is active has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site.', 'civicrm-admin-utilities' ); ?></p>
-			</div>
 
 			<hr />
 		<?php endif; ?>

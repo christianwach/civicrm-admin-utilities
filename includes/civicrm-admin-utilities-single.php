@@ -181,6 +181,16 @@ class CiviCRM_Admin_Utilities_Single {
 		// Don't save by default.
 		$save = false;
 
+		// Hide CiviCRM setting may not exist.
+		if ( ! $this->setting_exists( 'hide_civicrm' ) ) {
+
+			// Add it from defaults.
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'hide_civicrm', $settings['hide_civicrm'] );
+			$save = true;
+
+		}
+
 		// CSS settings may not exist.
 		if ( ! $this->setting_exists( 'css_default' ) ) {
 
@@ -313,6 +323,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Maybe suppress notification emails.
 		add_filter( 'send_email_change_email', array( $this, 'email_suppress' ), 10, 3 );
 
+		// Hook in after the CiviCRM menu hook has been registered.
+		add_action( 'init', array( $this, 'hide_civicrm' ), 20 );
+
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
@@ -438,6 +451,39 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// --<
 		return $send;
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Maybe hide CiviCRM on this site.
+	 *
+	 * @since 0.6.8
+	 */
+	public function hide_civicrm() {
+
+		// Bail if not multisite.
+		if ( ! is_multisite() ) return;
+
+		// Bail if disabled.
+		if ( $this->setting_get( 'hide_civicrm', '0' ) == '0' ) return;
+
+		// Unhook CiviCRM's menu item, but allow CiviCRM to load.
+		remove_action( 'admin_menu', array( civi_wp(), 'add_menu_items' ) );
+
+		// Remove notice.
+		remove_action( 'admin_notices', array( civi_wp(), 'show_setup_warning' ) );
+
+		// Remove CiviCRM shortcode button.
+		add_action( 'admin_head', array( $this, 'civi_button_remove' ) );
+
+		// Remove Shortcuts Menu from WordPress admin bar.
+		remove_action( 'admin_bar_menu', array( $this, 'shortcuts_menu_add' ), 2000 );
 
 	}
 
@@ -644,6 +690,25 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Get admin page URLs.
 		$urls = $this->page_get_urls();
+
+		/**
+		 * Set restricted-to-main-site template variable but allow overrides.
+		 *
+		 * This variable is set to "restricted" by default so that the relevant
+		 * section of the form does not show up when not in multisite.
+		 *
+		 * @since 0.6.8
+		 *
+		 * @param bool The default template variable - restricted by default.
+		 * @return bool The modified template variable.
+		 */
+		$restricted = apply_filters( 'civicrm_admin_utilities_page_settings_restricted', true );
+
+		// Init Hide CiviCRM checkbox.
+		$hide_civicrm = '';
+		if ( $this->setting_get( 'hide_civicrm', '0' ) == '1' ) {
+			$hide_civicrm = ' checked="checked"';
+		}
 
 		// Init menu CSS checkbox.
 		$prettify_menu = '';
@@ -1947,6 +2012,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Init return.
 		$settings = array();
 
+		// Hide CiviCRM.
+		$settings['hide_civicrm'] = '0';
+
 		// Prettify menu.
 		$settings['prettify_menu'] = '1';
 
@@ -2037,6 +2105,7 @@ class CiviCRM_Admin_Utilities_Single {
 		check_admin_referer( 'civicrm_admin_utilities_settings_action', 'civicrm_admin_utilities_settings_nonce' );
 
 		// Init vars.
+		$civicrm_admin_utilities_hide_civicrm = '';
 		$civicrm_admin_utilities_menu = '';
 		$civicrm_admin_utilities_access = '';
 		$civicrm_admin_utilities_post_types = array();
@@ -2062,6 +2131,13 @@ class CiviCRM_Admin_Utilities_Single {
 		$existing_menu = $this->setting_get( 'prettify_menu', '0' );
 		if ( $civicrm_admin_utilities_menu != $existing_menu ) {
 			$force = true;
+		}
+
+		// Did we ask to hide CiviCRM?
+		if ( $civicrm_admin_utilities_hide_civicrm == '1' ) {
+			$this->setting_set( 'hide_civicrm', '1' );
+		} else {
+			$this->setting_set( 'hide_civicrm', '0' );
 		}
 
 		// Did we ask to prettify the menu?

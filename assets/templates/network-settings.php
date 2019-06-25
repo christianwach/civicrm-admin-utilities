@@ -121,6 +121,24 @@
 
 		<hr />
 
+		<h3><?php _e( 'CiviCRM Access', 'civicrm-admin-utilities' ); ?></h3>
+
+		<p><?php _e( 'In multisite, you may not want users of a sub-site to be able to access CiviCRM. If that is the case, check the box below and CiviCRM will be hidden from view.', 'civicrm-admin-utilities' ); ?></p>
+
+		<table class="form-table">
+
+			<tr>
+				<th scope="row"><?php _e( 'Hide CiviCRM', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_hide_civicrm" id="civicrm_admin_utilities_hide_civicrm" value="1"<?php echo $hide_civicrm; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_hide_civicrm"><?php _e( 'Hide CiviCRM on this site.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
+
+		</table>
+
+		<hr />
+
 		<h3><?php _e( 'CiviCRM Admin Appearance', 'civicrm-admin-utilities' ); ?></h3>
 
 		<p><?php _e( 'Checking these options applies styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin styles, then check the box for "CiviCRM Menu" and leave "CiviCRM Admin" unchecked.', 'civicrm-admin-utilities' ); ?></p>

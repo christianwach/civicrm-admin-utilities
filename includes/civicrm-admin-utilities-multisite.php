@@ -201,6 +201,18 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
+		// Hide CiviCRM setting may not exist.
+		if ( ! $this->setting_exists( 'hide_civicrm' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'hide_civicrm', $settings['hide_civicrm'] );
+			$save = true;
+
+		}
+
 		// Shoreditch Bootstrap CSS setting may not exist.
 		if ( ! $this->setting_exists( 'css_bootstrap' ) ) {
 
@@ -344,6 +356,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Filter CiviCRM Permissions.
 		add_action( 'civicrm_permission_check', array( $this, 'permission_check' ), 10, 2 );
+
+		// Maybe filter restrict-to-main-site template variable.
+		add_filter( 'civicrm_admin_utilities_page_settings_restricted', array( $this, 'page_settings_restricted' ), 10, 1 );
 
 		// Maybe switch to main site for Shortcuts Menu.
 		// TODO: Are there any situations where we'd like to switch?
@@ -630,6 +645,12 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$restrict_administer = ' checked="checked"';
 		}
 
+		// Init Hide CiviCRM checkbox.
+		$hide_civicrm = '';
+		if ( $this->setting_get( 'hide_civicrm', '0' ) == '1' ) {
+			$hide_civicrm = ' checked="checked"';
+		}
+
 		// Init menu CSS checkbox.
 		$prettify_menu = '';
 		if ( $this->setting_get( 'prettify_menu', '0' ) == '1' ) {
@@ -818,6 +839,35 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// --<
 		return $capability;
+
+	}
+
+
+
+	/**
+	 * Maybe filter restrict-to-main-site template variable.
+	 *
+	 * @since 0.6.8
+	 *
+	 * @param bool $restricted True if CiviCRM is restricted to main site only, false otherwise.
+	 * @return bool $restricted The modified value.
+	 */
+	public function page_settings_restricted( $restricted ) {
+
+		// Pass on restricted setting as boolean.
+		if ( $this->setting_get( 'main_site_only', '0' ) == '1' ) {
+			$restricted = true;
+		} else {
+			$restricted = false;
+		}
+
+		// But always show on main site.
+		if ( is_main_site() ) {
+			$restricted = false;
+		}
+
+		// --<
+		return $restricted;
 
 	}
 
@@ -1048,6 +1098,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Allow site admins to administer CiviCRM.
 		$settings['restrict_administer'] = '0';
 
+		// Hide CiviCRM.
+		$settings['hide_civicrm'] = '0';
+
 		// Prettify menu.
 		$settings['prettify_menu'] = '1';
 
@@ -1210,6 +1263,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'restrict_administer', '1' );
 		} else {
 			$this->setting_set( 'restrict_administer', '0' );
+		}
+
+		// Did we ask to hide CiviCRM?
+		if ( $civicrm_admin_utilities_hide_civicrm == '1' ) {
+			$this->setting_set( 'hide_civicrm', '1' );
+		} else {
+			$this->setting_set( 'hide_civicrm', '0' );
 		}
 
 		// Did we ask to prettify the menu?
