@@ -83,6 +83,21 @@
 
 		</form>
 
+		<?php if ( ! empty( $domains ) ) : ?>
+			<?php
+
+			/**
+			 * Allow others to add content after form.
+			 *
+			 * @since 0.6.8
+			 *
+			 * @param array $domains The array of CiviCRM Domains.
+			 */
+			do_action( 'civicrm_admin_utilities_network_multidomain_form_after', $domains );
+
+			?>
+		<?php endif; ?>
+
 	<?php endif; ?>
 
 </div><!-- /.wrap -->
