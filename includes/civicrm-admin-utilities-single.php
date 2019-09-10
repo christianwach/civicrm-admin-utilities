@@ -317,6 +317,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Add contact link to the 'user-edit.php' page.
 		add_action( 'personal_options', array( $this, 'profile_extras' ) );
 
+		// Add contact link to User listings.
+		add_filter( 'user_row_actions', array( $this, 'user_actions' ), 9, 2 );
+
 		// Intercept email updates in CiviCRM.
 		add_action( 'civicrm_pre', array( $this, 'email_pre_update' ), 10, 4 );
 
@@ -341,6 +344,67 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 	//##########################################################################
+
+
+
+	/**
+	 * Add link to CiviCRM Contact on the Users screen.
+	 *
+	 * @since 0.6.8
+	 *
+	 * @param str $actions The existing actions to display for this user row.
+	 * @param WP_User $user The user object displayed in this row.
+	 * @return str $actions The modified actions to display for this user row.
+	 */
+	public function user_actions( $actions, $user ) {
+
+		// Bail if we can't edit this user.
+		if ( ! current_user_can( 'edit_user', $user->ID ) ) return $actions;
+
+		// Bail if user cannot access CiviCRM.
+		if ( ! current_user_can( 'access_civicrm' ) ) return $actions;
+
+		// Perform further checks if we can't view all contacts.
+		if ( ! $this->check_permission( 'view all contacts' ) ) {
+
+			//  Get current user.
+			$current_user = wp_get_current_user();
+
+			// Is this their profile?
+			if ( $user->ID === $current_user->ID ) {
+
+				// Bail if they can't view their own contact.
+				if ( ! $this->check_permission( 'view my contact' ) ) return $actions;
+
+			} else {
+
+				// Not allowed.
+				return $actions;
+
+			}
+
+		}
+
+		// Get contact ID.
+		$contact_id = $this->contact_id_get_by_user_id( $user->ID );
+
+		// Bail if we don't get one for some reason.
+		if ( $contact_id === false ) return $actions;
+
+		// Get the link to the Contact.
+		$link = $this->get_link( 'civicrm/contact/view', 'reset=1&cid=' . $contact_id );
+
+		// Add link to actions.
+		$actions['civicrm'] = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url( $link ),
+			esc_html__( 'CiviCRM', 'civicrm-admin-utilities' )
+		);
+
+		// --<
+		return $actions;
+
+	}
 
 
 
