@@ -1258,6 +1258,18 @@ class CiviCRM_Admin_Utilities_Single {
 				'all' // Media.
 			);
 
+			// Amend styles when WordPress 5.3+ is detected.
+			global $wp_version;
+			if ( version_compare( $wp_version, '5.2.99999', '>' ) ) {
+				wp_enqueue_style(
+					'civicrm_admin_utilities_admin_override_53plus',
+					plugins_url( 'assets/css/civicrm-admin-utilities-admin-5-3-plus.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+					array( 'civicrm_admin_utilities_admin_override' ),
+					CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+					'all' // Media.
+				);
+			}
+
 			/**
 			 * Broadcast that we are loading a custom CiviCRM stylesheet.
 			 *

@@ -2240,6 +2240,7 @@ a.crm-i:hover {
 
 .crm-i-button {
 	position: relative;
+	margin-right: 3px;
 }
 
 .crm-i-button > .crm-i
@@ -3201,7 +3202,7 @@ tbody.scrollContent tr.alternateRow {
 }
 
 .crm-container a.button:hover,
-.crm-container a.button:focus
+.crm-container a.button:focus,
 .crm-container input.crm-form-submit:hover,
 .crm-container input.crm-form-submit:focus,
 .crm-container input[type=button]:hover,
@@ -3341,6 +3342,7 @@ tbody.scrollContent tr.alternateRow {
 }
 .crm-container .select2-container-multi .select2-choices .select2-search-field input {
 	padding: 4px;
+	line-height: normal;
 }
 .crm-container .select2-search-choice-close {
 	top: 2px;
@@ -3446,9 +3448,10 @@ tbody.scrollContent tr.alternateRow {
 	cursor: default;
 }
 
-/* Restore this property otherwise our css overrides it */
+/* Restore these properties otherwise they are overridden */
 .select2-search input {
 	box-sizing: border-box;
+	line-height: normal;
 }
 
 span.crm-select-item-color {
