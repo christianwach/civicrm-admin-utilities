@@ -48,6 +48,15 @@ if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 class CiviCRM_Admin_Utilities {
 
 	/**
+	 * UFMatch utility object.
+	 *
+	 * @since 0.6.8
+	 * @access public
+	 * @var object $single The UFMatch utility object.
+	 */
+	public $ufmatch;
+
+	/**
 	 * Single Site WordPress object.
 	 *
 	 * @since 0.5.4
@@ -137,6 +146,9 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function include_files() {
 
+		// Load our common classes.
+		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-ufmatch.php' );
+
 		// Load our Single Site class.
 		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single.php' );
 
@@ -156,6 +168,9 @@ class CiviCRM_Admin_Utilities {
 	 * @since 0.3.4
 	 */
 	public function setup_objects() {
+
+		// Always instantiate common classes.
+		$this->ufmatch = new CiviCRM_Admin_Utilities_UFMatch( $this );
 
 		// Always instantiate Single Site class.
 		$this->single = new CiviCRM_Admin_Utilities_Single( $this );

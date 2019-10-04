@@ -275,6 +275,18 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
+		// Fix Contact Soft Delete setting may not exist.
+		if ( ! $this->setting_exists( 'fix_soft_delete' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'fix_soft_delete', $settings['fix_soft_delete'] );
+			$save = true;
+
+		}
+
 		// Save settings if need be.
 		if ( $save === true ) {
 			$this->settings_save();
@@ -328,6 +340,12 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Hook in after the CiviCRM menu hook has been registered.
 		add_action( 'init', array( $this, 'hide_civicrm' ), 20 );
+
+		// Listen for when a Contact is about to be moved in or out of Trash.
+		add_action( 'civicrm_pre', array( $this, 'contact_soft_delete_pre' ), 10, 4 );
+
+		// Listen for when a Contact has been moved in or out of Trash.
+		add_action( 'civicrm_post', array( $this, 'contact_soft_delete_post' ), 10, 4 );
 
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
@@ -386,7 +404,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Get contact ID.
-		$contact_id = $this->contact_id_get_by_user_id( $user->ID );
+		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
 		if ( $contact_id === false ) return $actions;
@@ -445,7 +463,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Get contact ID.
-		$contact_id = $this->contact_id_get_by_user_id( $user->ID );
+		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
 		if ( $contact_id === false ) return;
@@ -868,6 +886,12 @@ class CiviCRM_Admin_Utilities_Single {
 		$admin_bar_groups = '';
 		if ( $this->setting_get( 'admin_bar_groups', '0' ) == '1' ) {
 			$admin_bar_groups = ' checked="checked"';
+		}
+
+		// Init "Fix Soft Delete" checkbox.
+		$fix_soft_delete = '';
+		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '1' ) {
+			$fix_soft_delete = ' checked="checked"';
 		}
 
 		// Get post type options.
@@ -1896,39 +1920,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 	/**
-	 * Get a CiviCRM contact ID for a given WordPress user ID.
-	 *
-	 * @since 0.6.3
-	 *
-	 * @param int $user_id The numeric WordPress user ID.
-	 * @return int|bool $contact_id The CiviCRM contact ID, or false on failure.
-	 */
-	public function contact_id_get_by_user_id( $user_id ) {
-
-		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return false;
-		}
-
-		// Make sure CiviCRM file is included.
-		require_once( 'CRM/Core/BAO/UFMatch.php' );
-
-		// Search using CiviCRM's logic.
-		$contact_id = CRM_Core_BAO_UFMatch::getContactId( $user_id );
-
-		// Cast contact ID as boolean if we didn't get one.
-		if ( empty( $contact_id ) ) {
-			$contact_id = false;
-		}
-
-		// --<
-		return $contact_id;
-
-	}
-
-
-
-	/**
 	 * Fixes the WordPress Access Control form by building a single table.
 	 *
 	 * @since 0.3
@@ -1986,6 +1977,132 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Camelcase dammit.
 		CRM_Utils_System::setTitle( __( 'WordPress Access Control', 'civicrm-admin-utilities' ) );
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Before a Contact is updated, establish if they are being moved "to the
+	 * Trash" or "from the Trash".
+	 *
+	 * @since 0.6.8
+	 *
+	 * @param string $op The type of database operation.
+	 * @param string $objectName The type of object.
+	 * @param integer $objectId The ID of the object.
+	 * @param object $objectRef The object.
+	 */
+	public function contact_soft_delete_pre( $op, $objectName, $objectId, $objectRef ) {
+
+		// Bail if our conditions are not met.
+		if ( $op !== 'update' ) return; // Uh oh! 'update' not 'edit'!
+		$contact_types = array( 'Individual', 'Household', 'Organization' );
+		if ( ! in_array( $objectName, $contact_types ) ) return;
+
+		// Bail if disabled.
+		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '0' ) return;
+
+		// Get the Contact's data.
+		$result = civicrm_api( 'Contact', 'get', array(
+			'version' => 3,
+			'sequential' => 1,
+			'id' => $objectId,
+		));
+
+		// Log and bail if there's an error.
+		if ( ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) OR $result['count'] == 0 ) {
+			$e = new Exception;
+			$trace = $e->getTraceAsString();
+			error_log( print_r( array(
+				'method' => __METHOD__,
+				'result' => $result,
+				'backtrace' => $trace,
+			), true ) );
+			return;
+		}
+
+		// Get the Contact data.
+		$contact_data = array_pop( $result['values'] );
+
+		// Init direction with arbitrary value.
+		$this->direction = 'none';
+
+		// If the Contact was not in the Trash, then its being moved to Trash.
+		if ( isset( $objectRef['is_deleted'] ) AND $objectRef['is_deleted'] == '1' ) {
+			if ( $contact_data['contact_is_deleted'] == '0' ) {
+				$this->direction = 'trashed';
+			}
+		}
+
+		// If the Contact was in the Trash, then its being moved out of the Trash.
+		if ( ! isset( $objectRef['is_deleted'] ) OR $objectRef['is_deleted'] == '0' ) {
+			if ( $contact_data['contact_is_deleted'] == '1' ) {
+				$this->direction = 'untrashed';
+			}
+		}
+
+		// Sanity check.
+		if ( $this->direction === 'none' ) return;
+
+		/**
+		 * Broadcast that a Contact is about to be moved into or out of the Trash.
+		 *
+		 * This produces two actions:
+		 *
+		 * `civicrm_admin_utilities_contact_pre_trashed`
+		 * `civicrm_admin_utilities_contact_pre_untrashed`
+		 *
+		 * @since 0.6.8
+		 *
+		 * @param array $contact_data The Contact data array.
+		 */
+		do_action( 'civicrm_admin_utilities_contact_pre_' . $this->direction, $contact_data );
+
+	}
+
+
+
+	/**
+	 * Act when a Contact has been moved in or out of Trash.
+	 *
+	 * @since 0.6.8
+	 *
+	 * @param string $op The type of database operation.
+	 * @param string $objectName The type of object.
+	 * @param integer $objectId The ID of the object.
+	 * @param object $objectRef The object.
+	 */
+	public function contact_soft_delete_post( $op, $objectName, $objectId, $objectRef ) {
+
+		// Bail if our conditions are not met.
+		if ( $op !== 'update' ) return; // Uh oh! 'update' not 'edit'!
+		$contact_types = array( 'Individual', 'Household', 'Organization' );
+		if ( ! in_array( $objectName, $contact_types ) ) return;
+
+		// Bail if disabled.
+		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '0' ) return;
+
+		// Sanity check.
+		if ( $this->direction === 'none' ) return;
+
+		/**
+		 * Broadcast that a Contact has been moved into or out of the Trash.
+		 *
+		 * This produces two actions:
+		 *
+		 * `civicrm_admin_utilities_contact_post_trashed`
+		 * `civicrm_admin_utilities_contact_post_untrashed`
+		 *
+		 * @since 0.6.8
+		 *
+		 * @param CRM_Contact_DAO_Contact $objectRef The Contact data object.
+		 */
+		do_action( 'civicrm_admin_utilities_contact_post_' . $this->direction, $objectRef );
 
 	}
 
@@ -2126,6 +2243,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Do not hide "Manage Groups" menu item from Shortcuts Menu.
 		$settings['admin_bar_groups'] = '0';
 
+		// Do not fix Contact Soft Delete by default to keep existing behaviour.
+		$settings['fix_soft_delete'] = '0';
+
 		/**
 		 * Filter default settings.
 		 *
@@ -2188,6 +2308,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$civicrm_admin_utilities_cache = '';
 		$civicrm_admin_utilities_admin_bar = '';
 		$civicrm_admin_utilities_admin_bar_groups = '';
+		$civicrm_admin_utilities_fix_soft_delete = '';
 		$civicrm_admin_utilities_styles_default = '';
 		$civicrm_admin_utilities_styles_nav = '';
 		$civicrm_admin_utilities_styles_shoreditch = '';
@@ -2322,6 +2443,13 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'admin_bar_groups', '1' );
 		} else {
 			$this->setting_set( 'admin_bar_groups', '0' );
+		}
+
+		// Did we ask to fix Contact Soft Delete?
+		if ( $civicrm_admin_utilities_fix_soft_delete == '1' ) {
+			$this->setting_set( 'fix_soft_delete', '1' );
+		} else {
+			$this->setting_set( 'fix_soft_delete', '0' );
 		}
 
 		// Save options.
