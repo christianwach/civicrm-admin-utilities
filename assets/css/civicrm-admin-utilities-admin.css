@@ -340,20 +340,76 @@ div.crm-container .crm-content label.error
 	padding-left: 24px;
 }
 
-/* Fix styling of "editing contacts" elements */
-.crm-container ul#contactEditNameFields > li,
-.crm-container ul#contactEditBlocks > li,
-.crm-container ul#contactEditOptions > li
+/* Checkbox lists */
+.crm-container ul.crm-checkbox-list
 {
-	padding: 6px 0 6px;
+	list-style: none;
+	margin: 0;
+	padding: 4px;
+	width: 300px;
+	max-width: 100%;
+	max-height: 300px;
+	overflow-y: auto;
+	border: 1px solid #868686;
+	background-color: #f5f5f5;
+}
+
+.crm-container ul.crm-checkbox-list li
+{
+	position: relative;
+	background-color: #e6e6e6;
+	border: 1px solid #d3d3d3;
+	padding: 6px 0 6px 4px;
 	line-height: 1;
 }
 
-.crm-container ul#contactEditNameFields > li.ui-sortable-placeholder,
+.crm-container ul.crm-checkbox-list li:last-child
+{
+	margin-bottom: 0;
+}
+
+.crm-container ul.crm-checkbox-list.crm-sortable-list li input
+{
+	position: absolute;
+	left: 20px;
+	top: 7px;
+}
+
+.crm-preferences-display-form-block-contact_view_options td .crm-checkbox-list,
+.crm-preferences-display-form-block-advanced_search_options td .crm-checkbox-list,
+.crm-preferences-display-form-block-user_dashboard_options td .crm-checkbox-list
+{
+	line-height: 1.5;
+	margin: 0.5em 0;
+}
+
+.crm-container ul.crm-sortable-list li label:after {
+	display: block;
+	font-family: "FontAwesome";
+	content: "\f047";
+	position: absolute;
+	left: 4px;
+	top: 8px;
+	font-size: 10px;
+	color: grey;
+}
+
+.crm-container ul.crm-sortable-list li label {
+	padding-left: 40px;
+	cursor: move;
+}
+
+/* Fix styling of "editing contacts" elements */
 .crm-container ul#contactEditBlocks > li.ui-sortable-placeholder,
 .crm-container ul#contactEditOptions > li.ui-sortable-placeholder
 {
 	padding: 15px 5px;
+}
+
+.crm-container ul#contactEditBlocks > li.ui-sortable-placeholder.ui-sortable-handle,
+.crm-container ul#contactEditOptions > li.ui-sortable-placeholder.ui-sortable-handle
+{
+	padding: 6px 5px;
 }
 
 .crm-container ul#contactEditNameFields > li span input,
@@ -375,14 +431,6 @@ div.crm-container .crm-content label.error
 .crm-preferences-display-form-block-user_dashboard_options td
 {
 	line-height: 2;
-}
-
-.crm-preferences-display-form-block-contact_view_options td .crm-checkbox-list,
-.crm-preferences-display-form-block-advanced_search_options td .crm-checkbox-list,
-.crm-preferences-display-form-block-user_dashboard_options td .crm-checkbox-list
-{
-	line-height: 1.5;
-	margin: 0.5em 0;
 }
 
 .crm-container input.crm-form-text.ng-invalid.ng-dirty
