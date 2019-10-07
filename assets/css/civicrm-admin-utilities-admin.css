@@ -370,14 +370,20 @@ div.crm-container .crm-content label.error
 	margin: 2px 4px;
 }
 
-/*
 .crm-preferences-display-form-block-contact_view_options td,
 .crm-preferences-display-form-block-advanced_search_options td,
 .crm-preferences-display-form-block-user_dashboard_options td
 {
 	line-height: 2;
 }
-*/
+
+.crm-preferences-display-form-block-contact_view_options td .crm-checkbox-list,
+.crm-preferences-display-form-block-advanced_search_options td .crm-checkbox-list,
+.crm-preferences-display-form-block-user_dashboard_options td .crm-checkbox-list
+{
+	line-height: 1;
+	margin: 0;
+}
 
 .crm-container input.crm-form-text.ng-invalid.ng-dirty
 {
