@@ -400,6 +400,13 @@ div.crm-container .crm-content label.error
 }
 
 /* Fix styling of "editing contacts" elements */
+.crm-container ul#contactEditNameFields.crm-checkbox-list,
+.crm-container ul#contactEditBlocks.crm-checkbox-list,
+.crm-container ul#contactEditOptions.crm-checkbox-list
+{
+	margin-top: 0.6em;
+}
+
 .crm-container ul#contactEditNameFields > li,
 .crm-container ul#contactEditBlocks > li,
 .crm-container ul#contactEditOptions > li
@@ -5128,6 +5135,59 @@ jQuery UI overrides
 .ui-dialog .ui-dialog-buttonpane button .ui-icon[class*=" fa-"]
 {
 	margin-top: 0;
+}
+
+/* Mini calendar */
+#ui-datepicker-div.ui-datepicker
+{
+	padding: 0;
+	border: 1px solid #ccc;
+	border-radius: 0;
+}
+
+#ui-datepicker-div.ui-datepicker .ui-datepicker-header
+{
+	background-color: #eee;
+	background-image: none;
+	padding: 0.2em 0;
+	border: none;
+	border-radius: 0;
+	height: auto;
+}
+
+#ui-datepicker-div.ui-datepicker table.ui-datepicker-calendar
+{
+	width: 96%;
+	margin: 2%;
+	border: none;
+	height: auto;
+}
+
+#ui-datepicker-div.ui-datepicker .ui-state-default
+{
+	background: #f5f5f5;
+}
+
+#ui-datepicker-div.ui-datepicker .ui-state-highlight
+{
+	background: #fdefa1;
+}
+
+#ui-datepicker-div.ui-datepicker .ui-datepicker-prev,
+#ui-datepicker-div.ui-datepicker .ui-datepicker-next
+{
+	top: 5px;
+}
+
+#ui-datepicker-div.ui-datepicker .ui-datepicker-prev.ui-state-hover,
+#ui-datepicker-div.ui-datepicker .ui-datepicker-next.ui-state-hover
+{
+	top: 5px;
+	box-sizing: border-box;
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	cursor: pointer;
 }
 
 
