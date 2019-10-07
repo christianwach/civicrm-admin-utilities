@@ -311,7 +311,7 @@ div.crm-container .crm-content label.error
 	width: 6em;
 }
 
-/* Style civi form inputs to (roughly) match select2 */
+/* Style civi form inputs to (very roughly) match Select2 */
 .crm-container select.crm-form-select,
 .crm-container select.crm-form-date
 {
@@ -321,7 +321,63 @@ div.crm-container .crm-content label.error
 	padding: 4px;
 	border-radius: 4px;
 	background-color: #fff;
+	/* background gradients removed */
 }
+
+/* Fix styling of editor button */
+.crm-container #editor_id + .crm-icon-button {
+	position: relative;
+}
+
+.crm-container #editor_id + .crm-icon-button > i {
+	position: absolute;
+	color: #fff;
+	top: 9px;
+	left: 10px;
+}
+
+.crm-container #editor_id + .crm-icon-button > input {
+	padding-left: 24px;
+}
+
+/* Fix styling of "editing contacts" elements */
+.crm-container ul#contactEditNameFields > li,
+.crm-container ul#contactEditBlocks > li,
+.crm-container ul#contactEditOptions > li
+{
+	padding: 6px 0 6px;
+	line-height: 1;
+}
+
+.crm-container ul#contactEditNameFields > li.ui-sortable-placeholder,
+.crm-container ul#contactEditBlocks > li.ui-sortable-placeholder,
+.crm-container ul#contactEditOptions > li.ui-sortable-placeholder
+{
+	padding: 15px 5px;
+}
+
+.crm-container ul#contactEditNameFields > li span input,
+.crm-container ul#contactEditBlocks > li span input,
+.crm-container ul#contactEditOptions > li span input
+{
+	margin-top: 0;
+}
+
+.crm-container ul#contactEditNameFields > li .crm-grip,
+.crm-container ul#contactEditBlocks > li .crm-grip,
+.crm-container ul#contactEditOptions > li .crm-grip
+{
+	margin: 2px 4px;
+}
+
+/*
+.crm-preferences-display-form-block-contact_view_options td,
+.crm-preferences-display-form-block-advanced_search_options td,
+.crm-preferences-display-form-block-user_dashboard_options td
+{
+	line-height: 2;
+}
+*/
 
 .crm-container input.crm-form-text.ng-invalid.ng-dirty
 {
@@ -868,6 +924,7 @@ div.crm-container .crm-content label.error
 /* Inline form field 'post-help' and radio-button unselect */
 .crm-container .description {
 	margin: 1em 0;
+	font-style: italic;
 }
 
 .crm-container .form-layout-compressed td.description,
@@ -3209,9 +3266,9 @@ tbody.scrollContent tr.alternateRow {
 .crm-container a.button.crmMailing-submit-button:hover,
 .crm-container a.button.crmMailing-submit-button:focus
 {
-    background: #008ec2;
-    border-color: #006799;
-    color: #fff;
+	background: #008ec2;
+	border-color: #006799;
+	color: #fff;
 }
 
 .crm-container button.crm-button,
@@ -4365,9 +4422,9 @@ body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .c
 body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:hover,
 body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
 {
-    background: #008ec2;
-    border-color: #006799;
-    color: #fff;
+	background: #008ec2;
+	border-color: #006799;
+	color: #fff;
 }
 
 #contact-summary-relationship-tab > .label.font-red
@@ -5001,9 +5058,9 @@ jQuery UI overrides
 .ui-dialog .ui-dialog-buttonpane button:hover,
 .ui-dialog .ui-dialog-buttonpane button:focus
 {
-    background: #008ec2;
-    border-color: #006799;
-    color: #fff;
+	background: #008ec2;
+	border-color: #006799;
+	color: #fff;
 }
 
 .ui-dialog .ui-dialog-buttonpane button .ui-icon[class*=" fa-"]
