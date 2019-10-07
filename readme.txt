@@ -70,6 +70,12 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.6.8 =
+
+* Fixes UFMatch data loss during "soft delete"
+* Allows CiviCRM to be hidden on sub-sites
+* Prepares for admin style changes in WordPress 5.3
+
 = 0.6.7 =
 
 * Fixes button jitter in Mosaico
