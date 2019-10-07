@@ -400,6 +400,14 @@ div.crm-container .crm-content label.error
 }
 
 /* Fix styling of "editing contacts" elements */
+.crm-container ul#contactEditNameFields > li,
+.crm-container ul#contactEditBlocks > li,
+.crm-container ul#contactEditOptions > li
+{
+	padding: 6px 0 6px 4px;
+	line-height: 1;
+}
+
 .crm-container ul#contactEditBlocks > li.ui-sortable-placeholder,
 .crm-container ul#contactEditOptions > li.ui-sortable-placeholder
 {
