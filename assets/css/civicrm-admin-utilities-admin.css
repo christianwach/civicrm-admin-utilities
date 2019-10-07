@@ -381,8 +381,8 @@ div.crm-container .crm-content label.error
 .crm-preferences-display-form-block-advanced_search_options td .crm-checkbox-list,
 .crm-preferences-display-form-block-user_dashboard_options td .crm-checkbox-list
 {
-	line-height: 1;
-	margin: 0;
+	line-height: 1.5;
+	margin: 0.5em 0;
 }
 
 .crm-container input.crm-form-text.ng-invalid.ng-dirty
