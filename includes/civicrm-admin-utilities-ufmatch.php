@@ -563,9 +563,14 @@ class CiviCRM_Admin_Utilities_UFMatch {
 			return false;
 		}
 
-		// Return the entry if present.
-		if ( ! empty( $result['values'] ) ) {
+		// Return the entry data if there's only one.
+		if ( ! empty( $result['values'] ) AND count( $result['values'] ) === 1 ) {
 			return array_pop( $result['values'] );
+		}
+
+		// Return the entries array if there are more than one.
+		if ( ! empty( $result['values'] ) AND count( $result['values'] ) > 1 ) {
+			return $result['values'];
 		}
 
 		// Fall back to false.
@@ -631,9 +636,14 @@ class CiviCRM_Admin_Utilities_UFMatch {
 			return false;
 		}
 
-		// Return the entry if present.
-		if ( ! empty( $result['values'] ) ) {
+		// Return the entry data if there's only one.
+		if ( ! empty( $result['values'] ) AND count( $result['values'] ) === 1 ) {
 			return array_pop( $result['values'] );
+		}
+
+		// Return the entries array if there are more than one.
+		if ( ! empty( $result['values'] ) AND count( $result['values'] ) > 1 ) {
+			return $result['values'];
 		}
 
 		// Fall back to false.
