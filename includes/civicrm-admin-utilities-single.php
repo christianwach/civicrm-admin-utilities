@@ -608,7 +608,8 @@ class CiviCRM_Admin_Utilities_Single {
 		add_action( 'admin_head-' . $this->parent_page, array( $this, 'admin_head' ), 50 );
 
 		// Add scripts and styles.
-		//add_action( 'admin_print_styles-' . $this->parent_page, array( $this, 'admin_css' ) );
+		add_action( 'admin_print_styles-' . $this->parent_page, array( $this, 'admin_css' ) );
+		add_action( 'admin_print_scripts-' . $this->parent_page, array( $this, 'admin_js' ) );
 
 		// Add settings page
 		$this->settings_page = add_submenu_page(
@@ -627,7 +628,8 @@ class CiviCRM_Admin_Utilities_Single {
 		add_action( 'admin_head-' . $this->settings_page, array( $this, 'admin_head' ), 50 );
 
 		// Add scripts and styles.
-		//add_action( 'admin_print_styles-' . $this->settings_page, array( $this, 'admin_css' ) );
+		add_action( 'admin_print_styles-' . $this->settings_page, array( $this, 'admin_css' ) );
+		add_action( 'admin_print_scripts-' . $this->settings_page, array( $this, 'admin_js' ) );
 
 		// Try and update options.
 		$saved = $this->settings_update_router();
@@ -741,6 +743,61 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// --<
 		return $help;
+
+	}
+
+
+
+	/**
+	 * Enqueue stylesheet for this plugin's "Site Settings" page.
+	 *
+	 * @since 0.7
+	 */
+	public function admin_css() {
+
+		// Add twentytwenty stylesheet.
+		wp_enqueue_style(
+			'civicrm_admin_utilities_2020_css',
+			plugins_url( 'assets/js/twentytwenty/css/twentytwenty.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+			false,
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			'all' // Media.
+		);
+
+	}
+
+
+
+	/**
+	 * Enqueue scripts for this plugin's "Site Settings" page.
+	 *
+	 * @since 0.7
+	 */
+	public function admin_js() {
+
+		// Enqueue 2020 move script.
+		wp_enqueue_script(
+			'civicrm_admin_utilities_2020_move_js',
+			plugins_url( 'assets/js/twentytwenty/js/jquery.event.move.js', CIVICRM_ADMIN_UTILITIES_FILE ),
+			array( 'jquery' ),
+			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+		);
+
+		// Enqueue 2020 script.
+		wp_enqueue_script(
+			'civicrm_admin_utilities_2020_js',
+			plugins_url( 'assets/js/twentytwenty/js/jquery.twentytwenty.js', CIVICRM_ADMIN_UTILITIES_FILE ),
+			array( 'civicrm_admin_utilities_2020_move_js' ),
+			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+		);
+
+		// Enqueue our "Site Settings" page script.
+		wp_enqueue_script(
+			'civicrm_admin_utilities_js',
+			plugins_url( 'assets/js/civicrm-admin-utilities-site-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
+			array( 'civicrm_admin_utilities_2020_js' ),
+			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+		);
 
 	}
 
