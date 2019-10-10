@@ -855,10 +855,12 @@ class CiviCRM_Admin_Utilities_Single {
 			$prettify_menu = ' checked="checked"';
 		}
 
-		// Init admin CSS checkbox.
+		// Init admin CSS checkbox and theme preview visibility.
 		$admin_css = '';
+		$theme_preview = '';
 		if ( $this->setting_get( 'css_admin', '0' ) == '1' ) {
 			$admin_css = ' checked="checked"';
+			$theme_preview = ' display: none;';
 		}
 
 		// Init default CSS checkbox.

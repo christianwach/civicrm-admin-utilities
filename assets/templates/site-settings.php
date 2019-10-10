@@ -68,7 +68,7 @@
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_admin" id="civicrm_admin_utilities_styles_admin" value="1"<?php echo $admin_css; ?> />
 					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_admin"><?php _e( 'Check this to enable the CiviCRM Admin Utilities theme.', 'civicrm-admin-utilities' ); ?></label>
-					<div class="theme-compare-wrapper theme-compare-dashboard" style="margin: 1em 0 0.4em 0;">
+					<div class="theme-compare-wrapper theme-compare-dashboard" style="margin: 1em 0 0.4em 0;<?php echo $theme_preview; ?>">
 						<div id="theme-compare-dashboard" class="twentytwenty-container" style="max-width: 720px;">
 							<img src="<?php echo plugins_url( 'assets/images/civicrm-dashboard.jpg', CIVICRM_ADMIN_UTILITIES_FILE ); ?>">
 							<img src="<?php echo plugins_url( 'assets/images/civicrm-dashboard-cau.jpg', CIVICRM_ADMIN_UTILITIES_FILE ); ?>">

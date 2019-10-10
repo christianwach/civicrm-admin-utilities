@@ -24,10 +24,22 @@
 	 */
 	$(document).ready( function() {
 
-		// Init 2020 on theme preview images.
-		$( '#theme-compare-dashboard' ).twentytwenty({
-			default_offset_pct: 0.8
-		});
+		// Define vars.
+		var checkbox = $('#civicrm_admin_utilities_styles_admin'),
+			theme_preview = $('#theme-compare-dashboard');
+
+		// Init 2020 only when theme is not selected.
+		if ( ! checkbox.prop( 'checked' ) ) {
+
+			// Show the theme preview.
+			theme_preview.show();
+
+			// Init 2020 on theme preview images.
+			theme_preview.twentytwenty({
+				default_offset_pct: 0.8
+			});
+
+		}
 
    	});
 
