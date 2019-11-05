@@ -1739,14 +1739,14 @@ class CiviCRM_Admin_Utilities_Single {
 		$id = 'civicrm-admin-utils';
 
 		// Add parent.
-		$wp_admin_bar->add_menu( array(
+		$wp_admin_bar->add_node( array(
 			'id' => $id,
 			'title' => __( 'CiviCRM', 'civicrm-admin-utilities' ),
 			'href' => admin_url( 'admin.php?page=CiviCRM' ),
 		) );
 
 		// Dashboard.
-		$wp_admin_bar->add_menu( array(
+		$wp_admin_bar->add_node( array(
 			'id' => 'cau-1',
 			'parent' => $id,
 			'title' => __( 'CiviCRM Dashboard', 'civicrm-admin-utilities' ),
@@ -1754,7 +1754,7 @@ class CiviCRM_Admin_Utilities_Single {
 		) );
 
 		// Search.
-		$wp_admin_bar->add_menu( array(
+		$wp_admin_bar->add_node( array(
 			'id' => 'cau-2',
 			'parent' => $id,
 			'title' => __( 'Advanced Search', 'civicrm-admin-utilities' ),
@@ -1783,7 +1783,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Groups.
 		if ( $allowed ) {
-			$wp_admin_bar->add_menu( array(
+			$wp_admin_bar->add_node( array(
 				'id' => 'cau-3',
 				'parent' => $id,
 				'title' => __( 'Manage Groups', 'civicrm-admin-utilities' ),
@@ -1794,7 +1794,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Contributions.
 		if ( array_key_exists( 'CiviContribute', $components ) ) {
 			if ( $this->check_permission( 'access CiviContribute' ) ) {
-				$wp_admin_bar->add_menu( array(
+				$wp_admin_bar->add_node( array(
 					'id' => 'cau-4',
 					'parent' => $id,
 					'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
@@ -1806,7 +1806,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Membership.
 		if ( array_key_exists( 'CiviMember', $components ) ) {
 			if ( $this->check_permission( 'access CiviMember' ) ) {
-				$wp_admin_bar->add_menu( array(
+				$wp_admin_bar->add_node( array(
 					'id' => 'cau-5',
 					'parent' => $id,
 					'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
@@ -1818,7 +1818,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Events.
 		if ( array_key_exists( 'CiviEvent', $components ) ) {
 			if ( $this->check_permission( 'access CiviEvent' ) ) {
-				$wp_admin_bar->add_menu( array(
+				$wp_admin_bar->add_node( array(
 					'id' => 'cau-6',
 					'parent' => $id,
 					'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
@@ -1830,7 +1830,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Mailings.
 		if ( array_key_exists( 'CiviMail', $components ) ) {
 			if ( $this->check_permission( 'access CiviMail' ) ) {
-				$wp_admin_bar->add_menu( array(
+				$wp_admin_bar->add_node( array(
 					'id' => 'cau-7',
 					'parent' => $id,
 					'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
@@ -1842,7 +1842,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Reports.
 		if ( array_key_exists( 'CiviReport', $components ) ) {
 			if ( $this->check_permission( 'access CiviReport' ) ) {
-				$wp_admin_bar->add_menu( array(
+				$wp_admin_bar->add_node( array(
 					'id'     => 'cau-8',
 					'parent' => $id,
 					'title'  => __( 'Report Listing', 'civicrm-admin-utilities' ),
@@ -1854,7 +1854,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Cases.
 		if ( array_key_exists( 'CiviCase', $components ) ) {
 			if ( CRM_Case_BAO_Case::accessCiviCase() ) {
-				$wp_admin_bar->add_menu( array(
+				$wp_admin_bar->add_node( array(
 					'id' => 'cau-9',
 					'parent' => $id,
 					'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
@@ -1865,7 +1865,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Admin console.
 		if ( $this->check_permission( 'administer CiviCRM' ) ) {
-			$wp_admin_bar->add_menu( array(
+			$wp_admin_bar->add_node( array(
 				'id' => 'cau-10',
 				'parent' => $id,
 				'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
@@ -1886,7 +1886,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Admin Utilities settings page.
 		if ( current_user_can( $capability ) ) {
-			$wp_admin_bar->add_menu( array(
+			$wp_admin_bar->add_node( array(
 				'id' => 'cau-11',
 				'parent' => $id,
 				'title' => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
