@@ -382,8 +382,8 @@ class CiviCRM_Admin_Utilities_Single {
 		// Bail if user cannot access CiviCRM.
 		if ( ! current_user_can( 'access_civicrm' ) ) return $actions;
 
-		// Perform further checks if we can't view all contacts.
-		if ( ! $this->check_permission( 'view all contacts' ) ) {
+		// Perform further checks if we can't view all contacts and view all contact in domain on a multisite.
+		if ( ( ! $this->check_permission( 'view all contacts' ) ) && ( ! $this->check_permission( 'view all contacts in domain' ) ) ) {
 
 			//  Get current user.
 			$current_user = wp_get_current_user();
