@@ -1187,7 +1187,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$config = CRM_Core_Config::singleton();
 
 		// Clear database cache.
-		CRM_Core_Config::clearDBCache();
+		$config->clearDBCache();
 
 		// Cleanup the "templates_c" directory.
 		$config->cleanup( 1, true );
@@ -1195,6 +1195,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Cleanup the session object.
 		$session = CRM_Core_Session::singleton();
 		$session->reset( 1 );
+
+		// Call system flush.
+		CRM_Utils_System::flushCache();
 
 	}
 
