@@ -376,38 +376,26 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function user_actions( $actions, $user ) {
 
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) return $actions;
+
 		// Bail if we can't edit this user.
 		if ( ! current_user_can( 'edit_user', $user->ID ) ) return $actions;
 
 		// Bail if user cannot access CiviCRM.
 		if ( ! current_user_can( 'access_civicrm' ) ) return $actions;
 
-		// Perform further checks if we can't view all contacts.
-		if ( ! $this->check_permission( 'view all contacts' ) ) {
-
-			//  Get current user.
-			$current_user = wp_get_current_user();
-
-			// Is this their profile?
-			if ( $user->ID === $current_user->ID ) {
-
-				// Bail if they can't view their own contact.
-				if ( ! $this->check_permission( 'view my contact' ) ) return $actions;
-
-			} else {
-
-				// Not allowed.
-				return $actions;
-
-			}
-
-		}
-
 		// Get contact ID.
 		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
 		if ( $contact_id === false ) return $actions;
+
+		// Check with CiviCRM that this Contact can be viewed.
+		$allowed = CRM_Contact_BAO_Contact_Permission::allow( $contact_id, CRM_Core_Permission::VIEW );
+
+		// Bail if we don't get permission.
+		if ( ! $allowed ) return $actions;
 
 		// Get the link to the Contact.
 		$link = $this->get_link( 'civicrm/contact/view', 'reset=1&cid=' . $contact_id );
@@ -435,38 +423,26 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function profile_extras( $user ) {
 
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) return $actions;
+
 		// Bail if we can't edit this user.
 		if ( ! current_user_can( 'edit_user', $user->ID ) ) return;
 
 		// Bail if user cannot access CiviCRM.
 		if ( ! current_user_can( 'access_civicrm' ) ) return;
 
-		// Perform further checks if we can't view all contacts.
-		if ( ! $this->check_permission( 'view all contacts' ) ) {
-
-			//  Get current user.
-			$current_user = wp_get_current_user();
-
-			// Is this their profile?
-			if ( $user->ID === $current_user->ID ) {
-
-				// Bail if they can't view their own contact.
-				if ( ! $this->check_permission( 'view my contact' ) ) return;
-
-			} else {
-
-				// Not allowed.
-				return;
-
-			}
-
-		}
-
 		// Get contact ID.
 		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
 		if ( $contact_id === false ) return;
+
+		// Check with CiviCRM that this Contact can be viewed.
+		$allowed = CRM_Contact_BAO_Contact_Permission::allow( $contact_id, CRM_Core_Permission::VIEW );
+
+		// Bail if we don't get permission.
+		if ( ! $allowed ) return $actions;
 
 		// Get the link to the Contact.
 		$link = $this->get_link( 'civicrm/contact/view', 'reset=1&cid=' . $contact_id );
