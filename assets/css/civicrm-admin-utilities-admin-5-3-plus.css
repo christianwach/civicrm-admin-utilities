@@ -171,7 +171,7 @@ body.wp-admin .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:hover,
 body.wp-admin .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	background: #f1f1f1;
+	background: #f3f5f6;
 	border-color: #016087;
 	color: #016087;
 }
@@ -371,9 +371,9 @@ body.wp-admin.admin-color-light .ui-dialog .ui-dialog-buttonpane button[data-op=
 body.wp-admin.admin-color-light .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-light .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	color: #04a4cc;
-	border-color: #04a4cc;
-	background: transparent;
+	background: #f3f5f6;
+	color: #32373c;
+	border-color: #7e8993;
 }
 
 body.wp-admin.admin-color-light #crm-container.crm-container a.button.delete:hover,
@@ -398,8 +398,9 @@ body.wp-admin.admin-color-light .ui-dialog .ui-dialog-buttonpane button[data-op=
 body.wp-admin.admin-color-light .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-light .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	border-color: #0490b3;
-	color: #0490b3;
+	background: #f1f1f1;
+	border-color: #717c87;
+	color: #262a2e;
 }
 
 body.wp-admin.admin-color-light #crm-container.crm-container a.button.delete:focus,
@@ -410,22 +411,22 @@ body.wp-admin.admin-color-light button.ui-button[data-identifier*="_cancel"]:foc
 body.wp-admin.admin-color-light button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin.admin-color-light .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
-	border-color: #04a4cc;
-	color: #0490b3;
-	box-shadow: 0 0 0 1px #04a4cc;
+	border-color: #7e8993;
+	color: #262a2e;
+	box-shadow: 0 0 0 1px #32373c;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin.admin-color-light #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin.admin-color-light .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-	color: #04a4cc;
+	color: #32373c;
 }
 
 body.wp-admin.admin-color-light #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin.admin-color-light .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-	color: #0490b3;
+	color: #262a2e;
 }
 
 
@@ -518,9 +519,9 @@ body.wp-admin.admin-color-blue .ui-dialog .ui-dialog-buttonpane button[data-op="
 body.wp-admin.admin-color-blue .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-blue .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	color: #e1a948;
-	border-color: #e1a948;
-	background: transparent;
+	background: #f3f5f6;
+	color: #32373c;
+	border-color: #7e8993;
 }
 
 body.wp-admin.admin-color-blue #crm-container.crm-container a.button.delete:hover,
@@ -545,8 +546,9 @@ body.wp-admin.admin-color-blue .ui-dialog .ui-dialog-buttonpane button[data-op="
 body.wp-admin.admin-color-blue .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-blue .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	border-color: #dd9f32;
-	color: #dd9f32;
+	background: #f1f1f1;
+	border-color: #717c87;
+	color: #262a2e;
 }
 
 body.wp-admin.admin-color-blue #crm-container.crm-container a.button.delete:focus,
@@ -557,22 +559,22 @@ body.wp-admin.admin-color-blue button.ui-button[data-identifier*="_cancel"]:focu
 body.wp-admin.admin-color-blue button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin.admin-color-blue .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
-	border-color: #e1a948;
-	color: #dd9f32;
-	box-shadow: 0 0 0 1px #e1a948;
+	border-color: #7e8993;
+	color: #262a2e;
+	box-shadow: 0 0 0 1px #32373c;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin.admin-color-blue #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin.admin-color-blue .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-	color: #e1a948;
+	color: #32373c;
 }
 
 body.wp-admin.admin-color-blue #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin.admin-color-blue .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-	color: #dd9f32;
+	color: #262a2e;
 }
 
 
@@ -665,9 +667,9 @@ body.wp-admin.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button[data-op
 body.wp-admin.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	color: #c7a589;
-	border-color: #c7a589;
-	background: transparent;
+	background: #f3f5f6;
+	color: #32373c;
+	border-color: #7e8993;
 }
 
 body.wp-admin.admin-color-coffee #crm-container.crm-container a.button.delete:hover,
@@ -692,8 +694,9 @@ body.wp-admin.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button[data-op
 body.wp-admin.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	border-color: #bf9878;
-	color: #bf9878;
+	background: #f1f1f1;
+	border-color: #717c87;
+	color: #262a2e;
 }
 
 body.wp-admin.admin-color-coffee #crm-container.crm-container a.button.delete:focus,
@@ -704,22 +707,22 @@ body.wp-admin.admin-color-coffee button.ui-button[data-identifier*="_cancel"]:fo
 body.wp-admin.admin-color-coffee button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
-	border-color: #c7a589;
-	color: #bf9878;
-	box-shadow: 0 0 0 1px #c7a589;
+	border-color: #7e8993;
+	color: #262a2e;
+	box-shadow: 0 0 0 1px #32373c;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin.admin-color-coffee #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin.admin-color-coffee .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-	color: #c7a589;
+	color: #32373c;
 }
 
 body.wp-admin.admin-color-coffee #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin.admin-color-coffee .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-	color: #bf9878;
+	color: #262a2e;
 }
 
 
@@ -812,9 +815,9 @@ body.wp-admin.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button[data
 body.wp-admin.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	color: #a3b745;
-	border-color: #a3b745;
-	background: transparent;
+	background: #f3f5f6;
+	color: #32373c;
+	border-color: #7e8993;
 }
 
 body.wp-admin.admin-color-ectoplasm #crm-container.crm-container a.button.delete:hover,
@@ -839,8 +842,9 @@ body.wp-admin.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button[data
 body.wp-admin.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	border-color: #93a43e;
-	color: #93a43e;
+	background: #f1f1f1;
+	border-color: #717c87;
+	color: #262a2e;
 }
 
 body.wp-admin.admin-color-ectoplasm #crm-container.crm-container a.button.delete:focus,
@@ -851,22 +855,22 @@ body.wp-admin.admin-color-ectoplasm button.ui-button[data-identifier*="_cancel"]
 body.wp-admin.admin-color-ectoplasm button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
-	border-color: #a3b745;
-	color: #93a43e;
-	box-shadow: 0 0 0 1px #a3b745;
+	border-color: #7e8993;
+	color: #262a2e;
+	box-shadow: 0 0 0 1px #32373c;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin.admin-color-ectoplasm #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin.admin-color-ectoplasm .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-	color: #a3b745;
+	color: #32373c;
 }
 
 body.wp-admin.admin-color-ectoplasm #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin.admin-color-ectoplasm .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-	color: #93a43e;
+	color: #262a2e;
 }
 
 
@@ -959,9 +963,9 @@ body.wp-admin.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button[data-
 body.wp-admin.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	color: #e14d43;
-	border-color: #e14d43;
-	background: transparent;
+	background: #f3f5f6;
+	color: #32373c;
+	border-color: #7e8993;
 }
 
 body.wp-admin.admin-color-midnight #crm-container.crm-container a.button.delete:hover,
@@ -986,8 +990,9 @@ body.wp-admin.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button[data-
 body.wp-admin.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	border-color: #dd382d;
-	color: #dd382d;
+	background: #f1f1f1;
+	border-color: #717c87;
+	color: #262a2e;
 }
 
 body.wp-admin.admin-color-midnight #crm-container.crm-container a.button.delete:focus,
@@ -998,22 +1003,22 @@ body.wp-admin.admin-color-midnight button.ui-button[data-identifier*="_cancel"]:
 body.wp-admin.admin-color-midnight button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
-	border-color: #e14d43;
-	color: #dd382d;
-	box-shadow: 0 0 0 1px #e14d43;
+	border-color: #7e8993;
+	color: #262a2e;
+	box-shadow: 0 0 0 1px #32373c;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin.admin-color-midnight #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin.admin-color-midnight .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-	color: #e14d43;
+	color: #32373c;
 }
 
 body.wp-admin.admin-color-midnight #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin.admin-color-midnight .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-	color: #dd382d;
+	color: #262a2e;
 }
 
 
@@ -1106,9 +1111,9 @@ body.wp-admin.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button[data-op=
 body.wp-admin.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	color: #9ebaa0;
-	border-color: #9ebaa0;
-	background: transparent;
+	background: #f3f5f6;
+	color: #32373c;
+	border-color: #7e8993;
 }
 
 body.wp-admin.admin-color-ocean #crm-container.crm-container a.button.delete:hover,
@@ -1133,8 +1138,9 @@ body.wp-admin.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button[data-op=
 body.wp-admin.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	border-color: #8faf91;
-	color: #8faf91;
+	background: #f1f1f1;
+	border-color: #717c87;
+	color: #262a2e;
 }
 
 body.wp-admin.admin-color-ocean #crm-container.crm-container a.button.delete:focus,
@@ -1145,22 +1151,22 @@ body.wp-admin.admin-color-ocean button.ui-button[data-identifier*="_cancel"]:foc
 body.wp-admin.admin-color-ocean button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
-	border-color: #9ebaa0;
-	color: #8faf91;
-	box-shadow: 0 0 0 1px #9ebaa0;
+	border-color: #7e8993;
+	color: #262a2e;
+	box-shadow: 0 0 0 1px #32373c;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin.admin-color-ocean #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin.admin-color-ocean .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-	color: #9ebaa0;
+	color: #32373c;
 }
 
 body.wp-admin.admin-color-ocean #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin.admin-color-ocean .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-	color: #8faf91;
+	color: #262a2e;
 }
 
 
@@ -1253,9 +1259,9 @@ body.wp-admin.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button[data-o
 body.wp-admin.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	color: #dd823b;
-	border-color: #dd823b;
-	background: transparent;
+	background: #f3f5f6;
+	color: #32373c;
+	border-color: #7e8993;
 }
 
 body.wp-admin.admin-color-sunrise #crm-container.crm-container a.button.delete:hover,
@@ -1280,8 +1286,9 @@ body.wp-admin.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button[data-o
 body.wp-admin.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus,
 body.wp-admin.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:active
 {
-	border-color: #d97426;
-	color: #d97426;
+	background: #f1f1f1;
+	border-color: #717c87;
+	color: #262a2e;
 }
 
 body.wp-admin.admin-color-sunrise #crm-container.crm-container a.button.delete:focus,
@@ -1292,22 +1299,22 @@ body.wp-admin.admin-color-sunrise button.ui-button[data-identifier*="_cancel"]:f
 body.wp-admin.admin-color-sunrise button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
-	border-color: #dd823b;
-	color: #d97426;
-	box-shadow: 0 0 0 1px #dd823b;
+	border-color: #7e8993;
+	color: #262a2e;
+	box-shadow: 0 0 0 1px #32373c;
 }
 
 /* Alter colour of cancel button icon */
 body.wp-admin.admin-color-sunrise #crm-container.crm-container .crm-button.crm-button-type-cancel .crm-i.fa-times,
 body.wp-admin.admin-color-sunrise .crm-button.crm-i-button[class*="_cancel"] .crm-i.fa-times
 {
-	color: #dd823b;
+	color: #32373c;
 }
 
 body.wp-admin.admin-color-sunrise #crm-container.crm-container .crm-button.crm-button-type-cancel:hover .crm-i.fa-times,
 body.wp-admin.admin-color-sunrise .crm-button.crm-i-button[class*="_cancel"]:hover .crm-i.fa-times
 {
-	color: #d97426;
+	color: #262a2e;
 }
 
 
