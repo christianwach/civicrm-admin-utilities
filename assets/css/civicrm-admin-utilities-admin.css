@@ -4405,110 +4405,6 @@ body .crm-container div#searchForm table.form-layout td
 
 /*
 --------------------------------------------------------------------------------
-contactSummary.css overrides
---------------------------------------------------------------------------------
-*/
-
-body #crm-container div.crm-summary-row
-{
-	background-color: transparent;
-	border-top: none;
-	margin-bottom: 0;
-}
-
-body #crm-container .crm-inline-edit-form div.crm-summary-row,
-body #crm-container .crm-inline-edit-form div.crm-summary-row div.crm-label
-{
-	background-color: #fff;
-}
-
-body #crm-container div.crm-summary-contactname-block
-{
-	margin-top: 0;
-	margin-bottom: 1em;
-	padding-bottom: 0;
-}
-
-body #crm-container div.crm-summary-display_name
-{
-	padding: 10px 0;
-}
-
-body #crm-container table.crm-inline-edit-form td,
-body #crm-container div.crm-inline-edit-form
-{
-	background-color: #fff;
-}
-
-body #crm-container div.contact_panel td
-{
-	border-bottom: none;
-}
-
-body #crm-container div.contact_panel .crm-summary-block
-{
-	margin-bottom: 1em;
-	line-height: 2;
-	background: #fafafa;
-}
-
-body #crm-container div.crm-summary-row div.crm-label
-{
-	font-weight: bold;
-	width: 128px;
-	word-break: break-word;
-}
-
-body #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body #crm-container div.crm-inline-edit .crm-edit-help,
-body #crm-container .crm-inline-edit.add-new .crm-edit-help
-{
-	font-size: 13px;
-	border-width: 1px;
-	border-style: solid;
-	-webkit-appearance: none;
-	border-radius: 3px;
-	white-space: nowrap;
-	box-sizing: border-box;
-	background: #0085ba;
-	background-color: #0085ba;
-	border-color: #0073aa #006799 #006799;
-	box-shadow: 0 1px 0 #006799;
-	color: #fff;
-	text-decoration: none;
-	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
-	padding: 2px 10px 1px;
-	opacity: 1;
-}
-
-body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
-{
-	background: #0085ba;
-	background-color: #0085ba;
-}
-
-body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:hover,
-body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:focus,
-body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:hover,
-body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
-{
-	background: #008ec2;
-	border-color: #006799;
-	color: #fff;
-}
-
-#contact-summary-relationship-tab > .label.font-red
-{
-	font-size: 1.3em;
-	margin: 1em 0;
-	font-weight: bold;
-}
-
-
-
-/*
---------------------------------------------------------------------------------
 dashboard.css overrides
 --------------------------------------------------------------------------------
 */
@@ -4687,6 +4583,167 @@ Contact Summary overrides
 
 /*
 --------------------------------------------------------------------------------
+contactSummary.css overrides
+--------------------------------------------------------------------------------
+*/
+
+body #crm-container div.crm-summary-row
+{
+	background-color: transparent;
+	border-top: 2px solid #fff;
+	margin-bottom: 0;
+}
+
+body #crm-container div.crm-summary-row:first-child,
+body #crm-container .crm-edit-help + div.crm-summary-row
+{
+	border-top: none;
+}
+
+body #crm-container .crm-inline-edit-form div.crm-summary-row,
+body #crm-container .crm-inline-edit-form div.crm-summary-row div.crm-label
+{
+	background-color: #fff;
+}
+
+body #crm-container div.crm-summary-contactname-block
+{
+	margin-top: 0;
+	margin-bottom: 1em;
+	padding-bottom: 0;
+}
+
+body #crm-container div.crm-summary-display_name
+{
+	padding: 10px 0;
+}
+
+body #crm-container table.crm-inline-edit-form td,
+body #crm-container div.crm-inline-edit-form
+{
+	background-color: #fff;
+}
+
+body #crm-container div.contact_panel td
+{
+	border-bottom: none;
+}
+
+body #crm-container div.contact_panel .crm-summary-block
+{
+	margin-bottom: 1.5em;
+	line-height: 2;
+	background: #fafafa;
+}
+
+body #crm-container div.crm-summary-row div.crm-label
+{
+	font-weight: bold;
+	width: 128px;
+	word-break: break-word;
+}
+
+body #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body #crm-container div.crm-inline-edit .crm-edit-help,
+body #crm-container .crm-inline-edit.add-new .crm-edit-help
+{
+	font-size: 13px;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	background: #0085ba;
+	background-color: #0085ba;
+	border-color: #0073aa #006799 #006799;
+	box-shadow: 0 1px 0 #006799;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+	padding: 2px 10px 1px;
+	opacity: 1;
+}
+
+body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+{
+	background: #0085ba;
+	background-color: #0085ba;
+}
+
+body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:hover,
+body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:focus,
+body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:hover,
+body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
+{
+	background: #008ec2;
+	border-color: #006799;
+	color: #fff;
+}
+
+#contact-summary-relationship-tab > .label.font-red
+{
+	font-size: 1.3em;
+	margin: 1em 0;
+	font-weight: bold;
+}
+
+#contact-summary div.crm-inline-edit.form
+{
+	margin-bottom: 1.5em;
+}
+
+#contact-summary div.contact_panel .crm-summary-block
+{
+	margin-bottom: 1.5em;
+}
+
+#contact-summary div.contact_panel .crm-summary-block .crm-inline-edit-form td
+{
+	background-color: #fff;
+}
+
+/* Style the "Tags" title */
+#contact-summary .crm-summary-block #tagLink a
+{
+	color: #007bba;
+	line-height: 1;
+	text-decoration: none;
+	position: relative;
+}
+
+/* Add a right arrow after "Tags" title - it's a link */
+#contact-summary .crm-summary-block #tagLink a:after
+{
+	content: "\2192";
+	position: absolute;
+	top: 0.2em;
+	right: -1.1em;
+	width: 1.1em;
+	text-align: right;
+}
+
+#contact-summary .crm-block .crm-summary-block
+{
+	line-height: 2;
+}
+
+/* Block titles */
+#contact-summary .contact_panel .collapsible-title
+{
+	font-size: 1.4em;
+	margin: 0 0 0.5em 0;
+	color: #007bba;
+	color: #777760;
+	padding: 0;
+	line-height: 1;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
 Contact Summary Editor extension overrides
 --------------------------------------------------------------------------------
 */
@@ -4771,11 +4828,6 @@ body #cse-block-container .cse-block
 .ui-widget.crm-container .crm-container button.ui-widget .ui-icon[class*=" fa-"]
 {
 	margin-top: 0;
-}
-
-#contact-summary .crm-block .crm-summary-block
-{
-	line-height: 2;
 }
 
 
