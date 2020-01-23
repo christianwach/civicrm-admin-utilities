@@ -4729,15 +4729,41 @@ body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
 	line-height: 2;
 }
 
-/* Block titles */
+/* Static Block Titles */
 #contact-summary .contact_panel .collapsible-title
 {
 	font-size: 1.4em;
 	margin: 0 0 0.5em 0;
-	color: #007bba;
 	color: #777760;
 	padding: 0;
 	line-height: 1;
+}
+
+/* Collapsible Block Titles */
+#contact-summary .contact_panel .crm-collapsible .collapsible-title
+{
+	font-size: 1.4em;
+	padding: 0 0 0.5em 0.8em;
+	color: #777760;
+	line-height: 1;
+	margin: 0;
+	background-color: transparent;
+	background-position-y: 0.1em;
+	background-position-x: -0.1em;
+	border: none;
+	box-shadow: none;
+}
+
+/* Collapsed Block Titles */
+#contact-summary .contact_panel .crm-collapsible.collapsed .collapsible-title
+{
+	background-position-x: -0.2em;
+}
+
+/* Collapsible Blocks */
+#contact-summary .contact_panel .crm-collapsible.collapsed
+{
+	margin-bottom: 1.5em;
 }
 
 
