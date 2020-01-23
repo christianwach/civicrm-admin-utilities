@@ -340,6 +340,11 @@ div.crm-container .crm-content label.error
 	padding-left: 24px;
 }
 
+.crm-container input[type="radio"]:checked::before
+{
+	margin: 0.25rem;
+}
+
 /* Checkbox lists */
 .crm-container ul.crm-checkbox-list
 {
