@@ -2155,10 +2155,10 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.5.4 Moved from plugin class.
 	 *
-	 * @param string $op the type of database operation.
-	 * @param string $objectName the type of object.
-	 * @param integer $objectId the ID of the object.
-	 * @param object $objectRef the object.
+	 * @param string $op The type of database operation.
+	 * @param string $objectName The type of object.
+	 * @param integer $objectId The ID of the object.
+	 * @param object $objectRef The object.
 	 */
 	public function trace_pre( $op, $objectName, $objectId, $objectRef ) {
 
@@ -2182,10 +2182,10 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.5.4 Moved from plugin class.
 	 *
-	 * @param string $op the type of database operation.
-	 * @param string $objectName the type of object.
-	 * @param integer $objectId the ID of the object.
-	 * @param object $objectRef the object.
+	 * @param string $op The type of database operation.
+	 * @param string $objectName The type of object.
+	 * @param integer $objectId The ID of the object.
+	 * @param object $objectRef The object.
 	 */
 	public function trace_post( $op, $objectName, $objectId, $objectRef ) {
 
