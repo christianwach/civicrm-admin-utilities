@@ -70,6 +70,12 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.7 =
+
+* Fix "View Contact" permission by delegating to CiviCRM
+* Apply WordPress 5.3.1+ secondary button styles
+* Refine display of Contact Layout Editor blocks
+
 = 0.6.8 =
 
 * Fixes UFMatch data loss during "soft delete"
