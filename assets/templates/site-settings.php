@@ -56,6 +56,14 @@
 		<table class="form-table">
 
 			<tr>
+				<th scope="row"><?php _e( 'CiviCRM Dashboard Title', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_dashboard_title" id="civicrm_admin_utilities_dashboard_title" value="1"<?php echo $dashboard_title; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_dashboard_title"><?php _e( 'Check this to make the CiviCRM Dashboard Title more welcoming.', 'civicrm-admin-utilities' ); ?></label>
+				</td>
+			</tr>
+
+			<tr>
 				<th scope="row"><?php _e( 'CiviCRM Menu', 'civicrm-admin-utilities' ); ?></th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"<?php echo $prettify_menu; ?> />

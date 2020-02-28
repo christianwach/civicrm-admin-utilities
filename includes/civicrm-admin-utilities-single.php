@@ -287,6 +287,18 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
+		// Dashboard Title setting may not exist.
+		if ( ! $this->setting_exists( 'dashboard_title' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'dashboard_title', $settings['dashboard_title'] );
+			$save = true;
+
+		}
+
 		// Save settings if need be.
 		if ( $save === true ) {
 			$this->settings_save();
@@ -346,6 +358,9 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Listen for when a Contact has been moved in or out of Trash.
 		add_action( 'civicrm_post', array( $this, 'contact_soft_delete_post' ), 10, 4 );
+
+		// Listen for Dashboard view.
+		add_action( 'civicrm_config', array( $this, 'dashboard_init' ), 10, 1 );
 
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
@@ -927,6 +942,12 @@ class CiviCRM_Admin_Utilities_Single {
 		$fix_soft_delete = '';
 		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '1' ) {
 			$fix_soft_delete = ' checked="checked"';
+		}
+
+		// Init "Dashboard Title" checkbox.
+		$dashboard_title = '';
+		if ( $this->setting_get( 'dashboard_title', '0' ) == '1' ) {
+			$dashboard_title = ' checked="checked"';
 		}
 
 		// Get post type options.
@@ -2151,6 +2172,99 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 	/**
+	 * Add link to CiviCRM Contact on the Users screen.
+	 *
+	 * @since 0.6.8
+	 *
+	 * @param object $config The CiviCRM config object.
+	 */
+	public function dashboard_init( &$config ) {
+
+		// Bail if disabled.
+		if ( $this->setting_get( 'dashboard_title', '0' ) == '0' ) return;
+
+		// Add callback for CiviCRM "dashboard" hook.
+		Civi::service('dispatcher')->addListener(
+			'hook_civicrm_dashboard',
+			[ $this, 'dashboard_title' ],
+			-100 // Default priority.
+		);
+
+	}
+
+
+
+	/**
+	 * Add link to CiviCRM Contact on the Users screen.
+	 *
+	 * @since 0.6.8
+	 *
+	 * @param object $event The event object.
+	 * @param string $hook The hook name.
+	 */
+	public function dashboard_title( $event, $hook ) {
+
+		// Extract args for this hook.
+		$params = $event->getHookValues();
+
+		// The Contact ID is the first item.
+		$contact_id = $params[0];
+
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+
+		// Define params to get Contact.
+		$params = [
+			'version' => 3,
+			'sequential' => 1,
+			'id' => $contact_id,
+		];
+
+		// Call the API.
+		$result = civicrm_api( 'Contact', 'get', $params );
+
+		// Bail if there's an error.
+		if ( ! empty( $result['is_error'] ) AND $result['is_error'] == 1 ) {
+			return;
+		}
+
+		// Bail if there are no results.
+		if ( empty( $result['values'] ) ) {
+			return;
+		}
+
+		// The result set should contain only one item.
+		$contact = array_pop( $result['values'] );
+
+		// Build title.
+		$title = sprintf(
+			__( 'Hi %s, welcome to CiviCRM', 'civicrm-admin-utilities' ),
+			$contact['first_name']
+		);
+
+		/**
+		 * Filter the Dashboard Title.
+		 *
+		 * @since 0.7.1
+		 *
+		 * @param str $title The title to show on the CiviCRM Dashboard.
+		 * @param array $contact The logged-in CiviCRM Contact data.
+		 * @return str $title The modified title to show on the CiviCRM Dashboard.
+		 */
+		$title = apply_filters( 'civicrm_admin_utilities_dashboard_title', $title, $contact );
+
+		// Overwrite Dashboard title.
+		CRM_Utils_System::setTitle( $title );
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
 	 * Utility for tracing calls to hook_civicrm_pre.
 	 *
 	 * @since 0.5.4 Moved from plugin class.
@@ -2284,6 +2398,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Do not fix Contact Soft Delete by default to keep existing behaviour.
 		$settings['fix_soft_delete'] = '0';
 
+		// Do not alter Dashboard Title by default to keep existing behaviour.
+		$settings['dashboard_title'] = '0';
+
 		/**
 		 * Filter default settings.
 		 *
@@ -2347,6 +2464,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$civicrm_admin_utilities_admin_bar = '';
 		$civicrm_admin_utilities_admin_bar_groups = '';
 		$civicrm_admin_utilities_fix_soft_delete = '';
+		$civicrm_admin_utilities_dashboard_title = '';
 		$civicrm_admin_utilities_styles_default = '';
 		$civicrm_admin_utilities_styles_nav = '';
 		$civicrm_admin_utilities_styles_shoreditch = '';
@@ -2488,6 +2606,13 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'fix_soft_delete', '1' );
 		} else {
 			$this->setting_set( 'fix_soft_delete', '0' );
+		}
+
+		// Did we ask to prettify Dashboard Title?
+		if ( $civicrm_admin_utilities_dashboard_title == '1' ) {
+			$this->setting_set( 'dashboard_title', '1' );
+		} else {
+			$this->setting_set( 'dashboard_title', '0' );
 		}
 
 		// Save options.
