@@ -60,6 +60,7 @@
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_dashboard_title" id="civicrm_admin_utilities_dashboard_title" value="1"<?php echo $dashboard_title; ?> />
 					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_dashboard_title"><?php _e( 'Check this to make the CiviCRM Dashboard Title more welcoming.', 'civicrm-admin-utilities' ); ?></label>
+					<p class="description"><?php _e( 'Alters "CiviCRM Home" to become "Hi FirstName, welcome to CiviCRM". The "civicrm_admin_utilities_dashboard_title" filter can be used to modify this further if required.', 'civicrm-admin-utilities' ); ?></p>
 				</td>
 			</tr>
 
