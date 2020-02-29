@@ -280,7 +280,8 @@
 				<tr>
 					<th scope="row"><?php _e( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ); ?></th>
 					<td>
-						<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/upgrade' ) . '&reset=1' ); ?>"><?php _e( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ); ?></a>
+						<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/upgrade' ) . '&reset=1' ); ?>"><?php _e( 'Click this to upgrade CiviCRM.', 'civicrm-admin-utilities' ); ?></a><br>
+						<span class="description"><?php _e( 'Please note: you need to update the CiviCRM plugin folder first.', 'civicrm-admin-utilities' ); ?></span>
 					</td>
 				</tr>
 
