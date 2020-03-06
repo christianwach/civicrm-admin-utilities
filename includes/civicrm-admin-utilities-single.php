@@ -1729,9 +1729,6 @@ class CiviCRM_Admin_Utilities_Single {
 		// Access WordPress admin bar.
 		global $wp_admin_bar;
 
-		// Init CiviCRM or bail.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
-
 		// Get component info.
 		$components = CRM_Core_Component::getEnabledComponents();
 
