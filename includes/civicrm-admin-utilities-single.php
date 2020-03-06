@@ -1742,6 +1742,16 @@ class CiviCRM_Admin_Utilities_Single {
 			'href' => admin_url( 'admin.php?page=CiviCRM' ),
 		) );
 
+		/**
+		 * Fires at the top of the Shortcuts Menu.
+		 *
+		 * @since 0.7.1
+		 *
+		 * @param str $id The menu parent ID.
+		 * @param array $components The active CiviCRM Conponents.
+		 */
+		do_action( 'civicrm_admin_utilities_menu_top', $id, $components );
+
 		// Dashboard.
 		$wp_admin_bar->add_node( array(
 			'id' => 'cau-1',
@@ -1895,8 +1905,11 @@ class CiviCRM_Admin_Utilities_Single {
 		 * Fires after Shortcuts Menu has been defined.
 		 *
 		 * @since 0.3
+		 *
+		 * @param str $id The menu parent ID.
+		 * @param array $components The active CiviCRM Conponents.
 		 */
-		do_action( 'civicrm_admin_utilities_menu_after' );
+		do_action( 'civicrm_admin_utilities_menu_after', $id,$components );
 
 	}
 
