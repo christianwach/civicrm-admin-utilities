@@ -70,6 +70,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.7.1 =
+
+* Add setting to make Dashboard Title more welcoming
+* Upgrade Shortcuts Menu actions
+
 = 0.7 =
 
 * Fix "View Contact" permission by delegating to CiviCRM
