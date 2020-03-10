@@ -1,9 +1,22 @@
 <?php
+/**
+ * UFMatch Class.
+ *
+ * Handles User-Contact matching functionality.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.6.8
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+
 
 /**
  * CiviCRM Admin Utilities UFMatch Class.
  *
- * A class that encapsulates Single Site admin functionality.
+ * A class that encapsulates User-Contact matching functionality.
  *
  * @since 0.6.8
  */
@@ -268,7 +281,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param array $contact_data The Contact data array.
+	 * @param array $contact The Contact data array.
 	 */
 	public function entries_get( $contact ) {
 

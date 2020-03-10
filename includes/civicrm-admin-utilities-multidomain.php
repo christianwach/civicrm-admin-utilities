@@ -1,4 +1,17 @@
 <?php
+/**
+ * Multidomain Class.
+ *
+ * Handles Multidomain functionality.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.5.4
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+
 
 /**
  * CiviCRM Admin Utilities Multidomain Class.
