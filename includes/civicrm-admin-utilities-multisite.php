@@ -1233,6 +1233,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$civicrm_admin_utilities_restrict_settings_access = '';
 		$civicrm_admin_utilities_restrict_domain_access = '';
 		$civicrm_admin_utilities_restrict_administer = '';
+		$civicrm_admin_utilities_hide_civicrm = '';
 		$civicrm_admin_utilities_menu = '';
 		$civicrm_admin_utilities_access = '';
 		$civicrm_admin_utilities_post_types = array();
