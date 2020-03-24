@@ -1249,7 +1249,60 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$civicrm_admin_utilities_email_suppress = '';
 
 		// Get variables.
-		extract( $_POST );
+		if ( isset($_POST['civicrm_admin_utilities_main_site']) ){
+			$civicrm_admin_utilities_main_site = $_POST['civicrm_admin_utilities_main_site'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_restrict_settings_access']) ){
+			$civicrm_admin_utilities_restrict_settings_access = $_POST['civicrm_admin_utilities_restrict_settings_access'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_restrict_domain_access']) ){
+			$civicrm_admin_utilities_restrict_domain_access = $_POST['civicrm_admin_utilities_restrict_domain_access'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_restrict_administer']) ){
+			$civicrm_admin_utilities_restrict_administer = $_POST['civicrm_admin_utilities_restrict_administer'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_hide_civicrm']) ){
+			$civicrm_admin_utilities_hide_civicrm = $_POST['civicrm_admin_utilities_hide_civicrm'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_menu']) ){
+			$civicrm_admin_utilities_menu = $_POST['civicrm_admin_utilities_menu'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_access']) ){
+			$civicrm_admin_utilities_access = $_POST['civicrm_admin_utilities_access'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_post_types']) ){
+			$civicrm_admin_utilities_post_types = $_POST['civicrm_admin_utilities_post_types'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_admin_bar']) ){
+			$civicrm_admin_utilities_admin_bar = $_POST['civicrm_admin_utilities_admin_bar'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_admin_bar_groups']) ){
+			$civicrm_admin_utilities_admin_bar_groups = $_POST['civicrm_admin_utilities_admin_bar_groups'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_styles_default']) ){
+			$civicrm_admin_utilities_styles_default = $_POST['civicrm_admin_utilities_styles_default'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_styles_nav']) ){
+			$civicrm_admin_utilities_styles_nav = $_POST['civicrm_admin_utilities_styles_nav'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_styles_shoreditch']) ){
+			$civicrm_admin_utilities_styles_shoreditch = $_POST['civicrm_admin_utilities_styles_shoreditch'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_styles_bootstrap']) ){
+			$civicrm_admin_utilities_styles_bootstrap = $_POST['civicrm_admin_utilities_styles_bootstrap'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_styles_custom']) ){
+			$civicrm_admin_utilities_styles_custom = $_POST['civicrm_admin_utilities_styles_custom'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_styles_custom_public']) ){
+			$civicrm_admin_utilities_styles_custom_public = $_POST['civicrm_admin_utilities_styles_custom_public'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_styles_admin']) ){
+			$civicrm_admin_utilities_styles_admin = $_POST['civicrm_admin_utilities_styles_admin'];
+		}
+		if ( isset($_POST['civicrm_admin_utilities_email_suppress']) ){
+			$civicrm_admin_utilities_email_suppress = $_POST['civicrm_admin_utilities_email_suppress'];
+		}
 
 		// Should we remove the visible traces of CiviCRM on sub-sites?
 		if ( $civicrm_admin_utilities_main_site == '1' ) {
