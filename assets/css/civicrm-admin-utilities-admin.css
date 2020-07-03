@@ -1437,11 +1437,11 @@ div.crm-container .crm-content label.error
 }
 
 #crm-container div.remaining {
-	background: url("../../../civicrm/civicrm/i/contribute/pcp_remain.gif");
+	background: url("../images/civicrm-legacy/contribute/pcp_remain.gif");
 }
 
 #crm-container div.achieved {
-	background: url("../../../civicrm/civicrm/i/contribute/pcp_achieve.gif");
+	background: url("../images/civicrm-legacy/contribute/pcp_achieve.gif");
 }
 
 #crm-container .honor_roll {
@@ -1462,14 +1462,14 @@ div.crm-container .crm-content label.error
 }
 
 #crm-container .thermometer-fill-wrapper {
-	background: transparent url("../../../civicrm/civicrm/i/contribute/pcp_remain.gif") repeat-y scroll left bottom;
+	background: transparent url("../images/civicrm-legacy/contribute/pcp_remain.gif") repeat-y scroll left bottom;
 	height: 220px;
 	position: relative;
 	margin: 1em 0 1.5em 0;
 }
 
 #crm-container .thermometer-fill {
-	background: transparent url(../../../civicrm/civicrm/i/contribute/pcp_achieve.gif) repeat-y scroll 0 bottom;
+	background: transparent url(../images/civicrm-legacy/contribute/pcp_achieve.gif) repeat-y scroll 0 bottom;
 	bottom: 0;
 	left: 0;
 	position: absolute;
@@ -1774,7 +1774,7 @@ div.crm-container .crm-content label.error
 	right: 2px;
 	top: 3px;
 	width: 15px;
-	background: url("../../../civicrm/civicrm/i/TreePlus.gif") no-repeat right 1px;
+	background: url("../images/civicrm-legacy/TreePlus.gif") no-repeat right 1px;
 }
 
 .crm-container .btn-slide-active .panel {
@@ -2504,7 +2504,7 @@ div.crm-master-accordion-header a.helpicon {
 /* accordion styles */
 .crm-container .crm-accordion-header
 {
-	background-image: url("../../../civicrm/civicrm/i/TreeMinusWhite.gif");
+	background-image: url("../images/civicrm-legacy/TreeMinusWhite.gif");
 	background-repeat: no-repeat;
 	background-position: 2px center;
 	cursor: pointer;
@@ -2522,7 +2522,7 @@ div.crm-master-accordion-header a.helpicon {
 }
 
 .crm-container .collapsed .crm-accordion-header {
-	background-image: url("../../../civicrm/civicrm/i/TreePlusWhite.gif");
+	background-image: url("../images/civicrm-legacy/TreePlusWhite.gif");
 }
 
 .crm-container .collapsed .crm-accordion-body,
@@ -2538,14 +2538,14 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container .crm-accordion-inner .crm-accordion-header,
 .crm-container .crm-collapsible .collapsible-title {
-	background-image: url("../../../civicrm/civicrm/i/TreeMinus.gif");
+	background-image: url("../images/civicrm-legacy/TreeMinus.gif");
 	background-color: transparent;
 	color: #3E3E3E;
 }
 
 .crm-container .crm-accordion-inner.collapsed .crm-accordion-header,
 .crm-container .crm-collapsible.collapsed .collapsible-title {
-	background-image: url("../../../civicrm/civicrm/i/TreePlus.gif");
+	background-image: url("../images/civicrm-legacy/TreePlus.gif");
 }
 
 .crm-container .crm-accordion-wrapper
@@ -2782,7 +2782,7 @@ div.crm-master-accordion-header a.helpicon {
 #crm-container div span.privacy-flag
 {
 	background-repeat: no-repeat;
-	background-image: url("../../../civicrm/civicrm/i/stop-icon.png");
+	background-image: url("../images/civicrm-legacy/stop-icon.png");
 	float: right;
 }
 
@@ -3874,7 +3874,7 @@ span.crm-select-item-color {
 .crm-container span.collapsed,
 .crm-container a.collapsed,
 .crm-container .crm-expand-row {
-	background: url("../../../civicrm/civicrm/i/TreePlus.gif") no-repeat 0 0;
+	background: url("../images/civicrm-legacy/TreePlus.gif") no-repeat 0 0;
 	padding-left: 19px;
 	cursor: pointer;
 	text-decoration: none;
@@ -3882,7 +3882,7 @@ span.crm-select-item-color {
 
 .crm-container span.expanded,
 .crm-container a.expanded {
-	background: url("../../../civicrm/civicrm/i/TreeMinus.gif") no-repeat 0 0;
+	background: url("../images/civicrm-legacy/TreeMinus.gif") no-repeat 0 0;
 	padding-left: 19px;
 	cursor: pointer;
 }
