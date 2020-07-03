@@ -31,6 +31,7 @@ if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_FILE' ) ) {
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_URL' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_URL', plugin_dir_url( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
+
 // Store PATH to this plugin's directory.
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_PATH', plugin_dir_path( CIVICRM_ADMIN_UTILITIES_FILE ) );
@@ -108,13 +109,17 @@ class CiviCRM_Admin_Utilities {
 
 		// Only do this once.
 		static $done;
-		if ( isset( $done ) AND $done === true ) return;
+		if ( isset( $done ) AND $done === true ) {
+			return;
+		}
 
 		// Enable translation.
 		$this->enable_translation();
 
 		// Bail if CiviCRM plugin is not present.
-		if ( ! function_exists( 'civi_wp' ) ) return;
+		if ( ! function_exists( 'civi_wp' ) ) {
+			return;
+		}
 
 		// Include files.
 		$this->include_files();
@@ -274,11 +279,17 @@ class CiviCRM_Admin_Utilities {
 	public function is_civicrm_initialised() {
 
 		// Init only when CiviCRM is fully installed.
-		if ( ! defined( 'CIVICRM_INSTALLED' ) ) return false;
-		if ( ! CIVICRM_INSTALLED ) return false;
+		if ( ! defined( 'CIVICRM_INSTALLED' ) ) {
+			return false;
+		}
+		if ( ! CIVICRM_INSTALLED ) {
+			return false;
+		}
 
 		// Bail if no CiviCRM init function.
-		if ( ! function_exists( 'civi_wp' ) ) return false;
+		if ( ! function_exists( 'civi_wp' ) ) {
+			return false;
+		}
 
 		// Try and initialise CiviCRM.
 		return civi_wp()->initialize();
@@ -425,11 +436,17 @@ function civicrm_au() {
 function civicrm_admin_utilities_action_links( $links, $file ) {
 
 	// Add links only when CiviCRM is fully installed.
-	if ( ! defined( 'CIVICRM_INSTALLED' ) ) return $links;
-	if ( ! CIVICRM_INSTALLED ) return $links;
+	if ( ! defined( 'CIVICRM_INSTALLED' ) ) {
+		return $links;
+	}
+	if ( ! CIVICRM_INSTALLED ) {
+		return $links;
+	}
 
 	// Bail if CiviCRM plugin is not present.
-	if ( ! function_exists( 'civi_wp' ) ) return $links;
+	if ( ! function_exists( 'civi_wp' ) ) {
+		return $links;
+	}
 
 	// Add settings link.
 	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {

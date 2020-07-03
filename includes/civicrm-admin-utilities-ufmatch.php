@@ -157,7 +157,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$entry = $this->entry_get_by_user_id( $user_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $entry === false ) return false;
+		if ( $entry === false ) {
+			return false;
+		}
 
 		// Get the Contact ID if present.
 		if ( ! empty( $entry['contact_id'] ) ) {
@@ -193,7 +195,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$contact_id = $this->contact_id_get_by_user_id( $user_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $contact_id === false ) return false;
+		if ( $contact_id === false ) {
+			return false;
+		}
 
 		// Get Contact data.
 		$contact = $this->contact_get_by_id( $contact_id );
@@ -224,7 +228,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$entry = $this->entry_get_by_contact_id( $contact_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $entry === false ) return false;
+		if ( $entry === false ) {
+			return false;
+		}
 
 		// Get the User ID if a single UFMatch item is returned.
 		if ( ! empty( $entry['uf_id'] ) ) {
@@ -260,7 +266,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$user_id = $this->user_id_get_by_contact_id( $contact_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $user_id === false ) return false;
+		if ( $user_id === false ) {
+			return false;
+		}
 
 		// Get User object.
 		$user = new WP_User( $user_id );
@@ -289,7 +297,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$entries = $this->entry_get_by_contact_id( $contact['id'], 'all' );
 
 		// Bail if we didn't get any.
-		if ( empty( $entries ) ) return;
+		if ( empty( $entries ) ) {
+			return;
+		}
 
 		// Assign to a property for processing in `entries_restore()` below.
 		$this->ufmatch_entries = $entries;
@@ -308,7 +318,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function entries_restore( $contact ) {
 
 		// Bail if there are no entries to restore.
-		if ( ! isset( $this->ufmatch_entries ) ) return;
+		if ( ! isset( $this->ufmatch_entries ) ) {
+			return;
+		}
 
 		// Create single UFMatch entry if a single UFMatch item is returned.
 		if ( ! empty( $this->ufmatch_entries['uf_id'] ) ) {
@@ -357,8 +369,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Sanity checks.
-		if ( ! is_numeric( $contact_id ) ) return false;
-		if ( ! is_numeric( $user_id ) ) return false;
+		if ( ! is_numeric( $contact_id ) OR ! is_numeric( $user_id ) ) {
+			return false;
+		}
 
 		// Construct params.
 		$params = array(
@@ -412,7 +425,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Sanity checks.
-		if ( ! is_numeric( $ufmatch_id ) ) return false;
+		if ( ! is_numeric( $ufmatch_id ) ) {
+			return false;
+		}
 
 		// Construct params.
 		$params = array(
@@ -468,7 +483,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Sanity checks.
-		if ( ! is_numeric( $contact_id ) ) return false;
+		if ( ! is_numeric( $contact_id ) ) {
+			return false;
+		}
 
 		// Construct params.
 		$params = array(
@@ -541,7 +558,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Sanity checks.
-		if ( ! is_numeric( $user_id ) ) return false;
+		if ( ! is_numeric( $user_id ) ) {
+			return false;
+		}
 
 		// Construct params.
 		$params = array(
@@ -614,7 +633,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Sanity checks.
-		if ( ! is_numeric( $contact_id ) ) return false;
+		if ( ! is_numeric( $contact_id ) ) {
+			return false;
+		}
 
 		// Construct params.
 		$params = array(

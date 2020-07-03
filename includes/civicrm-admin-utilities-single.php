@@ -405,25 +405,35 @@ class CiviCRM_Admin_Utilities_Single {
 	public function user_actions( $actions, $user ) {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return $actions;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return $actions;
+		}
 
 		// Bail if we can't edit this user.
-		if ( ! current_user_can( 'edit_user', $user->ID ) ) return $actions;
+		if ( ! current_user_can( 'edit_user', $user->ID ) ) {
+			return $actions;
+		}
 
 		// Bail if user cannot access CiviCRM.
-		if ( ! current_user_can( 'access_civicrm' ) ) return $actions;
+		if ( ! current_user_can( 'access_civicrm' ) ) {
+			return $actions;
+		}
 
 		// Get contact ID.
 		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
-		if ( $contact_id === false ) return $actions;
+		if ( $contact_id === false ) {
+			return $actions;
+		}
 
 		// Check with CiviCRM that this Contact can be viewed.
 		$allowed = CRM_Contact_BAO_Contact_Permission::allow( $contact_id, CRM_Core_Permission::VIEW );
 
 		// Bail if we don't get permission.
-		if ( ! $allowed ) return $actions;
+		if ( ! $allowed ) {
+			return $actions;
+		}
 
 		// Get the link to the Contact.
 		$link = $this->get_link( 'civicrm/contact/view', 'reset=1&cid=' . $contact_id );
@@ -452,25 +462,35 @@ class CiviCRM_Admin_Utilities_Single {
 	public function profile_extras( $user ) {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return $actions;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Bail if we can't edit this user.
-		if ( ! current_user_can( 'edit_user', $user->ID ) ) return;
+		if ( ! current_user_can( 'edit_user', $user->ID ) ) {
+			return;
+		}
 
 		// Bail if user cannot access CiviCRM.
-		if ( ! current_user_can( 'access_civicrm' ) ) return;
+		if ( ! current_user_can( 'access_civicrm' ) ) {
+			return;
+		}
 
 		// Get contact ID.
 		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
-		if ( $contact_id === false ) return;
+		if ( $contact_id === false ) {
+			return;
+		}
 
 		// Check with CiviCRM that this Contact can be viewed.
 		$allowed = CRM_Contact_BAO_Contact_Permission::allow( $contact_id, CRM_Core_Permission::VIEW );
 
 		// Bail if we don't get permission.
-		if ( ! $allowed ) return $actions;
+		if ( ! $allowed ) {
+			return;
+		}
 
 		// Get the link to the Contact.
 		$link = $this->get_link( 'civicrm/contact/view', 'reset=1&cid=' . $contact_id );
@@ -495,13 +515,19 @@ class CiviCRM_Admin_Utilities_Single {
 	public function email_pre_update( $op, $objectName, $objectId, $objectRef ) {
 
 		// Target our operation.
-		if ( $op != 'edit' ) return;
+		if ( $op != 'edit' ) {
+			return;
+		}
 
 		// Target our object type.
-		if ( $objectName != 'Email' ) return;
+		if ( $objectName != 'Email' ) {
+			return;
+		}
 
 		// Bail if we have no email.
-		if ( ! isset( $objectRef['email'] ) ) return;
+		if ( ! isset( $objectRef['email'] ) ) {
+			return;
+		}
 
 		// Set a property to check in `email_suppress()` below.
 		$this->email_sync = true;
@@ -522,7 +548,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function email_suppress( $send, $user, $userdata ) {
 
 		// Bail if email suppression is not enabled.
-		if ( $this->setting_get( 'email_suppress', '0' ) == '0' ) return $send;
+		if ( $this->setting_get( 'email_suppress', '0' ) == '0' ) {
+			return $send;
+		}
 
 		// Did this change originate with CiviCRM?
 		if ( isset( $this->email_sync ) AND $this->email_sync === true ) {
@@ -554,10 +582,14 @@ class CiviCRM_Admin_Utilities_Single {
 	public function hide_civicrm() {
 
 		// Bail if not multisite.
-		if ( ! is_multisite() ) return;
+		if ( ! is_multisite() ) {
+			return;
+		}
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'hide_civicrm', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'hide_civicrm', '0' ) == '0' ) {
+			return;
+		}
 
 		// Unhook CiviCRM's menu item, but allow CiviCRM to load.
 		remove_action( 'admin_menu', array( civi_wp(), 'add_menu_items' ) );
@@ -597,7 +629,9 @@ class CiviCRM_Admin_Utilities_Single {
 		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
 		// Check user permissions.
-		if ( ! current_user_can( $capability ) ) return;
+		if ( ! current_user_can( $capability ) ) {
+			return;
+		}
 
 		// Add the admin page to the Settings menu.
 		$this->parent_page = add_options_page(
@@ -717,7 +751,9 @@ class CiviCRM_Admin_Utilities_Single {
 		);
 
 		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) return $screen;
+		if ( ! in_array( $screen->id, $pages ) ) {
+			return $screen;
+		}
 
 		// Add a tab - we can add more later.
 		$screen->add_help_tab( array(
@@ -829,7 +865,9 @@ class CiviCRM_Admin_Utilities_Single {
 		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
 		// Check user permissions
-		if ( ! current_user_can( $capability ) ) return;
+		if ( ! current_user_can( $capability ) ) {
+			return;
+		}
 
 		// Get admin page URLs.
 		$urls = $this->page_get_urls();
@@ -1134,7 +1172,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function access_form_fixed() {
 
 		// Always true if already fixed in CiviCRM.
-		if ( $this->setting_get( 'access_fixed', '0' ) == '1' ) return true;
+		if ( $this->setting_get( 'access_fixed', '0' ) == '1' ) {
+			return true;
+		}
 
 		// Avoid recalculation.
 		if ( isset( $this->fixed ) ) {
@@ -1191,7 +1231,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function clear_caches() {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Access config object.
 		$config = CRM_Core_Config::singleton();
@@ -1228,10 +1270,14 @@ class CiviCRM_Admin_Utilities_Single {
 	public function register_menu_directory( &$config ) {
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'prettify_menu', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'prettify_menu', '0' ) == '0' ) {
+			return;
+		}
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Get template instance.
 		$template = CRM_Core_Smarty::singleton();
@@ -1268,13 +1314,19 @@ class CiviCRM_Admin_Utilities_Single {
 	public function register_access_directory( &$config ) {
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'prettify_access', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'prettify_access', '0' ) == '0' ) {
+			return;
+		}
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Bail if CiviCRM has been fixed.
-		if ( $this->access_form_fixed() ) return;
+		if ( $this->access_form_fixed() ) {
+			return;
+		}
 
 		// Get template instance.
 		$template = CRM_Core_Smarty::singleton();
@@ -1392,7 +1444,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function resources_disable() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Only on back-end.
 		if ( is_admin() ) {
@@ -1468,13 +1522,17 @@ class CiviCRM_Admin_Utilities_Single {
 	public function resource_disable( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Get the resource URL.
 		$url = $this->resource_get_url( $extension, $file );
 
 		// Kick out if not enqueued.
-		if ( $url === false ) return;
+		if ( $url === false ) {
+			return;
+		}
 
 		// Set to disabled.
 		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => true ) );
@@ -1496,7 +1554,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function resource_get_url( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return false;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
 
 		// Get registered URL.
 		$url = CRM_Core_Resources::singleton()->getUrl( $extension, $file, true );
@@ -1505,7 +1565,9 @@ class CiviCRM_Admin_Utilities_Single {
 		$registration = CRM_Core_Region::instance( 'html-header' )->get( $url );
 
 		// Bail if not registered.
-		if ( empty( $registration ) ) return false;
+		if ( empty( $registration ) ) {
+			return false;
+		}
 
 		// Is enqueued.
 		return $url;
@@ -1523,13 +1585,17 @@ class CiviCRM_Admin_Utilities_Single {
 	public function custom_css_disable() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Get CiviCRM config.
 		$config = CRM_Core_Config::singleton();
 
 		// Bail if there's no custom CSS file.
-		if ( empty( $config->customCSSURL ) ) return;
+		if ( empty( $config->customCSSURL ) ) {
+			return;
+		}
 
 		// Get registered URL.
 		$url = CRM_Core_Resources::singleton()->addCacheCode( $config->customCSSURL );
@@ -1538,7 +1604,9 @@ class CiviCRM_Admin_Utilities_Single {
 		$registration = CRM_Core_Region::instance('html-header')->get( $url );
 
 		// Bail if not registered.
-		if ( empty ( $registration ) ) return;
+		if ( empty ( $registration ) ) {
+			return;
+		}
 
 		// Set to disabled.
 		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => true ) );
@@ -1561,17 +1629,16 @@ class CiviCRM_Admin_Utilities_Single {
 		$shoreditch = false;
 
 		// Init CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return $shoreditch;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return $shoreditch;
+		}
 
 		// Get the current Custom CSS URL.
 		$config = CRM_Core_Config::singleton();
 
-		// Has the Shoreditch CSS been activated?
+		// Override return if the Shoreditch CSS has been activated.
 		if ( strstr( $config->customCSSURL, 'org.civicrm.shoreditch' ) !== false ) {
-
-			// Shoreditch CSS is active.
 			$shoreditch = true;
-
 		}
 
 		// --<
@@ -1592,7 +1659,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function kam_is_active() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return false;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
 
 		// Get current version of CiviCRM.
 		$civicrm_version = CRM_Utils_System::version();
@@ -1635,10 +1704,14 @@ class CiviCRM_Admin_Utilities_Single {
 		$screen = get_current_screen();
 
 		// Prevent warning if screen not defined.
-		if ( empty( $screen ) ) return;
+		if ( empty( $screen ) ) {
+			return;
+		}
 
 		// Bail if there's no post type.
-		if ( empty( $screen->post_type ) ) return;
+		if ( empty( $screen->post_type ) ) {
+			return;
+		}
 
 		// Get chosen post types.
 		$selected_types = $this->setting_get( 'post_types', array() );
@@ -1661,7 +1734,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function civi_button_remove() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Get CiviCRM object.
 		$civi = civi_wp();
@@ -1724,13 +1799,19 @@ class CiviCRM_Admin_Utilities_Single {
 	public function shortcuts_menu_add() {
 
 		// Bail if admin bar not enabled.
-		if ( $this->setting_get( 'admin_bar', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'admin_bar', '0' ) == '0' ) {
+			return;
+		}
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Bail if user cannot access CiviCRM.
-		if ( ! current_user_can( 'access_civicrm' ) ) return;
+		if ( ! current_user_can( 'access_civicrm' ) ) {
+			return;
+		}
 
 		/**
 		 * Fires before Shortcuts Menu has been defined.
@@ -1944,7 +2025,9 @@ class CiviCRM_Admin_Utilities_Single {
 		$link = '';
 
 		// Init CiviCRM or bail.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return $link;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return $link;
+		}
 
 		// Use CiviCRM to construct link.
 		$link = CRM_Utils_System::url(
@@ -1976,7 +2059,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function check_permission( $permission ) {
 
 		// Always deny if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return false;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
 
 		// Deny by default.
 		$permitted = false;
@@ -2013,19 +2098,27 @@ class CiviCRM_Admin_Utilities_Single {
 	public function fix_permissions_form( $formName, &$form ) {
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'prettify_access', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'prettify_access', '0' ) == '0' ) {
+			return;
+		}
 
 		// Bail if CiviCRM has been fixed.
-		if ( $this->access_form_fixed() ) return;
+		if ( $this->access_form_fixed() ) {
+			return;
+		}
 
 		// Bail if not the form we want.
-		if ( $formName != 'CRM_ACL_Form_WordPress_Permissions' ) return;
+		if ( $formName != 'CRM_ACL_Form_WordPress_Permissions' ) {
+			return;
+		}
 
 		// Get vars.
 		$vars = $form->get_template_vars();
 
 		// Bail if $permDesc does not exist.
-		if ( ! isset( $vars['permDesc'] ) ) return;
+		if ( ! isset( $vars['permDesc'] ) ) {
+			return;
+		}
 
 		// Build replacement for permDesc array.
 		foreach( $vars['rolePerms'] AS $role => $perms ) {
@@ -2081,13 +2174,21 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function contact_soft_delete_pre( $op, $objectName, $objectId, $objectRef ) {
 
-		// Bail if our conditions are not met.
-		if ( $op !== 'update' ) return; // Uh oh! 'update' not 'edit'!
+		// Uh oh! 'update' not 'edit'!
+		if ( $op !== 'update' ) {
+			return;
+		}
+
+		// Sanity check Contact Type.
 		$contact_types = array( 'Individual', 'Household', 'Organization' );
-		if ( ! in_array( $objectName, $contact_types ) ) return;
+		if ( ! in_array( $objectName, $contact_types ) ) {
+			return;
+		}
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '0' ) {
+			return;
+		}
 
 		// Get the Contact's data.
 		$result = civicrm_api( 'Contact', 'get', array(
@@ -2129,7 +2230,9 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Sanity check.
-		if ( $this->direction === 'none' ) return;
+		if ( $this->direction === 'none' ) {
+			return;
+		}
 
 		/**
 		 * Broadcast that a Contact is about to be moved into or out of the Trash.
@@ -2161,16 +2264,26 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function contact_soft_delete_post( $op, $objectName, $objectId, $objectRef ) {
 
-		// Bail if our conditions are not met.
-		if ( $op !== 'update' ) return; // Uh oh! 'update' not 'edit'!
+		// Uh oh! 'update' not 'edit'!
+		if ( $op !== 'update' ) {
+			return;
+		}
+
+		// Sanity check Contact Type.
 		$contact_types = array( 'Individual', 'Household', 'Organization' );
-		if ( ! in_array( $objectName, $contact_types ) ) return;
+		if ( ! in_array( $objectName, $contact_types ) ) {
+			return;
+		}
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '0' ) {
+			return;
+		}
 
 		// Sanity check.
-		if ( $this->direction === 'none' ) return;
+		if ( $this->direction === 'none' ) {
+			return;
+		}
 
 		/**
 		 * Broadcast that a Contact has been moved into or out of the Trash.
@@ -2204,7 +2317,9 @@ class CiviCRM_Admin_Utilities_Single {
 	public function dashboard_init( &$config ) {
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'dashboard_title', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'dashboard_title', '0' ) == '0' ) {
+			return;
+		}
 
 		// Add callback for CiviCRM "dashboard" hook.
 		Civi::service('dispatcher')->addListener(
@@ -2234,7 +2349,9 @@ class CiviCRM_Admin_Utilities_Single {
 		$contact_id = $params[0];
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Define params to get Contact.
 		$params = [

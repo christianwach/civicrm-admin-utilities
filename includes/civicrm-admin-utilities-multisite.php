@@ -394,7 +394,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function network_admin_menu() {
 
 		// We must be network admin in multisite.
-		if ( ! is_super_admin() ) return;
+		if ( ! is_super_admin() ) {
+			return;
+		}
 
 		// Set capability.
 		$capability = 'manage_network_plugins';
@@ -477,7 +479,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		);
 
 		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) return $screen;
+		if ( ! in_array( $screen->id, $pages ) ) {
+			return $screen;
+		}
 
 		// Add a tab - we can add more later.
 		$screen->add_help_tab( array(
@@ -541,7 +545,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		$url = esc_url( $url );
 
-		if ( $echo ) echo $url;
+		if ( $echo ) {
+			echo $url;
+		}
 
 		// --<
 		return $url;
@@ -608,7 +614,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Check user permissions.
-		if ( ! current_user_can( 'manage_network_plugins' ) ) return;
+		if ( ! current_user_can( 'manage_network_plugins' ) ) {
+			return;
+		}
 
 		// Get admin page URLs.
 		$urls = $this->page_get_network_urls();
@@ -947,7 +955,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function civicrm_on_main_site_only() {
 
 		// Bail if disabled.
-		if ( $this->setting_get( 'main_site_only', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'main_site_only', '0' ) == '0' ) {
+			return;
+		}
 
 		// If not on main site.
 		if ( ! is_main_site() ) {
@@ -1028,16 +1038,22 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function permission_check( $permission, &$granted ) {
 
 		// Only check "administer CiviCRM".
-		if ( strtolower( $permission ) !== 'administer civicrm' ) return;
+		if ( strtolower( $permission ) !== 'administer civicrm' ) {
+			return;
+		}
 
 		// Bail if we're not restricting.
-		if ( $this->setting_get( 'restrict_administer', '0' ) == '0' ) return;
+		if ( $this->setting_get( 'restrict_administer', '0' ) == '0' ) {
+			return;
+		}
 
 		// Get current user.
 		$user = wp_get_current_user();
 
 	    // Sanity check.
-		if ( ! ( $user instanceof WP_User ) ) return;
+		if ( ! ( $user instanceof WP_User ) ) {
+			return;
+		}
 
 		// Always allow network admins.
 		if ( $user->has_cap( 'manage_network_plugins' ) ) {

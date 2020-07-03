@@ -114,7 +114,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function network_admin_menu() {
 
 		// We must be network admin in multisite.
-		if ( ! is_super_admin() ) return;
+		if ( ! is_super_admin() ) {
+			return;
+		}
 
 		// Add settings page.
 		$this->network_multidomain_page = add_submenu_page(
@@ -211,7 +213,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		);
 
 		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) return $screen;
+		if ( ! in_array( $screen->id, $pages ) ) {
+			return $screen;
+		}
 
 		// Add a tab - we can add more later.
 		$screen->add_help_tab( array(
@@ -263,7 +267,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Check user permissions.
-		if ( ! current_user_can( 'manage_network_plugins' ) ) return;
+		if ( ! current_user_can( 'manage_network_plugins' ) ) {
+			return;
+		}
 
 		// Get admin page URLs.
 		$urls = $this->plugin->multisite->page_get_network_urls();
@@ -414,7 +420,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$capability = apply_filters( 'civicrm_admin_utilities_page_domain_cap', 'manage_options' );
 
 		// Check user permissions.
-		if ( ! current_user_can( $capability ) ) return;
+		if ( ! current_user_can( $capability ) ) {
+			return;
+		}
 
 		// Add Domain page.
 		$this->multidomain_page = add_submenu_page(
@@ -511,7 +519,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		);
 
 		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) return $screen;
+		if ( ! in_array( $screen->id, $pages ) ) {
+			return $screen;
+		}
 
 		// Add a tab - we can add more later.
 		$screen->add_help_tab( array(
@@ -568,10 +578,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$capability = apply_filters( 'civicrm_admin_utilities_page_domain_cap', 'manage_options' );
 
 		// Check user permissions.
-		if ( ! current_user_can( $capability ) ) return;
+		if ( ! current_user_can( $capability ) ) {
+			return;
+		}
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Get admin page URLs.
 		$urls = $this->plugin->single->page_get_urls();
@@ -826,7 +840,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$domain_name = isset( $_POST['cau_domain_name'] ) ? sanitize_text_field( $_POST['cau_domain_name'] ) : '';
 
 		// Bail if we get nothing through.
-		if ( empty( $domain_name ) ) return false;
+		if ( empty( $domain_name ) ) {
+			return false;
+		}
 
 		// Okay, create domain.
 		$result = $this->domain_create( $domain_name );
@@ -936,7 +952,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function domains_ajax_get() {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Init return.
 		$json = array();
@@ -1099,7 +1117,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function domain_groups_ajax_get() {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Init return.
 		$json = array();
@@ -1430,7 +1450,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function domain_orgs_ajax_get() {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) return;
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
 
 		// Init return.
 		$json = array();
