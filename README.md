@@ -51,7 +51,7 @@ If you have this plugin installed on WordPress Multisite and this plugin is *not
 
 Prior to version 0.3.4, this plugin stored its settings in the *network options* rather than in the *site's options*. This meant that separate sites *shared* their settings rather than being individually configurable. Version 0.3.4 changed the location where the plugin's settings are stored to be appropriate to the install location and, as a result, each site can be configured differently.
 
-If you are upgrading from 0.3.3, therefore, you may need to review the settings for each site where *CiviCRM Admin Utilities** is activated.
+If you are upgrading from 0.3.3, therefore, you may need to review the settings for each site where *CiviCRM Admin Utilities* is activated.
 
 Version 0.6 introduces further changes to configuration in WordPress Multisite which you should be aware of. When the plugin is activated on any site on the network, Network Administrators will then have access to a Settings Page in WordPress Network Admin at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities". This means that there are settings at both the site level and the network level.
 
