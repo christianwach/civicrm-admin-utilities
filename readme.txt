@@ -70,6 +70,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.7.2 =
+
+* Add theme support for CiviCRM 5.27+
+
 = 0.7.1 =
 
 * Add setting to make Dashboard Title more welcoming
