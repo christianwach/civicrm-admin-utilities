@@ -4639,6 +4639,7 @@ body #crm-container div.contact_panel .crm-summary-block
 	margin-bottom: 1.5em;
 	line-height: 2;
 	background: #fafafa;
+	clear: left;
 }
 
 body #crm-container div.crm-summary-row div.crm-label
@@ -5398,6 +5399,10 @@ body #crm-container div.crm-summary-row div.crm-content
 	margin-left: 134px;
 }
 
+.crm-contact_image.crm-contact_image-block a
+{
+    display: block;
+}
 
 
 /*
