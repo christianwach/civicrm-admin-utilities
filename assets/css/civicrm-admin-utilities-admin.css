@@ -131,9 +131,20 @@ div.crm-container fieldset label
 .crm-container table thead.sticky .sticky-header
 {
 	background-color: #fff;
-	margin-top: 9px;
+	margin-top: 0;
 	height: 20px;
 	border-bottom: 1px solid #aaa;
+	z-index: 100;
+}
+
+.wp-toolbar body.crm-menubar-over-cms-menu .crm-container table thead.sticky .sticky-header
+{
+	top: 40px !important;
+}
+
+.wp-toolbar body.crm-menubar-below-cms-menu .crm-container table thead.sticky .sticky-header
+{
+	top: 72px !important;
 }
 
 /* Styles for Sorting Header */
