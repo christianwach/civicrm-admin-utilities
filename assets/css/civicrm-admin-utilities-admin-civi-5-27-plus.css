@@ -1,7 +1,8 @@
 /**
  * CiviCRM style overrides for CiviCRM 5.27+.
  *
- * Implements changes in admin styling introduced in CiviCRM 5.27.
+ * Implements changes in admin styling introduced in CiviCRM 5.27. This mostly
+ * means supporting the transition from graphic sprites to Font Awesome icons.
  *
  * @package WordPress
  * @subpackage CiviCRM_Admin_Utilities
