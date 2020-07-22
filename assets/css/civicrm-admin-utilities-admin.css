@@ -1227,6 +1227,14 @@ div.crm-container .crm-content label.error
 	text-align: center;
 }
 
+.crm-container .crm-pager span.ui-spinner {
+    margin-top: -2px;
+}
+
+#crm-container .crm-pager input.ui-spinner-input {
+    min-height: 25px;
+}
+
 .crm-container .crm-pager-nav {
 	display: block;
 	margin-top: 7px;
