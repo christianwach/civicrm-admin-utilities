@@ -1854,6 +1854,14 @@ class CiviCRM_Admin_Utilities_Single {
 			'href' => admin_url( 'admin.php?page=CiviCRM' ),
 		) );
 
+		// All Contacts.
+		$wp_admin_bar->add_node( array(
+			'id' => 'cau-12',
+			'parent' => $id,
+			'title' => __( 'All Contacts', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/contact/search', 'force=true&reset=1' ),
+		) );
+
 		// Search.
 		$wp_admin_bar->add_node( array(
 			'id' => 'cau-2',
