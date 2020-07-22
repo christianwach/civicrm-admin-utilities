@@ -70,6 +70,12 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.7.3 =
+
+* Improved support for CiviCRM 5.27+
+* Add "All Contacts" link to Shortcuts menu
+* Improved support for sticky table headers
+
 = 0.7.2 =
 
 * Add theme support for CiviCRM 5.27+
