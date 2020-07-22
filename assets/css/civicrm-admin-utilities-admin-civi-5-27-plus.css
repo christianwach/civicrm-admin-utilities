@@ -1,0 +1,28 @@
+/**
+ * CiviCRM style overrides for CiviCRM 5.27+.
+ *
+ * Implements changes in admin styling introduced in CiviCRM 5.27.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+
+
+/*
+--------------------------------------------------------------------------------
+Privacy flags
+--------------------------------------------------------------------------------
+*/
+
+#crm-container div span.privacy-flag
+{
+	background: none;
+	float: none;
+}
+
+#crm-container div.contact_panel span.privacy-flag
+{
+	margin-top: 0;
+}
+

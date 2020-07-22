@@ -1418,6 +1418,20 @@ class CiviCRM_Admin_Utilities_Single {
 				);
 			}
 
+			// Amend styles when CiviCRM 5.27+ is detected.
+			if ( $this->plugin->is_civicrm_initialised() ) {
+				$version = CRM_Utils_System::version();
+				if ( version_compare( $version, '5.27', '>=' ) ) {
+					wp_enqueue_style(
+						'civicrm_admin_utilities_admin_override_civi527plus',
+						plugins_url( 'assets/css/civicrm-admin-utilities-admin-civi-5-27-plus.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+						array( 'civicrm_admin_utilities_admin_override' ),
+						CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+						'all' // Media.
+					);
+				}
+			}
+
 			/**
 			 * Broadcast that we are loading a custom CiviCRM stylesheet.
 			 *
