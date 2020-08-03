@@ -65,7 +65,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * @access public
 	 * @var array $settings The plugin network settings data.
 	 */
-	public $settings = array();
+	public $settings = [];
 
 
 
@@ -82,7 +82,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$this->plugin = $plugin;
 
 		// Initialise when plugin is loaded.
-		add_action( 'civicrm_admin_utilities_loaded', array( $this, 'initialise' ) );
+		add_action( 'civicrm_admin_utilities_loaded', [ $this, 'initialise' ] );
 
 		/*
 		 * Override Single Site default settings.
@@ -90,7 +90,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 * This filter must be added prior to `register_hooks()` because the
 		 * Single Site class will have already loaded its settings by then.
 		 */
-		add_filter( 'civicrm_admin_utilities_settings_default', array( $this, 'settings_override' ) );
+		add_filter( 'civicrm_admin_utilities_settings_default', [ $this, 'settings_override' ] );
 
 	}
 
@@ -354,29 +354,29 @@ class CiviCRM_Admin_Utilities_Multisite {
 		if ( $this->plugin->is_civicrm_network_activated() ) {
 
 			// Hook in after the CiviCRM menu hook has been registered.
-			add_action( 'init', array( $this, 'civicrm_on_main_site_only' ), 20 );
+			add_action( 'init', [ $this, 'civicrm_on_main_site_only' ], 20 );
 
 		}
 
 		// Add admin page to Network Settings menu.
-		add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ), 30 );
+		add_action( 'network_admin_menu', [ $this, 'network_admin_menu' ], 30 );
 
 		// Maybe restrict access to site settings page.
-		add_filter( 'civicrm_admin_utilities_page_settings_cap', array( $this, 'page_settings_cap' ), 10, 2 );
+		add_filter( 'civicrm_admin_utilities_page_settings_cap', [ $this, 'page_settings_cap' ], 10, 2 );
 
 		// Maybe restrict access to site domain page.
-		add_filter( 'civicrm_admin_utilities_page_domain_cap', array( $this, 'page_domain_cap' ), 10, 2 );
+		add_filter( 'civicrm_admin_utilities_page_domain_cap', [ $this, 'page_domain_cap' ], 10, 2 );
 
 		// Filter CiviCRM Permissions.
-		add_action( 'civicrm_permission_check', array( $this, 'permission_check' ), 10, 2 );
+		add_action( 'civicrm_permission_check', [ $this, 'permission_check' ], 10, 2 );
 
 		// Maybe filter restrict-to-main-site template variable.
-		add_filter( 'civicrm_admin_utilities_page_settings_restricted', array( $this, 'page_settings_restricted' ), 10, 1 );
+		add_filter( 'civicrm_admin_utilities_page_settings_restricted', [ $this, 'page_settings_restricted' ], 10, 1 );
 
 		// Maybe switch to main site for Shortcuts Menu.
 		// TODO: Are there any situations where we'd like to switch?
-		//add_action( 'civicrm_admin_utilities_menu_before', array( $this, 'shortcuts_menu_switch_to' ) );
-		//add_action( 'civicrm_admin_utilities_menu_after', array( $this, 'shortcuts_menu_switch_back' ) );
+		//add_action( 'civicrm_admin_utilities_menu_before', [ $this, 'shortcuts_menu_switch_to' ] );
+		//add_action( 'civicrm_admin_utilities_menu_after', [ $this, 'shortcuts_menu_switch_back' ] );
 
 	}
 
@@ -408,15 +408,15 @@ class CiviCRM_Admin_Utilities_Multisite {
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
 			'civicrm_admin_utilities_network_parent', // Slug name.
-			array( $this, 'page_network_settings' ) // Callback.
+			[ $this, 'page_network_settings' ] // Callback.
 		);
 
 		// Add help text.
-		add_action( 'admin_head-' . $this->network_parent_page, array( $this, 'network_admin_head' ), 50 );
+		add_action( 'admin_head-' . $this->network_parent_page, [ $this, 'network_admin_head' ], 50 );
 
 		// Add scripts and styles.
-		add_action( 'admin_print_scripts-' . $this->network_parent_page, array( $this, 'page_network_settings_js' ) );
-		//add_action( 'admin_print_styles-' . $this->network_parent_page, array( $this, 'page_network_settings_css' ) );
+		add_action( 'admin_print_scripts-' . $this->network_parent_page, [ $this, 'page_network_settings_js' ] );
+		//add_action( 'admin_print_styles-' . $this->network_parent_page, [ $this, 'page_network_settings_css' ] );
 
 		// Add settings page.
 		$this->network_settings_page = add_submenu_page(
@@ -425,18 +425,18 @@ class CiviCRM_Admin_Utilities_Multisite {
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
 			'civicrm_admin_utilities_network_settings', // Slug name.
-			array( $this, 'page_network_settings' ) // Callback.
+			[ $this, 'page_network_settings' ] // Callback.
 		);
 
 		// Ensure correct menu item is highlighted.
-		add_action( 'admin_head-' . $this->network_settings_page, array( $this, 'network_menu_highlight' ), 50 );
+		add_action( 'admin_head-' . $this->network_settings_page, [ $this, 'network_menu_highlight' ], 50 );
 
 		// Add help text.
-		add_action( 'admin_head-' . $this->network_settings_page, array( $this, 'network_admin_head' ), 50 );
+		add_action( 'admin_head-' . $this->network_settings_page, [ $this, 'network_admin_head' ], 50 );
 
 		// Add scripts and styles.
-		add_action( 'admin_print_scripts-' . $this->network_settings_page, array( $this, 'page_network_settings_js' ) );
-		//add_action( 'admin_print_styles-' . $this->network_settings_page, array( $this, 'page_network_settings_css' ) );
+		add_action( 'admin_print_scripts-' . $this->network_settings_page, [ $this, 'page_network_settings_js' ] );
+		//add_action( 'admin_print_styles-' . $this->network_settings_page, [ $this, 'page_network_settings_css' ] );
 
 		// Try and update options.
 		$saved = $this->settings_update_router();
@@ -473,10 +473,10 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function network_admin_help( $screen ) {
 
 		// Init page IDs.
-		$pages = array(
+		$pages = [
 			$this->network_parent_page . '-network',
 			$this->network_settings_page . '-network',
-		);
+		];
 
 		// Kick out if not our screen.
 		if ( ! in_array( $screen->id, $pages ) ) {
@@ -484,11 +484,11 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Add a tab - we can add more later.
-		$screen->add_help_tab( array(
+		$screen->add_help_tab( [
 			'id'      => 'civicrm_admin_utilities_network',
 			'title'   => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 			'content' => $this->network_admin_help_get(),
-		));
+		] );
 
 		// --<
 		return $screen;
@@ -573,9 +573,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		global $plugin_page, $submenu_file;
 
 		// Define subpages.
-		$subpages = array(
+		$subpages = [
 			'civicrm_admin_utilities_network_settings',
-		);
+		];
 
 		/**
 		 * Filter the list of network subpages.
@@ -745,7 +745,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Get selected post types.
-		$selected_types = $this->setting_get( 'post_types', array() );
+		$selected_types = $this->setting_get( 'post_types', [] );
 
 		// Get post type options.
 		$options = $this->plugin->single->post_type_options_get( $selected_types );
@@ -798,7 +798,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		wp_enqueue_script(
 			'civicrm_admin_utilities_network_settings_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-network-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
-			array( 'jquery' ),
+			[ 'jquery' ],
 			CIVICRM_ADMIN_UTILITIES_VERSION // version
 		);
 
@@ -821,7 +821,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Init return.
-		$this->network_urls = array();
+		$this->network_urls = [];
 
 		// Get admin page URLs via our adapted method.
 		$this->network_urls['settings'] = $this->network_menu_page_url( 'civicrm_admin_utilities_network_settings', false );
@@ -963,19 +963,19 @@ class CiviCRM_Admin_Utilities_Multisite {
 		if ( ! is_main_site() ) {
 
 			// Unhook CiviCRM's menu item, but allow CiviCRM to load.
-			remove_action( 'admin_menu', array( civi_wp(), 'add_menu_items' ) );
+			remove_action( 'admin_menu', [ civi_wp(), 'add_menu_items' ] );
 
 			// Remove notice.
-			remove_action( 'admin_notices', array( civi_wp(), 'show_setup_warning' ) );
+			remove_action( 'admin_notices', [ civi_wp(), 'show_setup_warning' ] );
 
 			// Remove CiviCRM shortcode button.
-			add_action( 'admin_head', array( $this->plugin->single, 'civi_button_remove' ) );
+			add_action( 'admin_head', [ $this->plugin->single, 'civi_button_remove' ] );
 
 			// Remove Shortcuts Menu from WordPress admin bar.
-			remove_action( 'admin_bar_menu', array( $this->plugin->single, 'shortcuts_menu_add' ), 2000 );
+			remove_action( 'admin_bar_menu', [ $this->plugin->single, 'shortcuts_menu_add' ], 2000 );
 
 			// Remove this plugin's menu item.
-			remove_action( 'admin_menu', array( $this->plugin->single, 'admin_menu' ) );
+			remove_action( 'admin_menu', [ $this->plugin->single, 'admin_menu' ] );
 
 		}
 
@@ -1084,7 +1084,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$granted = false;
 
 		// Override if individual Site Admins can see the "Plugins" menu.
-		$menu_perms = get_site_option( 'menu_items', array() );
+		$menu_perms = get_site_option( 'menu_items', [] );
 		if ( ! empty( $menu_perms['plugins'] ) ) {
 			$granted = true;
 		}
@@ -1113,7 +1113,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function settings_get_defaults() {
 
 		// Init return.
-		$settings = array();
+		$settings = [];
 
 		// Do not restrict to main site only.
 		$settings['main_site_only'] = '0';
@@ -1154,7 +1154,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$settings['access_fixed'] = '0';
 
 		// Init post types with defaults.
-		$settings['post_types'] = array( 'post', 'page' );
+		$settings['post_types'] = [ 'post', 'page' ];
 
 		// Add menu to admin bar.
 		$settings['admin_bar'] = '1';
@@ -1252,7 +1252,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$civicrm_admin_utilities_hide_civicrm = '';
 		$civicrm_admin_utilities_menu = '';
 		$civicrm_admin_utilities_access = '';
-		$civicrm_admin_utilities_post_types = array();
+		$civicrm_admin_utilities_post_types = [];
 		$civicrm_admin_utilities_admin_bar = '';
 		$civicrm_admin_utilities_admin_bar_groups = '';
 		$civicrm_admin_utilities_styles_default = '';
@@ -1387,7 +1387,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'post_types', $civicrm_admin_utilities_post_types );
 
 		} else {
-			$this->setting_set( 'post_types', array() );
+			$this->setting_set( 'post_types', [] );
 		}
 
 		// Did we ask to add the shortcuts menu to the admin bar?

@@ -94,7 +94,7 @@ class CiviCRM_Admin_Utilities {
 	public function __construct() {
 
 		// Initialise.
-		add_action( 'plugins_loaded', array( $this, 'initialise' ) );
+		add_action( 'plugins_loaded', [ $this, 'initialise' ] );
 
 	}
 
@@ -364,11 +364,11 @@ class CiviCRM_Admin_Utilities {
 		$installed = false;
 
 		// Query API for extension.
-		$result = civicrm_api( 'extension', 'get', array(
+		$result = civicrm_api( 'extension', 'get', [
 			'version' => 3,
 			'sequential' => 1,
 			'full_name' => $full_name,
-		));
+		] );
 
 		// Bail if there's an error.
 		if ( ! empty( $result['is_error'] ) AND $result['is_error'] == 1 ) {
@@ -453,13 +453,13 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 
 		// Add settings link if network activated and viewing network admin.
 		if ( civicrm_au()->is_network_activated() AND is_network_admin() ) {
-			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities_network_parent' ), network_admin_url( 'settings.php' ) );
+			$link = add_query_arg( [ 'page' => 'civicrm_admin_utilities_network_parent' ], network_admin_url( 'settings.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
 		// Add settings link if not network activated and not viewing network admin.
 		if ( ! civicrm_au()->is_network_activated() AND ! is_network_admin() ) {
-			$link = add_query_arg( array( 'page' => 'civicrm_admin_utilities_parent' ), admin_url( 'options-general.php' ) );
+			$link = add_query_arg( [ 'page' => 'civicrm_admin_utilities_parent' ], admin_url( 'options-general.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 

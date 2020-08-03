@@ -46,7 +46,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$this->plugin = $plugin;
 
 		// Initialise when plugin is loaded.
-		add_action( 'civicrm_admin_utilities_loaded', array( $this, 'initialise' ) );
+		add_action( 'civicrm_admin_utilities_loaded', [ $this, 'initialise' ] );
 
 	}
 
@@ -74,8 +74,8 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function register_hooks() {
 
 		// Retain UFMatch data on "soft delete".
-		add_action( 'civicrm_admin_utilities_contact_pre_trashed', array( $this, 'entries_get' ), 10, 1 );
-		add_action( 'civicrm_admin_utilities_contact_post_trashed', array( $this, 'entries_restore' ), 10, 1 );
+		add_action( 'civicrm_admin_utilities_contact_pre_trashed', [ $this, 'entries_get' ], 10, 1 );
+		add_action( 'civicrm_admin_utilities_contact_post_trashed', [ $this, 'entries_restore' ], 10, 1 );
 
 	}
 
@@ -101,10 +101,10 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Construct API query.
-		$params = array(
+		$params = [
 			'version' => 3,
 			'id' => $contact_id,
-		);
+		];
 
 		// Get Contact details via API.
 		$contact = civicrm_api( 'Contact', 'getsingle', $params );
@@ -113,13 +113,13 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		if ( isset( $contact['is_error'] ) AND $contact['is_error'] == '1' ) {
 			$e = new Exception;
 			$trace = $e->getTraceAsString();
-			error_log( print_r( array(
+			error_log( print_r( [
 				'method' => __METHOD__,
 				'contact_id' => $contact_id,
 				'params' => $params,
 				'contact' => $contact,
 				'backtrace' => $trace,
-			), true ) );
+			], true ) );
 			return false;
 		}
 
@@ -374,12 +374,12 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Construct params.
-		$params = array(
+		$params = [
 			'version' => 3,
 			'uf_id' => $user_id,
 			'uf_name' => $username,
 			'contact_id' => $contact_id,
-		);
+		];
 
 		// Maybe add Domain ID.
 		if ( ! empty( $domain_id ) ) {
@@ -393,12 +393,12 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
 			$e = new Exception;
 			$trace = $e->getTraceAsString();
-			error_log( print_r( array(
+			error_log( print_r( [
 				'method' => __METHOD__,
 				'params' => $params,
 				'result' => $result,
 				'backtrace' => $trace,
-			), true ) );
+			], true ) );
 			return false;
 		}
 
@@ -430,10 +430,10 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Construct params.
-		$params = array(
+		$params = [
 			'version' => 3,
 			'id' => $ufmatch_id,
-		);
+		];
 
 		// Create record via API.
 		$result = civicrm_api( 'UFMatch', 'delete', $params );
@@ -442,12 +442,12 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
 			$e = new Exception;
 			$trace = $e->getTraceAsString();
-			error_log( print_r( array(
+			error_log( print_r( [
 				'method' => __METHOD__,
 				'params' => $params,
 				'result' => $result,
 				'backtrace' => $trace,
-			), true ) );
+			], true ) );
 			return false;
 		}
 
@@ -488,10 +488,10 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Construct params.
-		$params = array(
+		$params = [
 			'version' => 3,
 			'contact_id' => $contact_id,
-		);
+		];
 
 		// If no Domain ID is specified, default to current Domain ID.
 		if ( empty( $domain_id ) ) {
@@ -510,13 +510,13 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
 			$e = new Exception;
 			$trace = $e->getTraceAsString();
-			error_log( print_r( array(
+			error_log( print_r( [
 				'method' => __METHOD__,
 				'user_id' => $user_id,
 				'params' => $params,
 				'result' => $result,
 				'backtrace' => $trace,
-			), true ) );
+			], true ) );
 			return false;
 		}
 
@@ -563,10 +563,10 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Construct params.
-		$params = array(
+		$params = [
 			'version' => 3,
 			'uf_id' => $user_id,
-		);
+		];
 
 		// If no Domain ID is specified, default to current Domain ID.
 		if ( empty( $domain_id ) ) {
@@ -585,13 +585,13 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
 			$e = new Exception;
 			$trace = $e->getTraceAsString();
-			error_log( print_r( array(
+			error_log( print_r( [
 				'method' => __METHOD__,
 				'user_id' => $user_id,
 				'params' => $params,
 				'result' => $result,
 				'backtrace' => $trace,
-			), true ) );
+			], true ) );
 			return false;
 		}
 
@@ -638,10 +638,10 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Construct params.
-		$params = array(
+		$params = [
 			'version' => 3,
 			'uf_name' => $email,
-		);
+		];
 
 		// If no Domain ID is specified, default to current Domain ID.
 		if ( empty( $domain_id ) ) {
@@ -660,13 +660,13 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
 			$e = new Exception;
 			$trace = $e->getTraceAsString();
-			error_log( print_r( array(
+			error_log( print_r( [
 				'method' => __METHOD__,
 				'user_id' => $user_id,
 				'params' => $params,
 				'result' => $result,
 				'backtrace' => $trace,
-			), true ) );
+			], true ) );
 			return false;
 		}
 

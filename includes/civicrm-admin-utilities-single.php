@@ -65,7 +65,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @access public
 	 * @var array $settings The plugin settings data.
 	 */
-	public $settings = array();
+	public $settings = [];
 
 
 
@@ -82,7 +82,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$this->plugin = $plugin;
 
 		// Initialise when plugin is loaded.
-		add_action( 'civicrm_admin_utilities_loaded', array( $this, 'initialise' ) );
+		add_action( 'civicrm_admin_utilities_loaded', [ $this, 'initialise' ] );
 
 	}
 
@@ -329,59 +329,59 @@ class CiviCRM_Admin_Utilities_Single {
 	public function register_hooks() {
 
 		// Add admin page to Settings menu.
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
 		// Kill CiviCRM shortcode button.
-		add_action( 'admin_head', array( $this, 'kill_civi_button' ) );
+		add_action( 'admin_head', [ $this, 'kill_civi_button' ] );
 
 		// Register template directory for menu amends.
-		add_action( 'civicrm_config', array( $this, 'register_menu_directory' ), 10, 1 );
+		add_action( 'civicrm_config', [ $this, 'register_menu_directory' ], 10, 1 );
 
 		// Style tweaks for CiviCRM.
-		add_action( 'admin_print_styles', array( $this, 'admin_scripts_enqueue' ) );
+		add_action( 'admin_print_styles', [ $this, 'admin_scripts_enqueue' ] );
 
 		// Add Shortcuts Menu to WordPress admin bar.
-		add_action( 'admin_bar_menu', array( $this, 'shortcuts_menu_add' ), 2000 );
+		add_action( 'admin_bar_menu', [ $this, 'shortcuts_menu_add' ], 2000 );
 
 		// Filter the WordPress Permissions Form.
-		add_action( 'civicrm_config', array( $this, 'register_access_directory' ), 10, 1 );
-		add_action( 'civicrm_buildForm', array( $this, 'fix_permissions_form' ), 10, 2 );
+		add_action( 'civicrm_config', [ $this, 'register_access_directory' ], 10, 1 );
+		add_action( 'civicrm_buildForm', [ $this, 'fix_permissions_form' ], 10, 2 );
 
 		// Hook in just before CiviCRM does to disable resources.
-		add_action( 'admin_head', array( $this, 'resources_disable' ), 9 );
-		add_action( 'wp_head', array( $this, 'resources_disable' ), 9 );
+		add_action( 'admin_head', [ $this, 'resources_disable' ], 9 );
+		add_action( 'wp_head', [ $this, 'resources_disable' ], 9 );
 
 		// Add contact link to the 'user-edit.php' page.
-		add_action( 'personal_options', array( $this, 'profile_extras' ) );
+		add_action( 'personal_options', [ $this, 'profile_extras' ] );
 
 		// Add contact link to User listings.
-		add_filter( 'user_row_actions', array( $this, 'user_actions' ), 9, 2 );
+		add_filter( 'user_row_actions', [ $this, 'user_actions' ], 9, 2 );
 
 		// Intercept email updates in CiviCRM.
-		add_action( 'civicrm_pre', array( $this, 'email_pre_update' ), 10, 4 );
+		add_action( 'civicrm_pre', [ $this, 'email_pre_update' ], 10, 4 );
 
 		// Maybe suppress notification emails.
-		add_filter( 'send_email_change_email', array( $this, 'email_suppress' ), 10, 3 );
+		add_filter( 'send_email_change_email', [ $this, 'email_suppress' ], 10, 3 );
 
 		// Hook in after the CiviCRM menu hook has been registered.
-		add_action( 'init', array( $this, 'hide_civicrm' ), 20 );
+		add_action( 'init', [ $this, 'hide_civicrm' ], 20 );
 
 		// Listen for when a Contact is about to be moved in or out of Trash.
-		add_action( 'civicrm_pre', array( $this, 'contact_soft_delete_pre' ), 10, 4 );
+		add_action( 'civicrm_pre', [ $this, 'contact_soft_delete_pre' ], 10, 4 );
 
 		// Listen for when a Contact has been moved in or out of Trash.
-		add_action( 'civicrm_post', array( $this, 'contact_soft_delete_post' ), 10, 4 );
+		add_action( 'civicrm_post', [ $this, 'contact_soft_delete_post' ], 10, 4 );
 
 		// Listen for Dashboard view.
-		add_action( 'civicrm_config', array( $this, 'dashboard_init' ), 10, 1 );
+		add_action( 'civicrm_config', [ $this, 'dashboard_init' ], 10, 1 );
 
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
 			// Log pre and post database operations.
-			add_action( 'civicrm_pre', array( $this, 'trace_pre' ), 10, 4 );
-			add_action( 'civicrm_post', array( $this, 'trace_post' ), 10, 4 );
-			add_action( 'civicrm_postProcess', array( $this, 'trace_postProcess' ), 10, 2 );
+			add_action( 'civicrm_pre', [ $this, 'trace_pre' ], 10, 4 );
+			add_action( 'civicrm_post', [ $this, 'trace_post' ], 10, 4 );
+			add_action( 'civicrm_postProcess', [ $this, 'trace_postProcess' ], 10, 2 );
 
 		}
 
@@ -592,16 +592,16 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Unhook CiviCRM's menu item, but allow CiviCRM to load.
-		remove_action( 'admin_menu', array( civi_wp(), 'add_menu_items' ) );
+		remove_action( 'admin_menu', [ civi_wp(), 'add_menu_items' ] );
 
 		// Remove notice.
-		remove_action( 'admin_notices', array( civi_wp(), 'show_setup_warning' ) );
+		remove_action( 'admin_notices', [ civi_wp(), 'show_setup_warning' ] );
 
 		// Remove CiviCRM shortcode button.
-		add_action( 'admin_head', array( $this, 'civi_button_remove' ) );
+		add_action( 'admin_head', [ $this, 'civi_button_remove' ] );
 
 		// Remove Shortcuts Menu from WordPress admin bar.
-		remove_action( 'admin_bar_menu', array( $this, 'shortcuts_menu_add' ), 2000 );
+		remove_action( 'admin_bar_menu', [ $this, 'shortcuts_menu_add' ], 2000 );
 
 	}
 
@@ -639,15 +639,15 @@ class CiviCRM_Admin_Utilities_Single {
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 			$capability,
 			'civicrm_admin_utilities_parent',
-			array( $this, 'page_settings' )
+			[ $this, 'page_settings' ]
 		);
 
 		// Add help text.
-		add_action( 'admin_head-' . $this->parent_page, array( $this, 'admin_head' ), 50 );
+		add_action( 'admin_head-' . $this->parent_page, [ $this, 'admin_head' ], 50 );
 
 		// Add scripts and styles.
-		add_action( 'admin_print_styles-' . $this->parent_page, array( $this, 'admin_css' ) );
-		add_action( 'admin_print_scripts-' . $this->parent_page, array( $this, 'admin_js' ) );
+		add_action( 'admin_print_styles-' . $this->parent_page, [ $this, 'admin_css' ] );
+		add_action( 'admin_print_scripts-' . $this->parent_page, [ $this, 'admin_js' ] );
 
 		// Add settings page
 		$this->settings_page = add_submenu_page(
@@ -656,18 +656,18 @@ class CiviCRM_Admin_Utilities_Single {
 			__( 'Settings', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
 			'civicrm_admin_utilities_settings', // Slug name.
-			array( $this, 'page_settings' ) // Callback.
+			[ $this, 'page_settings' ] // Callback.
 		);
 
 		// Ensure correct menu item is highlighted.
-		add_action( 'admin_head-' . $this->settings_page, array( $this, 'admin_menu_highlight' ), 50 );
+		add_action( 'admin_head-' . $this->settings_page, [ $this, 'admin_menu_highlight' ], 50 );
 
 		// Add help text.
-		add_action( 'admin_head-' . $this->settings_page, array( $this, 'admin_head' ), 50 );
+		add_action( 'admin_head-' . $this->settings_page, [ $this, 'admin_head' ], 50 );
 
-		// Add scripts and styles.
-		add_action( 'admin_print_styles-' . $this->settings_page, array( $this, 'admin_css' ) );
-		add_action( 'admin_print_scripts-' . $this->settings_page, array( $this, 'admin_js' ) );
+		// Add scripts and styles
+		add_action( 'admin_print_styles-' . $this->settings_page, [ $this, 'admin_css' ] );
+		add_action( 'admin_print_scripts-' . $this->settings_page, [ $this, 'admin_js' ] );
 
 		// Try and update options.
 		$saved = $this->settings_update_router();
@@ -693,9 +693,9 @@ class CiviCRM_Admin_Utilities_Single {
 		global $plugin_page, $submenu_file;
 
 		// Define subpages.
-		$subpages = array(
+		$subpages = [
 		 	'civicrm_admin_utilities_settings',
-		);
+		];
 
 		/**
 		 * Filter the list of subpages.
@@ -745,10 +745,10 @@ class CiviCRM_Admin_Utilities_Single {
 	public function admin_help( $screen ) {
 
 		// Init page IDs.
-		$pages = array(
+		$pages = [
 			$this->parent_page,
 			$this->settings_page,
-		);
+		];
 
 		// Kick out if not our screen.
 		if ( ! in_array( $screen->id, $pages ) ) {
@@ -756,11 +756,11 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Add a tab - we can add more later.
-		$screen->add_help_tab( array(
+		$screen->add_help_tab( [
 			'id'      => 'civicrm_admin_utilities',
 			'title'   => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 			'content' => $this->admin_help_get(),
-		));
+		] );
 
 		// --<
 		return $screen;
@@ -819,7 +819,7 @@ class CiviCRM_Admin_Utilities_Single {
 		wp_enqueue_script(
 			'civicrm_admin_utilities_2020_move_js',
 			plugins_url( 'assets/js/twentytwenty/js/jquery.event.move.js', CIVICRM_ADMIN_UTILITIES_FILE ),
-			array( 'jquery' ),
+			[ 'jquery' ],
 			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
 		);
 
@@ -827,7 +827,7 @@ class CiviCRM_Admin_Utilities_Single {
 		wp_enqueue_script(
 			'civicrm_admin_utilities_2020_js',
 			plugins_url( 'assets/js/twentytwenty/js/jquery.twentytwenty.js', CIVICRM_ADMIN_UTILITIES_FILE ),
-			array( 'civicrm_admin_utilities_2020_move_js' ),
+			[ 'civicrm_admin_utilities_2020_move_js' ],
 			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
 		);
 
@@ -835,7 +835,7 @@ class CiviCRM_Admin_Utilities_Single {
 		wp_enqueue_script(
 			'civicrm_admin_utilities_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-site-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
-			array( 'civicrm_admin_utilities_2020_js' ),
+			[ 'civicrm_admin_utilities_2020_js' ],
 			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
 		);
 
@@ -1044,7 +1044,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Init return.
-		$this->urls = array();
+		$this->urls = [];
 
 		// Get admin page URLs.
 		$this->urls['settings'] = menu_page_url( 'civicrm_admin_utilities_settings', false );
@@ -1080,13 +1080,13 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param array $selected_types The selected post types.
 	 * @return str $options The post type options rendered as checkboxes.
 	 */
-	public function post_type_options_get( $selected_types = array() ) {
+	public function post_type_options_get( $selected_types = [] ) {
 
 		// Get CPTs with admin UI.
-		$args = array(
+		$args = [
 			'public'   => true,
 			'show_ui' => true,
-		);
+		];
 
 		$output = 'objects'; // Names or objects, note names is the default.
 		$operator = 'and'; // Operator may be 'and' or 'or'.
@@ -1095,12 +1095,12 @@ class CiviCRM_Admin_Utilities_Single {
 		$post_types = get_post_types( $args, $output, $operator );
 
 		// Init outputs.
-		$output = array();
+		$output = [];
 		$options = '';
 
 		// Get chosen post types.
 		if ( empty( $selected_types ) ) {
-			$selected_types = $this->setting_get( 'post_types', array() );
+			$selected_types = $this->setting_get( 'post_types', [] );
 		}
 
 		// Sanity check.
@@ -1412,7 +1412,7 @@ class CiviCRM_Admin_Utilities_Single {
 				wp_enqueue_style(
 					'civicrm_admin_utilities_admin_override_53plus',
 					plugins_url( 'assets/css/civicrm-admin-utilities-admin-5-3-plus.css', CIVICRM_ADMIN_UTILITIES_FILE ),
-					array( 'civicrm_admin_utilities_admin_override' ),
+					[ 'civicrm_admin_utilities_admin_override' ],
 					CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
 					'all' // Media.
 				);
@@ -1425,7 +1425,7 @@ class CiviCRM_Admin_Utilities_Single {
 					wp_enqueue_style(
 						'civicrm_admin_utilities_admin_override_civi527plus',
 						plugins_url( 'assets/css/civicrm-admin-utilities-admin-civi-5-27-plus.css', CIVICRM_ADMIN_UTILITIES_FILE ),
-						array( 'civicrm_admin_utilities_admin_override' ),
+						[ 'civicrm_admin_utilities_admin_override' ],
 						CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
 						'all' // Media.
 					);
@@ -1549,7 +1549,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Set to disabled.
-		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => true ) );
+		CRM_Core_Region::instance('html-header')->update( $url, [ 'disabled' => true ] );
 
 	}
 
@@ -1623,7 +1623,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Set to disabled.
-		CRM_Core_Region::instance('html-header')->update( $url, array( 'disabled' => true ) );
+		CRM_Core_Region::instance('html-header')->update( $url, [ 'disabled' => true ] );
 
 	}
 
@@ -1728,7 +1728,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Get chosen post types.
-		$selected_types = $this->setting_get( 'post_types', array() );
+		$selected_types = $this->setting_get( 'post_types', [] );
 
 		// Remove button if this is not a post type we want to allow the button on.
 		if ( ! in_array( $screen->post_type, $selected_types ) ) {
@@ -1759,25 +1759,25 @@ class CiviCRM_Admin_Utilities_Single {
 		if ( isset( $civi->modal ) AND is_object( $civi->modal ) ) {
 
 			// Remove current CiviCRM actions.
-			remove_action( 'media_buttons_context', array( $civi->modal, 'add_form_button' ) );
-			remove_action( 'media_buttons', array( $civi->modal, 'add_form_button' ), 100 );
-			remove_action( 'admin_enqueue_scripts', array( $civi->modal, 'add_form_button_js' ) );
-			remove_action( 'admin_footer', array( $civi->modal, 'add_form_button_html' ) );
+			remove_action( 'media_buttons_context', [ $civi->modal, 'add_form_button' ] );
+			remove_action( 'media_buttons', [ $civi->modal, 'add_form_button' ], 100 );
+			remove_action( 'admin_enqueue_scripts', [ $civi->modal, 'add_form_button_js' ] );
+			remove_action( 'admin_footer', [ $civi->modal, 'add_form_button_html' ] );
 
 			// Also remove core resources.
-			remove_action( 'admin_head', array( $civi, 'wp_head' ), 50 );
-			remove_action( 'load-post.php', array( $civi->modal, 'add_core_resources' ) );
-			remove_action( 'load-post-new.php', array( $civi->modal, 'add_core_resources' ) );
-			remove_action( 'load-page.php', array( $civi->modal, 'add_core_resources' ) );
-			remove_action( 'load-page-new.php', array( $civi->modal, 'add_core_resources' ) );
+			remove_action( 'admin_head', [ $civi, 'wp_head' ], 50 );
+			remove_action( 'load-post.php', [ $civi->modal, 'add_core_resources' ] );
+			remove_action( 'load-post-new.php', [ $civi->modal, 'add_core_resources' ] );
+			remove_action( 'load-page.php', [ $civi->modal, 'add_core_resources' ] );
+			remove_action( 'load-page-new.php', [ $civi->modal, 'add_core_resources' ] );
 
 		} else {
 
 			// Remove legacy CiviCRM actions.
-			remove_action( 'media_buttons_context', array( $civi, 'add_form_button' ) );
-			remove_action( 'media_buttons', array( $civi, 'add_form_button' ), 100 );
-			remove_action( 'admin_enqueue_scripts', array( $civi, 'add_form_button_js' ) );
-			remove_action( 'admin_footer', array( $civi, 'add_form_button_html' ) );
+			remove_action( 'media_buttons_context', [ $civi, 'add_form_button' ] );
+			remove_action( 'media_buttons', [ $civi, 'add_form_button' ], 100 );
+			remove_action( 'admin_enqueue_scripts', [ $civi, 'add_form_button_js' ] );
+			remove_action( 'admin_footer', [ $civi, 'add_form_button_html' ] );
 
 		}
 
@@ -1844,11 +1844,11 @@ class CiviCRM_Admin_Utilities_Single {
 		$id = 'civicrm-admin-utils';
 
 		// Add parent.
-		$wp_admin_bar->add_node( array(
+		$wp_admin_bar->add_node( [
 			'id' => $id,
 			'title' => __( 'CiviCRM', 'civicrm-admin-utilities' ),
 			'href' => admin_url( 'admin.php?page=CiviCRM' ),
-		) );
+		] );
 
 		/**
 		 * Fires at the top of the Shortcuts Menu.
@@ -1861,28 +1861,28 @@ class CiviCRM_Admin_Utilities_Single {
 		do_action( 'civicrm_admin_utilities_menu_top', $id, $components );
 
 		// Dashboard.
-		$wp_admin_bar->add_node( array(
+		$wp_admin_bar->add_node( [
 			'id' => 'cau-1',
 			'parent' => $id,
 			'title' => __( 'CiviCRM Dashboard', 'civicrm-admin-utilities' ),
 			'href' => admin_url( 'admin.php?page=CiviCRM' ),
-		) );
+		] );
 
 		// All Contacts.
-		$wp_admin_bar->add_node( array(
+		$wp_admin_bar->add_node( [
 			'id' => 'cau-12',
 			'parent' => $id,
 			'title' => __( 'All Contacts', 'civicrm-admin-utilities' ),
 			'href' => $this->get_link( 'civicrm/contact/search', 'force=true&reset=1' ),
-		) );
+		] );
 
 		// Search.
-		$wp_admin_bar->add_node( array(
+		$wp_admin_bar->add_node( [
 			'id' => 'cau-2',
 			'parent' => $id,
 			'title' => __( 'Advanced Search', 'civicrm-admin-utilities' ),
 			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
-		) );
+		] );
 
 		// Maybe hide "Manage Groups" menu item.
 		if ( $this->setting_get( 'admin_bar_groups', '0' ) == '1' ) {
@@ -1906,94 +1906,94 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Groups.
 		if ( $allowed ) {
-			$wp_admin_bar->add_node( array(
+			$wp_admin_bar->add_node( [
 				'id' => 'cau-3',
 				'parent' => $id,
 				'title' => __( 'Manage Groups', 'civicrm-admin-utilities' ),
 				'href' => $this->get_link( 'civicrm/group', 'reset=1' ),
-			) );
+			] );
 		}
 
 		// Contributions.
 		if ( array_key_exists( 'CiviContribute', $components ) ) {
 			if ( $this->check_permission( 'access CiviContribute' ) ) {
-				$wp_admin_bar->add_node( array(
+				$wp_admin_bar->add_node( [
 					'id' => 'cau-4',
 					'parent' => $id,
 					'title' => __( 'Contribution Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/contribute', 'reset=1' ),
-				) );
+				] );
 			}
 		}
 
 		// Membership.
 		if ( array_key_exists( 'CiviMember', $components ) ) {
 			if ( $this->check_permission( 'access CiviMember' ) ) {
-				$wp_admin_bar->add_node( array(
+				$wp_admin_bar->add_node( [
 					'id' => 'cau-5',
 					'parent' => $id,
 					'title' => __( 'Membership Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/member', 'reset=1' ),
-				) );
+				] );
 			}
 		}
 
 		// Events.
 		if ( array_key_exists( 'CiviEvent', $components ) ) {
 			if ( $this->check_permission( 'access CiviEvent' ) ) {
-				$wp_admin_bar->add_node( array(
+				$wp_admin_bar->add_node( [
 					'id' => 'cau-6',
 					'parent' => $id,
 					'title' => __( 'Events Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/event', 'reset=1' ),
-				) );
+				] );
 			}
 		}
 
 		// Mailings.
 		if ( array_key_exists( 'CiviMail', $components ) ) {
 			if ( $this->check_permission( 'access CiviMail' ) ) {
-				$wp_admin_bar->add_node( array(
+				$wp_admin_bar->add_node( [
 					'id' => 'cau-7',
 					'parent' => $id,
 					'title' => __( 'Mailings Sent and Scheduled', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/mailing/browse/scheduled', 'reset=1&scheduled=true' ),
-				) );
+				] );
 			}
 		}
 
 		// Reports.
 		if ( array_key_exists( 'CiviReport', $components ) ) {
 			if ( $this->check_permission( 'access CiviReport' ) ) {
-				$wp_admin_bar->add_node( array(
+				$wp_admin_bar->add_node( [
 					'id'     => 'cau-8',
 					'parent' => $id,
 					'title'  => __( 'Report Listing', 'civicrm-admin-utilities' ),
 					'href'   => $this->get_link( 'civicrm/report/list', '&reset=1' ),
-				) );
+				] );
 			}
 		}
 
 		// Cases.
 		if ( array_key_exists( 'CiviCase', $components ) ) {
 			if ( CRM_Case_BAO_Case::accessCiviCase() ) {
-				$wp_admin_bar->add_node( array(
+				$wp_admin_bar->add_node( [
 					'id' => 'cau-9',
 					'parent' => $id,
 					'title' => __( 'Cases Dashboard', 'civicrm-admin-utilities' ),
 					'href' => $this->get_link( 'civicrm/case', 'reset=1' ),
-				) );
+				] );
 			}
 		}
 
 		// Admin console.
 		if ( $this->check_permission( 'administer CiviCRM' ) ) {
-			$wp_admin_bar->add_node( array(
+			$wp_admin_bar->add_node( [
 				'id' => 'cau-10',
 				'parent' => $id,
 				'title' => __( 'Admin Console', 'civicrm-admin-utilities' ),
 				'href' => $this->get_link( 'civicrm/admin', 'reset=1' ),
-			) );
+			] );
 		}
 
 		/**
@@ -2009,12 +2009,12 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Admin Utilities settings page.
 		if ( current_user_can( $capability ) ) {
-			$wp_admin_bar->add_node( array(
+			$wp_admin_bar->add_node( [
 				'id' => 'cau-11',
 				'parent' => $id,
 				'title' => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
 				'href' => admin_url( 'admin.php?page=civicrm_admin_utilities_settings' ),
-			) );
+			] );
 		}
 
 		/**
@@ -2150,14 +2150,14 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Build array keyed by permission.
-		$table = array();
+		$table = [];
 		foreach( $permissions AS $perm => $label ) {
 
 			// Init row with permission description.
-			$table[$perm] = array(
+			$table[$perm] = [
 				'label' => $label,
-				'roles' => array(),
-			);
+				'roles' => [],
+			];
 
 			// Add permission label and role names.
 			foreach( $vars['roles'] AS $key => $label ) {
@@ -2202,7 +2202,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Sanity check Contact Type.
-		$contact_types = array( 'Individual', 'Household', 'Organization' );
+		$contact_types = [ 'Individual', 'Household', 'Organization' ];
 		if ( ! in_array( $objectName, $contact_types ) ) {
 			return;
 		}
@@ -2213,21 +2213,21 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Get the Contact's data.
-		$result = civicrm_api( 'Contact', 'get', array(
+		$result = civicrm_api( 'Contact', 'get', [
 			'version' => 3,
 			'sequential' => 1,
 			'id' => $objectId,
-		));
+		] );
 
 		// Log and bail if there's an error.
 		if ( ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) OR $result['count'] == 0 ) {
 			$e = new Exception;
 			$trace = $e->getTraceAsString();
-			error_log( print_r( array(
+			error_log( print_r( [
 				'method' => __METHOD__,
 				'result' => $result,
 				'backtrace' => $trace,
-			), true ) );
+			], true ) );
 			return;
 		}
 
@@ -2292,7 +2292,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Sanity check Contact Type.
-		$contact_types = array( 'Individual', 'Household', 'Organization' );
+		$contact_types = [ 'Individual', 'Household', 'Organization' ];
 		if ( ! in_array( $objectName, $contact_types ) ) {
 			return;
 		}
@@ -2440,14 +2440,14 @@ class CiviCRM_Admin_Utilities_Single {
 
 		$e = new Exception;
 		$trace = $e->getTraceAsString();
-		error_log( print_r( array(
+		error_log( print_r( [
 			'method' => __METHOD__,
 			'op' => $op,
 			'objectName' => $objectName,
 			'objectId' => $objectId,
 			'objectRef' => $objectRef,
 			'backtrace' => $trace,
-		), true ) );
+		], true ) );
 
 	}
 
@@ -2467,14 +2467,14 @@ class CiviCRM_Admin_Utilities_Single {
 
 		$e = new Exception;
 		$trace = $e->getTraceAsString();
-		error_log( print_r( array(
+		error_log( print_r( [
 			'method' => __METHOD__,
 			'op' => $op,
 			'objectName' => $objectName,
 			'objectId' => $objectId,
 			'objectRef' => $objectRef,
 			'backtrace' => $trace,
-		), true ) );
+		], true ) );
 
 	}
 
@@ -2492,12 +2492,12 @@ class CiviCRM_Admin_Utilities_Single {
 
 		$e = new Exception;
 		$trace = $e->getTraceAsString();
-		error_log( print_r( array(
+		error_log( print_r( [
 			'method' => __METHOD__,
 			'formName' => $formName,
 			'form' => $form,
 			'backtrace' => $trace,
-		), true ) );
+		], true ) );
 
 	}
 
@@ -2517,7 +2517,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function settings_get_defaults() {
 
 		// Init return.
-		$settings = array();
+		$settings = [];
 
 		// Hide CiviCRM.
 		$settings['hide_civicrm'] = '0';
@@ -2549,7 +2549,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$settings['access_fixed'] = '0';
 
 		// Init post types with defaults.
-		$settings['post_types'] = array( 'post', 'page' );
+		$settings['post_types'] = [ 'post', 'page' ];
 
 		// Add Shortcuts Menu to admin bar.
 		$settings['admin_bar'] = '1';
@@ -2621,7 +2621,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$civicrm_admin_utilities_hide_civicrm = '';
 		$civicrm_admin_utilities_menu = '';
 		$civicrm_admin_utilities_access = '';
-		$civicrm_admin_utilities_post_types = array();
+		$civicrm_admin_utilities_post_types = [];
 		$civicrm_admin_utilities_cache = '';
 		$civicrm_admin_utilities_admin_bar = '';
 		$civicrm_admin_utilities_admin_bar_groups = '';
@@ -2746,7 +2746,7 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'post_types', $civicrm_admin_utilities_post_types );
 
 		} else {
-			$this->setting_set( 'post_types', array() );
+			$this->setting_set( 'post_types', [] );
 		}
 
 		// Did we ask to add the shortcuts menu to the admin bar?
