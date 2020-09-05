@@ -95,7 +95,9 @@ body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #000;
 	border-width: 1px;
@@ -152,7 +154,9 @@ body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body.admin-color-light > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-light > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-light > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #ededed;
 }
@@ -201,7 +205,9 @@ body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #3b85a0;
 }
@@ -250,7 +256,9 @@ body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #2f2b28;
 }
@@ -299,7 +307,9 @@ body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hov
 body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #2f2b28;
 }
@@ -348,7 +358,9 @@ body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hove
 body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #000;
 }
@@ -397,7 +409,9 @@ body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #556c72;
 }
@@ -446,7 +460,9 @@ body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
 body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
 body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #a12c26;
 }
