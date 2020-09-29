@@ -49,10 +49,25 @@ Replacement for CiviCRM default styles for WordPress
  * Other civi blocks outside the main container also have the class crm-container (but not the id)
  * All styles should start with .crm-container unless they are specific to the main div only
  */
-.crm-container input,
-#civicrm-menu input
+.crm-container input
 {
 	box-sizing: content-box;
+}
+
+.crm-container input[type="checkbox"],
+.crm-container input[type="radio"]
+{
+	margin-top: 0;
+}
+
+.crm-container td > input[type="radio"]
+{
+	margin-left: 1em;
+}
+
+.crm-container td > input[type="radio"]:first-child
+{
+	margin-left: 0;
 }
 
 div.crm-container label
@@ -413,6 +428,7 @@ div.crm-container .crm-content label.error
 .crm-container ul.crm-sortable-list li label {
 	padding-left: 40px;
 	cursor: move;
+	line-height: 1.4;
 }
 
 /* Fix styling of "editing contacts" elements */
