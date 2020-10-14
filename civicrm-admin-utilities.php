@@ -67,6 +67,15 @@ class CiviCRM_Admin_Utilities {
 	public $single;
 
 	/**
+	 * CiviCRM Theme object.
+	 *
+	 * @since 0.7.4
+	 * @access public
+	 * @var object $theme The theme object.
+	 */
+	public $theme;
+
+	/**
 	 * Multisite WordPress object.
 	 *
 	 * @since 0.5.4
@@ -157,6 +166,9 @@ class CiviCRM_Admin_Utilities {
 		// Load our Single Site class.
 		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single.php' );
 
+		// Load our Theme "Extension" class.
+		require( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-theme.php' );
+
 		// Load our Multisite class.
 		if ( is_multisite() ) {
 			require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multisite.php' );
@@ -179,6 +191,9 @@ class CiviCRM_Admin_Utilities {
 
 		// Always instantiate Single Site class.
 		$this->single = new CiviCRM_Admin_Utilities_Single( $this );
+
+		// Always instantiate Theme class.
+		$this->theme = new CiviCRM_Admin_Utilities_Theme( $this );
 
 		// Maybe instantiate Multisite classes.
 		if ( is_multisite() ) {
