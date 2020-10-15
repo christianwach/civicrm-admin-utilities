@@ -104,6 +104,17 @@ div.crm-container fieldset label
 	padding: 0;
 }
 
+/* The little wrench */
+#crm-container .crm-form-block > a > i.fa-wrench,
+.crm-container .crm-form-block > a > i.fa-wrench
+{
+	float: left;
+	width: 20px;
+	display: inline-block;
+	padding: 8px 0;
+	margin-top: 3px;
+ }
+
 
 
 /* TABLE STYLING */
@@ -725,6 +736,16 @@ div.crm-container .crm-content label.error
 	border: none;
 }
 
+.crm-container .form-layout-compressed > tbody > tr > td
+{
+	padding-bottom: 12px;
+}
+
+#crm-container .crm-edit-address-form td
+{
+	padding-bottom: 4px;
+}
+
 .crm-container .form-layout td.label,
 .crm-container .form-layout-compressed td.label,
 .crm-container .selector td.label,
@@ -1024,8 +1045,8 @@ div.crm-container .crm-content label.error
 
 /* Inline form field 'post-help' and radio-button unselect */
 .crm-container .description {
-	margin: 1em 0;
 	font-style: italic;
+	line-height: 1.4;
 }
 
 .crm-container .form-layout-compressed td.description,
@@ -1129,13 +1150,20 @@ div.crm-container .crm-content label.error
 	border-top: 2px solid #999999;
 }
 
-#crm-container #map-field th {
+#crm-container #map-field-table
+{
+	margin-top: 1em;
+}
+
+#crm-container #map-field th
+{
 	border-right: 1px solid #999999;
 }
 
 #crm-container #map-field td,
 #crm-container .report td,
-#crm-container .chart td {
+#crm-container .chart td
+{
 	padding: 10px 10px 4px 10px;
 }
 
@@ -1281,16 +1309,22 @@ div.crm-container .crm-content label.error
 }
 
 /* Styles for Wizard Progress Bars */
+#crm-container #wizard-steps
+{
+	border-top: 3px solid #bbb;
+	margin-top: 9px;
+}
+
 #crm-container ul.wizard-bar {
 	border-collapse: collapse;
 	padding: 0 0 0 1em;
 	white-space: nowrap;
 	list-style: none;
 	margin: 10px 0 20px;
+	margin-top: -9px;
 	height: auto;
 	width: auto;
 	line-height: normal;
-	border-top: 3px solid #bbb;
 	text-align: center;
 }
 
@@ -1429,6 +1463,22 @@ div.crm-container .crm-content label.error
 	outline: 0;
 }
 
+#crm-container button.submit-link
+{
+	color: #285286;
+	background: none transparent;
+	border: none;
+	cursor: pointer;
+	margin: 0 -0.5em 0 -0.5em;
+	text-shadow: none;
+	outline: 0;
+}
+
+#crm-container .underline-effect button.submit-link:hover
+{
+	text-decoration: underline;
+}
+
 .crm-container .underline-effect {
 	color: #285286;
 }
@@ -1439,6 +1489,7 @@ div.crm-container .crm-content label.error
 
 .crm-container .underline-effect:before {
 	content: "\00BB";
+	margin-right: 0.3em;
 }
 
 #crm-container.clear,
@@ -1821,6 +1872,55 @@ div.crm-container .crm-content label.error
 	display: none;
 }
 
+.crm-search-block
+{
+	padding-bottom: 1px;
+}
+
+/* Make Reset button inline */
+.reset-advanced-search
+{
+	display: inline-block;
+}
+
+/* Style Reset Search button (it's a "hover button") */
+#resetAdvancedSearch
+{
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 2;
+	min-height: 28px;
+	margin: 0;
+	padding: 0 10px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	border-color: #007cba;
+	text-decoration: none;
+	color: #0071a1;
+	border-color: #0071a1;
+	background: #f3f5f6;
+	text-shadow: none;
+	box-shadow: none;
+}
+
+/* Style the "Full-text Search" table */
+.crm-container .CRM_Contact_Form_Search_Custom .form-layout-compressed td.label
+{
+	width: auto;
+	vertical-align: middle;
+}
+
+.crm-container .CRM_Contact_Form_Search_Custom .form-layout-compressed td:last-child
+{
+	vertical-align: middle;
+}
+
 .crm-container .crm-event-participants,
 .crm-container .crm-event-links,
 .crm-container .crm-event-more {
@@ -2096,6 +2196,11 @@ div.crm-container .crm-content label.error
 #crm-container .breadcrumb + div#printer-friendly
 {
 	margin: -1.5em 0.5em 0 0;
+}
+
+#crm-container .breadcrumb i.crm-i
+{
+    margin: 0 0.2em;
 }
 
 /* For Joomla, margin 0 works correctly */
