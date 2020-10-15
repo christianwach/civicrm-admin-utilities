@@ -2707,10 +2707,28 @@ class CiviCRM_Admin_Utilities_Single {
 		// Did we ask to override CiviCRM Default styleheet?
 		if ( $civicrm_admin_utilities_styles_admin == '1' ) {
 			$this->setting_set( 'css_admin', '1' );
-			$this->plugin->theme->toggle( 'enable' );
+
+			/**
+			 * Broadcast a change in theme.
+			 *
+			 * @since 0.7.4
+			 *
+			 * @param str Identifies the action taken.
+			 */
+			do_action( 'civicrm_admin_utilities_styles_admin', 'enable' );
+
 		} else {
 			$this->setting_set( 'css_admin', '0' );
-			$this->plugin->theme->toggle( 'disable' );
+
+			/**
+			 * Broadcast a change in theme.
+			 *
+			 * @since 0.7.4
+			 *
+			 * @param str Identifies the action taken.
+			 */
+			do_action( 'civicrm_admin_utilities_styles_admin', 'disable' );
+
 		}
 
 		// Did we ask to suppress Notification Emails?

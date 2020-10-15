@@ -55,6 +55,40 @@ class CiviCRM_Admin_Utilities_Theme {
     // Register hooks.
     add_action( 'civicrm_themes', array( $this, 'register_theme' ), 10, 1 );
     add_action( 'civicrm_alterBundle', array( $this, 'modify_bundle' ), 10, 1 );
+    add_action( 'civicrm_admin_utilities_styles_admin', array( $this, 'toggle' ), 10, 1 );
+
+  }
+
+
+
+  /**
+   * Check if we want to allow the theme functionality in this class.
+   *
+   * @since 0.7.4
+   *
+   * @return bool $allowed True if we do, false otherwise.
+   */
+  public function is_allowed() {
+
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
+
+    // Only do this once.
+    static $allowed = false;
+    if ( $allowed === true ) {
+      return $allowed;
+    }
+
+    // Ignore anything but 5.31+.
+    $version = CRM_Utils_System::version();
+    if ( version_compare( $version, '5.31', '>=' ) ) {
+      $allowed = true;
+    }
+
+    // --<
+    return $allowed;
 
   }
 
@@ -68,6 +102,11 @@ class CiviCRM_Admin_Utilities_Theme {
    * @param array $themes The array of themes.
    */
   public function register_theme( &$themes ) {
+
+    // Ignore anything but 5.31+.
+    if ( ! $this->is_allowed() ) {
+      return;
+    }
 
     // Add setup to themes array.
     $themes['cautheme'] = [
@@ -96,6 +135,11 @@ class CiviCRM_Admin_Utilities_Theme {
    * @param object $bundle The bundle of theme resources.
    */
   public function modify_bundle( CRM_Core_Resources_Bundle $bundle ) {
+
+    // Ignore anything but 5.31+.
+    if ( ! $this->is_allowed() ) {
+      return;
+    }
 
     // Get the theme identifier.
     $theme = Civi::service( 'themes' )->getActiveThemeKey();
@@ -127,8 +171,7 @@ class CiviCRM_Admin_Utilities_Theme {
   public function toggle( $action = 'enable' ) {
 
     // Ignore anything but 5.31+.
-    $version = CRM_Utils_System::version();
-    if ( ! version_compare( $version, '5.31', '>=' ) ) {
+    if ( ! $this->is_allowed() ) {
       return;
     }
 
