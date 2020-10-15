@@ -72,19 +72,24 @@ class CiviCRM_Admin_Utilities_Theme {
 
 		// Bail if no CiviCRM.
 		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return;
+			return false;
 		}
 
     // Only do this once.
-    static $allowed = false;
-    if ( $allowed === true ) {
+    static $allowed;
+    if ( isset( $allowed ) ) {
       return $allowed;
     }
 
     // Ignore anything but 5.31+.
     $version = CRM_Utils_System::version();
-    if ( version_compare( $version, '5.31', '>=' ) ) {
+		$parts = explode( '.', $version );
+		$major_version = $parts[0] . '.' . $parts[1];
+
+    if ( version_compare( $major_version, '5.31', '>=' ) ) {
       $allowed = true;
+    } else {
+      $allowed = false;
     }
 
     // --<
