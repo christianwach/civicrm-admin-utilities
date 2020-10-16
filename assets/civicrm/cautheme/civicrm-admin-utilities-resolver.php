@@ -37,7 +37,7 @@ class CiviCRM_Admin_Utilities_Resolver {
   public static function resolve($themes, $themeKey, $cssExt, $cssFile) {
 
 		// For the core theme, use existing logic.
-		if ( in_array( $cssExt, [ 'civicrm', 'greenwich', 'default' ] ) ) {
+		if ( $cssExt != 'cautheme' ) {
 
       // Get the theme data.
       $theme = $themes->get( 'greenwich' );
