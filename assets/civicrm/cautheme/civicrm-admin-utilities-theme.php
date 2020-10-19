@@ -36,7 +36,7 @@ class CiviCRM_Admin_Utilities_Theme {
     $this->plugin = $plugin;
 
     // Initialise when plugin is loaded.
-    add_action( 'civicrm_admin_utilities_loaded', array( $this, 'initialise' ) );
+    add_action( 'civicrm_admin_utilities_loaded', [ $this, 'initialise' ] );
 
   }
 
@@ -53,9 +53,12 @@ class CiviCRM_Admin_Utilities_Theme {
     require( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-resolver.php' );
 
     // Register hooks.
-    add_action( 'civicrm_themes', array( $this, 'register_theme' ), 10, 1 );
-    add_action( 'civicrm_alterBundle', array( $this, 'modify_bundle' ), 10, 1 );
-    add_action( 'civicrm_admin_utilities_styles_admin', array( $this, 'toggle' ), 10, 1 );
+    add_action( 'civicrm_themes', [ $this, 'register_theme' ], 10, 1 );
+    add_action( 'civicrm_alterBundle', [ $this, 'modify_bundle' ], 10, 1 );
+    add_action( 'civicrm_admin_utilities_styles_admin', [ $this, 'toggle' ], 10, 1 );
+
+    // Listen for changes to the theme setting.
+    add_action( 'civicrm_postSave_civicrm_setting', [ $this, 'settings_change' ], 10 );
 
   }
 
@@ -122,6 +125,7 @@ class CiviCRM_Admin_Utilities_Theme {
       'search_order' => [
         'cautheme',
         'greenwich',
+        '_fallback_',
       ],
       'excludes' => [
         'css/civicrm.css',
@@ -181,16 +185,55 @@ class CiviCRM_Admin_Utilities_Theme {
     }
 
     // Switch setting to our theme or the default.
-    $params = array(
+    $params = [
       'version' => 3,
       'theme_backend' => ( $action === 'enable' ) ? 'cautheme' : 'default',
-    );
+    ];
 
     // Save the setting.
     $result = civicrm_api( 'Setting', 'create', $params );
 
   }
 
+
+
+  /**
+   * Reverse sync with the CiviCRM Admin Utilities setting.
+   *
+   * When CiviCRM settings are saved, this method is called post-save. It then
+   * reverse-syncs to the internal setting depending on whether the theme that
+   * is chosen is ours.
+   *
+   * @since 0.7.4
+   *
+   * @param obj $dao The CiviCRM database access object.
+   */
+  public function settings_change( $dao ) {
+
+    // Bail if not a setting.
+    if ( ! ( $dao instanceOf CRM_Core_DAO_Setting ) ) {
+      return;
+    }
+
+    // Bail if not the theme setting.
+    if ( ! isset( $dao->name ) OR $dao->name != 'theme_backend' ) {
+      return;
+    }
+
+    // Set or unset the internal setting.
+    if ( isset( $dao->value ) AND 'cautheme' == unserialize( $dao->value ) ) {
+      if ( $this->plugin->single->setting_get( 'css_admin', '1' ) == '0' ) {
+        $this->plugin->single->setting_set( 'css_admin', '1' );
+        $this->plugin->single->settings_save();
+      }
+    } else {
+      if ( $this->plugin->single->setting_get( 'css_admin', '0' ) == '1' ) {
+        $this->plugin->single->setting_set( 'css_admin', '0' );
+        $this->plugin->single->settings_save();
+      }
+    }
+
+  }
 
 
 } // Class ends.
