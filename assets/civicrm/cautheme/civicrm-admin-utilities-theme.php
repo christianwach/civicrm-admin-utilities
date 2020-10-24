@@ -21,6 +21,15 @@ class CiviCRM_Admin_Utilities_Theme {
    */
   public $plugin;
 
+  /**
+   * Theme "slug".
+   *
+   * @since 0.7.4
+   * @access public
+   * @var str $slug The theme "slug".
+   */
+  public $slug = 'cautheme';
+
 
 
   /**
@@ -59,6 +68,9 @@ class CiviCRM_Admin_Utilities_Theme {
 
     // Listen for changes to the theme setting.
     add_action( 'civicrm_postSave_civicrm_setting', [ $this, 'settings_change' ], 10 );
+
+    // Make sure that the theme is enabled if the setting is enabled.
+    add_action( 'civicrm_config', [ $this, 'activate_theme' ], 10 );
 
   }
 
@@ -117,13 +129,13 @@ class CiviCRM_Admin_Utilities_Theme {
     }
 
     // Add setup to themes array.
-    $themes['cautheme'] = [
-      'ext' => 'cautheme',
+    $themes[$this->slug] = [
+      'ext' => $this->slug,
       'title' => __ ( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
       'help' => __( 'Gives CiviCRM a look-and-feel that is closer to WordPress', 'civicrm-admin-utilities' ),
       'url_callback' => 'CiviCRM_Admin_Utilities_Resolver::resolve',
       'search_order' => [
-        'cautheme',
+        $this->slug,
         'greenwich',
         '_fallback_',
       ],
@@ -171,6 +183,54 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
+   * Maybe enable our theme.
+   *
+   * @since 0.7.4
+   */
+  public function activate_theme() {
+
+    // Ignore anything but 5.31+.
+    if ( ! $this->is_allowed() ) {
+      return;
+    }
+
+    // Ignore if we've done this before.
+    if ( $this->plugin->single->setting_get( 'theme_sync', '1' ) == '0' ) {
+      return;
+    }
+
+    // Ignore when our setting is not enabled.
+    if ( $this->plugin->single->setting_get( 'css_admin', '1' ) == '0' ) {
+      return;
+    }
+
+    // Switch setting to our theme or the default.
+    $params = [
+      'version' => 3,
+      'name' => 'theme_backend',
+      'group' => 'CiviCRM Preferences',
+    ];
+
+    // Get the setting.
+    $theme = civicrm_api( 'Setting', 'getvalue', $params );
+
+		// Bail if it's our theme.
+		if ( $theme == $this->slug ) {
+			return;
+		}
+
+		// Set it to our theme.
+		$this->toggle();
+
+		// Set a flag in our plugin settings.
+		$this->plugin->single->setting_set( 'theme_sync', '1' );
+		$this->plugin->single->setting_save();
+
+  }
+
+
+
+  /**
    * Enable or disable our theme.
    *
    * @since 0.7.4
@@ -184,14 +244,20 @@ class CiviCRM_Admin_Utilities_Theme {
       return;
     }
 
+    // Prevent reverse sync.
+    remove_action( 'civicrm_postSave_civicrm_setting', [ $this, 'settings_change' ], 10 );
+
     // Switch setting to our theme or the default.
     $params = [
       'version' => 3,
-      'theme_backend' => ( $action === 'enable' ) ? 'cautheme' : 'default',
+      'theme_backend' => ( $action === 'enable' ) ? $this->slug : 'default',
     ];
 
     // Save the setting.
     $result = civicrm_api( 'Setting', 'create', $params );
+
+    // Reinstate reverse sync.
+    add_action( 'civicrm_postSave_civicrm_setting', [ $this, 'settings_change' ], 10 );
 
   }
 
@@ -221,7 +287,7 @@ class CiviCRM_Admin_Utilities_Theme {
     }
 
     // Set or unset the internal setting.
-    if ( isset( $dao->value ) AND 'cautheme' == unserialize( $dao->value ) ) {
+    if ( isset( $dao->value ) AND $this->slug == unserialize( $dao->value ) ) {
       if ( $this->plugin->single->setting_get( 'css_admin', '1' ) == '0' ) {
         $this->plugin->single->setting_set( 'css_admin', '1' );
         $this->plugin->single->settings_save();
@@ -234,6 +300,7 @@ class CiviCRM_Admin_Utilities_Theme {
     }
 
   }
+
 
 
 } // Class ends.

@@ -67,6 +67,15 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public $settings = [];
 
+	/**
+	 * Upgrade flag.
+	 *
+	 * @since 0.7.4
+	 * @access public
+	 * @var array $settings An upgrade flag.
+	 */
+	public $is_upgrade = false;
+
 
 
 	/**
@@ -153,6 +162,11 @@ class CiviCRM_Admin_Utilities_Single {
 			// Delete the legacy "installed" option.
 			$this->delete_legacy_option();
 
+		}
+
+		// If this is an upgrade.
+		if ( $this->plugin_version != CIVICRM_ADMIN_UTILITIES_VERSION ) {
+			$this->is_upgrade = true;
 		}
 
 		/*
@@ -308,6 +322,15 @@ class CiviCRM_Admin_Utilities_Single {
 				$settings = $this->settings_get_defaults();
 			}
 			$this->setting_set( 'dashboard_title', $settings['dashboard_title'] );
+			$save = true;
+
+		}
+
+		// If this is an upgrade.
+		if ( $this->is_upgrade ) {
+
+			// Always check theme sync on upgrade.
+			$this->setting_set( 'theme_sync', '0' );
 			$save = true;
 
 		}
