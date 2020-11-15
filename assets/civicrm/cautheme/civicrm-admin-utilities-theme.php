@@ -224,7 +224,7 @@ class CiviCRM_Admin_Utilities_Theme {
 
 		// Set a flag in our plugin settings.
 		$this->plugin->single->setting_set( 'theme_sync', '1' );
-		$this->plugin->single->setting_save();
+		$this->plugin->single->settings_save();
 
   }
 
