@@ -5110,6 +5110,7 @@ body #wpbody-content > .crm-container:not(#crm-container) > form > div a
 	color: #fff;
 	text-decoration: none;
 	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+	float: none;
 }
 
 /* Fix appearance of Upgrade Cancel button */
