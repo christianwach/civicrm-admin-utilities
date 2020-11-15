@@ -491,6 +491,14 @@ div.crm-container .crm-content label.error
 	line-height: 2;
 }
 
+@media screen and (max-width: 1280px) {
+	.crm-container .form-layout .crm-preferences-display-form-block-contact_edit_options table td
+	{
+		display: block;
+		width: 300px !important;
+	}
+}
+
 .crm-container input.crm-form-text.ng-invalid.ng-dirty
 {
 	border: 1px solid #FF0000;
@@ -3869,6 +3877,12 @@ span.crm-select-item-color {
 	border: 1px solid #999;
 }
 
+.crm-container textarea#display_name_format,
+.crm-container textarea#sort_name_format
+{
+	width: 340px;
+}
+
 .crm-container .replace-plain {
 	cursor: pointer;
 	background: rgba(255,255,255,0.6);
@@ -3896,7 +3910,7 @@ span.crm-select-item-color {
 	opacity: .5;
 }
 
-/* in place edit	*/
+/* in place edit */
 .crm-container .crm-editable-enabled {
 	padding-left: 2px;
 	border: 2px dashed transparent;
