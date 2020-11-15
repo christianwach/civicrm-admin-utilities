@@ -70,6 +70,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.7.4 =
+
+* Support Bootstrap screens and theme bundles in CiviCRM 5.31+
+
 = 0.7.3 =
 
 * Improved support for CiviCRM 5.27+
