@@ -1973,6 +1973,18 @@ a#checkavailability
 }
 */
 
+span.crm-frozen-field {
+    display: inline-block;
+    vertical-align: top;
+    min-height: 26px;
+}
+
+.form-layout-compressed span.crm-frozen-field
+{
+    padding-top: 4px;
+    min-height: 26px;
+}
+
 .crm-container .ui-tabs .ui-tabs-nav
 {
 	border-radius: 0;
