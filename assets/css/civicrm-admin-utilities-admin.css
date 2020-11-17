@@ -1944,12 +1944,20 @@ div.crm-container .crm-content label.error
 	color: #333;
 }
 
-/*class for CMS user name check used in profile*/
-.crm-container .cmsmessagebox {
+/* class for CMS user name check used in profile */
+.crm-container .cmsmessagebox
+{
 	position: absolute;
 	width: auto;
-	margin-left: 10px;
-	padding: 3px;
+	padding: 6px;
+	margin: 0 12px;
+}
+
+a#checkavailability
+{
+	display: inline-block;
+	padding: 6px 8px;
+    margin: 2px 0 0 4px;
 }
 
 /*
