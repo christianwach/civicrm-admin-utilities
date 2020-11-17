@@ -383,6 +383,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Intercept email updates in CiviCRM.
 		add_action( 'civicrm_pre', [ $this, 'email_pre_update' ], 10, 4 );
 
+		// Intercept email updates in CiviCRM WP Profile Sync.
+		add_action( 'civicrm_wp_profile_sync_primary_email_pre_update', [ $this, 'email_cwps_pre_update' ], 10, 2 );
+
 		// Maybe suppress notification emails.
 		add_filter( 'send_email_change_email', [ $this, 'email_suppress' ], 10, 3 );
 
@@ -525,6 +528,10 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
+	//##########################################################################
+
+
+
 	/**
 	 * Set property when a CiviCRM contact's primary email address is updated.
 	 *
@@ -547,10 +554,36 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Bail if we have no email.
+		// Bail if we have no Email address.
 		if ( ! isset( $objectRef['email'] ) ) {
 			return;
 		}
+
+		// Get the existing Email record.
+		$email = $this->email_get_by_id( $objectId );
+
+		// Bail if this is not the Primary Email.
+		if ( $email->is_primary != 1 ) {
+			return;
+		}
+
+		// Set a property to check in `email_suppress()` below.
+		$this->email_sync = true;
+
+	}
+
+
+
+	/**
+	 * Set property when a CiviCRM contact's primary email address is updated by
+	 * the CiviCRM WordPress Profile Sync plugin.
+	 *
+	 * @since 0.8
+	 *
+	 * @param integer $objectId The ID of the object.
+	 * @param object $objectRef The object.
+	 */
+	public function email_cwps_pre_update( $objectId, $objectRef ) {
 
 		// Set a property to check in `email_suppress()` below.
 		$this->email_sync = true;
@@ -588,6 +621,48 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// --<
 		return $send;
+
+	}
+
+
+
+	/**
+	 * Get a CiviCRM Email record by its ID.
+	 *
+	 * @since 0.8
+	 *
+	 * @param integer $email_id The numeric ID of the CiviCRM Email record.
+	 * @return object|bool $email The CiviCRM Email record, or false on failure.
+	 */
+	public function email_get_by_id( $email_id ) {
+
+		// Init return.
+		$email = false;
+
+		// Get the requested Email record.
+		$params = [
+			'version' => 3,
+			'id' => $email_id,
+		];
+
+		// Call the CiviCRM API.
+		$result = civicrm_api( 'Email', 'get', $params );
+
+		// Bail on failure.
+		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+			return $email;
+		}
+
+		// Bail if there are no results.
+		if ( empty( $result['values'] ) ) {
+			return $email;
+		}
+
+		// The result set should contain only one item.
+		$email = (object) array_pop( $result['values'] );
+
+		// --<
+		return $email;
 
 	}
 
