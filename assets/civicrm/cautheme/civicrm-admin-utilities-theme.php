@@ -183,24 +183,14 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Maybe enable our theme.
+   * Get the current theme.
    *
-   * @since 0.7.4
+   * @since 0.8
    */
-  public function activate_theme() {
+  public function get_theme() {
 
     // Ignore anything but 5.31+.
     if ( ! $this->is_allowed() ) {
-      return;
-    }
-
-    // Ignore if we've done this before.
-    if ( $this->plugin->single->setting_get( 'theme_sync', '1' ) == '0' ) {
-      return;
-    }
-
-    // Ignore when our setting is not enabled.
-    if ( $this->plugin->single->setting_get( 'css_admin', '1' ) == '0' ) {
       return;
     }
 
@@ -214,6 +204,38 @@ class CiviCRM_Admin_Utilities_Theme {
     // Get the setting.
     $theme = civicrm_api( 'Setting', 'getvalue', $params );
 
+    // --<
+    return $theme;
+
+  }
+
+
+
+  /**
+   * Maybe enable our theme.
+   *
+   * @since 0.7.4
+   */
+  public function activate_theme() {
+
+    // Ignore anything but 5.31+.
+    if ( ! $this->is_allowed() ) {
+      return;
+    }
+
+    // Ignore when our Admin Theme is not enabled.
+    if ( $this->plugin->single->setting_get( 'css_admin', '1' ) == '0' ) {
+      return;
+    }
+
+    // Ignore if we've done this before.
+    if ( $this->plugin->single->setting_get( 'theme_sync', '1' ) == '0' ) {
+      return;
+    }
+
+    // Get the setting.
+    $theme = $this->get_theme();
+
 		// Bail if it's our theme.
 		if ( $theme == $this->slug ) {
 			return;
@@ -224,6 +246,42 @@ class CiviCRM_Admin_Utilities_Theme {
 
 		// Set a flag in our plugin settings.
 		$this->plugin->single->setting_set( 'theme_sync', '1' );
+		$this->plugin->single->settings_save();
+
+  }
+
+
+
+  /**
+   * Maybe disable our theme.
+   *
+   * @since 0.8
+   */
+  public function deactivate_theme() {
+
+    // Ignore anything but 5.31+.
+    if ( ! $this->is_allowed() ) {
+      return;
+    }
+
+    // Ignore when our Admin Theme is not enabled.
+    if ( $this->plugin->single->setting_get( 'css_admin', '1' ) == '0' ) {
+      return;
+    }
+
+    // Get the setting.
+    $theme = $this->get_theme();
+
+		// Bail if it's not our theme.
+		if ( $theme != $this->slug ) {
+			return;
+		}
+
+		// Set it to the default theme.
+		$this->toggle( 'disable' );
+
+		// Set a flag in our plugin settings.
+		$this->plugin->single->setting_set( 'theme_sync', '0' );
 		$this->plugin->single->settings_save();
 
   }

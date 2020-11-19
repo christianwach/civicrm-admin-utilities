@@ -242,6 +242,38 @@ class CiviCRM_Admin_Utilities {
 
 
 	/**
+	 * Perform plugin activation tasks.
+	 *
+	 * @since 0.8
+	 */
+	public function activate() {
+
+	}
+
+
+
+	/**
+	 * Perform plugin deactivation tasks.
+	 *
+	 * @since 0.8
+	 */
+	public function deactivate() {
+
+		// Maybe init.
+		$this->initialise();
+
+		// Maybe deactivate our CiviCRM Theme.
+		$this->theme->deactivate_theme();
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
 	 * Check if this plugin is network activated.
 	 *
 	 * @since 0.3.4
@@ -432,7 +464,11 @@ function civicrm_au() {
 
 }
 
+// Activation.
+register_activation_hook( __FILE__, [ civicrm_au(), 'activate' ] );
 
+// Deactivation.
+register_deactivation_hook( __FILE__, [ civicrm_au(), 'deactivate' ] );
 
 // Uninstall uses the 'uninstall.php' method.
 // See: http://codex.wordpress.org/Function_Reference/register_uninstall_hook
