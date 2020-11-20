@@ -146,6 +146,15 @@
 		<table class="form-table">
 
 			<tr>
+				<th scope="row"><?php _e( 'CiviCRM Dashboard Title', 'civicrm-admin-utilities' ); ?></th>
+				<td>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_dashboard_title" id="civicrm_admin_utilities_dashboard_title" value="1"<?php echo $dashboard_title; ?> />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_dashboard_title"><?php _e( 'Check this to make the CiviCRM Dashboard Title more welcoming.', 'civicrm-admin-utilities' ); ?></label>
+					<p class="description"><?php _e( 'Alters "CiviCRM Home" to become "Hi FirstName, welcome to CiviCRM". The "civicrm_admin_utilities_dashboard_title" filter can be used to modify this further if required.', 'civicrm-admin-utilities' ); ?></p>
+				</td>
+			</tr>
+
+			<tr>
 				<th scope="row"><?php _e( 'CiviCRM Menu', 'civicrm-admin-utilities' ); ?></th>
 				<td>
 					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"<?php echo $prettify_menu; ?> />
@@ -241,23 +250,27 @@
 
 		<hr />
 
-		<h3><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></h3>
+		<?php if ( $access_form_fixed === false ) : ?>
 
-		<p><?php _e( 'Checking this option fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></p>
+			<h3><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></h3>
 
-		<table class="form-table">
+			<p><?php _e( 'Checking this option fixes the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></p>
 
-			<tr>
-				<th scope="row"><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></th>
-				<td>
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_access" id="civicrm_admin_utilities_access" value="1"<?php echo $prettify_access; ?> />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_access"><?php _e( 'Check this to fix the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></label>
-				</td>
-			</tr>
+			<table class="form-table">
 
-		</table>
+				<tr>
+					<th scope="row"><?php _e( 'Fix WordPress Access Control form', 'civicrm-admin-utilities' ); ?></th>
+					<td>
+						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_access" id="civicrm_admin_utilities_access" value="1"<?php echo $prettify_access; ?> />
+						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_access"><?php _e( 'Check this to fix the appearance of the WordPress Access Control form.', 'civicrm-admin-utilities' ); ?></label>
+					</td>
+				</tr>
 
-		<hr />
+			</table>
+
+			<hr />
+
+		<?php endif; ?>
 
 		<h3><?php _e( 'Admin Bar Options', 'civicrm-admin-utilities' ); ?></h3>
 

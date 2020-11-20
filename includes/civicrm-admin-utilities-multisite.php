@@ -202,14 +202,38 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Don't save by default.
 		$save = false;
 
-		// CSS settings may not exist.
-		if ( ! $this->setting_exists( 'css_default' ) ) {
+		// Restrict settings access setting may not exist.
+		if ( ! $this->setting_exists( 'restrict_settings_access' ) ) {
 
-			// Add them from defaults.
-			$settings = $this->settings_get_defaults();
-			$this->setting_set( 'css_default', $settings['css_default'] );
-			$this->setting_set( 'css_navigation', $settings['css_navigation'] );
-			$this->setting_set( 'css_shoreditch', $settings['css_shoreditch'] );
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'restrict_settings_access', $settings['restrict_settings_access'] );
+			$save = true;
+
+		}
+
+		// Restrict domain access setting may not exist.
+		if ( ! $this->setting_exists( 'restrict_domain_access' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'restrict_domain_access', $settings['restrict_domain_access'] );
+			$save = true;
+
+		}
+
+		// Restrict administer CiviCRM setting may not exist.
+		if ( ! $this->setting_exists( 'restrict_administer' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'restrict_administer', $settings['restrict_administer'] );
 			$save = true;
 
 		}
@@ -222,6 +246,18 @@ class CiviCRM_Admin_Utilities_Multisite {
 				$settings = $this->settings_get_defaults();
 			}
 			$this->setting_set( 'hide_civicrm', $settings['hide_civicrm'] );
+			$save = true;
+
+		}
+
+		// CSS settings may not exist.
+		if ( ! $this->setting_exists( 'css_default' ) ) {
+
+			// Add them from defaults.
+			$settings = $this->settings_get_defaults();
+			$this->setting_set( 'css_default', $settings['css_default'] );
+			$this->setting_set( 'css_navigation', $settings['css_navigation'] );
+			$this->setting_set( 'css_shoreditch', $settings['css_shoreditch'] );
 			$save = true;
 
 		}
@@ -262,7 +298,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
-		// CiviCRM Default CSS setting may not exist.
+		// Override CiviCRM Default CSS setting may not exist.
 		if ( ! $this->setting_exists( 'css_admin' ) ) {
 
 			// Add it from defaults.
@@ -270,42 +306,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 				$settings = $this->settings_get_defaults();
 			}
 			$this->setting_set( 'css_admin', $settings['css_admin'] );
-			$save = true;
-
-		}
-
-		// Restrict settings access setting may not exist.
-		if ( ! $this->setting_exists( 'restrict_settings_access' ) ) {
-
-			// Add it from defaults.
-			if ( ! isset( $settings ) ) {
-				$settings = $this->settings_get_defaults();
-			}
-			$this->setting_set( 'restrict_settings_access', $settings['restrict_settings_access'] );
-			$save = true;
-
-		}
-
-		// Restrict domain access setting may not exist.
-		if ( ! $this->setting_exists( 'restrict_domain_access' ) ) {
-
-			// Add it from defaults.
-			if ( ! isset( $settings ) ) {
-				$settings = $this->settings_get_defaults();
-			}
-			$this->setting_set( 'restrict_domain_access', $settings['restrict_domain_access'] );
-			$save = true;
-
-		}
-
-		// Restrict administer CiviCRM setting may not exist.
-		if ( ! $this->setting_exists( 'restrict_administer' ) ) {
-
-			// Add it from defaults.
-			if ( ! isset( $settings ) ) {
-				$settings = $this->settings_get_defaults();
-			}
-			$this->setting_set( 'restrict_administer', $settings['restrict_administer'] );
 			$save = true;
 
 		}
@@ -330,6 +330,30 @@ class CiviCRM_Admin_Utilities_Multisite {
 				$settings = $this->settings_get_defaults();
 			}
 			$this->setting_set( 'admin_bar_groups', $settings['admin_bar_groups'] );
+			$save = true;
+
+		}
+
+		// Fix Contact Soft Delete setting may not exist.
+		if ( ! $this->setting_exists( 'fix_soft_delete' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'fix_soft_delete', $settings['fix_soft_delete'] );
+			$save = true;
+
+		}
+
+		// Dashboard Title setting may not exist.
+		if ( ! $this->setting_exists( 'dashboard_title' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'dashboard_title', $settings['dashboard_title'] );
 			$save = true;
 
 		}
@@ -732,6 +756,23 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$email_suppress = ' checked="checked"';
 		}
 
+		// Assume access form has been fixed.
+		$access_form_fixed = true;
+
+		// If CiviCRM has not been fixed.
+		if ( ! $this->plugin->single->access_form_fixed() ) {
+
+			// Set flag.
+			$access_form_fixed = false;
+
+			// Init access form checkbox.
+			$prettify_access = '';
+			if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) {
+				$prettify_access = ' checked="checked"';
+			}
+
+		}
+
 		// Init admin bar checkbox.
 		$admin_bar = '';
 		if ( $this->setting_get( 'admin_bar', '0' ) == '1' ) {
@@ -742,6 +783,18 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$admin_bar_groups = '';
 		if ( $this->setting_get( 'admin_bar_groups', '0' ) == '1' ) {
 			$admin_bar_groups = ' checked="checked"';
+		}
+
+		// Init "Fix Soft Delete" checkbox.
+		$fix_soft_delete = '';
+		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '1' ) {
+			$fix_soft_delete = ' checked="checked"';
+		}
+
+		// Init "Dashboard Title" checkbox.
+		$dashboard_title = '';
+		if ( $this->setting_get( 'dashboard_title', '0' ) == '1' ) {
+			$dashboard_title = ' checked="checked"';
 		}
 
 		// Get selected post types.
@@ -1402,6 +1455,20 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'admin_bar_groups', '1' );
 		} else {
 			$this->setting_set( 'admin_bar_groups', '0' );
+		}
+
+		// Did we ask to fix Contact Soft Delete?
+		if ( $civicrm_admin_utilities_fix_soft_delete == '1' ) {
+			$this->setting_set( 'fix_soft_delete', '1' );
+		} else {
+			$this->setting_set( 'fix_soft_delete', '0' );
+		}
+
+		// Did we ask to prettify Dashboard Title?
+		if ( $civicrm_admin_utilities_dashboard_title == '1' ) {
+			$this->setting_set( 'dashboard_title', '1' );
+		} else {
+			$this->setting_set( 'dashboard_title', '0' );
 		}
 
 		// Save options.
