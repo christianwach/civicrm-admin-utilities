@@ -70,6 +70,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.8 =
+
+* Fix PayPal IPN URL encoding
+* Fix CiviCRM theme assignment on deactivation
+
 = 0.7.5 =
 
 * Fix incorrect method call
