@@ -401,6 +401,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Listen for Dashboard view.
 		add_action( 'civicrm_config', [ $this, 'dashboard_init' ], 10, 1 );
 
+		// Add callback for CiviCRM Processor Params.
+		add_action( 'civicrm_alterPaymentProcessorParams', [ $this, 'paypal_params' ], 10, 3 );
+
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
 
@@ -2515,6 +2518,92 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Overwrite Dashboard title.
 		CRM_Utils_System::setTitle( $title );
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Filter the CiviCRM Processor Params.
+	 *
+	 * PayPal urlencodes the IPN Notify URL. For sites not using Clean URLs (or
+	 * using Shortcodes in WordPress) this results in "%2F" becoming "%252F" and
+	 * therefore incomplete transactions. We need to prevent that.
+	 *
+	 * This fix expires with CiviCRM 5.31.1 but supports all previous versions.
+	 *
+	 * @see https://lab.civicrm.org/dev/core/-/issues/1931
+	 *
+	 * @since 0.8
+	 *
+     * @param object $payment_obj The Payment Processor object.
+     * @param array $raw_params The original params.
+     * @param array $cooked_params The built params.
+	 */
+	public function paypal_params( $payment_obj, &$raw_params, &$cooked_params ) {
+
+		// Bail if this is fixed.
+		if ( $this->paypal_fixed() ) {
+			return;
+		}
+
+		// Bail if not the PayPal Processor.
+		if ( ! ( $payment_obj instanceOf CRM_Core_Payment_PayPalImpl ) ) {
+			return;
+		}
+
+		// PayPal now rawurlencodes the IPN URL.
+		$cooked_params['notify_url'] = rawurldecode( $cooked_params['notify_url'] );
+
+	}
+
+
+
+	/**
+	 * Check if PayPal IPN URLs have been fixed.
+	 *
+	 * @since 0.8
+	 *
+	 * @return bool $allowed True if fixed, false otherwise.
+	 */
+	public function paypal_fixed() {
+
+		// Always true if already fixed in CiviCRM.
+		if ( $this->setting_get( 'paypal_fixed', '0' ) == '1' ) {
+			return true;
+		}
+
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
+
+		// Only do this once.
+		static $fixed;
+		if ( isset( $fixed ) ) {
+			return $fixed;
+		}
+
+		// Ignore anything but 5.31.1+.
+		$version = CRM_Utils_System::version();
+		if ( version_compare( $version, '5.31.1', '>=' ) ) {
+			$fixed = true;
+		} else {
+			$fixed = false;
+		}
+
+		// Save setting if fixed.
+		if ( $fixed ) {
+			$this->setting_set( 'paypal_fixed', '1' );
+			$this->settings_save();
+		}
+
+		// --<
+		return $fixed;
 
 	}
 
