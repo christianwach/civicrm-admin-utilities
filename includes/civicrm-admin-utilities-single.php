@@ -2551,6 +2551,11 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
+		// Bail if this version predates the need for a fix.
+		if ( $this->paypal_predates_problem() ) {
+			return;
+		}
+
 		// Bail if not the PayPal Processor.
 		if ( ! ( $payment_obj instanceOf CRM_Core_Payment_PayPalImpl ) ) {
 			return;
@@ -2568,7 +2573,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.8
 	 *
-	 * @return bool $allowed True if fixed, false otherwise.
+	 * @return bool $fixed True if fixed, false otherwise.
 	 */
 	public function paypal_fixed() {
 
@@ -2604,6 +2609,41 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// --<
 		return $fixed;
+
+	}
+
+
+
+	/**
+	 * Check if this version of CiviCRM predates the need for a fix.
+	 *
+	 * @since 0.8
+	 *
+	 * @return bool $predates True if CiviCRM predates the need for a fix, false otherwise.
+	 */
+	public function paypal_predates_problem() {
+
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
+
+		// Only do this once.
+		static $predates;
+		if ( isset( $predates ) ) {
+			return $predates;
+		}
+
+		// URLs were not encoded prior to 5.23.
+		$version = CRM_Utils_System::version();
+		if ( version_compare( $version, '5.23', '<' ) ) {
+			$predates = true;
+		} else {
+			$predates = false;
+		}
+
+		// --<
+		return $predates;
 
 	}
 
