@@ -518,7 +518,7 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 
 		// Add settings link if not network activated and not viewing network admin.
 		if ( ! civicrm_au()->is_network_activated() AND ! is_network_admin() ) {
-			$link = add_query_arg( [ 'page' => 'civicrm_au_parent' ], admin_url( 'options-general.php' ) );
+			$link = add_query_arg( [ 'page' => 'civicrm_au_parent' ], admin_url( 'admin.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
