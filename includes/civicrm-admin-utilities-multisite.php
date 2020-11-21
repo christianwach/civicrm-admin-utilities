@@ -431,7 +431,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // Page title.
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
-			'civicrm_admin_utilities_network_parent', // Slug name.
+			'civicrm_au_network_parent', // Slug name.
 			[ $this, 'page_network_settings' ] // Callback.
 		);
 
@@ -444,7 +444,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Add settings page.
 		$this->network_settings_page = add_submenu_page(
-			'civicrm_admin_utilities_network_parent', // Parent slug.
+			'civicrm_au_network_parent', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // Page title.
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
@@ -613,8 +613,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// This tweaks the Settings subnav menu to show only one menu item.
 		if ( in_array( $plugin_page, $subpages ) ) {
-			$plugin_page = 'civicrm_admin_utilities_network_parent';
-			$submenu_file = 'civicrm_admin_utilities_network_parent';
+			$plugin_page = 'civicrm_au_network_parent';
+			$submenu_file = 'civicrm_au_network_parent';
 		}
 
 	}

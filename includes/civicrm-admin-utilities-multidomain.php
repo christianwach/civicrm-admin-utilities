@@ -120,7 +120,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Add settings page.
 		$this->network_multidomain_page = add_submenu_page(
-			'civicrm_admin_utilities_network_parent', // Parent slug.
+			'civicrm_au_network_parent', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Domain', 'civicrm-admin-utilities' ), // Page title.
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // Menu title.
 			'manage_network_plugins', // Required caps.
@@ -426,11 +426,11 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Add Domain page.
 		$this->multidomain_page = add_submenu_page(
-			'civicrm_admin_utilities_parent', // Parent slug.
+			'civicrm_au_parent', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Domain', 'civicrm-admin-utilities' ), // Page title.
 			__( 'Domain', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
-			'civicrm_admin_utilities_multidomain', // Slug name.
+			'civicrm_au_multidomain', // Slug name.
 			[ $this, 'page_multidomain' ] // Callback.
 		);
 
@@ -477,7 +477,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function admin_subpages_filter( $subpages ) {
 
 		// Add multidomain settings page.
-		$subpages[] = 'civicrm_admin_utilities_multidomain';
+		$subpages[] = 'civicrm_au_multidomain';
 
 		// --<
 		return $subpages;
@@ -525,7 +525,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Add a tab - we can add more later.
 		$screen->add_help_tab( [
-			'id'      => 'civicrm_admin_utilities_multidomain',
+			'id'      => 'civicrm_au_multidomain',
 			'title'   => __( 'CiviCRM Admin Utilities Domain', 'civicrm-admin-utilities' ),
 			'content' => $this->admin_help_get(),
 		] );
@@ -708,7 +708,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function page_urls_filter( $urls ) {
 
 		// Add multidomain settings page.
-		$urls['multidomain'] = menu_page_url( 'civicrm_admin_utilities_multidomain', false );
+		$urls['multidomain'] = menu_page_url( 'civicrm_au_multidomain', false );
 
 		// --<
 		return $urls;

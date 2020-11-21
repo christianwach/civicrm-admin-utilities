@@ -130,6 +130,14 @@ class CiviCRM_Admin_Utilities {
 			return;
 		}
 
+		// Bail if CiviCRM is not fully installed.
+		if ( ! defined( 'CIVICRM_INSTALLED' ) ) {
+			return false;
+		}
+		if ( ! CIVICRM_INSTALLED ) {
+			return false;
+		}
+
 		// Include files.
 		$this->include_files();
 
@@ -486,6 +494,11 @@ register_deactivation_hook( __FILE__, [ civicrm_au(), 'deactivate' ] );
  */
 function civicrm_admin_utilities_action_links( $links, $file ) {
 
+	// Bail if CiviCRM plugin is not present.
+	if ( ! function_exists( 'civi_wp' ) ) {
+		return $links;
+	}
+
 	// Add links only when CiviCRM is fully installed.
 	if ( ! defined( 'CIVICRM_INSTALLED' ) ) {
 		return $links;
@@ -494,23 +507,18 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 		return $links;
 	}
 
-	// Bail if CiviCRM plugin is not present.
-	if ( ! function_exists( 'civi_wp' ) ) {
-		return $links;
-	}
-
 	// Add settings link.
 	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {
 
 		// Add settings link if network activated and viewing network admin.
 		if ( civicrm_au()->is_network_activated() AND is_network_admin() ) {
-			$link = add_query_arg( [ 'page' => 'civicrm_admin_utilities_network_parent' ], network_admin_url( 'settings.php' ) );
+			$link = add_query_arg( [ 'page' => 'civicrm_au_network_parent' ], network_admin_url( 'settings.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
 		// Add settings link if not network activated and not viewing network admin.
 		if ( ! civicrm_au()->is_network_activated() AND ! is_network_admin() ) {
-			$link = add_query_arg( [ 'page' => 'civicrm_admin_utilities_parent' ], admin_url( 'options-general.php' ) );
+			$link = add_query_arg( [ 'page' => 'civicrm_au_parent' ], admin_url( 'options-general.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 

@@ -352,7 +352,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function register_hooks() {
 
 		// Add admin page to Settings menu.
-		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
+		add_action( 'admin_menu', [ $this, 'admin_menu' ], 11 );
 
 		// Kill CiviCRM shortcode button.
 		add_action( 'admin_head', [ $this, 'kill_civi_button' ] );
@@ -734,12 +734,13 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Add the admin page to the Settings menu.
-		$this->parent_page = add_options_page(
+		// Add the admin page to the CiviCRM menu.
+		$this->parent_page = add_submenu_page(
+			'CiviCRM', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ),
-			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
+			__( ' Admin Utilities', 'civicrm-admin-utilities' ),
 			$capability,
-			'civicrm_admin_utilities_parent',
+			'civicrm_au_parent',
 			[ $this, 'page_settings' ]
 		);
 
@@ -750,13 +751,13 @@ class CiviCRM_Admin_Utilities_Single {
 		add_action( 'admin_print_styles-' . $this->parent_page, [ $this, 'admin_css' ] );
 		add_action( 'admin_print_scripts-' . $this->parent_page, [ $this, 'admin_js' ] );
 
-		// Add settings page
+		// Add settings page.
 		$this->settings_page = add_submenu_page(
-			'civicrm_admin_utilities_parent', // Parent slug.
+			'civicrm_au_parent', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // Page title.
 			__( 'Settings', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
-			'civicrm_admin_utilities_settings', // Slug name.
+			'civicrm_au_settings', // Slug name.
 			[ $this, 'page_settings' ] // Callback.
 		);
 
@@ -795,7 +796,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Define subpages.
 		$subpages = [
-		 	'civicrm_admin_utilities_settings',
+		 	'civicrm_au_settings',
 		];
 
 		/**
@@ -810,8 +811,8 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// This tweaks the Settings subnav menu to show only one menu item.
 		if ( in_array( $plugin_page, $subpages ) ) {
-			$plugin_page = 'civicrm_admin_utilities_parent';
-			$submenu_file = 'civicrm_admin_utilities_parent';
+			$plugin_page = 'civicrm_au_parent';
+			$submenu_file = 'civicrm_au_parent';
 		}
 
 	}
@@ -1148,7 +1149,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$this->urls = [];
 
 		// Get admin page URLs.
-		$this->urls['settings'] = menu_page_url( 'civicrm_admin_utilities_settings', false );
+		$this->urls['settings'] = menu_page_url( 'civicrm_au_settings', false );
 
 		/**
 		 * Filter the list of URLs.
