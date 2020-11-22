@@ -8,7 +8,7 @@
 		<td>
 			<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_dashboard_title" id="civicrm_admin_utilities_dashboard_title" value="1"<?php echo $dashboard_title; ?> />
 			<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_dashboard_title"><?php _e( 'Make the CiviCRM Dashboard Title more welcoming.', 'civicrm-admin-utilities' ); ?></label>
-			<p class="description"><?php _e( 'Alters "CiviCRM Home" to become "Hi FirstName, welcome to CiviCRM".', 'civicrm-admin-utilities' ); ?><br>
+			<p class="description"><?php _e( 'Checking this alters "CiviCRM Home" to become "Hi FirstName, welcome to CiviCRM".', 'civicrm-admin-utilities' ); ?><br>
 			<?php _e( 'The "civicrm_admin_utilities_dashboard_title" filter can be used to modify this further if required.', 'civicrm-admin-utilities' ); ?></p>
 		</td>
 	</tr>
