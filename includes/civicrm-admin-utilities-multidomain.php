@@ -85,8 +85,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Add Domain subpage to Network Settings menu.
 		add_action( 'network_admin_menu', [ $this, 'network_admin_menu' ], 30 );
 
+		// Add meta boxes to Network Domain subpage.
+		add_action( 'add_meta_boxes', [ $this, 'network_meta_boxes_add' ], 11, 1 );
+
 		// Add Domain subpage to Single Site Settings menu.
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
+
+		// Add meta boxes to Single Site Domain subpage.
+		add_action( 'add_meta_boxes', [ $this, 'meta_boxes_add' ], 11, 1 );
 
 		// Add Domains AJAX handler.
 		add_action( 'wp_ajax_cau_domains_get', [ $this, 'domains_ajax_get' ] );
@@ -193,6 +199,11 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Pass to method in this class.
 		$this->network_admin_help( $screen );
 
+		// Enqueue WordPress scripts.
+		wp_enqueue_script( 'common' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'dashboard' );
+
 	}
 
 
@@ -274,14 +285,22 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Get admin page URLs.
 		$urls = $this->plugin->multisite->page_get_network_urls();
 
-		// Get domains.
-		$domains = $this->domains_get();
+		// Get current screen.
+		$screen = get_current_screen();
 
-		// Check if "CiviCRM Multisite" extension is active.
-		$multisite = false;
-		if ( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
-			$multisite = true;
-		}
+		/**
+		 * Allow meta boxes to be added to this screen.
+		 *
+		 * The Screen ID to use is: "civicrm_page_cwps_settings".
+		 *
+		 * @since 0.8.1
+		 *
+		 * @param str $screen_id The ID of the current screen.
+		 */
+		do_action( 'add_meta_boxes', $screen->id, null );
+
+		// Grab columns.
+		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
 
 		// Include template file.
 		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-multidomain.php' );
@@ -403,6 +422,136 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
+	 * Register meta boxes for our Network "Domains" page.
+	 *
+	 * @since 0.8.1
+	 *
+	 * @param str $screen_id The Admin Page Screen ID.
+	 */
+	public function network_meta_boxes_add( $screen_id ) {
+
+		// Define valid Screen IDs.
+		$screen_ids = [
+			'admin_page_cau_network_multidomain-network',
+		];
+
+		// Bail if not the Screen ID we want.
+		if ( ! in_array( $screen_id, $screen_ids ) ) {
+			return;
+		}
+
+		// Bail if user does not have permission.
+		if ( ! current_user_can( 'manage_network_plugins' ) ) {
+			return;
+		}
+
+		// Init data to pass to meta boxes.
+		$data = [];
+
+		// Get domains.
+		$data['domains'] = $this->domains_get();
+
+		// Check if "CiviCRM Multisite" extension is active.
+		$data['multisite'] = false;
+		if ( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
+			$data['multisite'] = true;
+		}
+
+		// Create CiviCRM Network Settings metabox.
+		add_meta_box(
+			'civicrm_au_network_domains',
+			__( 'CiviCRM Domains', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_network_domain_info_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core', // Vertical placement: options are 'core', 'high', 'low'.
+			$data
+		);
+
+		// Bail if "multisite" is not present.
+		if ( $data['multisite'] === false ) {
+			return;
+		}
+
+		// Create "Create Domain" metabox.
+		add_meta_box(
+			'civicrm_au_network_domain_create',
+			__( 'Create Domain', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_network_domain_create_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core', // Vertical placement: options are 'core', 'high', 'low'.
+			$data
+		);
+
+		// Create Submit metabox.
+		add_meta_box(
+			'submitdiv',
+			__( 'Settings', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_network_submit_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'side', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+	}
+
+
+
+	/**
+	 * Render a Submit meta box for our Network "Domain" page.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_network_submit_render() {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/network-metabox-domain-submit.php';
+
+	}
+
+
+
+	/**
+	 * Render "CiviCRM Domains" meta box for our Network "Domain" page.
+	 *
+	 * @since 0.8.1
+	 *
+	 * @param mixed $unused Unused param.
+	 * @param array $metabox Array containing id, title, callback, and args elements.
+	 */
+	public function meta_box_network_domain_info_render( $unused = null, $metabox ) {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/network-metabox-domain-info.php';
+
+	}
+
+
+
+	/**
+	 * Render "Create Domain" meta box for our Network "Domain" page.
+	 *
+	 * @since 0.8.1
+	 *
+	 * @param mixed $unused Unused param.
+	 * @param array $metabox Array containing id, title, callback, and args elements.
+	 */
+	public function meta_box_network_domain_create_render( $unused = null, $metabox ) {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/network-metabox-domain-create.php';
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+
+	/**
 	 * Add admin menu item(s) for this plugin.
 	 *
 	 * @since 0.5.4
@@ -499,6 +648,11 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Pass to method in this class.
 		$this->admin_help( $screen );
 
+		// Enqueue WordPress scripts.
+		wp_enqueue_script( 'common' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'dashboard' );
+
 	}
 
 
@@ -561,6 +715,157 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
+	 * Register meta boxes.
+	 *
+	 * @since 0.8.1
+	 *
+	 * @param str $screen_id The Admin Page Screen ID.
+	 */
+	public function meta_boxes_add( $screen_id ) {
+
+		// Define valid Screen IDs.
+		$screen_ids = [
+			'admin_page_civicrm_au_multidomain',
+		];
+
+		// Bail if not the Screen ID we want.
+		if ( ! in_array( $screen_id, $screen_ids ) ) {
+			return;
+		}
+
+		// Bail if user does not have permission.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Kick out if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
+
+		// Init data to pass to meta boxes.
+		$data = [];
+
+		// Get domain name.
+		$data['domain'] = $this->domain_get();
+
+		// Get domain group name.
+		$data['domain_group'] = $this->domain_group_get();
+
+		// Get domain org data.
+		$data['domain_org'] = $this->domain_org_get();
+
+		// Check if "CiviCRM Multisite" extension is active.
+		$data['multisite'] = false;
+		if ( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
+			$data['multisite'] = true;
+		}
+
+		// Check if "Multisite" is enabled for this Domain.
+		$data['enabled'] = civicrm_api( 'setting', 'getvalue', [
+			'version' => 3,
+			'domain_id' => $data['domain']['id'],
+			'name' => 'is_enabled',
+			'group' => 'Multi Site Preferences',
+		] );
+
+		// Get the "Multi Site Settings" page URL.
+		$data['multisite_url'] = $this->plugin->single->get_link( 'civicrm/admin/setting/preferences/multisite', 'reset=1' );
+
+		// Create "Domain Info" metabox.
+		add_meta_box(
+			'civicrm_au_domain_info',
+			__( 'CiviCRM Domain Information', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_info_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core', // Vertical placement: options are 'core', 'high', 'low'.
+			$data
+		);
+
+		// Bail if "multisite" is not present and enabled in CiviCRM.
+		if ( $data['multisite'] === false OR $data['enabled'] === false ) {
+			return;
+		}
+
+		// Create "Edit Domain" metabox.
+		add_meta_box(
+			'civicrm_au_domain_edit',
+			__( 'Edit Domain', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_edit_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core', // Vertical placement: options are 'core', 'high', 'low'.
+			$data
+		);
+
+		// Create Submit metabox.
+		add_meta_box(
+			'submitdiv',
+			__( 'Settings', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_submit_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'side', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+	}
+
+
+
+	/**
+	 * Render a "Domain Info" meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 *
+	 * @param mixed $unused Unused param.
+	 * @param array $metabox Array containing id, title, callback, and args elements.
+	 */
+	public function meta_box_info_render( $unused = null, $metabox ) {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-domain-info.php';
+
+	}
+
+
+
+	/**
+	 * Render "Edit Domain" meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 *
+	 * @param mixed $unused Unused param.
+	 * @param array $metabox Array containing id, title, callback, and args elements.
+	 */
+	public function meta_box_edit_render( $unused = null, $metabox ) {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-domain-edit.php';
+
+	}
+
+
+
+	/**
+	 * Render a Submit meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_submit_render() {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-domain-submit.php';
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
 	 * Show our multidomain settings page.
 	 *
 	 * @since 0.5.4
@@ -590,31 +895,22 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Get admin page URLs.
 		$urls = $this->plugin->single->page_get_urls();
 
-		// Get domain name.
-		$domain = $this->domain_get();
+		// Get current screen.
+		$screen = get_current_screen();
 
-		// Get domain group name.
-		$domain_group = $this->domain_group_get();
+		/**
+		 * Allow meta boxes to be added to this screen.
+		 *
+		 * The Screen ID to use is: "civicrm_page_cwps_settings".
+		 *
+		 * @since 0.8.1
+		 *
+		 * @param str $screen_id The ID of the current screen.
+		 */
+		do_action( 'add_meta_boxes', $screen->id, null );
 
-		// Get domain org data.
-		$domain_org = $this->domain_org_get();
-
-		// Check if "CiviCRM Multisite" extension is active.
-		$multisite = false;
-		if ( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
-			$multisite = true;
-		}
-
-		// Check if "Multisite" is enabled for this Domain.
-		$enabled = civicrm_api( 'setting', 'getvalue', [
-			'version' => 3,
-			'domain_id' => $domain['id'],
-			'name' => 'is_enabled',
-			'group' => 'Multi Site Preferences',
-		] );
-
-		// Get the "Multi Site Settings" page URL.
-		$multisite_url = $this->plugin->single->get_link( 'civicrm/admin/setting/preferences/multisite', 'reset=1' );
+		// Grab columns.
+		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
 
 		// Include template file.
 		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-multidomain.php' );
@@ -807,14 +1103,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Init return.
 		$result = false;
 
-	 	// Was the "Domain" form submitted?
-		if ( isset( $_POST['civicrm_admin_utilities_multidomain_submit'] ) ) {
-			return $this->settings_multidomain_update();
+	 	// Was the "Network Domain" form submitted?
+		if ( isset( $_POST['cau_network_multidomain_submit'] ) ) {
+			return $this->settings_network_multidomain_update();
 		}
 
-	 	// Was the "Network Domain" form submitted?
-		if ( isset( $_POST['civicrm_admin_utilities_network_multidomain_submit'] ) ) {
-			return $this->settings_network_multidomain_update();
+	 	// Was the "Domain" form submitted?
+		if ( isset( $_POST['cau_multidomain_submit'] ) ) {
+			return $this->settings_multidomain_update();
 		}
 
 		// --<
@@ -834,7 +1130,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function settings_network_multidomain_update() {
 
 		// Check that we trust the source of the data.
-		check_admin_referer( 'civicrm_admin_utilities_network_multidomain_action', 'civicrm_admin_utilities_network_multidomain_nonce' );
+		check_admin_referer( 'cau_network_multidomain_action', 'cau_network_multidomain_nonce' );
 
 		// Sanitise input.
 		$domain_name = isset( $_POST['cau_domain_name'] ) ? sanitize_text_field( $_POST['cau_domain_name'] ) : '';
@@ -875,7 +1171,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function settings_multidomain_update() {
 
 		// Check that we trust the source of the data.
-		check_admin_referer( 'civicrm_admin_utilities_multidomain_action', 'civicrm_admin_utilities_multidomain_nonce' );
+		check_admin_referer( 'cau_multidomain_action', 'cau_multidomain_nonce' );
 
 		// Sanitise inputs.
 		$domain_org_id = isset( $_POST['cau_domain_org_select'] ) ? absint( $_POST['cau_domain_org_select'] ) : '';

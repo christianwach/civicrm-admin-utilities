@@ -20,104 +20,33 @@
 		?>
 	</h2>
 
-	<h3><?php _e( 'CiviCRM Domain Information', 'civicrm-admin-utilities' ); ?></h3>
+	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->page_submit_url_get(); ?>">
 
-	<?php if ( ! $multisite ) : ?>
-		<div class="updated error">
-			<p><?php _e( 'It is recommended that you install and activate the <a href="https://civicrm.org/extensions/multisite-permissioning" target="_blank">CiviCRM Multisite</a> extension to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ); ?></p>
-		</div>
-	<?php endif; ?>
+		<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
+		<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
+		<?php wp_nonce_field( 'cau_multidomain_action', 'cau_multidomain_nonce' ); ?>
 
-	<?php if ( ! $enabled ) : ?>
-		<div class="notice notice-warning">
-			<p><?php echo sprintf( __( 'Multisite is not enabled on this CiviCRM Domain. Change <a href="%s">the setting in CiviCRM</a> to enable it.', 'civicrm-admin-utilities' ), $multisite_url ); ?></p>
-		</div>
-	<?php endif; ?>
+		<div id="poststuff">
 
-	<ul>
+			<div id="post-body" class="metabox-holder columns-<?php echo $columns;?>">
 
-		<li><?php echo sprintf(
-			__( 'The current domain for this site is: "%1$s" (ID: %2$s)', 'civicrm-admin-utilities' ),
-			'<span class="cau_domain_name">' . $domain['name'] . '</span>',
-			'<span class="cau_domain_id">' . $domain['id'] . '</span>'
-		); ?></li>
+				<!--<div id="post-body-content">
+				</div>--><!-- #post-body-content -->
 
-		<li><?php echo sprintf(
-			__( 'The current domain group for this site is: "%1$s" (ID: %2$s)', 'civicrm-admin-utilities' ),
-			'<span class="cau_domain_group_name">' . $domain_group['name'] . '</span>',
-			'<span class="cau_domain_group_id">' . $domain_group['id'] . '</span>'
-		); ?></li>
+				<div id="postbox-container-1" class="postbox-container">
+					<?php do_meta_boxes( $screen->id, 'side', null ); ?>
+				</div>
 
-		<li><?php echo sprintf(
-			__( 'The current domain organisation for this site is: "%1$s" (ID: %2$s)', 'civicrm-admin-utilities' ),
-			'<span class="cau_domain_org_name">' . $domain_org['name'] . '</span>',
-			'<span class="cau_domain_org_id">' . $domain_org['id'] . '</span>'
-		); ?></li>
+				<div id="postbox-container-2" class="postbox-container">
+					<?php do_meta_boxes( $screen->id, 'normal', null );  ?>
+					<?php do_meta_boxes( $screen->id, 'advanced', null ); ?>
+				</div>
 
-	</ul>
+			</div><!-- #post-body -->
+			<br class="clear">
 
-	<?php if ( $multisite ) : ?>
+		</div><!-- #poststuff -->
 
-		<hr />
-
-		<form method="post" id="civicrm_admin_utilities_multidomain_form" action="<?php echo $this->page_submit_url_get(); ?>">
-
-			<?php wp_nonce_field( 'civicrm_admin_utilities_multidomain_action', 'civicrm_admin_utilities_multidomain_nonce' ); ?>
-
-			<h3><?php echo sprintf ( __( 'Edit "%s" Domain', 'civicrm-admin-utilities' ), $domain['name'] ); ?></h3>
-
-			<p><?php _e( 'Edit this Domain with caution - it could cause problems if you make edits to a Domain which is not completely new and unused. You have been warned.', 'civicrm-admin-utilities' ); ?></p>
-
-			<div class="cau-domain-edit">
-
-				<table class="form-table">
-
-					<tr>
-						<th scope="row">
-							<label class="civicrm_admin_utilities_settings_label" for="cau_domain_group_select">
-								<?php _e( 'Domain Group', 'civicrm-admin-utilities' ); ?>
-							</label>
-						</th>
-
-						<td>
-							<select id="cau_domain_group_select" name="cau_domain_group_select">
-								<option value=""><?php _e( 'Select existing Group', 'civicrm-admin-utilities' ); ?></option>
-								<?php if ( $domain_group['id'] !== 0 ) : ?>
-									<option value="<?php echo $domain_group['id']; ?>" selected="selected"><?php echo $domain_group['name']; ?></option>
-								<?php endif; ?>
-							</select>
-						</td>
-					</tr>
-
-					<tr>
-						<th scope="row">
-							<label class="civicrm_admin_utilities_settings_label" for="cau_domain_org_select">
-								<?php _e( 'Domain Organisation', 'civicrm-admin-utilities' ); ?>
-							</label>
-						</th>
-
-						<td>
-							<select id="cau_domain_org_select" name="cau_domain_org_select">
-								<option value=""><?php _e( 'Select existing Organisation', 'civicrm-admin-utilities' ); ?></option>
-								<?php if ( $domain_org['id'] !== 0 ) : ?>
-									<option value="<?php echo $domain_org['id']; ?>" selected="selected"><?php echo $domain_org['name']; ?></option>
-								<?php endif; ?>
-							</select>
-						</td>
-					</tr>
-
-				</table>
-
-			</div>
-
-			<div class="cau-domain-submit">
-				<p class="submit">
-					<input class="button-primary" type="submit" id="civicrm_admin_utilities_multidomain_submit" name="civicrm_admin_utilities_multidomain_submit" value="<?php _e( 'Save Changes', 'civicrm-admin-utilities' ); ?>" />
-				</p>
-			</div>
-
-		</form>
-
-	<?php endif; ?>
+	</form>
 
 </div><!-- /.wrap -->

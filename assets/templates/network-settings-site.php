@@ -1,4 +1,4 @@
-<!-- assets/templates/network-multidomain.php -->
+<!-- assets/templates/network-settings-site.php -->
 <div class="wrap">
 
 	<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
@@ -11,23 +11,27 @@
 		<?php endif; ?>
 	</div>
 
-	<h2 class="nav-tab-wrapper">
-		<a href="<?php echo $urls['settings_network']; ?>" class="nav-tab"><?php _e( 'Network Settings', 'civicrm-admin-utilities' ); ?></a>
-		<a href="<?php echo $urls['settings_site']; ?>" class="nav-tab"><?php _e( 'Site Settings', 'civicrm-admin-utilities' ); ?></a>
-		<?php
+	<?php if ( $show_tabs ) : ?>
+		<h1 class="nav-tab-wrapper">
+			<a href="<?php echo $urls['settings_network']; ?>" class="nav-tab"><?php _e( 'Network Settings', 'civicrm-admin-utilities' ); ?></a>
+			<a href="<?php echo $urls['settings_site']; ?>" class="nav-tab nav-tab-active"><?php _e( 'Site Settings', 'civicrm-admin-utilities' ); ?></a>
+			<?php
 
-		/**
-		 * Allow others to add tabs.
-		 *
-		 * @since 0.5.4
-		 *
-		 * @param array $urls The array of subpage URLs.
-		 * @param str The key of the active tab in the subpage URLs array.
-		 */
-		do_action( 'civicrm_admin_utilities_network_nav_tabs', $urls, 'multidomain' );
+			/**
+			 * Allow others to add tabs.
+			 *
+			 * @since 0.5.4
+			 *
+			 * @param array $urls The array of subpage URLs.
+			 * @param str The key of the active tab in the subpage URLs array.
+			 */
+			do_action( 'civicrm_admin_utilities_network_nav_tabs', $urls, 'settings' );
 
-		?>
-	</h2>
+			?>
+		</h1>
+	<?php else : ?>
+		<hr />
+	<?php endif; ?>
 
 	<?php if ( isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) : ?>
 		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
@@ -42,14 +46,17 @@
 
 		<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
 		<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
-		<?php wp_nonce_field( 'cau_network_multidomain_action', 'cau_network_multidomain_nonce' ); ?>
+		<?php wp_nonce_field( 'cau_network_site_action', 'cau_network_site_nonce' ); ?>
 
 		<div id="poststuff">
 
 			<div id="post-body" class="metabox-holder columns-<?php echo $columns;?>">
 
-				<!--<div id="post-body-content">
-				</div>--><!-- #post-body-content -->
+				<div id="post-body-content">
+					<div class="notice notice-warning inline" style="margin: 0;">
+						<p><strong style="text-transform: uppercase;"><?php _e( 'Important Note:', 'civicrm-admin-utilities' ); ?></strong> <?php _e( 'The settings that you choose below will be used as the initial default settings for CiviCRM Admin Utilities on each sub-site where CiviCRM is activated. Each of these sub-sites has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site.', 'civicrm-admin-utilities' ); ?></p>
+					</div>
+				</div><!-- #post-body-content -->
 
 				<div id="postbox-container-1" class="postbox-container">
 					<?php do_meta_boxes( $screen->id, 'side', null ); ?>
@@ -65,21 +72,9 @@
 
 		</div><!-- #poststuff -->
 
-		<?php if ( ! empty( $domains ) ) : ?>
-			<?php
-
-			/**
-			 * Allow others to add content after form.
-			 *
-			 * @since 0.6.8
-			 *
-			 * @param array $domains The array of CiviCRM Domains.
-			 */
-			do_action( 'civicrm_admin_utilities_network_multidomain_form_after', $domains );
-
-			?>
-		<?php endif; ?>
-
 	</form>
 
 </div><!-- /.wrap -->
+
+
+

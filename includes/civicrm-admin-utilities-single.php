@@ -1000,7 +1000,7 @@ class CiviCRM_Admin_Utilities_Single {
 		 *
 		 * The Screen ID to use is: "civicrm_page_cwps_settings".
 		 *
-		 * @since 0.4
+		 * @since 0.8.1
 		 *
 		 * @param str $screen_id The ID of the current screen.
 		 */
@@ -1105,6 +1105,11 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Bail if user does not have permission.
 		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Kick out if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
 			return;
 		}
 
@@ -3020,25 +3025,28 @@ class CiviCRM_Admin_Utilities_Single {
 		// Hide CiviCRM.
 		$settings['hide_civicrm'] = '0';
 
+		// Do not alter Dashboard Title by default to keep existing behaviour.
+		$settings['dashboard_title'] = '0';
+
 		// Prettify menu.
 		$settings['prettify_menu'] = '1';
-
-		// Restrict CSS files from front-end.
-		$settings['css_default'] = '0'; // Load default.
-		$settings['css_navigation'] = '1'; // Do not load CiviCRM menu.
-		$settings['css_shoreditch'] = '0'; // Load Shoreditch.
-		$settings['css_bootstrap'] = '0'; // Load Shoreditch Bootstrap.
-		$settings['css_custom'] = '0'; // Load Custom Stylesheet on front-end.
-		$settings['css_custom_public'] = '0'; // Load Custom Stylesheet on admin.
-
-		// Override CiviCRM Default in wp-admin.
-		$settings['css_admin'] = '0'; // Load CiviCRM Default Stylesheet.
 
 		// Override default CiviCRM CSS in wp-admin.
 		$settings['css_admin'] = '0'; // Do not override by default.
 
+		// Restrict CSS files from front-end.
+		$settings['css_default'] = '0'; // Load default.
+		$settings['css_navigation'] = '1'; // Do not load CiviCRM menu.
+		$settings['css_custom'] = '0'; // Load Custom Stylesheet on front-end.
+		$settings['css_custom_public'] = '0'; // Load Custom Stylesheet on admin.
+		$settings['css_shoreditch'] = '0'; // Load Shoreditch.
+		$settings['css_bootstrap'] = '0'; // Load Shoreditch Bootstrap.
+
 		// Suppress notification email.
 		$settings['email_suppress'] = '0'; // Do not suppress by default.
+
+		// Do not fix Contact Soft Delete by default to keep existing behaviour.
+		$settings['fix_soft_delete'] = '0';
 
 		// Fix WordPress Access Control table.
 		$settings['prettify_access'] = '1';
@@ -3046,20 +3054,14 @@ class CiviCRM_Admin_Utilities_Single {
 		// Do not assume WordPress Access Control table is fixed.
 		$settings['access_fixed'] = '0';
 
-		// Init post types with defaults.
-		$settings['post_types'] = [ 'post', 'page' ];
-
 		// Add Shortcuts Menu to admin bar.
 		$settings['admin_bar'] = '1';
 
 		// Do not hide "Manage Groups" menu item from Shortcuts Menu.
 		$settings['admin_bar_groups'] = '0';
 
-		// Do not fix Contact Soft Delete by default to keep existing behaviour.
-		$settings['fix_soft_delete'] = '0';
-
-		// Do not alter Dashboard Title by default to keep existing behaviour.
-		$settings['dashboard_title'] = '0';
+		// Init post types with defaults.
+		$settings['post_types'] = [ 'post', 'page' ];
 
 		/**
 		 * Filter default settings.
@@ -3117,22 +3119,22 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Init vars.
 		$civicrm_admin_utilities_hide_civicrm = '';
-		$civicrm_admin_utilities_menu = '';
-		$civicrm_admin_utilities_access = '';
-		$civicrm_admin_utilities_post_types = [];
-		$civicrm_admin_utilities_cache = '';
-		$civicrm_admin_utilities_admin_bar = '';
-		$civicrm_admin_utilities_admin_bar_groups = '';
-		$civicrm_admin_utilities_fix_soft_delete = '';
 		$civicrm_admin_utilities_dashboard_title = '';
+		$civicrm_admin_utilities_menu = '';
+		$civicrm_admin_utilities_styles_admin = '';
 		$civicrm_admin_utilities_styles_default = '';
 		$civicrm_admin_utilities_styles_nav = '';
-		$civicrm_admin_utilities_styles_shoreditch = '';
-		$civicrm_admin_utilities_styles_bootstrap = '';
 		$civicrm_admin_utilities_styles_custom = '';
 		$civicrm_admin_utilities_styles_custom_public = '';
-		$civicrm_admin_utilities_styles_admin = '';
+		$civicrm_admin_utilities_styles_shoreditch = '';
+		$civicrm_admin_utilities_styles_bootstrap = '';
 		$civicrm_admin_utilities_email_suppress = '';
+		$civicrm_admin_utilities_fix_soft_delete = '';
+		$civicrm_admin_utilities_access = '';
+		$civicrm_admin_utilities_admin_bar = '';
+		$civicrm_admin_utilities_admin_bar_groups = '';
+		$civicrm_admin_utilities_post_types = [];
+		$civicrm_admin_utilities_cache = '';
 
 		// Get variables.
 		extract( $_POST );
@@ -3140,17 +3142,24 @@ class CiviCRM_Admin_Utilities_Single {
 		// Init force cache-clearing flag.
 		$force = false;
 
-		// Get existing menu setting.
-		$existing_menu = $this->setting_get( 'prettify_menu', '0' );
-		if ( $civicrm_admin_utilities_menu != $existing_menu ) {
-			$force = true;
-		}
-
 		// Did we ask to hide CiviCRM?
 		if ( $civicrm_admin_utilities_hide_civicrm == '1' ) {
 			$this->setting_set( 'hide_civicrm', '1' );
 		} else {
 			$this->setting_set( 'hide_civicrm', '0' );
+		}
+
+		// Did we ask to prettify Dashboard Title?
+		if ( $civicrm_admin_utilities_dashboard_title == '1' ) {
+			$this->setting_set( 'dashboard_title', '1' );
+		} else {
+			$this->setting_set( 'dashboard_title', '0' );
+		}
+
+		// Get existing menu setting.
+		$existing_menu = $this->setting_get( 'prettify_menu', '0' );
+		if ( $civicrm_admin_utilities_menu != $existing_menu ) {
+			$force = true;
 		}
 
 		// Did we ask to prettify the menu?
@@ -3160,46 +3169,10 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'prettify_menu', '0' );
 		}
 
-		// Did we ask to prevent default styleheet?
-		if ( $civicrm_admin_utilities_styles_default == '1' ) {
-			$this->setting_set( 'css_default', '1' );
-		} else {
-			$this->setting_set( 'css_default', '0' );
-		}
-
-		// Did we ask to prevent navigation styleheet?
-		if ( $civicrm_admin_utilities_styles_nav == '1' ) {
-			$this->setting_set( 'css_navigation', '1' );
-		} else {
-			$this->setting_set( 'css_navigation', '0' );
-		}
-
-		// Did we ask to prevent Shoreditch styleheet?
-		if ( $civicrm_admin_utilities_styles_shoreditch == '1' ) {
-			$this->setting_set( 'css_shoreditch', '1' );
-		} else {
-			$this->setting_set( 'css_shoreditch', '0' );
-		}
-
-		// Did we ask to prevent Shoreditch Bootstrap styleheet?
-		if ( $civicrm_admin_utilities_styles_bootstrap == '1' ) {
-			$this->setting_set( 'css_bootstrap', '1' );
-		} else {
-			$this->setting_set( 'css_bootstrap', '0' );
-		}
-
-		// Did we ask to prevent CiviCRM custom styleheet from front-end?
-		if ( $civicrm_admin_utilities_styles_custom == '1' ) {
-			$this->setting_set( 'css_custom', '1' );
-		} else {
-			$this->setting_set( 'css_custom', '0' );
-		}
-
-		// Did we ask to prevent CiviCRM custom styleheet from admin?
-		if ( $civicrm_admin_utilities_styles_custom_public == '1' ) {
-			$this->setting_set( 'css_custom_public', '1' );
-		} else {
-			$this->setting_set( 'css_custom_public', '0' );
+		// Get existing Admin Theme setting.
+		$existing_theme = $this->setting_get( 'css_admin', '0' );
+		if ( $civicrm_admin_utilities_styles_admin != $existing_theme ) {
+			$force = true;
 		}
 
 		// Did we ask to override CiviCRM Default styleheet?
@@ -3229,11 +3202,60 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
+		// Did we ask to prevent default styleheet?
+		if ( $civicrm_admin_utilities_styles_default == '1' ) {
+			$this->setting_set( 'css_default', '1' );
+		} else {
+			$this->setting_set( 'css_default', '0' );
+		}
+
+		// Did we ask to prevent navigation styleheet?
+		if ( $civicrm_admin_utilities_styles_nav == '1' ) {
+			$this->setting_set( 'css_navigation', '1' );
+		} else {
+			$this->setting_set( 'css_navigation', '0' );
+		}
+
+		// Did we ask to prevent CiviCRM custom styleheet from front-end?
+		if ( $civicrm_admin_utilities_styles_custom == '1' ) {
+			$this->setting_set( 'css_custom', '1' );
+		} else {
+			$this->setting_set( 'css_custom', '0' );
+		}
+
+		// Did we ask to prevent CiviCRM custom styleheet from admin?
+		if ( $civicrm_admin_utilities_styles_custom_public == '1' ) {
+			$this->setting_set( 'css_custom_public', '1' );
+		} else {
+			$this->setting_set( 'css_custom_public', '0' );
+		}
+
+		// Did we ask to prevent Shoreditch styleheet?
+		if ( $civicrm_admin_utilities_styles_shoreditch == '1' ) {
+			$this->setting_set( 'css_shoreditch', '1' );
+		} else {
+			$this->setting_set( 'css_shoreditch', '0' );
+		}
+
+		// Did we ask to prevent Shoreditch Bootstrap styleheet?
+		if ( $civicrm_admin_utilities_styles_bootstrap == '1' ) {
+			$this->setting_set( 'css_bootstrap', '1' );
+		} else {
+			$this->setting_set( 'css_bootstrap', '0' );
+		}
+
 		// Did we ask to suppress Notification Emails?
 		if ( $civicrm_admin_utilities_email_suppress == '1' ) {
 			$this->setting_set( 'email_suppress', '1' );
 		} else {
 			$this->setting_set( 'email_suppress', '0' );
+		}
+
+		// Did we ask to fix Contact Soft Delete?
+		if ( $civicrm_admin_utilities_fix_soft_delete == '1' ) {
+			$this->setting_set( 'fix_soft_delete', '1' );
+		} else {
+			$this->setting_set( 'fix_soft_delete', '0' );
 		}
 
 		// Get existing access setting.
@@ -3247,6 +3269,20 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'prettify_access', '1' );
 		} else {
 			$this->setting_set( 'prettify_access', '0' );
+		}
+
+		// Did we ask to add the shortcuts menu to the admin bar?
+		if ( $civicrm_admin_utilities_admin_bar == '1' ) {
+			$this->setting_set( 'admin_bar', '1' );
+		} else {
+			$this->setting_set( 'admin_bar', '0' );
+		}
+
+		// Did we ask to hide the "Manage Groups" menu item from the shortcuts menu?
+		if ( $civicrm_admin_utilities_admin_bar_groups == '1' ) {
+			$this->setting_set( 'admin_bar_groups', '1' );
+		} else {
+			$this->setting_set( 'admin_bar_groups', '0' );
 		}
 
 		// Which post types are we enabling the CiviCRM button on?
@@ -3265,34 +3301,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 		} else {
 			$this->setting_set( 'post_types', [] );
-		}
-
-		// Did we ask to add the shortcuts menu to the admin bar?
-		if ( $civicrm_admin_utilities_admin_bar == '1' ) {
-			$this->setting_set( 'admin_bar', '1' );
-		} else {
-			$this->setting_set( 'admin_bar', '0' );
-		}
-
-		// Did we ask to hide the "Manage Groups" menu item from the shortcuts menu?
-		if ( $civicrm_admin_utilities_admin_bar_groups == '1' ) {
-			$this->setting_set( 'admin_bar_groups', '1' );
-		} else {
-			$this->setting_set( 'admin_bar_groups', '0' );
-		}
-
-		// Did we ask to fix Contact Soft Delete?
-		if ( $civicrm_admin_utilities_fix_soft_delete == '1' ) {
-			$this->setting_set( 'fix_soft_delete', '1' );
-		} else {
-			$this->setting_set( 'fix_soft_delete', '0' );
-		}
-
-		// Did we ask to prettify Dashboard Title?
-		if ( $civicrm_admin_utilities_dashboard_title == '1' ) {
-			$this->setting_set( 'dashboard_title', '1' );
-		} else {
-			$this->setting_set( 'dashboard_title', '0' );
 		}
 
 		// Save options.
