@@ -1,5 +1,5 @@
 <!-- assets/templates/templates/metaboxes/site-metabox-appearance.php -->
-<p><?php _e( 'Checking these options applies styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin theme, then check the box for "CiviCRM Menu" and leave "CiviCRM Admin Theme" unchecked.', 'civicrm-admin-utilities' ); ?></p>
+<p><?php _e( 'These options apply styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin theme, then check the box for "CiviCRM Menu" and leave "CiviCRM Admin Theme" unchecked.', 'civicrm-admin-utilities' ); ?></p>
 
 <table class="form-table">
 
@@ -9,7 +9,7 @@
 			<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_dashboard_title" id="civicrm_admin_utilities_dashboard_title" value="1"<?php echo $dashboard_title; ?> />
 			<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_dashboard_title"><?php _e( 'Make the CiviCRM Dashboard Title more welcoming.', 'civicrm-admin-utilities' ); ?></label>
 			<p class="description"><?php _e( 'Checking this alters "CiviCRM Home" to become "Hi FirstName, welcome to CiviCRM".', 'civicrm-admin-utilities' ); ?><br>
-			<?php _e( 'The "civicrm_admin_utilities_dashboard_title" filter can be used to modify this further if required.', 'civicrm-admin-utilities' ); ?></p>
+			<?php echo sprintf( __( 'The %s filter can be used to modify this further if required.', 'civicrm-admin-utilities' ), '<code style="font-style: normal">civicrm_admin_utilities_dashboard_title</code>' ); ?></p>
 		</td>
 	</tr>
 
