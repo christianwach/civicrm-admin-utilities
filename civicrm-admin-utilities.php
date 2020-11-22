@@ -512,13 +512,13 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 
 		// Add settings link if network activated and viewing network admin.
 		if ( civicrm_au()->is_network_activated() AND is_network_admin() ) {
-			$link = add_query_arg( [ 'page' => 'civicrm_au_network_parent' ], network_admin_url( 'settings.php' ) );
+			$link = add_query_arg( [ 'page' => 'cau_network_parent' ], network_admin_url( 'settings.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
 		// Add settings link if not network activated and not viewing network admin.
 		if ( ! civicrm_au()->is_network_activated() AND ! is_network_admin() ) {
-			$link = add_query_arg( [ 'page' => 'civicrm_au_parent' ], admin_url( 'admin.php' ) );
+			$link = add_query_arg( [ 'page' => 'cau_parent' ], admin_url( 'admin.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 

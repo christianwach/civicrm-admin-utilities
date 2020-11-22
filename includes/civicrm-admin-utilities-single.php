@@ -354,6 +354,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Add admin page to Settings menu.
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 11 );
 
+		// Add our meta boxes.
+		add_action( 'add_meta_boxes', [ $this, 'meta_boxes_add' ], 11, 1 );
+
 		// Kill CiviCRM shortcode button.
 		add_action( 'admin_head', [ $this, 'kill_civi_button' ] );
 
@@ -740,7 +743,7 @@ class CiviCRM_Admin_Utilities_Single {
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ),
 			__( ' Admin Utilities', 'civicrm-admin-utilities' ),
 			$capability,
-			'civicrm_au_parent',
+			'cau_parent',
 			[ $this, 'page_settings' ]
 		);
 
@@ -753,11 +756,11 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Add settings page.
 		$this->settings_page = add_submenu_page(
-			'civicrm_au_parent', // Parent slug.
+			'cau_parent', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // Page title.
 			__( 'Settings', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
-			'civicrm_au_settings', // Slug name.
+			'cau_settings', // Slug name.
 			[ $this, 'page_settings' ] // Callback.
 		);
 
@@ -796,7 +799,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Define subpages.
 		$subpages = [
-		 	'civicrm_au_settings',
+		 	'cau_settings',
 		];
 
 		/**
@@ -811,8 +814,8 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// This tweaks the Settings subnav menu to show only one menu item.
 		if ( in_array( $plugin_page, $subpages ) ) {
-			$plugin_page = 'civicrm_au_parent';
-			$submenu_file = 'civicrm_au_parent';
+			$plugin_page = 'cau_parent';
+			$submenu_file = 'cau_parent';
 		}
 
 	}
@@ -831,6 +834,11 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Pass to method in this class.
 		$this->admin_help( $screen );
+
+		// Enqueue WordPress scripts.
+		wp_enqueue_script( 'common' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'dashboard' );
 
 	}
 
@@ -975,6 +983,142 @@ class CiviCRM_Admin_Utilities_Single {
 		$urls = $this->page_get_urls();
 
 		/**
+		 * Do not show tabs by default but allow overrides.
+		 *
+		 * @since 0.5.4
+		 *
+		 * @param bool False by default - do not show tabs.
+		 * @return bool Modified flag for whether or not to show tabs.
+		 */
+		$show_tabs = apply_filters( 'civicrm_admin_utilities_show_tabs', false );
+
+		// Get current screen.
+		$screen = get_current_screen();
+
+		/**
+		 * Allow meta boxes to be added to this screen.
+		 *
+		 * The Screen ID to use is: "civicrm_page_cwps_settings".
+		 *
+		 * @since 0.4
+		 *
+		 * @param str $screen_id The ID of the current screen.
+		 */
+		do_action( 'add_meta_boxes', $screen->id, null );
+
+		// Grab columns.
+		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
+
+		// Include template.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-settings.php';
+
+	}
+
+
+
+	/**
+	 * Get admin page URLs.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return array $urls The array of admin page URLs.
+	 */
+	public function page_get_urls() {
+
+		// Only calculate once.
+		if ( isset( $this->urls ) ) {
+			return $this->urls;
+		}
+
+		// Init return.
+		$this->urls = [];
+
+		// Get admin page URLs.
+		$this->urls['settings'] = menu_page_url( 'cau_settings', false );
+
+		/**
+		 * Filter the list of URLs.
+		 *
+		 * @since 0.5.4
+		 *
+		 * @param array $urls The existing list of URLs.
+		 * @return array $urls The modified list of URLs.
+		 */
+		$this->urls = apply_filters( 'civicrm_admin_utilities_page_urls', $this->urls );
+
+		// --<
+		return $this->urls;
+
+	}
+
+
+
+	/**
+	 * Get the URL for the form action.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return string $target_url The URL for the admin form action.
+	 */
+	public function page_submit_url_get() {
+
+		// Sanitise admin page url.
+		$target_url = $_SERVER['REQUEST_URI'];
+		$url_array = explode( '&', $target_url );
+
+		// Strip flag, if present, and rebuild.
+		if ( ! empty( $url_array ) ) {
+			$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
+			$target_url = htmlentities( $url_raw . '&updated=true' );
+		}
+
+		// --<
+		return $target_url;
+
+	}
+
+
+
+	//##########################################################################
+
+
+
+	/**
+	 * Register meta boxes.
+	 *
+	 * @since 0.8.1
+	 *
+	 * @param str $screen_id The Admin Page Screen ID.
+	 */
+	public function meta_boxes_add( $screen_id ) {
+
+		// Define valid Screen IDs.
+		$screen_ids = [
+			'civicrm_page_cau_parent',
+			'admin_page_cau_settings',
+		];
+
+		// Bail if not the Screen ID we want.
+		if ( ! in_array( $screen_id, $screen_ids ) ) {
+			return;
+		}
+
+		// Bail if user does not have permission.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Create Submit metabox.
+		add_meta_box(
+			'submitdiv',
+			__( 'Settings', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_submit_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'side', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+		/**
 		 * Set restricted-to-main-site template variable but allow overrides.
 		 *
 		 * This variable is set to "restricted" by default so that the relevant
@@ -987,10 +1131,150 @@ class CiviCRM_Admin_Utilities_Single {
 		 */
 		$restricted = apply_filters( 'civicrm_admin_utilities_page_settings_restricted', true );
 
+		// Show meta box if we're allowed to.
+		if ( ! $restricted ) {
+
+			// Create CiviCRM Access metabox.
+			add_meta_box(
+				'civicrm_au_access',
+				__( 'CiviCRM Access', 'civicrm-admin-utilities' ),
+				[ $this, 'meta_box_access_render' ], // Callback.
+				$screen_id, // Screen ID.
+				'normal', // Column: options are 'normal' and 'side'.
+				'core' // Vertical placement: options are 'core', 'high', 'low'.
+			);
+
+		}
+
+		// Create CiviCRM Admin Appearance metabox.
+		add_meta_box(
+			'civicrm_au_appearance',
+			__( 'CiviCRM Admin Appearance', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_appearance_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+		// Create CiviCRM Stylesheets metabox.
+		add_meta_box(
+			'civicrm_au_stylesheets',
+			__( 'CiviCRM Stylesheets', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_stylesheets_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+		// Create CiviCRM Contacts & WordPress Users metabox.
+		add_meta_box(
+			'civicrm_au_contacts',
+			__( 'CiviCRM Contacts &amp; WordPress Users', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_contacts_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+		// If CiviCRM has not been fixed.
+		if ( ! $this->access_form_fixed() ) {
+
+			// Create CiviCRM WordPress Access Control metabox.
+			add_meta_box(
+				'civicrm_au_access_form',
+				__( 'CiviCRM WordPress Access Control', 'civicrm-admin-utilities' ),
+				[ $this, 'meta_box_access_form_render' ], // Callback.
+				$screen_id, // Screen ID.
+				'normal', // Column: options are 'normal' and 'side'.
+				'core' // Vertical placement: options are 'core', 'high', 'low'.
+			);
+
+		}
+
+		// Create Admin Bar Options metabox.
+		add_meta_box(
+			'civicrm_au_admin_bar',
+			__( 'Admin Bar Options', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_admin_bar_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+		// Create Post Type Options metabox.
+		add_meta_box(
+			'civicrm_au_post_types',
+			__( 'Post Type Options', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_post_types_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
+		// If this user can administer CiviCRM.
+		if ( $this->check_permission( 'administer CiviCRM' ) ) {
+
+			// Create Shortcuts metabox.
+			add_meta_box(
+				'civicrm_au_misc',
+				__( 'Shortcuts', 'civicrm-admin-utilities' ),
+				[ $this, 'meta_box_shortcuts_render' ], // Callback.
+				$screen_id, // Screen ID.
+				'side', // Column: options are 'normal' and 'side'.
+				'low' // Vertical placement: options are 'core', 'high', 'low'.
+			);
+
+		}
+
+	}
+
+
+
+	/**
+	 * Render a Submit meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_submit_render() {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-submit.php';
+
+	}
+
+
+
+	/**
+	 * Render CiviCRM Access meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_access_render() {
+
 		// Init Hide CiviCRM checkbox.
 		$hide_civicrm = '';
 		if ( $this->setting_get( 'hide_civicrm', '0' ) == '1' ) {
 			$hide_civicrm = ' checked="checked"';
+		}
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-access.php';
+
+	}
+
+
+
+	/**
+	 * Render CiviCRM Admin Appearance meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_appearance_render() {
+
+		// Init "Dashboard Title" checkbox.
+		$dashboard_title = '';
+		if ( $this->setting_get( 'dashboard_title', '0' ) == '1' ) {
+			$dashboard_title = ' checked="checked"';
 		}
 
 		// Init menu CSS checkbox.
@@ -1006,6 +1290,20 @@ class CiviCRM_Admin_Utilities_Single {
 			$admin_css = ' checked="checked"';
 			$theme_preview = ' display: none;';
 		}
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-appearance.php';
+
+	}
+
+
+
+	/**
+	 * Render CiviCRM Stylesheets meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_stylesheets_render() {
 
 		// Init default CSS checkbox.
 		$default_css = '';
@@ -1056,28 +1354,65 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-stylesheets.php';
+
+	}
+
+
+
+	/**
+	 * Render CiviCRM Contacts & WordPress Users meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_contacts_render() {
+
 		// Init suppress email checkbox.
 		$email_suppress = '';
 		if ( $this->setting_get( 'email_suppress', '0' ) == '1' ) {
 			$email_suppress = ' checked="checked"';
 		}
 
-		// Assume access form has been fixed.
-		$access_form_fixed = true;
-
-		// If CiviCRM has not been fixed.
-		if ( ! $this->access_form_fixed() ) {
-
-			// Set flag.
-			$access_form_fixed = false;
-
-			// Init access form checkbox.
-			$prettify_access = '';
-			if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) {
-				$prettify_access = ' checked="checked"';
-			}
-
+		// Init "Fix Soft Delete" checkbox.
+		$fix_soft_delete = '';
+		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '1' ) {
+			$fix_soft_delete = ' checked="checked"';
 		}
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-contacts.php';
+
+	}
+
+
+
+	/**
+	 * Render CiviCRM WordPress Access Control meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_access_form_render() {
+
+		// Init access form checkbox.
+		$prettify_access = '';
+		if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) {
+			$prettify_access = ' checked="checked"';
+		}
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-access-form.php';
+
+	}
+
+
+
+	/**
+	 * Render Admin Bar Options meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_admin_bar_render() {
 
 		// Init admin bar checkbox.
 		$admin_bar = '';
@@ -1091,78 +1426,39 @@ class CiviCRM_Admin_Utilities_Single {
 			$admin_bar_groups = ' checked="checked"';
 		}
 
-		// Init "Fix Soft Delete" checkbox.
-		$fix_soft_delete = '';
-		if ( $this->setting_get( 'fix_soft_delete', '0' ) == '1' ) {
-			$fix_soft_delete = ' checked="checked"';
-		}
-
-		// Init "Dashboard Title" checkbox.
-		$dashboard_title = '';
-		if ( $this->setting_get( 'dashboard_title', '0' ) == '1' ) {
-			$dashboard_title = ' checked="checked"';
-		}
-
-		// Get post type options.
-		$options = $this->post_type_options_get();
-
-		// Init administer CiviCRM flag.
-		$administer_civicrm = false;
-
-		// Override if this user can administer CiviCRM.
-		if ( $this->check_permission( 'administer CiviCRM' ) ) {
-			$administer_civicrm = true;
-		}
-
-		/**
-		 * Do not show tabs by default but allow overrides.
-		 *
-		 * @since 0.5.4
-		 *
-		 * @param bool False by default - do not show tabs.
-		 * @return bool Modified flag for whether or not to show tabs.
-		 */
-		$show_tabs = apply_filters( 'civicrm_admin_utilities_show_tabs', false );
-
-		// Include template.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-settings.php' );
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-admin-bar.php';
 
 	}
 
 
 
 	/**
-	 * Get admin page URLs.
+	 * Render Post Type Options meta box on Admin screen.
 	 *
-	 * @since 0.5.4
-	 *
-	 * @return array $urls The array of admin page URLs.
+	 * @since 0.8.1
 	 */
-	public function page_get_urls() {
+	public function meta_box_post_types_render() {
 
-		// Only calculate once.
-		if ( isset( $this->urls ) ) {
-			return $this->urls;
-		}
+		// Get Post Type options.
+		$options = $this->post_type_options_get();
 
-		// Init return.
-		$this->urls = [];
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-post-types.php';
 
-		// Get admin page URLs.
-		$this->urls['settings'] = menu_page_url( 'civicrm_au_settings', false );
+	}
 
-		/**
-		 * Filter the list of URLs.
-		 *
-		 * @since 0.5.4
-		 *
-		 * @param array $urls The existing list of URLs.
-		 * @return array $urls The modified list of URLs.
-		 */
-		$this->urls = apply_filters( 'civicrm_admin_utilities_page_urls', $this->urls );
 
-		// --<
-		return $this->urls;
+
+	/**
+	 * Render Shortcuts meta box on Admin screen.
+	 *
+	 * @since 0.8.1
+	 */
+	public function meta_box_shortcuts_render() {
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-shortcuts.php';
 
 	}
 
@@ -1232,32 +1528,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// --<
 		return $options;
-
-	}
-
-
-
-	/**
-	 * Get the URL for the form action.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @return string $target_url The URL for the admin form action.
-	 */
-	public function page_submit_url_get() {
-
-		// Sanitise admin page url.
-		$target_url = $_SERVER['REQUEST_URI'];
-		$url_array = explode( '&', $target_url );
-
-		// Strip flag, if present, and rebuild.
-		if ( ! empty( $url_array ) ) {
-			$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
-			$target_url = htmlentities( $url_raw . '&updated=true' );
-		}
-
-		// --<
-		return $target_url;
 
 	}
 
@@ -2115,7 +2385,7 @@ class CiviCRM_Admin_Utilities_Single {
 				'id' => 'cau-11',
 				'parent' => $id,
 				'title' => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				'href' => admin_url( 'admin.php?page=civicrm_admin_utilities_settings' ),
+				'href' => menu_page_url( 'cau_parent', false ),
 			] );
 		}
 

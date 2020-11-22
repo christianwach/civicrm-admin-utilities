@@ -120,7 +120,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Add settings page.
 		$this->network_multidomain_page = add_submenu_page(
-			'civicrm_au_network_parent', // Parent slug.
+			'cau_network_parent', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Domain', 'civicrm-admin-utilities' ), // Page title.
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // Menu title.
 			'manage_network_plugins', // Required caps.
@@ -426,7 +426,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Add Domain page.
 		$this->multidomain_page = add_submenu_page(
-			'civicrm_au_parent', // Parent slug.
+			'cau_parent', // Parent slug.
 			__( 'CiviCRM Admin Utilities: Domain', 'civicrm-admin-utilities' ), // Page title.
 			__( 'Domain', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
