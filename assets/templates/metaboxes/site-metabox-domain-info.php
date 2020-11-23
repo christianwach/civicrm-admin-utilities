@@ -11,24 +11,48 @@
 	</div>
 <?php endif; ?>
 
-<ul>
+<table class="form-table">
 
-	<li><?php echo sprintf(
-		__( 'The current domain for this site is: "%1$s" (ID: %2$s)', 'civicrm-admin-utilities' ),
-		'<span class="cau_domain_name">' . $metabox['args']['domain']['name'] . '</span>',
-		'<span class="cau_domain_id">' . $metabox['args']['domain']['id'] . '</span>'
-	); ?></li>
+	<tr>
+		<th scope="row">
+			<?php _e( 'Domain', 'civicrm-admin-utilities' ); ?>
+		</th>
 
-	<li><?php echo sprintf(
-		__( 'The current domain group for this site is: "%1$s" (ID: %2$s)', 'civicrm-admin-utilities' ),
-		'<span class="cau_domain_group_name">' . $metabox['args']['domain_group']['name'] . '</span>',
-		'<span class="cau_domain_group_id">' . $metabox['args']['domain_group']['id'] . '</span>'
-	); ?></li>
+		<td>
+			<?php echo sprintf(
+				__( '%1$s (ID %2$s)', 'civicrm-admin-utilities' ),
+				'<span class="cau_domain_name">' . $metabox['args']['domain']['name'] . '</span>',
+				'<span class="cau_domain_id">' . $metabox['args']['domain']['id'] . '</span>'
+			); ?>
+		</td>
+	</tr>
 
-	<li><?php echo sprintf(
-		__( 'The current domain organisation for this site is: "%1$s" (ID: %2$s)', 'civicrm-admin-utilities' ),
-		'<span class="cau_domain_org_name">' . $metabox['args']['domain_org']['name'] . '</span>',
-		'<span class="cau_domain_org_id">' . $metabox['args']['domain_org']['id'] . '</span>'
-	); ?></li>
+	<tr>
+		<th scope="row">
+			<?php _e( 'Domain Group', 'civicrm-admin-utilities' ); ?>
+		</th>
 
-</ul>
+		<td>
+			<?php echo sprintf(
+				__( '%1$s (ID %2$s)', 'civicrm-admin-utilities' ),
+				'<span class="cau_domain_group_name">' . $metabox['args']['domain_group']['name'] . '</span>',
+				'<span class="cau_domain_group_id">' . $metabox['args']['domain_group']['id'] . '</span>'
+			); ?>
+		</td>
+	</tr>
+
+	<tr>
+		<th scope="row">
+			<?php _e( 'Domain Organisation', 'civicrm-admin-utilities' ); ?>
+		</th>
+
+		<td>
+			<?php echo sprintf(
+				__( '%1$s (ID %2$s)', 'civicrm-admin-utilities' ),
+				'<span class="cau_domain_org_name">' . $metabox['args']['domain_org']['name'] . '</span>',
+				'<span class="cau_domain_org_id">' . $metabox['args']['domain_org']['id'] . '</span>'
+			); ?>
+		</td>
+	</tr>
+
+</table>

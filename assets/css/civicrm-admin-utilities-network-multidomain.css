@@ -19,3 +19,10 @@ h3.wp-heading-inline
 	display: inline-block;
 	margin-right: 5px;
 }
+
+/* Compress Domain Info table */
+#civicrm_au_network_domains .form-table th,
+#civicrm_au_network_domains .form-table td
+{
+	padding: 10px 10px 10px 0;
+}

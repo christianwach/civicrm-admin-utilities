@@ -26,3 +26,9 @@
     min-width: 300px;
 }
 
+/* Compress Domain Info table */
+#civicrm_au_domain_info .form-table th,
+#civicrm_au_domain_info .form-table td
+{
+	padding: 10px 10px 10px 0;
+}

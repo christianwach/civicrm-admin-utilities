@@ -6,13 +6,26 @@
 <?php endif; ?>
 
 <?php if ( ! empty( $metabox['args']['domains'] ) ) : ?>
-	<ul>
+
+<table class="form-table">
+
 	<?php foreach( $metabox['args']['domains'] AS $domain ) : ?>
-		<li><?php echo sprintf(
-			__( '"%1$s" (ID: %2$s)', 'civicrm-admin-utilities' ),
-			'<span class="cau_domain_name">' . $domain['name'] . '</span>',
-			'<span class="cau_domain_id">' . $domain['id'] . '</span>'
-		); ?></li>
+
+	<tr>
+		<th scope="row">
+			<?php echo $domain['name']; ?>
+		</th>
+
+		<td>
+			<?php echo sprintf(
+				__( 'ID %s', 'civicrm-admin-utilities' ),
+				'<span class="cau_domain_id">' . $domain['id'] . '</span>'
+			); ?>
+		</td>
+	</tr>
+
 	<?php endforeach; ?>
-	</ul>
+
+</table>
+
 <?php endif; ?>
