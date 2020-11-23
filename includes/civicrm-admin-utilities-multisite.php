@@ -1752,6 +1752,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Save options.
 		$this->settings_save();
 
+		/**
+		 * Broadcast that the Network Settings update process is finished.
+		 *
+		 * @since 0.8.1
+		 */
+		do_action( 'civicrm_admin_utilities_settings_network_updated' );
+
 		// --<
 		return true;
 
@@ -1922,6 +1929,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Save options.
 		$this->settings_save();
+
+		/**
+		 * Broadcast that the Site Settings update process is finished.
+		 *
+		 * @since 0.8.1
+		 */
+		do_action( 'civicrm_admin_utilities_settings_site_updated' );
 
 		// --<
 		return true;

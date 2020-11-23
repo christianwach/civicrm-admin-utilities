@@ -1154,6 +1154,13 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			], true ) );
 		}
 
+		/**
+		 * Broadcast that the Network Multidomain update process is finished.
+		 *
+		 * @since 0.8.1
+		 */
+		do_action( 'civicrm_admin_utilities_network_multidomain_updated' );
+
 		// --<
 		return true;
 
@@ -1182,6 +1189,13 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Maybe set new Domain Group.
 		$this->domain_group_set( $domain_group_id );
+
+		/**
+		 * Broadcast that the Single Site Multidomain update process is finished.
+		 *
+		 * @since 0.8.1
+		 */
+		do_action( 'civicrm_admin_utilities_multidomain_updated' );
 
 		// --<
 		return true;

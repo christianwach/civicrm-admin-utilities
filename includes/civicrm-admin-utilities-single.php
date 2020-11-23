@@ -3311,6 +3311,13 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->clear_caches();
 		}
 
+		/**
+		 * Broadcast that the settings update process is finished.
+		 *
+		 * @since 0.8.1
+		 */
+		do_action( 'civicrm_admin_utilities_single_settings_updated' );
+
 		// --<
 		return true;
 
