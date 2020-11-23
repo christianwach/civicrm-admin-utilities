@@ -302,6 +302,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Grab columns.
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
 
+		// Get domains.
+		$domains = $this->domains_get();
+
 		// Include template file.
 		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-multidomain.php' );
 
