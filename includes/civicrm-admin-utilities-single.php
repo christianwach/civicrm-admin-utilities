@@ -1664,9 +1664,9 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Define our custom path based on CiviCRM version.
 		if ( version_compare( $version, '5.5', '>=' ) ) {
-			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_nav_template';
+			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/template-nav';
 		} else {
-			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_custom_templates';
+			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/template-menu';
 		}
 
 		// Add our custom template directory.
@@ -1709,7 +1709,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$template = CRM_Core_Smarty::singleton();
 
 		// Define our custom path.
-		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'civicrm_access_templates';
+		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/template-access';
 
 		// Add our custom template directory.
 		$template->addTemplateDir( $custom_path );
