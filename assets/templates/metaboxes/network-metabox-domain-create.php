@@ -1,6 +1,6 @@
 <!-- assets/templates/metaboxes/network-metabox-domain-create.php -->
-<div class="notice notice-warning inline" style="background-color: #f7f7f7;">
-	<p><?php _e( 'If you want a WordPress sub-site to have a separate CiviCRM Domain, create the Domain here before you activate the CiviCRM plugin on that WordPress sub-site.', 'civicrm-admin-utilities' ); ?></p>
+<div class="notice notice-warning inline">
+		<p><?php _e( 'If you want a WordPress sub-site to have a separate CiviCRM Domain, create the Domain here before you activate the CiviCRM plugin on that WordPress sub-site. There is no simple way to delete CiviCRM Domains yet, so please make sure this is what you want to do.', 'civicrm-admin-utilities' ); ?></p>
 </div>
 
 <table class="form-table">

@@ -32,3 +32,10 @@
 {
 	padding: 10px 10px 10px 0;
 }
+
+/* Give notice a little space */
+#civicrm_au_domain_edit .notice.notice-warning
+{
+	background-color: #f7f7f7;
+	margin: 12px 0 0 0;
+}

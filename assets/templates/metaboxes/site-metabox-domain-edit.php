@@ -1,5 +1,5 @@
 <!-- assets/templates/metaboxes/site-metabox-domain-edit.php -->
-<div class="notice notice-warning inline" style="background-color: #f7f7f7;">
+<div class="notice notice-warning inline">
 	<p><?php _e( 'Edit this Domain with caution &mdash; it could cause problems if you make edits to a Domain which is not completely new and unused.', 'civicrm-admin-utilities' ); ?><br>
 	<strong><?php _e( 'You have been warned.', 'civicrm-admin-utilities' ); ?></strong></p>
 </div>

@@ -54,7 +54,7 @@
 
 				<div id="post-body-content">
 					<div class="notice notice-warning inline" style="margin: 0;">
-						<p><strong style="text-transform: uppercase;"><?php _e( 'Important Note:', 'civicrm-admin-utilities' ); ?></strong> <?php _e( 'The settings that you choose below will be used as the initial default settings for CiviCRM Admin Utilities on each sub-site where CiviCRM is activated. Each of these sub-sites has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site.', 'civicrm-admin-utilities' ); ?></p>
+						<p><strong style="text-transform: uppercase;"><?php _e( 'Please Note:', 'civicrm-admin-utilities' ); ?></strong> <?php _e( 'The settings that you choose below will be used as the initial default settings for CiviCRM Admin Utilities on each sub-site where CiviCRM is activated. Each of these sub-sites has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site.', 'civicrm-admin-utilities' ); ?></p>
 					</div>
 				</div><!-- #post-body-content -->
 
