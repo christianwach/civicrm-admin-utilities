@@ -4,8 +4,8 @@ CiviCRM Admin Utilities
 **Contributors:** [needle](https://profiles.wordpress.org/needle/), [cuny-academic-commons](https://profiles.wordpress.org/cuny-academic-commons/)<br/>
 **Donate link:** https://www.paypal.me/interactivist<br/>
 **Tags:** civicrm, admin, utility, styling, menu<br/>
-**Requires at least:** 4.4<br/>
-**Tested up to:** 5.5<br/>
+**Requires at least:** 4.9<br/>
+**Tested up to:** 5.6<br/>
 **Stable tag:** 0.8.1<br/>
 **License:** GPLv2 or later<br/>
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
