@@ -183,15 +183,39 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
+   * Is the current theme our theme?
+   *
+   * @since 0.8.1
+   *
+   * @return bool True if the CAU theme is active, false otherwise.
+   */
+  public function is_cau_theme() {
+
+		// If it's our theme, return true.
+    $theme = $this->get_theme();
+		if ( $theme == $this->slug ) {
+			return true;
+		}
+
+		// Fall back to false.
+		return false;
+
+  }
+
+
+
+  /**
    * Get the current theme.
    *
    * @since 0.8
+   *
+   * @return str $theme The current theme "slug", empty otherwise.
    */
   public function get_theme() {
 
     // Ignore anything but 5.31+.
     if ( ! $this->is_allowed() ) {
-      return;
+      return '';
     }
 
     // Switch setting to our theme or the default.

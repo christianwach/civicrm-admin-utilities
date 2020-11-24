@@ -1809,6 +1809,17 @@ class CiviCRM_Admin_Utilities_Single {
 				}
 			}
 
+			// Amend styles when the CiviCRM Admin Utilities "theme" is active.
+			if ( $this->plugin->theme->is_cau_theme() ) {
+				wp_enqueue_style(
+					'civicrm_admin_utilities_admin_override_civi531plus',
+					plugins_url( 'assets/css/civicrm-admin-utilities-admin-civi-5-31-plus.css', CIVICRM_ADMIN_UTILITIES_FILE ),
+					[ 'civicrm_admin_utilities_admin_override' ],
+					CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+					'all' // Media.
+				);
+			}
+
 			/**
 			 * Broadcast that we are loading a custom CiviCRM stylesheet.
 			 *

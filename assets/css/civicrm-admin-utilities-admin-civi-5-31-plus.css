@@ -1,0 +1,104 @@
+/**
+ * CiviCRM style overrides for CiviCRM 5.31+.
+ *
+ * Implements changes in admin styling introduced in CiviCRM 5.31. This mostly
+ * means overriding the amends we made when Bootstrap wasn't present.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+
+
+/*
+--------------------------------------------------------------------------------
+Contact Summary Editor extension overrides
+--------------------------------------------------------------------------------
+*/
+
+body #bootstrap-theme h1,
+body #bootstrap-theme h2,
+body #bootstrap-theme h3,
+body #bootstrap-theme h4,
+body #bootstrap-theme h5,
+body #bootstrap-theme h6,
+body #bootstrap-theme .h1,
+body #bootstrap-theme .h2,
+body #bootstrap-theme .h3,
+body #bootstrap-theme .h4,
+body #bootstrap-theme .h5,
+body #bootstrap-theme .h6
+{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+body #bootstrap-theme > h1
+{
+    font-size: 130%;
+    margin-bottom: 1em;
+}
+
+body #bootstrap-theme #contactLayoutEditor .navbar
+{
+	border: none;
+}
+
+body #bootstrap-theme #contactLayoutEditor .panel-heading
+{
+	color: #464354;
+	background: #e6e6e6;
+	height: 50px;
+}
+
+body #bootstrap-theme #contactLayoutEditor h2.panel-title
+{
+	line-height: 1.8;
+	color: #464354;
+}
+
+body #bootstrap-theme #contactLayoutEditor .panel-primary > .panel-heading h2.panel-title
+{
+	color: #464354;
+}
+
+body #bootstrap-theme #contactLayoutEditor .panel-inner
+{
+	padding: 12px;
+}
+
+body #bootstrap-theme #contactLayoutEditor .navbar .container-fluid
+{
+	padding: 0;
+	border-top: none;
+}
+
+body #bootstrap-theme #contactLayoutEditor .panel-heading .panel-title form
+{
+	top: 0;
+}
+
+body #bootstrap-theme #contactLayoutEditor .panel-heading .btn
+{
+	padding: 4px 8px;
+}
+
+body #bootstrap-theme #contactLayoutEditor .panel-heading .btn-group
+{
+	top: 0;
+}
+
+body #bootstrap-theme .form-control.select2-container .select2-choices
+{
+	margin-bottom: 0;
+}
+
+body #bootstrap-theme #contactLayoutEditor .cse-layout-delete .btn:hover
+{
+	color: #666;
+}
+
+body #cse-block-container #cse-palette-col > h4 .btn-group
+{
+	top: -2px;
+}
