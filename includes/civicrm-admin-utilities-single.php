@@ -2385,7 +2385,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		/**
-		 * Set capability but allow overrides.
+		 * Filter capability to view Admin Utilities settings page.
 		 *
 		 * @since 0.5.4
 		 * @since 0.6.1 Added here to check access to menu item.
@@ -2395,13 +2395,13 @@ class CiviCRM_Admin_Utilities_Single {
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
-		// Admin Utilities settings page.
+		// Add link to Admin Utilities settings page.
 		if ( current_user_can( $capability ) ) {
 			$wp_admin_bar->add_node( [
 				'id' => 'cau-11',
 				'parent' => $id,
 				'title' => __( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
-				'href' => menu_page_url( 'cau_parent', false ),
+				'href' => admin_url( 'admin.php?page=cau_settings' ),
 			] );
 		}
 
