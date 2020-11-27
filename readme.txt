@@ -70,6 +70,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.8.1 =
+
+* Introduces new Settings UI
+* Relocates Settings menu item under CiviCRM's menu item
+
 = 0.8 =
 
 * Fix PayPal IPN URL encoding
