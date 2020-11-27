@@ -8,7 +8,7 @@ Stable tag: 0.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-CiviCRM Admin Utilities modifies CiviCRM's behaviour and appearance in single site and multisite installs.
+Utilities for customising CiviCRM's behaviour and appearance in single site and multisite installs.
 
 
 
@@ -16,7 +16,7 @@ CiviCRM Admin Utilities modifies CiviCRM's behaviour and appearance in single si
 
 CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
-* Supplies an alternative theme for CiviCRM admin screens (see below)
+* Supplies a theme for CiviCRM admin screensthat is more in keeping with WordPress (see below)
 * Modifies the styling of the CiviCRM menu to fix a number of issues
 * Fixes the appearance of the Shoreditch extension in WordPress admin
 * Fixes the appearance of the WordPress Access Control form where necessary

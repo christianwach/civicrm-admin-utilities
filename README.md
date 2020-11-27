@@ -10,7 +10,7 @@ CiviCRM Admin Utilities
 **License:** GPLv2 or later<br/>
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
-CiviCRM Admin Utilities modifies CiviCRM's behaviour and appearance in single site and multisite installs.
+*CiviCRM Admin Utilities* helps you customise CiviCRM's behaviour and appearance in single site and multisite installs.
 
 ### Description
 
