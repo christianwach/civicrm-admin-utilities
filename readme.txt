@@ -16,7 +16,7 @@ Utilities for customising CiviCRM's behaviour and appearance in single site and 
 
 CiviCRM Admin Utilities modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
-* Supplies a theme for CiviCRM admin screensthat is more in keeping with WordPress (see below)
+* Supplies a theme for CiviCRM admin screens that is more in keeping with WordPress (see below)
 * Modifies the styling of the CiviCRM menu to fix a number of issues
 * Fixes the appearance of the Shoreditch extension in WordPress admin
 * Fixes the appearance of the WordPress Access Control form where necessary
@@ -33,7 +33,7 @@ Version 0.5 introduces a new theme for CiviCRM admin screens that is more in kee
 
 ### Requirements
 
-This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.7*.
+This plugin requires a minimum of *WordPress 4.9* and *CiviCRM 5*.
 
 ### Notes
 

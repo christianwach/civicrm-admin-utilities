@@ -10,7 +10,7 @@ CiviCRM Admin Utilities
 **License:** GPLv2 or later<br/>
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
-*CiviCRM Admin Utilities* helps you customise CiviCRM's behaviour and appearance in single site and multisite installs.
+Utilities for customising CiviCRM's behaviour and appearance in single site and multisite installs.
 
 ### Description
 
@@ -18,7 +18,7 @@ Please note: this is the development repository for *CiviCRM Admin Utilities*. I
 
 *CiviCRM Admin Utilities* is a WordPress plugin that modifies CiviCRM's behaviour in single site and multisite installs. It does a number of useful things:
 
-* Supplies an alternative theme for CiviCRM admin screens (see below)
+* Supplies a theme for CiviCRM admin screens that is more in keeping with WordPress (see below)
 * Modifies the styling of the CiviCRM menu to fix a number of issues
 * Fixes the appearance of the Shoreditch extension in WordPress admin
 * Fixes the appearance of the WordPress Access Control form where necessary
@@ -27,6 +27,7 @@ Please note: this is the development repository for *CiviCRM Admin Utilities*. I
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
 * Allows you to remove "administer CiviCRM" capabilities from sub-site administrators
+* Allows suppression of the "change of email" notification when a CiviCRM Contact's primary email is changed
 
 ### CiviCRM Admin Theme
 
@@ -34,7 +35,7 @@ Version 0.5 introduces a new theme for CiviCRM admin screens that is more in kee
 
 ### Notes
 
-This plugin requires a minimum of *WordPress 4.4* and *CiviCRM 4.6*. For versions of CiviCRM prior to 4.6, this plugin requires the corresponding branch of the [CiviCRM WordPress plugin](https://github.com/civicrm/civicrm-wordpress) plus the custom WordPress.php hook file from the [CiviCRM Hook Tester repo on GitHub](https://github.com/christianwach/civicrm-wp-hook-tester) so that it overrides the built-in CiviCRM file. Please refer to the each repo for further instructions.
+This plugin requires a minimum of *WordPress 4.9* and *CiviCRM 5*.
 
 If you have installed the Shoreditch extension for CiviCRM, then this plugin does its best to make it compatible with WordPress. Unfortunately, Shoreditch version 0.1-alpha25 now makes it very difficult to override the margin applied to the body tag on the front end of your site, so you will have to do this yourself. See [this PR for details](https://github.com/civicrm/org.civicrm.shoreditch/pull/291).
 
