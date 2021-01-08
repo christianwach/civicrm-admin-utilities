@@ -40,6 +40,106 @@ html body.wp-admin:not(.toolbar)
 
 /*
 --------------------------------------------------------------------------------
+Support for flex-box dashboard
+--------------------------------------------------------------------------------
+*/
+
+.crm-container .crm-flex-box
+{
+	display: flex;
+}
+.crm-container .crm-flex-box > *
+{
+	flex: 1;
+	min-width: 0; /* prevents getting squashed by whitespace:nowrap content */
+}
+.crm-container .crm-flex-box > .crm-flex-2
+{
+	flex: 2;
+}
+.crm-container .crm-flex-box > .crm-flex-3
+{
+	flex: 3;
+}
+.crm-container .crm-flex-box > .crm-flex-4
+{
+	flex: 4;
+}
+
+.crm-container .crm-draggable
+{
+	cursor: move;
+}
+
+div.crm-container .crm-dashlet-header a
+{
+	text-decoration: none;
+}
+
+div.crm-container .crm-dashlet
+{
+	margin: 5px;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+div.crm-container .crm-dashlet-header
+{
+	padding: 12px 8px;
+	color: #23282d;
+	font-weight: bold;
+	background-color: #fafafa;
+	border: 1px solid #e5e5e5;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+div.crm-container .crm-dashlet-header h3,
+div.crm-container .crm-dashlet-header a
+{
+	color: #000;
+}
+
+div.crm-container .crm-dashlet-header a
+{
+	padding-top: 1px;
+	font-size: 16px;
+}
+
+div.crm-container .crm-dashlet-content
+{
+	border: 1px solid #e5e5e5;
+	border-top: none;
+}
+
+div.crm-container .crm-inactive-dashlet
+{
+	margin: 10px;
+}
+
+div#civicrm-dashboard .ui-sortable-placeholder
+{
+	position: relative;
+	height: 66px !important;
+	width: 226px;
+	vertical-align: bottom;
+}
+
+#civicrm-dashboard #civicrm-news-feed-blog .crm-accordion-header
+{
+	background-color: #eee;
+}
+
+#civicrm-dashboard #civicrm-news-feed-blog .crm-accordion-header:hover
+{
+	background-color: #ddd;
+}
+
+
+
+
+
+/*
+--------------------------------------------------------------------------------
 Replacement for CiviCRM default styles for WordPress
 --------------------------------------------------------------------------------
 */
@@ -49,6 +149,20 @@ Replacement for CiviCRM default styles for WordPress
  * Other civi blocks outside the main container also have the class crm-container (but not the id)
  * All styles should start with .crm-container unless they are specific to the main div only
  */
+
+/* Use this class to hide text that should only be there for screen readers */
+.sr-only {
+   border: 0;
+   clip: rect(1px, 1px, 1px, 1px);
+   clip-path: inset(50%);
+   height: 1px;
+   width: 1px;
+   margin: -1px;
+   overflow: hidden;
+   padding: 0;
+   position: absolute;
+}
+
 .crm-container input
 {
 	box-sizing: content-box;
@@ -1280,11 +1394,11 @@ div.crm-container .crm-content label.error
 }
 
 .crm-container .crm-pager span.ui-spinner {
-    margin-top: -2px;
+	margin-top: -2px;
 }
 
 #crm-container .crm-pager input.ui-spinner-input {
-    min-height: 25px;
+	min-height: 25px;
 }
 
 .crm-container .crm-pager-nav {
@@ -1957,7 +2071,7 @@ a#checkavailability
 {
 	display: inline-block;
 	padding: 6px 8px;
-    margin: 2px 0 0 4px;
+	margin: 2px 0 0 4px;
 }
 
 /*
@@ -1974,15 +2088,15 @@ a#checkavailability
 */
 
 span.crm-frozen-field {
-    display: inline-block;
-    vertical-align: top;
-    min-height: 26px;
+	display: inline-block;
+	vertical-align: top;
+	min-height: 26px;
 }
 
 .form-layout-compressed span.crm-frozen-field
 {
-    padding-top: 4px;
-    min-height: 26px;
+	padding-top: 4px;
+	min-height: 26px;
 }
 
 .crm-container .ui-tabs .ui-tabs-nav
@@ -2228,7 +2342,7 @@ span.crm-frozen-field {
 
 #crm-container .breadcrumb i.crm-i
 {
-    margin: 0 0.2em;
+	margin: 0 0.2em;
 }
 
 /* For Joomla, margin 0 works correctly */
@@ -5603,7 +5717,7 @@ body #crm-container div.crm-summary-row div.crm-content
 
 .crm-contact_image.crm-contact_image-block a
 {
-    display: block;
+	display: block;
 }
 
 
