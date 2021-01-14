@@ -70,6 +70,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.8.2 =
+
+* Fix styling of Dashboard in CiviCRM 5.33+
+
 = 0.8.1 =
 
 * Introduces new Settings UI
