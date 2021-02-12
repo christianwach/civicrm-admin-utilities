@@ -136,6 +136,51 @@ div#civicrm-dashboard .ui-sortable-placeholder
 
 
 
+/*
+--------------------------------------------------------------------------------
+Support for SearchKit
+--------------------------------------------------------------------------------
+*/
+
+#bootstrap-theme.crm-search > table
+{
+	margin: 5px 0;
+}
+
+#bootstrap-theme.crm-search > table,
+#bootstrap-theme .crm-search-results table
+{
+	background-color: #fff;
+}
+
+#bootstrap-theme.crm-search > table th,
+#bootstrap-theme.crm-search > table td,
+#bootstrap-theme .crm-search-results table td
+{
+	padding: 5px;
+}
+
+#bootstrap-theme.crm-search > table td,
+#bootstrap-theme .crm-search-results table td
+{
+	border-bottom: 1px solid #ddd;
+}
+
+#bootstrap-theme.crm-search fieldset
+{
+	background-color: #fff;
+}
+
+#bootstrap-theme.crm-search fieldset legend.collapsible-title
+{
+	padding-left: 15px;
+}
+
+#bootstrap-theme.crm-search .crm-flex-4 .crm-flex-box.ng-scope
+{
+	flex-direction: column;
+}
+
 
 
 /*
