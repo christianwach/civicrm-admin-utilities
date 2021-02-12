@@ -155,6 +155,7 @@ Support for SearchKit
 
 #bootstrap-theme.crm-search > table th,
 #bootstrap-theme.crm-search > table td,
+#bootstrap-theme .crm-search-results table th,
 #bootstrap-theme .crm-search-results table td
 {
 	padding: 5px;
@@ -169,6 +170,11 @@ Support for SearchKit
 #bootstrap-theme.crm-search fieldset
 {
 	background-color: #fff;
+}
+
+#bootstrap-theme.crm-search fieldset.crm-collapsible
+{
+	border: 1px solid lightgrey;
 }
 
 #bootstrap-theme.crm-search fieldset legend.collapsible-title
