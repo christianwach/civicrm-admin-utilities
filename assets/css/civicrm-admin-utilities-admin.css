@@ -65,6 +65,14 @@ Support for flex-box dashboard
 {
 	flex: 4;
 }
+.crm-container .crm-flex-box > .crm-flex-5
+{
+	flex: 5;
+}
+.crm-container .crm-flex-box > .crm-flex-6
+{
+	flex: 6;
+}
 
 .crm-container .crm-draggable
 {
@@ -185,6 +193,74 @@ Support for SearchKit
 #bootstrap-theme.crm-search .crm-flex-4 .crm-flex-box.ng-scope
 {
 	flex-direction: column;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Support for Afform
+--------------------------------------------------------------------------------
+*/
+
+#bootstrap-theme.afadmin-list .nav-tabs
+{
+	margin-bottom: 12px;
+}
+
+#bootstrap-theme.afadmin-list > table
+{
+	margin: 5px 0;
+}
+
+#bootstrap-theme.afadmin-list > table,
+#bootstrap-theme .afadmin-list-results table
+{
+	background-color: #fff;
+}
+
+#bootstrap-theme.afadmin-list > table th,
+#bootstrap-theme.afadmin-list > table td,
+#bootstrap-theme .afadmin-list-results table th,
+#bootstrap-theme .afadmin-list-results table td
+{
+	padding: 5px;
+}
+
+#bootstrap-theme.afadmin-list > table td,
+#bootstrap-theme .afadmin-list-results table td
+{
+	border-bottom: 1px solid #ddd;
+}
+
+#bootstrap-theme.afadmin-list fieldset
+{
+	background-color: #fff;
+}
+
+#bootstrap-theme.afadmin-list fieldset.crm-collapsible
+{
+	border: 1px solid lightgrey;
+}
+
+#bootstrap-theme.afadmin-list fieldset legend.collapsible-title
+{
+	padding-left: 15px;
+}
+
+#afGuiEditor
+{
+	margin-top: 20px;
+}
+
+#bootstrap-theme #afGuiEditor .panel-heading
+{
+	padding-bottom: 1px;
+}
+
+#bootstrap-theme #afGuiEditor .panel-body
+{
+	padding-top: 12px;
 }
 
 
