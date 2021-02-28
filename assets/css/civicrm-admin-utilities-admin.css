@@ -258,9 +258,23 @@ Support for Afform
 	padding-bottom: 1px;
 }
 
+#bootstrap-theme #afGuiEditor .panel-heading a:focus,
+#bootstrap-theme #afGuiEditor-canvas .nav-tabs a:focus
+{
+	outline: none;
+	outline-offset: unset;
+	box-shadow: none;
+}
+
 #bootstrap-theme #afGuiEditor .panel-body
 {
 	padding-top: 12px;
+}
+
+#bootstrap-theme #afGuiEditor-canvas .nav-tabs
+{
+	border: none;
+	margin-bottom: -1px;
 }
 
 
