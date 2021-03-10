@@ -1419,11 +1419,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// If not on main site.
 		if ( ! is_main_site() ) {
 
-			// Unhook CiviCRM's menu item, but allow CiviCRM to load.
-			remove_action( 'admin_menu', [ civi_wp(), 'add_menu_items' ] );
-
-			// Remove notice.
-			remove_action( 'admin_notices', [ civi_wp(), 'show_setup_warning' ] );
+			// Hide the CiviCRM UI elements.
+			$this->plugin->single->hide_civicrm_ui();
 
 			// Remove CiviCRM shortcode button.
 			add_action( 'admin_head', [ $this->plugin->single, 'civi_button_remove' ] );

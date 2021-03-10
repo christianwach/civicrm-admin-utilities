@@ -695,17 +695,54 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Unhook CiviCRM's menu item, but allow CiviCRM to load.
-		remove_action( 'admin_menu', [ civi_wp(), 'add_menu_items' ] );
-
-		// Remove notice.
-		remove_action( 'admin_notices', [ civi_wp(), 'show_setup_warning' ] );
+		// Hide the CiviCRM UI elements.
+		$this->hide_civicrm_ui();
 
 		// Remove CiviCRM shortcode button.
 		add_action( 'admin_head', [ $this, 'civi_button_remove' ] );
 
 		// Remove Shortcuts Menu from WordPress admin bar.
 		remove_action( 'admin_bar_menu', [ $this, 'shortcuts_menu_add' ], 2000 );
+
+	}
+
+
+
+	/**
+	 * Hide the CiviCRM UI.
+	 *
+	 * @since 0.8.3
+	 */
+	public function hide_civicrm_ui() {
+
+		// Get CiviCRM object.
+		$civi = civi_wp();
+
+		// Do we have the admin object?
+		if ( isset( $civi->admin ) AND is_object( $civi->admin ) ) {
+
+			// Unhook CiviCRM's menu item, but allow CiviCRM to load.
+			remove_action( 'admin_menu', [ $civi->admin, 'add_menu_items' ], 9 );
+
+			// Remove notice.
+			remove_action( 'admin_notices', [ $civi->admin, 'show_setup_warning' ] );
+
+			// Also remove the "Quick Add" meta box.
+			remove_action( 'wp_dashboard_setup', [ $civi->admin->metabox_quick_add, 'meta_box_add' ] );
+			remove_action( 'admin_enqueue_scripts', [ $civi->admin->metabox_quick_add, 'enqueue_js' ] );
+			remove_action( 'admin_enqueue_scripts', [ $civi->admin->metabox_quick_add, 'enqueue_css' ] );
+			remove_action( 'admin_init', [ $civi->admin->metabox_quick_add, 'form_submitted' ] );
+			remove_action( 'wp_ajax_civicrm_contact_add', [ $civi->admin->metabox_quick_add, 'ajax_contact_add' ] );
+
+		} else {
+
+			// Unhook CiviCRM's menu item, but allow CiviCRM to load.
+			remove_action( 'admin_menu', [ civi_wp(), 'add_menu_items' ] );
+
+			// Remove notice.
+			remove_action( 'admin_notices', [ civi_wp(), 'show_setup_warning' ] );
+
+		}
 
 	}
 
