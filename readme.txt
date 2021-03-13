@@ -70,6 +70,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.8.3 =
+
+* Fix styling of SearchKit and Afform in CiviCRM 5.35+
+* Fix "Hide CiviCRM" option when CiviCRM is network-activated
+
 = 0.8.2 =
 
 * Fix styling of Dashboard in CiviCRM 5.33+
