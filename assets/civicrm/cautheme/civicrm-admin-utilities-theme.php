@@ -131,7 +131,7 @@ class CiviCRM_Admin_Utilities_Theme {
     // Add setup to themes array.
     $themes[$this->slug] = [
       'ext' => $this->slug,
-      'title' => __ ( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ),
+      'title' => __ ( 'Radstock (CAU)', 'civicrm-admin-utilities' ),
       'help' => __( 'Gives CiviCRM a look-and-feel that is closer to WordPress', 'civicrm-admin-utilities' ),
       'url_callback' => 'CiviCRM_Admin_Utilities_Resolver::resolve',
       'search_order' => [
