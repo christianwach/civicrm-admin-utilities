@@ -53,7 +53,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.6.8
 	 * @access public
-	 * @var object $single The UFMatch utility object.
+	 * @var object $ufmatch The UFMatch utility object.
 	 */
 	public $ufmatch;
 
@@ -62,7 +62,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $single The single site object.
+	 * @var object $single The Single Site object.
 	 */
 	public $single;
 
@@ -71,7 +71,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.7.4
 	 * @access public
-	 * @var object $theme The theme object.
+	 * @var object $theme The Theme object.
 	 */
 	public $theme;
 
@@ -80,7 +80,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $admin The multisite object.
+	 * @var object $multisite The Multisite object.
 	 */
 	public $multisite;
 
@@ -89,7 +89,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $admin The multidomain object.
+	 * @var object $multidomain The Multidomain object.
 	 */
 	public $multidomain;
 
@@ -169,18 +169,18 @@ class CiviCRM_Admin_Utilities {
 	public function include_files() {
 
 		// Load our common classes.
-		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-ufmatch.php' );
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-ufmatch.php';
 
 		// Load our Single Site class.
-		require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single.php' );
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single.php';
 
 		// Load our Theme "Extension" class.
-		require( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-theme.php' );
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-theme.php';
 
-		// Load our Multisite class.
+		// Load our Multisite classes.
 		if ( is_multisite() ) {
-			require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multisite.php' );
-			require( CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multidomain.php' );
+			require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multisite.php';
+			require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multidomain.php';
 		}
 
 	}
@@ -245,7 +245,7 @@ class CiviCRM_Admin_Utilities {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -277,7 +277,7 @@ class CiviCRM_Admin_Utilities {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -299,7 +299,7 @@ class CiviCRM_Admin_Utilities {
 			return $is_network_active;
 		}
 
-		// If not multisite, it cannot be.
+		// If not Multisite, it cannot be.
 		if ( ! is_multisite() ) {
 			$is_network_active = false;
 			return $is_network_active;
@@ -307,7 +307,7 @@ class CiviCRM_Admin_Utilities {
 
 		// Make sure plugin file is included when outside admin.
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
 		}
 
 		// Get path from 'plugins' directory to this plugin.
@@ -370,7 +370,7 @@ class CiviCRM_Admin_Utilities {
 			return $civicrm_network_active;
 		}
 
-		// If not multisite, it cannot be.
+		// If not Multisite, it cannot be.
 		if ( ! is_multisite() ) {
 			$civicrm_network_active = false;
 			return $civicrm_network_active;
@@ -384,7 +384,7 @@ class CiviCRM_Admin_Utilities {
 
 		// Make sure plugin file is included when outside admin.
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
 		}
 
 		// Get path from 'plugins' directory to CiviCRM's directory.

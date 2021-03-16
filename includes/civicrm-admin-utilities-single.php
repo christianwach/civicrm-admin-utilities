@@ -329,7 +329,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// If this is an upgrade.
 		if ( $this->is_upgrade ) {
 
-			// Always check theme sync on upgrade.
+			// Always check Theme sync on upgrade.
 			$this->setting_set( 'theme_sync', '0' );
 			$save = true;
 
@@ -421,7 +421,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -528,13 +528,13 @@ class CiviCRM_Admin_Utilities_Single {
 		$link = $this->get_link( 'civicrm/contact/view', 'reset=1&cid=' . $contact_id );
 
 		// Include template.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/user-edit.php' );
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/user-edit.php';
 
 	}
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -674,7 +674,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -685,7 +685,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function hide_civicrm() {
 
-		// Bail if not multisite.
+		// Bail if not Multisite.
 		if ( ! is_multisite() ) {
 			return;
 		}
@@ -748,7 +748,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -990,7 +990,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1116,7 +1116,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1164,7 +1164,7 @@ class CiviCRM_Admin_Utilities_Single {
 		 * Set restricted-to-main-site template variable but allow overrides.
 		 *
 		 * This variable is set to "restricted" by default so that the relevant
-		 * section of the form does not show up when not in multisite.
+		 * section of the form does not show up when not in Multisite.
 		 *
 		 * @since 0.6.8
 		 *
@@ -1325,7 +1325,7 @@ class CiviCRM_Admin_Utilities_Single {
 			$prettify_menu = ' checked="checked"';
 		}
 
-		// Init admin CSS checkbox and theme preview visibility.
+		// Init admin CSS checkbox and Theme preview visibility.
 		$admin_css = '';
 		$theme_preview = '';
 		if ( $this->setting_get( 'css_admin', '0' ) == '1' ) {
@@ -1506,7 +1506,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1669,7 +1669,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1870,7 +1870,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -2210,7 +2210,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -2604,7 +2604,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -2750,7 +2750,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -2847,7 +2847,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -2973,7 +2973,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -3054,7 +3054,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -3228,7 +3228,7 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'css_admin', '1' );
 
 			/**
-			 * Broadcast a change in theme.
+			 * Broadcast a change in Theme.
 			 *
 			 * @since 0.7.4
 			 *
@@ -3240,7 +3240,7 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'css_admin', '0' );
 
 			/**
-			 * Broadcast a change in theme.
+			 * Broadcast a change in Theme.
 			 *
 			 * @since 0.7.4
 			 *
@@ -3373,7 +3373,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -3491,7 +3491,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 

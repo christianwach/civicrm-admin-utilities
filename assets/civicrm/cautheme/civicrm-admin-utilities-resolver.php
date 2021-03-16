@@ -21,12 +21,12 @@
 class CiviCRM_Admin_Utilities_Resolver {
 
   /**
-   * Define the base resource for this theme.
+   * Define the base resource for this Theme.
    *
    * @param \Civi\Core\Themes $themes
    *   The theming subsystem.
    * @param string $themeKey
-   *   The active/desired theme key.
+   *   The active/desired Theme key.
    * @param string $cssExt
    *   The extension for which we want a themed CSS file (e.g. "civicrm").
    * @param string $cssFile
@@ -36,10 +36,10 @@ class CiviCRM_Admin_Utilities_Resolver {
    */
   public static function resolve($themes, $themeKey, $cssExt, $cssFile) {
 
-		// For the core theme, use existing logic.
+		// For the Core Theme, use existing logic.
 		if ( $cssExt != 'cautheme' ) {
 
-      // Get the theme data.
+      // Get the Theme data.
       $theme = $themes->get( 'greenwich' );
 
       $res = Civi::resources();

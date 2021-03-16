@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * CiviCRM Admin Utilities Multidomain Class.
  *
- * A class that encapsulates Multidomain admin functionality.
+ * A class that encapsulates Multidomain Settings page functionality.
  *
  * @since 0.5.4
  */
@@ -36,7 +36,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $multidomain_page The reference to the multidomain settings page.
+	 * @var array $multidomain_page The reference to the Multidomain Settings page.
 	 */
 	public $multidomain_page;
 
@@ -107,7 +107,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -119,7 +119,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function network_admin_menu() {
 
-		// We must be network admin in multisite.
+		// We must be network admin in Multisite.
 		if ( ! is_super_admin() ) {
 			return;
 		}
@@ -147,10 +147,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Try and update options.
 		$saved = $this->settings_update_router();
 
-		// Filter the list of single site subpages and add multidomain page.
+		// Filter the list of Single Site subpages and add Multidomain page.
 		add_filter( 'civicrm_admin_utilities_network_subpages', [ $this, 'network_admin_subpages_filter' ] );
 
-		// Filter the list of network page URLs and add multidomain page URL.
+		// Filter the list of network page URLs and add Multidomain page URL.
 		add_filter( 'civicrm_admin_utilities_network_page_urls', [ $this, 'page_network_urls_filter' ] );
 
 		// Filter the "show tabs" flag for setting templates.
@@ -164,7 +164,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
-	 * Append the multidomain settings page to network subpages.
+	 * Append the Multidomain Settings page to network subpages.
 	 *
 	 * This ensures that the correct parent menu item is highlighted for our
 	 * Multidomain subpage in Multisite installs.
@@ -176,7 +176,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function network_admin_subpages_filter( $subpages ) {
 
-		// Add multidomain settings page.
+		// Add Multidomain Settings page.
 		$subpages[] = 'cau_network_multidomain';
 
 		// --<
@@ -261,18 +261,18 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
 	/**
-	 * Show our network multidomain settings page.
+	 * Show our network Multidomain Settings page.
 	 *
 	 * @since 0.6.2
 	 */
 	public function page_network_multidomain() {
 
-		// Disallow if not network admin in multisite.
+		// Disallow if not network admin in Multisite.
 		if ( is_network_admin() AND ! is_super_admin() ) {
 			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
 		}
@@ -306,7 +306,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$domains = $this->domains_get();
 
 		// Include template file.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-multidomain.php' );
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-multidomain.php';
 
 	}
 
@@ -352,7 +352,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
-	 * Append the multidomain page URL to network subpage URLs.
+	 * Append the Multidomain page URL to network subpage URLs.
 	 *
 	 * @since 0.6.2
 	 *
@@ -361,7 +361,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function page_network_urls_filter( $urls ) {
 
-		// Add multidomain settings page.
+		// Add Multidomain Settings page.
 		$urls['multidomain'] = $this->plugin->multisite->network_menu_page_url( 'cau_network_multidomain', false );
 
 		// --<
@@ -419,7 +419,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -549,7 +549,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -599,10 +599,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Try and update options.
 		$saved = $this->settings_update_router();
 
-		// Filter the list of single site subpages and add multidomain page.
+		// Filter the list of Single Site subpages and add Multidomain page.
 		add_filter( 'civicrm_admin_utilities_subpages', [ $this, 'admin_subpages_filter' ] );
 
-		// Filter the list of single site page URLs and add multidomain page URL.
+		// Filter the list of Single Site page URLs and add Multidomain page URL.
 		add_filter( 'civicrm_admin_utilities_page_urls', [ $this, 'page_urls_filter' ] );
 
 		// Filter the "show tabs" flag for setting templates.
@@ -616,7 +616,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
-	 * Append the multidomain settings page to single site subpages.
+	 * Append the Multidomain Settings page to Single Site subpages.
 	 *
 	 * This ensures that the correct parent menu item is highlighted for our
 	 * Multidomain subpage in Single Site installs.
@@ -628,7 +628,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function admin_subpages_filter( $subpages ) {
 
-		// Add multidomain settings page.
+		// Add Multidomain Settings page.
 		$subpages[] = 'civicrm_au_multidomain';
 
 		// --<
@@ -713,7 +713,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -864,12 +864,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
 	/**
-	 * Show our multidomain settings page.
+	 * Show our Multidomain Settings page.
 	 *
 	 * @since 0.5.4
 	 */
@@ -916,7 +916,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
 
 		// Include template file.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-multidomain.php' );
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-multidomain.php';
 
 	}
 
@@ -997,7 +997,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
-	 * Append the multidomain settings page URL to single site subpage URLs.
+	 * Append the Multidomain Settings page URL to Single Site subpage URLs.
 	 *
 	 * @since 0.5.4
 	 *
@@ -1006,7 +1006,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function page_urls_filter( $urls ) {
 
-		// Add multidomain settings page.
+		// Add Multidomain Settings page.
 		$urls['multidomain'] = menu_page_url( 'civicrm_au_multidomain', false );
 
 		// --<
@@ -1090,7 +1090,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1124,7 +1124,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
-	 * Update options supplied by our Network Multidomain admin page.
+	 * Update options supplied by our Network Multidomain Settings page.
 	 *
 	 * @since 0.6.2
 	 *
@@ -1172,7 +1172,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 	/**
-	 * Update options supplied by our Multidomain admin page.
+	 * Update options supplied by our Multidomain Settings page.
 	 *
 	 * @since 0.5.4
 	 *
@@ -1207,7 +1207,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1935,7 +1935,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 

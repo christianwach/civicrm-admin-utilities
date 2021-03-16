@@ -410,7 +410,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -421,7 +421,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public function network_admin_menu() {
 
-		// We must be network admin in multisite.
+		// We must be network admin in Multisite.
 		if ( ! is_super_admin() ) {
 			return;
 		}
@@ -652,7 +652,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -778,7 +778,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1107,7 +1107,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1118,7 +1118,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public function page_network_settings() {
 
-		// Disallow if not network admin in multisite.
+		// Disallow if not network admin in Multisite.
 		if ( is_network_admin() AND ! is_super_admin() ) {
 			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
 		}
@@ -1159,7 +1159,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
 
 		// Include template.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-settings.php' );
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-settings.php';
 
 	}
 
@@ -1204,7 +1204,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1215,7 +1215,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public function page_network_site_settings() {
 
-		// Disallow if not network admin in multisite.
+		// Disallow if not network admin in Multisite.
 		if ( is_network_admin() AND ! is_super_admin() ) {
 			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
 		}
@@ -1256,7 +1256,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
 
 		// Include template.
-		include( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-settings-site.php' );
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/network-settings-site.php';
 
 	}
 
@@ -1399,7 +1399,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1437,7 +1437,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1472,7 +1472,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -1550,14 +1550,14 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
 	/**
 	 * Get default network settings values for this plugin.
 	 *
-	 * In a multisite context, these defaults are used for both network defaults
+	 * In a Multisite context, these defaults are used for both network defaults
 	 * and individual sites.
 	 *
 	 * @since 0.5.4
@@ -1941,7 +1941,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 
@@ -2059,7 +2059,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-	//##########################################################################
+	// -------------------------------------------------------------------------
 
 
 

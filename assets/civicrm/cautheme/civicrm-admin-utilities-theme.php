@@ -26,7 +26,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    * @access public
-   * @var str $slug The theme "slug".
+   * @var str $slug The Theme "slug".
    */
   public $slug = 'cautheme';
 
@@ -59,17 +59,17 @@ class CiviCRM_Admin_Utilities_Theme {
   public function initialise() {
 
     // Load our Resolver class.
-    require( CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-resolver.php' );
+    require CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-resolver.php';
 
     // Register hooks.
     add_action( 'civicrm_themes', [ $this, 'register_theme' ], 10, 1 );
     add_action( 'civicrm_alterBundle', [ $this, 'modify_bundle' ], 10, 1 );
     add_action( 'civicrm_admin_utilities_styles_admin', [ $this, 'toggle' ], 10, 1 );
 
-    // Listen for changes to the theme setting.
+    // Listen for changes to the Theme setting.
     add_action( 'civicrm_postSave_civicrm_setting', [ $this, 'settings_change' ], 10 );
 
-    // Make sure that the theme is enabled if the setting is enabled.
+    // Make sure that the Theme is enabled if the setting is enabled.
     add_action( 'civicrm_config', [ $this, 'activate_theme' ], 10 );
 
   }
@@ -77,7 +77,7 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Check if we want to allow the theme functionality in this class.
+   * Check if we want to allow the Theme functionality in this class.
    *
    * @since 0.7.4
    *
@@ -115,7 +115,7 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Register our theme.
+   * Register our Theme.
    *
    * @since 0.7.4
    *
@@ -153,7 +153,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    *
-   * @param object $bundle The bundle of theme resources.
+   * @param object $bundle The bundle of Theme resources.
    */
   public function modify_bundle( CRM_Core_Resources_Bundle $bundle ) {
 
@@ -162,10 +162,10 @@ class CiviCRM_Admin_Utilities_Theme {
       return;
     }
 
-    // Get the theme identifier.
+    // Get the Theme identifier.
     $theme = Civi::service( 'themes' )->getActiveThemeKey();
 
-    // Add in the Bootstrap resources from the "Greenwich" theme.
+    // Add in the Bootstrap resources from the "Greenwich" Theme.
     switch( $theme . ':' . $bundle->name ) {
       case 'cautheme:bootstrap3' :
         $bundle->clear();
@@ -183,15 +183,15 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Is the current theme our theme?
+   * Is the current Theme our Theme?
    *
    * @since 0.8.1
    *
-   * @return bool True if the CAU theme is active, false otherwise.
+   * @return bool True if the CAU Theme is active, false otherwise.
    */
   public function is_cau_theme() {
 
-		// If it's our theme, return true.
+		// If it's our Theme, return true.
     $theme = $this->get_theme();
 		if ( $theme == $this->slug ) {
 			return true;
@@ -205,11 +205,11 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Get the current theme.
+   * Get the current Theme.
    *
    * @since 0.8
    *
-   * @return str $theme The current theme "slug", empty otherwise.
+   * @return str $theme The current Theme "slug", empty otherwise.
    */
   public function get_theme() {
 
@@ -218,7 +218,7 @@ class CiviCRM_Admin_Utilities_Theme {
       return '';
     }
 
-    // Switch setting to our theme or the default.
+    // Switch setting to our Theme or the default.
     $params = [
       'version' => 3,
       'name' => 'theme_backend',
@@ -236,7 +236,7 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Maybe enable our theme.
+   * Maybe enable our Theme.
    *
    * @since 0.7.4
    */
@@ -260,12 +260,12 @@ class CiviCRM_Admin_Utilities_Theme {
     // Get the setting.
     $theme = $this->get_theme();
 
-		// Bail if it's our theme.
+		// Bail if it's our Theme.
 		if ( $theme == $this->slug ) {
 			return;
 		}
 
-		// Set it to our theme.
+		// Set it to our Theme.
 		$this->toggle();
 
 		// Set a flag in our plugin settings.
@@ -277,7 +277,7 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Maybe disable our theme.
+   * Maybe disable our Theme.
    *
    * @since 0.8
    */
@@ -296,12 +296,12 @@ class CiviCRM_Admin_Utilities_Theme {
     // Get the setting.
     $theme = $this->get_theme();
 
-		// Bail if it's not our theme.
+		// Bail if it's not our Theme.
 		if ( $theme != $this->slug ) {
 			return;
 		}
 
-		// Set it to the default theme.
+		// Set it to the default Theme.
 		$this->toggle( 'disable' );
 
 		// Set a flag in our plugin settings.
@@ -313,7 +313,7 @@ class CiviCRM_Admin_Utilities_Theme {
 
 
   /**
-   * Enable or disable our theme.
+   * Enable or disable our Theme.
    *
    * @since 0.7.4
    *
@@ -329,7 +329,7 @@ class CiviCRM_Admin_Utilities_Theme {
     // Prevent reverse sync.
     remove_action( 'civicrm_postSave_civicrm_setting', [ $this, 'settings_change' ], 10 );
 
-    // Switch setting to our theme or the default.
+    // Switch setting to our Theme or the default.
     $params = [
       'version' => 3,
       'theme_backend' => ( $action === 'enable' ) ? $this->slug : 'default',
@@ -349,7 +349,7 @@ class CiviCRM_Admin_Utilities_Theme {
    * Reverse sync with the CiviCRM Admin Utilities setting.
    *
    * When CiviCRM settings are saved, this method is called post-save. It then
-   * reverse-syncs to the internal setting depending on whether the theme that
+   * reverse-syncs to the internal setting depending on whether the Theme that
    * is chosen is ours.
    *
    * @since 0.7.4
@@ -363,7 +363,7 @@ class CiviCRM_Admin_Utilities_Theme {
       return;
     }
 
-    // Bail if not the theme setting.
+    // Bail if not the Theme setting.
     if ( ! isset( $dao->name ) OR $dao->name != 'theme_backend' ) {
       return;
     }
