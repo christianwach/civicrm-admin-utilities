@@ -111,7 +111,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $contact['is_error'] ) AND $contact['is_error'] == '1' ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,
@@ -391,7 +391,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,
@@ -440,7 +440,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,
@@ -508,7 +508,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,
@@ -583,7 +583,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,
@@ -658,7 +658,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,

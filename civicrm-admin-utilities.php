@@ -455,7 +455,7 @@ class CiviCRM_Admin_Utilities {
 
 // Init plugin.
 global $civicrm_admin_utilities;
-$civicrm_admin_utilities = new CiviCRM_Admin_Utilities;
+$civicrm_admin_utilities = new CiviCRM_Admin_Utilities();
 
 /**
  * Utility to get a reference to this plugin.

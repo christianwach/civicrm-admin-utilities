@@ -2646,7 +2646,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Log and bail if there's an error.
 		if ( ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) OR $result['count'] == 0 ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,
@@ -2989,7 +2989,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function trace_pre( $op, $objectName, $objectId, $objectRef ) {
 
-		$e = new Exception;
+		$e = new Exception();
 		$trace = $e->getTraceAsString();
 		error_log( print_r( [
 			'method' => __METHOD__,
@@ -3016,7 +3016,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function trace_post( $op, $objectName, $objectId, $objectRef ) {
 
-		$e = new Exception;
+		$e = new Exception();
 		$trace = $e->getTraceAsString();
 		error_log( print_r( [
 			'method' => __METHOD__,
@@ -3041,7 +3041,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function trace_postProcess( $formName, &$form ) {
 
-		$e = new Exception;
+		$e = new Exception();
 		$trace = $e->getTraceAsString();
 		error_log( print_r( [
 			'method' => __METHOD__,

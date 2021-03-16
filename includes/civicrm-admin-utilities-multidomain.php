@@ -1148,7 +1148,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Maybe log errors.
 		if ( ! is_int( $result ) ) {
-			$e = new Exception;
+			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
 				'method' => __METHOD__,
@@ -1683,7 +1683,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 			// Log if there's an error.
 			if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
-				$e = new Exception;
+				$e = new Exception();
 				$trace = $e->getTraceAsString();
 				error_log( print_r( [
 					'method' => __METHOD__,
