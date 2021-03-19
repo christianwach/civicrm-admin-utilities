@@ -86,9 +86,58 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 
 	/**
+	 * Get details for a set of Contacts.
+	 *
+	 * @since 0.9
+	 *
+	 * @param array $args The CiviCRM API arguments.
+	 * @param array|bool The array of data for the Contacts, or false if none.
+	 */
+	public function contacts_get( $args ) {
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
+
+		// Construct API query.
+		$params = [
+			'version' => 3,
+			'sequential' => 1,
+		] + $args;
+
+		// Get Contact details via API.
+		$result = civicrm_api( 'Contact', 'get', $params );
+
+		// Log and bail on failure.
+		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+			$e = new Exception();
+			$trace = $e->getTraceAsString();
+			error_log( print_r( [
+				'method' => __METHOD__,
+				'params' => $params,
+				'result' => $result,
+				'backtrace' => $trace,
+			], true ) );
+			return false;
+		}
+
+		// Return the values array.
+		if ( ! empty( $result['values'] ) ) {
+			return $result['values'];
+		}
+
+		// Fall back to false.
+		return false;
+
+	}
+
+
+
+	/**
 	 * Get a Contact's Details.
 	 *
-	 * @since 0.1
+	 * @since 0.6.8
 	 *
 	 * @param int $contact_id The numeric ID of the Contact.
 	 * @param array|bool $contact The array of Contact data, or false if none.
@@ -140,7 +189,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 * *any* Domain - if so, pass a string such as "all" for "$domain_id" and
 	 * all Domains will be searched for a matching Contact.
 	 *
-	 * @since 0.1
+	 * @since 0.6.8
 	 *
 	 * @param int $user_id The numeric ID of the WordPress user.
 	 * @param int|str $domain_id The Domain ID (defaults to current Domain ID) or a string to search all Domains.
@@ -183,7 +232,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	/**
 	 * Get a CiviCRM Contact for a given WordPress user ID.
 	 *
-	 * @since 0.1
+	 * @since 0.6.8
 	 *
 	 * @param int $user_id The numeric ID of the WordPress User.
 	 * @param int|str $domain_id The Domain ID (defaults to current Domain ID) or a string to search all Domains.
@@ -463,6 +512,76 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 
 	/**
+	 * Get the User and Contact IDs of all UFMatch entries.
+	 *
+	 * @since 0.9
+	 *
+	 * @param int|str $domain_id The CiviCRM Domain ID (defaults to current Domain ID).
+	 * @return array|bool The UFMatch data on success, or false on failure.
+	 */
+	public function entry_ids_get_all( $domain_id = '' ) {
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
+
+		// Construct params.
+		$params = [
+			'version' => 3,
+			'options' => [
+				'limit' => 0,
+			],
+			'return' => [
+				'uf_id',
+				'contact_id',
+			],
+		];
+
+		// If no Domain ID is specified, default to current Domain ID.
+		if ( empty( $domain_id ) ) {
+			$params['domain_id'] = CRM_Core_Config::domainID();
+		}
+
+		// Maybe add Domain ID if passed as a number.
+		if ( ! empty( $domain_id ) AND is_numeric( $domain_id ) ) {
+			$params['domain_id'] = (int) $domain_id;
+		}
+
+		// Get all UFMatch records via API.
+		$result = civicrm_api( 'UFMatch', 'get', $params );
+
+		// Log and bail on failure.
+		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+			$e = new Exception();
+			$trace = $e->getTraceAsString();
+			error_log( print_r( [
+				'method' => __METHOD__,
+				'user_id' => $user_id,
+				'params' => $params,
+				'result' => $result,
+				'backtrace' => $trace,
+			], true ) );
+			return false;
+		}
+
+		// Return the entries array.
+		if ( ! empty( $result['values'] ) ) {
+			return $result['values'];
+		}
+
+		// Fall back to false.
+		return false;
+
+	}
+
+
+
+	// -------------------------------------------------------------------------
+
+
+
+	/**
 	 * Get the UFMatch data for a given CiviCRM Contact ID.
 	 *
 	 * This method optionally allows a Domain ID to be specified.
@@ -682,6 +801,91 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Fall back to false.
 		return false;
+
+	}
+
+
+
+	// -------------------------------------------------------------------------
+
+
+
+	/**
+	 * Get Dedupe Rules.
+	 *
+	 * By default, all Dedupe Rules for all the top-level Contact Types will be
+	 * returned, but you can specify a Contact Type if you want to limit what is
+	 * returned.
+	 *
+	 * @since 0.9
+	 *
+	 * @param string $contact_type A Contact Type to filter rules by.
+	 * @return array $dedupe_rules The Dedupe Rules, or empty on failure.
+	 */
+	public function dedupe_rules_get( $contact_type = '' ) {
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return [];
+		}
+
+		// Init return.
+		$dedupe_rules = [];
+
+		// Init Contact Types.
+		$types = [ 'Organization', 'Household', 'Individual' ];
+
+		// Add the Dedupe rules.
+		foreach( $types AS $type ) {
+			if ( empty( $contact_type ) ) {
+				$dedupe_rules[$type] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
+			} elseif ( $contact_type == $type ) {
+				$dedupe_rules[$type] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
+			}
+		}
+
+		// --<
+		return $dedupe_rules;
+
+	}
+
+
+
+	/**
+	 * Dedupe a CiviCRM Contact.
+	 *
+	 * @since 0.9
+	 *
+	 * @param array $contact The Contact data.
+	 * @param string $contact_type The Contact type.
+	 * @param int $dedupe_rule_id The Dedupe Rule ID.
+	 * @return int|bool $contact_id The numeric Contact ID, or false on failure.
+	 */
+	public function dedupe_contact( $contact, $contact_type, $dedupe_rule_id ) {
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return false;
+		}
+
+		// init return.
+		$contact_id = 0;
+
+		// Build the Dedupe params.
+		$dedupe_params = CRM_Dedupe_Finder::formatParams( $contact, $contact_type );
+		$dedupe_params['check_permission'] = false;
+
+		// Check for duplicates.
+		$contact_ids = CRM_Dedupe_Finder::dupesByParams( $dedupe_params, $contact_type, NULL, [], $dedupe_rule_id );
+		$contact_ids = array_reverse( $contact_ids );
+
+		// Return the suggested Contact ID.
+		if ( ! empty( $contact_ids ) ) {
+			$contact_id = array_pop( $contact_ids );
+		}
+
+		// --<
+		return $contact_id;
 
 	}
 
