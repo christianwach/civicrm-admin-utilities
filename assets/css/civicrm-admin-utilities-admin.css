@@ -119,6 +119,25 @@ div.crm-container .crm-dashlet-content
 	border-top: none;
 }
 
+/* Make Dashlet filters a bit more usable */
+div.crm-container .crm-dashlet-content .crm-accordion-body > form
+{
+	overflow-x: scroll;
+}
+
+/* Make Dashlet tables a bit more usable */
+.crm-container .crm-dashlet-content .dataTables_wrapper
+{
+	overflow-x: scroll;
+}
+
+/*
+.axis.x .tick text
+{
+	transform: rotate(90deg) translateX(42px) translateY(-13px);
+}
+*/
+
 div.crm-container .crm-inactive-dashlet
 {
 	margin: 10px;
@@ -3257,7 +3276,7 @@ div.crm-container form {
 }
 
 .crm-container .paging_full_numbers {
-	width: 350px !important;
+	width: 350px;
 }
 
 .crm-container .dataTables_wrapper .ui-toolbar {
