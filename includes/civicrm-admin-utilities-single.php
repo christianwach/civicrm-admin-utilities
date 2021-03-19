@@ -3140,7 +3140,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Init return.
 		$result = false;
 
-		// was the "Settings" form submitted?
+		// Was the "Settings" form submitted?
 		if ( isset( $_POST['civicrm_admin_utilities_settings_submit'] ) ) {
 			return $this->settings_update();
 		}
