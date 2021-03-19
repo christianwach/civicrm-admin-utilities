@@ -67,6 +67,15 @@ class CiviCRM_Admin_Utilities {
 	public $single;
 
 	/**
+	 * Single Site Users object.
+	 *
+	 * @since 0.9
+	 * @access public
+	 * @var object $single_users The single site users object.
+	 */
+	public $single_users;
+
+	/**
 	 * CiviCRM Theme object.
 	 *
 	 * @since 0.7.4
@@ -171,8 +180,9 @@ class CiviCRM_Admin_Utilities {
 		// Load our common classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-ufmatch.php';
 
-		// Load our Single Site class.
+		// Load our Single Site classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single.php';
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single-users.php';
 
 		// Load our Theme "Extension" class.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-theme.php';
@@ -197,8 +207,9 @@ class CiviCRM_Admin_Utilities {
 		// Always instantiate common classes.
 		$this->ufmatch = new CiviCRM_Admin_Utilities_UFMatch( $this );
 
-		// Always instantiate Single Site class.
+		// Always instantiate Single Site classes.
 		$this->single = new CiviCRM_Admin_Utilities_Single( $this );
+		$this->single_users = new CiviCRM_Admin_Utilities_Single_Users( $this );
 
 		// Always instantiate Theme class.
 		$this->theme = new CiviCRM_Admin_Utilities_Theme( $this );

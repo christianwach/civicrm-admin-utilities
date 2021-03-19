@@ -1,0 +1,12 @@
+/**
+ * Site Users styles.
+ *
+ * @since 0.9
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+#civicrm-au-users-form
+{
+	margin-top: 12px;
+}
