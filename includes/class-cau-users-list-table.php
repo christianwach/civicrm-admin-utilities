@@ -198,14 +198,25 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Store results in properties for use elsewhere.
 		$this->items = $user_search->get_results();
-		$this->post_counts = count_many_users_posts( array_keys( $this->items ) );
-		$this->user_counts['in_civicrm'] = count( $ufmatch_ids );
-		$this->user_counts['not_in_civicrm'] = $this->user_counts['all'] - $this->user_counts['in_civicrm'];
 
-		// Users held for moderation (e.g. by BuddyPress) may skew counts.
-		if ( $this->user_counts['not_in_civicrm'] < 0 ) {
-			$this->user_counts['not_in_civicrm'] = 0;
-		}
+		// Get Post Counts for these results.
+		$this->post_counts = count_many_users_posts( array_keys( $this->items ) );
+
+		// Store the count of UFMatch results for this CiviCRM Domain.
+		$this->user_counts['in_civicrm'] = count( $ufmatch_ids );
+
+		/*
+		 * Users held for moderation (e.g. by BuddyPress) may skew counts, so
+		 * we need to do an additional query for Users not in CiviCRM.
+		 */
+		$not_in_civicrm = new WP_User_Query( [
+			'number' => $users_per_page,
+			'exclude' => $ufmatch_ids,
+		] );
+
+		// Right, let's find out how many.
+		$users_not_in_civicrm = $not_in_civicrm->get_results();
+		$this->user_counts['not_in_civicrm'] = count( $users_not_in_civicrm );
 
 		// Build pagination params.
 		$pagination_args = [
