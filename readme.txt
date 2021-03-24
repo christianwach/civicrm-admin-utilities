@@ -70,6 +70,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.9 =
+
+* Introduce "Manage Users" sub-page
+
 = 0.8.3 =
 
 * Fix styling of SearchKit and Afform in CiviCRM 5.35+
