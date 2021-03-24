@@ -28,6 +28,7 @@ Please note: this is the development repository for *CiviCRM Admin Utilities*. I
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
 * Allows you to remove "administer CiviCRM" capabilities from sub-site administrators
 * Allows suppression of the "change of email" notification when a CiviCRM Contact's primary email is changed
+* Gives an overview of the relationships between Users and Contacts via the "Manage Users" screen
 
 ### CiviCRM Admin Theme
 
