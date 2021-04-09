@@ -217,6 +217,16 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	background-color: #70716b;
 }
 
+#bootstrap-theme.crm-search ul.nav-pills.nav-stacked li
+{
+	margin-top: 5px;
+}
+
+#bootstrap-theme ul.nav-pills > li > a:hover
+{
+	background: #ccc;
+}
+
 #bootstrap-theme ul.nav-pills .crm-search-delete-display
 {
 	right: 7px;
