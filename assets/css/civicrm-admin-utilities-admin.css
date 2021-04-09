@@ -190,12 +190,38 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	color: #666;
 }
 
+#bootstrap-theme .btn.btn-primary-outline:hover,
+#bootstrap-theme .btn.btn-primary-outline:focus,
 #bootstrap-theme .btn.crm-search-auto-toggle.btn-primary-outline:hover,
 #bootstrap-theme .btn.crm-search-auto-toggle.btn-primary-outline:focus,
 #bootstrap-theme .btn.dropdown-toggle:hover,
 #bootstrap-theme .btn.dropdown-toggle:focus
 {
 	color: #000;
+}
+
+#bootstrap-theme ul.nav-pills .btn.dropdown-toggle:active,
+#bootstrap-theme ul.nav-pills .btn.dropdown-toggle:hover,
+#bootstrap-theme ul.nav-pills .btn.dropdown-toggle:focus,
+#bootstrap-theme crm-search-actions .btn.dropdown-toggle:active,
+#bootstrap-theme crm-search-actions .btn.dropdown-toggle:hover,
+#bootstrap-theme crm-search-actions .btn.dropdown-toggle:focus
+{
+	background-color: #a2a39e;
+}
+
+#bootstrap-theme ul.nav-pills > li.active > a,
+#bootstrap-theme ul.nav-pills > li.active > a:hover,
+#bootstrap-theme ul.nav-pills > li.active > a:focus
+{
+	background-color: #70716b;
+}
+
+#bootstrap-theme ul.nav-pills .crm-search-delete-display
+{
+	right: 7px;
+	top: 7px;
+	border-color: white;
 }
 
 #bootstrap-theme .crm-search-admin-edit-columns .form-inline
