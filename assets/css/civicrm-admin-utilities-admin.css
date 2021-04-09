@@ -169,13 +169,48 @@ Support for SearchKit
 --------------------------------------------------------------------------------
 */
 
+body #bootstrap-theme label
+{
+	margin-bottom: 3px;
+}
+
+body #bootstrap-theme .btn-info
+{
+	background-color: #2786c2;
+	border-color: #2786c2;
+}
+
+body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
+{
+	margin-top: 0;
+}
+
+#bootstrap-theme .btn.crm-search-auto-toggle.btn-primary-outline
+{
+	color: #666;
+}
+
+#bootstrap-theme .btn.crm-search-auto-toggle.btn-primary-outline:hover,
+#bootstrap-theme .btn.crm-search-auto-toggle.btn-primary-outline:focus,
+#bootstrap-theme .btn.dropdown-toggle:hover,
+#bootstrap-theme .btn.dropdown-toggle:focus
+{
+	color: #000;
+}
+
+#bootstrap-theme .crm-search-admin-edit-columns .form-inline
+{
+	margin-bottom: 5px;
+}
+
 #bootstrap-theme.crm-search > table
 {
 	margin: 5px 0;
 }
 
 #bootstrap-theme.crm-search > table,
-#bootstrap-theme .crm-search-results table
+#bootstrap-theme .crm-search-results table,
+#bootstrap-theme crm-search-display-table table
 {
 	background-color: #fff;
 }
@@ -183,13 +218,16 @@ Support for SearchKit
 #bootstrap-theme.crm-search > table th,
 #bootstrap-theme.crm-search > table td,
 #bootstrap-theme .crm-search-results table th,
-#bootstrap-theme .crm-search-results table td
+#bootstrap-theme .crm-search-results table td,
+#bootstrap-theme crm-search-display-table table th,
+#bootstrap-theme crm-search-display-table table td
 {
 	padding: 5px;
 }
 
 #bootstrap-theme.crm-search > table td,
-#bootstrap-theme .crm-search-results table td
+#bootstrap-theme .crm-search-results table td,
+#bootstrap-theme crm-search-display-table table td
 {
 	border-bottom: 1px solid #ddd;
 }
@@ -213,6 +251,13 @@ Support for SearchKit
 {
 	flex-direction: column;
 }
+
+#bootstrap-theme crm-search-display-list ul
+{
+	background: white;
+	padding: 10px 10px 1px 10px;
+}
+
 
 
 
