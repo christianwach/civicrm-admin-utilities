@@ -397,6 +397,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Filter CiviCRM Permissions.
 		add_action( 'civicrm_permission_check', [ $this, 'permission_check' ], 10, 2 );
+		add_filter( 'civicrm/admin/settings/cap', [ $this, 'permission_check_subpages' ] );
+		add_filter( 'civicrm/admin/integration/cap', [ $this, 'permission_check_subpages' ] );
 
 		// Maybe filter restrict-to-main-site template variable.
 		add_filter( 'civicrm_admin_utilities_page_settings_restricted', [ $this, 'page_settings_restricted' ], 10, 1 );
@@ -1517,6 +1519,41 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Disallow everyone else.
 		$granted = 0;
+
+	}
+
+
+
+    /**
+     * Filter the capability for viewing the CiviCRM Settings and Integration pages.
+     *
+     * @since 0.9.1
+     *
+     * @param str $capability The default access capability.
+     * @return str $capability The modified access capability.
+     */
+	public function permission_check_subpages( $capability ) {
+
+		// Bail if we're not restricting.
+		if ( $this->setting_get( 'restrict_administer', '0' ) == '0' ) {
+			return $capability;
+		}
+
+		// Get current user.
+		$user = wp_get_current_user();
+
+	    // Sanity check.
+		if ( ! ( $user instanceof WP_User ) ) {
+			return;
+		}
+
+		// Always allow network admins.
+		if ( $user->has_cap( 'manage_network_plugins' ) ) {
+			return $capability;
+		}
+
+		// Disallow everyone else.
+		return 'manage_network_plugins';
 
 	}
 
