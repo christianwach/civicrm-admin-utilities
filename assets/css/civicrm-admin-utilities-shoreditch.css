@@ -199,14 +199,14 @@ Temporary style fixes for Upgrade Screen with Shoreditch active
 .crm-container > form > a.button.cancel
 {
 	background: #fff;
-    border: 1px solid #4d4d69;
-    color: #363342;
+	border: 1px solid #4d4d69;
+	color: #363342;
 }
 
 .crm-container > form > a.button.cancel:hover
 {
 	background: #3e3e54;
-    color: #fff !important;
+	color: #fff !important;
 }
 
 .crm-container > form > a.button.cancel > i

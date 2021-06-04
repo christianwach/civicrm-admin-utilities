@@ -2864,9 +2864,9 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.8
 	 *
-     * @param object $payment_obj The Payment Processor object.
-     * @param array $raw_params The original params.
-     * @param array $cooked_params The built params.
+	 * @param object $payment_obj The Payment Processor object.
+	 * @param array $raw_params The original params.
+	 * @param array $cooked_params The built params.
 	 */
 	public function paypal_params( $payment_obj, &$raw_params, &$cooked_params ) {
 

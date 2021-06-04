@@ -1506,7 +1506,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Get current user.
 		$user = wp_get_current_user();
 
-	    // Sanity check.
+		// Sanity check.
 		if ( ! ( $user instanceof WP_User ) ) {
 			return;
 		}
@@ -1524,14 +1524,14 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 
 
-    /**
-     * Filter the capability for viewing the CiviCRM Settings and Integration pages.
-     *
-     * @since 0.9.1
-     *
-     * @param str $capability The default access capability.
-     * @return str $capability The modified access capability.
-     */
+	/**
+	 * Filter the capability for viewing the CiviCRM Settings and Integration pages.
+	 *
+	 * @since 0.9.1
+	 *
+	 * @param str $capability The default access capability.
+	 * @return str $capability The modified access capability.
+	 */
 	public function permission_check_subpages( $capability ) {
 
 		// Bail if we're not restricting.
@@ -1542,7 +1542,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Get current user.
 		$user = wp_get_current_user();
 
-	    // Sanity check.
+		// Sanity check.
 		if ( ! ( $user instanceof WP_User ) ) {
 			return;
 		}

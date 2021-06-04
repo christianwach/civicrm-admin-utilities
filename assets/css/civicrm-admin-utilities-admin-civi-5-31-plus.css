@@ -35,8 +35,8 @@ body #bootstrap-theme .h6
 
 body #bootstrap-theme > h1
 {
-    font-size: 130%;
-    margin-bottom: 1em;
+	font-size: 130%;
+	margin-bottom: 1em;
 }
 
 body #bootstrap-theme #contactLayoutEditor .navbar
