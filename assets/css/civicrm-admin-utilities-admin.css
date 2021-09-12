@@ -4012,6 +4012,10 @@ tbody.scrollContent tr.alternateRow {
 .crm-container .select2-dropdown-open .select2-choice .select2-arrow b {
 	background-position: -18px 1px;
 }
+/* Restore padding needed for CiviCRM Container */
+.select2-drop.crm-container {
+	padding: 0;
+}
 .select2-drop .crm-entityref-links {
 	border-top: 1px solid #d3d3d3;
 	margin-top: 9px;
