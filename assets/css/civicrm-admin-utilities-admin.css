@@ -4030,7 +4030,7 @@ tbody.scrollContent tr.alternateRow {
 	border: 1px solid #f2f2f2;
 	background-color: #f6f6f6;
 	color: #494949;
-	max-width: 60%;
+	max-width: 90%;
 }
 .select2-drop .crm-entityref-filters select:hover,
 .select2-drop .crm-entityref-filters select:focus,
@@ -4085,7 +4085,6 @@ tbody.scrollContent tr.alternateRow {
 .crm-container .select2-results li.select2-no-results {
 	padding-left: 4px;
 	padding-top: 4px;
-	margin-left: 4px;
 }
 .crm-container .select2-results li {
 	margin: 0;
@@ -5566,6 +5565,11 @@ jQuery UI overrides
 #crm-container .ui-widget select,
 #crm-container .ui-widget textarea,
 #crm-container .ui-widget button,
+.ui-dialog.ui-widget.crm-container,
+.ui-dialog.ui-widget.crm-container input,
+.ui-dialog.ui-widget.crm-container select,
+.ui-dialog.ui-widget.crm-container textarea,
+.ui-dialog.ui-widget.crm-container button,
 #ui-datepicker-div.ui-datepicker,
 #ui-datepicker-div.ui-datepicker .ui-widget select
 {
