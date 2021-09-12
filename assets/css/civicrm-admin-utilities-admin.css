@@ -4014,7 +4014,8 @@ tbody.scrollContent tr.alternateRow {
 }
 /* Restore padding needed for CiviCRM Container */
 .select2-drop.crm-container {
-	padding: 0;
+	padding-top: 0;
+	padding-right: 0;
 }
 .select2-drop .crm-entityref-links {
 	border-top: 1px solid #d3d3d3;
@@ -4046,7 +4047,6 @@ tbody.scrollContent tr.alternateRow {
 }
 /* Style autocomplete results */
 .crm-container .select2-results {
-	padding: 0;
 	text-align: left;
 }
 .crm-container .select2-results li,
