@@ -62,8 +62,8 @@ Primary buttons
 	white-space: nowrap;
 	box-sizing: border-box;
 	box-shadow: none;
-	background: #007cba;
-	border-color: #007cba;
+	background: #2271b1;
+	border-color: #2271b1;
 	color: #fff;
 	text-decoration: none;
 	text-shadow: none;
@@ -105,7 +105,7 @@ Primary buttons
 /* Dialog buttons */
 .ui-dialog .ui-dialog-buttonpane button:focus
 {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #007cba;
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #2271b1;
 }
 
 
@@ -207,9 +207,9 @@ body.wp-admin button.crm-button[crm-icon="fa-trash"]:focus,
 body.wp-admin .ui-dialog .ui-dialog-buttonpane button[data-op="no"]:focus
 {
 	background: #f3f5f6;
-	border-color: #007cba;
+	border-color: #2271b1;
 	color: #016087;
-	box-shadow: 0 0 0 1px #007cba;
+	box-shadow: 0 0 0 1px #2271b1;
 	/* Only visible in Windows High Contrast mode */
 	outline: 2px solid transparent;
 	/* Reset inherited offset from Gutenberg */
@@ -264,8 +264,8 @@ body #crm-container .crm-inline-edit.add-new .crm-edit-help
 	white-space: nowrap;
 	box-sizing: border-box;
 	box-shadow: none;
-	background: #007cba;
-	border-color: #007cba;
+	background: #2271b1;
+	border-color: #2271b1;
 	color: #fff;
 	text-decoration: none;
 	text-shadow: none;
@@ -284,7 +284,7 @@ body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
 body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:focus,
 body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
 {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #007cba;
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #2271b1;
 }
 
 

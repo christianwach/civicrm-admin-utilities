@@ -1703,8 +1703,8 @@ div.crm-container .crm-content label.error
 }
 
 #crm-container ul.wizard-bar li.current-step {
-	background-color: #4A89DC;
-	border-color: #4A89DC;
+	background-color: #2271b1;
+	border-color: #2271b1;
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -2263,7 +2263,7 @@ div.crm-container .crm-content label.error
 	border-radius: 3px;
 	white-space: nowrap;
 	box-sizing: border-box;
-	border-color: #007cba;
+	border-color: #2271b1;
 	text-decoration: none;
 	color: #0071a1;
 	border-color: #0071a1;
@@ -5192,8 +5192,8 @@ body #crm-container .crm-inline-edit.add-new .crm-edit-help
 	border-radius: 3px;
 	white-space: nowrap;
 	box-sizing: border-box;
-	background: #0085ba;
-	background-color: #0085ba;
+	background: #2271b1;
+	background-color: #2271b1;
 	border-color: #0073aa #006799 #006799;
 	box-shadow: 0 1px 0 #006799;
 	color: #fff;
@@ -5206,8 +5206,8 @@ body #crm-container .crm-inline-edit.add-new .crm-edit-help
 body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
 body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
 {
-	background: #0085ba;
-	background-color: #0085ba;
+	background: #2271b1;
+	background-color: #2271b1;
 }
 
 body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:hover,
@@ -5245,7 +5245,7 @@ body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
 /* Style the "Tags" title */
 #contact-summary .crm-summary-block #tagLink a
 {
-	color: #007bba;
+	color: #2271b1;
 	line-height: 1;
 	text-decoration: none;
 	position: relative;
