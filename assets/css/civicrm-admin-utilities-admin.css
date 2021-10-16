@@ -239,11 +239,14 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	margin-bottom: 5px;
 }
 
+/* Saved Searches table */
+#bootstrap-theme.crm-search table,
 #bootstrap-theme.crm-search > table
 {
 	margin: 5px 0;
 }
 
+#bootstrap-theme.crm-search table,
 #bootstrap-theme.crm-search > table,
 #bootstrap-theme .crm-search-results table,
 #bootstrap-theme crm-search-display-table table
@@ -251,6 +254,8 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	background-color: #fff;
 }
 
+#bootstrap-theme.crm-search table th,
+#bootstrap-theme.crm-search table td,
 #bootstrap-theme.crm-search > table th,
 #bootstrap-theme.crm-search > table td,
 #bootstrap-theme .crm-search-results table th,
@@ -258,14 +263,21 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 #bootstrap-theme crm-search-display-table table th,
 #bootstrap-theme crm-search-display-table table td
 {
-	padding: 5px;
+	padding: 8px;
 }
 
+#bootstrap-theme.crm-search table td,
 #bootstrap-theme.crm-search > table td,
 #bootstrap-theme .crm-search-results table td,
 #bootstrap-theme crm-search-display-table table td
 {
 	border-bottom: 1px solid #ddd;
+}
+
+#bootstrap-theme.crm-search table td .alert.alert-info
+{
+	background-color: transparent;
+	border: none;
 }
 
 #bootstrap-theme.crm-search fieldset
