@@ -36,6 +36,19 @@ html body.wp-admin:not(.toolbar)
 	margin-right: 20px;
 }
 
+/* Implement basic System Status loader */
+#wpwrap #crm-main-content-wrapper > .ng-scope
+{
+	display: block;
+	min-height: 20px;
+	background: transparent url(../images/loading-E6E6DC.gif) no-repeat center top;
+}
+
+#wpwrap #crm-main-content-wrapper > .ng-scope > .ng-scope
+{
+	background: #f0f0f1;
+}
+
 
 
 /*
