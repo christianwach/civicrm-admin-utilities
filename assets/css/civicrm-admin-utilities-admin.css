@@ -176,8 +176,8 @@ body #bootstrap-theme label
 
 body #bootstrap-theme .btn-info
 {
-	background-color: #2786c2;
-	border-color: #2786c2;
+	background-color: #2271b1;
+	border-color: #2271b1;
 }
 
 body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
@@ -1703,8 +1703,8 @@ div.crm-container .crm-content label.error
 }
 
 #crm-container ul.wizard-bar li.current-step {
-	background-color: #4A89DC;
-	border-color: #4A89DC;
+	background-color: #2271b1;
+	border-color: #2271b1;
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -2137,7 +2137,7 @@ div.crm-container .crm-content label.error
 .crm-container .crm-hover-button.btn-slide {
 	padding: 3px 5px;
 	opacity: 1;
-	color: #2786c2;
+	color: #2271b1;
 }
 .crm-container .btn-slide .action-item {
 	white-space: normal;
@@ -2154,7 +2154,7 @@ div.crm-container .crm-content label.error
 .crm-container a.crm-hover-button:active
 {
 	opacity: 1;
-	color: #2786C2;
+	color: #2271b1;
 }
 .crm-container .crm-hover-button .icon {
 	cursor: pointer;
@@ -2263,7 +2263,7 @@ div.crm-container .crm-content label.error
 	border-radius: 3px;
 	white-space: nowrap;
 	box-sizing: border-box;
-	border-color: #007cba;
+	border-color: #2271b1;
 	text-decoration: none;
 	color: #0071a1;
 	border-color: #0071a1;
@@ -2461,7 +2461,7 @@ span.crm-frozen-field {
 }
 
 .crm-container a.crm-event-feed-link:hover {
-	color: #2786c2;
+	color: #2271b1;
 }
 
 .crm-container table.criteria-group {
@@ -2947,7 +2947,7 @@ div.crm-accordion-header a.helpicon {
 	color: inherit;
 }
 div.crm-master-accordion-header a.helpicon {
-	color: #2786c2;
+	color: #2271b1;
 }
 
 /* These .crm-icon classes use item_sprites.png */
@@ -4092,7 +4092,7 @@ tbody.scrollContent tr.alternateRow {
 	padding: 0;
 }
 .crm-container .crm-action-menu .select2-default span.select2-chosen {
-	color: #2786C2;
+	color: #2271b1;
 }
 .crm-container .select2-container[class*=" fa-"]:before {
 	display: none;
@@ -5193,8 +5193,8 @@ body #crm-container .crm-inline-edit.add-new .crm-edit-help
 	border-radius: 3px;
 	white-space: nowrap;
 	box-sizing: border-box;
-	background: #0085ba;
-	background-color: #0085ba;
+	background: #2271b1;
+	background-color: #2271b1;
 	border-color: #0073aa #006799 #006799;
 	box-shadow: 0 1px 0 #006799;
 	color: #fff;
@@ -5207,8 +5207,8 @@ body #crm-container .crm-inline-edit.add-new .crm-edit-help
 body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
 body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
 {
-	background: #0085ba;
-	background-color: #0085ba;
+	background: #2271b1;
+	background-color: #2271b1;
 }
 
 body #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help:hover,
@@ -5246,7 +5246,7 @@ body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
 /* Style the "Tags" title */
 #contact-summary .crm-summary-block #tagLink a
 {
-	color: #007bba;
+	color: #2271b1;
 	line-height: 1;
 	text-decoration: none;
 	position: relative;
