@@ -4456,7 +4456,7 @@ span.crm-select-item-color {
 
 #crm-notification-container div.ui-notify-message
 {
-	padding: 10px 15px;
+	padding: 10px 10px 15px 15px;
 	margin: 0 0 15px;
 	color: #fff;
 	max-height: 600px;
@@ -4541,7 +4541,23 @@ span.crm-select-item-color {
 #crm-notification-container .ui-notify-message .ui-notify-cross:hover,
 #crm-notification-container .ui-notify-message .ui-notify-cross:focus
 {
-	color: #333;
+	color: #888;
+}
+
+#crm-notification-container .ui-notify-message a.ui-notify-cross.ui-notify-close
+{
+	width: 18px;
+	height: 18px;
+	overflow: hidden;
+}
+
+#crm-notification-container .ui-notify-message a.ui-notify-cross.ui-notify-close:before
+{
+	content: "\f158";
+	font-family: 'dashicons';
+	width: 18px;
+	height: 18px;
+	margin-left: 3px;
 }
 
 .crm-container div.ui-notify-message table,
