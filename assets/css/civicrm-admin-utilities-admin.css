@@ -4487,6 +4487,17 @@ span.crm-select-item-color {
 	font-weight: bold;
 }
 
+#crm-notification-container div.ui-notify-message .notify-content
+{
+	margin-right: 5px;
+	overflow-x: scroll;
+}
+
+#crm-notification-container div.ui-notify-message .notify-content ul.indented
+{
+	padding-left: 1em;
+}
+
 #crm-notification-container div.ui-notify-message p
 {
 	margin: 0.4em 0;
@@ -4504,6 +4515,7 @@ span.crm-select-item-color {
 	background: #fff;
 	box-shadow: 0 3px 18px 0 rgba(48,40,40,0.25);
 	color: #4d4d69;
+	border-left: 4px solid #eee;
 }
 
 .crm-container div.ui-notify-message-style a,
