@@ -1201,6 +1201,18 @@ div.crm-container .crm-content label.error
 	font-weight: bold;
 }
 
+.crm-container .messages i.crm-i {
+	display: none;
+}
+
+.crm-container .messages p:first-child {
+	margin-top: 0;
+}
+
+.crm-container .messages p:last-child {
+	margin-bottom: 0;
+}
+
 .crm-container .messages table {
 	width: auto;
 }
@@ -3852,7 +3864,8 @@ tbody.scrollContent tr.alternateRow {
 .crm-container input[type=button],
 .crm-container button.crm-button,
 .crm-container button.crmMailing-btn-primary.crm-button,
-.crm-container a.button.crmMailing-submit-button
+.crm-container a.button.crmMailing-submit-button,
+#crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	display: inline-block;
 	text-decoration: none;
@@ -3887,7 +3900,9 @@ tbody.scrollContent tr.alternateRow {
 .crm-container button.crmMailing-btn-primary.crm-button:hover,
 .crm-container button.crmMailing-btn-primary.crm-button:focus,
 .crm-container a.button.crmMailing-submit-button:hover,
-.crm-container a.button.crmMailing-submit-button:focus
+.crm-container a.button.crmMailing-submit-button:focus,
+#crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+#crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	background: #008ec2;
 	border-color: #006799;
@@ -4169,7 +4184,7 @@ span.crm-select-item-color {
 	font-weight: 400;
 }
 
-.crm-container .ui-dialog-titlebar .ui-button
+.ui-dialog.ui-widget.crm-container .ui-dialog-titlebar .ui-button
 {
 	background-color: transparent;
 	background-image: none;
@@ -4177,6 +4192,13 @@ span.crm-select-item-color {
 	color: inherit;
 	font-size: 16px;
 }
+
+.ui-dialog.ui-widget.crm-container .ui-dialog-titlebar .ui-button:hover,
+.ui-dialog.ui-widget.crm-container .ui-dialog-titlebar .ui-button:active
+{
+	color: #666;
+}
+
 .crm-container .ui-dialog-titlebar .ui-button:hover {
 	background-color: #cdcdcd;
 	color: #555;
@@ -4496,6 +4518,16 @@ span.crm-select-item-color {
 #crm-notification-container div.ui-notify-message .notify-content ul.indented
 {
 	padding-left: 1em;
+}
+
+#crm-notification-container div.ui-notify-message .notify-content a.ui-button[role="button"]
+{
+	margin: 10px 0 0 3px;
+}
+
+#crm-notification-container div.ui-notify-message .notify-content a.ui-button[role="button"] .fa-undo
+{
+	margin-top: 1px;
 }
 
 #crm-notification-container div.ui-notify-message p
@@ -6047,7 +6079,8 @@ body.admin-color-light .crm-container > form > a.button.cancel,
 body.admin-color-light .ui-widget.crm-container .crm-container button.ui-widget,
 body.admin-color-light #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body.admin-color-light #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-light #crm-container .crm-inline-edit.add-new .crm-edit-help
+body.admin-color-light #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #04a4cc;
 	 border-color: #037c9a #036881 #036881;
@@ -6062,7 +6095,9 @@ body.admin-color-light .crm-container a.button:active,
 body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-light #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-light #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+body.admin-color-light #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #04b0db;
 	 border-color: #036881;
@@ -6089,7 +6124,8 @@ body.admin-color-blue .crm-container > form > a.button.cancel,
 body.admin-color-blue .ui-widget.crm-container .crm-container button.ui-widget,
 body.admin-color-blue #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body.admin-color-blue #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-blue #crm-container .crm-inline-edit.add-new .crm-edit-help
+body.admin-color-blue #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #e1a948;
 	 border-color: #d39323 #bd831f #bd831f;
@@ -6104,7 +6140,9 @@ body.admin-color-blue .crm-container a.button:active,
 body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-blue #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-blue #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+body.admin-color-blue #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #e3af55;
 	 border-color: #bd831f;
@@ -6131,7 +6169,8 @@ body.admin-color-coffee .crm-container > form > a.button.cancel,
 body.admin-color-coffee .ui-widget.crm-container .crm-container button.ui-widget,
 body.admin-color-coffee #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body.admin-color-coffee #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-coffee #crm-container .crm-inline-edit.add-new .crm-edit-help
+body.admin-color-coffee #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #c7a589;
 	 border-color: #b78b66 #ae7d55 #ae7d55;
@@ -6146,7 +6185,9 @@ body.admin-color-coffee .crm-container a.button:active,
 body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-coffee #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-coffee #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+body.admin-color-coffee #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #ccad93;
 	 border-color: #ae7d55;
@@ -6173,7 +6214,8 @@ body.admin-color-ectoplasm .crm-container > form > a.button.cancel,
 body.admin-color-ectoplasm .ui-widget.crm-container .crm-container button.ui-widget,
 body.admin-color-ectoplasm #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body.admin-color-ectoplasm #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-ectoplasm #crm-container .crm-inline-edit.add-new .crm-edit-help
+body.admin-color-ectoplasm #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #a3b745;
 	 border-color: #829237 #727f30 #727f30;
@@ -6188,7 +6230,9 @@ body.admin-color-ectoplasm .crm-container a.button:active,
 body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #a9bd4f;
 	 border-color: #727f30;
@@ -6215,7 +6259,8 @@ body.admin-color-midnight .crm-container > form > a.button.cancel,
 body.admin-color-midnight .ui-widget.crm-container .crm-container button.ui-widget,
 body.admin-color-midnight #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body.admin-color-midnight #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-midnight #crm-container .crm-inline-edit.add-new .crm-edit-help
+body.admin-color-midnight #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #e14d43;
 	 border-color: #d02c21 #ba281e #ba281e;
@@ -6230,7 +6275,9 @@ body.admin-color-midnight .crm-container a.button:active,
 body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-midnight #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-midnight #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+body.admin-color-midnight #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #e35950;
 	 border-color: #ba281e;
@@ -6257,7 +6304,8 @@ body.admin-color-ocean .crm-container > form > a.button.cancel,
 body.admin-color-ocean .ui-widget.crm-container .crm-container button.ui-widget,
 body.admin-color-ocean #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body.admin-color-ocean #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-ocean #crm-container .crm-inline-edit.add-new .crm-edit-help
+body.admin-color-ocean #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #9ebaa0;
 	 border-color: #80a583 #719a74 #719a74;
@@ -6272,7 +6320,9 @@ body.admin-color-ocean .crm-container a.button:active,
 body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-ocean #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-ocean #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+body.admin-color-ocean #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #a7c0a9;
 	 border-color: #719a74;
@@ -6299,7 +6349,8 @@ body.admin-color-sunrise .crm-container > form > a.button.cancel,
 body.admin-color-sunrise .ui-widget.crm-container .crm-container button.ui-widget,
 body.admin-color-sunrise #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body.admin-color-sunrise #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-sunrise #crm-container .crm-inline-edit.add-new .crm-edit-help
+body.admin-color-sunrise #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #dd823b;
 	 border-color: #c36922 #ad5d1e #ad5d1e;
@@ -6314,7 +6365,9 @@ body.admin-color-sunrise .crm-container a.button:active,
 body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:hover,
 body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:focus,
 body.admin-color-sunrise #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-sunrise #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help
+body.admin-color-sunrise #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #df8a48;
 	 border-color: #ad5d1e;
