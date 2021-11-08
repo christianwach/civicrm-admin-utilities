@@ -71,6 +71,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.9.1 =
+
+* Radstock theme updates
+
 = 0.9 =
 
 * Introduce "Manage Users" sub-page
