@@ -4550,6 +4550,11 @@ span.crm-select-item-color {
 	border-left: 4px solid #eee;
 }
 
+#crm-notification-container div.error.ui-notify-message-style
+{
+	border-left: 4px solid #d63638;
+}
+
 .crm-container div.ui-notify-message-style a,
 .crm-container div.ui-notify-message-style a:link
 {
