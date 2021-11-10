@@ -5272,6 +5272,10 @@ body #crm-container div.crm-summary-row div.crm-label
 	word-break: break-word;
 }
 
+body #crm-container div.crm-summary-row.primary div.crm-label::after {
+        content:"*";
+}
+
 body #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
 body #crm-container div.crm-inline-edit .crm-edit-help,
 body #crm-container .crm-inline-edit.add-new .crm-edit-help
