@@ -5196,6 +5196,12 @@ Contact Summary overrides
 --------------------------------------------------------------------------------
 */
 
+/* Hides spinner on CLE Settings page */
+contact-layout-editor h1
+{
+    background: #f0f0f1;
+}
+
 #crm-container div.contact_panel div.contactCardLeft .label,
 #crm-container div.contact_panel div.contactCardRight .label
 {
@@ -5272,8 +5278,8 @@ body #crm-container div.crm-summary-row div.crm-label
 	word-break: break-word;
 }
 
-body #crm-container div.crm-summary-row.primary div.crm-label::after {
-        content:"*";
+body #crm-container div.crm-summary-row.primary div.crm-label:after {
+	content: "*";
 }
 
 body #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
