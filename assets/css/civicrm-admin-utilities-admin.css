@@ -5273,7 +5273,7 @@ body #crm-container div.crm-summary-row div.crm-label
 }
 
 body #crm-container div.crm-summary-row.primary div.crm-label::after {
-        content:" *";
+        content:"*";
 }
 
 body #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
