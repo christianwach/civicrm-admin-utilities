@@ -805,7 +805,7 @@ div.crm-container .crm-content label.error
 	margin: 0.5em 0;
 }
 
-.crm-container ul.crm-sortable-list li label:after {
+.crm-container ul.crm-sortable-list li label::after {
 	display: block;
 	font-family: "FontAwesome";
 	content: "\f047";
@@ -1887,7 +1887,7 @@ div.crm-container .crm-content label.error
 	text-decoration: underline;
 }
 
-.crm-container .underline-effect:before {
+.crm-container .underline-effect::before {
 	content: "\00BB";
 	margin-right: 0.3em;
 }
@@ -2252,7 +2252,7 @@ div.crm-container .crm-content label.error
 	display: inline;
 }
 
-.crm-container .btn-slide:after {
+.crm-container .btn-slide::after {
 	content: "";
 	display: block;
 	height: 15px;
@@ -2426,7 +2426,7 @@ span.crm-frozen-field {
 	background: #fff;
 }
 
-#crm-container .ui-tabs-panel:after
+#crm-container .ui-tabs-panel::after
 {
 	clear: both;
 	content: ".";
@@ -2441,7 +2441,7 @@ span.crm-frozen-field {
 	clear: both;
 }
 
-.crm-container .crm-clearfix:after {
+.crm-container .crm-clearfix::after {
 	clear: both;
 	content: ".";
 	display: block;
@@ -2976,7 +2976,7 @@ a.crm-i:hover {
 }
 
 /* Same as fa-question-circle */
-.crm-container a.helpicon:before {
+.crm-container a.helpicon::before {
 	content: "\f059";
 }
 
@@ -4005,7 +4005,7 @@ tbody.scrollContent tr.alternateRow {
 }
 
 /* Add arrow icon to multi-selects */
-.crm-container .select2-container-multi .select2-choices:before {
+.crm-container .select2-container-multi .select2-choices::before {
 	background: url("../../../civicrm/civicrm/bower_components/select2/select2.png") no-repeat scroll 0 -4px;
 	content: "";
 	display: block;
@@ -4016,11 +4016,11 @@ tbody.scrollContent tr.alternateRow {
 	width: 20px;
 }
 /* Add search icon to ajax multi-selects and opened multi-selects */
-.crm-container .select2-container-multi.select2-container-active .select2-choices:before,
-.crm-container .select2-container-multi.crm-ajax-select .select2-choices:before {
+.crm-container .select2-container-multi.select2-container-active .select2-choices::before,
+.crm-container .select2-container-multi.crm-ajax-select .select2-choices::before {
 	background-position: right -26px;
 }
-.crm-container .select2-container-multi.loading .select2-choices:before,
+.crm-container .select2-container-multi.loading .select2-choices::before,
 .crm-container .select2-container.loading .select2-choice .select2-arrow b {
 	background: url('../../../civicrm/civicrm/i/loading.gif') no-repeat center center;
 }
@@ -4134,7 +4134,7 @@ tbody.scrollContent tr.alternateRow {
 .crm-container .crm-action-menu .select2-default span.select2-chosen {
 	color: #2271b1;
 }
-.crm-container .select2-container[class*=" fa-"]:before {
+.crm-container .select2-container[class*=" fa-"]::before {
 	display: none;
 }
 .crm-container .select2-results .select2-result.select2-disabled > .select2-result-label {
@@ -4164,7 +4164,7 @@ span.crm-select-item-color {
 .crm-container.ui-dialog {
 	box-shadow: 0 0 70px rgba(0, 0, 0, 0.4);
 }
-.crm-container.ui-dialog.ui-resizable:before {
+.crm-container.ui-dialog.ui-resizable::before {
 	display:block;
 	content: " ";
 	width: 16px;
@@ -4328,7 +4328,7 @@ span.crm-select-item-color {
 	background: rgba(255,255,255,0.8);
 }
 
-.crm-container .replace-plain:before {
+.crm-container .replace-plain::before {
 	content: "\f040";
 	position: absolute;
 	top: .4em;
@@ -4366,9 +4366,9 @@ span.crm-select-item-color {
 	opacity: .5;
 }
 
-.crm-container .replace-plain a:active:before,
-.crm-container .replace-plain:focus:before,
-.crm-container .replace-plain:hover:before,
+.crm-container .replace-plain a:active::before,
+.crm-container .replace-plain:focus::before,
+.crm-container .replace-plain:hover::before,
 .crm-container .crm-editable-enabled:hover .crm-i {
 	opacity: 1;
 }
@@ -4600,7 +4600,7 @@ span.crm-select-item-color {
 	overflow: hidden;
 }
 
-#crm-notification-container .ui-notify-message a.ui-notify-cross.ui-notify-close:before
+#crm-notification-container .ui-notify-message a.ui-notify-cross.ui-notify-close::before
 {
 	content: "\f158";
 	font-family: 'dashicons';
@@ -4721,7 +4721,7 @@ span.crm-status-icon {
 .crm-container.crm-public .select2-container-multi .select2-choices .select2-search-choice {
 	padding: 3px 3px 3px 20px;
 }
-.crm-container.crm-public .select2-container-multi .select2-choices:before {
+.crm-container.crm-public .select2-container-multi .select2-choices::before {
 	top: 9px;
 }
 
@@ -5278,7 +5278,7 @@ body #crm-container div.crm-summary-row div.crm-label
 	word-break: break-word;
 }
 
-body #crm-container div.crm-summary-row.primary div.crm-label:after {
+body #crm-container div.crm-summary-row.primary div.crm-label::after {
 	content: "*";
 }
 
@@ -5353,7 +5353,7 @@ body #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help:focus
 }
 
 /* Add a right arrow after "Tags" title - it's a link */
-#contact-summary .crm-summary-block #tagLink a:after
+#contact-summary .crm-summary-block #tagLink a::after
 {
 	content: "\2192";
 	position: absolute;
@@ -5699,12 +5699,12 @@ jQuery UI overrides
 	margin: 0;
 }
 
-#mainTabContainer ul.crm-contact-tabs-list:after
+#mainTabContainer ul.crm-contact-tabs-list::after
 {
 	clear: both;
 }
-#mainTabContainer ul.crm-contact-tabs-list:before,
-#mainTabContainer ul.crm-contact-tabs-list:after
+#mainTabContainer ul.crm-contact-tabs-list::before,
+#mainTabContainer ul.crm-contact-tabs-list::after
 {
 	content: "";
 	display: table;
