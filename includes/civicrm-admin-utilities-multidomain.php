@@ -1231,6 +1231,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Get domains.
 		$result = civicrm_api( 'domain', 'get', [
 			'version' => 3,
+			'options' => [
+				'limit' => 0, // No limit.
+			],
 		] );
 
 		// Sanity check.
@@ -1278,7 +1281,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Get domains.
 		$domains = civicrm_api( 'domain', 'get', [
 			'version' => 3,
-			'name' => array( 'LIKE' => '%' . $search . '%' ),
+			'name' => [ 'LIKE' => '%' . $search . '%' ],
+			'options' => [
+				'limit' => 0, // No limit.
+			],
 		] );
 
 		// Sanity check.
@@ -1444,7 +1450,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$groups = civicrm_api( 'group', 'get', [
 			'version' => 3,
 			'visibility' => 'User and User Admin Only',
-			'title' => array( 'LIKE' => '%' . $search . '%' ),
+			'title' => [ 'LIKE' => '%' . $search . '%' ],
+			'options' => [
+				'limit' => 0, // No limit.
+			],
 		] );
 
 		// Sanity check.
@@ -1777,7 +1786,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$orgs = civicrm_api( 'contact', 'get', [
 			'version' => 3,
 			'contact_type' => "Organization",
-			'organization_name' => array( 'LIKE' => '%' . $search . '%' ),
+			'organization_name' => [ 'LIKE' => '%' . $search . '%' ],
+			'options' => [
+				'limit' => 0, // No limit.
+			],
 		] );
 
 		// Sanity check.
