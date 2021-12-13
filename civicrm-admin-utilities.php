@@ -430,7 +430,7 @@ class CiviCRM_Admin_Utilities {
 		$installed = false;
 
 		// Query API for extension.
-		$result = civicrm_api( 'extension', 'get', [
+		$result = civicrm_api( 'Extension', 'get', [
 			'version' => 3,
 			'sequential' => 1,
 			'full_name' => $full_name,

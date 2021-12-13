@@ -765,7 +765,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Check if "Multisite" is enabled for this Domain.
-		$data['enabled'] = civicrm_api( 'setting', 'getvalue', [
+		$data['enabled'] = civicrm_api( 'Setting', 'getvalue', [
 			'version' => 3,
 			'domain_id' => $data['domain']['id'],
 			'name' => 'is_enabled',
@@ -1229,7 +1229,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Get domains.
-		$result = civicrm_api( 'domain', 'get', [
+		$result = civicrm_api( 'Domain', 'get', [
 			'version' => 3,
 			'options' => [
 				'limit' => 0, // No limit.
@@ -1279,7 +1279,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( $_POST['s'] ) : '';
 
 		// Get domains.
-		$domains = civicrm_api( 'domain', 'get', [
+		$domains = civicrm_api( 'Domain', 'get', [
 			'version' => 3,
 			'name' => [ 'LIKE' => '%' . $search . '%' ],
 			'options' => [
@@ -1350,7 +1350,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Get domain info.
-		$domain_info = civicrm_api( 'domain', 'getsingle', [
+		$domain_info = civicrm_api( 'Domain', 'getsingle', [
 			'version' => 3,
 			'id' => $domain_id,
 		] );
@@ -1447,7 +1447,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( $_POST['s'] ) : '';
 
 		// Get domain groups.
-		$groups = civicrm_api( 'group', 'get', [
+		$groups = civicrm_api( 'Group', 'get', [
 			'version' => 3,
 			'visibility' => 'User and User Admin Only',
 			'title' => [ 'LIKE' => '%' . $search . '%' ],
@@ -1514,7 +1514,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Get domain group info.
-		$domain_group_info = civicrm_api( 'group', 'getsingle', [
+		$domain_group_info = civicrm_api( 'Group', 'getsingle', [
 			'version' => 3,
 			'id' => $domain_group_id,
 		] );
@@ -1580,7 +1580,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Check "domain_group_id" setting.
-		$result = civicrm_api( 'setting', 'getsingle', [
+		$result = civicrm_api( 'Setting', 'getsingle', [
 			'version' => 3,
 			'sequential' => 1,
 			'domain_id' => $domain['id'],
@@ -1594,7 +1594,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Check for Group with the name of the Domain.
-		$result = civicrm_api( 'group', 'getsingle', [
+		$result = civicrm_api( 'Group', 'getsingle', [
 			'version' => 3,
 			'sequential' => 1,
 			'title' => $domain['name'],
@@ -1673,7 +1673,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$domain_group = $this->domain_group_get();
 
 		// Check "domain_group_id" setting.
-		$setting = civicrm_api( 'setting', 'getsingle', [
+		$setting = civicrm_api( 'Setting', 'getsingle', [
 			'version' => 3,
 			'sequential' => 1,
 			'domain_id' => $domain['id'],
@@ -1684,7 +1684,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		if ( isset( $setting['domain_group_id'] ) AND $setting['domain_group_id'] !== $group_id ) {
 
 			// Set "domain_group_id" setting.
-			$result = civicrm_api( 'setting', 'create', [
+			$result = civicrm_api( 'Setting', 'create', [
 				'version' => 3,
 				'domain_id' => $domain['id'],
 				'domain_group_id' => absint( $group_id ),
@@ -1783,7 +1783,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( $_POST['s'] ) : '';
 
 		// Get domain orgs.
-		$orgs = civicrm_api( 'contact', 'get', [
+		$orgs = civicrm_api( 'Contact', 'get', [
 			'version' => 3,
 			'contact_type' => "Organization",
 			'organization_name' => [ 'LIKE' => '%' . $search . '%' ],
@@ -1863,7 +1863,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Get domain org info.
-		$domain_org_info = civicrm_api( 'contact', 'getsingle', [
+		$domain_org_info = civicrm_api( 'Contact', 'getsingle', [
 			'version' => 3,
 			'id' => $domain_org_id,
 		] );
@@ -1932,7 +1932,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Update Domain.
-		$result = civicrm_api( 'domain', 'create', [
+		$result = civicrm_api( 'Domain', 'create', [
 			'version' => 3,
 			'id' => $domain['id'],
 			'contact_id' => absint( $org_id ),
