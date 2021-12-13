@@ -127,7 +127,7 @@ class CiviCRM_Admin_Utilities {
 
 		// Only do this once.
 		static $done;
-		if ( isset( $done ) AND $done === true ) {
+		if ( isset( $done ) && $done === true ) {
 			return;
 		}
 
@@ -245,7 +245,7 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function enable_translation() {
 
-		// Enable translation
+		// Enable translation.
 		load_plugin_textdomain(
 			'civicrm-admin-utilities', // Unique name.
 			false, // Deprecated argument.
@@ -401,7 +401,7 @@ class CiviCRM_Admin_Utilities {
 		// Get path from 'plugins' directory to CiviCRM's directory.
 		$civicrm = plugin_basename( CIVICRM_PLUGIN_FILE );
 
-		// Test if network active
+		// Test if network active.
 		$civicrm_network_active = is_plugin_active_for_network( $civicrm );
 
 		// --<
@@ -437,7 +437,7 @@ class CiviCRM_Admin_Utilities {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $result['is_error'] ) AND $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
 			return $installed;
 		}
 
@@ -447,7 +447,7 @@ class CiviCRM_Admin_Utilities {
 		}
 
 		// Double check.
-		foreach( $result['values'] AS $extension ) {
+		foreach ( $result['values'] as $extension ) {
 			if ( $extension['key'] == $full_name ) {
 				$installed = true;
 			}
@@ -522,13 +522,13 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {
 
 		// Add settings link if network activated and viewing network admin.
-		if ( civicrm_au()->is_network_activated() AND is_network_admin() ) {
+		if ( civicrm_au()->is_network_activated() && is_network_admin() ) {
 			$link = add_query_arg( [ 'page' => 'cau_network_parent' ], network_admin_url( 'settings.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
 		// Add settings link if not network activated and not viewing network admin.
-		if ( ! civicrm_au()->is_network_activated() AND ! is_network_admin() ) {
+		if ( ! civicrm_au()->is_network_activated() && ! is_network_admin() ) {
 			$link = add_query_arg( [ 'page' => 'cau_parent' ], admin_url( 'admin.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}

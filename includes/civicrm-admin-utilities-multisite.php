@@ -433,7 +433,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Add the parent page to the Network Admin "Settings" menu.
 		$this->network_parent_page = add_submenu_page(
-			'settings.php', // target menu
+			'settings.php', // Target menu.
 			__( 'CiviCRM Admin Utilities: Settings', 'civicrm-admin-utilities' ), // Page title.
 			__( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ), // Menu title.
 			$capability, // Required caps.
@@ -588,9 +588,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		global $_parent_pages;
 
-		if ( isset( $_parent_pages[$menu_slug] ) ) {
-			$parent_slug = $_parent_pages[$menu_slug];
-			if ( $parent_slug && ! isset( $_parent_pages[$parent_slug] ) ) {
+		if ( isset( $_parent_pages[ $menu_slug ] ) ) {
+			$parent_slug = $_parent_pages[ $menu_slug ];
+			if ( $parent_slug && ! isset( $_parent_pages[ $parent_slug ] ) ) {
 				$url = network_admin_url( add_query_arg( 'page', $menu_slug, $parent_slug ) );
 			} else {
 				$url = network_admin_url( 'admin.php?page=' . $menu_slug );
@@ -1121,7 +1121,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function page_network_settings() {
 
 		// Disallow if not network admin in Multisite.
-		if ( is_network_admin() AND ! is_super_admin() ) {
+		if ( is_network_admin() && ! is_super_admin() ) {
 			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
 		}
 
@@ -1179,8 +1179,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 			'civicrm_admin_utilities_network_settings_css',
 			plugins_url( 'assets/css/civicrm-admin-utilities-network-settings.css', CIVICRM_ADMIN_UTILITIES_FILE ),
 			false,
-			CIVICRM_ADMIN_UTILITIES_VERSION, // version
-			'all' // media
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			'all' // Media.
 		);
 
 	}
@@ -1199,7 +1199,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			'civicrm_admin_utilities_network_settings_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-network-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'jquery' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // version
+			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
 		);
 
 	}
@@ -1218,7 +1218,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function page_network_site_settings() {
 
 		// Disallow if not network admin in Multisite.
-		if ( is_network_admin() AND ! is_super_admin() ) {
+		if ( is_network_admin() && ! is_super_admin() ) {
 			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
 		}
 
@@ -1571,7 +1571,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public function site_admin_has_plugins_menu_access() {
 
-		// Init return
+		// Init return.
 		$granted = false;
 
 		// Override if individual Site Admins can see the "Plugins" menu.
@@ -1691,9 +1691,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Override Single Site values with the values from Network.
 		if ( ! empty( $network_settings ) ) {
-			foreach( $settings AS $key => $setting ) {
-				if ( ! empty( $network_settings[$key] ) ) {
-					$settings[$key] = $network_settings[$key];
+			foreach ( $settings as $key => $setting ) {
+				if ( ! empty( $network_settings[ $key ] ) ) {
+					$settings[ $key ] = $network_settings[ $key ];
 				}
 			}
 		}
@@ -2040,7 +2040,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Get setting.
-		return ( array_key_exists( $setting_name, $this->settings ) ) ? $this->settings[$setting_name] : $default;
+		return ( array_key_exists( $setting_name, $this->settings ) ) ? $this->settings[ $setting_name ] : $default;
 
 	}
 
@@ -2068,7 +2068,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Set setting.
-		$this->settings[$setting_name] = $value;
+		$this->settings[ $setting_name ] = $value;
 
 	}
 
@@ -2090,7 +2090,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Unset setting.
-		unset( $this->settings[$setting_name] );
+		unset( $this->settings[ $setting_name ] );
 
 	}
 

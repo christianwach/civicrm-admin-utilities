@@ -29,7 +29,7 @@
 		?>
 	</h2>
 
-	<?php if ( isset( $_GET['updated'] ) AND $_GET['updated'] == 'true' ) : ?>
+	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'true' ) : ?>
 		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
 			<p><strong><?php _e( 'Settings saved.', 'civicrm-admin-utilities' ); ?></strong></p>
 			<button type="button" class="notice-dismiss">

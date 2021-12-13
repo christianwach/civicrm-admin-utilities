@@ -615,7 +615,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Did this change originate with CiviCRM?
-		if ( isset( $this->email_sync ) AND $this->email_sync === true ) {
+		if ( isset( $this->email_sync ) && $this->email_sync === true ) {
 
 			// Unset property.
 			unset( $this->email_sync );
@@ -655,7 +655,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$result = civicrm_api( 'Email', 'get', $params );
 
 		// Bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			return $email;
 		}
 
@@ -719,7 +719,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$civi = civi_wp();
 
 		// Do we have the admin object?
-		if ( isset( $civi->admin ) AND is_object( $civi->admin ) ) {
+		if ( isset( $civi->admin ) && is_object( $civi->admin ) ) {
 
 			// Unhook CiviCRM's menu item, but allow CiviCRM to load.
 			remove_action( 'admin_menu', [ $civi->admin, 'add_menu_items' ], 9 );
@@ -807,7 +807,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Add help text.
 		add_action( 'admin_head-' . $this->settings_page, [ $this, 'admin_head' ], 50 );
 
-		// Add scripts and styles
+		// Add scripts and styles.
 		add_action( 'admin_print_styles-' . $this->settings_page, [ $this, 'admin_css' ] );
 		add_action( 'admin_print_scripts-' . $this->settings_page, [ $this, 'admin_js' ] );
 
@@ -836,7 +836,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Define subpages.
 		$subpages = [
-		 	'cau_settings',
+			'cau_settings',
 		];
 
 		/**
@@ -1011,7 +1011,7 @@ class CiviCRM_Admin_Utilities_Single {
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
-		// Check user permissions
+		// Check user permissions.
 		if ( ! current_user_can( $capability ) ) {
 			return;
 		}
@@ -1546,7 +1546,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Sanity check.
 		if ( count( $post_types ) > 0 ) {
 
-			foreach( $post_types AS $post_type ) {
+			foreach ( $post_types as $post_type ) {
 
 				// Filter only those which have an editor.
 				if ( post_type_supports( $post_type->name, 'editor' ) ) {
@@ -1613,11 +1613,9 @@ class CiviCRM_Admin_Utilities_Single {
 		$parts = explode( '.', $version );
 		$major_version = $parts[0] . '.' . $parts[1];
 
-		// CiviCRM 4.6 is LTS and may have the fix back-ported at some point.
-		if ( version_compare( $major_version, '4.6', '=' ) ) {
-			//if ( version_compare( $version, '4.6.38', '>=' ) ) $this->fixed = true;
-		} else {
-			if ( version_compare( $version, '4.7.30', '>=' ) ) $this->fixed = true;
+		// CiviCRM 4.7+ is fixed.
+		if ( version_compare( $version, '4.7.30', '>=' ) ) {
+			$this->fixed = true;
 		}
 
 		// Save setting if fixed.
@@ -1974,7 +1972,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Set to disabled.
-		CRM_Core_Region::instance('html-header')->update( $url, [ 'disabled' => true ] );
+		CRM_Core_Region::instance( 'html-header' )->update( $url, [ 'disabled' => true ] );
 
 	}
 
@@ -2040,15 +2038,15 @@ class CiviCRM_Admin_Utilities_Single {
 		$url = CRM_Core_Resources::singleton()->addCacheCode( $config->customCSSURL );
 
 		// Get registration data from region.
-		$registration = CRM_Core_Region::instance('html-header')->get( $url );
+		$registration = CRM_Core_Region::instance( 'html-header' )->get( $url );
 
 		// Bail if not registered.
-		if ( empty ( $registration ) ) {
+		if ( empty( $registration ) ) {
 			return;
 		}
 
 		// Set to disabled.
-		CRM_Core_Region::instance('html-header')->update( $url, [ 'disabled' => true ] );
+		CRM_Core_Region::instance( 'html-header' )->update( $url, [ 'disabled' => true ] );
 
 	}
 
@@ -2139,7 +2137,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function kill_civi_button() {
 
-		// Get screen
+		// Get screen.
 		$screen = get_current_screen();
 
 		// Prevent warning if screen not defined.
@@ -2181,7 +2179,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$civi = civi_wp();
 
 		// Do we have the modal object?
-		if ( isset( $civi->modal ) AND is_object( $civi->modal ) ) {
+		if ( isset( $civi->modal ) && is_object( $civi->modal ) ) {
 
 			// Remove current CiviCRM actions.
 			remove_action( 'media_buttons_context', [ $civi->modal, 'add_form_button' ] );
@@ -2450,7 +2448,7 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @param str $id The menu parent ID.
 		 * @param array $components The active CiviCRM Conponents.
 		 */
-		do_action( 'civicrm_admin_utilities_menu_after', $id,$components );
+		do_action( 'civicrm_admin_utilities_menu_after', $id, $components );
 
 	}
 
@@ -2568,28 +2566,28 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Build replacement for permDesc array.
-		foreach( $vars['rolePerms'] AS $role => $perms ) {
-			foreach( $perms AS $name => $title ) {
-				$permissions[$name] = $title;
+		foreach ( $vars['rolePerms'] as $role => $perms ) {
+			foreach ( $perms as $name => $title ) {
+				$permissions[ $name ] = $title;
 			}
 		}
 
 		// Build array keyed by permission.
 		$table = [];
-		foreach( $permissions AS $perm => $label ) {
+		foreach ( $permissions as $perm => $label ) {
 
 			// Init row with permission description.
-			$table[$perm] = [
+			$table[ $perm ] = [
 				'label' => $label,
 				'roles' => [],
 			];
 
 			// Add permission label and role names.
-			foreach( $vars['roles'] AS $key => $label ) {
-				if ( isset( $vars['permDesc'][$perm] ) ) {
-					$table[$perm]['desc'] = $vars['permDesc'][$perm];
+			foreach ( $vars['roles'] as $key => $label ) {
+				if ( isset( $vars['permDesc'][ $perm ] ) ) {
+					$table[ $perm ]['desc'] = $vars['permDesc'][ $perm ];
 				}
-				$table[$perm]['roles'][] = $key;
+				$table[ $perm ]['roles'][] = $key;
 			}
 
 		}
@@ -2645,7 +2643,7 @@ class CiviCRM_Admin_Utilities_Single {
 		] );
 
 		// Log and bail if there's an error.
-		if ( ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) OR $result['count'] == 0 ) {
+		if ( ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) || $result['count'] == 0 ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -2663,14 +2661,14 @@ class CiviCRM_Admin_Utilities_Single {
 		$this->direction = 'none';
 
 		// If the Contact was not in the Trash, then its being moved to Trash.
-		if ( isset( $objectRef['is_deleted'] ) AND $objectRef['is_deleted'] == '1' ) {
+		if ( isset( $objectRef['is_deleted'] ) && $objectRef['is_deleted'] == '1' ) {
 			if ( $contact_data['contact_is_deleted'] == '0' ) {
 				$this->direction = 'trashed';
 			}
 		}
 
 		// If the Contact was in the Trash, then its being moved out of the Trash.
-		if ( ! isset( $objectRef['is_deleted'] ) OR $objectRef['is_deleted'] == '0' ) {
+		if ( ! isset( $objectRef['is_deleted'] ) || $objectRef['is_deleted'] == '0' ) {
 			if ( $contact_data['contact_is_deleted'] == '1' ) {
 				$this->direction = 'untrashed';
 			}
@@ -2769,7 +2767,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Add callback for CiviCRM "dashboard" hook.
-		Civi::service('dispatcher')->addListener(
+		Civi::service( 'dispatcher' )->addListener(
 			'hook_civicrm_dashboard',
 			[ $this, 'dashboard_title' ],
 			-100 // Default priority.
@@ -2811,7 +2809,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$result = civicrm_api( 'Contact', 'get', $params );
 
 		// Bail if there's an error.
-		if ( ! empty( $result['is_error'] ) AND $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
 			return;
 		}
 
@@ -2881,7 +2879,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Bail if not the PayPal Processor.
-		if ( ! ( $payment_obj instanceOf CRM_Core_Payment_PayPalImpl ) ) {
+		if ( ! ( $payment_obj instanceof CRM_Core_Payment_PayPalImpl ) ) {
 			return;
 		}
 
@@ -3355,7 +3353,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$this->settings_save();
 
 		// Clear caches if asked to - or if forced to do so.
-		if ( $civicrm_admin_utilities_cache == '1' OR $force ) {
+		if ( $civicrm_admin_utilities_cache == '1' || $force ) {
 			$this->clear_caches();
 		}
 
@@ -3435,7 +3433,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Get setting.
-		return ( array_key_exists( $setting_name, $this->settings ) ) ? $this->settings[$setting_name] : $default;
+		return ( array_key_exists( $setting_name, $this->settings ) ) ? $this->settings[ $setting_name ] : $default;
 
 	}
 
@@ -3463,7 +3461,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Set setting.
-		$this->settings[$setting_name] = $value;
+		$this->settings[ $setting_name ] = $value;
 
 	}
 
@@ -3485,7 +3483,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Unset setting.
-		unset( $this->settings[$setting_name] );
+		unset( $this->settings[ $setting_name ] );
 
 	}
 
@@ -3566,7 +3564,7 @@ class CiviCRM_Admin_Utilities_Single {
 			die( __( 'You must supply an option to option_set()', 'civicrm-admin-utilities' ) );
 		}
 
-		// Update option
+		// Update option.
 		return update_option( $option_name, $value );
 
 	}
@@ -3589,7 +3587,7 @@ class CiviCRM_Admin_Utilities_Single {
 			die( __( 'You must supply an option to option_delete()', 'civicrm-admin-utilities' ) );
 		}
 
-		// Delete option
+		// Delete option.
 		return delete_option( $option_name );
 
 	}

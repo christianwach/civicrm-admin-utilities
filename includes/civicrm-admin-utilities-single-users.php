@@ -110,7 +110,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	public function register_hooks() {
 
 		// Filter the "per_page" screen option.
-		if ( is_admin() AND ! empty( $_REQUEST['page'] ) AND $this->users_page_slug == $_REQUEST['page'] ) {
+		if ( is_admin() && ! empty( $_REQUEST['page'] ) && $this->users_page_slug == $_REQUEST['page'] ) {
 			add_filter( 'set-screen-option', [ $this, 'admin_screen_options' ], 10, 3 );
 		}
 
@@ -173,7 +173,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	public function admin_screen_columns( $hidden, $screen ) {
 
 		// Bail if this is not our screen.
-		if ( ! isset( $screen->id ) OR $this->users_page !== $screen->id ) {
+		if ( ! isset( $screen->id ) || $this->users_page !== $screen->id ) {
 			return $hidden;
 		}
 
@@ -471,8 +471,8 @@ class CiviCRM_Admin_Utilities_Single_Users {
 			'cau_site_users',
 			plugins_url( 'assets/css/civicrm-admin-utilities-users.css', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[],
-			CIVICRM_ADMIN_UTILITIES_VERSION, // version
-			'all' // media
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			'all' // Media.
 		);
 
 	}

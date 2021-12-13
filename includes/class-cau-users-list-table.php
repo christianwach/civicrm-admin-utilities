@@ -131,8 +131,8 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Build a reference array.
 		$ufmatch_linked = [];
-		foreach( $ufmatch_all AS $ufmatch ) {
-			$ufmatch_linked[$ufmatch['uf_id']] = $ufmatch['contact_id'];
+		foreach ( $ufmatch_all as $ufmatch ) {
+			$ufmatch_linked[ $ufmatch['uf_id'] ] = $ufmatch['contact_id'];
 		}
 
 		// Store it.
@@ -142,7 +142,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		$ufmatch_ids = wp_list_pluck( $ufmatch_all, 'uf_id' );
 
 		// Restrict Users to those with a CiviCRM Contact.
-		if ( 'in_civicrm' === $user_status OR 'not_in_civicrm' === $user_status ) {
+		if ( 'in_civicrm' === $user_status || 'not_in_civicrm' === $user_status ) {
 
 			// Restrict Users to those with a CiviCRM Contact.
 			if ( 'in_civicrm' === $user_status ) {
@@ -402,7 +402,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		$style = '';
 
 		// Process list items and write the rows to the screen.
-		foreach( $this->items AS $user_id => $user_object ) {
+		foreach ( $this->items as $user_id => $user_object ) {
 			$style = ( ' class="alternate"' == $style ) ? '' : ' class="alternate"';
 			echo "\n\t" . $this->single_row( $user_object, $style );
 		}
@@ -452,7 +452,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 			/* translators: accessibility text */
 			printf( esc_html__( 'Select user: %s', 'civicrm-admin-utilities' ), $user_object->user_login );
 		?></label>
-		<input type="checkbox" id="user_<?php echo intval( $user_object->ID ) ?>" name="allusers[]" value="<?php echo esc_attr( $user_object->ID ) ?>" />
+		<input type="checkbox" id="user_<?php echo intval( $user_object->ID ); ?>" name="allusers[]" value="<?php echo esc_attr( $user_object->ID ); ?>" />
 		<?php
 
 	}
@@ -469,7 +469,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	public function column_username( $user_object = null ) {
 
 		// Grab the User's avatar.
-		$avatar	= get_avatar( $user_object->user_email, 32 );
+		$avatar = get_avatar( $user_object->user_email, 32 );
 
 		/*
 		// Define args for link.
@@ -600,8 +600,8 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	public function column_contact_id( $user_object = null ) {
 
 		// Write to screen.
-		if ( ! empty( $this->linked_ids[$user_object->ID] ) ) {
-			echo esc_html( $this->linked_ids[$user_object->ID] );
+		if ( ! empty( $this->linked_ids[ $user_object->ID ] ) ) {
+			echo esc_html( $this->linked_ids[ $user_object->ID ] );
 		} else {
 			echo '<span class="dashicons dashicons-minus"></span>';
 		}
@@ -620,8 +620,8 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	public function column_post_counts( $user_object = null ) {
 
 		// Get the number of posts for this user.
-		$post_count = ! empty( $this->post_counts[$user_object->ID] ) ?
-					  $this->post_counts[$user_object->ID] :
+		$post_count = ! empty( $this->post_counts[ $user_object->ID ] ) ?
+					  $this->post_counts[ $user_object->ID ] :
 					  0;
 
 		// Assume none.

@@ -364,12 +364,12 @@ class CiviCRM_Admin_Utilities_Theme {
     }
 
     // Bail if not the Theme setting.
-    if ( ! isset( $dao->name ) OR $dao->name != 'theme_backend' ) {
+    if ( ! isset( $dao->name ) || $dao->name != 'theme_backend' ) {
       return;
     }
 
     // Set or unset the internal setting.
-    if ( isset( $dao->value ) AND $this->slug == unserialize( $dao->value ) ) {
+    if ( isset( $dao->value ) && $this->slug == unserialize( $dao->value ) ) {
       if ( $this->plugin->single->setting_get( 'css_admin', '1' ) == '0' ) {
         $this->plugin->single->setting_set( 'css_admin', '1' );
         $this->plugin->single->settings_save();

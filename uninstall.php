@@ -14,7 +14,7 @@ NOTES
 
 
 // Kick out if uninstall not called from WordPress.
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit();
+defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
 
 

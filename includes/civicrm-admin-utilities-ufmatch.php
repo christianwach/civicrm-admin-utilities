@@ -110,7 +110,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'Contact', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -159,7 +159,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$contact = civicrm_api( 'Contact', 'getsingle', $params );
 
 		// Log and bail on failure.
-		if ( isset( $contact['is_error'] ) AND $contact['is_error'] == '1' ) {
+		if ( isset( $contact['is_error'] ) && $contact['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -217,7 +217,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Get the Contact ID from the returned array.
 		if ( empty( $entry['contact_id'] ) ) {
-			foreach( $entry AS $item ) {
+			foreach ( $entry as $item ) {
 				return absint( $item['contact_id'] );
 			}
 		}
@@ -288,7 +288,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Get the User ID from the returned array.
 		if ( empty( $entry['uf_id'] ) ) {
-			foreach( $entry AS $item ) {
+			foreach ( $entry as $item ) {
 				return absint( $item['uf_id'] );
 			}
 		}
@@ -381,7 +381,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Create multiple UFMatch entries if an array is returned.
 		if ( empty( $this->ufmatch_entries['uf_id'] ) ) {
-			foreach( $this->ufmatch_entries AS $entry ) {
+			foreach ( $this->ufmatch_entries as $entry ) {
 				$contact_id = absint( $entry['contact_id'] );
 				$user_id = absint( $entry['uf_id'] );
 				$domain_id = absint( $entry['domain_id'] );
@@ -418,7 +418,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Sanity checks.
-		if ( ! is_numeric( $contact_id ) OR ! is_numeric( $user_id ) ) {
+		if ( ! is_numeric( $contact_id ) || ! is_numeric( $user_id ) ) {
 			return false;
 		}
 
@@ -439,7 +439,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'create', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -488,7 +488,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'delete', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -544,7 +544,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Maybe add Domain ID if passed as a number.
-		if ( ! empty( $domain_id ) AND is_numeric( $domain_id ) ) {
+		if ( ! empty( $domain_id ) && is_numeric( $domain_id ) ) {
 			$params['domain_id'] = (int) $domain_id;
 		}
 
@@ -552,7 +552,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -618,7 +618,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Maybe add Domain ID if passed as an integer.
-		if ( ! empty( $domain_id ) AND is_numeric( $domain_id ) ) {
+		if ( ! empty( $domain_id ) && is_numeric( $domain_id ) ) {
 			$params['domain_id'] = $domain_id;
 		}
 
@@ -626,7 +626,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -640,12 +640,12 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Return the entry data if there's only one.
-		if ( ! empty( $result['values'] ) AND count( $result['values'] ) === 1 ) {
+		if ( ! empty( $result['values'] ) && count( $result['values'] ) === 1 ) {
 			return array_pop( $result['values'] );
 		}
 
 		// Return the entries array if there are more than one.
-		if ( ! empty( $result['values'] ) AND count( $result['values'] ) > 1 ) {
+		if ( ! empty( $result['values'] ) && count( $result['values'] ) > 1 ) {
 			return $result['values'];
 		}
 
@@ -693,7 +693,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Maybe add Domain ID if passed as an integer.
-		if ( ! empty( $domain_id ) AND is_numeric( $domain_id ) ) {
+		if ( ! empty( $domain_id ) && is_numeric( $domain_id ) ) {
 			$params['domain_id'] = $domain_id;
 		}
 
@@ -701,7 +701,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -715,12 +715,12 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Return the entry data if there's only one.
-		if ( ! empty( $result['values'] ) AND count( $result['values'] ) === 1 ) {
+		if ( ! empty( $result['values'] ) && count( $result['values'] ) === 1 ) {
 			return array_pop( $result['values'] );
 		}
 
 		// Return the entries array if there are more than one.
-		if ( ! empty( $result['values'] ) AND count( $result['values'] ) > 1 ) {
+		if ( ! empty( $result['values'] ) && count( $result['values'] ) > 1 ) {
 			return $result['values'];
 		}
 
@@ -768,7 +768,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Maybe add Domain ID if passed as an integer.
-		if ( ! empty( $domain_id ) AND is_numeric( $domain_id ) ) {
+		if ( ! empty( $domain_id ) && is_numeric( $domain_id ) ) {
 			$params['domain_id'] = $domain_id;
 		}
 
@@ -776,7 +776,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -790,12 +790,12 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		}
 
 		// Return the entry data if there's only one.
-		if ( ! empty( $result['values'] ) AND count( $result['values'] ) === 1 ) {
+		if ( ! empty( $result['values'] ) && count( $result['values'] ) === 1 ) {
 			return array_pop( $result['values'] );
 		}
 
 		// Return the entries array if there are more than one.
-		if ( ! empty( $result['values'] ) AND count( $result['values'] ) > 1 ) {
+		if ( ! empty( $result['values'] ) && count( $result['values'] ) > 1 ) {
 			return $result['values'];
 		}
 
@@ -836,11 +836,11 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$types = [ 'Organization', 'Household', 'Individual' ];
 
 		// Add the Dedupe rules.
-		foreach( $types AS $type ) {
+		foreach ( $types as $type ) {
 			if ( empty( $contact_type ) ) {
-				$dedupe_rules[$type] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
+				$dedupe_rules[ $type ] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
 			} elseif ( $contact_type == $type ) {
-				$dedupe_rules[$type] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
+				$dedupe_rules[ $type ] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
 			}
 		}
 
@@ -876,7 +876,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$dedupe_params['check_permission'] = false;
 
 		// Check for duplicates.
-		$contact_ids = CRM_Dedupe_Finder::dupesByParams( $dedupe_params, $contact_type, NULL, [], $dedupe_rule_id );
+		$contact_ids = CRM_Dedupe_Finder::dupesByParams( $dedupe_params, $contact_type, null, [], $dedupe_rule_id );
 		$contact_ids = array_reverse( $contact_ids );
 
 		// Return the suggested Contact ID.

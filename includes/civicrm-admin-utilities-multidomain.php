@@ -273,7 +273,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function page_network_multidomain() {
 
 		// Disallow if not network admin in Multisite.
-		if ( is_network_admin() AND ! is_super_admin() ) {
+		if ( is_network_admin() && ! is_super_admin() ) {
 			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
 		}
 
@@ -324,8 +324,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			'civicrm_admin_utilities_network_multidomain_css',
 			plugins_url( 'assets/css/civicrm-admin-utilities-network-multidomain.css', CIVICRM_ADMIN_UTILITIES_FILE ),
 			false,
-			CIVICRM_ADMIN_UTILITIES_VERSION, // version
-			'all' // media
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			'all' // Media.
 		);
 
 	}
@@ -344,7 +344,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			'civicrm_admin_utilities_network_multidomain_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-network-multidomain.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'jquery' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // version
+			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
 		);
 
 	}
@@ -787,7 +787,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		);
 
 		// Bail if "multisite" is not present and enabled in CiviCRM.
-		if ( $data['multisite'] === false OR $data['enabled'] === false ) {
+		if ( $data['multisite'] === false || $data['enabled'] === false ) {
 			return;
 		}
 
@@ -943,8 +943,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			'cau_site_domain_css',
 			plugins_url( 'assets/css/civicrm-admin-utilities-site-multidomain.css', CIVICRM_ADMIN_UTILITIES_FILE ),
 			false,
-			CIVICRM_ADMIN_UTILITIES_VERSION, // version
-			'all' // media
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			'all' // Media.
 		);
 
 	}
@@ -973,7 +973,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			'cau_site_domain_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-site-multidomain.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'jquery', 'cau_site_domain_select2_js' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // version
+			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
 		);
 
 		// Localisation array.
@@ -1106,12 +1106,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Init return.
 		$result = false;
 
-	 	// Was the "Network Domain" form submitted?
+		// Was the "Network Domain" form submitted?
 		if ( isset( $_POST['cau_network_multidomain_submit'] ) ) {
 			return $this->settings_network_multidomain_update();
 		}
 
-	 	// Was the "Domain" form submitted?
+		// Was the "Domain" form submitted?
 		if ( isset( $_POST['cau_multidomain_submit'] ) ) {
 			return $this->settings_multidomain_update();
 		}
@@ -1237,12 +1237,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $result['is_error'] ) AND $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
 			return $domains;
 		}
 
 		// Loop through our domains.
-		foreach( $result['values'] AS $domain ) {
+		foreach ( $result['values'] as $domain ) {
 
 			// Add domain data to return array.
 			$domains[] = [
@@ -1288,12 +1288,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $domains['is_error'] ) AND $domains['is_error'] == 1 ) {
+		if ( ! empty( $domains['is_error'] ) && $domains['is_error'] == 1 ) {
 			return;
 		}
 
 		// Loop through our domains.
-		foreach( $domains['values'] AS $domain ) {
+		foreach ( $domains['values'] as $domain ) {
 
 			// Add domain data to output array.
 			$json[] = [
@@ -1330,7 +1330,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return $domain;
 		}
 
-		// If no parameter set,
+		// If no parameter set.
 		if ( $domain_id === 0 ) {
 
 			// Get CiviCRM domain group ID from constant, if set.
@@ -1356,7 +1356,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $domain_info['is_error'] ) AND $domain_info['is_error'] == 1 ) {
+		if ( ! empty( $domain_info['is_error'] ) && $domain_info['is_error'] == 1 ) {
 			$domain['name'] = $domain_info['error_message'];
 			return $domain;
 		}
@@ -1408,7 +1408,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $result['is_error'] ) AND $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
 			return $result['error_message'];
 		}
 
@@ -1457,12 +1457,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $groups['is_error'] ) AND $groups['is_error'] == 1 ) {
+		if ( ! empty( $groups['is_error'] ) && $groups['is_error'] == 1 ) {
 			return;
 		}
 
 		// Loop through our groups.
-		foreach( $groups['values'] AS $group ) {
+		foreach ( $groups['values'] as $group ) {
 
 			// Add group data to output array.
 			$json[] = [
@@ -1499,7 +1499,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return $domain_group;
 		}
 
-		// If no parameter set,
+		// If no parameter set.
 		if ( $domain_group_id === 0 ) {
 
 			// Try and find the current Domain Group ID.
@@ -1520,7 +1520,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $domain_group_info['is_error'] ) AND $domain_group_info['is_error'] == 1 ) {
+		if ( ! empty( $domain_group_info['is_error'] ) && $domain_group_info['is_error'] == 1 ) {
 			$domain_group['name'] = $domain_group_info['error_message'];
 			return $domain_group;
 		}
@@ -1588,7 +1588,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// If we were successful, cast as integer and return the ID.
-		if ( ! empty( $result['domain_group_id'] ) AND $result['domain_group_id'] != '0' ) {
+		if ( ! empty( $result['domain_group_id'] ) && $result['domain_group_id'] != '0' ) {
 			$domain_group_id = absint( $result['domain_group_id'] );
 			return $domain_group_id;
 		}
@@ -1657,7 +1657,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Sanity check.
-		if ( $group_id === 0 OR ! is_numeric( $group_id ) ) {
+		if ( $group_id === 0 || ! is_numeric( $group_id ) ) {
 			return false;
 		}
 
@@ -1681,7 +1681,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Skip the Setting if there's no change.
-		if ( isset( $setting['domain_group_id'] ) AND $setting['domain_group_id'] !== $group_id ) {
+		if ( isset( $setting['domain_group_id'] ) && $setting['domain_group_id'] !== $group_id ) {
 
 			// Set "domain_group_id" setting.
 			$result = civicrm_api( 'Setting', 'create', [
@@ -1691,7 +1691,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			] );
 
 			// Log if there's an error.
-			if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+			if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 				$e = new Exception();
 				$trace = $e->getTraceAsString();
 				error_log( print_r( [
@@ -1711,7 +1711,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// If it doesn't have one.
-		if ( isset( $result['is_error'] ) AND $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
 
 			// Create new "GroupOrganization" entry.
 			$result = civicrm_api( 'GroupOrganization', 'create', [
@@ -1735,13 +1735,13 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// If the previous Domain Group had more than one "GroupOrganization".
-		if ( isset( $result['count'] ) AND absint( $result['count'] ) > 1 ) {
+		if ( isset( $result['count'] ) && absint( $result['count'] ) > 1 ) {
 
 			// Init linkage ID.
 			$linkage_id = 0;
 
 			// Find the one that's tied to this Domain Org.
-			foreach( $result['values'] AS $linkage ) {
+			foreach ( $result['values'] as $linkage ) {
 				if ( $linkage['organization_id'] == $domain['contact_id'] ) {
 					$linkage_id = $linkage['id'];
 				}
@@ -1785,7 +1785,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Get domain orgs.
 		$orgs = civicrm_api( 'Contact', 'get', [
 			'version' => 3,
-			'contact_type' => "Organization",
+			'contact_type' => 'Organization',
 			'organization_name' => [ 'LIKE' => '%' . $search . '%' ],
 			'options' => [
 				'limit' => 0, // No limit.
@@ -1793,12 +1793,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $orgs['is_error'] ) AND $orgs['is_error'] == 1 ) {
+		if ( ! empty( $orgs['is_error'] ) && $orgs['is_error'] == 1 ) {
 			return;
 		}
 
 		// Loop through our orgs.
-		foreach( $orgs['values'] AS $org ) {
+		foreach ( $orgs['values'] as $org ) {
 
 			// Add org data to output array.
 			$json[] = [
@@ -1869,7 +1869,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $domain_org_info['is_error'] ) AND $domain_org_info['is_error'] == 1 ) {
+		if ( ! empty( $domain_org_info['is_error'] ) && $domain_org_info['is_error'] == 1 ) {
 			$domain_org['name'] = $domain_org_info['error_message'];
 			return $domain_org;
 		}
@@ -1914,7 +1914,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Sanity check.
-		if ( $org_id === 0 OR ! is_numeric( $org_id ) ) {
+		if ( $org_id === 0 || ! is_numeric( $org_id ) ) {
 			return false;
 		}
 
@@ -1961,14 +1961,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	public function send_data( $data ) {
 
 		// Bail if this not an AJAX request.
-		if ( ! defined( 'DOING_AJAX' ) OR ! DOING_AJAX ) {
+		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
 			return;
 		}
 
 		// Set reasonable headers.
-		header('Content-type: text/plain');
-		header("Cache-Control: no-cache");
-		header("Expires: -1");
+		header( 'Content-type: text/plain' );
+		header( 'Cache-Control: no-cache' );
+		header( 'Expires: -1' );
 
 		// Echo and die.
 		echo json_encode( $data );
