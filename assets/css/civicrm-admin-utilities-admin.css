@@ -2843,7 +2843,8 @@ span.crm-frozen-field {
 	top: -1px;
 }
 
-.crm-container .button.delete-button .icon
+.crm-container .button.delete-button .icon,
+.crm-container #case-casecontribution-contributions .button .icon
 {
 	top: 5px;
 }
