@@ -338,6 +338,14 @@ msgstr ""
 msgid "Please note: you need to update the CiviCRM plugin folder first."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:17
+msgid "Execute CiviCRM Extension updates"
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:18
+msgid "Please note: you need to update each of the CiviCRM extensions first."
+msgstr ""
+
 #: assets/templates/metaboxes/site-metabox-stylesheets.php:2
 msgid ""
 "This section allows you to configure how various CiviCRM stylesheets are "
