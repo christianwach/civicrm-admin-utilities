@@ -12,4 +12,8 @@
 		<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/upgrade' ) . '&reset=1' ); ?>"><?php _e( 'Upgrade CiviCRM', 'civicrm-admin-utilities' ); ?></a><br>
 		<span class="description"><?php _e( 'Please note: you need to update the CiviCRM plugin folder first.', 'civicrm-admin-utilities' ); ?></span>
 	</li>
+	<li>
+		<a href="<?php echo admin_url( 'admin.php?page=CiviCRM&q=' . urlencode( 'civicrm/admin/extensions/upgrade' ) . '&reset=1' ); ?>"><?php _e( 'Execute CiviCRM Extension updates', 'civicrm-admin-utilities' ); ?></a><br>
+		<span class="description"><?php _e( 'Please note: you need to update each of the CiviCRM extensions first.', 'civicrm-admin-utilities' ); ?></span>
+	</li>
 </ul>
