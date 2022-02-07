@@ -2034,8 +2034,13 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Get registered URL.
-		$url = CRM_Core_Resources::singleton()->addCacheCode( $config->customCSSURL );
+		// Get registered URL or bundle "name".
+		$version = CRM_Utils_System::version();
+		if ( version_compare( $version, '5.39', '<' ) ) {
+			$url = CRM_Core_Resources::singleton()->addCacheCode( $config->customCSSURL );
+		} else {
+			$url = 'civicrm:css/custom.css';
+		}
 
 		// Get registration data from region.
 		$registration = CRM_Core_Region::instance( 'html-header' )->get( $url );
