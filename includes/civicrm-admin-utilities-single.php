@@ -2424,6 +2424,16 @@ class CiviCRM_Admin_Utilities_Single {
 			] );
 		}
 
+		// CiviCRM Extensions.
+		if ( $this->check_permission( 'administer CiviCRM' ) ) {
+			$wp_admin_bar->add_node( [
+				'id' => 'cau-ext',
+				'parent' => $id,
+				'title' => __( 'Manage Extensions', 'civicrm-admin-utilities' ),
+				'href' => $this->get_link( 'civicrm/admin/extensions', 'reset=1' ),
+			] );
+		}
+
 		/**
 		 * Filter capability to view Admin Utilities settings page.
 		 *
