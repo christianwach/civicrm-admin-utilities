@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.9.2 =
+
+* Misc bug fixes
+* Add "Manage Extensions" to Shortcuts menu
+
 = 0.9.1 =
 
 * Radstock theme updates
