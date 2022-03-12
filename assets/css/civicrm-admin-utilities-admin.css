@@ -44,7 +44,8 @@ html body.wp-admin:not(.toolbar)
 	background: transparent url(../images/loading-E6E6DC.gif) no-repeat center top;
 }
 
-#wpwrap #crm-main-content-wrapper > .ng-scope > .ng-scope
+#wpwrap #crm-main-content-wrapper > .ng-scope > .ng-scope,
+#wpwrap #crm-main-content-wrapper > .ng-scope > form.ng-pristine
 {
 	background: #f0f0f1;
 }
