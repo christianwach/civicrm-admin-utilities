@@ -295,7 +295,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Define our columns.
 		$columns = [
-			//'cb' => '<input type="checkbox" />',
+			'cb' => '<input type="checkbox" />',
 			'username' => __( 'Username', 'civicrm-admin-utilities' ),
 			'name' => __( 'Name', 'civicrm-admin-utilities' ),
 			'email' => __( 'Email', 'civicrm-admin-utilities' ),
@@ -325,9 +325,6 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * @since 0.9
 	 */
 	public function get_bulk_actions() {
-
-		// Disable for now.
-		return;
 
 		// Define our Bulk Actions.
 		$actions = [
