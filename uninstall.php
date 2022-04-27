@@ -1,17 +1,10 @@
-<?php /*
-================================================================================
-CiviCRM Admin Utilities Uninstaller
-================================================================================
-AUTHOR: Christian Wach <needle@haystack.co.uk>
---------------------------------------------------------------------------------
-NOTES
-=====
-
-
---------------------------------------------------------------------------------
-*/
-
-
+<?php
+/**
+ * Uninstaller.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.1
+ */
 
 // Kick out if uninstall not called from WordPress.
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;

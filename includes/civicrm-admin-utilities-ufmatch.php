@@ -91,7 +91,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 * @since 0.9
 	 *
 	 * @param array $args The CiviCRM API arguments.
-	 * @param array|bool The array of data for the Contacts, or false if none.
+	 * @return array|bool The array of data for the Contacts, or false if none.
 	 */
 	public function contacts_get( $args ) {
 
@@ -140,7 +140,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 * @since 0.6.8
 	 *
 	 * @param int $contact_id The numeric ID of the Contact.
-	 * @param array|bool $contact The array of Contact data, or false if none.
+	 * @return array|bool $contact The array of Contact data, or false if none.
 	 */
 	public function contact_get_by_id( $contact_id ) {
 

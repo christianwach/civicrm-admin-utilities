@@ -110,6 +110,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	public function register_hooks() {
 
 		// Filter the "per_page" screen option.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( is_admin() && ! empty( $_REQUEST['page'] ) && $this->users_page_slug == $_REQUEST['page'] ) {
 			add_filter( 'set-screen-option', [ $this, 'admin_screen_options' ], 10, 3 );
 		}
@@ -168,7 +169,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 *
 	 * @param array $hidden The existing array of hidden columns.
 	 * @param WP_Screen $screen The current screen object.
-	 * @param array $hidden The modified array of hidden columns.
+	 * @return array $hidden The modified array of hidden columns.
 	 */
 	public function admin_screen_columns( $hidden, $screen ) {
 
@@ -234,6 +235,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		add_action( 'admin_head-' . $this->users_page, [ $this, 'admin_head' ], 50 );
 
 		// Add scripts and styles.
+		// phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
 		//add_action( 'admin_print_scripts-' . $this->users_page, [ $this, 'page_users_js' ] );
 		add_action( 'admin_print_styles-' . $this->users_page, [ $this, 'page_users_css' ] );
 
@@ -462,7 +464,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	/**
 	 * Enqueue stylesheets for the Site User page.
 	 *
-	 * since 0.9
+	 * @since 0.9
 	 */
 	public function page_users_css() {
 
@@ -482,7 +484,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	/**
 	 * Enqueue Javascripts on the Site User page.
 	 *
-	 * since 0.9
+	 * @since 0.9
 	 */
 	public function page_users_js() {
 
@@ -562,7 +564,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 * @since 0.9
 	 *
 	 * @param array $urls The array of subpage URLs.
-	 * @param str The key of the active tab in the subpage URLs array.
+	 * @param str $active_tab The key of the active tab in the subpage URLs array.
 	 */
 	public function page_add_tab( $urls, $active_tab ) {
 

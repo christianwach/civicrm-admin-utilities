@@ -27,7 +27,7 @@ echo
 # Check version in readme.txt is the same as plugin file after translating both to unix line breaks to work around grep's failure to identify mac line breaks
 NEWVERSION1=`grep "^Stable tag:" $GITPATH/readme.txt | awk -F' ' '{print $NF}'`
 echo "readme.txt version: $NEWVERSION1"
-NEWVERSION2=`grep "^Version:" $GITPATH/$MAINFILE | awk -F' ' '{print $NF}'`
+NEWVERSION2=`grep "^ \* Version:" $GITPATH/$MAINFILE | awk -F' ' '{print $NF}'`
 echo "$MAINFILE version: $NEWVERSION2"
 
 if [ "$NEWVERSION1" != "$NEWVERSION2" ]; then echo "Version in readme.txt & $MAINFILE don't match. Exiting...."; exit 1; fi
@@ -64,9 +64,10 @@ git checkout-index -a -f --prefix=$SVNPATH/trunk/
 echo "Ignoring github specific files and deployment script"
 svn propset svn:ignore "deploy.sh
 README.md
-phpcs.xml
-.editorconfig
 .git
+.editorconfig
+docs
+phpcs.xml
 .gitignore" "$SVNPATH/trunk/"
 
 echo "Changing directory to SVN and committing to trunk"

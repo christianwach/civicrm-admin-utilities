@@ -106,10 +106,12 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		$this->user_counts['all'] = $users_of_blog['total_users'];
 
 		// Get the search string if present.
-		$usersearch = isset( $_REQUEST['s'] ) ? wp_unslash( trim( $_REQUEST['s'] ) ) : '';
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,  WordPress.WP.GlobalVariablesOverride.Prohibited
+		$usersearch = isset( $_REQUEST['s'] ) ? trim( wp_unslash( $_REQUEST['s'] ) ) : '';
 
 		// Get the views param if present.
-		$user_status = isset( $_REQUEST['user_status'] ) ? $_REQUEST['user_status'] : 'all';
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$user_status = isset( $_REQUEST['user_status'] ) ? wp_unslash( $_REQUEST['user_status'] ) : 'all';
 
 		// Set per page from the screen options.
 		$per_page = 'admin_page_' . civicrm_au()->single_users->users_page_slug . '_per_page';
@@ -175,10 +177,12 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Support ordering.
 		if ( isset( $_REQUEST['orderby'] ) ) {
-			$args['orderby'] = $_REQUEST['orderby'];
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$args['orderby'] = wp_unslash( $_REQUEST['orderby'] );
 		}
 		if ( isset( $_REQUEST['order'] ) ) {
-			$args['order'] = $_REQUEST['order'];
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$args['order'] = wp_unslash( $_REQUEST['order'] );
 		}
 
 		/**
@@ -260,9 +264,6 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 */
 	public function extra_tablenav( $which ) {
 
-		// Disable.
-		return;
-
 	}
 
 
@@ -326,6 +327,8 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 */
 	public function get_bulk_actions() {
 
+		// phpcs:disable Squiz.PHP.NonExecutableCode.Unreachable
+
 		// Disable for now.
 		return;
 
@@ -343,6 +346,8 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		 * @return array $actions The modified array of bulk actions.
 		 */
 		return apply_filters( 'cau/single_users/user_table/bulk_actions', $actions );
+
+		// phpcs:enable Squiz.PHP.NonExecutableCode.Unreachable
 
 	}
 
@@ -447,11 +452,15 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 */
 	public function column_cb( $user_object = null ) {
 
-		?>
-		<label class="screen-reader-text" for="user_<?php echo intval( $user_object->ID ); ?>"><?php
+		// Define label.
+		$label = sprintf(
 			/* translators: accessibility text */
-			printf( esc_html__( 'Select user: %s', 'civicrm-admin-utilities' ), $user_object->user_login );
-		?></label>
+			esc_html__( 'Select user: %s', 'civicrm-admin-utilities' ),
+			$user_object->user_login
+		);
+
+		?>
+		<label class="screen-reader-text" for="user_<?php echo intval( $user_object->ID ); ?>"><?php echo $label; ?></label>
 		<input type="checkbox" id="user_<?php echo intval( $user_object->ID ); ?>" name="allusers[]" value="<?php echo esc_attr( $user_object->ID ); ?>" />
 		<?php
 
@@ -546,14 +555,6 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		// Write email to screen.
 		echo esc_html( $user_object->user_email );
 
-		/*
-		printf(
-			'<a href="mailto:%1$s">%2$s</a>',
-			esc_attr( $user_object->user_email ),
-			esc_html( $user_object->user_email )
-		);
-		*/
-
 	}
 
 
@@ -620,9 +621,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	public function column_post_counts( $user_object = null ) {
 
 		// Get the number of posts for this user.
-		$post_count = ! empty( $this->post_counts[ $user_object->ID ] ) ?
-					  $this->post_counts[ $user_object->ID ] :
-					  0;
+		$post_count = ! empty( $this->post_counts[ $user_object->ID ] ) ? $this->post_counts[ $user_object->ID ] : 0;
 
 		// Assume none.
 		$markup = '0';
@@ -636,7 +635,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 				$post_count,
 				sprintf(
 					/* translators: %s: Number of posts. */
-					_n( '%s post by this author', '%s posts by this author', $post_count ),
+					_n( '%s post by this author', '%s posts by this author', $post_count, 'civicrm-admin-utilities' ),
 					number_format_i18n( $post_count )
 				)
 			);

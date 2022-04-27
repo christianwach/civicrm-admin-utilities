@@ -413,7 +413,7 @@ class CiviCRM_Admin_Utilities_Single {
 			// Log pre and post database operations.
 			add_action( 'civicrm_pre', [ $this, 'trace_pre' ], 10, 4 );
 			add_action( 'civicrm_post', [ $this, 'trace_post' ], 10, 4 );
-			add_action( 'civicrm_postProcess', [ $this, 'trace_postProcess' ], 10, 2 );
+			add_action( 'civicrm_postProcess', [ $this, 'trace_post_process' ], 10, 2 );
 
 		}
 
@@ -784,6 +784,9 @@ class CiviCRM_Admin_Utilities_Single {
 			[ $this, 'page_settings' ]
 		);
 
+		// Register our form submit hander.
+		add_action( 'load-' . $this->parent_page, [ $this, 'settings_update_router' ] );
+
 		// Add help text.
 		add_action( 'admin_head-' . $this->parent_page, [ $this, 'admin_head' ], 50 );
 
@@ -801,6 +804,9 @@ class CiviCRM_Admin_Utilities_Single {
 			[ $this, 'page_settings' ] // Callback.
 		);
 
+		// Register our form submit hander.
+		add_action( 'load-' . $this->settings_page, [ $this, 'settings_update_router' ] );
+
 		// Ensure correct menu item is highlighted.
 		add_action( 'admin_head-' . $this->settings_page, [ $this, 'admin_menu_highlight' ], 50 );
 
@@ -810,9 +816,6 @@ class CiviCRM_Admin_Utilities_Single {
 		// Add scripts and styles.
 		add_action( 'admin_print_styles-' . $this->settings_page, [ $this, 'admin_css' ] );
 		add_action( 'admin_print_scripts-' . $this->settings_page, [ $this, 'admin_js' ] );
-
-		// Try and update options.
-		$saved = $this->settings_update_router();
 
 	}
 
@@ -832,6 +835,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function admin_menu_highlight() {
 
+		// We need to override these to highlight the correct item.
 		global $plugin_page, $submenu_file;
 
 		// Define subpages.
@@ -851,8 +855,10 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// This tweaks the Settings subnav menu to show only one menu item.
 		if ( in_array( $plugin_page, $subpages ) ) {
+			// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 			$plugin_page = 'cau_parent';
 			$submenu_file = 'cau_parent';
+			// phpcs:enable WordPress.WP.GlobalVariablesOverride.Prohibited
 		}
 
 	}
@@ -967,7 +973,8 @@ class CiviCRM_Admin_Utilities_Single {
 			'civicrm_admin_utilities_2020_move_js',
 			plugins_url( 'assets/js/twentytwenty/js/jquery.event.move.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'jquery' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			true
 		);
 
 		// Enqueue 2020 script.
@@ -975,7 +982,8 @@ class CiviCRM_Admin_Utilities_Single {
 			'civicrm_admin_utilities_2020_js',
 			plugins_url( 'assets/js/twentytwenty/js/jquery.twentytwenty.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'civicrm_admin_utilities_2020_move_js' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			true
 		);
 
 		// Enqueue our "Site Settings" page script.
@@ -983,7 +991,8 @@ class CiviCRM_Admin_Utilities_Single {
 			'civicrm_admin_utilities_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-site-settings.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'civicrm_admin_utilities_2020_js' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			true
 		);
 
 	}
@@ -1099,14 +1108,15 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function page_submit_url_get() {
 
-		// Sanitise admin page url.
-		$target_url = $_SERVER['REQUEST_URI'];
-		$url_array = explode( '&', $target_url );
-
-		// Strip flag, if present, and rebuild.
-		if ( ! empty( $url_array ) ) {
-			$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
-			$target_url = htmlentities( $url_raw . '&updated=true' );
+		// Sanitise admin page URL.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$target_url = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
+		if ( ! empty( $target_url ) ) {
+			$url_array = explode( '&', $target_url );
+			if ( ! empty( $url_array ) ) {
+				$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
+				$target_url = htmlentities( $url_raw . '&updated=true' );
+			}
 		}
 
 		// --<
@@ -1709,6 +1719,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Register template directories.
 		$template_include_path = $custom_path . PATH_SEPARATOR . get_include_path();
+		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_set_include_path
 		set_include_path( $template_include_path );
 
 	}
@@ -1751,6 +1762,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Register template directories.
 		$template_include_path = $custom_path . PATH_SEPARATOR . get_include_path();
+		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_set_include_path
 		set_include_path( $template_include_path );
 
 	}
@@ -2030,6 +2042,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$config = CRM_Core_Config::singleton();
 
 		// Bail if there's no custom CSS file.
+		// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 		if ( empty( $config->customCSSURL ) ) {
 			return;
 		}
@@ -2037,6 +2050,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Get registered URL or bundle "name".
 		$version = CRM_Utils_System::version();
 		if ( version_compare( $version, '5.39', '<' ) ) {
+			// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			$url = CRM_Core_Resources::singleton()->addCacheCode( $config->customCSSURL );
 		} else {
 			$url = 'civicrm:css/custom.css';
@@ -2079,6 +2093,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$config = CRM_Core_Config::singleton();
 
 		// Override return if the Shoreditch CSS has been activated.
+		// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 		if ( strstr( $config->customCSSURL, 'org.civicrm.shoreditch' ) !== false ) {
 			$shoreditch = true;
 		}
@@ -2838,6 +2853,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Build title.
 		$title = sprintf(
+			/* translators: %s: The Contact's first name */
 			__( 'Hi %s, welcome to CiviCRM', 'civicrm-admin-utilities' ),
 			$contact['first_name']
 		);
@@ -3052,7 +3068,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param string $formName The name of the form.
 	 * @param object $form The form object.
 	 */
-	public function trace_postProcess( $formName, &$form ) {
+	public function trace_post_process( $formName, &$form ) {
 
 		$e = new Exception();
 		$trace = $e->getTraceAsString();
@@ -3154,6 +3170,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$result = false;
 
 		// Was the "Settings" form submitted?
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['civicrm_admin_utilities_settings_submit'] ) ) {
 			return $this->settings_update();
 		}

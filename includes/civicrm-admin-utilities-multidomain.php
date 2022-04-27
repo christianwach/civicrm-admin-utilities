@@ -142,6 +142,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Add scripts and styles.
 		add_action( 'admin_print_styles-' . $this->network_multidomain_page, [ $this, 'page_network_multidomain_css' ] );
+		// phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
 		//add_action( 'admin_print_scripts-' . $this->network_multidomain_page, [ $this, 'page_network_multidomain_js' ] );
 
 		// Try and update options.
@@ -344,7 +345,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			'civicrm_admin_utilities_network_multidomain_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-network-multidomain.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'jquery' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			true
 		);
 
 	}
@@ -397,7 +399,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @since 0.6.2
 	 *
 	 * @param array $urls The array of subpage URLs.
-	 * @param str The key of the active tab in the subpage URLs array.
+	 * @param str $active_tab The key of the active tab in the subpage URLs array.
 	 */
 	public function page_network_add_tab( $urls, $active_tab ) {
 
@@ -586,6 +588,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			[ $this, 'page_multidomain' ] // Callback.
 		);
 
+		// Register our form submit hander.
+		add_action( 'load-' . $this->multidomain_page, [ $this, 'settings_update_router' ] );
+
 		// Ensure correct menu item is highlighted.
 		add_action( 'admin_head-' . $this->multidomain_page, [ $this->plugin->single, 'admin_menu_highlight' ], 50 );
 
@@ -595,9 +600,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Add scripts and styles.
 		add_action( 'admin_print_scripts-' . $this->multidomain_page, [ $this, 'page_multidomain_js' ] );
 		add_action( 'admin_print_styles-' . $this->multidomain_page, [ $this, 'page_multidomain_css' ] );
-
-		// Try and update options.
-		$saved = $this->settings_update_router();
 
 		// Filter the list of Single Site subpages and add Multidomain page.
 		add_filter( 'civicrm_admin_utilities_subpages', [ $this, 'admin_subpages_filter' ] );
@@ -932,7 +934,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Register Select2 styles.
 		wp_register_style(
 			'cau_site_domain_select2_css',
-			set_url_scheme( 'http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css' )
+			set_url_scheme( 'http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css' ),
+			false,
+			'4.0.5',
+			'all'
 		);
 
 		// Enqueue styles.
@@ -962,7 +967,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		wp_register_script(
 			'cau_site_domain_select2_js',
 			set_url_scheme( 'http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js' ),
-			[ 'jquery' ]
+			[ 'jquery' ],
+			'4.0.5',
+			true
 		);
 
 		// Enqueue Select2 script.
@@ -973,7 +980,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			'cau_site_domain_js',
 			plugins_url( 'assets/js/civicrm-admin-utilities-site-multidomain.js', CIVICRM_ADMIN_UTILITIES_FILE ),
 			[ 'jquery', 'cau_site_domain_select2_js' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // Version.
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			true
 		);
 
 		// Localisation array.
@@ -1042,7 +1050,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @since 0.5.4
 	 *
 	 * @param array $urls The array of subpage URLs.
-	 * @param str The key of the active tab in the subpage URLs array.
+	 * @param str $active_tab The key of the active tab in the subpage URLs array.
 	 */
 	public function page_add_tab( $urls, $active_tab ) {
 
@@ -1073,14 +1081,15 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function page_submit_url_get() {
 
-		// Sanitise admin page url.
-		$target_url = $_SERVER['REQUEST_URI'];
-		$url_array = explode( '&', $target_url );
-
-		// Strip flag, if present, and rebuild.
-		if ( ! empty( $url_array ) ) {
-			$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
-			$target_url = htmlentities( $url_raw . '&updated=true' );
+		// Sanitise admin page URL.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$target_url = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
+		if ( ! empty( $target_url ) ) {
+			$url_array = explode( '&', $target_url );
+			if ( ! empty( $url_array ) ) {
+				$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
+				$target_url = htmlentities( $url_raw . '&updated=true' );
+			}
 		}
 
 		// --<
@@ -1107,11 +1116,13 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$result = false;
 
 		// Was the "Network Domain" form submitted?
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['cau_network_multidomain_submit'] ) ) {
 			return $this->settings_network_multidomain_update();
 		}
 
 		// Was the "Domain" form submitted?
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['cau_multidomain_submit'] ) ) {
 			return $this->settings_multidomain_update();
 		}
@@ -1136,7 +1147,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		check_admin_referer( 'cau_network_multidomain_action', 'cau_network_multidomain_nonce' );
 
 		// Sanitise input.
-		$domain_name = isset( $_POST['cau_domain_name'] ) ? sanitize_text_field( $_POST['cau_domain_name'] ) : '';
+		$domain_name = isset( $_POST['cau_domain_name'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_domain_name'] ) ) : '';
 
 		// Bail if we get nothing through.
 		if ( empty( $domain_name ) ) {
@@ -1184,8 +1195,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		check_admin_referer( 'cau_multidomain_action', 'cau_multidomain_nonce' );
 
 		// Sanitise inputs.
-		$domain_org_id = isset( $_POST['cau_domain_org_select'] ) ? absint( $_POST['cau_domain_org_select'] ) : '';
-		$domain_group_id = isset( $_POST['cau_domain_group_select'] ) ? absint( $_POST['cau_domain_group_select'] ) : '';
+		$domain_org_id = isset( $_POST['cau_domain_org_select'] ) ? absint( wp_unslash( $_POST['cau_domain_org_select'] ) ) : '';
+		$domain_group_id = isset( $_POST['cau_domain_group_select'] ) ? absint( wp_unslash( $_POST['cau_domain_group_select'] ) ) : '';
 
 		// Maybe set new Domain Org.
 		$this->domain_org_set( $domain_org_id );
@@ -1276,7 +1287,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$json = [];
 
 		// Sanitise search input.
-		$search = isset( $_POST['s'] ) ? sanitize_text_field( $_POST['s'] ) : '';
+		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
 
 		// Get domains.
 		$domains = civicrm_api( 'Domain', 'get', [
@@ -1305,7 +1316,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Send data.
-		$this->send_data( $json );
+		wp_send_json( $json );
 
 	}
 
@@ -1444,7 +1455,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$json = [];
 
 		// Sanitise search input.
-		$search = isset( $_POST['s'] ) ? sanitize_text_field( $_POST['s'] ) : '';
+		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
 
 		// Get domain groups.
 		$groups = civicrm_api( 'Group', 'get', [
@@ -1474,7 +1485,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Send data.
-		$this->send_data( $json );
+		wp_send_json( $json );
 
 	}
 
@@ -1780,7 +1791,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$json = [];
 
 		// Sanitise search input.
-		$search = isset( $_POST['s'] ) ? sanitize_text_field( $_POST['s'] ) : '';
+		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
 
 		// Get domain orgs.
 		$orgs = civicrm_api( 'Contact', 'get', [
@@ -1810,7 +1821,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Send data.
-		$this->send_data( $json );
+		wp_send_json( $json );
 
 	}
 
@@ -1942,37 +1953,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// --<
 		return $org_id;
-
-	}
-
-
-
-	// -------------------------------------------------------------------------
-
-
-
-	/**
-	 * Send JSON data to the browser.
-	 *
-	 * @since 0.6.2
-	 *
-	 * @param array $data The data to send.
-	 */
-	public function send_data( $data ) {
-
-		// Bail if this not an AJAX request.
-		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
-			return;
-		}
-
-		// Set reasonable headers.
-		header( 'Content-type: text/plain' );
-		header( 'Cache-Control: no-cache' );
-		header( 'Expires: -1' );
-
-		// Echo and die.
-		echo json_encode( $data );
-		exit();
 
 	}
 

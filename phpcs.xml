@@ -31,7 +31,7 @@
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 
-		<!-- Remove some checks to allow phpcbf to run in bulk mode
+		<!-- Remove some checks to allow phpcbf to run in bulk mode -->
 		<exclude name="WordPress.PHP.StrictComparisons.LooseComparison" />
 		<exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict" />
 		<exclude name="Squiz.Commenting.InlineComment.NoSpaceBefore" />
@@ -40,7 +40,7 @@
 		<exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase" />
 		<exclude name="Squiz.Commenting.InlineComment.SpacingAfterAtFunctionEnd" />
 		<exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect" />
-		<exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" /> -->
+		<exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
 
 		<!-- Remove when error logging has been moved to a function -->
 		<exclude name="WordPress.PHP.DevelopmentFunctions.error_log_error_log" />
