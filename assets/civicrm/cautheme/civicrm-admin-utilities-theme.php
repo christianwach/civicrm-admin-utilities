@@ -86,8 +86,10 @@ class CiviCRM_Admin_Utilities_Theme {
   public function is_allowed() {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return false;
+		if ( ! doing_action( 'civicrm_config' ) ) {
+      if ( ! $this->plugin->is_civicrm_initialised() ) {
+        return false;
+      }
 		}
 
     // Only do this once.

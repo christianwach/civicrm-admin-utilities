@@ -1601,11 +1601,6 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return;
-		}
-
 		// Get template instance.
 		$template = CRM_Core_Smarty::singleton();
 
@@ -2613,11 +2608,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// The Contact ID is the first item.
 		$contact_id = $params[0];
-
-		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return;
-		}
 
 		// Define params to get Contact.
 		$params = [
