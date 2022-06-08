@@ -873,21 +873,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 			'core' // Vertical placement: options are 'core', 'high', 'low'.
 		);
 
-		// If CiviCRM has not been fixed.
-		if ( ! $this->plugin->single->access_form_fixed() ) {
-
-			// Create CiviCRM WordPress Access Control metabox.
-			add_meta_box(
-				'civicrm_au_access_form',
-				__( 'CiviCRM WordPress Access Control', 'civicrm-admin-utilities' ),
-				[ $this, 'meta_box_access_form_render' ], // Callback.
-				$screen_id, // Screen ID.
-				'normal', // Column: options are 'normal' and 'side'.
-				'core' // Vertical placement: options are 'core', 'high', 'low'.
-			);
-
-		}
-
 		// Create Admin Bar Options metabox.
 		add_meta_box(
 			'civicrm_au_admin_bar',
@@ -1056,26 +1041,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-contacts.php';
-
-	}
-
-
-
-	/**
-	 * Render CiviCRM WordPress Access Control meta box on Admin screen.
-	 *
-	 * @since 0.8.1
-	 */
-	public function meta_box_access_form_render() {
-
-		// Init access form checkbox.
-		$prettify_access = '';
-		if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) {
-			$prettify_access = ' checked="checked"';
-		}
-
-		// Include template file.
-		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-access-form.php';
 
 	}
 
@@ -1661,12 +1626,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Do not fix Contact Soft Delete by default to keep existing behaviour.
 		$settings['fix_soft_delete'] = '0';
 
-		// Fix WordPress Access Control table.
-		$settings['prettify_access'] = '1';
-
-		// Do not assume WordPress Access Control table is fixed.
-		$settings['access_fixed'] = '0';
-
 		// Add menu to admin bar.
 		$settings['admin_bar'] = '1';
 
@@ -1849,8 +1808,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$civicrm_admin_utilities_email_suppress = '';
 		$civicrm_admin_utilities_fix_soft_delete = '';
 
-		$civicrm_admin_utilities_access = '';
-
 		$civicrm_admin_utilities_admin_bar = '';
 		$civicrm_admin_utilities_admin_bar_groups = '';
 		$civicrm_admin_utilities_post_types = [];
@@ -1941,13 +1898,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 			$this->setting_set( 'fix_soft_delete', '1' );
 		} else {
 			$this->setting_set( 'fix_soft_delete', '0' );
-		}
-
-		// Did we ask to fix the access form?
-		if ( $civicrm_admin_utilities_access == '1' ) {
-			$this->setting_set( 'prettify_access', '1' );
-		} else {
-			$this->setting_set( 'prettify_access', '0' );
 		}
 
 		// Did we ask to add the shortcuts menu to the admin bar?

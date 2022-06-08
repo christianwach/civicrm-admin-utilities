@@ -369,10 +369,6 @@ class CiviCRM_Admin_Utilities_Single {
 		// Add Shortcuts Menu to WordPress admin bar.
 		add_action( 'admin_bar_menu', [ $this, 'shortcuts_menu_add' ], 2000 );
 
-		// Filter the WordPress Permissions Form.
-		add_action( 'civicrm_config', [ $this, 'register_access_directory' ], 10, 1 );
-		add_action( 'civicrm_buildForm', [ $this, 'fix_permissions_form' ], 10, 2 );
-
 		// Hook in just before CiviCRM does to disable resources.
 		add_action( 'admin_head', [ $this, 'resources_disable' ], 9 );
 		add_action( 'wp_head', [ $this, 'resources_disable' ], 9 );
@@ -1228,21 +1224,6 @@ class CiviCRM_Admin_Utilities_Single {
 			'core' // Vertical placement: options are 'core', 'high', 'low'.
 		);
 
-		// If CiviCRM has not been fixed.
-		if ( ! $this->access_form_fixed() ) {
-
-			// Create CiviCRM WordPress Access Control metabox.
-			add_meta_box(
-				'civicrm_au_access_form',
-				__( 'CiviCRM WordPress Access Control', 'civicrm-admin-utilities' ),
-				[ $this, 'meta_box_access_form_render' ], // Callback.
-				$screen_id, // Screen ID.
-				'normal', // Column: options are 'normal' and 'side'.
-				'core' // Vertical placement: options are 'core', 'high', 'low'.
-			);
-
-		}
-
 		// Create Admin Bar Options metabox.
 		add_meta_box(
 			'civicrm_au_admin_bar',
@@ -1440,26 +1421,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 	/**
-	 * Render CiviCRM WordPress Access Control meta box on Admin screen.
-	 *
-	 * @since 0.8.1
-	 */
-	public function meta_box_access_form_render() {
-
-		// Init access form checkbox.
-		$prettify_access = '';
-		if ( $this->setting_get( 'prettify_access', '0' ) == '1' ) {
-			$prettify_access = ' checked="checked"';
-		}
-
-		// Include template file.
-		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-access-form.php';
-
-	}
-
-
-
-	/**
 	 * Render Admin Bar Options meta box on Admin screen.
 	 *
 	 * @since 0.8.1
@@ -1586,62 +1547,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 	/**
-	 * Check if CiviCRM's WordPress Access Control template has been fixed.
-	 *
-	 * @since 0.3.2
-	 * @since 0.5.4 Moved from plugin class.
-	 *
-	 * @return bool $fixed True if fixed, false otherwise.
-	 */
-	public function access_form_fixed() {
-
-		// Always true if already fixed in CiviCRM.
-		if ( $this->setting_get( 'access_fixed', '0' ) == '1' ) {
-			return true;
-		}
-
-		// Avoid recalculation.
-		if ( isset( $this->fixed ) ) {
-			return $this->fixed;
-		}
-
-		// Do nothing if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			$this->setting_set( 'access_fixed', '1' );
-			$this->settings_save();
-			$this->fixed = true;
-			return $this->fixed;
-		}
-
-		// Init property.
-		$this->fixed = false;
-
-		// Get current version.
-		$version = CRM_Utils_System::version();
-
-		// Find major version.
-		$parts = explode( '.', $version );
-		$major_version = $parts[0] . '.' . $parts[1];
-
-		// CiviCRM 4.7+ is fixed.
-		if ( version_compare( $version, '4.7.30', '>=' ) ) {
-			$this->fixed = true;
-		}
-
-		// Save setting if fixed.
-		if ( $this->fixed ) {
-			$this->setting_set( 'access_fixed', '1' );
-			$this->settings_save();
-		}
-
-		// --<
-		return $this->fixed;
-
-	}
-
-
-
-	/**
 	 * Clear CiviCRM caches.
 	 *
 	 * Another way to do this might be:
@@ -1713,49 +1618,6 @@ class CiviCRM_Admin_Utilities_Single {
 		} else {
 			$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/template-menu';
 		}
-
-		// Add our custom template directory.
-		$template->addTemplateDir( $custom_path );
-
-		// Register template directories.
-		$template_include_path = $custom_path . PATH_SEPARATOR . get_include_path();
-		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_set_include_path
-		set_include_path( $template_include_path );
-
-	}
-
-
-
-	/**
-	 * Register directory that CiviCRM searches for the WordPress Access Control template file.
-	 *
-	 * @since 0.3.2
-	 * @since 0.5.4 Moved from plugin class.
-	 *
-	 * @param object $config The CiviCRM config object.
-	 */
-	public function register_access_directory( &$config ) {
-
-		// Bail if disabled.
-		if ( $this->setting_get( 'prettify_access', '0' ) == '0' ) {
-			return;
-		}
-
-		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return;
-		}
-
-		// Bail if CiviCRM has been fixed.
-		if ( $this->access_form_fixed() ) {
-			return;
-		}
-
-		// Get template instance.
-		$template = CRM_Core_Smarty::singleton();
-
-		// Define our custom path.
-		$custom_path = CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/template-access';
 
 		// Add our custom template directory.
 		$template->addTemplateDir( $custom_path );
@@ -2561,77 +2423,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 
 
-	/**
-	 * Fixes the WordPress Access Control form by building a single table.
-	 *
-	 * @since 0.3
-	 * @since 0.5.4 Moved from plugin class.
-	 *
-	 * @param string $formName The name of the form.
-	 * @param CRM_Core_Form $form The form object.
-	 */
-	public function fix_permissions_form( $formName, &$form ) {
-
-		// Bail if disabled.
-		if ( $this->setting_get( 'prettify_access', '0' ) == '0' ) {
-			return;
-		}
-
-		// Bail if CiviCRM has been fixed.
-		if ( $this->access_form_fixed() ) {
-			return;
-		}
-
-		// Bail if not the form we want.
-		if ( $formName != 'CRM_ACL_Form_WordPress_Permissions' ) {
-			return;
-		}
-
-		// Get vars.
-		$vars = $form->get_template_vars();
-
-		// Bail if $permDesc does not exist.
-		if ( ! isset( $vars['permDesc'] ) ) {
-			return;
-		}
-
-		// Build replacement for permDesc array.
-		foreach ( $vars['rolePerms'] as $role => $perms ) {
-			foreach ( $perms as $name => $title ) {
-				$permissions[ $name ] = $title;
-			}
-		}
-
-		// Build array keyed by permission.
-		$table = [];
-		foreach ( $permissions as $perm => $label ) {
-
-			// Init row with permission description.
-			$table[ $perm ] = [
-				'label' => $label,
-				'roles' => [],
-			];
-
-			// Add permission label and role names.
-			foreach ( $vars['roles'] as $key => $label ) {
-				if ( isset( $vars['permDesc'][ $perm ] ) ) {
-					$table[ $perm ]['desc'] = $vars['permDesc'][ $perm ];
-				}
-				$table[ $perm ]['roles'][] = $key;
-			}
-
-		}
-
-		// Assign to form.
-		$form->assign( 'table', $table );
-
-		// Camelcase dammit.
-		CRM_Utils_System::setTitle( __( 'WordPress Access Control', 'civicrm-admin-utilities' ) );
-
-	}
-
-
-
 	// -------------------------------------------------------------------------
 
 
@@ -3125,12 +2916,6 @@ class CiviCRM_Admin_Utilities_Single {
 		// Do not fix Contact Soft Delete by default to keep existing behaviour.
 		$settings['fix_soft_delete'] = '0';
 
-		// Fix WordPress Access Control table.
-		$settings['prettify_access'] = '1';
-
-		// Do not assume WordPress Access Control table is fixed.
-		$settings['access_fixed'] = '0';
-
 		// Add Shortcuts Menu to admin bar.
 		$settings['admin_bar'] = '1';
 
@@ -3208,7 +2993,6 @@ class CiviCRM_Admin_Utilities_Single {
 		$civicrm_admin_utilities_styles_bootstrap = '';
 		$civicrm_admin_utilities_email_suppress = '';
 		$civicrm_admin_utilities_fix_soft_delete = '';
-		$civicrm_admin_utilities_access = '';
 		$civicrm_admin_utilities_admin_bar = '';
 		$civicrm_admin_utilities_admin_bar_groups = '';
 		$civicrm_admin_utilities_post_types = [];
@@ -3334,19 +3118,6 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'fix_soft_delete', '1' );
 		} else {
 			$this->setting_set( 'fix_soft_delete', '0' );
-		}
-
-		// Get existing access setting.
-		$existing_access = $this->setting_get( 'prettify_access', '0' );
-		if ( $civicrm_admin_utilities_access != $existing_access ) {
-			$force = true;
-		}
-
-		// Did we ask to fix the access form?
-		if ( $civicrm_admin_utilities_access == '1' ) {
-			$this->setting_set( 'prettify_access', '1' );
-		} else {
-			$this->setting_set( 'prettify_access', '0' );
 		}
 
 		// Did we ask to add the shortcuts menu to the admin bar?
