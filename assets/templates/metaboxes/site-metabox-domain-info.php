@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 		printf(
 			/* translators: 1: Opening anchor tag, 2: Closing anchor tag. */
-			__( 'It is recommended that you install and activate the %2$sCiviCRM Multisite extension%2$s to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ),
+			__( 'It is recommended that you install and activate the %1$sCiviCRM Multisite extension%2$s to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ),
 			'<a href="https://civicrm.org/extensions/multisite-permissioning" target="_blank">',
 			'</a>'
 		);
