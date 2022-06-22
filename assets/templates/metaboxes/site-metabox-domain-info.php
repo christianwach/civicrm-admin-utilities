@@ -14,7 +14,18 @@ defined( 'ABSPATH' ) || exit;
 ?><!-- assets/templates/metaboxes/site-metabox-domain-info.php -->
 <?php if ( ! $metabox['args']['multisite'] ) : ?>
 	<div class="updated error inline" style="background-color: #f7f7f7;">
-		<p><?php esc_html_e( 'It is recommended that you install and activate the <a href="https://civicrm.org/extensions/multisite-permissioning" target="_blank">CiviCRM Multisite</a> extension to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ); ?></p>
+		<p>
+		<?php
+
+		printf(
+			/* translators: 1: Opening anchor tag, 2: Closing anchor tag. */
+			__( 'It is recommended that you install and activate the %2$sCiviCRM Multisite extension%2$s to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ),
+			'<a href="https://civicrm.org/extensions/multisite-permissioning" target="_blank">',
+			'</a>'
+		);
+
+		?>
+		</p>
 	</div>
 <?php endif; ?>
 
@@ -23,7 +34,7 @@ defined( 'ABSPATH' ) || exit;
 		<p>
 		<?php
 
-		echo sprintf(
+		printf(
 			/* translators: %s: The URL of the CiviCRM setting page. */
 			__( 'Multisite is not enabled on this CiviCRM Domain. Change <a href="%s">the setting in CiviCRM</a> to enable it.', 'civicrm-admin-utilities' ),
 			$metabox['args']['multisite_url']
