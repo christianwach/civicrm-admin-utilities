@@ -1,4 +1,17 @@
-<!-- assets/templates/metaboxes/site-metabox-domain-submit.php -->
+<?php
+/**
+ * Network Settings "Domain Submit" metabox Template.
+ *
+ * Handles markup for the Network Settings "Domain Submit" metabox.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.8.1
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+?><!-- assets/templates/metaboxes/site-metabox-domain-submit.php -->
 <div class="submitbox">
 	<div id="minor-publishing">
 		<div id="misc-publishing-actions">

@@ -1,10 +1,23 @@
-<!-- assets/templates/site-multidomain.php -->
+<?php
+/**
+ * Multidomain Settings Template.
+ *
+ * Handles markup for the Multidomain Settings page.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.8.1
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+?><!-- assets/templates/site-multidomain.php -->
 <div class="wrap">
 
-	<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
+	<h1><?php esc_html_e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
 
 	<h2 class="nav-tab-wrapper">
-		<a href="<?php echo $urls['settings']; ?>" class="nav-tab"><?php _e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
+		<a href="<?php echo $urls['settings']; ?>" class="nav-tab"><?php esc_html_e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
 		<?php
 
 		/**
@@ -28,7 +41,7 @@
 
 		<div id="poststuff">
 
-			<div id="post-body" class="metabox-holder columns-<?php echo $columns;?>">
+			<div id="post-body" class="metabox-holder columns-<?php echo $columns; ?>">
 
 				<!--<div id="post-body-content">
 				</div>--><!-- #post-body-content -->
@@ -38,7 +51,7 @@
 				</div>
 
 				<div id="postbox-container-2" class="postbox-container">
-					<?php do_meta_boxes( $screen->id, 'normal', null );  ?>
+					<?php do_meta_boxes( $screen->id, 'normal', null ); ?>
 					<?php do_meta_boxes( $screen->id, 'advanced', null ); ?>
 				</div>
 

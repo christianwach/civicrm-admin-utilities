@@ -106,7 +106,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		$this->user_counts['all'] = $users_of_blog['total_users'];
 
 		// Get the search string if present.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,  WordPress.WP.GlobalVariablesOverride.Prohibited
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.WP.GlobalVariablesOverride.Prohibited
 		$usersearch = isset( $_REQUEST['s'] ) ? trim( wp_unslash( $_REQUEST['s'] ) ) : '';
 
 		// Get the views param if present.

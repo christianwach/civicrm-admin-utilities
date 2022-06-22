@@ -1,7 +1,31 @@
-<!-- assets/templates/metaboxes/network-metabox-domain-info.php -->
+<?php
+/**
+ * Network Settings "Domain Info" metabox Template.
+ *
+ * Handles markup for the Network Settings "Domain Info" metabox.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.8.1
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+?><!-- assets/templates/metaboxes/network-metabox-domain-info.php -->
 <?php if ( ! $metabox['args']['multisite'] ) : ?>
 	<div class="updated error inline" style="background-color: #f7f7f7;">
-		<p><?php _e( 'It is recommended that you install and activate the <a href="https://civicrm.org/extensions/multisite-permissioning" target="_blank">CiviCRM Multisite</a> extension to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ); ?></p>
+		<p>
+		<?php
+
+		printf(
+			/* translators: 1: Opening anchor tag, 2: Closing anchor tag. */
+			__( 'It is recommended that you install and activate the %1$sCiviCRM Multisite%2$s extension to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ),
+			'<a href="https://civicrm.org/extensions/multisite-permissioning" target="_blank">',
+			'</a>'
+		);
+
+		?>
+		</p>
 	</div>
 <?php endif; ?>
 
@@ -9,18 +33,23 @@
 
 <table class="form-table">
 
-	<?php foreach( $metabox['args']['domains'] AS $domain ) : ?>
+	<?php foreach ( $metabox['args']['domains'] as $civicrm_domain ) : ?>
 
 	<tr>
 		<th scope="row">
-			<?php echo $domain['name']; ?>
+			<?php echo $civicrm_domain['name']; ?>
 		</th>
 
 		<td>
-			<?php echo sprintf(
+			<?php
+
+			echo sprintf(
+				/* translators: %s: The ID of the CiviCRM Domain. */
 				__( 'ID %s', 'civicrm-admin-utilities' ),
-				'<span class="cau_domain_id">' . $domain['id'] . '</span>'
-			); ?>
+				'<span class="cau_domain_id">' . $civicrm_domain['id'] . '</span>'
+			);
+
+			?>
 		</td>
 	</tr>
 

@@ -41,6 +41,7 @@
 		<exclude name="Squiz.Commenting.InlineComment.SpacingAfterAtFunctionEnd" />
 		<exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect" />
 		<exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
+		<exclude name="Squiz.Commenting.BlockComment.HasEmptyLineBefore" />
 
 		<!-- Remove when error logging has been moved to a function -->
 		<exclude name="WordPress.PHP.DevelopmentFunctions.error_log_error_log" />
@@ -66,11 +67,10 @@
 	<!-- Nesting levels -->
 	<rule ref="Generic.Metrics.NestingLevel">
 		<properties>
-			<property name="absoluteNestingLevel" value="3" />
+			<property name="absoluteNestingLevel" value="5" />
 		</properties>
 	</rule>
 
 	<exclude-pattern>assets/civicrm/*</exclude-pattern>
-	<exclude-pattern>assets/templates/*</exclude-pattern>
 
 </ruleset>

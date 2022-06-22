@@ -1,44 +1,72 @@
-<!-- assets/templates/site-users-table-views.php -->
-<h2 class="screen-reader-text"><?php _e( 'Filter Users list', 'civicrm-admin-utilities' ); ?></h2>
+<?php
+/**
+ * Site Users Table Views Template.
+ *
+ * Handles markup for the Site Users Table Views.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.9
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+?><!-- assets/templates/site-users-table-views.php -->
+<h2 class="screen-reader-text"><?php esc_html_e( 'Filter Users list', 'civicrm-admin-utilities' ); ?></h2>
 
 <ul class="subsubsub">
 
 	<li class="all">
-		<a href="<?php echo esc_url( $url_base ); ?>" class="<?php if ( 'all' === $this->view ) echo 'current'; ?>">
-			<?php printf(
+		<?php $anchor_class = ( ( 'all' === $this->view ) ? ' class="current"' : '' ); ?>
+		<a href="<?php echo esc_url( $url_base ); ?>"<?php echo $anchor_class; ?>>
+			<?php
+
+			printf(
 				/* translators: %s is the placeholder for the count html tag `<span class="count"/>` */
 				esc_html__( 'All %s', 'civicrm-admin-utilities' ),
 				sprintf(
 					'<span class="count">(%s)</span>',
 					number_format_i18n( $this->user_counts['all'] )
 				)
-			); ?>
+			);
+
+			?>
 		</a> |
 	</li>
 
 	<li class="in_civicrm">
-		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'in_civicrm', $url_base ) ); ?>" class="<?php if ( 'in_civicrm' === $this->view ) echo 'current'; ?>">
-			<?php printf(
+		<?php $anchor_class = ( ( 'in_civicrm' === $this->view ) ? ' class="current"' : '' ); ?>
+		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'in_civicrm', $url_base ) ); ?>"<?php echo $anchor_class; ?>>
+			<?php
+
+			printf(
 				/* translators: %s is the placeholder for the count html `<span class="count"/>` */
 				_n( 'In CiviCRM %s', 'In CiviCRM %s', $this->user_counts['in_civicrm'], 'civicrm-admin-utilities' ),
 				sprintf(
 					'<span class="count">(%s)</span>',
 					number_format_i18n( $this->user_counts['in_civicrm'] )
 				)
-			); ?>
+			);
+
+			?>
 		</a> |
 	</li>
 
 	<li class="not_in_civicrm">
-		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'not_in_civicrm', $url_base ) ); ?>" class="<?php if ( 'not_in_civicrm' === $this->view ) echo 'current'; ?>">
-			<?php printf(
+		<?php $anchor_class = ( ( 'not_in_civicrm' === $this->view ) ? ' class="current"' : '' ); ?>
+		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'not_in_civicrm', $url_base ) ); ?>"<?php echo $anchor_class; ?>>
+			<?php
+
+			printf(
 				/* translators: %s is the placeholder for the count html `<span class="count"/>` */
 				_n( 'Not in CiviCRM %s', 'Not in CiviCRM %s', $this->user_counts['not_in_civicrm'], 'civicrm-admin-utilities' ),
 				sprintf(
 					'<span class="count">(%s)</span>',
 					number_format_i18n( $this->user_counts['not_in_civicrm'] )
 				)
-			); ?>
+			);
+
+			?>
 		</a>
 	</li>
 

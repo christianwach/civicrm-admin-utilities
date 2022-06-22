@@ -1,19 +1,32 @@
-<!-- assets/templates/network-multidomain.php -->
+<?php
+/**
+ * Network Settings "Multidomain" Page Template.
+ *
+ * Handles markup for the Network Settings "Multidomain" page.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.8.1
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+?><!-- assets/templates/network-multidomain.php -->
 <div class="wrap">
 
-	<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
+	<h1><?php esc_html_e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
 
 	<div class="updated">
 		<?php if ( $this->plugin->is_civicrm_network_activated() ) : ?>
-			<p><?php _e( 'CiviCRM is network-activated.', 'civicrm-admin-utilities' ); ?></p>
+			<p><?php esc_html_e( 'CiviCRM is network-activated.', 'civicrm-admin-utilities' ); ?></p>
 		<?php else : ?>
-			<p><?php _e( 'CiviCRM is not network-activated.', 'civicrm-admin-utilities' ); ?></p>
+			<p><?php esc_html_e( 'CiviCRM is not network-activated.', 'civicrm-admin-utilities' ); ?></p>
 		<?php endif; ?>
 	</div>
 
 	<h2 class="nav-tab-wrapper">
-		<a href="<?php echo $urls['settings_network']; ?>" class="nav-tab"><?php _e( 'Network Settings', 'civicrm-admin-utilities' ); ?></a>
-		<a href="<?php echo $urls['settings_site']; ?>" class="nav-tab"><?php _e( 'Site Settings', 'civicrm-admin-utilities' ); ?></a>
+		<a href="<?php echo $urls['settings_network']; ?>" class="nav-tab"><?php esc_html_e( 'Network Settings', 'civicrm-admin-utilities' ); ?></a>
+		<a href="<?php echo $urls['settings_site']; ?>" class="nav-tab"><?php esc_html_e( 'Site Settings', 'civicrm-admin-utilities' ); ?></a>
 		<?php
 
 		/**
@@ -31,9 +44,9 @@
 
 	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'true' ) : ?>
 		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
-			<p><strong><?php _e( 'Settings saved.', 'civicrm-admin-utilities' ); ?></strong></p>
+			<p><strong><?php esc_html_e( 'Settings saved.', 'civicrm-admin-utilities' ); ?></strong></p>
 			<button type="button" class="notice-dismiss">
-				<span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'civicrm-admin-utilities' ); ?></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'civicrm-admin-utilities' ); ?></span>
 			</button>
 		</div>
 	<?php endif; ?>
@@ -46,7 +59,7 @@
 
 		<div id="poststuff">
 
-			<div id="post-body" class="metabox-holder columns-<?php echo $columns;?>">
+			<div id="post-body" class="metabox-holder columns-<?php echo $columns; ?>">
 
 				<!--<div id="post-body-content">
 				</div>--><!-- #post-body-content -->
@@ -56,7 +69,7 @@
 				</div>
 
 				<div id="postbox-container-2" class="postbox-container">
-					<?php do_meta_boxes( $screen->id, 'normal', null );  ?>
+					<?php do_meta_boxes( $screen->id, 'normal', null ); ?>
 					<?php do_meta_boxes( $screen->id, 'advanced', null ); ?>
 				</div>
 

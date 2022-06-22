@@ -1446,13 +1446,19 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function domain_groups_ajax_get() {
 
-		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return;
-		}
-
 		// Init return.
 		$json = [];
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			wp_send_json( $json );
+		}
+
+		// This is an AJAX request, so check security.
+		$result = check_ajax_referer( 'cau_domain_group', false, false );
+		if ( $result === false ) {
+			wp_send_json( $json );
+		}
 
 		// Sanitise search input.
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
@@ -1469,7 +1475,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Sanity check.
 		if ( ! empty( $groups['is_error'] ) && $groups['is_error'] == 1 ) {
-			return;
+			wp_send_json( $json );
 		}
 
 		// Loop through our groups.
@@ -1782,13 +1788,19 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 */
 	public function domain_orgs_ajax_get() {
 
-		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return;
-		}
-
 		// Init return.
 		$json = [];
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			wp_send_json( $json );
+		}
+
+		// This is an AJAX request, so check security.
+		$result = check_ajax_referer( 'cau_domain_org', false, false );
+		if ( $result === false ) {
+			wp_send_json( $json );
+		}
 
 		// Sanitise search input.
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
@@ -1805,7 +1817,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Sanity check.
 		if ( ! empty( $orgs['is_error'] ) && $orgs['is_error'] == 1 ) {
-			return;
+			wp_send_json( $json );
 		}
 
 		// Loop through our orgs.

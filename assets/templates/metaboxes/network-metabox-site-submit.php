@@ -1,4 +1,17 @@
-<!-- assets/templates/metaboxes/network-metabox-site-submit.php -->
+<?php
+/**
+ * Network Settings "Site Submit" metabox Template.
+ *
+ * Handles markup for the Network Settings "Site Submit" metabox.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.8.1
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+?><!-- assets/templates/metaboxes/network-metabox-site-submit.php -->
 <div class="submitbox">
 	<div id="minor-publishing">
 		<div id="misc-publishing-actions">

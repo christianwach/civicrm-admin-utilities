@@ -1,10 +1,23 @@
-<!-- assets/templates/site-users-table.php -->
+<?php
+/**
+ * Site Users Table Template.
+ *
+ * Handles markup for the Site Users Table.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 0.9
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+?><!-- assets/templates/site-users-table.php -->
 <div class="wrap">
 
-	<h1><?php _e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
+	<h1><?php esc_html_e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
 
 	<h2 class="nav-tab-wrapper">
-		<a href="<?php echo $urls['settings']; ?>" class="nav-tab"><?php _e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
+		<a href="<?php echo $urls['settings']; ?>" class="nav-tab"><?php esc_html_e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
 		<?php
 
 		/**
@@ -21,7 +34,13 @@
 	</h2>
 
 	<?php if ( ! empty( $messages ) ) : ?>
-		<div class="<?php echo ( ! empty( $_REQUEST['error'] ) ) ? 'error' : 'updated'; ?> notice is-dismissible">
+		<?php
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$message_class = ( ! empty( $_REQUEST['error'] ) ) ? 'error' : 'updated';
+
+		?>
+		<div class="<?php echo $message_class; ?> notice is-dismissible">
 			<p><?php echo implode( "<br/>\n", $messages ); ?></p>
 		</div>
 	<?php endif; ?>
@@ -41,12 +60,20 @@
 
 		?>
 
-		<?php if ( ! empty( $_REQUEST['s'] ) ) : ?>
-			<span class="subtitle"><?php printf(
+		<?php
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_REQUEST['s'] ) ) :
+
+			$span_content = sprintf(
 				/* translators: %s: Search query. */
 				__( 'Search results for: %s', 'civicrm-admin-utilities' ),
-				'<strong>' . wp_html_excerpt( esc_html( stripslashes( $_REQUEST['s'] ) ), 50 ) . '</strong>'
-			); ?></span>
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				'<strong>' . wp_html_excerpt( esc_html( wp_unslash( $_REQUEST['s'] ) ), 50 ) . '</strong>'
+			);
+
+			?>
+			<span class="subtitle"><?php echo $span_content; ?></span>
 		<?php endif; ?>
 
 		<?php $this->user_table->search_box( __( 'Search Users', 'civicrm-admin-utilities' ), 'civicrm_au_users' ); ?>

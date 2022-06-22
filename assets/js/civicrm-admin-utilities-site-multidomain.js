@@ -46,7 +46,8 @@
 						s: params.term, // Search term.
 						action: 'cau_domain_groups_get',
 						page: params.page,
-						blog_id: CAU_Site_Domain.settings.blog_id
+						blog_id: CAU_Site_Domain.settings.blog_id,
+						_ajax_nonce: group.data( 'security' )
 					};
 				},
 				processResults: function( data, page ) {
@@ -89,7 +90,8 @@
 						s: params.term, // Search term.
 						action: 'cau_domain_orgs_get',
 						page: params.page,
-						blog_id: CAU_Site_Domain.settings.blog_id
+						blog_id: CAU_Site_Domain.settings.blog_id,
+						_ajax_nonce: org.data( 'security' )
 					};
 				},
 				processResults: function( data, page ) {
