@@ -3922,6 +3922,12 @@ tbody.scrollContent tr.alternateRow {
 	padding-left: 5px;
 }
 
+.crm-custom-image-popup,
+.crm-contact_image.crm-contact_image-block
+{
+	background: #ddd;
+}
+
 
 
 /* deprecated autocomplete styles */
