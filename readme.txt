@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 0.9.3 =
+
+* Remove support for broken Access Form prior to CiviCRM 4.7.30
+* Theme improvements
+
 = 0.9.2 =
 
 * Misc bug fixes
