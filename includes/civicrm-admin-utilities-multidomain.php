@@ -525,7 +525,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @param mixed $unused Unused param.
 	 * @param array $metabox Array containing id, title, callback, and args elements.
 	 */
-	public function meta_box_network_domain_info_render( $unused = null, $metabox ) {
+	public function meta_box_network_domain_info_render( $unused = null, $metabox = [] ) {
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/network-metabox-domain-info.php';
@@ -542,7 +542,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @param mixed $unused Unused param.
 	 * @param array $metabox Array containing id, title, callback, and args elements.
 	 */
-	public function meta_box_network_domain_create_render( $unused = null, $metabox ) {
+	public function meta_box_network_domain_create_render( $unused = null, $metabox = [] ) {
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/network-metabox-domain-create.php';
@@ -826,7 +826,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @param mixed $unused Unused param.
 	 * @param array $metabox Array containing id, title, callback, and args elements.
 	 */
-	public function meta_box_info_render( $unused = null, $metabox ) {
+	public function meta_box_info_render( $unused = null, $metabox = [] ) {
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-domain-info.php';
@@ -843,7 +843,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @param mixed $unused Unused param.
 	 * @param array $metabox Array containing id, title, callback, and args elements.
 	 */
-	public function meta_box_edit_render( $unused = null, $metabox ) {
+	public function meta_box_edit_render( $unused = null, $metabox = [] ) {
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-domain-edit.php';
