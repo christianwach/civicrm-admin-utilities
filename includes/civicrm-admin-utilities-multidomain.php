@@ -1105,8 +1105,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		check_admin_referer( 'cau_multidomain_action', 'cau_multidomain_nonce' );
 
 		// Sanitise inputs.
-		$domain_org_id = isset( $_POST['cau_domain_org_select'] ) ? absint( wp_unslash( $_POST['cau_domain_org_select'] ) ) : '';
-		$domain_group_id = isset( $_POST['cau_domain_group_select'] ) ? absint( wp_unslash( $_POST['cau_domain_group_select'] ) ) : '';
+		$domain_org_id = isset( $_POST['cau_domain_org_select'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['cau_domain_org_select'] ) ) : '';
+		$domain_group_id = isset( $_POST['cau_domain_group_select'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['cau_domain_group_select'] ) ) : '';
 
 		// Maybe set new Domain Org.
 		$this->domain_org_set( $domain_org_id );
