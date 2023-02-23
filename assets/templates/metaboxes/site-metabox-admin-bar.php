@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/templates/metaboxes/site-metabox-admin-bar.php -->
+?>
+<!-- assets/templates/templates/metaboxes/site-metabox-admin-bar.php -->
 <table class="form-table">
 
 	<tr>

@@ -17,8 +17,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-
-
 // Set our version here.
 define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '0.9.4a' );
 
@@ -41,8 +39,6 @@ if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_URL' ) ) {
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_PATH', plugin_dir_path( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
-
-
 
 /**
  * CiviCRM Admin Utilities Class.
@@ -107,8 +103,6 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public $multidomain;
 
-
-
 	/**
 	 * Constructor.
 	 *
@@ -120,8 +114,6 @@ class CiviCRM_Admin_Utilities {
 		add_action( 'plugins_loaded', [ $this, 'initialise' ] );
 
 	}
-
-
 
 	/**
 	 * Do stuff on plugin init.
@@ -173,8 +165,6 @@ class CiviCRM_Admin_Utilities {
 
 	}
 
-
-
 	/**
 	 * Include files.
 	 *
@@ -199,8 +189,6 @@ class CiviCRM_Admin_Utilities {
 		}
 
 	}
-
-
 
 	/**
 	 * Set up this plugin's objects.
@@ -227,8 +215,6 @@ class CiviCRM_Admin_Utilities {
 
 	}
 
-
-
 	/**
 	 * Register hooks.
 	 *
@@ -240,8 +226,6 @@ class CiviCRM_Admin_Utilities {
 		// If global-scope hooks are needed, add them here.
 
 	}
-
-
 
 	/**
 	 * Load translation files.
@@ -260,11 +244,7 @@ class CiviCRM_Admin_Utilities {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Perform plugin activation tasks.
@@ -274,8 +254,6 @@ class CiviCRM_Admin_Utilities {
 	public function activate() {
 
 	}
-
-
 
 	/**
 	 * Perform plugin deactivation tasks.
@@ -292,11 +270,7 @@ class CiviCRM_Admin_Utilities {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Check if this plugin is network activated.
@@ -338,8 +312,6 @@ class CiviCRM_Admin_Utilities {
 
 	}
 
-
-
 	/**
 	 * Check if CiviCRM is initialised.
 	 *
@@ -367,8 +339,6 @@ class CiviCRM_Admin_Utilities {
 		return civi_wp()->initialize();
 
 	}
-
-
 
 	/**
 	 * Check if CiviCRM is network activated.
@@ -414,8 +384,6 @@ class CiviCRM_Admin_Utilities {
 		return $civicrm_network_active;
 
 	}
-
-
 
 	/**
 	 * Check if a CiviCRM Extension is installed and active.
@@ -464,11 +432,7 @@ class CiviCRM_Admin_Utilities {
 
 	}
 
-
-
-} // Class ends.
-
-
+}
 
 // Init plugin.
 global $civicrm_admin_utilities;
@@ -499,8 +463,6 @@ register_deactivation_hook( __FILE__, [ civicrm_au(), 'deactivate' ] );
  * Uninstall uses the 'uninstall.php' method.
  * @see http://codex.wordpress.org/Function_Reference/register_uninstall_hook
  */
-
-
 
 /**
  * Utility to add link to settings page.
@@ -555,6 +517,3 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 // Add filters for the above.
 add_filter( 'network_admin_plugin_action_links', 'civicrm_admin_utilities_action_links', 10, 2 );
 add_filter( 'plugin_action_links', 'civicrm_admin_utilities_action_links', 10, 2 );
-
-
-

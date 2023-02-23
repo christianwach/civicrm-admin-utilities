@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/network-multidomain.php -->
+?>
+<!-- assets/templates/network-multidomain.php -->
 <div class="wrap">
 
 	<h1><?php esc_html_e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>

@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/templates/metaboxes/network-metabox-network-settings.php -->
+?>
+<!-- assets/templates/templates/metaboxes/network-metabox-network-settings.php -->
 <?php if ( $this->plugin->is_civicrm_network_activated() ) : ?>
 
 	<table class="form-table">

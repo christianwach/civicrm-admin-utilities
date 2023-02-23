@@ -11,8 +11,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-
-
 /**
  * CiviCRM Admin Utilities Single Site Class.
  *
@@ -76,8 +74,6 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public $is_upgrade = false;
 
-
-
 	/**
 	 * Constructor.
 	 *
@@ -94,8 +90,6 @@ class CiviCRM_Admin_Utilities_Single {
 		add_action( 'civicrm_admin_utilities_loaded', [ $this, 'initialise' ] );
 
 	}
-
-
 
 	/**
 	 * Initialise this object.
@@ -131,8 +125,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Store the plugin version.
 	 *
@@ -145,8 +137,6 @@ class CiviCRM_Admin_Utilities_Single {
 		$this->option_set( 'civicrm_admin_utilities_version', CIVICRM_ADMIN_UTILITIES_VERSION );
 
 	}
-
-
 
 	/**
 	 * Utility to do stuff when an upgrade is required.
@@ -178,8 +168,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Delete the legacy "installed" option.
 	 *
@@ -194,8 +182,6 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 	}
-
-
 
 	/**
 	 * Utility to do stuff when a settings upgrade is required.
@@ -342,8 +328,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Register hooks.
 	 *
@@ -415,11 +399,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Add link to CiviCRM Contact on the Users screen.
@@ -478,8 +458,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Add link to CiviCRM Contact on User Edit screen.
 	 *
@@ -528,11 +506,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Set property when a CiviCRM contact's primary email address is updated.
@@ -574,8 +548,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Set property when a CiviCRM contact's primary email address is updated by
 	 * the CiviCRM WordPress Profile Sync plugin.
@@ -591,8 +563,6 @@ class CiviCRM_Admin_Utilities_Single {
 		$this->email_sync = true;
 
 	}
-
-
 
 	/**
 	 * Suppress notification email when WordPress user email changes.
@@ -625,8 +595,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return $send;
 
 	}
-
-
 
 	/**
 	 * Get a CiviCRM Email record by its ID.
@@ -668,11 +636,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Maybe hide CiviCRM on this site.
@@ -701,8 +665,6 @@ class CiviCRM_Admin_Utilities_Single {
 		remove_action( 'admin_bar_menu', [ $this, 'shortcuts_menu_add' ], 2000 );
 
 	}
-
-
 
 	/**
 	 * Hide the CiviCRM UI.
@@ -742,11 +704,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Add an admin menu item(s) for this plugin.
@@ -815,8 +773,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Highlight the plugin's parent menu item.
 	 *
@@ -859,8 +815,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Initialise plugin help.
 	 *
@@ -880,8 +834,6 @@ class CiviCRM_Admin_Utilities_Single {
 		wp_enqueue_script( 'dashboard' );
 
 	}
-
-
 
 	/**
 	 * Adds help copy to admin page.
@@ -916,8 +868,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Get help text.
 	 *
@@ -934,8 +884,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return $help;
 
 	}
-
-
 
 	/**
 	 * Enqueue stylesheet for this plugin's "Site Settings" page.
@@ -954,8 +902,6 @@ class CiviCRM_Admin_Utilities_Single {
 		);
 
 	}
-
-
 
 	/**
 	 * Enqueue scripts for this plugin's "Site Settings" page.
@@ -993,11 +939,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Show our settings page.
@@ -1056,8 +998,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Get admin page URLs.
 	 *
@@ -1093,8 +1033,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Get the URL for the form action.
 	 *
@@ -1120,11 +1058,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Register meta boxes.
@@ -1261,8 +1195,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Render a Submit meta box on Admin screen.
 	 *
@@ -1274,8 +1206,6 @@ class CiviCRM_Admin_Utilities_Single {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-submit.php';
 
 	}
-
-
 
 	/**
 	 * Render CiviCRM Access meta box on Admin screen.
@@ -1294,8 +1224,6 @@ class CiviCRM_Admin_Utilities_Single {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-access.php';
 
 	}
-
-
 
 	/**
 	 * Render CiviCRM Admin Appearance meta box on Admin screen.
@@ -1328,8 +1256,6 @@ class CiviCRM_Admin_Utilities_Single {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-appearance.php';
 
 	}
-
-
 
 	/**
 	 * Render CiviCRM Stylesheets meta box on Admin screen.
@@ -1392,8 +1318,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Render CiviCRM Contacts & WordPress Users meta box on Admin screen.
 	 *
@@ -1417,8 +1341,6 @@ class CiviCRM_Admin_Utilities_Single {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-contacts.php';
 
 	}
-
-
 
 	/**
 	 * Render Admin Bar Options meta box on Admin screen.
@@ -1444,8 +1366,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Render Post Type Options meta box on Admin screen.
 	 *
@@ -1461,8 +1381,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Render Shortcuts meta box on Admin screen.
 	 *
@@ -1475,11 +1393,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get post type options.
@@ -1544,8 +1458,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Clear CiviCRM caches.
 	 *
@@ -1580,11 +1492,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Register directory that CiviCRM searches for the menu template file.
@@ -1623,8 +1531,6 @@ class CiviCRM_Admin_Utilities_Single {
 		set_include_path( $template_include_path );
 
 	}
-
-
 
 	/**
 	 * Admin style tweaks.
@@ -1735,11 +1641,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Disable CiviCRM resources from front-end.
@@ -1814,8 +1716,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Disable a resource enqueued by CiviCRM.
 	 *
@@ -1844,8 +1744,6 @@ class CiviCRM_Admin_Utilities_Single {
 		CRM_Core_Region::instance( 'html-header' )->update( $url, [ 'disabled' => true ] );
 
 	}
-
-
 
 	/**
 	 * Get the URL of a resource if it is enqueued by CiviCRM.
@@ -1879,8 +1777,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return $url;
 
 	}
-
-
 
 	/**
 	 * Disable any custom CSS file enqueued by CiviCRM.
@@ -1926,8 +1822,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Determine if the Shoreditch CSS file is being used.
 	 *
@@ -1959,8 +1853,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return $shoreditch;
 
 	}
-
-
 
 	/**
 	 * Determine if the Keyboard Accessible Menu Extension is being used.
@@ -2004,8 +1896,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Do not load the CiviCRM shortcode button unless we explicitly enable it.
 	 *
@@ -2036,8 +1926,6 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 	}
-
-
 
 	/**
 	 * Prevent the loading of the CiviCRM shortcode button.
@@ -2083,11 +1971,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Add a CiviCRM menu to the WordPress admin bar.
@@ -2339,8 +2223,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Get a CiviCRM admin link.
 	 *
@@ -2376,8 +2258,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return $link;
 
 	}
-
-
 
 	/**
 	 * Check a CiviCRM permission.
@@ -2416,11 +2296,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Before a Contact is updated, establish if they are being moved "to the
@@ -2511,8 +2387,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Act when a Contact has been moved in or out of Trash.
 	 *
@@ -2562,11 +2436,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Add link to CiviCRM Contact on the Users screen.
@@ -2590,8 +2460,6 @@ class CiviCRM_Admin_Utilities_Single {
 		);
 
 	}
-
-
 
 	/**
 	 * Add link to CiviCRM Contact on the Users screen.
@@ -2655,11 +2523,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Filter the CiviCRM Processor Params.
@@ -2699,8 +2563,6 @@ class CiviCRM_Admin_Utilities_Single {
 		$cooked_params['notify_url'] = rawurldecode( $cooked_params['notify_url'] );
 
 	}
-
-
 
 	/**
 	 * Check if PayPal IPN URLs have been fixed.
@@ -2746,8 +2608,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Check if this version of CiviCRM predates the need for a fix.
 	 *
@@ -2781,11 +2641,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Utility for tracing calls to hook_civicrm_pre.
@@ -2812,8 +2668,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Utility for tracing calls to hook_civicrm_post.
 	 *
@@ -2839,8 +2693,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Utility for tracing calls to hook_civicrm_postProcess.
 	 *
@@ -2862,11 +2714,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get default settings values for this plugin.
@@ -2930,8 +2778,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Route settings updates to relevant methods.
 	 *
@@ -2954,8 +2800,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return $result;
 
 	}
-
-
 
 	/**
 	 * Update options supplied by our Settings admin page.
@@ -3165,11 +3009,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Save array as option.
@@ -3185,8 +3025,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return $this->option_set( 'civicrm_admin_utilities_settings', $this->settings );
 
 	}
-
-
 
 	/**
 	 * Check whether a specified setting exists.
@@ -3209,8 +3047,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Return a value for a specified setting.
 	 *
@@ -3232,8 +3068,6 @@ class CiviCRM_Admin_Utilities_Single {
 		return ( array_key_exists( $setting_name, $this->settings ) ) ? $this->settings[ $setting_name ] : $default;
 
 	}
-
-
 
 	/**
 	 * Sets a value for a specified setting.
@@ -3261,8 +3095,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Deletes a specified setting.
 	 *
@@ -3283,11 +3115,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Test existence of a specified option.
@@ -3314,8 +3142,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Return a value for a specified option.
 	 *
@@ -3341,8 +3167,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Set a value for a specified option.
 	 *
@@ -3365,8 +3189,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
 	/**
 	 * Delete a specified option.
 	 *
@@ -3388,9 +3210,4 @@ class CiviCRM_Admin_Utilities_Single {
 
 	}
 
-
-
-} // Class ends.
-
-
-
+}

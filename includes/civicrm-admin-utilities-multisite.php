@@ -11,8 +11,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-
-
 /**
  * CiviCRM Admin Utilities Multisite Class.
  *
@@ -67,8 +65,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 */
 	public $settings = [];
 
-
-
 	/**
 	 * Constructor.
 	 *
@@ -93,8 +89,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_filter( 'civicrm_admin_utilities_settings_default', [ $this, 'settings_override' ] );
 
 	}
-
-
 
 	/**
 	 * Initialise this object.
@@ -130,8 +124,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Store the plugin version.
 	 *
@@ -144,8 +136,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$this->option_set( 'civicrm_admin_utilities_version', CIVICRM_ADMIN_UTILITIES_VERSION );
 
 	}
-
-
 
 	/**
 	 * Utility to do stuff when an upgrade is required.
@@ -172,8 +162,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Delete the legacy "installed" option.
 	 *
@@ -188,8 +176,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 	}
-
-
 
 	/**
 	 * Utility to do stuff when a settings upgrade is required.
@@ -365,8 +351,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Register hooks.
 	 *
@@ -412,11 +396,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Add network admin menu item(s) for this plugin.
@@ -505,8 +485,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Initialise plugin help for network admin.
 	 *
@@ -526,8 +504,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		wp_enqueue_script( 'dashboard' );
 
 	}
-
-
 
 	/**
 	 * Adds help copy to network admin page.
@@ -563,8 +539,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Get help text for network admin.
 	 *
@@ -581,8 +555,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return $help;
 
 	}
-
-
 
 	/**
 	 * Get the URL to access a particular menu page.
@@ -621,8 +593,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return $url;
 
 	}
-
-
 
 	/**
 	 * Highlight the plugin's parent menu item.
@@ -667,11 +637,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Register meta boxes for our "Network Settings" page.
@@ -720,8 +686,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Render a Submit meta box for our "Network Settings" page.
 	 *
@@ -733,8 +697,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/network-metabox-settings-submit.php';
 
 	}
-
-
 
 	/**
 	 * Render CiviCRM Network Settings meta box on Admin screen.
@@ -793,11 +755,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Register meta boxes for our "Site Settings" page.
@@ -895,8 +853,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Render a Submit meta box for our "Site Settings" page.
 	 *
@@ -908,8 +864,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/network-metabox-site-submit.php';
 
 	}
-
-
 
 	/**
 	 * Render CiviCRM Access meta box on Admin screen.
@@ -928,8 +882,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-access.php';
 
 	}
-
-
 
 	/**
 	 * Render CiviCRM Admin Appearance meta box on Admin screen.
@@ -964,8 +916,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-appearance.php';
 
 	}
-
-
 
 	/**
 	 * Render CiviCRM Stylesheets meta box on Admin screen.
@@ -1018,8 +968,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Render CiviCRM Contacts & WordPress Users meta box on Admin screen.
 	 *
@@ -1043,8 +991,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-contacts.php';
 
 	}
-
-
 
 	/**
 	 * Render Admin Bar Options meta box on Admin screen.
@@ -1070,8 +1016,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Render Post Type Options meta box on Admin screen.
 	 *
@@ -1087,11 +1031,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Show our network settings page.
@@ -1145,8 +1085,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Enqueue stylesheet for the Network Admin Settings page.
 	 *
@@ -1164,8 +1102,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		);
 
 	}
-
-
 
 	/**
 	 * Enqueue Javascript on the Network Admin Settings page.
@@ -1185,11 +1121,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Show our "Site Settings" page.
@@ -1243,8 +1175,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Get network admin page URLs.
 	 *
@@ -1281,8 +1211,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Maybe restrict access to site settings pages.
 	 *
@@ -1302,8 +1230,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return $capability;
 
 	}
-
-
 
 	/**
 	 * Maybe filter restrict-to-main-site template variable.
@@ -1332,8 +1258,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Maybe restrict access to site domain pages.
 	 *
@@ -1353,8 +1277,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return $capability;
 
 	}
-
-
 
 	/**
 	 * Get the URL for the form action.
@@ -1381,11 +1303,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Do not load CiviCRM on sites other than the main site.
@@ -1419,11 +1337,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Maybe switch to main site before configuring Shortcuts Menu.
@@ -1440,8 +1354,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Maybe switch back to current site after configuring Shortcuts Menu.
 	 *
@@ -1454,11 +1366,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Filter CiviCRM permissions.
@@ -1504,8 +1412,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Filter the capability for viewing the CiviCRM Settings and Integration pages.
 	 *
@@ -1539,8 +1445,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Check if Site Admins have access to the "Plugins" menu on a Site.
 	 *
@@ -1567,11 +1471,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get default network settings values for this plugin.
@@ -1650,8 +1550,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Override Single Site settings on first load.
 	 *
@@ -1678,8 +1576,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return $settings;
 
 	}
-
-
 
 	/**
 	 * Route settings updates to relevant methods.
@@ -1709,8 +1605,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return $result;
 
 	}
-
-
 
 	/**
 	 * Update options supplied by our "Network Settings" admin page.
@@ -1776,8 +1670,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return true;
 
 	}
-
-
 
 	/**
 	 * Update options supplied by our "Site Settings" admin page.
@@ -1947,11 +1839,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Save array as site option.
@@ -1967,8 +1855,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return $this->option_set( 'civicrm_admin_utilities_settings', $this->settings );
 
 	}
-
-
 
 	/**
 	 * Check whether a specified setting exists.
@@ -1991,8 +1877,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Return a value for a specified setting.
 	 *
@@ -2014,8 +1898,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		return ( array_key_exists( $setting_name, $this->settings ) ) ? $this->settings[ $setting_name ] : $default;
 
 	}
-
-
 
 	/**
 	 * Sets a value for a specified setting.
@@ -2043,8 +1925,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Deletes a specified setting.
 	 *
@@ -2065,11 +1945,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Test existence of a specified network option.
@@ -2096,8 +1972,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Return a value for a specified network option.
 	 *
@@ -2123,8 +1997,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Set a value for a specified network option.
 	 *
@@ -2147,8 +2019,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
 	/**
 	 * Delete a specified network option.
 	 *
@@ -2170,9 +2040,4 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 	}
 
-
-
-} // Class ends.
-
-
-
+}

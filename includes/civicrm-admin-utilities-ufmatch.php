@@ -11,8 +11,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-
-
 /**
  * CiviCRM Admin Utilities UFMatch Class.
  *
@@ -31,8 +29,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 */
 	public $plugin;
 
-
-
 	/**
 	 * Constructor.
 	 *
@@ -50,8 +46,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	/**
 	 * Initialise this object.
 	 *
@@ -63,8 +57,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$this->register_hooks();
 
 	}
-
-
 
 	/**
 	 * Register hooks.
@@ -79,11 +71,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get details for a set of Contacts.
@@ -132,8 +120,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	/**
 	 * Get a Contact's Details.
 	 *
@@ -176,8 +162,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		return $contact;
 
 	}
-
-
 
 	/**
 	 * Get a CiviCRM Contact ID for a given WordPress User ID.
@@ -227,8 +211,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	/**
 	 * Get a CiviCRM Contact for a given WordPress user ID.
 	 *
@@ -256,11 +238,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get a WordPress User ID given a CiviCRM Contact ID.
@@ -298,8 +276,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	/**
 	 * Get a WordPress User given a CiviCRM Contact ID.
 	 *
@@ -327,11 +303,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Act when a Contact is about to be moved into the Trash.
@@ -354,8 +326,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$this->ufmatch_entries = $entries;
 
 	}
-
-
 
 	/**
 	 * Act when a Contact has been moved into the Trash.
@@ -391,11 +361,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Create a link between a WordPress User and a CiviCRM Contact.
@@ -456,8 +422,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	/**
 	 * Delete the link between a WordPress User and a CiviCRM Contact.
 	 *
@@ -505,11 +469,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get the User and Contact IDs of all UFMatch entries.
@@ -575,11 +535,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get the UFMatch data for a given CiviCRM Contact ID.
@@ -654,8 +610,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	/**
 	 * Get the UFMatch data for a given WordPress User ID.
 	 *
@@ -728,8 +682,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		return false;
 
 	}
-
-
 
 	/**
 	 * Get the UFMatch data for a given WordPress User email.
@@ -804,11 +756,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	// -------------------------------------------------------------------------
-
-
 
 	/**
 	 * Get Dedupe Rules.
@@ -849,8 +797,6 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
 	/**
 	 * Dedupe a CiviCRM Contact.
 	 *
@@ -889,9 +835,4 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 	}
 
-
-
-} // Class ends.
-
-
-
+}

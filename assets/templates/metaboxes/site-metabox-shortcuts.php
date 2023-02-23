@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/templates/metaboxes/site-metabox-misc.php -->
+?>
+<!-- assets/templates/templates/metaboxes/site-metabox-misc.php -->
 <p><?php esc_html_e( 'Shortcuts to some CiviCRM admin pages that have no menu items.', 'civicrm-admin-utilities' ); ?></p>
 
 <ul>

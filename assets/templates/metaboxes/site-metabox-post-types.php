@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/templates/metaboxes/site-metabox-post-types.php -->
+?>
+<!-- assets/templates/templates/metaboxes/site-metabox-post-types.php -->
 <table class="form-table">
 
 	<tr>

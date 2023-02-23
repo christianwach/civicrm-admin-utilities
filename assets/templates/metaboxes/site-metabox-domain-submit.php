@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/metaboxes/site-metabox-domain-submit.php -->
+?>
+<!-- assets/templates/metaboxes/site-metabox-domain-submit.php -->
 <div class="submitbox">
 	<div id="minor-publishing">
 		<div id="misc-publishing-actions">

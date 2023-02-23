@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/site-users-table-views.php -->
+?>
+<!-- assets/templates/site-users-table-views.php -->
 <h2 class="screen-reader-text"><?php esc_html_e( 'Filter Users list', 'civicrm-admin-utilities' ); ?></h2>
 
 <ul class="subsubsub">

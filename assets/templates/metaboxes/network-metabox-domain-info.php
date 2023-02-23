@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/metaboxes/network-metabox-domain-info.php -->
+?>
+<!-- assets/templates/metaboxes/network-metabox-domain-info.php -->
 <?php if ( ! $metabox['args']['multisite'] ) : ?>
 	<div class="updated error inline" style="background-color: #f7f7f7;">
 		<p>

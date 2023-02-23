@@ -6,8 +6,6 @@
  * @package CiviCRM_Admin_Utilities
  */
 
-
-
 /**
  * Pass the jQuery shortcut in.
  *

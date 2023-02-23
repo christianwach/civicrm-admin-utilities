@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-?><!-- assets/templates/metaboxes/site-metabox-domain-edit.php -->
+?>
+<!-- assets/templates/metaboxes/site-metabox-domain-edit.php -->
 <div class="notice notice-warning inline">
 	<p><?php esc_html_e( 'Edit this Domain with caution &mdash; it could cause problems if you make edits to a Domain which is not completely new and unused.', 'civicrm-admin-utilities' ); ?><br>
 	<strong><?php esc_html_e( 'You have been warned.', 'civicrm-admin-utilities' ); ?></strong></p>
