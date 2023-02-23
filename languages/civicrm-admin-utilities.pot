@@ -1,20 +1,33 @@
-# Copyright (C) 2022 Christian Wach
+# Copyright (C) 2023 Christian Wach
 # This file is distributed under the same license as the CiviCRM Admin Utilities plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.9.3a\n"
+"Project-Id-Version: CiviCRM Admin Utilities 0.9.4a\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-08T10:08:12+00:00\n"
+"POT-Creation-Date: 2023-02-23T13:22:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: civicrm-admin-utilities\n"
 
 #. Plugin Name of the plugin
+#: assets/templates/network-multidomain.php:18
+#: assets/templates/network-settings-site.php:18
+#: assets/templates/network-settings.php:18
+#: assets/templates/site-multidomain.php:18
+#: assets/templates/site-settings.php:18
+#: assets/templates/site-users-table.php:18
+#: includes/civicrm-admin-utilities-multidomain.php:119
+#: includes/civicrm-admin-utilities-multisite.php:420
+#: includes/civicrm-admin-utilities-multisite.php:441
+#: includes/civicrm-admin-utilities-multisite.php:465
+#: includes/civicrm-admin-utilities-multisite.php:533
+#: includes/civicrm-admin-utilities-single.php:862
+#: includes/civicrm-admin-utilities-single.php:2209
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -34,508 +47,731 @@ msgstr ""
 msgid "http://haystack.co.uk"
 msgstr ""
 
+#: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:128
 msgid "Radstock (CAU)"
 msgstr ""
 
+#: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:129
 msgid "Gives CiviCRM a look-and-feel that is closer to WordPress"
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-domain-create.php:17
 msgid "If you want a WordPress sub-site to have a separate CiviCRM Domain, create the Domain here before you activate the CiviCRM plugin on that WordPress sub-site. There is no simple way to delete CiviCRM Domains yet, so please make sure this is what you want to do."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-domain-create.php:24
 msgid "Domain Name"
 msgstr ""
 
 #. translators: 1: Opening anchor tag, 2: Closing anchor tag.
+#: assets/templates/metaboxes/network-metabox-domain-info.php:23
 msgid "It is recommended that you install and activate the %1$sCiviCRM Multisite%2$s extension to work with multiple Domains in CiviCRM."
 msgstr ""
 
 #. translators: %s: The ID of the CiviCRM Domain.
+#: assets/templates/metaboxes/network-metabox-domain-info.php:49
 msgid "ID %s"
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-domain-submit.php:27
+#: assets/templates/metaboxes/network-metabox-settings-submit.php:27
+#: assets/templates/metaboxes/network-metabox-site-submit.php:27
+#: assets/templates/metaboxes/site-metabox-domain-submit.php:27
+#: assets/templates/metaboxes/site-metabox-submit.php:28
 msgid "Update"
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:21
 msgid "Restrict CiviCRM"
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:24
 msgid "Restrict CiviCRM UI elements to main site only."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:25
 msgid "When CiviCRM is network-activated in WordPress Multisite, it will load on every sub-site. This may not be what you want - especially when Multisite uses subdirectories - because CiviCRM makes assumptions about the path to WordPress admin and as a result there are a number of problems with CiviCRM. So check this option to restrict the appearance of the CiviCRM UI elements (as well as access to the CiviCRM Admin Utilities settings page) to the main site only."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:38
 msgid "Settings Page access"
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:41
 msgid "Restrict access to CiviCRM Admin Utilities Settings Pages to Network Admins only."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:42
 msgid "When CiviCRM is activated on one or more individual sites in WordPress Multisite, you may want to restrict who has access to the CiviCRM Admin Utilities Settings Page on each site. This is useful if the individual site administrators on your network should be prevented from changing the settings that Network Admins define for the sites where CiviCRM is activated."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:53
 msgid "Domain Page access"
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:56
 msgid "Restrict access to CiviCRM Admin Utilities Domain Pages to Network Admins only."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:57
 msgid "When CiviCRM is activated on one or more individual sites in WordPress Multisite and you are allowing access to Settings Pages, it is likely that you want to restrict access to the CiviCRM Admin Utilities Domain Page on each site to Network Admins only. If, for some reason, you want to allow the individual site administrators on your network to access the CiviCRM domain settings, uncheck this setting."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:70
 msgid "Administer CiviCRM"
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:73
 msgid "Restrict \"Administer CiviCRM\" capability to Network Admins only."
 msgstr ""
 
+#: assets/templates/metaboxes/network-metabox-network-settings.php:74
 msgid "When CiviCRM is activated on on one or more individual sites in WordPress Multisite, you may want to restrict who has the \"Administer CiviCRM\" capability to Network Admins only. This is useful if the individual site administrators on your network should be prevented from having \"root access\" to CiviCRM. You will need CiviCRM 4.7.19+ for this to have an effect."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-access.php:19
 msgid "Hide CiviCRM"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-access.php:21
 msgid "Hide CiviCRM on this site."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-access.php:22
 msgid "In Multisite, you may not want users of this site to be able to access CiviCRM easily. If that is the case, check this and CiviCRM will be hidden from view."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-admin-bar.php:19
 msgid "Shortcuts Menu"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-admin-bar.php:22
 msgid "Add a CiviCRM Shortcuts Menu to the WordPress admin bar."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-admin-bar.php:23
 msgid "Some people find it helpful to have links directly to CiviCRM components available from the WordPress admin bar."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-admin-bar.php:28
 msgid "Hide \"Manage Groups\""
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-admin-bar.php:31
 msgid "Hide the \"Manage Groups\" menu item from the CiviCRM Shortcuts Menu."
 msgstr ""
 
 #. translators: %s: The name of the filter wrapped in a <code> tag.
+#: assets/templates/metaboxes/site-metabox-admin-bar.php:37
 msgid "There is no permission or capability that can be checked to find out if a user has access to the \"Manage Groups\" screen. Check this to hide the menu item. More granular permissions can be applied via the %s filter if they are required, for example, on a per-user basis."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:16
 msgid "These options apply styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin Theme, then check the box for \"CiviCRM Menu\" and leave \"CiviCRM Admin Theme\" unchecked."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:21
 msgid "CiviCRM Dashboard Title"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:24
 msgid "Make the CiviCRM Dashboard Title more welcoming."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:25
 msgid "Checking this alters \"CiviCRM Home\" to become \"Hi FirstName, welcome to CiviCRM\"."
 msgstr ""
 
 #. translators: %s: The name of the filter wrapped in a <code> tag.
+#: assets/templates/metaboxes/site-metabox-appearance.php:30
 msgid "The %s filter can be used to modify this further if required."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:40
 msgid "CiviCRM Menu"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:43
 msgid "Apply style fixes to the CiviCRM menu."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:48
 msgid "CiviCRM Admin Theme"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-appearance.php:51
 msgid "Enable the CiviCRM Admin Utilities \"Radstock\" Theme."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-contacts.php:19
 msgid "WordPress User notification"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-contacts.php:22
 msgid "Suppress the email to the WordPress user."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-contacts.php:23
 msgid "When the primary email for a CiviCRM Contact is changed, CiviCRM updates the email address of the corresponding  WordPress User. This triggers an email to be sent to the User."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-contacts.php:28
 msgid "CiviCRM Contact \"Soft Delete\""
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-contacts.php:31
 msgid "Fix the Contact \"soft delete\" process."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-contacts.php:32
 msgid "When a CiviCRM Contact is initially deleted, CiviCRM does not actually delete the Contact record, but instead flags it as deleted so that it can be \"undeleted\" if necessary. However, this \"soft delete\" process deletes the data linking the Contact to the WordPress User (the UFMatch record) and this is lost when the Contact is \"Restored from Trash\". Checking this option retains this data until the Contact is \"hard deleted\". Leave unchecked to retain existing behaviour."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-domain-edit.php:17
 msgid "Edit this Domain with caution &mdash; it could cause problems if you make edits to a Domain which is not completely new and unused."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-domain-edit.php:18
 msgid "You have been warned."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-domain-edit.php:28
+#: assets/templates/metaboxes/site-metabox-domain-info.php:72
 msgid "Domain Group"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-domain-edit.php:34
 msgid "Select existing Group"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-domain-edit.php:45
+#: assets/templates/metaboxes/site-metabox-domain-info.php:91
 msgid "Domain Organisation"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-domain-edit.php:51
 msgid "Select existing Organisation"
 msgstr ""
 
 #. translators: 1: Opening anchor tag, 2: Closing anchor tag.
+#: assets/templates/metaboxes/site-metabox-domain-info.php:23
 msgid "It is recommended that you install and activate the %1$sCiviCRM Multisite extension%2$s to work with multiple Domains in CiviCRM."
 msgstr ""
 
 #. translators: %s: The URL of the CiviCRM setting page.
+#: assets/templates/metaboxes/site-metabox-domain-info.php:40
 msgid "Multisite is not enabled on this CiviCRM Domain. Change <a href=\"%s\">the setting in CiviCRM</a> to enable it."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-domain-info.php:53
+#: includes/civicrm-admin-utilities-multidomain.php:537
+#: includes/civicrm-admin-utilities-multidomain.php:978
 msgid "Domain"
 msgstr ""
 
 #. translators: 1: The Domain name, 2: The Domain ID.
 #. translators: 1: The Domain Group name, 2: The Domain Group ID.
 #. translators: 1: The Domain Organisation name, 2: The Domain Organisation ID.
+#: assets/templates/metaboxes/site-metabox-domain-info.php:61
+#: assets/templates/metaboxes/site-metabox-domain-info.php:80
+#: assets/templates/metaboxes/site-metabox-domain-info.php:99
 msgid "%1$s (ID %2$s)"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-post-types.php:19
 msgid "Shortcode Button"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-post-types.php:22
 msgid "Select which post types you want the CiviCRM shortcode button to appear on."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:16
 msgid "Shortcuts to some CiviCRM admin pages that have no menu items."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:20
 msgid "Rebuild the CiviCRM menu"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:23
 msgid "Rebuild the CiviCRM database triggers"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:26
 msgid "Upgrade CiviCRM"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:27
 msgid "Please note: you need to update the CiviCRM plugin folder first."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:30
 msgid "Execute CiviCRM Extension updates"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-shortcuts.php:31
 msgid "Please note: you need to update each of the CiviCRM extensions first."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:16
 msgid "This section allows you to configure how various CiviCRM stylesheets are loaded on your website. This is useful if you have created custom styles for CiviCRM in your theme, for example. By default, this plugin prevents the CiviCRM menu stylesheet from loading on the front-end, since the CiviCRM menu itself is only ever present in WordPress admin."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:21
 msgid "Default CiviCRM stylesheet"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:24
 msgid "Prevent the default CiviCRM stylesheet (civicrm.css) from loading on Public Pages."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:29
 msgid "CiviCRM Menu stylesheet"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:32
 msgid "Prevent the CiviCRM menu stylesheet (civicrmNavigation.css) from loading on Public Pages."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:39
 msgid "Custom Stylesheet on Public Pages"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:42
 msgid "Prevent the user-defined CiviCRM custom stylesheet from loading on Public Pages."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:47
 msgid "Custom Stylesheet in CiviCRM Admin"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:50
 msgid "Prevent the user-defined CiviCRM custom stylesheet from loading in CiviCRM Admin."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:57
 msgid "Shoreditch stylesheet"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:60
 msgid "Prevent the Shoreditch extension stylesheet (civicrm-custom.css) from loading on Public Pages."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:65
 msgid "Shoreditch Bootstrap stylesheet"
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-stylesheets.php:68
 msgid "Prevent the Shoreditch extension Bootstrap stylesheet (bootstrap.css) from loading on Public Pages."
 msgstr ""
 
+#: assets/templates/metaboxes/site-metabox-submit.php:20
 msgid "Clear CiviCRM caches."
 msgstr ""
 
+#: assets/templates/network-multidomain.php:22
+#: assets/templates/network-settings-site.php:22
+#: assets/templates/network-settings.php:22
 msgid "CiviCRM is network-activated."
 msgstr ""
 
+#: assets/templates/network-multidomain.php:24
+#: assets/templates/network-settings-site.php:24
+#: assets/templates/network-settings.php:24
 msgid "CiviCRM is not network-activated."
 msgstr ""
 
+#: assets/templates/network-multidomain.php:29
+#: assets/templates/network-settings-site.php:30
+#: assets/templates/network-settings.php:30
 msgid "Network Settings"
 msgstr ""
 
+#: assets/templates/network-multidomain.php:30
+#: assets/templates/network-settings-site.php:31
+#: assets/templates/network-settings.php:31
 msgid "Site Settings"
 msgstr ""
 
+#: assets/templates/network-multidomain.php:48
+#: assets/templates/network-settings-site.php:52
+#: assets/templates/network-settings.php:52
 msgid "Settings saved."
 msgstr ""
 
+#: assets/templates/network-multidomain.php:50
+#: assets/templates/network-settings-site.php:54
+#: assets/templates/network-settings.php:54
 msgid "Dismiss this notice."
 msgstr ""
 
+#: assets/templates/network-settings-site.php:71
 msgid "Please Note:"
 msgstr ""
 
+#: assets/templates/network-settings-site.php:71
 msgid "The settings that you choose below will be used as the initial default settings for CiviCRM Admin Utilities on each sub-site where CiviCRM is activated. Each of these sub-sites has its own CiviCRM Admin Utilities settings page where these settings can be overridden for that particular sub-site."
 msgstr ""
 
+#: assets/templates/site-multidomain.php:21
+#: assets/templates/site-settings.php:22
+#: assets/templates/site-users-table.php:21
+#: civicrm-admin-utilities.php:497
+#: civicrm-admin-utilities.php:503
+#: includes/civicrm-admin-utilities-multidomain.php:457
+#: includes/civicrm-admin-utilities-multidomain.php:750
+#: includes/civicrm-admin-utilities-multisite.php:670
+#: includes/civicrm-admin-utilities-multisite.php:787
+#: includes/civicrm-admin-utilities-single.php:755
+#: includes/civicrm-admin-utilities-single.php:1096
 msgid "Settings"
 msgstr ""
 
+#: assets/templates/site-users-table-help.php:16
 msgid "This screen helps you to see the relationships between WordPress Users and CiviCRM Contacts. If there are too many columns for your liking, you can manage which ones you see in the \"Screen Options\" tab."
 msgstr ""
 
+#: assets/templates/site-users-table-help.php:18
 msgid "If you are using BuddyPress and allowing Users to register, then you may see a mismatch between the count for \"All Users\" and the count for \"In CiviCRM\" if there are Users who are currently being held in the BuddyPress signup queue."
 msgstr ""
 
+#: assets/templates/site-users-table-views.php:16
 msgid "Filter Users list"
 msgstr ""
 
 #. translators: %s is the placeholder for the count html tag `<span class="count"/>`
+#: assets/templates/site-users-table-views.php:27
 msgid "All %s"
 msgstr ""
 
 #. translators: %s is the placeholder for the count html `<span class="count"/>`
+#: assets/templates/site-users-table-views.php:45
 msgid "In CiviCRM %s"
 msgid_plural "In CiviCRM %s"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s is the placeholder for the count html `<span class="count"/>`
+#: assets/templates/site-users-table-views.php:63
 msgid "Not in CiviCRM %s"
 msgid_plural "Not in CiviCRM %s"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: Search query.
+#: assets/templates/site-users-table.php:71
 msgid "Search results for: %s"
 msgstr ""
 
+#: assets/templates/site-users-table.php:80
 msgid "Search Users"
 msgstr ""
 
+#: assets/templates/user-edit.php:17
 msgid "CiviCRM Contact"
 msgstr ""
 
+#: assets/templates/user-edit.php:18
 msgid "View Contact in CiviCRM"
 msgstr ""
 
+#: civicrm-admin-utilities.php:508
 msgid "Donate!"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:118
+#: includes/civicrm-admin-utilities-multidomain.php:536
 msgid "CiviCRM Admin Utilities: Domain"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:217
+#: includes/civicrm-admin-utilities-multidomain.php:634
 msgid "CiviCRM Admin Utilities Domain"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:236
+#: includes/civicrm-admin-utilities-multisite.php:552
 msgid "For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:254
+#: includes/civicrm-admin-utilities-multisite.php:1088
+#: includes/civicrm-admin-utilities-multisite.php:1178
 msgid "You do not have permission to access this page."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:373
 msgid "Domains"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:430
 msgid "CiviCRM Domains"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:446
 msgid "Create Domain"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:653
 msgid "Domain Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:723
 msgid "CiviCRM Domain Information"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:739
 msgid "Edit Domain"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:1242
+#: includes/civicrm-admin-utilities-multidomain.php:1305
+#: includes/civicrm-admin-utilities-multidomain.php:1411
+#: includes/civicrm-admin-utilities-multidomain.php:1743
 msgid "Failed to initialise CiviCRM."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:1259
 msgid "Could not find a Domain ID."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:1310
 msgid "CiviCRM Multisite extension must be enabled."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:1327
 msgid "Domain ID not found."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:1423
 msgid "Could not find a Domain Group ID."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multidomain.php:1766
 msgid "Could not find a Domain Org ID."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:419
+#: includes/civicrm-admin-utilities-multisite.php:440
+#: includes/civicrm-admin-utilities-multisite.php:464
+#: includes/civicrm-admin-utilities-single.php:734
+#: includes/civicrm-admin-utilities-single.php:754
 msgid "CiviCRM Admin Utilities: Settings"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:680
 msgid "CiviCRM Network Settings"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:797
+#: includes/civicrm-admin-utilities-single.php:1122
 msgid "CiviCRM Access"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:807
+#: includes/civicrm-admin-utilities-single.php:1134
 msgid "CiviCRM Admin Appearance"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:817
+#: includes/civicrm-admin-utilities-single.php:1144
 msgid "CiviCRM Stylesheets"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:827
+#: includes/civicrm-admin-utilities-single.php:1154
 msgid "CiviCRM Contacts &amp; WordPress Users"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:837
+#: includes/civicrm-admin-utilities-single.php:1164
 msgid "Admin Bar Options"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:847
+#: includes/civicrm-admin-utilities-single.php:1174
 msgid "Post Type Options"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:1910
+#: includes/civicrm-admin-utilities-single.php:3042
 msgid "You must supply a setting to setting_exists()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:1932
+#: includes/civicrm-admin-utilities-single.php:3064
 msgid "You must supply a setting to setting_get()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:1953
+#: includes/civicrm-admin-utilities-single.php:3085
 msgid "You must supply a setting to setting_set()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:1958
 msgid "The setting name must be passed as a string to setting_set()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:1978
+#: includes/civicrm-admin-utilities-single.php:3110
 msgid "You must supply a setting to setting_delete()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:2001
+#: includes/civicrm-admin-utilities-single.php:3133
 msgid "You must supply an option to option_exists()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:2027
+#: includes/civicrm-admin-utilities-single.php:3159
 msgid "You must supply an option to option_get()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:2052
+#: includes/civicrm-admin-utilities-single.php:3184
 msgid "You must supply an option to option_set()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-multisite.php:2073
+#: includes/civicrm-admin-utilities-single.php:3205
 msgid "You must supply an option to option_delete()"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single-users.php:203
+#: includes/civicrm-admin-utilities-single-users.php:204
+#: includes/civicrm-admin-utilities-single-users.php:297
+#: includes/civicrm-admin-utilities-single-users.php:528
 msgid "Manage Users"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single-users.php:356
 msgctxt "Users per page (screen options)"
 msgid "Users"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:453
+#: includes/civicrm-admin-utilities-single.php:2033
 msgid "CiviCRM"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:735
 msgid " Admin Utilities"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:881
 msgid "Site Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:1187
 msgid "Shortcuts"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2051
 msgid "CiviCRM Dashboard"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2059
 msgid "All Contacts"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2067
 msgid "Advanced Search"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2096
 msgid "Manage Groups"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2107
 msgid "Contribution Dashboard"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2119
 msgid "Membership Dashboard"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2131
 msgid "Events Dashboard"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2143
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2155
 msgid "Report Listing"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2167
 msgid "Cases Dashboard"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2178
 msgid "Admin Console"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:2188
 msgid "Manage Extensions"
 msgstr ""
 
 #. translators: %s: The Contact's first name
+#: includes/civicrm-admin-utilities-single.php:2506
 msgid "Hi %s, welcome to CiviCRM"
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:3090
 msgid "You must supply the setting as a string to setting_set()"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:288
 msgid "Username"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:289
 msgid "Name"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:290
 msgid "Email"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:291
 msgid "User Since"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:292
 msgid "User ID"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:293
 msgid "Contact ID"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:294
 msgid "Posts"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:323
 msgctxt "Manage Users action"
 msgid "Sync to CiviCRM"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:348
 msgid "No Users found."
 msgstr ""
 
 #. translators: accessibility text
+#: includes/class-cau-users-list-table.php:434
 msgid "Select user: %s"
 msgstr ""
 
+#: includes/class-cau-users-list-table.php:484
 msgid "Edit"
 msgstr ""
 
 #. translators: %s: Number of posts.
+#: includes/class-cau-users-list-table.php:600
 msgid "%s post by this author"
 msgid_plural "%s posts by this author"
 msgstr[0] ""
