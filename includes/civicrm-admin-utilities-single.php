@@ -339,7 +339,7 @@ class CiviCRM_Admin_Utilities_Single {
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 11 );
 
 		// Add our meta boxes.
-		add_action( 'add_meta_boxes', [ $this, 'meta_boxes_add' ], 11, 1 );
+		add_action( 'cau/single/admin/add_meta_boxes', [ $this, 'meta_boxes_add' ], 11, 1 );
 
 		// Kill CiviCRM shortcode button.
 		add_action( 'admin_head', [ $this, 'kill_civi_button' ] );
@@ -988,7 +988,7 @@ class CiviCRM_Admin_Utilities_Single {
 		 *
 		 * @param str $screen_id The ID of the current screen.
 		 */
-		do_action( 'add_meta_boxes', $screen->id, null );
+		do_action( 'cau/single/admin/add_meta_boxes', $screen->id, null );
 
 		// Grab columns.
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );

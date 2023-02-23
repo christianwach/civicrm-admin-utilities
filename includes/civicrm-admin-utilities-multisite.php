@@ -370,8 +370,8 @@ class CiviCRM_Admin_Utilities_Multisite {
 		add_action( 'network_admin_menu', [ $this, 'network_admin_menu' ], 30 );
 
 		// Add our meta boxes.
-		add_action( 'add_meta_boxes', [ $this, 'network_settings_meta_boxes_add' ], 11, 1 );
-		add_action( 'add_meta_boxes', [ $this, 'network_site_meta_boxes_add' ], 11, 1 );
+		add_action( 'cau/network/settings/add_meta_boxes', [ $this, 'network_settings_meta_boxes_add' ], 11, 1 );
+		add_action( 'cau/network/settings/site/add_meta_boxes', [ $this, 'network_site_meta_boxes_add' ], 11, 1 );
 
 		// Maybe restrict access to site settings page.
 		add_filter( 'civicrm_admin_utilities_page_settings_cap', [ $this, 'page_settings_cap' ], 10, 2 );
@@ -1075,7 +1075,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 *
 		 * @param str $screen_id The ID of the current screen.
 		 */
-		do_action( 'add_meta_boxes', $screen->id, null );
+		do_action( 'cau/network/settings/add_meta_boxes', $screen->id, null );
 
 		// Grab columns.
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
@@ -1165,7 +1165,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 *
 		 * @param str $screen_id The ID of the current screen.
 		 */
-		do_action( 'add_meta_boxes', $screen->id, null );
+		do_action( 'cau/network/settings/site/add_meta_boxes', $screen->id, null );
 
 		// Grab columns.
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );

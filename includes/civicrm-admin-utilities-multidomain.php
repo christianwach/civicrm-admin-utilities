@@ -78,13 +78,13 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		add_action( 'network_admin_menu', [ $this, 'network_admin_menu' ], 30 );
 
 		// Add meta boxes to Network Domain subpage.
-		add_action( 'add_meta_boxes', [ $this, 'network_meta_boxes_add' ], 11, 1 );
+		add_action( 'cau/multidomain/network/settings/add_meta_boxes', [ $this, 'network_meta_boxes_add' ], 11, 1 );
 
 		// Add Domain subpage to Single Site Settings menu.
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
 		// Add meta boxes to Single Site Domain subpage.
-		add_action( 'add_meta_boxes', [ $this, 'meta_boxes_add' ], 11, 1 );
+		add_action( 'cau/multidomain/settings/add_meta_boxes', [ $this, 'meta_boxes_add' ], 11, 1 );
 
 		// Add Domains AJAX handler.
 		add_action( 'wp_ajax_cau_domains_get', [ $this, 'domains_ajax_get' ] );
@@ -274,7 +274,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 *
 		 * @param str $screen_id The ID of the current screen.
 		 */
-		do_action( 'add_meta_boxes', $screen->id, null );
+		do_action( 'cau/multidomain/network/settings/add_meta_boxes', $screen->id, null );
 
 		// Grab columns.
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
@@ -842,7 +842,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 *
 		 * @param str $screen_id The ID of the current screen.
 		 */
-		do_action( 'add_meta_boxes', $screen->id, null );
+		do_action( 'cau/multidomain/settings/add_meta_boxes', $screen->id, null );
 
 		// Grab columns.
 		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
