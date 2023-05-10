@@ -58,6 +58,11 @@ Support for flex-box dashboard
 --------------------------------------------------------------------------------
 */
 
+.crm-container .crm-draggable
+{
+	cursor: move;
+}
+
 .crm-container .crm-flex-box
 {
 	display: flex;
@@ -86,11 +91,6 @@ Support for flex-box dashboard
 .crm-container .crm-flex-box > .crm-flex-6
 {
 	flex: 6;
-}
-
-.crm-container .crm-draggable
-{
-	cursor: move;
 }
 
 div.crm-container .crm-dashlet-header a
@@ -221,6 +221,7 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 #bootstrap-theme crm-search-actions .btn.dropdown-toggle:hover,
 #bootstrap-theme crm-search-actions .btn.dropdown-toggle:focus
 {
+	color: #fff;
 	background-color: #a2a39e;
 }
 
@@ -320,6 +321,23 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	padding: 10px 10px 1px 10px;
 }
 
+#bootstrap-theme .crm-editable-enabled
+{
+    min-height: 1.5em;
+}
+
+.crm-container #bootstrap-theme .btn:hover,
+.crm-container #bootstrap-theme .btn:focus,
+.crm-container #bootstrap-theme .btn.focus
+{
+	color: #999;
+	background-color:
+}
+
+#bootstrap-theme fieldset .form-inline
+{
+    margin: 0.8em 0.4em;
+}
 
 
 
@@ -623,6 +641,7 @@ div.crm-container fieldset label
 	width: 15em;
 }
 .crm-container .huge,
+input.crm-form-autocomplete,
 input.crm-form-entityref {
 	width: 25em;
 }
@@ -1355,6 +1374,7 @@ div.crm-container .crm-content label.error
 
 .crm-container div.empowered-by-logo {
 	background: url('../../../civicrm/civicrm/i/civi99.png') no-repeat;
+	background-image: url('../../../civicrm/civicrm/i/civi99.svg'), none;
 	display: block;
 	line-height: 34px;
 	position: absolute;
@@ -1450,6 +1470,10 @@ div.crm-container .crm-content label.error
 	line-height: 1.4;
 }
 
+.crm-container .price-set-option-content .description {
+  font-size: 1em;
+}
+
 .crm-container .form-layout-compressed td.description,
 .crm-container .form-layout td.description {
 	padding: 0 5px 5px 5px;
@@ -1476,6 +1500,10 @@ div.crm-container .crm-content label.error
 
 .crm-container .bold {
 	font-weight: bold;
+}
+
+.crm-container .font-bold {
+	font-weight: bold !important;
 }
 
 .crm-container .font-italic {
@@ -2064,10 +2092,6 @@ div.crm-container .crm-content label.error
 
 #crm-container table.nestedActivitySelector td {
 	border-right: 0;
-}
-
-#crm-container table#activities-selector.nestedActivitySelector tr.status-overdue {
-
 }
 
 #crm-container table.nestedActivitySelector tr.priority-urgent,
@@ -2808,7 +2832,7 @@ span.crm-frozen-field {
 
 .crm-container .ui-icon,
 .crm-container .icon {
-	background-image: url("../../../civicrm/civicrm/i/icons/jquery-ui-52534D.png")
+	background-image: url("../../../civicrm/civicrm/i/icons/jquery-ui-52534D.png");
 }
 
 .crm-container .icon {
@@ -3760,7 +3784,8 @@ tbody.scrollContent tr.alternateRow {
 }
 
 .crm-container .disabled,
-.crm-container .disabled td,
+.crm-container .disabled *,
+.crm-container .crm-disabled,
 .crm-container .cancelled,
 .crm-container .cancelled td,
 .crm-container li.disabled a.ui-tabs-anchor,
@@ -4170,6 +4195,7 @@ span.crm-select-item-color {
 }
 
 .crm-container.ui-dialog {
+	background-color: #fff;
 	box-shadow: 0 0 70px rgba(0, 0, 0, 0.4);
 }
 .crm-container.ui-dialog.ui-resizable::before {
@@ -4940,7 +4966,7 @@ span.crm-status-icon {
 }
 
 .crm-container .strikethrough {
-	text-decoration: line-through;
+	text-decoration: line-through !important;
 }
 
 .crm-container input.ng-invalid.ng-dirty,
@@ -4995,6 +5021,31 @@ span.crm-status-icon {
 	margin-top: 0.4em;
 }
 
+/* Dedupe rules */
+.crm-dedupe-rules-form-block-used div
+{
+	max-width: 800px;
+}
+.crm-dedupe-rules-form-block-used p:first-child
+{
+	margin-top: 0;
+}
+.dedupe-rules-dialog [type=radio]
+{
+	margin-top: 4px;
+}
+.dedupe-rules-dialog p:first-child
+{
+	margin-top: 0;
+}
+.dedupe-rules-dialog input[type=radio]
+{
+	float: left;
+}
+.dedupe-rules-dialog label > *
+{
+	margin-left: 30px;
+}
 
 
 /*
@@ -5220,7 +5271,7 @@ Contact Summary overrides
 /* Hides spinner on CLE Settings page */
 contact-layout-editor h1
 {
-    background: #f0f0f1;
+	background: #f0f0f1;
 }
 
 #crm-container div.contact_panel div.contactCardLeft .label,
