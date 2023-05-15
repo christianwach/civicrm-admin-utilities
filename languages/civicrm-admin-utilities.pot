@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 0.9.4a\n"
+"Project-Id-Version: CiviCRM Admin Utilities 1.0.0a\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-23T13:22:39+00:00\n"
+"POT-Creation-Date: 2023-05-15T11:49:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: civicrm-admin-utilities\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: assets/templates/site-multidomain.php:18
 #: assets/templates/site-settings.php:18
 #: assets/templates/site-users-table.php:18
-#: includes/civicrm-admin-utilities-multidomain.php:119
+#: includes/civicrm-admin-utilities-multidomain.php:121
 #: includes/civicrm-admin-utilities-multisite.php:420
 #: includes/civicrm-admin-utilities-multisite.php:441
 #: includes/civicrm-admin-utilities-multisite.php:465
@@ -44,7 +44,7 @@ msgid "Christian Wach"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "http://haystack.co.uk"
+msgid "https://haystack.co.uk"
 msgstr ""
 
 #: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:128
@@ -264,8 +264,8 @@ msgid "Multisite is not enabled on this CiviCRM Domain. Change <a href=\"%s\">th
 msgstr ""
 
 #: assets/templates/metaboxes/site-metabox-domain-info.php:53
-#: includes/civicrm-admin-utilities-multidomain.php:537
-#: includes/civicrm-admin-utilities-multidomain.php:978
+#: includes/civicrm-admin-utilities-multidomain.php:539
+#: includes/civicrm-admin-utilities-multidomain.php:980
 msgid "Domain"
 msgstr ""
 
@@ -419,8 +419,8 @@ msgstr ""
 #: assets/templates/site-users-table.php:21
 #: civicrm-admin-utilities.php:497
 #: civicrm-admin-utilities.php:503
-#: includes/civicrm-admin-utilities-multidomain.php:457
-#: includes/civicrm-admin-utilities-multidomain.php:750
+#: includes/civicrm-admin-utilities-multidomain.php:459
+#: includes/civicrm-admin-utilities-multidomain.php:752
 #: includes/civicrm-admin-utilities-multisite.php:670
 #: includes/civicrm-admin-utilities-multisite.php:787
 #: includes/civicrm-admin-utilities-single.php:755
@@ -480,75 +480,75 @@ msgstr ""
 msgid "Donate!"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:118
-#: includes/civicrm-admin-utilities-multidomain.php:536
+#: includes/civicrm-admin-utilities-multidomain.php:120
+#: includes/civicrm-admin-utilities-multidomain.php:538
 msgid "CiviCRM Admin Utilities: Domain"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:217
-#: includes/civicrm-admin-utilities-multidomain.php:634
+#: includes/civicrm-admin-utilities-multidomain.php:219
+#: includes/civicrm-admin-utilities-multidomain.php:636
 msgid "CiviCRM Admin Utilities Domain"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:236
+#: includes/civicrm-admin-utilities-multidomain.php:238
 #: includes/civicrm-admin-utilities-multisite.php:552
 msgid "For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:254
+#: includes/civicrm-admin-utilities-multidomain.php:256
 #: includes/civicrm-admin-utilities-multisite.php:1088
 #: includes/civicrm-admin-utilities-multisite.php:1178
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:373
+#: includes/civicrm-admin-utilities-multidomain.php:375
 msgid "Domains"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:430
+#: includes/civicrm-admin-utilities-multidomain.php:432
 msgid "CiviCRM Domains"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:446
+#: includes/civicrm-admin-utilities-multidomain.php:448
 msgid "Create Domain"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:653
+#: includes/civicrm-admin-utilities-multidomain.php:655
 msgid "Domain Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:723
+#: includes/civicrm-admin-utilities-multidomain.php:725
 msgid "CiviCRM Domain Information"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:739
+#: includes/civicrm-admin-utilities-multidomain.php:741
 msgid "Edit Domain"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:1242
-#: includes/civicrm-admin-utilities-multidomain.php:1305
-#: includes/civicrm-admin-utilities-multidomain.php:1411
-#: includes/civicrm-admin-utilities-multidomain.php:1743
+#: includes/civicrm-admin-utilities-multidomain.php:1252
+#: includes/civicrm-admin-utilities-multidomain.php:1315
+#: includes/civicrm-admin-utilities-multidomain.php:1421
+#: includes/civicrm-admin-utilities-multidomain.php:1753
 msgid "Failed to initialise CiviCRM."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:1259
+#: includes/civicrm-admin-utilities-multidomain.php:1269
 msgid "Could not find a Domain ID."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:1310
+#: includes/civicrm-admin-utilities-multidomain.php:1320
 msgid "CiviCRM Multisite extension must be enabled."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:1327
+#: includes/civicrm-admin-utilities-multidomain.php:1337
 msgid "Domain ID not found."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:1423
+#: includes/civicrm-admin-utilities-multidomain.php:1433
 msgid "Could not find a Domain Group ID."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multidomain.php:1766
+#: includes/civicrm-admin-utilities-multidomain.php:1776
 msgid "Could not find a Domain Org ID."
 msgstr ""
 
