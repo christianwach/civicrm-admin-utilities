@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
 			</th>
 
 			<td>
-				<select id="cau_domain_group_select" name="cau_domain_group_select" data-security="' . esc_attr( wp_create_nonce( 'cau_domain_group' ) ) . '">
+				<select id="cau_domain_group_select" name="cau_domain_group_select" data-security="<?php echo esc_attr( wp_create_nonce( 'cau_domain_group' ) ); ?>">
 					<option value=""><?php esc_html_e( 'Select existing Group', 'civicrm-admin-utilities' ); ?></option>
 					<?php if ( $metabox['args']['domain_group']['id'] !== 0 ) : ?>
 						<option value="<?php echo $metabox['args']['domain_group']['id']; ?>" selected="selected"><?php echo $metabox['args']['domain_group']['name']; ?></option>
@@ -47,7 +47,7 @@ defined( 'ABSPATH' ) || exit;
 			</th>
 
 			<td>
-				<select id="cau_domain_org_select" name="cau_domain_org_select" data-security="' . esc_attr( wp_create_nonce( 'cau_domain_org' ) ) . '">
+				<select id="cau_domain_org_select" name="cau_domain_org_select" data-security="<?php echo esc_attr( wp_create_nonce( 'cau_domain_org' ) ); ?>">
 					<option value=""><?php esc_html_e( 'Select existing Organisation', 'civicrm-admin-utilities' ); ?></option>
 					<?php if ( $metabox['args']['domain_org']['id'] !== 0 ) : ?>
 						<option value="<?php echo $metabox['args']['domain_org']['id']; ?>" selected="selected"><?php echo $metabox['args']['domain_org']['name']; ?></option>

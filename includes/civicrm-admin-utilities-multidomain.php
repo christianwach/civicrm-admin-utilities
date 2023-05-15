@@ -86,8 +86,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Add meta boxes to Single Site Domain subpage.
 		add_action( 'cau/multidomain/settings/add_meta_boxes', [ $this, 'meta_boxes_add' ], 11, 1 );
 
+		/*
 		// Add Domains AJAX handler.
 		add_action( 'wp_ajax_cau_domains_get', [ $this, 'domains_ajax_get' ] );
+		*/
 
 		// Add Domain Groups AJAX handler.
 		add_action( 'wp_ajax_cau_domain_groups_get', [ $this, 'domain_groups_ajax_get' ] );
@@ -1178,17 +1180,25 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	/**
 	 * Get the Domains registered in CiviCRM.
 	 *
+	 * Not used.
+	 *
 	 * @since 0.6.2
 	 */
 	public function domains_ajax_get() {
 
-		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
-			return;
-		}
-
 		// Init return.
 		$json = [];
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			wp_send_json( $json );
+		}
+
+		// Since this is an AJAX request, check security.
+		$result = check_ajax_referer( 'cau_domains', false, false );
+		if ( $result === false ) {
+			wp_send_json( $json );
+		}
 
 		// Sanitise search input.
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
@@ -1204,7 +1214,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Sanity check.
 		if ( ! empty( $domains['is_error'] ) && $domains['is_error'] == 1 ) {
-			return;
+			wp_send_json( $json );
 		}
 
 		// Loop through our domains.
