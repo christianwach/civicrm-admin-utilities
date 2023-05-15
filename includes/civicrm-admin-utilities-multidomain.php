@@ -864,7 +864,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Register Select2 styles.
 		wp_register_style(
 			'cau_site_domain_select2_css',
-			set_url_scheme( 'http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css' ),
+			set_url_scheme( 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css' ),
 			false,
 			'4.0.13',
 			'all'
@@ -894,7 +894,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Register Select2.
 		wp_register_script(
 			'cau_site_domain_select2_js',
-			set_url_scheme( 'http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js' ),
+			set_url_scheme( 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js' ),
 			[ 'jquery' ],
 			'4.0.13',
 			true

@@ -6,7 +6,7 @@
  * Description: Optionally modifies CiviCRM's behaviour and appearance in single site and multisite installs.
  * Author: Christian Wach
  * Version: 1.0.0a
- * Author URI: http://haystack.co.uk
+ * Author URI: https://haystack.co.uk
  * Text Domain: civicrm-admin-utilities
  * Domain Path: /languages
  * Depends: CiviCRM
@@ -461,7 +461,7 @@ register_deactivation_hook( __FILE__, [ civicrm_au(), 'deactivate' ] );
 
 /*
  * Uninstall uses the 'uninstall.php' method.
- * @see http://codex.wordpress.org/Function_Reference/register_uninstall_hook
+ * @see https://developer.wordpress.org/reference/functions/register_uninstall_hook/
  */
 
 /**
