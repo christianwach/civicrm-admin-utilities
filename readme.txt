@@ -71,6 +71,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.0 =
+
+* Theme improvements
+
 = 0.9.4 =
 
 * Avoid PHP8 warnings
