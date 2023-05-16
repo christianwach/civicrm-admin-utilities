@@ -124,6 +124,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			[ $this, 'page_network_multidomain' ] // Callback.
 		);
 
+		// Register our form submit hander.
+		add_action( 'load-' . $this->network_multidomain_page, [ $this, 'settings_update_router' ] );
+
 		// Ensure correct menu item is highlighted.
 		add_action( 'admin_head-' . $this->network_multidomain_page, [ $this->plugin->multisite, 'network_menu_highlight' ], 50 );
 
@@ -134,9 +137,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		add_action( 'admin_print_styles-' . $this->network_multidomain_page, [ $this, 'page_network_multidomain_css' ] );
 		// phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
 		//add_action( 'admin_print_scripts-' . $this->network_multidomain_page, [ $this, 'page_network_multidomain_js' ] );
-
-		// Try and update options.
-		$saved = $this->settings_update_router();
 
 		// Filter the list of Single Site subpages and add Multidomain page.
 		add_filter( 'civicrm_admin_utilities_network_subpages', [ $this, 'network_admin_subpages_filter' ] );
@@ -384,6 +384,23 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Render tab.
 		echo '<a href="' . $urls['multidomain'] . '" class="nav-tab' . $active . '">' . $title . '</a>' . "\n";
+
+	}
+
+	/**
+	 * Get the URL for the form action.
+	 *
+	 * @since 0.5.4
+	 *
+	 * @return string $target_url The URL for the admin form action.
+	 */
+	public function page_network_submit_url_get() {
+
+		// Use Site Multi Domain admin page URL.
+		$target_url = $this->plugin->multisite->network_menu_page_url( 'cau_network_multidomain', false );
+
+		// --<
+		return $target_url;
 
 	}
 
@@ -999,18 +1016,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 *
 	 * @return string $target_url The URL for the admin form action.
 	 */
-	public function page_submit_url_get() {
+	public function page_multidomain_submit_url_get() {
 
-		// Sanitise admin page URL.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$target_url = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
-		if ( ! empty( $target_url ) ) {
-			$url_array = explode( '&', $target_url );
-			if ( ! empty( $url_array ) ) {
-				$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
-				$target_url = htmlentities( $url_raw . '&updated=true' );
-			}
-		}
+		// Use Site Multi Domain admin page URL.
+		$target_url = menu_page_url( 'civicrm_au_multidomain', false );
 
 		// --<
 		return $target_url;
@@ -1023,28 +1032,42 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * Route settings updates to relevant methods.
 	 *
 	 * @since 0.5.4
-	 *
-	 * @return bool $result True on success, false otherwise.
 	 */
 	public function settings_update_router() {
-
-		// Init return.
-		$result = false;
 
 		// Was the "Network Domain" form submitted?
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['cau_network_multidomain_submit'] ) ) {
-			return $this->settings_network_multidomain_update();
+			$this->settings_network_multidomain_update();
+			$url = $this->plugin->multisite->network_menu_page_url( 'cau_network_multidomain', false );
+			$this->settings_update_redirect( $url );
 		}
 
 		// Was the "Domain" form submitted?
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['cau_multidomain_submit'] ) ) {
-			return $this->settings_multidomain_update();
+			$this->settings_multidomain_update();
+			$url = menu_page_url( 'civicrm_au_multidomain', false );
+			$this->settings_update_redirect( $url );
 		}
 
-		// --<
-		return $result;
+	}
+
+	/**
+	 * Form redirection handler.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param string $url The menu page URL.
+	 */
+	public function settings_update_redirect( $url ) {
+
+		// Our array of arguments.
+		$args = [ 'updated' => 'true' ];
+
+		// Redirect to our Settings Page.
+		wp_safe_redirect( add_query_arg( $args, $url ) );
+		exit;
 
 	}
 
@@ -1052,8 +1075,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * Update options supplied by our Network Multidomain Settings page.
 	 *
 	 * @since 0.6.2
-	 *
-	 * @return bool True if successful, false otherwise (always true at present).
 	 */
 	public function settings_network_multidomain_update() {
 
@@ -1065,7 +1086,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Bail if we get nothing through.
 		if ( empty( $domain_name ) ) {
-			return false;
+			return;
 		}
 
 		// Okay, create domain.
@@ -1089,17 +1110,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 */
 		do_action( 'civicrm_admin_utilities_network_multidomain_updated' );
 
-		// --<
-		return true;
-
 	}
 
 	/**
 	 * Update options supplied by our Multidomain Settings page.
 	 *
 	 * @since 0.5.4
-	 *
-	 * @return bool True if successful, false otherwise (always true at present).
 	 */
 	public function settings_multidomain_update() {
 
@@ -1122,9 +1138,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 * @since 0.8.1
 		 */
 		do_action( 'civicrm_admin_utilities_multidomain_updated' );
-
-		// --<
-		return true;
 
 	}
 

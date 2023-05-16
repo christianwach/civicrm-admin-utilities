@@ -17,9 +17,20 @@ defined( 'ABSPATH' ) || exit;
 
 	<h1><?php esc_html_e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
 
+	<?php
+
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( isset( $_GET['updated'] ) && isset( $_GET['page'] ) ) {
+		add_settings_error( 'cau', 'settings_updated', __( 'Settings saved.', 'civicrm-admin-utilities' ), 'success' );
+	}
+
+	settings_errors();
+
+	?>
+
 	<?php if ( $show_tabs ) : ?>
 		<h2 class="nav-tab-wrapper">
-			<a href="<?php echo $urls['settings']; ?>" class="nav-tab nav-tab-active"><?php esc_html_e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
+			<a href="<?php echo esc_url( $urls['settings'] ); ?>" class="nav-tab nav-tab-active"><?php esc_html_e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
 			<?php
 
 			/**

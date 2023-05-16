@@ -1326,20 +1326,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 *
 	 * @since 0.5.4
 	 *
+	 * @param string $slug The slug of the menu page.
 	 * @return string $target_url The URL for the admin form action.
 	 */
-	public function page_submit_url_get() {
+	public function page_submit_url_get( $slug = 'cau_network_settings' ) {
 
 		// Sanitise admin page URL.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$target_url = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
-		if ( ! empty( $target_url ) ) {
-			$url_array = explode( '&', $target_url );
-			if ( ! empty( $url_array ) ) {
-				$url_raw = str_replace( '&amp;updated=true', '', $url_array[0] );
-				$target_url = htmlentities( $url_raw . '&updated=true' );
-			}
-		}
+		$target_url = $this->network_menu_page_url( $slug, false );
 
 		// --<
 		return $target_url;
@@ -1624,28 +1617,43 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * Route settings updates to relevant methods.
 	 *
 	 * @since 0.5.4
-	 *
-	 * @return bool $result True on success, false otherwise.
 	 */
 	public function settings_update_router() {
-
-		// Init return.
-		$result = false;
 
 		// Was the "Network Settings" form submitted?
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['cau_network_settings_submit'] ) ) {
-			return $this->settings_network_update();
+			$this->settings_network_update();
+			$this->settings_update_redirect( 'cau_network_settings' );
 		}
 
 		// Was the "Site Settings" form submitted?
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['cau_network_site_submit'] ) ) {
-			return $this->settings_site_update();
+			$this->settings_site_update();
+			$this->settings_update_redirect( 'cau_network_site' );
 		}
 
-		// --<
-		return $result;
+	}
+
+	/**
+	 * Form redirection handler.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param string $slug The slug of the menu page.
+	 */
+	public function settings_update_redirect( $slug = 'cau_network_settings' ) {
+
+		// Get the Site Settings Page URL.
+		$url = $this->page_submit_url_get( $slug );
+
+		// Our array of arguments.
+		$args = [ 'updated' => 'true' ];
+
+		// Redirect to our Settings Page.
+		wp_safe_redirect( add_query_arg( $args, $url ) );
+		exit;
 
 	}
 
@@ -1653,8 +1661,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 * Update options supplied by our "Network Settings" admin page.
 	 *
 	 * @since 0.5.4
-	 *
-	 * @return bool True if successful, false otherwise (always true at present).
 	 */
 	public function settings_network_update() {
 
@@ -1706,17 +1712,12 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 */
 		do_action( 'civicrm_admin_utilities_settings_network_updated' );
 
-		// --<
-		return true;
-
 	}
 
 	/**
 	 * Update options supplied by our "Site Settings" admin page.
 	 *
 	 * @since 0.5.4
-	 *
-	 * @return bool True if successful, false otherwise (always true at present).
 	 */
 	public function settings_site_update() {
 
@@ -1871,9 +1872,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 * @since 0.8.1
 		 */
 		do_action( 'civicrm_admin_utilities_settings_site_updated' );
-
-		// --<
-		return true;
 
 	}
 

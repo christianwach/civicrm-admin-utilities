@@ -38,7 +38,7 @@ defined( 'ABSPATH' ) || exit;
 		printf(
 			/* translators: %s: The URL of the CiviCRM setting page. */
 			__( 'Multisite is not enabled on this CiviCRM Domain. Change <a href="%s">the setting in CiviCRM</a> to enable it.', 'civicrm-admin-utilities' ),
-			$metabox['args']['multisite_url']
+			esc_url( $metabox['args']['multisite_url'] )
 		);
 
 		?>
@@ -59,8 +59,8 @@ defined( 'ABSPATH' ) || exit;
 			echo sprintf(
 				/* translators: 1: The Domain name, 2: The Domain ID. */
 				__( '%1$s (ID %2$s)', 'civicrm-admin-utilities' ),
-				'<span class="cau_domain_name">' . $metabox['args']['domain']['name'] . '</span>',
-				'<span class="cau_domain_id">' . $metabox['args']['domain']['id'] . '</span>'
+				'<span class="cau_domain_name">' . esc_html( $metabox['args']['domain']['name'] ) . '</span>',
+				'<span class="cau_domain_id">' . esc_html( $metabox['args']['domain']['id'] ) . '</span>'
 			);
 
 			?>
@@ -78,8 +78,8 @@ defined( 'ABSPATH' ) || exit;
 			echo sprintf(
 				/* translators: 1: The Domain Group name, 2: The Domain Group ID. */
 				__( '%1$s (ID %2$s)', 'civicrm-admin-utilities' ),
-				'<span class="cau_domain_group_name">' . $metabox['args']['domain_group']['name'] . '</span>',
-				'<span class="cau_domain_group_id">' . $metabox['args']['domain_group']['id'] . '</span>'
+				'<span class="cau_domain_group_name">' . esc_html( $metabox['args']['domain_group']['name'] ) . '</span>',
+				'<span class="cau_domain_group_id">' . esc_html( $metabox['args']['domain_group']['id'] ) . '</span>'
 			);
 
 			?>
@@ -97,8 +97,8 @@ defined( 'ABSPATH' ) || exit;
 			echo sprintf(
 				/* translators: 1: The Domain Organisation name, 2: The Domain Organisation ID. */
 				__( '%1$s (ID %2$s)', 'civicrm-admin-utilities' ),
-				'<span class="cau_domain_org_name">' . $metabox['args']['domain_org']['name'] . '</span>',
-				'<span class="cau_domain_org_id">' . $metabox['args']['domain_org']['id'] . '</span>'
+				'<span class="cau_domain_org_name">' . esc_html( $metabox['args']['domain_org']['name'] ) . '</span>',
+				'<span class="cau_domain_org_id">' . esc_html( $metabox['args']['domain_org']['id'] ) . '</span>'
 			);
 
 			?>

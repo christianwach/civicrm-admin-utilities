@@ -100,12 +100,11 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		$this->user_counts['all'] = $users_of_blog['total_users'];
 
 		// Get the search string if present.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.WP.GlobalVariablesOverride.Prohibited
-		$usersearch = isset( $_REQUEST['s'] ) ? trim( wp_unslash( $_REQUEST['s'] ) ) : '';
+		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		$usersearch = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
 
 		// Get the views param if present.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$user_status = isset( $_REQUEST['user_status'] ) ? wp_unslash( $_REQUEST['user_status'] ) : 'all';
+		$user_status = isset( $_REQUEST['user_status'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['user_status'] ) ) : 'all';
 
 		// Set per page from the screen options.
 		$per_page = 'admin_page_' . civicrm_au()->single_users->users_page_slug . '_per_page';
@@ -171,12 +170,10 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Support ordering.
 		if ( isset( $_REQUEST['orderby'] ) ) {
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$args['orderby'] = wp_unslash( $_REQUEST['orderby'] );
+			$args['orderby'] = sanitize_text_field( wp_unslash( $_REQUEST['orderby'] ) );
 		}
 		if ( isset( $_REQUEST['order'] ) ) {
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$args['order'] = wp_unslash( $_REQUEST['order'] );
+			$args['order'] = sanitize_text_field( wp_unslash( $_REQUEST['order'] ) );
 		}
 
 		/**

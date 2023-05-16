@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 	<h1><?php esc_html_e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
 
 	<h2 class="nav-tab-wrapper">
-		<a href="<?php echo $urls['settings']; ?>" class="nav-tab"><?php esc_html_e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
+		<a href="<?php echo esc_url( $urls['settings'] ); ?>" class="nav-tab"><?php esc_html_e( 'Settings', 'civicrm-admin-utilities' ); ?></a>
 		<?php
 
 		/**

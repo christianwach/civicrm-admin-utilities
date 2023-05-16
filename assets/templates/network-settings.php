@@ -17,6 +17,17 @@ defined( 'ABSPATH' ) || exit;
 
 	<h1><?php esc_html_e( 'CiviCRM Admin Utilities', 'civicrm-admin-utilities' ); ?></h1>
 
+	<?php
+
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( isset( $_GET['updated'] ) && isset( $_GET['page'] ) ) {
+		add_settings_error( 'cau', 'settings_updated', __( 'Settings saved.', 'civicrm-admin-utilities' ), 'success' );
+	}
+
+	settings_errors();
+
+	?>
+
 	<div class="updated">
 		<?php if ( $this->plugin->is_civicrm_network_activated() ) : ?>
 			<p><?php esc_html_e( 'CiviCRM is network-activated.', 'civicrm-admin-utilities' ); ?></p>
@@ -27,8 +38,8 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php if ( $show_tabs ) : ?>
 		<h1 class="nav-tab-wrapper">
-			<a href="<?php echo $urls['settings_network']; ?>" class="nav-tab nav-tab-active"><?php esc_html_e( 'Network Settings', 'civicrm-admin-utilities' ); ?></a>
-			<a href="<?php echo $urls['settings_site']; ?>" class="nav-tab"><?php esc_html_e( 'Site Settings', 'civicrm-admin-utilities' ); ?></a>
+			<a href="<?php echo esc_url( $urls['settings_network'] ); ?>" class="nav-tab nav-tab-active"><?php esc_html_e( 'Network Settings', 'civicrm-admin-utilities' ); ?></a>
+			<a href="<?php echo esc_url( $urls['settings_site'] ); ?>" class="nav-tab"><?php esc_html_e( 'Site Settings', 'civicrm-admin-utilities' ); ?></a>
 			<?php
 
 			/**
@@ -45,15 +56,6 @@ defined( 'ABSPATH' ) || exit;
 		</h1>
 	<?php else : ?>
 		<hr />
-	<?php endif; ?>
-
-	<?php if ( isset( $_GET['updated'] ) && $_GET['updated'] == 'true' ) : ?>
-		<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
-			<p><strong><?php esc_html_e( 'Settings saved.', 'civicrm-admin-utilities' ); ?></strong></p>
-			<button type="button" class="notice-dismiss">
-				<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'civicrm-admin-utilities' ); ?></span>
-			</button>
-		</div>
 	<?php endif; ?>
 
 	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->page_submit_url_get(); ?>">
