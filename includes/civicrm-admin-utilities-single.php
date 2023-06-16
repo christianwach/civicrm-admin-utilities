@@ -75,6 +75,15 @@ class CiviCRM_Admin_Utilities_Single {
 	public $is_upgrade = false;
 
 	/**
+	 * Saved timezone.
+	 *
+	 * @since 1.0.1
+	 * @access public
+	 * @var str
+	 */
+	public $php_timezone = '';
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.5.4
@@ -386,6 +395,9 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Add callback for CiviCRM Processor Params.
 		add_action( 'civicrm_alterPaymentProcessorParams', [ $this, 'paypal_params' ], 10, 3 );
+
+		// Listen for API calls.
+		add_action( 'civicrm_config', [ $this, 'api_timezone_sync' ], 10, 1 );
 
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
@@ -2630,6 +2642,161 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// --<
 		return $predates;
+
+	}
+
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Listens for API calls and makes sure the timezone is set correctly.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param object $config The CiviCRM config object.
+	 */
+	public function api_timezone_sync( &$config ) {
+
+		// Add callback for CiviCRM "civi.api.prepare" hook.
+		Civi::service( 'dispatcher' )->addListener(
+			'civi.api.prepare',
+			[ $this, 'api_timezone_set' ],
+			-100 // Default priority.
+		);
+
+		// Add callback for CiviCRM "civi.api.respond" hook.
+		Civi::service( 'dispatcher' )->addListener(
+			'civi.api.respond',
+			[ $this, 'api_timezone_reset' ],
+			-100 // Default priority.
+		);
+
+	}
+
+	/**
+	 * Sets the timezone just before for API calls are made.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param object $event The event object.
+	 * @param string $hook The hook name.
+	 */
+	public function api_timezone_set( $event, $hook ) {
+
+		// Extract args for this hook.
+		$action = $event->getActionName();
+
+		// Bail if not an action that modifies the database.
+		if ( ! in_array( $action, [ 'create', 'replace', 'validate', 'update', 'setvalue' ] ) ) {
+			return;
+		}
+
+		// Store current PHP timezone.
+		if ( empty( $this->php_timezone ) ) {
+			$this->php_timezone = date_default_timezone_get();
+		}
+
+		// Get the timezone defined by the WordPress Site.
+		$site_timezone = $this->site_timezone_get();
+
+		// Configure timezone for CiviCRM.
+		if ( $site_timezone !== $this->php_timezone ) {
+			date_default_timezone_set( $site_timezone );
+			CRM_Core_Config::singleton()->userSystem->setMySQLTimeZone();
+		}
+
+	}
+
+	/**
+	 * Resets the timezone just after API calls have been made.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param object $event The event object.
+	 * @param string $hook The hook name.
+	 */
+	public function api_timezone_reset( $event, $hook ) {
+
+		// Extract args for this hook.
+		$action = $event->getActionName();
+
+		// Bail if not an action that modifies the database.
+		if ( ! in_array( $action, [ 'create', 'replace', 'validate', 'update', 'setvalue' ] ) ) {
+			return;
+		}
+
+		// Restore current PHP timezone.
+		if ( ! empty( $this->php_timezone ) ) {
+			date_default_timezone_set( $this->php_timezone );
+			$this->php_timezone = '';
+		}
+
+	}
+
+	/**
+	 * Returns the timezone string for the current site.
+	 *
+	 * If a timezone identifier is used, this method returns that.
+	 * If an offset is used, tries to build a suitable timezone.
+	 * If all else fails, uses UTC.
+	 *
+	 * This is a modified version of the "eo_get_blog_timezone" function in the
+	 * Event Organiser plugin.
+	 *
+	 * @see https://github.com/stephenharris/Event-Organiser/blob/develop/includes/event-organiser-utility-functions.php#L352
+	 *
+	 * @since 1.0.1
+	 *
+	 * @return string $tzstring The site timezone string.
+	 */
+	public function site_timezone_get() {
+
+		// Check our cached value first.
+		$tzstring = wp_cache_get( 'civicrm_admin_utilities_timezone' );
+
+		/**
+		 * Filters the cached timezone string.
+		 *
+		 * @since 1.0.1
+		 *
+		 * @param string $tzstring The cached timezone string.
+		 */
+		$tzstring = apply_filters( 'civicrm_admin_utilities_timezone', $tzstring );
+
+		// Build value if none is cached.
+		if ( false === $tzstring ) {
+
+			// Get relevant WordPress settings.
+			$tzstring = get_option( 'timezone_string' );
+			$offset = get_option( 'gmt_offset' );
+
+			/*
+			 * Setting manual offsets should be discouraged.
+			 *
+			 * The IANA timezone database that provides PHP's timezone support
+			 * uses (reversed) POSIX style signs.
+			 *
+			 * @see https://github.com/stephenharris/Event-Organiser/issues/287
+			 * @see https://www.php.net/manual/en/timezones.others.php
+			 * @see https://bugs.php.net/bug.php?id=45543
+			 * @see https://bugs.php.net/bug.php?id=45528
+			 */
+			if ( empty( $tzstring ) && 0 != $offset && floor( $offset ) == $offset ) {
+				$offset_string = $offset > 0 ? "-$offset" : '+' . absint( $offset );
+				$tzstring = 'Etc/GMT' . $offset_string;
+			}
+
+			// Default to 'UTC' if the timezone string is empty.
+			if ( empty( $tzstring ) ) {
+				$tzstring = 'UTC';
+			}
+
+			// Cache timezone string.
+			wp_cache_set( 'civicrm_admin_utilities_timezone', $tzstring );
+
+		}
+
+		// --<
+		return $tzstring;
 
 	}
 
