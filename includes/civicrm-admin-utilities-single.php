@@ -2060,6 +2060,22 @@ class CiviCRM_Admin_Utilities_Single {
 			'href' => $this->get_link( 'civicrm/contact/search/advanced', 'reset=1' ),
 		] );
 
+		// Searchkit
+		$wp_admin_bar->add_node( [
+			'id' => 'cau-13',
+			'parent' => $id,
+			'title' => __( 'SearchKit', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/admin/search' ),
+		] );
+
+		// Form Builder
+		$wp_admin_bar->add_node( [
+			'id' => 'cau-14',
+			'parent' => $id,
+			'title' => __( 'Form Builder', 'civicrm-admin-utilities' ),
+			'href' => $this->get_link( 'civicrm/admin/afform' ),
+		] );
+
 		// Maybe hide "Manage Groups" menu item.
 		if ( $this->setting_get( 'admin_bar_groups', '0' ) == '1' ) {
 			add_filter( 'civicrm_admin_utilities_manage_groups_menu_item', '__return_false' );
