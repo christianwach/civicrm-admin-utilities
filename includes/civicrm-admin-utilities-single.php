@@ -66,6 +66,15 @@ class CiviCRM_Admin_Utilities_Single {
 	public $settings = [];
 
 	/**
+	 * Admin page URLs.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var array
+	 */
+	public $urls = [];
+
+	/**
 	 * Upgrade flag.
 	 *
 	 * @since 0.7.4
@@ -1032,7 +1041,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function page_get_urls() {
 
 		// Only calculate once.
-		if ( isset( $this->urls ) ) {
+		if ( ! empty( $this->urls ) ) {
 			return $this->urls;
 		}
 
