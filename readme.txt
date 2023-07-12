@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Introduces fix for API timezone mismatch
+* Uses API4 for retrieving Dedupe Rule Groups if available
+
 = 1.0.0 =
 
 * Theme improvements
