@@ -103,7 +103,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 
 		// Filter the "per_page" screen option.
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( is_admin() && ! empty( $_REQUEST['page'] ) && $this->users_page_slug == $_REQUEST['page'] ) {
+		if ( is_admin() && ! empty( $_REQUEST['page'] ) && $this->users_page_slug === $_REQUEST['page'] ) {
 			add_filter( 'set-screen-option', [ $this, 'admin_screen_options' ], 10, 3 );
 		}
 
@@ -133,7 +133,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	public function admin_screen_options( $value, $option, $new_value ) {
 
 		// Bail if not our page.
-		if ( 'admin_page_' . $this->users_page_slug . '_per_page' != $option ) {
+		if ( 'admin_page_' . $this->users_page_slug . '_per_page' !== $option ) {
 			return $value;
 		}
 
@@ -333,7 +333,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	public function page_init() {
 
 		// Default to index page.
-		if ( $this->page === 'user_table' ) {
+		if ( 'user_table' === $this->page ) {
 
 			// Include the WordPress list table class.
 			if ( ! class_exists( 'WP_List_Table' ) ) {
@@ -388,7 +388,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		}
 
 		// Default to index page.
-		if ( $this->page === 'user_table' ) {
+		if ( 'user_table' === $this->page ) {
 			$this->page_users_table();
 		}
 
@@ -531,7 +531,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		$active = '';
 
 		// Make active if it's our subpage.
-		if ( $active_tab === 'users' ) {
+		if ( 'users' === $active_tab ) {
 			$active = ' nav-tab-active';
 		}
 

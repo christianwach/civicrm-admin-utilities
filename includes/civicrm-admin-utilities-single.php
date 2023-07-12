@@ -75,6 +75,15 @@ class CiviCRM_Admin_Utilities_Single {
 	public $urls = [];
 
 	/**
+	 * Soft delete direction flag.
+	 *
+	 * @since 0.6.8
+	 * @access private
+	 * @var string
+	 */
+	private $direction;
+
+	/**
 	 * Upgrade flag.
 	 *
 	 * @since 0.7.4
@@ -123,7 +132,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$this->upgrade_tasks();
 
 		// Store version for later reference if there has been a change.
-		if ( $this->plugin_version != CIVICRM_ADMIN_UTILITIES_VERSION ) {
+		if ( CIVICRM_ADMIN_UTILITIES_VERSION !== $this->plugin_version ) {
 			$this->store_version();
 		}
 
@@ -165,7 +174,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function upgrade_tasks() {
 
 		// If this is a new install (or an upgrade from a version prior to 0.3.4).
-		if ( $this->plugin_version === false ) {
+		if ( false === $this->plugin_version ) {
 
 			// Delete the legacy "installed" option.
 			$this->delete_legacy_option();
@@ -173,7 +182,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// If this is an upgrade.
-		if ( $this->plugin_version != CIVICRM_ADMIN_UTILITIES_VERSION ) {
+		if ( CIVICRM_ADMIN_UTILITIES_VERSION !== $this->plugin_version ) {
 			$this->is_upgrade = true;
 		}
 
@@ -352,7 +361,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Save settings if need be.
-		if ( $save === true ) {
+		if ( true === $save ) {
 			$this->settings_save();
 		}
 
@@ -464,7 +473,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
-		if ( $contact_id === false ) {
+		if ( false === $contact_id ) {
 			return $actions;
 		}
 
@@ -519,7 +528,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
-		if ( $contact_id === false ) {
+		if ( false === $contact_id ) {
 			return;
 		}
 
@@ -554,17 +563,17 @@ class CiviCRM_Admin_Utilities_Single {
 	public function email_pre_update( $op, $objectName, $objectId, $objectRef ) {
 
 		// Target our operation.
-		if ( $op != 'edit' ) {
+		if ( 'edit' !== $op ) {
 			return;
 		}
 
 		// Target our object type.
-		if ( $objectName != 'Email' ) {
+		if ( 'Email' !== $objectName ) {
 			return;
 		}
 
 		// Bail if we have no Email address.
-		if ( ! isset( $objectRef['email'] ) ) {
+		if ( empty( $objectRef['email'] ) ) {
 			return;
 		}
 
@@ -572,7 +581,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$email = $this->email_get_by_id( $objectId );
 
 		// Bail if this is not the Primary Email.
-		if ( $email->is_primary != 1 ) {
+		if ( 1 !== (int) $email->is_primary ) {
 			return;
 		}
 
@@ -614,7 +623,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Did this change originate with CiviCRM?
-		if ( isset( $this->email_sync ) && $this->email_sync === true ) {
+		if ( isset( $this->email_sync ) && true === $this->email_sync ) {
 
 			// Unset property.
 			unset( $this->email_sync );
@@ -652,7 +661,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$result = civicrm_api( 'Email', 'get', $params );
 
 		// Bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			return $email;
 		}
 
@@ -1709,7 +1718,6 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Only on back-end.
 		if ( is_admin() ) {
 
 			// Maybe disable core stylesheet.
@@ -1730,7 +1738,6 @@ class CiviCRM_Admin_Utilities_Single {
 				$this->custom_css_disable();
 			}
 
-		// Only on front-end.
 		} else {
 
 			// Maybe disable core stylesheet.
@@ -1789,7 +1796,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$url = $this->resource_get_url( $extension, $file );
 
 		// Kick out if not enqueued.
-		if ( $url === false ) {
+		if ( false === $url ) {
 			return;
 		}
 
@@ -2365,7 +2372,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function contact_soft_delete_pre( $op, $objectName, $objectId, $objectRef ) {
 
 		// Uh oh! 'update' not 'edit'!
-		if ( $op !== 'update' ) {
+		if ( 'update' !== $op ) {
 			return;
 		}
 
@@ -2388,7 +2395,7 @@ class CiviCRM_Admin_Utilities_Single {
 		] );
 
 		// Log and bail if there's an error.
-		if ( ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) || $result['count'] == 0 ) {
+		if ( ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) || 0 === (int) $result['count'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -2405,22 +2412,22 @@ class CiviCRM_Admin_Utilities_Single {
 		// Init direction with arbitrary value.
 		$this->direction = 'none';
 
-		// If the Contact was not in the Trash, then its being moved to Trash.
-		if ( isset( $objectRef['is_deleted'] ) && $objectRef['is_deleted'] == '1' ) {
-			if ( $contact_data['contact_is_deleted'] == '0' ) {
+		// If the Contact was not in the Trash, then it's being moved to Trash.
+		if ( isset( $objectRef['is_deleted'] ) && 1 === (int) $objectRef['is_deleted'] ) {
+			if ( 0 === (int) $contact_data['contact_is_deleted'] ) {
 				$this->direction = 'trashed';
 			}
 		}
 
-		// If the Contact was in the Trash, then its being moved out of the Trash.
-		if ( ! isset( $objectRef['is_deleted'] ) || $objectRef['is_deleted'] == '0' ) {
-			if ( $contact_data['contact_is_deleted'] == '1' ) {
+		// If the Contact was in the Trash, then it's being moved out of the Trash.
+		if ( ! isset( $objectRef['is_deleted'] ) || 0 === (int) $objectRef['is_deleted'] ) {
+			if ( 1 === (int) $contact_data['contact_is_deleted'] ) {
 				$this->direction = 'untrashed';
 			}
 		}
 
 		// Sanity check.
-		if ( $this->direction === 'none' ) {
+		if ( 'none' === $this->direction ) {
 			return;
 		}
 
@@ -2453,7 +2460,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function contact_soft_delete_post( $op, $objectName, $objectId, $objectRef ) {
 
 		// Uh oh! 'update' not 'edit'!
-		if ( $op !== 'update' ) {
+		if ( 'update' !== $op ) {
 			return;
 		}
 
@@ -2469,7 +2476,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Sanity check.
-		if ( $this->direction === 'none' ) {
+		if ( 'none' === $this->direction ) {
 			return;
 		}
 
@@ -2541,7 +2548,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$result = civicrm_api( 'Contact', 'get', $params );
 
 		// Bail if there's an error.
-		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			return;
 		}
 
@@ -3268,12 +3275,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param string $setting_name The name of the setting.
 	 * @return bool Whether or not the setting exists.
 	 */
-	public function setting_exists( $setting_name = '' ) {
-
-		// Test for empty.
-		if ( $setting_name == '' ) {
-			die( __( 'You must supply a setting to setting_exists()', 'civicrm-admin-utilities' ) );
-		}
+	public function setting_exists( $setting_name ) {
 
 		// Get existence of setting in array.
 		return array_key_exists( $setting_name, $this->settings );
@@ -3290,15 +3292,10 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param mixed $default The default value if the setting does not exist.
 	 * @return mixed The setting or the default.
 	 */
-	public function setting_get( $setting_name = '', $default = false ) {
-
-		// Test for empty.
-		if ( $setting_name == '' ) {
-			die( __( 'You must supply a setting to setting_get()', 'civicrm-admin-utilities' ) );
-		}
+	public function setting_get( $setting_name, $default = false ) {
 
 		// Get setting.
-		return ( array_key_exists( $setting_name, $this->settings ) ) ? $this->settings[ $setting_name ] : $default;
+		return array_key_exists( $setting_name, $this->settings ) ? $this->settings[ $setting_name ] : $default;
 
 	}
 
@@ -3311,17 +3308,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param string $setting_name The name of the setting.
 	 * @param mixed $value The value of the setting.
 	 */
-	public function setting_set( $setting_name = '', $value = '' ) {
-
-		// Test for empty.
-		if ( $setting_name == '' ) {
-			die( __( 'You must supply a setting to setting_set()', 'civicrm-admin-utilities' ) );
-		}
-
-		// Test for other than string.
-		if ( ! is_string( $setting_name ) ) {
-			die( __( 'You must supply the setting as a string to setting_set()', 'civicrm-admin-utilities' ) );
-		}
+	public function setting_set( $setting_name, $value = '' ) {
 
 		// Set setting.
 		$this->settings[ $setting_name ] = $value;
@@ -3336,12 +3323,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @param string $setting_name The name of the setting.
 	 */
-	public function setting_delete( $setting_name = '' ) {
-
-		// Test for empty.
-		if ( $setting_name == '' ) {
-			die( __( 'You must supply a setting to setting_delete()', 'civicrm-admin-utilities' ) );
-		}
+	public function setting_delete( $setting_name ) {
 
 		// Unset setting.
 		unset( $this->settings[ $setting_name ] );
@@ -3359,12 +3341,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param str $option_name The name of the option.
 	 * @return bool $exists Whether or not the option exists.
 	 */
-	public function option_exists( $option_name = '' ) {
-
-		// Test for empty.
-		if ( $option_name == '' ) {
-			die( __( 'You must supply an option to option_exists()', 'civicrm-admin-utilities' ) );
-		}
+	public function option_exists( $option_name ) {
 
 		// Test by getting option with unlikely default.
 		if ( $this->option_get( $option_name, 'fenfgehgefdfdjgrkj' ) == 'fenfgehgefdfdjgrkj' ) {
@@ -3385,12 +3362,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param str $default The default value of the option if it has no value.
 	 * @return mixed $value the value of the option.
 	 */
-	public function option_get( $option_name = '', $default = false ) {
-
-		// Test for empty.
-		if ( $option_name == '' ) {
-			die( __( 'You must supply an option to option_get()', 'civicrm-admin-utilities' ) );
-		}
+	public function option_get( $option_name, $default = false ) {
 
 		// Get option.
 		$value = get_option( $option_name, $default );
@@ -3410,12 +3382,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param mixed $value The value to set the option to.
 	 * @return bool $success True if the value of the option was successfully updated.
 	 */
-	public function option_set( $option_name = '', $value = '' ) {
-
-		// Test for empty.
-		if ( $option_name == '' ) {
-			die( __( 'You must supply an option to option_set()', 'civicrm-admin-utilities' ) );
-		}
+	public function option_set( $option_name, $value = '' ) {
 
 		// Update option.
 		return update_option( $option_name, $value );
@@ -3431,12 +3398,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 * @param str $option_name The name of the option.
 	 * @return bool $success True if the option was successfully deleted.
 	 */
-	public function option_delete( $option_name = '' ) {
-
-		// Test for empty.
-		if ( $option_name == '' ) {
-			die( __( 'You must supply an option to option_delete()', 'civicrm-admin-utilities' ) );
-		}
+	public function option_delete( $option_name ) {
 
 		// Delete option.
 		return delete_option( $option_name );

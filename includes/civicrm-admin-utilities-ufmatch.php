@@ -98,7 +98,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'Contact', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -145,7 +145,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$contact = civicrm_api( 'Contact', 'getsingle', $params );
 
 		// Log and bail on failure.
-		if ( isset( $contact['is_error'] ) && $contact['is_error'] == '1' ) {
+		if ( isset( $contact['is_error'] ) && 1 === $contact['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -190,7 +190,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$entry = $this->entry_get_by_user_id( $user_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $entry === false ) {
+		if ( false === $entry ) {
 			return false;
 		}
 
@@ -226,7 +226,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$contact_id = $this->contact_id_get_by_user_id( $user_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $contact_id === false ) {
+		if ( false === $contact_id ) {
 			return false;
 		}
 
@@ -255,7 +255,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$entry = $this->entry_get_by_contact_id( $contact_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $entry === false ) {
+		if ( false === $entry ) {
 			return false;
 		}
 
@@ -291,7 +291,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$user_id = $this->user_id_get_by_contact_id( $contact_id, $domain_id );
 
 		// Bail if we didn't get one.
-		if ( $user_id === false ) {
+		if ( false === $user_id ) {
 			return false;
 		}
 
@@ -405,7 +405,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'create', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -452,7 +452,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'delete', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -512,7 +512,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -582,7 +582,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -655,7 +655,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -728,7 +728,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$result = civicrm_api( 'UFMatch', 'get', $params );
 
 		// Log and bail on failure.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			$e = new Exception();
 			$trace = $e->getTraceAsString();
 			error_log( print_r( [
@@ -824,7 +824,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 			foreach ( $types as $type ) {
 				if ( empty( $contact_type ) ) {
 					$dedupe_rules[ $type ] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
-				} elseif ( $contact_type == $type ) {
+				} elseif ( $contact_type === $type ) {
 					$dedupe_rules[ $type ] = CRM_Dedupe_BAO_RuleGroup::getByType( $type );
 				}
 			}

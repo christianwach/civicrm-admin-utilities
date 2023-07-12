@@ -124,7 +124,7 @@ class CiviCRM_Admin_Utilities {
 
 		// Only do this once.
 		static $done;
-		if ( isset( $done ) && $done === true ) {
+		if ( isset( $done ) && true === $done ) {
 			return;
 		}
 
@@ -411,7 +411,7 @@ class CiviCRM_Admin_Utilities {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			return $installed;
 		}
 
@@ -422,7 +422,7 @@ class CiviCRM_Admin_Utilities {
 
 		// Double check.
 		foreach ( $result['values'] as $extension ) {
-			if ( $extension['key'] == $full_name ) {
+			if ( $extension['key'] === $full_name ) {
 				$installed = true;
 			}
 		}
@@ -489,7 +489,7 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 	}
 
 	// Add settings link.
-	if ( $file == plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) ) {
+	if ( plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) === $file ) {
 
 		// Add settings link if network activated and viewing network admin.
 		if ( civicrm_au()->is_network_activated() && is_network_admin() ) {

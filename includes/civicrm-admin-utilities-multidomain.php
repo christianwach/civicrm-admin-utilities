@@ -279,7 +279,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		do_action( 'cau/multidomain/network/settings/add_meta_boxes', $screen->id, null );
 
 		// Grab columns.
-		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
+		$columns = ( 1 === $screen->get_columns() ? '1' : '2' );
 
 		// Get domains.
 		$domains = $this->domains_get();
@@ -378,7 +378,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$active = '';
 
 		// Make active if it's our subpage.
-		if ( $active_tab === 'multidomain' ) {
+		if ( 'multidomain' === $active_tab ) {
 			$active = ' nav-tab-active';
 		}
 
@@ -455,7 +455,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		);
 
 		// Bail if "multisite" is not present.
-		if ( $data['multisite'] === false ) {
+		if ( false === $data['multisite'] ) {
 			return;
 		}
 
@@ -748,7 +748,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		);
 
 		// Bail if "multisite" is not present and enabled in CiviCRM.
-		if ( $data['multisite'] === false || $data['enabled'] === false ) {
+		if ( false === $data['multisite'] || false === $data['enabled'] ) {
 			return;
 		}
 
@@ -864,7 +864,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		do_action( 'cau/multidomain/settings/add_meta_boxes', $screen->id, null );
 
 		// Grab columns.
-		$columns = ( 1 == $screen->get_columns() ? '1' : '2' );
+		$columns = ( 1 === $screen->get_columns() ? '1' : '2' );
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/site-multidomain.php';
@@ -1000,7 +1000,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$active = '';
 
 		// Make active if it's our subpage.
-		if ( $active_tab === 'multidomain' ) {
+		if ( 'multidomain' === $active_tab ) {
 			$active = ' nav-tab-active';
 		}
 
@@ -1169,7 +1169,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			return $domains;
 		}
 
@@ -1209,7 +1209,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Since this is an AJAX request, check security.
 		$result = check_ajax_referer( 'cau_domains', false, false );
-		if ( $result === false ) {
+		if ( false === $result ) {
 			wp_send_json( $json );
 		}
 
@@ -1226,7 +1226,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $domains['is_error'] ) && $domains['is_error'] == 1 ) {
+		if ( ! empty( $domains['is_error'] ) && 1 === (int) $domains['is_error'] ) {
 			wp_send_json( $json );
 		}
 
@@ -1267,18 +1267,18 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// If no parameter set.
-		if ( $domain_id === 0 ) {
+		if ( 0 === $domain_id ) {
 
 			// Get CiviCRM domain group ID from constant, if set.
 			$domain_id = defined( 'CIVICRM_DOMAIN_ID' ) ? CIVICRM_DOMAIN_ID : 0;
 
 			// If this fails, get it from config.
-			if ( $domain_id === 0 ) {
+			if ( 0 === $domain_id ) {
 				$domain_id = CRM_Core_Config::domainID();
 			}
 
 			// Bail if we still don't have one.
-			if ( $domain_id === 0 ) {
+			if ( 0 === $domain_id ) {
 				$domain['name'] = __( 'Could not find a Domain ID.', 'civicrm-admin-utilities' );
 				return $domain;
 			}
@@ -1292,7 +1292,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $domain_info['is_error'] ) && $domain_info['is_error'] == 1 ) {
+		if ( ! empty( $domain_info['is_error'] ) && 1 === (int) $domain_info['is_error'] ) {
 			$domain['name'] = $domain_info['error_message'];
 			return $domain;
 		}
@@ -1342,7 +1342,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $result['is_error'] ) && $result['is_error'] == 1 ) {
+		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 			return $result['error_message'];
 		}
 
@@ -1377,7 +1377,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// This is an AJAX request, so check security.
 		$result = check_ajax_referer( 'cau_domain_group', false, false );
-		if ( $result === false ) {
+		if ( false === $result ) {
 			wp_send_json( $json );
 		}
 
@@ -1395,7 +1395,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $groups['is_error'] ) && $groups['is_error'] == 1 ) {
+		if ( ! empty( $groups['is_error'] ) && 1 === (int) $groups['is_error'] ) {
 			wp_send_json( $json );
 		}
 
@@ -1436,13 +1436,13 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// If no parameter set.
-		if ( $domain_group_id === 0 ) {
+		if ( 0 === $domain_group_id ) {
 
 			// Try and find the current Domain Group ID.
 			$domain_group_id = $this->domain_group_id_get();
 
 			// Bail if we don't find one.
-			if ( $domain_group_id === 0 ) {
+			if ( 0 === $domain_group_id ) {
 				$domain_group['name'] = __( 'Could not find a Domain Group ID.', 'civicrm-admin-utilities' );
 				return $domain_group;
 			}
@@ -1456,7 +1456,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $domain_group_info['is_error'] ) && $domain_group_info['is_error'] == 1 ) {
+		if ( ! empty( $domain_group_info['is_error'] ) && 1 === (int) $domain_group_info['is_error'] ) {
 			$domain_group['name'] = $domain_group_info['error_message'];
 			return $domain_group;
 		}
@@ -1509,7 +1509,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$domain = $this->domain_get();
 
 		// Bail if we don't have a domain.
-		if ( $domain['id'] === 0 ) {
+		if ( 0 === $domain['id'] ) {
 			return $domain_group_id;
 		}
 
@@ -1522,8 +1522,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// If we were successful, cast as integer and return the ID.
-		if ( ! empty( $result['domain_group_id'] ) && $result['domain_group_id'] != '0' ) {
-			$domain_group_id = absint( $result['domain_group_id'] );
+		if ( ! empty( $result['domain_group_id'] ) && 0 !== (int) $result['domain_group_id'] ) {
+			$domain_group_id = (int) $result['domain_group_id'];
 			return $domain_group_id;
 		}
 
@@ -1587,7 +1587,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Sanity check.
-		if ( $group_id === 0 || ! is_numeric( $group_id ) ) {
+		if ( 0 === $group_id || ! is_numeric( $group_id ) ) {
 			return false;
 		}
 
@@ -1595,7 +1595,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$domain = $this->domain_get();
 
 		// Bail if we don't have a domain.
-		if ( $domain['id'] === 0 ) {
+		if ( 0 === $domain['id'] ) {
 			return false;
 		}
 
@@ -1621,7 +1621,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			] );
 
 			// Log if there's an error.
-			if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+			if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 				$e = new Exception();
 				$trace = $e->getTraceAsString();
 				error_log( print_r( [
@@ -1641,7 +1641,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// If it doesn't have one.
-		if ( isset( $result['is_error'] ) && $result['is_error'] == '1' ) {
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 
 			// Create new "GroupOrganization" entry.
 			$result = civicrm_api( 'GroupOrganization', 'create', [
@@ -1653,7 +1653,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Bail if there wasn't a previous Domain Group.
-		if ( $domain_group['id'] === 0 ) {
+		if ( 0 === $domain_group['id'] ) {
 			return $group_id;
 		}
 
@@ -1672,13 +1672,13 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 			// Find the one that's tied to this Domain Org.
 			foreach ( $result['values'] as $linkage ) {
-				if ( $linkage['organization_id'] == $domain['contact_id'] ) {
+				if ( (int) $linkage['organization_id'] === (int) $domain['contact_id'] ) {
 					$linkage_id = $linkage['id'];
 				}
 			}
 
 			// Remove it if we find it.
-			if ( $linkage_id !== 0 ) {
+			if ( 0 !== $linkage_id ) {
 				$result = civicrm_api( 'GroupOrganization', 'delete', [
 					'version' => 3,
 					'id' => $linkage_id,
@@ -1709,7 +1709,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// This is an AJAX request, so check security.
 		$result = check_ajax_referer( 'cau_domain_org', false, false );
-		if ( $result === false ) {
+		if ( false === $result ) {
 			wp_send_json( $json );
 		}
 
@@ -1727,7 +1727,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Sanity check.
-		if ( ! empty( $orgs['is_error'] ) && $orgs['is_error'] == 1 ) {
+		if ( ! empty( $orgs['is_error'] ) && 1 === (int) $orgs['is_error'] ) {
 			wp_send_json( $json );
 		}
 
@@ -1768,24 +1768,24 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// If no parameter specified.
-		if ( $domain_org_id === 0 ) {
+		if ( 0 === $domain_org_id ) {
 
 			// Get CiviCRM domain org ID from constant, if set.
 			$domain_org_id = defined( 'CIVICRM_DOMAIN_ORG_ID' ) ? CIVICRM_DOMAIN_ORG_ID : 0;
 
 			// If this fails, get it from the domain.
-			if ( $domain_org_id === 0 ) {
+			if ( 0 === $domain_org_id ) {
 
 				// Get domain data.
 				$domain = $this->domain_get();
 
 				// If this fails, try and get it from the domain.
-				if ( $domain['id'] !== 0 ) {
+				if ( 0 !== $domain['id'] ) {
 					$domain_org_id = isset( $domain['contact_id'] ) ? $domain['contact_id'] : 0;
 				}
 
 				// Bail if we still don't have one.
-				if ( $domain_org_id === 0 ) {
+				if ( 0 === $domain_org_id ) {
 					$domain_org['name'] = __( 'Could not find a Domain Org ID.', 'civicrm-admin-utilities' );
 					return $domain_org;
 				}
@@ -1801,7 +1801,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		] );
 
 		// Bail if there's an error.
-		if ( ! empty( $domain_org_info['is_error'] ) && $domain_org_info['is_error'] == 1 ) {
+		if ( ! empty( $domain_org_info['is_error'] ) && 1 === (int) $domain_org_info['is_error'] ) {
 			$domain_org['name'] = $domain_org_info['error_message'];
 			return $domain_org;
 		}
@@ -1842,7 +1842,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Sanity check.
-		if ( $org_id === 0 || ! is_numeric( $org_id ) ) {
+		if ( 0 === $org_id || ! is_numeric( $org_id ) ) {
 			return false;
 		}
 
@@ -1850,12 +1850,12 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		$domain = $this->domain_get();
 
 		// Bail if we don't have a domain.
-		if ( $domain['id'] === 0 ) {
+		if ( 0 === $domain['id'] ) {
 			return false;
 		}
 
 		// Bail if there's no change.
-		if ( $domain['contact_id'] == $org_id ) {
+		if ( (int) $domain['contact_id'] === (int) $org_id ) {
 			return $org_id;
 		}
 

@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 		</td>
 	</tr>
 
-	<?php if ( $shoreditch === false ) : ?>
+	<?php if ( false === $shoreditch ) : ?>
 
 		<tr>
 			<th scope="row"><?php esc_html_e( 'Custom Stylesheet on Public Pages', 'civicrm-admin-utilities' ); ?></th>
