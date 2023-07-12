@@ -138,10 +138,10 @@ class CiviCRM_Admin_Utilities {
 
 		// Bail if CiviCRM is not fully installed.
 		if ( ! defined( 'CIVICRM_INSTALLED' ) ) {
-			return false;
+			return;
 		}
 		if ( ! CIVICRM_INSTALLED ) {
-			return false;
+			return;
 		}
 
 		// Include files.
