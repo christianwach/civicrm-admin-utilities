@@ -2745,6 +2745,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Configure timezone for CiviCRM.
 		if ( $site_timezone !== $this->php_timezone ) {
+			// phpcs:ignore WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
 			date_default_timezone_set( $site_timezone );
 			CRM_Core_Config::singleton()->userSystem->setMySQLTimeZone();
 		}
@@ -2771,6 +2772,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Restore current PHP timezone.
 		if ( ! empty( $this->php_timezone ) ) {
+			// phpcs:ignore WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
 			date_default_timezone_set( $this->php_timezone );
 			$this->php_timezone = '';
 		}
