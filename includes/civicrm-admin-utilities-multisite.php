@@ -344,6 +344,18 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
+		// Fix API timezone setting may not exist.
+		if ( ! $this->setting_exists( 'fix_api_timezone' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'fix_api_timezone', $settings['fix_api_timezone'] );
+			$save = true;
+
+		}
+
 		// Save settings if need be.
 		if ( $save === true ) {
 			$this->settings_save();
@@ -851,6 +863,16 @@ class CiviCRM_Admin_Utilities_Multisite {
 			'core' // Vertical placement: options are 'core', 'high', 'low'.
 		);
 
+		// Create Other Fixes metabox.
+		add_meta_box(
+			'civicrm_au_fixes',
+			__( 'Other Fixes', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_fixes_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
 	}
 
 	/**
@@ -1071,6 +1093,24 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-post-types.php';
+
+	}
+
+	/**
+	 * Render Other Fixes meta box on Admin screen.
+	 *
+	 * @since 1.0.1
+	 */
+	public function meta_box_fixes_render() {
+
+		// Init fix API timezone checkbox.
+		$fix_api_timezone = '';
+		if ( $this->setting_get( 'fix_api_timezone', '0' ) == '1' ) {
+			$fix_api_timezone = ' checked="checked"';
+		}
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-fixes.php';
 
 	}
 
@@ -1571,6 +1611,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Init post types with defaults.
 		$settings['post_types'] = [ 'post', 'page' ];
 
+		// Fix API timezone by default.
+		$settings['fix_api_timezone'] = '1';
+
 		/**
 		 * Filter default network settings.
 		 *
@@ -1740,6 +1783,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$fix_soft_delete = isset( $_POST[ $prefix . 'fix_soft_delete' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_soft_delete' ] ) ) : 0;
 		$admin_bar = isset( $_POST[ $prefix . 'admin_bar' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar' ] ) ) : 0;
 		$admin_bar_groups = isset( $_POST[ $prefix . 'admin_bar_groups' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar_groups' ] ) ) : 0;
+		$fix_api_timezone = isset( $_POST[ $prefix . 'fix_api_timezone' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_api_timezone' ] ) ) : 0;
 
 		// Retrieve Post Types array.
 		$post_types = filter_input( INPUT_POST, $prefix . 'post_types', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
@@ -1861,6 +1905,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		} else {
 			$this->setting_set( 'post_types', [] );
+		}
+
+		// Did we ask to fix API timezone?
+		if ( 1 === $fix_api_timezone ) {
+			$this->setting_set( 'fix_api_timezone', '1' );
+		} else {
+			$this->setting_set( 'fix_api_timezone', '0' );
 		}
 
 		// Save options.
