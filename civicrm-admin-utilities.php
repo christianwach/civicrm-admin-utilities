@@ -54,7 +54,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.6.8
 	 * @access public
-	 * @var object $ufmatch The UFMatch utility object.
+	 * @var object
 	 */
 	public $ufmatch;
 
@@ -63,7 +63,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $single The Single Site object.
+	 * @var object
 	 */
 	public $single;
 
@@ -72,7 +72,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.9
 	 * @access public
-	 * @var object $single_users The single site users object.
+	 * @var object
 	 */
 	public $single_users;
 
@@ -81,7 +81,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.7.4
 	 * @access public
-	 * @var object $theme The Theme object.
+	 * @var object
 	 */
 	public $theme;
 
@@ -90,7 +90,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $multisite The Multisite object.
+	 * @var object
 	 */
 	public $multisite;
 
@@ -99,7 +99,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $multidomain The Multidomain object.
+	 * @var object
 	 */
 	public $multidomain;
 

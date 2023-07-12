@@ -22,7 +22,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * E.g. "All", "In CiviCRM", "Not in CiviCRM"...
 	 *
 	 * @since 0.9
-	 * @var string $view The current view.
+	 * @var string
 	 */
 	public $view = 'all';
 
@@ -30,7 +30,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * User counts.
 	 *
 	 * @since 0.9
-	 * @var array $user_counts The array of User counts.
+	 * @var array
 	 */
 	public $user_counts = [
 		'all' => 0,
@@ -42,7 +42,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * Items retrieved by the query.
 	 *
 	 * @since 0.9
-	 * @var array $items The array of items retrieved by the query.
+	 * @var array
 	 */
 	public $items = [];
 
@@ -50,7 +50,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * Post counts.
 	 *
 	 * @since 0.9
-	 * @var array $post_counts The array of Post counts.
+	 * @var array
 	 */
 	public $post_counts = [];
 
@@ -61,7 +61,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * User ID and the value is the Contact ID.
 	 *
 	 * @since 0.9
-	 * @var array $linked_ids The reference array.
+	 * @var array
 	 */
 	public $linked_ids = [];
 

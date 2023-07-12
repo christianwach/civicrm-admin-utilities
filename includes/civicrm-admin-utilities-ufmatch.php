@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit;
 class CiviCRM_Admin_Utilities_UFMatch {
 
 	/**
-	 * Plugin (calling) object.
+	 * Plugin object.
 	 *
 	 * @since 0.6.8
 	 * @access public
-	 * @var object $plugin The plugin object.
+	 * @var object
 	 */
 	public $plugin;
 

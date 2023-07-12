@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit;
 class CiviCRM_Admin_Utilities_Single {
 
 	/**
-	 * Plugin (calling) object.
+	 * Plugin object.
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $plugin The plugin object.
+	 * @var object
 	 */
 	public $plugin;
 
@@ -34,7 +34,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var str $plugin_version The plugin version. (numeric string)
+	 * @var string
 	 */
 	public $plugin_version;
 
@@ -43,7 +43,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $parent_page The reference to the parent page.
+	 * @var array
 	 */
 	public $parent_page;
 
@@ -52,7 +52,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $settings_page The reference to the settings page.
+	 * @var array
 	 */
 	public $settings_page;
 
@@ -61,7 +61,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $settings The plugin settings data.
+	 * @var array
 	 */
 	public $settings = [];
 
@@ -70,7 +70,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.7.4
 	 * @access public
-	 * @var array $settings An upgrade flag.
+	 * @var bool
 	 */
 	public $is_upgrade = false;
 
@@ -79,7 +79,7 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 1.0.1
 	 * @access public
-	 * @var str
+	 * @var string
 	 */
 	public $php_timezone = '';
 

@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit;
 class CiviCRM_Admin_Utilities_Multidomain {
 
 	/**
-	 * Plugin (calling) object.
+	 * Plugin object.
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $plugin The plugin object.
+	 * @var object
 	 */
 	public $plugin;
 
@@ -34,7 +34,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $multidomain_page The reference to the Multidomain Settings page.
+	 * @var array
 	 */
 	public $multidomain_page;
 

@@ -13,11 +13,11 @@
 class CiviCRM_Admin_Utilities_Theme {
 
   /**
-   * Plugin (calling) object.
+   * Plugin object.
    *
    * @since 0.7.4
    * @access public
-   * @var object $plugin The plugin object.
+   * @var object
    */
   public $plugin;
 
@@ -26,7 +26,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    * @access public
-   * @var str $slug The Theme "slug".
+   * @var string
    */
   public $slug = 'cautheme';
 

@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit;
 class CiviCRM_Admin_Utilities_Single_Users {
 
 	/**
-	 * Plugin (calling) object.
+	 * Plugin object.
 	 *
 	 * @since 0.9
 	 * @access public
-	 * @var object $plugin The plugin object.
+	 * @var object
 	 */
 	public $plugin;
 
@@ -34,7 +34,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 *
 	 * @since 0.9
 	 * @access public
-	 * @var str $page The identifier for which Users Page is displayed.
+	 * @var string
 	 */
 	public $page = 'user_table';
 
@@ -43,7 +43,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 *
 	 * @since 0.9
 	 * @access public
-	 * @var str $users_page_slug The slug of the Users Page.
+	 * @var string
 	 */
 	public $users_page_slug = 'civicrm_au_users';
 
@@ -52,7 +52,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 *
 	 * @since 0.9
 	 * @access public
-	 * @var str $users_page The reference to the Users Listing page.
+	 * @var string
 	 */
 	public $users_page;
 
@@ -61,7 +61,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 *
 	 * @since 0.9
 	 * @access public
-	 * @var CAU_Single_Users_List_Table $user_table The User Table object.
+	 * @var CAU_Single_Users_List_Table
 	 */
 	public $user_table;
 

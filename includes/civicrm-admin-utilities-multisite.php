@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit;
 class CiviCRM_Admin_Utilities_Multisite {
 
 	/**
-	 * Plugin (calling) object.
+	 * Plugin object.
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var object $plugin The plugin object.
+	 * @var object
 	 */
 	public $plugin;
 
@@ -34,7 +34,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var str $plugin_version The plugin version. (numeric string)
+	 * @var string
 	 */
 	public $plugin_version;
 
@@ -43,7 +43,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $network_parent_page The reference to the network parent page.
+	 * @var array
 	 */
 	public $network_parent_page;
 
@@ -52,7 +52,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $network_settings_page The reference to the network settings page.
+	 * @var array
 	 */
 	public $network_settings_page;
 
@@ -61,7 +61,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array $settings The plugin network settings data.
+	 * @var array
 	 */
 	public $settings = [];
 
