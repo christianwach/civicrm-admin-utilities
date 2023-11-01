@@ -266,7 +266,9 @@ class CiviCRM_Admin_Utilities {
 		$this->initialise();
 
 		// Maybe deactivate our CiviCRM Theme.
-		$this->theme->deactivate_theme();
+		if ( ! empty( $this->theme ) ) {
+			$this->theme->deactivate_theme();
+		}
 
 	}
 
