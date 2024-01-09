@@ -295,9 +295,15 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	border: none;
 }
 
+/* Original fieldset design */
 #bootstrap-theme.crm-search fieldset
 {
 	background-color: #fff;
+}
+
+#bootstrap-theme.crm-search fieldset.api4-clause-fieldset
+{
+	margin: 0;
 }
 
 #bootstrap-theme.crm-search fieldset.crm-collapsible
@@ -319,6 +325,24 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 {
 	background: white;
 	padding: 10px 10px 1px 10px;
+}
+
+/* Replacement fieldset design */
+#bootstrap-theme.crm-search details
+{
+	background-color: #fff;
+	padding: 6px;
+	border-top: 1px solid lightgrey;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+/* Bootstrap3 styles these as block which is non-compliant with html standards */
+#bootstrap-theme.crm-search summary
+{
+	display: list-item;
+	cursor: pointer;
+	font-weight: bold;
 }
 
 #bootstrap-theme .crm-editable-enabled
