@@ -1,17 +1,17 @@
-# Copyright (C) 2023 Christian Wach
+# Copyright (C) 2024 Christian Wach
 # This file is distributed under the same license as the CiviCRM Admin Utilities plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 1.0.1a\n"
+"Project-Id-Version: CiviCRM Admin Utilities 1.0.2a\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-07-12T15:07:19+00:00\n"
+"POT-Creation-Date: 2024-01-09T12:36:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.8.1\n"
+"X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: civicrm-admin-utilities\n"
 
 #. Plugin Name of the plugin
@@ -26,8 +26,8 @@ msgstr ""
 #: includes/civicrm-admin-utilities-multisite.php:453
 #: includes/civicrm-admin-utilities-multisite.php:477
 #: includes/civicrm-admin-utilities-multisite.php:545
-#: includes/civicrm-admin-utilities-single.php:895
-#: includes/civicrm-admin-utilities-single.php:2262
+#: includes/civicrm-admin-utilities-single.php:904
+#: includes/civicrm-admin-utilities-single.php:2269
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -425,14 +425,14 @@ msgstr ""
 #: assets/templates/site-multidomain.php:32
 #: assets/templates/site-settings.php:33
 #: assets/templates/site-users-table.php:21
-#: civicrm-admin-utilities.php:497
-#: civicrm-admin-utilities.php:503
+#: civicrm-admin-utilities.php:499
+#: civicrm-admin-utilities.php:505
 #: includes/civicrm-admin-utilities-multidomain.php:476
 #: includes/civicrm-admin-utilities-multidomain.php:769
-#: includes/civicrm-admin-utilities-multisite.php:682
-#: includes/civicrm-admin-utilities-multisite.php:799
-#: includes/civicrm-admin-utilities-single.php:788
-#: includes/civicrm-admin-utilities-single.php:1121
+#: includes/civicrm-admin-utilities-multisite.php:683
+#: includes/civicrm-admin-utilities-multisite.php:800
+#: includes/civicrm-admin-utilities-single.php:797
+#: includes/civicrm-admin-utilities-single.php:1130
 msgid "Settings"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgstr ""
 msgid "View Contact in CiviCRM"
 msgstr ""
 
-#: civicrm-admin-utilities.php:508
+#: civicrm-admin-utilities.php:510
 msgid "Donate!"
 msgstr ""
 
@@ -504,8 +504,8 @@ msgid "For further information about using CiviCRM Admin Utilities, please refer
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multidomain.php:256
-#: includes/civicrm-admin-utilities-multisite.php:1128
-#: includes/civicrm-admin-utilities-multisite.php:1218
+#: includes/civicrm-admin-utilities-multisite.php:1130
+#: includes/civicrm-admin-utilities-multisite.php:1221
 msgid "You do not have permission to access this page."
 msgstr ""
 
@@ -563,92 +563,48 @@ msgstr ""
 #: includes/civicrm-admin-utilities-multisite.php:431
 #: includes/civicrm-admin-utilities-multisite.php:452
 #: includes/civicrm-admin-utilities-multisite.php:476
-#: includes/civicrm-admin-utilities-single.php:767
-#: includes/civicrm-admin-utilities-single.php:787
+#: includes/civicrm-admin-utilities-single.php:776
+#: includes/civicrm-admin-utilities-single.php:796
 msgid "CiviCRM Admin Utilities: Settings"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:692
+#: includes/civicrm-admin-utilities-multisite.php:693
 msgid "CiviCRM Network Settings"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:809
-#: includes/civicrm-admin-utilities-single.php:1147
+#: includes/civicrm-admin-utilities-multisite.php:810
+#: includes/civicrm-admin-utilities-single.php:1156
 msgid "CiviCRM Access"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:819
-#: includes/civicrm-admin-utilities-single.php:1159
+#: includes/civicrm-admin-utilities-multisite.php:820
+#: includes/civicrm-admin-utilities-single.php:1168
 msgid "CiviCRM Admin Appearance"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:829
-#: includes/civicrm-admin-utilities-single.php:1169
+#: includes/civicrm-admin-utilities-multisite.php:830
+#: includes/civicrm-admin-utilities-single.php:1178
 msgid "CiviCRM Stylesheets"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:839
-#: includes/civicrm-admin-utilities-single.php:1179
+#: includes/civicrm-admin-utilities-multisite.php:840
+#: includes/civicrm-admin-utilities-single.php:1188
 msgid "CiviCRM Contacts &amp; WordPress Users"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:849
-#: includes/civicrm-admin-utilities-single.php:1189
+#: includes/civicrm-admin-utilities-multisite.php:850
+#: includes/civicrm-admin-utilities-single.php:1198
 msgid "Admin Bar Options"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:859
-#: includes/civicrm-admin-utilities-single.php:1199
+#: includes/civicrm-admin-utilities-multisite.php:860
+#: includes/civicrm-admin-utilities-single.php:1208
 msgid "Post Type Options"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-multisite.php:869
-#: includes/civicrm-admin-utilities-single.php:1209
+#: includes/civicrm-admin-utilities-multisite.php:870
+#: includes/civicrm-admin-utilities-single.php:1218
 msgid "Other Fixes"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:1959
-#: includes/civicrm-admin-utilities-single.php:3275
-msgid "You must supply a setting to setting_exists()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:1981
-#: includes/civicrm-admin-utilities-single.php:3297
-msgid "You must supply a setting to setting_get()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:2002
-#: includes/civicrm-admin-utilities-single.php:3318
-msgid "You must supply a setting to setting_set()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:2007
-msgid "The setting name must be passed as a string to setting_set()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:2027
-#: includes/civicrm-admin-utilities-single.php:3343
-msgid "You must supply a setting to setting_delete()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:2050
-#: includes/civicrm-admin-utilities-single.php:3366
-msgid "You must supply an option to option_exists()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:2076
-#: includes/civicrm-admin-utilities-single.php:3392
-msgid "You must supply an option to option_get()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:2101
-#: includes/civicrm-admin-utilities-single.php:3417
-msgid "You must supply an option to option_set()"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-multisite.php:2122
-#: includes/civicrm-admin-utilities-single.php:3438
-msgid "You must supply an option to option_delete()"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-single-users.php:203
@@ -663,78 +619,74 @@ msgctxt "Users per page (screen options)"
 msgid "Users"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:486
-#: includes/civicrm-admin-utilities-single.php:2086
+#: includes/civicrm-admin-utilities-single.php:495
+#: includes/civicrm-admin-utilities-single.php:2093
 msgid "CiviCRM"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:768
+#: includes/civicrm-admin-utilities-single.php:777
 msgid " Admin Utilities"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:914
+#: includes/civicrm-admin-utilities-single.php:923
 msgid "Site Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:1222
+#: includes/civicrm-admin-utilities-single.php:1231
 msgid "Shortcuts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2104
+#: includes/civicrm-admin-utilities-single.php:2111
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2112
+#: includes/civicrm-admin-utilities-single.php:2119
 msgid "All Contacts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2120
+#: includes/civicrm-admin-utilities-single.php:2127
 msgid "Advanced Search"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2149
+#: includes/civicrm-admin-utilities-single.php:2156
 msgid "Manage Groups"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2160
+#: includes/civicrm-admin-utilities-single.php:2167
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2172
+#: includes/civicrm-admin-utilities-single.php:2179
 msgid "Membership Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2184
+#: includes/civicrm-admin-utilities-single.php:2191
 msgid "Events Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2196
+#: includes/civicrm-admin-utilities-single.php:2203
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2208
+#: includes/civicrm-admin-utilities-single.php:2215
 msgid "Report Listing"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2220
+#: includes/civicrm-admin-utilities-single.php:2227
 msgid "Cases Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2231
+#: includes/civicrm-admin-utilities-single.php:2238
 msgid "Admin Console"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2241
+#: includes/civicrm-admin-utilities-single.php:2248
 msgid "Manage Extensions"
 msgstr ""
 
 #. translators: %s: The Contact's first name
-#: includes/civicrm-admin-utilities-single.php:2559
+#: includes/civicrm-admin-utilities-single.php:2566
 msgid "Hi %s, welcome to CiviCRM"
-msgstr ""
-
-#: includes/civicrm-admin-utilities-single.php:3323
-msgid "You must supply the setting as a string to setting_set()"
 msgstr ""
 
 #: includes/class-cau-users-list-table.php:285

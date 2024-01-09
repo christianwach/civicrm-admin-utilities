@@ -3,7 +3,7 @@ Contributors: needle, cuny-academic-commons
 Donate link: https://www.paypal.me/interactivist
 Tags: civicrm, admin, utility, styling, menu
 Requires at least: 4.9
-Tested up to: 6.2
+Tested up to: 6.4
 Stable tag: 1.0.2a
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
