@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.2 =
+
+* Fixes SearchKit summary tabs appearance
+* Prevents fatal error on deactivation when CiviCRM not installed
+
 = 1.0.1 =
 
 * Introduces fix for API timezone mismatch
