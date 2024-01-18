@@ -34,7 +34,7 @@ Version 0.5 introduces a new theme for CiviCRM admin screens that is more in kee
 
 ### Requirements
 
-This plugin requires a minimum of *WordPress 4.9* and *CiviCRM 5*.
+This plugin requires a minimum of *WordPress 4.9* and *CiviCRM 5.39* but recommends you keep up to date with both.
 
 ### Notes
 

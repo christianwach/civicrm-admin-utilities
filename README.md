@@ -36,7 +36,7 @@ Version 0.5 introduces a new theme for CiviCRM admin screens that is more in kee
 
 ### Notes
 
-This plugin requires a minimum of *WordPress 4.9* and *CiviCRM 5*.
+This plugin requires a minimum of *WordPress 4.9* and *CiviCRM 5.39* but recommends you keep up to date with both.
 
 If you have installed the Shoreditch extension for CiviCRM, then this plugin does its best to make it compatible with WordPress. Unfortunately, Shoreditch version 0.1-alpha25 now makes it very difficult to override the margin applied to the body tag on the front end of your site, so you will have to do this yourself. See [this PR for details](https://github.com/civicrm/org.civicrm.shoreditch/pull/291).
 
