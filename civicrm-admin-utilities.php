@@ -170,7 +170,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.3.4
 	 */
-	public function include_files() {
+	private function include_files() {
 
 		// Load our common classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-ufmatch.php';
@@ -200,7 +200,7 @@ class CiviCRM_Admin_Utilities {
 	 *
 	 * @since 0.3.4
 	 */
-	public function setup_objects() {
+	private function setup_objects() {
 
 		// Always instantiate common classes.
 		$this->ufmatch = new CiviCRM_Admin_Utilities_UFMatch( $this );
@@ -226,7 +226,7 @@ class CiviCRM_Admin_Utilities {
 	 * @since 0.1
 	 * @since 0.5.4 All hooks moved to relevant classes.
 	 */
-	public function register_hooks() {
+	private function register_hooks() {
 
 		// If global-scope hooks are needed, add them here.
 
