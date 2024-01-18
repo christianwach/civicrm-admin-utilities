@@ -1,0 +1,123 @@
+/**
+ * CiviCRM style overrides for CiviCRM 5.69+.
+ *
+ * Implements changes in admin styling introduced in CiviCRM 5.69.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+
+/*
+--------------------------------------------------------------------------------
+Use FontAwesome instead of background image.
+--------------------------------------------------------------------------------
+*/
+
+.crm-container .crm-accordion-header,
+.crm-container .collapsed .crm-accordion-header
+{
+	padding-left: 8px;
+	background-image: none;
+}
+
+.crm-container div.crm-accordion-header:before,
+.crm-container .collapsed div.crm-accordion-header:before,
+.crm-container .crm-collapsible .collapsible-title:before,
+.crm-container span.collapsed:before,
+.crm-container a.collapsed:before,
+.crm-container .crm-expand-row:before
+{
+	font-family: "FontAwesome";
+	display: inline-block;
+	width: 1em;
+	content: "\f0da";
+	font-size: 13px;
+}
+
+.crm-container div.crm-accordion-header:before,
+.crm-container .crm-collapsible .collapsible-title:before,
+.crm-container span.expanded:before,
+.crm-container a.expanded:before,
+.crm-container .crm-expand-row.expanded:before
+{
+	font-family: "FontAwesome";
+	content: "\f0d7";
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Basic styling of <details> and <summary> elements.
+See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
+--------------------------------------------------------------------------------
+*/
+
+/* Remove user agent icon */
+.crm-container details > summary {
+	display: list-item;
+	list-style: none;
+	cursor: pointer;
+}
+
+/* Collapsed icon */
+.crm-container details > summary:before {
+	font-family: "FontAwesome";
+	display: inline-block;
+	width: 1em;
+	content: "\f0da";
+	font-size: 13px;
+}
+
+/* Expanded icon */
+.crm-container details[open] > summary:before {
+	font-family: "FontAwesome";
+	content: "\f0d7";
+}
+
+.crm-container summary::-webkit-details-marker {
+	/* Safari fix to remove summary icon */
+	display: none;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Advanced Search amends.
+The use of <details> and <summary> is going to increase, so we will need to
+broaden the scope of it as that happens. Until then, existing
+--------------------------------------------------------------------------------
+*/
+.crm-container .crm-advanced_search_form-accordion
+{
+	padding: 0;
+	background-color: #fafafa;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.crm-container .crm-advanced_search_form-accordion .crm-master-accordion-header,
+.crm-container .crm-advanced_search_form-accordion .crm-accordion-header
+{
+	font-weight: bold;
+	color: #23282d;
+	padding: 8px;
+	border: 1px solid #e5e5e5;
+	background-image: none;
+}
+
+.crm-container .crm-advanced_search_form-accordion .crm-master-accordion-header:hover
+{
+	background-color: #eee;
+}
+
+.crm-advanced_search_form-accordion #display-settings
+{
+	padding-top: 0;
+}
+
+.crm-advanced_search_form-accordion #display-settings table
+{
+	margin: 0;
+}

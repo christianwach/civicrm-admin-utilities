@@ -58,19 +58,19 @@ Support for flex-box dashboard
 --------------------------------------------------------------------------------
 */
 
-.crm-container .crm-draggable
-{
-	cursor: move;
-}
-
 .crm-container .crm-flex-box
 {
 	display: flex;
+	flex-wrap: wrap;
 }
 .crm-container .crm-flex-box > *
 {
 	flex: 1;
 	min-width: 0; /* prevents getting squashed by whitespace:nowrap content */
+}
+.crm-container .crm-flex-box > .crm-flex-1
+{
+	flex: 1;
 }
 .crm-container .crm-flex-box > .crm-flex-2
 {
@@ -91,6 +91,11 @@ Support for flex-box dashboard
 .crm-container .crm-flex-box > .crm-flex-6
 {
 	flex: 6;
+}
+
+.crm-container .crm-draggable
+{
+	cursor: move;
 }
 
 div.crm-container .crm-dashlet-header a
@@ -341,8 +346,16 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 #bootstrap-theme.crm-search summary
 {
 	display: list-item;
+	list-style: none;
 	cursor: pointer;
 	font-weight: bold;
+}
+
+/* Move "View Results" somewhere less intrusive */
+#bootstrap-theme.crm-search .crm-search-admin-right
+{
+	top: -30px;
+	right: 200px;
 }
 
 #bootstrap-theme .crm-editable-enabled
@@ -498,6 +511,7 @@ div.crm-container label
 	font-weight: normal;
 	display: inline;
 	word-break: break-word;
+	line-height: 1.8;
 }
 
 div.crm-container fieldset label
@@ -546,6 +560,11 @@ div.crm-container fieldset label
 	margin: 0 0 1em;
 	border-collapse: collapse;
 	width: 100%;
+}
+
+.crm-container table summary {
+	/* Makes summary match the size of the rest of the table it's in */
+	font-size: inherit;
 }
 
 .crm-container tr
@@ -3018,6 +3037,7 @@ a.crm-i:hover {
 	opacity: .8;
 	text-decoration: none;
 	color: #0073aa;
+	vertical-align: middle;
 }
 
 .crm-container	a.helpicon:hover,
@@ -3112,7 +3132,7 @@ div.crm-master-accordion-header a.helpicon {
 	background-position: -32px -32px;
 }
 
-/* accordion styles */
+/* Accordion styles */
 .crm-container .crm-accordion-header
 {
 	background-image: url("../images/civicrm-legacy/TreeMinusWhite.gif");
@@ -3264,8 +3284,8 @@ div.crm-master-accordion-header a.helpicon {
 
 .crm-container .crm-tooltip-wrapper {
 	position: absolute;
-	bottom: 6px;
-	left: -24px;
+	bottom: 24px;
+	left: -33px;
 	overflow: visible;
 	z-index: 1000;
 	padding: 0;
@@ -3273,7 +3293,15 @@ div.crm-master-accordion-header a.helpicon {
 }
 
 .crm-container .crm-tooltip-down .crm-tooltip-wrapper {
-	top: 30px;
+	top: 20px;
+}
+
+.crm-container .crm-tooltip-wrapper .crm-loading-element,
+.crm-container .crm-tooltip-down .crm-tooltip-wrapper .crm-loading-element
+{
+	background-position: center center;
+	margin-bottom: 14px;
+	width: 30px;
 }
 
 .crm-container a.crm-tooltip-down .crm-tooltip-wrapper::before
