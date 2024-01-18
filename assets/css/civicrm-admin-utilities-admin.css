@@ -4143,6 +4143,7 @@ tbody.scrollContent tr.alternateRow {
 .select2-drop.crm-container {
 	padding-top: 0;
 	padding-right: 0;
+	z-index: 10000000; /* Fixes appearance in TwentyTwenty and other themes */
 }
 .select2-drop .crm-entityref-links {
 	border-top: 1px solid #d3d3d3;
