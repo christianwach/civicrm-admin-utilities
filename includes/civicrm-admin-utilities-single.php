@@ -2717,6 +2717,12 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
+		// The "$event->getActionName()" method was introduced in 5.39.0.
+		$version = CRM_Utils_System::version();
+		if ( version_compare( $version, '5.39.0', '<' ) ) {
+			return;
+		}
+
 		// Add callback for CiviCRM "civi.api.prepare" hook.
 		Civi::service( 'dispatcher' )->addListener(
 			'civi.api.prepare',
