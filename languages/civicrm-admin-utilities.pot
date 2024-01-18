@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 1.0.2a\n"
+"Project-Id-Version: CiviCRM Admin Utilities 1.0.3a\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-09T12:38:41+00:00\n"
+"POT-Creation-Date: 2024-01-18T20:50:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: civicrm-admin-utilities\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: includes/civicrm-admin-utilities-multisite.php:477
 #: includes/civicrm-admin-utilities-multisite.php:545
 #: includes/civicrm-admin-utilities-single.php:904
-#: includes/civicrm-admin-utilities-single.php:2269
+#: includes/civicrm-admin-utilities-single.php:2286
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -78,6 +78,7 @@ msgstr ""
 #: assets/templates/metaboxes/network-metabox-site-submit.php:27
 #: assets/templates/metaboxes/site-metabox-domain-submit.php:27
 #: assets/templates/metaboxes/site-metabox-submit.php:28
+#: assets/templates/wordpress/settings/metaboxes/metabox-settings-submit.php:47
 msgid "Update"
 msgstr ""
 
@@ -387,6 +388,7 @@ msgstr ""
 #: assets/templates/network-settings.php:24
 #: assets/templates/site-multidomain.php:24
 #: assets/templates/site-settings.php:24
+#: assets/templates/wordpress/settings/pages/page-settings.php:24
 msgid "Settings saved."
 msgstr ""
 
@@ -425,8 +427,8 @@ msgstr ""
 #: assets/templates/site-multidomain.php:32
 #: assets/templates/site-settings.php:33
 #: assets/templates/site-users-table.php:21
-#: civicrm-admin-utilities.php:499
-#: civicrm-admin-utilities.php:505
+#: civicrm-admin-utilities.php:504
+#: civicrm-admin-utilities.php:510
 #: includes/civicrm-admin-utilities-multidomain.php:476
 #: includes/civicrm-admin-utilities-multidomain.php:769
 #: includes/civicrm-admin-utilities-multisite.php:683
@@ -484,7 +486,15 @@ msgstr ""
 msgid "View Contact in CiviCRM"
 msgstr ""
 
-#: civicrm-admin-utilities.php:510
+#: assets/templates/wordpress/settings/help/page-settings-help.php:16
+msgid "Settings: For further information about using this plugin, please refer to the readme file that is supplied with it."
+msgstr ""
+
+#: assets/templates/wordpress/settings/metaboxes/metabox-settings-submit.php:23
+msgid "Save your settings here."
+msgstr ""
+
+#: civicrm-admin-utilities.php:515
 msgid "Donate!"
 msgstr ""
 
@@ -620,7 +630,7 @@ msgid "Users"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-single.php:495
-#: includes/civicrm-admin-utilities-single.php:2093
+#: includes/civicrm-admin-utilities-single.php:2110
 msgid "CiviCRM"
 msgstr ""
 
@@ -636,56 +646,56 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2111
+#: includes/civicrm-admin-utilities-single.php:2128
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2119
+#: includes/civicrm-admin-utilities-single.php:2136
 msgid "All Contacts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2127
+#: includes/civicrm-admin-utilities-single.php:2144
 msgid "Advanced Search"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2156
+#: includes/civicrm-admin-utilities-single.php:2173
 msgid "Manage Groups"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2167
+#: includes/civicrm-admin-utilities-single.php:2184
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2179
+#: includes/civicrm-admin-utilities-single.php:2196
 msgid "Membership Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2191
+#: includes/civicrm-admin-utilities-single.php:2208
 msgid "Events Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2203
+#: includes/civicrm-admin-utilities-single.php:2220
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2215
+#: includes/civicrm-admin-utilities-single.php:2232
 msgid "Report Listing"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2227
+#: includes/civicrm-admin-utilities-single.php:2244
 msgid "Cases Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2238
+#: includes/civicrm-admin-utilities-single.php:2255
 msgid "Admin Console"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2248
+#: includes/civicrm-admin-utilities-single.php:2265
 msgid "Manage Extensions"
 msgstr ""
 
 #. translators: %s: The Contact's first name
-#: includes/civicrm-admin-utilities-single.php:2566
+#: includes/civicrm-admin-utilities-single.php:2583
 msgid "Hi %s, welcome to CiviCRM"
 msgstr ""
 
