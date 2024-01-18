@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.3 =
+
+* Fixes appearance of various screens in CiviCRM 5.69+
+* Prevents fatal error on versions of CiviCRM prior to 5.39
+
 = 1.0.2 =
 
 * Fixes SearchKit summary tabs appearance
