@@ -175,6 +175,11 @@ class CiviCRM_Admin_Utilities {
 		// Load our common classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-ufmatch.php';
 
+		// Load our admin utility classes.
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/admin/class-cau-admin-batch.php';
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/admin/class-cau-admin-stepper.php';
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/admin/class-cau-page-settings-base.php';
+
 		// Load our Single Site classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single.php';
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-single-users.php';
