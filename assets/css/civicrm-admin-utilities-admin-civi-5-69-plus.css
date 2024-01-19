@@ -45,6 +45,17 @@ Use FontAwesome instead of background image.
 	content: "\f0d7";
 }
 
+/* Reset older discovery tabs, e.g. Extensions screen */
+.crm-container span.collapsed,
+.crm-container a.collapsed,
+.crm-container .crm-expand-row,
+.crm-container span.expanded,
+.crm-container a.expanded
+{
+	background: none;
+	padding-left: 0;
+}
+
 
 
 /*
