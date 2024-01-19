@@ -3646,8 +3646,27 @@ div.crm-container form {
 }
 
 /* Use FontAwesome placeholder where available */
+.crm-container input.crm-placeholder-icon::placeholder,
+#crm-container input.crm-placeholder-icon::placeholder,
 .crm-container input.dateplugin::placeholder,
-.crm-container input.crm-form-date::placeholder
+#crm-container input.dateplugin::placeholder,
+.crm-container input.crm-form-date::placeholder,
+#crm-container input.crm-form-date::placeholder,
+.crm-container input.crm-form-time::placeholder,
+#crm-container input.crm-form-time::placeholder,
+#crmIconPicker .icon-ctrls input::placeholder
+{
+	font-family: "FontAwesome";
+	text-align: right;
+}
+
+/* Legacy browser support */
+.crm-container input.crm-placeholder-icon::-webkit-input-placeholder,
+#crm-container input.crm-placeholder-icon::-webkit-input-placeholder,
+.crm-container input.crm-placeholder-icon::-ms-input-placeholder,
+#crm-container input.crm-placeholder-icon::-ms-input-placeholder,
+.crm-container input.crm-placeholder-icon:-ms-input-placeholder,
+#crm-container input.crm-placeholder-icon:-ms-input-placeholder
 {
 	font-family: "FontAwesome";
 	text-align: right;
