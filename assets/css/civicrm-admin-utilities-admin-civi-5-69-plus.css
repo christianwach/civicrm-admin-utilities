@@ -92,13 +92,30 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
 	display: none;
 }
 
+.crm-container .crm-accordion-light summary
+{
+	line-height: 150%;
+}
+
+.crm-container .crm-accordion-light summary:focus-visible
+{
+    color: #043959;
+    box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
+    outline: 1px solid transparent
+}
+
+.crm-container .crm-accordion-light[open] summary
+{
+	margin-bottom: 8px;
+}
+
 
 
 /*
 --------------------------------------------------------------------------------
 Advanced Search amends.
 The use of <details> and <summary> is going to increase, so we will need to
-broaden the scope of it as that happens. Until then, existing
+broaden the scope of it as that happens.
 --------------------------------------------------------------------------------
 */
 .crm-container .crm-advanced_search_form-accordion

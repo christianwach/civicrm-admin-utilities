@@ -360,7 +360,7 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 
 #bootstrap-theme .crm-editable-enabled
 {
-    min-height: 1.5em;
+	min-height: 1.5em;
 }
 
 .crm-container #bootstrap-theme .btn:hover,
@@ -373,7 +373,7 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 
 #bootstrap-theme fieldset .form-inline
 {
-    margin: 0.8em 0.4em;
+	margin: 0.8em 0.4em;
 }
 
 
@@ -3283,6 +3283,9 @@ div.crm-master-accordion-header a.helpicon {
 	z-index: 16;
 }
 
+
+
+/* Tooltips */
 .crm-container .crm-tooltip-wrapper {
 	position: absolute;
 	bottom: 24px;
@@ -3772,10 +3775,10 @@ div.crm-container form {
 .crm-container .crm-form-block table {
 	border: none;
 }
-.crm-container tr.even,
-.crm-container tr.odd,
-.crm-container tbody th {
-	border-color: #FFF #FFF #efefef #FFF;
+.crm-container table tbody tr.even,
+.crm-container table tbody tr.odd,
+.crm-container table tbody th {
+	border-color: #fff #fff #efefef #fff;
 }
 
 .crm-container tr.even-row td,
@@ -3794,7 +3797,13 @@ tbody.scrollContent {
 .crm-container .even-row,
 .crm-container .even,
 tbody.scrollContent tr.alternateRow {
-	background-color: #f9f9f9;
+	background-color: #f2f2f2;
+}
+
+.crm-container table.dataTable.hover tbody tr:hover,
+.crm-container table.dataTable.display tbody tr:hover
+{
+    background-color: #f6f6f6;
 }
 
 .crm-container td.checkbox {
@@ -3842,7 +3851,58 @@ tbody.scrollContent tr.alternateRow {
 }
 
 
-/*contact summary page */
+
+/* Extensions page */
+.crm-container .crm-extensions-tabs-list #tab_summary a em,
+.crm-container .crm-extensions-tabs-list #tab_addnew a em
+{
+	display: none;
+}
+
+.crm-container #extensions .extension-installed
+{
+	background-color: #ebffeb !important;
+}
+
+#extensions table.dataTable thead th:first-child,
+#extensions-addnew table.dataTable thead th:first-child
+{
+	width: 75%;
+}
+
+#extensions table.crm-info-panel,
+#extensions-addnew table.crm-info-panel
+{
+	border: 1px solid #c9c9c9;
+	border-left: none;
+	border-right: none;
+}
+
+#extensions table.crm-info-panel tbody tr,
+#extensions-addnew table.crm-info-panel tbody tr
+{
+	background-color: transparent;
+}
+
+#extensions table.crm-info-panel tbody tr:hover,
+#extensions-addnew table.crm-info-panel tbody tr:hover
+{
+	background-color: #f0f0f1;
+	background-color: rgb(0 0 0 / 3%);
+}
+
+#extensions table.crm-info-panel tbody td,
+#extensions-addnew table.crm-info-panel tbody td
+{
+	border-bottom: 1px solid #c9c9c9;
+	border-left: none;
+	border-right: none;
+	background-color: transparent;
+}
+
+
+
+/* Contact summary page */
 #crm-container div.contact_details {
 	background-color: transparent;
 }
