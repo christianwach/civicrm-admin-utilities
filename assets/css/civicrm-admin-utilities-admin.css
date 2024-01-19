@@ -3896,6 +3896,11 @@ tbody.scrollContent tr.alternateRow {
 	background-color: transparent;
 }
 
+td.crm-extensions-label
+{
+    line-height: 150%;
+}
+
 
 
 /* Contact summary page */
