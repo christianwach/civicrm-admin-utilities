@@ -1391,6 +1391,7 @@ div.crm-container .crm-content label.error
 	background: #eeb147;
 }
 
+.crm-container #civicrm-footer .status.crm-status-none,
 .crm-container #civicrm-footer .status.crm-ok
 {
 	background: #2aaa67;
