@@ -2191,10 +2191,6 @@ div.crm-container .crm-content label.error
 	list-style: none;
 }
 
-#crm-container .crm-actions-ribbon li.crm-delete-action {
-	margin-left: 30px;
-}
-
 #crm-container .crm-actions-ribbon li.crm-previous-action,
 #crm-container .crm-actions-ribbon li.crm-next-action {
 	float: right;
@@ -4505,6 +4501,7 @@ span.crm-select-item-color {
 }
 
 /* in place edit */
+.crm-container .crm-editable-disabled,
 .crm-container .crm-editable-enabled {
 	padding-left: 2px;
 	border: 2px dashed transparent;
@@ -4526,6 +4523,7 @@ span.crm-select-item-color {
 .crm-container span.crm-editable-textarea-enabled {
 	width: 96%;
 }
+.crm-container span.crm-editable-disabled,
 .crm-container span.crm-editable-enabled {
 	display: inline-block !important;
 }
