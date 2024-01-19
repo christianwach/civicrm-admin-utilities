@@ -163,6 +163,57 @@ body.admin-color-light > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border
 
 
 
+/* modern */
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm
+{
+	 background: #1e1e1e;
+}
+
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
+{
+	 color: #fff;
+}
+
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
+{
+	color: #fff;
+}
+
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
+{
+	color: #33f078;
+}
+
+/* Remove hover behaviour */
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
+{
+	color: #33f078;
+	background-color: #0c0c0c;
+}
+
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
+{
+	border-color: #303030;
+}
+
+
+
 /* blue */
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
