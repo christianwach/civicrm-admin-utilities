@@ -376,6 +376,16 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	margin: 0.8em 0.4em;
 }
 
+#bootstrap-theme .ui-tabs .ui-tabs-nav
+{
+	margin-bottom: 0;
+}
+
+.afform-directive > div > .crm-tabset
+{
+	background: transparent;
+	border: none;
+}
 
 
 /*
@@ -5955,10 +5965,12 @@ jQuery UI overrides
 }
 
 #crm-container .ui-tabs .ui-tabs-nav li a,
+#crm-container .ui-tabs .ui-tabs-nav li a:hover,
 #crm-container .ui-tabs .ui-tabs-nav li a:active
 {
 	outline: 0;
 	box-shadow: none;
+	text-decoration: none;
 }
 
 #crm-container .ui-widget input,
