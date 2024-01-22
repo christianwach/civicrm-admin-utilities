@@ -351,11 +351,10 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	font-weight: bold;
 }
 
-/* Move "View Results" somewhere less intrusive */
-#bootstrap-theme.crm-search .crm-search-admin-right
+/* Adjust "View Results" location in new layout */
+#bootstrap-theme.crm-search .crm-search-admin-right.crm-search-admin-display-header-links
 {
-	top: -30px;
-	right: 200px;
+	top: -5px;
 }
 
 #bootstrap-theme .crm-editable-enabled
