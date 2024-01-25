@@ -93,6 +93,18 @@ Support for flex-box dashboard
 	flex: 6;
 }
 
+.crm-container fieldset.crm-inactive-dashlet-fieldset legend a
+{
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.crm-container fieldset.crm-inactive-dashlet-fieldset legend input.crm-form-text
+{
+	padding: 0 8px;
+	vertical-align: unset;
+}
+
 .crm-container .crm-draggable
 {
 	cursor: move;
