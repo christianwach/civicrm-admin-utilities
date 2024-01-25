@@ -56,6 +56,17 @@ Use FontAwesome instead of background image.
 	padding-left: 0;
 }
 
+/* Fix community messages */
+.crm-container .civicrm-community-messages .crm-collapsible .collapsible-title:before
+{
+	content: '';
+	float: left;
+}
+
+.crm-container div.civicrm-community-messages a.civicrm-community-message-dismiss
+{
+	top: 6px;
+}
 
 
 /*
