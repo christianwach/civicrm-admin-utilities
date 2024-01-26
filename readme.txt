@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.4 =
+
+* Updates support for WordPress admin colour schemes
+* Updates accordion styling in CiviCRM 5.69+
+
 = 1.0.3 =
 
 * Fixes appearance of various screens in CiviCRM 5.69+
