@@ -715,7 +715,8 @@ abstract class CiviCRM_AU_Settings_Page_Base {
 	 *
 	 * @since 1.0.5
 	 *
-	 * @param array $classes An array of postbox classes.
+	 * @param string $screen_id The Screen indentifier.
+	 * @return array $data The array of data to be shared with all metaboxes.
 	 */
 	public function meta_boxes_data( $screen_id ) {
 
