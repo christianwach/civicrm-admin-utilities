@@ -75,6 +75,15 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public $settings = [];
 
 	/**
+	 * Network URLs.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var array
+	 */
+	public $network_urls;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.5.4
