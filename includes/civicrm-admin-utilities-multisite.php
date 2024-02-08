@@ -43,7 +43,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array
+	 * @var string
 	 */
 	public $network_parent_page;
 
@@ -52,9 +52,18 @@ class CiviCRM_Admin_Utilities_Multisite {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array
+	 * @var string
 	 */
 	public $network_settings_page;
+
+	/**
+	 * Network site settings page reference.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var string
+	 */
+	public $network_site_settings_page;
 
 	/**
 	 * Network Settings data.

@@ -34,9 +34,18 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 *
 	 * @since 0.5.4
 	 * @access public
-	 * @var array
+	 * @var string
 	 */
 	public $multidomain_page;
+
+	/**
+	 * Network Multidomain Settings page reference.
+	 *
+	 * @since 0.5.4
+	 * @access public
+	 * @var string
+	 */
+	public $network_multidomain_page;
 
 	/**
 	 * Constructor.
