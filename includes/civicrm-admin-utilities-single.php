@@ -75,6 +75,15 @@ class CiviCRM_Admin_Utilities_Single {
 	public $urls = [];
 
 	/**
+	 * Suppress notification email flag.
+	 *
+	 * @since 0.6.5
+	 * @access public
+	 * @var bool
+	 */
+	private $email_sync;
+
+	/**
 	 * Soft delete direction flag.
 	 *
 	 * @since 0.6.8
