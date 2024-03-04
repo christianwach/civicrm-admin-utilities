@@ -2073,8 +2073,10 @@ class CiviCRM_Admin_Utilities_Single {
 	 *
 	 * @since 0.3
 	 * @since 0.5.4 Moved from plugin class.
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
 	 */
-	public function shortcuts_menu_add() {
+	public function shortcuts_menu_add( $wp_admin_bar ) {
 
 		// Bail if admin bar not enabled.
 		if ( $this->setting_get( 'admin_bar', '0' ) == '0' ) {
@@ -2098,9 +2100,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 */
 		do_action( 'civicrm_admin_utilities_menu_before' );
 
-		// Access WordPress admin bar.
-		global $wp_admin_bar;
-
 		// Get component info.
 		$components = CRM_Core_Component::getEnabledComponents();
 
@@ -2118,11 +2117,14 @@ class CiviCRM_Admin_Utilities_Single {
 		 * Fires at the top of the Shortcuts Menu.
 		 *
 		 * @since 0.7.1
+		 * @since 1.0.5 Changed to `do_action_ref_array`.
+		 * @since 1.0.5 Added `$wp_admin_bar` param.
 		 *
 		 * @param str $id The menu parent ID.
 		 * @param array $components The active CiviCRM Conponents.
+		 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
 		 */
-		do_action( 'civicrm_admin_utilities_menu_top', $id, $components );
+		do_action_ref_array( 'civicrm_admin_utilities_menu_top', [ $id, $components, &$wp_admin_bar ] );
 
 		// Dashboard.
 		$wp_admin_bar->add_node( [
@@ -2293,11 +2295,14 @@ class CiviCRM_Admin_Utilities_Single {
 		 * Fires after Shortcuts Menu has been defined.
 		 *
 		 * @since 0.3
+		 * @since 1.0.5 Changed to `do_action_ref_array`.
+		 * @since 1.0.5 Added `$wp_admin_bar` param.
 		 *
 		 * @param str $id The menu parent ID.
 		 * @param array $components The active CiviCRM Conponents.
+		 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
 		 */
-		do_action( 'civicrm_admin_utilities_menu_after', $id, $components );
+		do_action_ref_array( 'civicrm_admin_utilities_menu_after', [ $id, $components, &$wp_admin_bar ] );
 
 	}
 
