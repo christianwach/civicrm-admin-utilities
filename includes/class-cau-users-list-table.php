@@ -297,7 +297,6 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		 * @since 0.9
 		 *
 		 * @param array $columns The default array of columns to display.
-		 * @return array $columns The modified array of columns to display.
 		 */
 		return apply_filters( 'cau/single_users/user_table/columns', $columns );
 
@@ -326,7 +325,6 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		 * @since 0.9
 		 *
 		 * @param array $actions The default array of bulk actions.
-		 * @return array $actions The modified array of bulk actions.
 		 */
 		return apply_filters( 'cau/single_users/user_table/bulk_actions', $actions );
 
@@ -367,7 +365,6 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		 * @since 0.9
 		 *
 		 * @param array $columns The default array of sortable columns.
-		 * @return array $columns The modified array of sortable columns.
 		 */
 		return apply_filters( 'cau/single_users/user_table/sortable_columns', $columns );
 

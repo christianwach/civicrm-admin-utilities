@@ -654,7 +654,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 * @since 0.5.4
 		 *
 		 * @param array $subpages The existing list of network subpages.
-		 * @return array $subpages The modified list of network subpages.
 		 */
 		$subpages = apply_filters( 'civicrm_admin_utilities_network_subpages', $subpages );
 
@@ -1162,7 +1161,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 * @since 0.6.2
 		 *
 		 * @param bool False by default - do not show tabs.
-		 * @return bool Modified flag for whether or not to show tabs.
 		 */
 		$show_tabs = apply_filters( 'civicrm_admin_utilities_network_show_tabs', false );
 
@@ -1253,7 +1251,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 * @since 0.6.2
 		 *
 		 * @param bool False by default - do not show tabs.
-		 * @return bool Modified flag for whether or not to show tabs.
 		 */
 		$show_tabs = apply_filters( 'civicrm_admin_utilities_network_show_tabs', false );
 
@@ -1306,7 +1303,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 * @since 0.5.4
 		 *
 		 * @param array $urls The existing list of network URLs.
-		 * @return array $urls The modified list of network URLs.
 		 */
 		$this->network_urls = apply_filters( 'civicrm_admin_utilities_network_page_urls', $this->network_urls );
 
@@ -1641,7 +1637,6 @@ class CiviCRM_Admin_Utilities_Multisite {
 		 * @since 0.5.4
 		 *
 		 * @param array $settings The array of default network settings.
-		 * @return array $settings The modified array of default network settings.
 		 */
 		$settings = apply_filters( 'civicrm_admin_utilities_network_settings_default', $settings );
 

@@ -188,7 +188,6 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		 * @since 0.9
 		 *
 		 * @param str The default capability for access to user page.
-		 * @return str The modified capability for access to user page.
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_user_cap', 'manage_options' );
 
@@ -373,7 +372,6 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		 * @since 0.9
 		 *
 		 * @param str The default capability for access to user page.
-		 * @return str The modified capability for access to user page.
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_user_cap', 'manage_options' );
 
@@ -416,7 +414,6 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		 * @since 0.9
 		 *
 		 * @param array $messages The array of messages.
-		 * @return array $messages The modified array of messages.
 		 */
 		$messages = apply_filters( 'cau/single_users/user_table/messages', [] );
 
@@ -558,7 +555,6 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		 * @since 0.9
 		 *
 		 * @param array $url The default Users Page URL.
-		 * @return array $url The modified Users Page URL.
 		 */
 		$url = apply_filters( 'cau/single_users/page/settings/url', $url );
 

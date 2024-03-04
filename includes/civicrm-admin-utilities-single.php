@@ -770,7 +770,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.5.4
 		 *
 		 * @param str The default capability for access to settings page.
-		 * @return str The modified capability for access to settings page.
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
@@ -852,7 +851,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.5.4
 		 *
 		 * @param array $subpages The existing list of subpages.
-		 * @return array $subpages The modified list of subpages.
 		 */
 		$subpages = apply_filters( 'civicrm_admin_utilities_subpages', $subpages );
 
@@ -1005,7 +1003,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.5.4
 		 *
 		 * @param str The default capability for access to settings page.
-		 * @return str The modified capability for access to settings page.
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
@@ -1023,7 +1020,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.5.4
 		 *
 		 * @param bool False by default - do not show tabs.
-		 * @return bool Modified flag for whether or not to show tabs.
 		 */
 		$show_tabs = apply_filters( 'civicrm_admin_utilities_show_tabs', false );
 
@@ -1075,7 +1071,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.5.4
 		 *
 		 * @param array $urls The existing list of URLs.
-		 * @return array $urls The modified list of URLs.
 		 */
 		$this->urls = apply_filters( 'civicrm_admin_utilities_page_urls', $this->urls );
 
@@ -1152,7 +1147,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.6.8
 		 *
 		 * @param bool The default template variable - restricted by default.
-		 * @return bool The modified template variable.
 		 */
 		$restricted = apply_filters( 'civicrm_admin_utilities_page_settings_restricted', true );
 
@@ -2170,7 +2164,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.6.3
 		 *
 		 * @param bool True allows access by default.
-		 * @return bool Modified access flag - return boolean "false" to deny.
 		 */
 		$allowed = apply_filters( 'civicrm_admin_utilities_manage_groups_menu_item', true );
 
@@ -2283,7 +2276,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.6.1 Added here to check access to menu item.
 		 *
 		 * @param str The default capability for access to settings page.
-		 * @return str The modified capability for access to settings page.
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_settings_cap', 'manage_options' );
 
@@ -2376,7 +2368,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 *
 		 * @param bool $permitted True if allowed, false otherwise.
 		 * @param str $permission The CiviCRM permission string.
-		 * @return bool $permitted True if allowed, false otherwise.
 		 */
 		return apply_filters( 'civicrm_admin_utilities_permitted', $permitted, $permission );
 
@@ -2600,7 +2591,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 *
 		 * @param str $title The title to show on the CiviCRM Dashboard.
 		 * @param array $contact The logged-in CiviCRM Contact data.
-		 * @return str $title The modified title to show on the CiviCRM Dashboard.
 		 */
 		$title = apply_filters( 'civicrm_admin_utilities_dashboard_title', $title, $contact );
 
@@ -3026,7 +3016,6 @@ class CiviCRM_Admin_Utilities_Single {
 		 * @since 0.5.4
 		 *
 		 * @param array $settings The array of default settings.
-		 * @return array $settings The modified array of default settings.
 		 */
 		$settings = apply_filters( 'civicrm_admin_utilities_settings_default', $settings );
 

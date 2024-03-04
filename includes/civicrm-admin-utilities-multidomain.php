@@ -549,7 +549,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 * @since 0.5.4
 		 *
 		 * @param str The default capability for access to domain page.
-		 * @return str The modified capability for access to domain page.
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_domain_cap', 'manage_options' );
 
@@ -841,7 +840,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		 * @since 0.5.4
 		 *
 		 * @param str The default capability for access to domain page.
-		 * @return str The modified capability for access to domain page.
 		 */
 		$capability = apply_filters( 'civicrm_admin_utilities_page_domain_cap', 'manage_options' );
 
