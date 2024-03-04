@@ -1,14 +1,16 @@
 <?php
 /**
- * Plugin Name: CiviCRM Admin Utilities
- * Plugin URI: https://github.com/christianwach/civicrm-admin-utilities
+ * CiviCRM Admin Utilities
+ *
+ * Plugin Name:       CiviCRM Admin Utilities
+ * Description:       Optionally modifies CiviCRM's behaviour and appearance in single site and multisite installs.
+ * Plugin URI:        https://github.com/christianwach/civicrm-admin-utilities
  * GitHub Plugin URI: https://github.com/christianwach/civicrm-admin-utilities
- * Description: Optionally modifies CiviCRM's behaviour and appearance in single site and multisite installs.
- * Author: Christian Wach
- * Version: 1.0.5a
- * Author URI: https://haystack.co.uk
- * Text Domain: civicrm-admin-utilities
- * Domain Path: /languages
+ * Version:           1.0.5a
+ * Author:            Christian Wach
+ * Author URI:        https://haystack.co.uk
+ * Text Domain:       civicrm-admin-utilities
+ * Domain Path:       /languages
  *
  * @package CiviCRM_Admin_Utilities
  */
