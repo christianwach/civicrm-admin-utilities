@@ -153,7 +153,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 *
 	 * @since 0.9
 	 *
-	 * @param array $hidden The existing array of hidden columns.
+	 * @param array     $hidden The existing array of hidden columns.
 	 * @param WP_Screen $screen The current screen object.
 	 * @return array $hidden The modified array of hidden columns.
 	 */
@@ -216,8 +216,6 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		add_action( 'admin_head-' . $this->users_page, [ $this, 'admin_head' ], 50 );
 
 		// Add scripts and styles.
-		// phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
-		//add_action( 'admin_print_scripts-' . $this->users_page, [ $this, 'page_users_js' ] );
 		add_action( 'admin_print_styles-' . $this->users_page, [ $this, 'page_users_css' ] );
 
 		// Filter the list of Single Site subpages and add users page.
@@ -286,16 +284,19 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		];
 
 		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) {
+		if ( ! in_array( $screen->id, $pages, true ) ) {
 			return $screen;
 		}
 
-		// Add a tab - we can add more later.
-		$screen->add_help_tab( [
+		// Build tab args.
+		$args = [
 			'id'      => $this->users_page_slug,
 			'title'   => __( 'Manage Users', 'civicrm-admin-utilities' ),
 			'content' => $this->admin_help_get(),
-		] );
+		];
+
+		// Add a tab - we can add more later.
+		$screen->add_help_tab( $args );
 
 		// --<
 		return $screen;
@@ -351,9 +352,10 @@ class CiviCRM_Admin_Utilities_Single_Users {
 			$this->user_table = new CAU_Single_Users_List_Table();
 
 			// Add the "per_page" screen option.
-			add_screen_option( 'per_page', [
-				'label' => _x( 'Users', 'Users per page (screen options)', 'civicrm-admin-utilities' ),
-			] );
+			add_screen_option(
+				'per_page',
+				[ 'label' => _x( 'Users', 'Users per page (screen options)', 'civicrm-admin-utilities' ) ]
+			);
 
 		}
 
@@ -441,41 +443,6 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	}
 
 	/**
-	 * Enqueue Javascripts on the Site User page.
-	 *
-	 * @since 0.9
-	 */
-	public function page_users_js() {
-
-		/*
-		// Enqueue our Javascript plus dependencies.
-		wp_enqueue_script(
-			'cau_site_user_js',
-			plugins_url( 'assets/js/civicrm-admin-utilities-site-users.js', CIVICRM_ADMIN_UTILITIES_FILE ),
-			[ 'jquery' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION // version
-		);
-
-		// Localisation array.
-		$vars = [
-			'localisation' => [],
-			'settings' => [
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'blog_id' => get_current_blog_id(),
-			],
-		];
-
-		// Localise with WordPress function.
-		wp_localize_script(
-			'cau_site_user_js',
-			'CAU_Site_User',
-			$vars
-		);
-		*/
-
-	}
-
-	/**
 	 * Append the Users Listing page URL to Single Site subpage URLs.
 	 *
 	 * @since 0.9
@@ -517,7 +484,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 	 * @since 0.9
 	 *
 	 * @param array $urls The array of subpage URLs.
-	 * @param str $active_tab The key of the active tab in the subpage URLs array.
+	 * @param str   $active_tab The key of the active tab in the subpage URLs array.
 	 */
 	public function page_add_tab( $urls, $active_tab ) {
 
@@ -532,8 +499,9 @@ class CiviCRM_Admin_Utilities_Single_Users {
 			$active = ' nav-tab-active';
 		}
 
-		// Render tab.
-		echo '<a href="' . $urls['users'] . '" class="nav-tab' . $active . '">' . $title . '</a>' . "\n";
+		// Render tab. Users Listing page URL is already escaped.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<a href="' . $urls['users'] . '" class="nav-tab' . esc_attr( $active ) . '">' . esc_html( $title ) . '</a>' . "\n";
 
 	}
 

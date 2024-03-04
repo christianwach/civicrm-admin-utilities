@@ -144,8 +144,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Add scripts and styles.
 		add_action( 'admin_print_styles-' . $this->network_multidomain_page, [ $this, 'page_network_multidomain_css' ] );
-		// phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
-		//add_action( 'admin_print_scripts-' . $this->network_multidomain_page, [ $this, 'page_network_multidomain_js' ] );
 
 		// Filter the list of Single Site subpages and add Multidomain page.
 		add_filter( 'civicrm_admin_utilities_network_subpages', [ $this, 'network_admin_subpages_filter' ] );
@@ -218,16 +216,19 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		];
 
 		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) {
+		if ( ! in_array( $screen->id, $pages, true ) ) {
 			return $screen;
 		}
 
-		// Add a tab - we can add more later.
-		$screen->add_help_tab( [
+		// Build tab args.
+		$args = [
 			'id'      => 'cau_network_multidomain',
 			'title'   => __( 'CiviCRM Admin Utilities Domain', 'civicrm-admin-utilities' ),
 			'content' => $this->network_admin_help_get(),
-		] );
+		];
+
+		// Add a tab - we can add more later.
+		$screen->add_help_tab( $args );
 
 		// --<
 		return $screen;
@@ -262,7 +263,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Disallow if not network admin in Multisite.
 		if ( is_network_admin() && ! is_super_admin() ) {
-			wp_die( __( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'civicrm-admin-utilities' ) );
 		}
 
 		// Check user permissions.
@@ -317,24 +318,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	}
 
 	/**
-	 * Enqueue Javascript on the Network Admin Domain page.
-	 *
-	 * @since 0.6.2
-	 */
-	public function page_network_multidomain_js() {
-
-		// Add Javascript plus dependencies.
-		wp_enqueue_script(
-			'civicrm_admin_utilities_network_multidomain_js',
-			plugins_url( 'assets/js/civicrm-admin-utilities-network-multidomain.js', CIVICRM_ADMIN_UTILITIES_FILE ),
-			[ 'jquery' ],
-			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
-			true
-		);
-
-	}
-
-	/**
 	 * Append the Multidomain page URL to network subpage URLs.
 	 *
 	 * @since 0.6.2
@@ -376,7 +359,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @since 0.6.2
 	 *
 	 * @param array $urls The array of subpage URLs.
-	 * @param str $active_tab The key of the active tab in the subpage URLs array.
+	 * @param str   $active_tab The key of the active tab in the subpage URLs array.
 	 */
 	public function page_network_add_tab( $urls, $active_tab ) {
 
@@ -391,8 +374,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			$active = ' nav-tab-active';
 		}
 
-		// Render tab.
-		echo '<a href="' . $urls['multidomain'] . '" class="nav-tab' . $active . '">' . $title . '</a>' . "\n";
+		// Render tab. URL is already escaped.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<a href="' . $urls['multidomain'] . '" class="nav-tab' . esc_attr( $active ) . '">' . esc_html( $title ) . '</a>' . "\n";
 
 	}
 
@@ -431,7 +415,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		];
 
 		// Bail if not the Screen ID we want.
-		if ( ! in_array( $screen_id, $screen_ids ) ) {
+		if ( ! in_array( $screen_id, $screen_ids, true ) ) {
 			return;
 		}
 
@@ -651,16 +635,19 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		];
 
 		// Kick out if not our screen.
-		if ( ! in_array( $screen->id, $pages ) ) {
+		if ( ! in_array( $screen->id, $pages, true ) ) {
 			return $screen;
 		}
 
-		// Add a tab - we can add more later.
-		$screen->add_help_tab( [
+		// Build tab args.
+		$args = [
 			'id'      => 'civicrm_au_multidomain',
 			'title'   => __( 'CiviCRM Admin Utilities Domain', 'civicrm-admin-utilities' ),
 			'content' => $this->admin_help_get(),
-		] );
+		];
+
+		// Add a tab - we can add more later.
+		$screen->add_help_tab( $args );
 
 		// --<
 		return $screen;
@@ -701,7 +688,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		];
 
 		// Bail if not the Screen ID we want.
-		if ( ! in_array( $screen_id, $screen_ids ) ) {
+		if ( ! in_array( $screen_id, $screen_ids, true ) ) {
 			return;
 		}
 
@@ -733,13 +720,16 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			$data['multisite'] = true;
 		}
 
-		// Check if "Multisite" is enabled for this Domain.
-		$data['enabled'] = civicrm_api( 'Setting', 'getvalue', [
-			'version' => 3,
+		// Build params.
+		$params = [
+			'version'   => 3,
 			'domain_id' => $data['domain']['id'],
-			'name' => 'is_enabled',
-			'group' => 'Multi Site Preferences',
-		] );
+			'name'      => 'is_enabled',
+			'group'     => 'Multi Site Preferences',
+		];
+
+		// Check if "Multisite" is enabled for this Domain.
+		$data['enabled'] = civicrm_api( 'Setting', 'getvalue', $params );
 
 		// Get the "Multi Site Settings" page URL.
 		$data['multisite_url'] = $this->plugin->single->get_link( 'civicrm/admin/setting/preferences/multisite', 'reset=1' );
@@ -939,7 +929,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Localisation array.
 		$vars = [
 			'localisation' => [],
-			'settings' => [
+			'settings'     => [
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'blog_id' => get_current_blog_id(),
 			],
@@ -996,7 +986,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @since 0.5.4
 	 *
 	 * @param array $urls The array of subpage URLs.
-	 * @param str $active_tab The key of the active tab in the subpage URLs array.
+	 * @param str   $active_tab The key of the active tab in the subpage URLs array.
 	 */
 	public function page_add_tab( $urls, $active_tab ) {
 
@@ -1011,8 +1001,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			$active = ' nav-tab-active';
 		}
 
-		// Render tab.
-		echo '<a href="' . $urls['multidomain'] . '" class="nav-tab' . $active . '">' . $title . '</a>' . "\n";
+		// Render tab. URL is already escaped.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<a href="' . $urls['multidomain'] . '" class="nav-tab' . esc_attr( $active ) . '">' . esc_html( $title ) . '</a>' . "\n";
 
 	}
 
@@ -1101,13 +1092,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Maybe log errors.
 		if ( ! is_int( $result ) ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 		}
 
 		/**
@@ -1130,7 +1122,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		check_admin_referer( 'cau_multidomain_action', 'cau_multidomain_nonce' );
 
 		// Sanitise inputs.
-		$domain_org_id = isset( $_POST['cau_domain_org_select'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['cau_domain_org_select'] ) ) : '';
+		$domain_org_id   = isset( $_POST['cau_domain_org_select'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['cau_domain_org_select'] ) ) : '';
 		$domain_group_id = isset( $_POST['cau_domain_group_select'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['cau_domain_group_select'] ) ) : '';
 
 		// Maybe set new Domain Org.
@@ -1167,13 +1159,16 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return $domains;
 		}
 
-		// Get domains.
-		$result = civicrm_api( 'Domain', 'get', [
+		// Build params.
+		$params = [
 			'version' => 3,
 			'options' => [
 				'limit' => 0, // No limit.
 			],
-		] );
+		];
+
+		// Get domains.
+		$result = civicrm_api( 'Domain', 'get', $params );
 
 		// Sanity check.
 		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
@@ -1185,8 +1180,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 			// Add domain data to return array.
 			$domains[] = [
-				'id' => $domain['id'],
-				'name' => stripslashes( $domain['name'] ),
+				'id'          => $domain['id'],
+				'name'        => stripslashes( $domain['name'] ),
 				'description' => isset( $domain['description'] ) ? $domain['description'] : '',
 			];
 
@@ -1223,14 +1218,17 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Sanitise search input.
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
 
-		// Get domains.
-		$domains = civicrm_api( 'Domain', 'get', [
+		// Build params.
+		$params = [
 			'version' => 3,
-			'name' => [ 'LIKE' => '%' . $search . '%' ],
+			'name'    => [ 'LIKE' => '%' . $search . '%' ],
 			'options' => [
 				'limit' => 0, // No limit.
 			],
-		] );
+		];
+
+		// Get domains.
+		$domains = civicrm_api( 'Domain', 'get', $params );
 
 		// Sanity check.
 		if ( ! empty( $domains['is_error'] ) && 1 === (int) $domains['is_error'] ) {
@@ -1242,8 +1240,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 			// Add domain data to output array.
 			$json[] = [
-				'id' => $domain['id'],
-				'name' => stripslashes( $domain['name'] ),
+				'id'          => $domain['id'],
+				'name'        => stripslashes( $domain['name'] ),
 				'description' => isset( $domain['description'] ) ? $domain['description'] : '',
 			];
 
@@ -1292,11 +1290,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		}
 
-		// Get domain info.
-		$domain_info = civicrm_api( 'Domain', 'getsingle', [
+		// Build params.
+		$params = [
 			'version' => 3,
-			'id' => $domain_id,
-		] );
+			'id'      => $domain_id,
+		];
+
+		// Get domain info.
+		$domain_info = civicrm_api( 'Domain', 'getsingle', $params );
 
 		// Bail if there's an error.
 		if ( ! empty( $domain_info['is_error'] ) && 1 === (int) $domain_info['is_error'] ) {
@@ -1305,10 +1306,10 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Populate return array with the items we want.
-		$domain['id'] = $domain_id;
-		$domain['name'] = $domain_info['name'];
+		$domain['id']         = $domain_id;
+		$domain['name']       = $domain_info['name'];
 		$domain['contact_id'] = $domain_info['contact_id'];
-		$domain['version'] = $domain_info['domain_version'];
+		$domain['version']    = $domain_info['domain_version'];
 
 		// --<
 		return $domain;
@@ -1340,13 +1341,16 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return __( 'CiviCRM Multisite extension must be enabled.', 'civicrm-admin-utilities' );
 		}
 
-		// Create domain.
-		$result = civicrm_api( 'MultisiteDomain', 'create', [
-			'version' => 3,
-			'sequential' => 1,
-			'name' => $name,
+		// Build params.
+		$params = [
+			'version'          => 3,
+			'sequential'       => 1,
+			'name'             => $name,
 			'is_transactional' => 'FALSE',
-		] );
+		];
+
+		// Create domain.
+		$result = civicrm_api( 'MultisiteDomain', 'create', $params );
 
 		// Sanity check.
 		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
@@ -1359,7 +1363,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Find ID of new Domain and override message with ID.
 		if ( ! empty( $result['values'] ) ) {
 			$domain = array_pop( $result['values'] );
-			$id = absint( $domain['id'] );
+			$id     = absint( $domain['id'] );
 		}
 
 		// --<
@@ -1391,15 +1395,18 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Sanitise search input.
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
 
-		// Get domain groups.
-		$groups = civicrm_api( 'Group', 'get', [
-			'version' => 3,
+		// Build params.
+		$params = [
+			'version'    => 3,
 			'visibility' => 'User and User Admin Only',
-			'title' => [ 'LIKE' => '%' . $search . '%' ],
-			'options' => [
+			'title'      => [ 'LIKE' => '%' . $search . '%' ],
+			'options'    => [
 				'limit' => 0, // No limit.
 			],
-		] );
+		];
+
+		// Get domain groups.
+		$groups = civicrm_api( 'Group', 'get', $params );
 
 		// Sanity check.
 		if ( ! empty( $groups['is_error'] ) && 1 === (int) $groups['is_error'] ) {
@@ -1411,8 +1418,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 			// Add group data to output array.
 			$json[] = [
-				'id' => $group['id'],
-				'name' => stripslashes( $group['title'] ),
+				'id'          => $group['id'],
+				'name'        => stripslashes( $group['title'] ),
 				'description' => '',
 			];
 
@@ -1456,11 +1463,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		}
 
-		// Get domain group info.
-		$domain_group_info = civicrm_api( 'Group', 'getsingle', [
+		// Build params.
+		$params = [
 			'version' => 3,
-			'id' => $domain_group_id,
-		] );
+			'id'      => $domain_group_id,
+		];
+
+		// Get domain group info.
+		$domain_group_info = civicrm_api( 'Group', 'getsingle', $params );
 
 		// Bail if there's an error.
 		if ( ! empty( $domain_group_info['is_error'] ) && 1 === (int) $domain_group_info['is_error'] ) {
@@ -1469,7 +1479,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Populate return array with the items we want.
-		$domain_group['id'] = $domain_group_id;
+		$domain_group['id']   = $domain_group_id;
 		$domain_group['name'] = $domain_group_info['title'];
 
 		// --<
@@ -1520,13 +1530,16 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return $domain_group_id;
 		}
 
-		// Check "domain_group_id" setting.
-		$result = civicrm_api( 'Setting', 'getsingle', [
-			'version' => 3,
+		// Build params.
+		$params = [
+			'version'    => 3,
 			'sequential' => 1,
-			'domain_id' => $domain['id'],
-			'return' => 'domain_group_id',
-		] );
+			'domain_id'  => $domain['id'],
+			'return'     => 'domain_group_id',
+		];
+
+		// Check "domain_group_id" setting.
+		$result = civicrm_api( 'Setting', 'getsingle', $params );
 
 		// If we were successful, cast as integer and return the ID.
 		if ( ! empty( $result['domain_group_id'] ) && 0 !== (int) $result['domain_group_id'] ) {
@@ -1534,12 +1547,15 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return $domain_group_id;
 		}
 
-		// Check for Group with the name of the Domain.
-		$result = civicrm_api( 'Group', 'getsingle', [
-			'version' => 3,
+		// Build params.
+		$params = [
+			'version'    => 3,
 			'sequential' => 1,
-			'title' => $domain['name'],
-		] );
+			'title'      => $domain['name'],
+		];
+
+		// Check for Group with the name of the Domain.
+		$result = civicrm_api( 'Group', 'getsingle', $params );
 
 		// If we were successful, cast as integer and return the ID.
 		if ( ! empty( $result['id'] ) ) {
@@ -1548,12 +1564,15 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		/*
-		// Get result from "GroupOrganization".
-		$result = civicrm_api( 'GroupOrganization', 'getsingle', [
-			'version' => 3,
-			'sequential' => 1,
+		// Build params.
+		$params = [
+			'version'         => 3,
+			'sequential'      => 1,
 			'organization_id' => $domain['contact_id'],
-		] );
+		];
+
+		// Get result from "GroupOrganization".
+		$result = civicrm_api( 'GroupOrganization', 'getsingle', $params );
 
 		// If there is only a single linkage, cast as integer and return the ID.
 		if ( ! empty( $result['group_id'] ) ) {
@@ -1573,9 +1592,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @since 0.6.2
 	 */
 	public function domain_group_create() {
-
 		// Nothing to see yet.
-
 	}
 
 	/**
@@ -1609,53 +1626,66 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Get existing Domain Group data.
 		$domain_group = $this->domain_group_get();
 
-		// Check "domain_group_id" setting.
-		$setting = civicrm_api( 'Setting', 'getsingle', [
-			'version' => 3,
+		// Build params.
+		$params = [
+			'version'    => 3,
 			'sequential' => 1,
-			'domain_id' => $domain['id'],
-			'return' => 'domain_group_id',
-		] );
+			'domain_id'  => $domain['id'],
+			'return'     => 'domain_group_id',
+		];
+
+		// Check "domain_group_id" setting.
+		$setting = civicrm_api( 'Setting', 'getsingle', $params );
 
 		// Skip the Setting if there's no change.
 		if ( isset( $setting['domain_group_id'] ) && $setting['domain_group_id'] !== $group_id ) {
 
-			// Set "domain_group_id" setting.
-			$result = civicrm_api( 'Setting', 'create', [
-				'version' => 3,
-				'domain_id' => $domain['id'],
+			// Build params.
+			$params = [
+				'version'         => 3,
+				'domain_id'       => $domain['id'],
 				'domain_group_id' => absint( $group_id ),
-			] );
+			];
+
+			// Set "domain_group_id" setting.
+			$result = civicrm_api( 'Setting', 'create', $params );
 
 			// Log if there's an error.
 			if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-				$e = new Exception();
+				$e     = new Exception();
 				$trace = $e->getTraceAsString();
-				error_log( print_r( [
-					'method' => __METHOD__,
-					'result' => $result,
+				$log   = [
+					'method'    => __METHOD__,
+					'result'    => $result,
 					'backtrace' => $trace,
-				], true ) );
+				];
+				$this->plugin->log_error( $log );
 			}
 
 		}
 
-		// Check if new Domain Group has a "GroupOrganization".
-		$result = civicrm_api( 'GroupOrganization', 'getsingle', [
-			'version' => 3,
-			'group_id' => absint( $group_id ),
+		// Build params.
+		$params = [
+			'version'         => 3,
+			'group_id'        => absint( $group_id ),
 			'organization_id' => $domain['contact_id'],
-		] );
+		];
+
+		// Check if new Domain Group has a "GroupOrganization".
+		$result = civicrm_api( 'GroupOrganization', 'getsingle', $params );
 
 		// If it doesn't have one.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
 
-			// Create new "GroupOrganization" entry.
-			$result = civicrm_api( 'GroupOrganization', 'create', [
-				'version' => 3,
-				'group_id' => absint( $group_id ),
+			// Build params.
+			$params = [
+				'version'         => 3,
+				'group_id'        => absint( $group_id ),
 				'organization_id' => $domain['contact_id'],
-			] );
+			];
+
+			// Create new "GroupOrganization" entry.
+			$result = civicrm_api( 'GroupOrganization', 'create', $params );
 
 		}
 
@@ -1664,12 +1694,15 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return $group_id;
 		}
 
-		// Get all "GroupOrganization" data for previous Domain Group.
-		$result = civicrm_api( 'GroupOrganization', 'get', [
-			'version' => 3,
+		// Build params.
+		$params = [
+			'version'    => 3,
 			'sequential' => 1,
-			'group_id' => absint( $domain_group['id'] ),
-		] );
+			'group_id'   => absint( $domain_group['id'] ),
+		];
+
+		// Get all "GroupOrganization" data for previous Domain Group.
+		$result = civicrm_api( 'GroupOrganization', 'get', $params );
 
 		// If the previous Domain Group had more than one "GroupOrganization".
 		if ( isset( $result['count'] ) && absint( $result['count'] ) > 1 ) {
@@ -1686,10 +1719,11 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 			// Remove it if we find it.
 			if ( 0 !== $linkage_id ) {
-				$result = civicrm_api( 'GroupOrganization', 'delete', [
+				$params = [
 					'version' => 3,
-					'id' => $linkage_id,
-				] );
+					'id'      => $linkage_id,
+				];
+				$result = civicrm_api( 'GroupOrganization', 'delete', $params );
 			}
 
 		}
@@ -1723,15 +1757,18 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		// Sanitise search input.
 		$search = isset( $_POST['s'] ) ? sanitize_text_field( wp_unslash( $_POST['s'] ) ) : '';
 
-		// Get domain orgs.
-		$orgs = civicrm_api( 'Contact', 'get', [
-			'version' => 3,
-			'contact_type' => 'Organization',
+		// Build params.
+		$params = [
+			'version'           => 3,
+			'contact_type'      => 'Organization',
 			'organization_name' => [ 'LIKE' => '%' . $search . '%' ],
-			'options' => [
+			'options'           => [
 				'limit' => 0, // No limit.
 			],
-		] );
+		];
+
+		// Get domain orgs.
+		$orgs = civicrm_api( 'Contact', 'get', $params );
 
 		// Sanity check.
 		if ( ! empty( $orgs['is_error'] ) && 1 === (int) $orgs['is_error'] ) {
@@ -1743,8 +1780,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 			// Add org data to output array.
 			$json[] = [
-				'id' => $org['contact_id'],
-				'name' => stripslashes( $org['display_name'] ),
+				'id'          => $org['contact_id'],
+				'name'        => stripslashes( $org['display_name'] ),
 				'description' => '',
 			];
 
@@ -1801,11 +1838,14 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		}
 
-		// Get domain org info.
-		$domain_org_info = civicrm_api( 'Contact', 'getsingle', [
+		// Build params.
+		$params = [
 			'version' => 3,
-			'id' => $domain_org_id,
-		] );
+			'id'      => $domain_org_id,
+		];
+
+		// Get domain org info.
+		$domain_org_info = civicrm_api( 'Contact', 'getsingle', $params );
 
 		// Bail if there's an error.
 		if ( ! empty( $domain_org_info['is_error'] ) && 1 === (int) $domain_org_info['is_error'] ) {
@@ -1814,7 +1854,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Populate return array with the items we want.
-		$domain_org['id'] = $domain_org_id;
+		$domain_org['id']   = $domain_org_id;
 		$domain_org['name'] = $domain_org_info['display_name'];
 
 		// --<
@@ -1828,9 +1868,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 	 * @since 0.6.2
 	 */
 	public function domain_org_create() {
-
 		// Nothing to see yet.
-
 	}
 
 	/**
@@ -1866,12 +1904,15 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return $org_id;
 		}
 
-		// Update Domain.
-		$result = civicrm_api( 'Domain', 'create', [
-			'version' => 3,
-			'id' => $domain['id'],
+		// Build params.
+		$params = [
+			'version'    => 3,
+			'id'         => $domain['id'],
 			'contact_id' => absint( $org_id ),
-		] );
+		];
+
+		// Update Domain.
+		$result = civicrm_api( 'Domain', 'create', $params );
 
 		// TODO: Do we need to reassign all groups to this Org via "GroupOrganization" API?
 

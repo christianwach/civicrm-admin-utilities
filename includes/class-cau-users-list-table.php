@@ -33,8 +33,8 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * @var array
 	 */
 	public $user_counts = [
-		'all' => 0,
-		'in_civicrm' => 0,
+		'all'            => 0,
+		'in_civicrm'     => 0,
 		'not_in_civicrm' => 0,
 	];
 
@@ -74,10 +74,10 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Define singular and plural labels, as well as whether we support AJAX.
 		$options = [
-			'ajax' => false,
-			'plural' => 'users',
+			'ajax'     => false,
+			'plural'   => 'users',
 			'singular' => 'user',
-			'screen' => get_current_screen()->id,
+			'screen'   => get_current_screen()->id,
 		];
 
 		parent::__construct( $options );
@@ -96,18 +96,19 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		global $usersearch;
 
 		// Get total User count.
-		$users_of_blog = count_users();
+		$users_of_blog            = count_users();
 		$this->user_counts['all'] = $users_of_blog['total_users'];
 
 		// Get the search string if present.
-		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.Security.NonceVerification.Recommended
 		$usersearch = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
 
 		// Get the views param if present.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$user_status = isset( $_REQUEST['user_status'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['user_status'] ) ) : 'all';
 
 		// Set per page from the screen options.
-		$per_page = 'admin_page_' . civicrm_au()->single_users->users_page_slug . '_per_page';
+		$per_page       = 'admin_page_' . civicrm_au()->single_users->users_page_slug . '_per_page';
 		$users_per_page = $this->get_items_per_page( $per_page );
 
 		// Get the page number.
@@ -142,13 +143,13 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 			// Restrict Users to those with a CiviCRM Contact.
 			if ( 'in_civicrm' === $user_status ) {
 				$args['include'] = $ufmatch_ids;
-				$this->view = 'in_civicrm';
+				$this->view      = 'in_civicrm';
 			}
 
 			// Restrict Users to those with no CiviCRM Contact.
 			if ( 'not_in_civicrm' === $user_status ) {
 				$args['exclude'] = $ufmatch_ids;
-				$this->view = 'not_in_civicrm';
+				$this->view      = 'not_in_civicrm';
 			}
 
 		}
@@ -169,12 +170,14 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		}
 
 		// Support ordering.
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_REQUEST['orderby'] ) ) {
 			$args['orderby'] = sanitize_text_field( wp_unslash( $_REQUEST['orderby'] ) );
 		}
 		if ( isset( $_REQUEST['order'] ) ) {
 			$args['order'] = sanitize_text_field( wp_unslash( $_REQUEST['order'] ) );
 		}
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		/**
 		 * Filters the query arguments used to retrieve users for the current
@@ -204,19 +207,22 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		 * Users held for moderation (e.g. by BuddyPress) may skew counts, so
 		 * we need to do an additional query for Users not in CiviCRM.
 		 */
-		$not_in_civicrm = new WP_User_Query( [
-			'number' => $users_per_page,
+		$query = [
+			'number'  => $users_per_page,
 			'exclude' => $ufmatch_ids,
-		] );
+		];
+
+		// Do the query.
+		$not_in_civicrm = new WP_User_Query( $query );
 
 		// Right, let's find out how many.
-		$users_not_in_civicrm = $not_in_civicrm->get_results();
+		$users_not_in_civicrm                = $not_in_civicrm->get_results();
 		$this->user_counts['not_in_civicrm'] = count( $users_not_in_civicrm );
 
 		// Build pagination params.
 		$pagination_args = [
 			'total_items' => $user_search->get_total(),
-			'per_page' => $users_per_page,
+			'per_page'    => $users_per_page,
 		];
 
 		// Apply them.
@@ -224,7 +230,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Build an array to pass to the action below.
 		$params = [
-			'items' => $this->items,
+			'items'       => $this->items,
 			'post_counts' => $this->post_counts,
 			'user_counts' => $this->user_counts,
 			'ufmatch_all' => $ufmatch_all,
@@ -281,14 +287,14 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Define our columns.
 		$columns = [
-			//'cb' => '<input type="checkbox" />',
-			'username' => __( 'Username', 'civicrm-admin-utilities' ),
-			'name' => __( 'Name', 'civicrm-admin-utilities' ),
-			'email' => __( 'Email', 'civicrm-admin-utilities' ),
+			// 'cb' => '<input type="checkbox" />',
+			'username'      => __( 'Username', 'civicrm-admin-utilities' ),
+			'name'          => __( 'Name', 'civicrm-admin-utilities' ),
+			'email'         => __( 'Email', 'civicrm-admin-utilities' ),
 			'creation_date' => __( 'User Since', 'civicrm-admin-utilities' ),
-			'user_id' => __( 'User ID', 'civicrm-admin-utilities' ),
-			'contact_id' => __( 'Contact ID', 'civicrm-admin-utilities' ),
-			'post_counts' => __( 'Posts', 'civicrm-admin-utilities' ),
+			'user_id'       => __( 'User ID', 'civicrm-admin-utilities' ),
+			'contact_id'    => __( 'Contact ID', 'civicrm-admin-utilities' ),
+			'post_counts'   => __( 'Posts', 'civicrm-admin-utilities' ),
 		];
 
 		/**
@@ -353,10 +359,10 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Default sortable columns.
 		$columns = [
-			'username' => 'login',
-			'email' => 'email',
+			'username'      => 'login',
+			'email'         => 'email',
 			'creation_date' => 'user_registered',
-			'user_id' => 'ID',
+			'user_id'       => 'ID',
 		];
 
 		/**
@@ -382,8 +388,9 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 		// Process list items and write the rows to the screen.
 		foreach ( $this->items as $user_id => $user_object ) {
-			$style = ( ' class="alternate"' == $style ) ? '' : ' class="alternate"';
-			echo "\n\t" . $this->single_row( $user_object, $style );
+			$style = ( ' class="alternate"' === $style ) ? '' : ' class="alternate"';
+			echo "\n\t";
+			$this->single_row( $user_object, $style );
 		}
 
 	}
@@ -396,19 +403,22 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * @see WP_List_Table::single_row() for explanation of params.
 	 *
 	 * @param object|null $user_object The User object.
-	 * @param string $style Styles for the row.
-	 * @param string $role Role to be assigned to user.
-	 * @param int $numposts Number of posts.
+	 * @param string      $style Styles for the row.
+	 * @param string      $role Role to be assigned to user.
+	 * @param int         $numposts Number of posts.
 	 */
 	public function single_row( $user_object = null, $style = '', $role = '', $numposts = 0 ) {
 
 		// Open the table row.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo '<tr' . $style . ' id="user-' . esc_attr( $user_object->ID ) . '">';
 
 		// Write columns to screen.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $this->single_row_columns( $user_object );
 
 		// Close the table row.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo '</tr>';
 
 	}
@@ -425,12 +435,12 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		// Define label.
 		$label = sprintf(
 			/* translators: accessibility text */
-			esc_html__( 'Select user: %s', 'civicrm-admin-utilities' ),
+			__( 'Select user: %s', 'civicrm-admin-utilities' ),
 			$user_object->user_login
 		);
 
 		?>
-		<label class="screen-reader-text" for="user_<?php echo intval( $user_object->ID ); ?>"><?php echo $label; ?></label>
+		<label class="screen-reader-text" for="user_<?php echo esc_attr( (int) $user_object->ID ); ?>"><?php echo esc_html( $label ); ?></label>
 		<input type="checkbox" id="user_<?php echo intval( $user_object->ID ); ?>" name="allusers[]" value="<?php echo esc_attr( $user_object->ID ); ?>" />
 		<?php
 
@@ -465,8 +475,9 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		// Construct link to "Edit User" screen.
 		$edit_link = admin_url( 'user-edit.php?user_id=' . $user_object->ID );
 
-		// Write username to screen.
-		echo $avatar . sprintf( '<strong><a href="%1$s" class="edit">%2$s</a></strong><br/>', $edit_link, $user_object->user_login );
+		// Write username to screen. Avatar is already escaped.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $avatar . sprintf( '<strong><a href="%1$s" class="edit">%2$s</a></strong><br/>', esc_url( $edit_link ), esc_html( $user_object->user_login ) );
 
 		// Init row actions.
 		$actions = [];
@@ -474,7 +485,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		// Add edit link to actions.
 		$actions['edit'] = sprintf(
 			'<a href="%1$s">%2$s</a>',
-			$edit_link,
+			esc_url( $edit_link ),
 			esc_html__( 'Edit', 'civicrm-admin-utilities' )
 		);
 
@@ -489,6 +500,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		$actions = apply_filters( 'cau/single_users/user_table/row_actions', $actions, $user_object );
 
 		// Write row actions to screen.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $this->row_actions( $actions );
 
 	}
@@ -531,7 +543,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	public function column_creation_date( $user_object = null ) {
 
 		// Write to screen.
-		echo date_i18n( get_option( 'date_format' ), strtotime( $user_object->user_registered ) );
+		echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $user_object->user_registered ) ) );
 
 	}
 
@@ -587,8 +599,8 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 
 			$markup = sprintf(
 				'<a href="%s" class="edit"><span aria-hidden="true">%s</span><span class="screen-reader-text">%s</span></a>',
-				"edit.php?author={$user_object->ID}",
-				$post_count,
+				esc_url( "edit.php?author={$user_object->ID}" ),
+				esc_html( $post_count ),
 				sprintf(
 					/* translators: %s: Number of posts. */
 					_n( '%s post by this author', '%s posts by this author', $post_count, 'civicrm-admin-utilities' ),
@@ -599,6 +611,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		}
 
 		// Write to screen.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $markup;
 
 	}
@@ -609,7 +622,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 	 * @since 0.9
 	 *
 	 * @param object|null $user_object The User data object.
-	 * @param string $column_name The column name.
+	 * @param string      $column_name The column name.
 	 * @return string
 	 */
 	public function column_default( $user_object = null, $column_name = '' ) {

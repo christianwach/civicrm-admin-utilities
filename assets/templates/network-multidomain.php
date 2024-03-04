@@ -54,6 +54,7 @@ defined( 'ABSPATH' ) || exit;
 		?>
 	</h2>
 
+	<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->page_network_submit_url_get(); ?>">
 
 		<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
@@ -62,7 +63,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<div id="poststuff">
 
-			<div id="post-body" class="metabox-holder columns-<?php echo $columns; ?>">
+			<div id="post-body" class="metabox-holder columns-<?php echo esc_attr( $columns ); ?>">
 
 				<!--<div id="post-body-content">
 				</div>--><!-- #post-body-content -->

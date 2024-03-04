@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 	<tr>
 		<th scope="row"><?php esc_html_e( 'Shortcode Button', 'civicrm-admin-utilities' ); ?></th>
 		<td>
+			<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 			<?php echo $options; ?>
 			<p class="description"><?php esc_html_e( 'Select which post types you want the CiviCRM shortcode button to appear on.', 'civicrm-admin-utilities' ); ?></p>
 		</td>

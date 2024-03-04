@@ -461,12 +461,15 @@ abstract class CiviCRM_AU_Settings_Page_Base {
 			return;
 		}
 
-		// Add a tab - we can add more later.
-		$screen->add_help_tab( [
+		// Build tab args.
+		$args = [
 			'id'      => $this->hook_prefix,
 			'title'   => $this->page_help_label,
 			'content' => $this->admin_help_get(),
-		] );
+		];
+
+		// Add a tab - we can add more later.
+		$screen->add_help_tab( $args );
 
 	}
 

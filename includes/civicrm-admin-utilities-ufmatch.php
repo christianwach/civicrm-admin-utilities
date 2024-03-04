@@ -90,7 +90,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Construct API query.
 		$params = [
-			'version' => 3,
+			'version'    => 3,
 			'sequential' => 1,
 		] + $args;
 
@@ -99,14 +99,15 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'params' => $params,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'params'    => $params,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -138,7 +139,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		// Construct API query.
 		$params = [
 			'version' => 3,
-			'id' => $contact_id,
+			'id'      => $contact_id,
 		];
 
 		// Get Contact details via API.
@@ -146,15 +147,16 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $contact['is_error'] ) && 1 === $contact['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
+			$log   = [
+				'method'     => __METHOD__,
 				'contact_id' => $contact_id,
-				'params' => $params,
-				'contact' => $contact,
-				'backtrace' => $trace,
-			], true ) );
+				'params'     => $params,
+				'contact'    => $contact,
+				'backtrace'  => $trace,
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -175,7 +177,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param int $user_id The numeric ID of the WordPress user.
+	 * @param int     $user_id The numeric ID of the WordPress user.
 	 * @param int|str $domain_id The Domain ID (defaults to current Domain ID) or a string to search all Domains.
 	 * @return int|bool $contact_id The CiviCRM contact ID, or false on failure.
 	 */
@@ -216,7 +218,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param int $user_id The numeric ID of the WordPress User.
+	 * @param int     $user_id The numeric ID of the WordPress User.
 	 * @param int|str $domain_id The Domain ID (defaults to current Domain ID) or a string to search all Domains.
 	 * @return array|bool $contact The CiviCRM Contact data, or false on failure.
 	 */
@@ -245,7 +247,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param int $contact_id The numeric ID of the CiviCRM Contact.
+	 * @param int     $contact_id The numeric ID of the CiviCRM Contact.
 	 * @param int|str $domain_id The Domain ID (defaults to current Domain ID) or a string to search all Domains.
 	 * @return WP_User|bool $user The WordPress User object, or false on failure.
 	 */
@@ -281,7 +283,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param int $contact_id The numeric ID of the CiviCRM Contact.
+	 * @param int     $contact_id The numeric ID of the CiviCRM Contact.
 	 * @param int|str $domain_id The Domain ID (defaults to current Domain ID) or a string to search all Domains.
 	 * @return WP_User|bool $user The WordPress User object, or false on failure.
 	 */
@@ -344,8 +346,8 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		// Create single UFMatch entry if a single UFMatch item is returned.
 		if ( ! empty( $this->ufmatch_entries['uf_id'] ) ) {
 			$contact_id = absint( $this->ufmatch_entries['contact_id'] );
-			$user_id = absint( $this->ufmatch_entries['uf_id'] );
-			$domain_id = absint( $this->ufmatch_entries['domain_id'] );
+			$user_id    = absint( $this->ufmatch_entries['uf_id'] );
+			$domain_id  = absint( $this->ufmatch_entries['domain_id'] );
 			$this->entry_create( $contact_id, $user_id, $this->ufmatch_entries['uf_name'], $domain_id );
 		}
 
@@ -353,8 +355,8 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		if ( empty( $this->ufmatch_entries['uf_id'] ) ) {
 			foreach ( $this->ufmatch_entries as $entry ) {
 				$contact_id = absint( $entry['contact_id'] );
-				$user_id = absint( $entry['uf_id'] );
-				$domain_id = absint( $entry['domain_id'] );
+				$user_id    = absint( $entry['uf_id'] );
+				$domain_id  = absint( $entry['domain_id'] );
 				$this->entry_create( $contact_id, $user_id, $entry['uf_name'], $domain_id );
 			}
 		}
@@ -390,9 +392,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Construct params.
 		$params = [
-			'version' => 3,
-			'uf_id' => $user_id,
-			'uf_name' => $username,
+			'version'    => 3,
+			'uf_id'      => $user_id,
+			'uf_name'    => $username,
 			'contact_id' => $contact_id,
 		];
 
@@ -406,14 +408,15 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'params' => $params,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'params'    => $params,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -445,7 +448,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		// Construct params.
 		$params = [
 			'version' => 3,
-			'id' => $ufmatch_id,
+			'id'      => $ufmatch_id,
 		];
 
 		// Create record via API.
@@ -453,14 +456,15 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'params' => $params,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'params'    => $params,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -492,7 +496,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 			'options' => [
 				'limit' => 0,
 			],
-			'return' => [
+			'return'  => [
 				'uf_id',
 				'contact_id',
 			],
@@ -513,15 +517,16 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'user_id' => $user_id,
-				'params' => $params,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'user_id'   => $user_id,
+				'params'    => $params,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -546,7 +551,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param int $contact_id The numeric ID of the CiviCRM Contact.
+	 * @param int     $contact_id The numeric ID of the CiviCRM Contact.
 	 * @param int|str $domain_id The CiviCRM Domain ID (defaults to current Domain ID).
 	 * @return array|bool The UFMatch data on success, or false on failure.
 	 */
@@ -564,7 +569,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Construct params.
 		$params = [
-			'version' => 3,
+			'version'    => 3,
 			'contact_id' => $contact_id,
 		];
 
@@ -583,15 +588,16 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'user_id' => $user_id,
-				'params' => $params,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'user_id'   => $user_id,
+				'params'    => $params,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -619,7 +625,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param int $user_id The numeric ID of the WordPress User.
+	 * @param int     $user_id The numeric ID of the WordPress User.
 	 * @param int|str $domain_id The CiviCRM Domain ID (defaults to current Domain ID).
 	 * @return array|bool The UFMatch data on success, or false on failure.
 	 */
@@ -638,7 +644,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		// Construct params.
 		$params = [
 			'version' => 3,
-			'uf_id' => $user_id,
+			'uf_id'   => $user_id,
 		];
 
 		// If no Domain ID is specified, default to current Domain ID.
@@ -656,15 +662,16 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'user_id' => $user_id,
-				'params' => $params,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'user_id'   => $user_id,
+				'params'    => $params,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -692,7 +699,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param str $email The WordPress User's email address.
+	 * @param str     $email The WordPress User's email address.
 	 * @param int|str $domain_id The CiviCRM Domain ID (defaults to current Domain ID).
 	 * @return array|bool The UFMatch data on success, or false on failure.
 	 */
@@ -729,15 +736,16 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 		// Log and bail on failure.
 		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			$e = new Exception();
+			$e     = new Exception();
 			$trace = $e->getTraceAsString();
-			error_log( print_r( [
-				'method' => __METHOD__,
-				'user_id' => $user_id,
-				'params' => $params,
-				'result' => $result,
+			$log   = [
+				'method'    => __METHOD__,
+				'user_id'   => $user_id,
+				'params'    => $params,
+				'result'    => $result,
 				'backtrace' => $trace,
-			], true ) );
+			];
+			$this->plugin->log_error( $log );
 			return false;
 		}
 
@@ -790,7 +798,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 
 			// Build params to get Dedupe Rule Groups.
 			$params = [
-				'limit' => 0,
+				'limit'            => 0,
 				'checkPermissions' => false,
 			];
 
@@ -841,9 +849,9 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	 *
 	 * @since 0.9
 	 *
-	 * @param array $contact The Contact data.
+	 * @param array  $contact The Contact data.
 	 * @param string $contact_type The Contact type.
-	 * @param int $dedupe_rule_id The Dedupe Rule ID.
+	 * @param int    $dedupe_rule_id The Dedupe Rule ID.
 	 * @return int|bool $contact_id The numeric Contact ID, or false on failure.
 	 */
 	public function dedupe_contact( $contact, $contact_type, $dedupe_rule_id ) {
@@ -857,7 +865,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 		$contact_id = 0;
 
 		// Build the Dedupe params.
-		$dedupe_params = CRM_Dedupe_Finder::formatParams( $contact, $contact_type );
+		$dedupe_params                     = CRM_Dedupe_Finder::formatParams( $contact, $contact_type );
 		$dedupe_params['check_permission'] = false;
 
 		// Check for duplicates.

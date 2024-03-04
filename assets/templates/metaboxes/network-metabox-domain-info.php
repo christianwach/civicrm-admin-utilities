@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 
 		printf(
 			/* translators: 1: Opening anchor tag, 2: Closing anchor tag. */
-			__( 'It is recommended that you install and activate the %1$sCiviCRM Multisite%2$s extension to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ),
+			esc_html__( 'It is recommended that you install and activate the %1$sCiviCRM Multisite%2$s extension to work with multiple Domains in CiviCRM.', 'civicrm-admin-utilities' ),
 			'<a href="https://civicrm.org/extensions/multisite-permissioning" target="_blank">',
 			'</a>'
 		);
@@ -46,7 +46,7 @@ defined( 'ABSPATH' ) || exit;
 
 			echo sprintf(
 				/* translators: %s: The ID of the CiviCRM Domain. */
-				__( 'ID %s', 'civicrm-admin-utilities' ),
+				esc_html__( 'ID %s', 'civicrm-admin-utilities' ),
 				'<span class="cau_domain_id">' . esc_html( $civicrm_domain['id'] ) . '</span>'
 			);
 

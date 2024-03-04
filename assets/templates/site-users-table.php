@@ -41,13 +41,15 @@ defined( 'ABSPATH' ) || exit;
 		$message_class = ( ! empty( $_REQUEST['error'] ) ) ? 'error' : 'updated';
 
 		?>
-		<div class="<?php echo $message_class; ?> notice is-dismissible">
+		<div class="<?php echo esc_attr( $message_class ); ?> notice is-dismissible">
+			<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 			<p><?php echo implode( "<br/>\n", $messages ); ?></p>
 		</div>
 	<?php endif; ?>
 
 	<?php $this->user_table->views(); ?>
 
+	<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 	<form id="civicrm-au-users-form" action="<?php echo $this->page_submit_url_get(); ?>" method="get">
 
 		<?php
@@ -68,12 +70,13 @@ defined( 'ABSPATH' ) || exit;
 
 			$span_content = sprintf(
 				/* translators: %s: Search query. */
-				__( 'Search results for: %s', 'civicrm-admin-utilities' ),
+				esc_html__( 'Search results for: %s', 'civicrm-admin-utilities' ),
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				'<strong>' . wp_html_excerpt( esc_html( wp_unslash( $_REQUEST['s'] ) ), 50 ) . '</strong>'
 			);
 
 			?>
+			<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 			<span class="subtitle"><?php echo $span_content; ?></span>
 		<?php endif; ?>
 

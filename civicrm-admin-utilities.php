@@ -21,6 +21,11 @@ defined( 'ABSPATH' ) || exit;
 // Set our version here.
 define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '1.0.5a' );
 
+// Trigger logging of API failures (mostly).
+if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_LOG' ) ) {
+	define( 'CIVICRM_ADMIN_UTILITIES_LOG', false );
+}
+
 // Trigger logging of 'civicrm_pre' and 'civicrm_post'.
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_DEBUG', false );
@@ -207,7 +212,7 @@ class CiviCRM_Admin_Utilities {
 		$this->ufmatch = new CiviCRM_Admin_Utilities_UFMatch( $this );
 
 		// Always instantiate Single Site classes.
-		$this->single = new CiviCRM_Admin_Utilities_Single( $this );
+		$this->single       = new CiviCRM_Admin_Utilities_Single( $this );
 		$this->single_users = new CiviCRM_Admin_Utilities_Single_Users( $this );
 
 		// Always instantiate Theme class.
@@ -215,7 +220,7 @@ class CiviCRM_Admin_Utilities {
 
 		// Maybe instantiate Multisite classes.
 		if ( is_multisite() ) {
-			$this->multisite = new CiviCRM_Admin_Utilities_Multisite( $this );
+			$this->multisite   = new CiviCRM_Admin_Utilities_Multisite( $this );
 			$this->multidomain = new CiviCRM_Admin_Utilities_Multidomain( $this );
 		}
 
@@ -224,12 +229,12 @@ class CiviCRM_Admin_Utilities {
 	/**
 	 * Register hooks.
 	 *
+	 * If global-scope hooks are needed, add them here.
+	 *
 	 * @since 0.1
 	 * @since 0.5.4 All hooks moved to relevant classes.
 	 */
 	private function register_hooks() {
-
-		// If global-scope hooks are needed, add them here.
 
 	}
 
@@ -411,12 +416,15 @@ class CiviCRM_Admin_Utilities {
 		// Assume not installed.
 		$installed = false;
 
-		// Query API for extension.
-		$result = civicrm_api( 'Extension', 'get', [
-			'version' => 3,
+		// Build params.
+		$params = [
+			'version'    => 3,
 			'sequential' => 1,
-			'full_name' => $full_name,
-		] );
+			'full_name'  => $full_name,
+		];
+
+		// Query API for extension.
+		$result = civicrm_api( 'Extension', 'get', $params );
 
 		// Bail if there's an error.
 		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
@@ -437,6 +445,35 @@ class CiviCRM_Admin_Utilities {
 
 		// --<
 		return $installed;
+
+	}
+
+	/**
+	 * Write to the error log.
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $data The data to write to the log file.
+	 */
+	public function log_error( $data = [] ) {
+
+		// Skip if not logging.
+		if ( CIVICRM_ADMIN_UTILITIES_LOG === false ) {
+			return;
+		}
+
+		// Skip if empty.
+		if ( empty( $data ) ) {
+			return;
+		}
+
+		// Format data.
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+		$error = print_r( $data, true );
+
+		// Write to log file.
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		error_log( $error );
 
 	}
 
@@ -478,7 +515,7 @@ register_deactivation_hook( __FILE__, [ civicrm_au(), 'deactivate' ] );
  * @since 0.3
  *
  * @param array $links The existing links array.
- * @param str $file The name of the plugin file.
+ * @param str   $file The name of the plugin file.
  * @return array $links The modified links array.
  */
 function civicrm_admin_utilities_action_links( $links, $file ) {
@@ -501,18 +538,18 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 
 		// Add settings link if network activated and viewing network admin.
 		if ( civicrm_au()->is_network_activated() && is_network_admin() ) {
-			$link = add_query_arg( [ 'page' => 'cau_network_parent' ], network_admin_url( 'settings.php' ) );
+			$link    = add_query_arg( [ 'page' => 'cau_network_parent' ], network_admin_url( 'settings.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
 		// Add settings link if not network activated and not viewing network admin.
 		if ( ! civicrm_au()->is_network_activated() && ! is_network_admin() ) {
-			$link = add_query_arg( [ 'page' => 'cau_parent' ], admin_url( 'admin.php' ) );
+			$link    = add_query_arg( [ 'page' => 'cau_parent' ], admin_url( 'admin.php' ) );
 			$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html__( 'Settings', 'civicrm-admin-utilities' ) . '</a>';
 		}
 
 		// Always add Paypal link.
-		$paypal = 'https://www.paypal.me/interactivist';
+		$paypal  = 'https://www.paypal.me/interactivist';
 		$links[] = '<a href="' . $paypal . '" target="_blank">' . __( 'Donate!', 'civicrm-admin-utilities' ) . '</a>';
 
 	}

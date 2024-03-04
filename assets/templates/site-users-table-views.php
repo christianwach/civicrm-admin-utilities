@@ -18,8 +18,8 @@ defined( 'ABSPATH' ) || exit;
 <ul class="subsubsub">
 
 	<li class="all">
-		<?php $anchor_class = ( ( 'all' === $this->view ) ? ' class="current"' : '' ); ?>
-		<a href="<?php echo esc_url( $url_base ); ?>"<?php echo $anchor_class; ?>>
+		<?php $anchor_class = ( ( 'all' === $this->view ) ? 'current' : '' ); ?>
+		<a href="<?php echo esc_url( $url_base ); ?>" class="<?php echo esc_attr( $anchor_class ); ?>">
 			<?php
 
 			printf(
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 				esc_html__( 'All %s', 'civicrm-admin-utilities' ),
 				sprintf(
 					'<span class="count">(%s)</span>',
-					number_format_i18n( $this->user_counts['all'] )
+					esc_html( number_format_i18n( $this->user_counts['all'] ) )
 				)
 			);
 
@@ -36,16 +36,16 @@ defined( 'ABSPATH' ) || exit;
 	</li>
 
 	<li class="in_civicrm">
-		<?php $anchor_class = ( ( 'in_civicrm' === $this->view ) ? ' class="current"' : '' ); ?>
-		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'in_civicrm', $url_base ) ); ?>"<?php echo $anchor_class; ?>>
+		<?php $anchor_class = ( ( 'in_civicrm' === $this->view ) ? 'current' : '' ); ?>
+		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'in_civicrm', $url_base ) ); ?>" class="<?php echo esc_attr( $anchor_class ); ?>">
 			<?php
 
 			printf(
 				/* translators: %s is the placeholder for the count html `<span class="count"/>` */
-				_n( 'In CiviCRM %s', 'In CiviCRM %s', $this->user_counts['in_civicrm'], 'civicrm-admin-utilities' ),
+				_n( 'In CiviCRM %s', 'In CiviCRM %s', $this->user_counts['in_civicrm'], 'civicrm-admin-utilities' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				sprintf(
 					'<span class="count">(%s)</span>',
-					number_format_i18n( $this->user_counts['in_civicrm'] )
+					esc_html( number_format_i18n( $this->user_counts['in_civicrm'] ) )
 				)
 			);
 
@@ -54,16 +54,16 @@ defined( 'ABSPATH' ) || exit;
 	</li>
 
 	<li class="not_in_civicrm">
-		<?php $anchor_class = ( ( 'not_in_civicrm' === $this->view ) ? ' class="current"' : '' ); ?>
-		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'not_in_civicrm', $url_base ) ); ?>"<?php echo $anchor_class; ?>>
+		<?php $anchor_class = ( ( 'not_in_civicrm' === $this->view ) ? 'current' : '' ); ?>
+		<a href="<?php echo esc_url( add_query_arg( 'user_status', 'not_in_civicrm', $url_base ) ); ?>" class="<?php echo esc_attr( $anchor_class ); ?>">
 			<?php
 
 			printf(
 				/* translators: %s is the placeholder for the count html `<span class="count"/>` */
-				_n( 'Not in CiviCRM %s', 'Not in CiviCRM %s', $this->user_counts['not_in_civicrm'], 'civicrm-admin-utilities' ),
+				_n( 'Not in CiviCRM %s', 'Not in CiviCRM %s', $this->user_counts['not_in_civicrm'], 'civicrm-admin-utilities' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				sprintf(
 					'<span class="count">(%s)</span>',
-					number_format_i18n( $this->user_counts['not_in_civicrm'] )
+					esc_html( number_format_i18n( $this->user_counts['not_in_civicrm'] ) )
 				)
 			);
 
