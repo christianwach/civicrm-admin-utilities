@@ -103,33 +103,21 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
 	display: none;
 }
 
-/* Light Accordions */
-.crm-container .crm-accordion-light summary
-{
-	line-height: 150%;
-}
 
-.crm-container .crm-accordion-light summary:focus-visible
-{
-    color: #043959;
-    box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
-    outline: 1px solid transparent
-}
+/*
+--------------------------------------------------------------------------------
+Bold and Light Accordions
+--------------------------------------------------------------------------------
+*/
 
-.crm-container .crm-accordion-light[open] summary
-{
-	margin-bottom: 8px;
-}
-
-
-
-/* Dark Accordions */
-.crm-container .crm-accordion-bold
+.crm-container .crm-accordion-bold,
+.crm-container .crm-accordion-light
 {
     margin-bottom: 1em;
 }
 
-.crm-container .crm-accordion-bold summary
+.crm-container .crm-accordion-bold summary,
+.crm-container .crm-accordion-light summary
 {
     cursor: pointer;
     padding: 8px;
@@ -141,24 +129,28 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
 	background-image: none;
 }
 
-.crm-container .crm-accordion-bold summary:hover
+.crm-container .crm-accordion-bold summary:hover,
+.crm-container .crm-accordion-light summary:hover
 {
 	background-color: #eee;
 }
 
-.crm-container .crm-accordion-bold summary:focus-visible
+.crm-container .crm-accordion-bold summary:focus-visible,
+.crm-container .crm-accordion-light summary:focus-visible
 {
     color: #043959;
     box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
     outline: 1px solid transparent
 }
 
-.crm-container .crm-accordion-bold[open] summary
+.crm-container .crm-accordion-bold[open] summary,
+.crm-container .crm-accordion-light[open] summary
 {
 	margin-bottom: 0;
 }
 
-.crm-container .crm-accordion-bold .crm-accordion-body
+.crm-container .crm-accordion-bold .crm-accordion-body,
+.crm-container .crm-accordion-light .crm-accordion-body
 {
 	padding: 12px 8px 1px;
 }
@@ -166,7 +158,43 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
 
 /*
 --------------------------------------------------------------------------------
-News Feed amends.
+Light Accordions that really need to be "light".
+--------------------------------------------------------------------------------
+1. The Extensions screen.
+2. Add more here...
+--------------------------------------------------------------------------------
+*/
+
+#extensions .crm-accordion-light
+{
+	margin: 0;
+}
+
+#extensions .crm-accordion-light summary
+{
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+    font-weight: normal;
+}
+
+#extensions .crm-accordion-light summary:focus-visible
+{
+    color: #043959;
+    box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
+    outline: 1px solid transparent
+}
+
+#extensions .crm-accordion-light[open] summary
+{
+	margin-bottom: 8px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+News Feed accordions are also custom.
 --------------------------------------------------------------------------------
 */
 
@@ -195,32 +223,8 @@ News Feed amends.
 /*
 --------------------------------------------------------------------------------
 Advanced Search amends.
-The use of <details> and <summary> is going to increase, so we will need to
-broaden the scope of it as that happens.
 --------------------------------------------------------------------------------
 */
-.crm-container .crm-advanced_search_form-accordion
-{
-	padding: 0;
-	background-color: #fafafa;
-	box-shadow: 0 1px 1px rgba(0,0,0,.04);
-}
-
-.crm-container .crm-advanced_search_form-accordion .crm-master-accordion-header,
-.crm-container .crm-advanced_search_form-accordion .crm-accordion-header
-{
-	font-weight: bold;
-	color: #23282d;
-	padding: 8px;
-	border: 1px solid #e5e5e5;
-	background-image: none;
-}
-
-.crm-container .crm-advanced_search_form-accordion .crm-master-accordion-header:hover
-{
-	background-color: #eee;
-}
-
 .crm-advanced_search_form-accordion #display-settings
 {
 	padding-top: 0;
