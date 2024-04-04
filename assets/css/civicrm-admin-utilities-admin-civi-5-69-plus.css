@@ -103,23 +103,79 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
 	display: none;
 }
 
-.crm-container .crm-accordion-light summary
+/* Light and Dark Accordions */
+.crm-container .crm-accordion-light,
+.crm-container .crm-accordion-bold
 {
-	line-height: 150%;
+    margin-bottom: 1em;
 }
 
-.crm-container .crm-accordion-light summary:focus-visible
+.crm-container .crm-accordion-light summary,
+.crm-container .crm-accordion-bold summary
+{
+    cursor: pointer;
+    padding: 8px;
+	line-height: 150%;
+    font-weight: bold;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background-color: #fafafa;
+	background-image: none;
+}
+
+.crm-container .crm-accordion-light summary:hover,
+.crm-container .crm-accordion-bold summary:hover
+{
+	background-color: #eee;
+}
+
+.crm-container .crm-accordion-light summary:focus-visible,
+.crm-container .crm-accordion-bold summary:focus-visible
 {
     color: #043959;
     box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
     outline: 1px solid transparent
 }
 
-.crm-container .crm-accordion-light[open] summary
+.crm-container .crm-accordion-light[open] summary,
+.crm-container .crm-accordion-bold[open] summary
 {
-	margin-bottom: 8px;
+	margin-bottom: 0;
 }
 
+.crm-container .crm-accordion-light .crm-accordion-body,
+.crm-container .crm-accordion-bold .crm-accordion-body
+{
+	padding: 12px 8px 1px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+News Feed amends.
+--------------------------------------------------------------------------------
+*/
+
+#civicrm-dashboard #civicrm-news-feed-blog .crm-accordion-bold summary
+{
+    cursor: pointer;
+    padding: 8px;
+    color: #23282d;
+    font-weight: bold;
+	background-color: #eee;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+#civicrm-dashboard #civicrm-news-feed-blog .crm-accordion-bold summary:hover
+{
+	background-color: #ddd;
+}
+
+#civicrm-dashboard #civicrm-news-feed-blog .crm-accordion-body
+{
+	padding: 1px 8px 12px 8px;
+}
 
 
 /*
