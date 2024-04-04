@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.5 =
+
+* Updates accordion styling in CiviCRM 5.72+
+* Better PHP 8.2+ compatibility
+
 = 1.0.4 =
 
 * Updates support for WordPress admin colour schemes
