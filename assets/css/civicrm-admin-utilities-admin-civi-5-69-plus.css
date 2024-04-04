@@ -103,14 +103,32 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
 	display: none;
 }
 
-/* Light and Dark Accordions */
-.crm-container .crm-accordion-light,
+/* Light Accordions */
+.crm-container .crm-accordion-light summary
+{
+	line-height: 150%;
+}
+
+.crm-container .crm-accordion-light summary:focus-visible
+{
+    color: #043959;
+    box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
+    outline: 1px solid transparent
+}
+
+.crm-container .crm-accordion-light[open] summary
+{
+	margin-bottom: 8px;
+}
+
+
+
+/* Dark Accordions */
 .crm-container .crm-accordion-bold
 {
     margin-bottom: 1em;
 }
 
-.crm-container .crm-accordion-light summary,
 .crm-container .crm-accordion-bold summary
 {
     cursor: pointer;
@@ -123,13 +141,11 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
 	background-image: none;
 }
 
-.crm-container .crm-accordion-light summary:hover,
 .crm-container .crm-accordion-bold summary:hover
 {
 	background-color: #eee;
 }
 
-.crm-container .crm-accordion-light summary:focus-visible,
 .crm-container .crm-accordion-bold summary:focus-visible
 {
     color: #043959;
@@ -137,13 +153,11 @@ See also "#bootstrap-theme.crm-search summary" in the main Admin CSS file.
     outline: 1px solid transparent
 }
 
-.crm-container .crm-accordion-light[open] summary,
 .crm-container .crm-accordion-bold[open] summary
 {
 	margin-bottom: 0;
 }
 
-.crm-container .crm-accordion-light .crm-accordion-body,
 .crm-container .crm-accordion-bold .crm-accordion-body
 {
 	padding: 12px 8px 1px;
