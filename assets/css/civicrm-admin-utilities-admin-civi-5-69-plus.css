@@ -23,15 +23,15 @@ Use FontAwesome instead of background image.
 
 .crm-container div.crm-accordion-header:before,
 .crm-container .collapsed div.crm-accordion-header:before,
-.crm-container .crm-collapsible .collapsible-title:before,
+.crm-container .crm-collapsible.collapsed .collapsible-title:before,
 .crm-container span.collapsed:before,
 .crm-container a.collapsed:before,
 .crm-container .crm-expand-row:before
 {
 	font-family: "FontAwesome";
-	display: inline-block;
-	width: 1em;
 	content: "\f0da";
+	display: inline-block;
+	width: 0.8em;
 	font-size: 13px;
 }
 
@@ -43,6 +43,9 @@ Use FontAwesome instead of background image.
 {
 	font-family: "FontAwesome";
 	content: "\f0d7";
+	display: inline-block;
+	width: 0.8em;
+	font-size: 13px;
 }
 
 /* Reset older discovery tabs, e.g. Extensions screen */
@@ -50,7 +53,8 @@ Use FontAwesome instead of background image.
 .crm-container a.collapsed,
 .crm-container .crm-expand-row,
 .crm-container span.expanded,
-.crm-container a.expanded
+.crm-container a.expanded,
+#contact-summary .contact_panel .crm-collapsible .collapsible-title
 {
 	background: none;
 	padding-left: 0;
