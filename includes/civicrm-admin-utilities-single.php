@@ -2141,10 +2141,10 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// All Contacts.
 		$node = [
-			'id'     => 'cau-1',
+			'id'     => 'cau-12',
 			'parent' => $id,
-			'title'  => __( 'CiviCRM Dashboard', 'civicrm-admin-utilities' ),
-			'href'   => admin_url( 'admin.php?page=CiviCRM' ),
+			'title'  => __( 'All Contacts', 'civicrm-admin-utilities' ),
+			'href'   => $this->get_link( 'civicrm/contact/search', 'force=true&reset=1' ),
 		];
 		$wp_admin_bar->add_node( $node );
 
