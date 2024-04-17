@@ -71,6 +71,12 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.6 =
+
+* Updates accordion styling in Contact Layout Editor
+* Reinstates missing "All Contacts" menu item
+* Fixes resetting CiviCRM theme to default when saving settings
+
 = 1.0.5 =
 
 * Updates accordion styling in CiviCRM 5.72+
