@@ -308,6 +308,12 @@ class CiviCRM_Admin_Utilities_Theme {
       return;
     }
 
+    // Bail when disabling and the backend Theme is not ours.
+    $theme = $this->get_theme();
+		if ( 'disable' === $action && $theme !== $this->slug ) {
+			return;
+		}
+
     // Prevent reverse sync.
     remove_action( 'civicrm_postSave_civicrm_setting', [ $this, 'settings_change' ], 10 );
 
