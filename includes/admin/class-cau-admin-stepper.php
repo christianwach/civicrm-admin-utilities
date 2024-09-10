@@ -5,7 +5,6 @@
  * Handles "stepping" or "chunking" functionality.
  *
  * @package CiviCRM_Admin_Utilities
- * @since 1.0.2
  */
 
 // Exit if accessed directly.
@@ -18,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.2
  */
-class CiviCRM_Admin_Utilities_Admin_Stepper {
+class CAU_Admin_Stepper {
 
 	/**
 	 * Stepper identifier.

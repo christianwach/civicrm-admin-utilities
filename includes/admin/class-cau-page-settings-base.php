@@ -5,7 +5,6 @@
  * Handles common Settings Page functionality.
  *
  * @package CiviCRM_Admin_Utilities
- * @since 1.0.2
  */
 
 // Exit if accessed directly.
@@ -30,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.2
  */
-abstract class CiviCRM_AU_Settings_Page_Base {
+abstract class CAU_Settings_Page_Base {
 
 	/**
 	 * Hook prefix common to all Settings Pages.

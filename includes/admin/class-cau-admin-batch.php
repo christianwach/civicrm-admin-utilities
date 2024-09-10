@@ -5,7 +5,6 @@
  * Handles "batches" of "stepping" functionality.
  *
  * @package CiviCRM_Admin_Utilities
- * @since 1.0.2
  */
 
 // Exit if accessed directly.
@@ -18,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.2
  */
-class CiviCRM_Admin_Utilities_Admin_Batch {
+class CAU_Admin_Batch {
 
 	/**
 	 * Batch identifier.
@@ -52,7 +51,7 @@ class CiviCRM_Admin_Utilities_Admin_Batch {
 	 *
 	 * @since 1.0.2
 	 * @access public
-	 * @var CiviCRM_Admin_Utilities_Admin_Stepper
+	 * @var CAU_Admin_Stepper
 	 */
 	public $stepper;
 
@@ -70,7 +69,7 @@ class CiviCRM_Admin_Utilities_Admin_Batch {
 		$this->option_name = $identifier . $this->option_suffix;
 
 		// Instantiate the stepper.
-		$this->stepper = new CiviCRM_Admin_Utilities_Admin_Stepper( $identifier );
+		$this->stepper = new CAU_Admin_Stepper( $identifier );
 
 	}
 
@@ -206,7 +205,7 @@ class CiviCRM_Admin_Utilities_Admin_Batch {
 
 		// Delete the stepper.
 		if ( ! isset( $this->stepper ) ) {
-			$this->stepper = new CiviCRM_Admin_Utilities_Admin_Stepper( $this->identifier );
+			$this->stepper = new CAU_Admin_Stepper( $this->identifier );
 		}
 		$this->stepper->delete();
 		unset( $this->stepper );
