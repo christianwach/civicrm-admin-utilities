@@ -360,6 +360,18 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
+		// List of Afforms outside content setting may not exist.
+		if ( ! $this->setting_exists( 'afforms' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'afforms', $settings['afforms'] );
+			$save = true;
+
+		}
+
 		// If this is an upgrade.
 		if ( $this->is_upgrade ) {
 
@@ -437,6 +449,9 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Listen for API calls.
 		add_action( 'civicrm_config', [ $this, 'api_timezone_sync' ], 10, 1 );
+
+		// Add Afform Angular modules when required.
+		add_action( 'wp', [ $this, 'afform_scripts' ] );
 
 		// If the debugging flag is set.
 		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === true ) {
@@ -953,6 +968,18 @@ class CiviCRM_Admin_Utilities_Single {
 			'all' // Media.
 		);
 
+		// Register Select2 styles.
+		wp_register_style(
+			'civicrm-au-afforms-select2-css',
+			set_url_scheme( 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css' ),
+			false,
+			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
+			'all' // Media.
+		);
+
+		// Enqueue Select2 styles.
+		wp_enqueue_style( 'civicrm-au-afforms-select2-css' );
+
 	}
 
 	/**
@@ -988,6 +1015,18 @@ class CiviCRM_Admin_Utilities_Single {
 			CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
 			true
 		);
+
+		// Register Select2.
+		wp_register_script(
+			'civicrm-au-afforms-select2-js',
+			set_url_scheme( 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js' ),
+			[ 'jquery' ],
+			CIVICRM_ADMIN_UTILITIES_VERSION,
+			false
+		);
+
+		// Enqueue Select2.
+		wp_enqueue_script( 'civicrm-au-afforms-select2-js' );
 
 	}
 
@@ -1218,6 +1257,16 @@ class CiviCRM_Admin_Utilities_Single {
 			'core' // Vertical placement: options are 'core', 'high', 'low'.
 		);
 
+		// Create Form Builder metabox.
+		add_meta_box(
+			'civicrm_au_afform',
+			__( 'Form Builder Blocks', 'civicrm-admin-utilities' ),
+			[ $this, 'meta_box_afform_render' ], // Callback.
+			$screen_id, // Screen ID.
+			'normal', // Column: options are 'normal' and 'side'.
+			'core' // Vertical placement: options are 'core', 'high', 'low'.
+		);
+
 		// Create Other Fixes metabox.
 		add_meta_box(
 			'civicrm_au_fixes',
@@ -1428,6 +1477,33 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-post-types.php';
+
+	}
+
+	/**
+	 * Render Form Builder meta box on Admin screen.
+	 *
+	 * @since 1.0.7
+	 */
+	public function meta_box_afform_render() {
+
+		// Bail if CiviCRM fails to initialise.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
+
+		// Get all relevant Afforms.
+		$afforms = \Civi\Api4\Afform::get( false )
+			->addSelect( 'name', 'title', 'is_public' )
+			->addWhere( 'type', 'IN', [ 'form', 'search' ] )
+			->addWhere( 'is_public', '=', true )
+			->execute();
+
+		// Get the saved Afforms.
+		$used = $this->setting_get( 'afforms', [] );
+
+		// Include template file.
+		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-afform.php';
 
 	}
 
@@ -2916,6 +2992,62 @@ class CiviCRM_Admin_Utilities_Single {
 	// -------------------------------------------------------------------------
 
 	/**
+	 * Adds the callback for Afform Angular modules when required.
+	 *
+	 * @since 1.0.7
+	 */
+	public function afform_scripts() {
+
+		/**
+		 * Filters the hook through which loading of Angular modules is done.
+		 *
+		 * Some themes do not fire the "get_header" action. If that is the case, use this
+		 * filter to return a suitable substitute hook, e.g. "wp_head".
+		 *
+		 * @since 1.0.7
+		 *
+		 * @param string $hook The default hook name. Default is 'get_header'.
+		 */
+		$hook = apply_filters( 'civicrm_admin_utilities_afform_hook', 'get_header' );
+
+		// Add Afform Angular modules when required.
+		add_action( $hook, [ $this, 'afform_scripts_load' ] );
+
+	}
+
+	/**
+	 * Adds the Afform Angular modules when required.
+	 *
+	 * @since 1.0.7
+	 */
+	public function afform_scripts_load() {
+
+		// Get the saved Afforms.
+		$afforms = $this->setting_get( 'afforms', [] );
+		if ( empty( $afforms ) ) {
+			return;
+		}
+
+		// Bail if no CiviCRM.
+		if ( ! $this->plugin->is_civicrm_initialised() ) {
+			return;
+		}
+
+		// Add the Angular modules for these Afforms.
+		foreach ( $afforms as $afform ) {
+			\Civi::service( 'angularjs.loader' )->addModules( $afform );
+		}
+
+		// Add CiviCRM callback if not already added.
+		if ( ! has_action( 'wp_enqueue_scripts', [ civi_wp(), 'front_end_page_load' ] ) ) {
+			add_action( 'wp_enqueue_scripts', [ civi_wp(), 'front_end_page_load' ], 100 );
+		}
+
+	}
+
+	// -------------------------------------------------------------------------
+
+	/**
 	 * Utility for tracing calls to hook_civicrm_pre.
 	 *
 	 * @since 0.5.4 Moved from plugin class.
@@ -3041,6 +3173,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Fix API timezone by default.
 		$settings['fix_api_timezone'] = '1';
 
+		// List of Afforms outside content.
+		$settings['afforms'] = [];
+
 		/**
 		 * Filter default settings.
 		 *
@@ -3124,6 +3259,12 @@ class CiviCRM_Admin_Utilities_Single {
 		$post_types = filter_input( INPUT_POST, $prefix . 'post_types', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		if ( empty( $post_types ) ) {
 			$post_types = [];
+		}
+
+		// Retrieve Afforms array.
+		$afforms = filter_input( INPUT_POST, $prefix . 'afforms', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		if ( empty( $afforms ) ) {
+			$afforms = [];
 		}
 
 		// Init force cache-clearing flag.
@@ -3282,6 +3423,24 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'fix_api_timezone', '1' );
 		} else {
 			$this->setting_set( 'fix_api_timezone', '0' );
+		}
+
+		// Which Form Builder forms are we auto-loading?
+		if ( ! empty( $afforms ) ) {
+
+			// Sanitise array.
+			array_walk(
+				$afforms,
+				function( &$item ) {
+					$item = sanitize_text_field( wp_unslash( $item ) );
+				}
+			);
+
+			// Set option.
+			$this->setting_set( 'afforms', $afforms );
+
+		} else {
+			$this->setting_set( 'afforms', [] );
 		}
 
 		// Save options.

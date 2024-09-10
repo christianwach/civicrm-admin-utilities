@@ -24,7 +24,8 @@
 
 		// Define vars.
 		var checkbox = $('#civicrm_admin_utilities_styles_admin'),
-			theme_preview = $('#theme-compare-dashboard');
+			theme_preview = $('#theme-compare-dashboard'),
+			afforms_select = $('#civicrm_admin_utilities_afforms');
 
 		// Init 2020 only when theme is not selected.
 		if ( ! checkbox.prop( 'checked' ) ) {
@@ -38,6 +39,9 @@
 			});
 
 		}
+
+		// Enable Select2.
+		afforms_select.select2();
 
    	});
 
