@@ -6,7 +6,7 @@ CiviCRM Admin Utilities
 **Tags:** civicrm, admin, utility, styling, menu<br/>
 **Requires at least:** 4.9<br/>
 **Tested up to:** 6.6<br/>
-**Stable tag:** 1.0.7<br/>
+**Stable tag:** 1.0.8a<br/>
 **License:** GPLv2 or later<br/>
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
