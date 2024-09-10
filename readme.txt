@@ -71,6 +71,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.7 =
+
+* Adds a setting to enable auto-loading of Afforms outside content
+
 = 1.0.6 =
 
 * Updates accordion styling in Contact Layout Editor
