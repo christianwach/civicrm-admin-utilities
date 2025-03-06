@@ -6102,6 +6102,7 @@ jQuery UI overrides
 	padding: 0;
 	border: 1px solid #ccc;
 	border-radius: 0;
+	z-index: 3 !important;
 }
 
 #ui-datepicker-div.ui-datepicker .ui-datepicker-header
