@@ -720,16 +720,9 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			$data['multisite'] = true;
 		}
 
-		// Build params.
-		$params = [
-			'version'   => 3,
-			'domain_id' => $data['domain']['id'],
-			'name'      => 'is_enabled',
-			'group'     => 'Multi Site Preferences',
-		];
-
 		// Check if "Multisite" is enabled for this Domain.
-		$data['enabled'] = civicrm_api( 'Setting', 'getvalue', $params );
+		// is_enabled is the old name for the setting (before CiviCRM 6.3).
+		$data['enabled'] = \Civi::settings()->get('multisite_is_enabled') || \Civi::settings()->get('is_enabled');
 
 		// Get the "Multi Site Settings" page URL.
 		$data['multisite_url'] = $this->plugin->single->get_link( 'civicrm/admin/setting/preferences/multisite', 'reset=1' );
