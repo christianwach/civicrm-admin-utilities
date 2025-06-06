@@ -1684,6 +1684,33 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function admin_scripts_enqueue() {
 
+		/*
+		 * We should only load our styles on the CiviCRM admin screen and on any
+		 * Post Types where the CiviCRM Shortcode button is visible.
+		 */
+		$screen = get_current_screen();
+
+		// Get post types on which button is enabled.
+		$allowed_ids = $this->setting_get( 'post_types', [] );
+
+		// Allow CiviCRM admin screen.
+		$allowed_ids[] = 'toplevel_page_CiviCRM';
+
+		/**
+		 * Filters the array of allowed screen IDs.
+		 *
+		 * @since 1.0.8
+		 *
+		 * @param array     $allowed_ids The array of allowed screen IDs.
+		 * @param WP_Screen $screen The current screen object.
+		 */
+		$allowed_ids = apply_filters( 'cau/single/admin_scripts_enqueue/allowed_ids', $allowed_ids, $screen );
+
+		// Bail if we're not on a screen that needs our styles.
+		if ( ! in_array( $screen->id, $allowed_ids, true ) ) {
+			return;
+		}
+
 		// Bail if disabled.
 		if ( $this->setting_get( 'prettify_menu', '0' ) === '1' ) {
 
