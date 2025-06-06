@@ -5896,13 +5896,14 @@ jQuery UI overrides
 #crm-container .ui-widget select,
 #crm-container .ui-widget textarea,
 #crm-container .ui-widget button,
-.ui-dialog.ui-widget.crm-container,
+.ui-dialog.crm-container.ui-widget.crm-container,
 .ui-dialog.ui-widget.crm-container input,
 .ui-dialog.ui-widget.crm-container select,
 .ui-dialog.ui-widget.crm-container textarea,
 .ui-dialog.ui-widget.crm-container button,
-#ui-datepicker-div.ui-datepicker,
-#ui-datepicker-div.ui-datepicker .ui-widget select
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker,
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-widget select,
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-widget-header select
 {
 	/* Match WordPress admin */
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -5992,7 +5993,7 @@ jQuery UI overrides
 	font-size: 13px;
 }
 
-.ui-dialog .ui-corner-all,
+.ui-dialog.crm-container .ui-corner-all,
 #crm-container .ui-corner-all,
 #crm-container .ui-corner-bottom,
 #crm-container .ui-corner-right,
@@ -6001,7 +6002,7 @@ jQuery UI overrides
 	border-bottom-right-radius: 0;
 }
 
-.ui-dialog .ui-corner-all,
+.ui-dialog.crm-container .ui-corner-all,
 #crm-container .ui-corner-all,
 #crm-container .ui-corner-bottom,
 #crm-container .ui-corner-left,
@@ -6010,7 +6011,7 @@ jQuery UI overrides
 	border-bottom-left-radius: 0;
 }
 
-.ui-dialog .ui-corner-all,
+.ui-dialog.crm-container .ui-corner-all,
 #crm-container .ui-corner-all,
 #crm-container .ui-corner-top,
 #crm-container .ui-corner-right,
@@ -6019,7 +6020,7 @@ jQuery UI overrides
 	border-top-right-radius: 0;
 }
 
-.ui-dialog .ui-corner-all,
+.ui-dialog.crm-container .ui-corner-all,
 #crm-container .ui-corner-all,
 #crm-container .ui-corner-top,
 #crm-container .ui-corner-left,
@@ -6059,7 +6060,7 @@ jQuery UI overrides
 }
 
 /* dialog buttons */
-.ui-dialog .ui-dialog-buttonpane button
+.ui-dialog.crm-container .ui-dialog-buttonpane button
 {
 	display: inline-block;
 	text-decoration: none;
@@ -6083,29 +6084,29 @@ jQuery UI overrides
 	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
 }
 
-.ui-dialog .ui-dialog-buttonpane button:hover,
-.ui-dialog .ui-dialog-buttonpane button:focus
+.ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+.ui-dialog.crm-container .ui-dialog-buttonpane button:focus
 {
 	background: #008ec2;
 	border-color: #006799;
 	color: #fff;
 }
 
-.ui-dialog .ui-dialog-buttonpane button .ui-icon[class*=" fa-"]
+.ui-dialog.crm-container .ui-dialog-buttonpane button .ui-icon[class*=" fa-"]
 {
 	margin-top: 0;
 }
 
 /* Mini calendar */
-#ui-datepicker-div.ui-datepicker
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker
 {
 	padding: 0;
 	border: 1px solid #ccc;
 	border-radius: 0;
-	z-index: 3 !important;
+	z-index: 900000 !important
 }
 
-#ui-datepicker-div.ui-datepicker .ui-datepicker-header
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-datepicker-header
 {
 	background-color: #eee;
 	background-image: none;
@@ -6115,7 +6116,7 @@ jQuery UI overrides
 	height: auto;
 }
 
-#ui-datepicker-div.ui-datepicker table.ui-datepicker-calendar
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker table.ui-datepicker-calendar
 {
 	font-size: 108%;
 	width: 96%;
@@ -6124,24 +6125,24 @@ jQuery UI overrides
 	height: auto;
 }
 
-#ui-datepicker-div.ui-datepicker .ui-state-default
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-state-default
 {
 	background: #f5f5f5;
 }
 
-#ui-datepicker-div.ui-datepicker .ui-state-highlight
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-state-highlight
 {
 	background: #fdefa1;
 }
 
-#ui-datepicker-div.ui-datepicker .ui-datepicker-prev,
-#ui-datepicker-div.ui-datepicker .ui-datepicker-next
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-datepicker-prev,
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-datepicker-next
 {
 	top: 5px;
 }
 
-#ui-datepicker-div.ui-datepicker .ui-datepicker-prev.ui-state-hover,
-#ui-datepicker-div.ui-datepicker .ui-datepicker-next.ui-state-hover
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-datepicker-prev.ui-state-hover,
+body.toplevel_page_CiviCRM #ui-datepicker-div.ui-datepicker .ui-datepicker-next.ui-state-hover
 {
 	top: 5px;
 	box-sizing: border-box;
@@ -6311,24 +6312,24 @@ WordPress Admin Themes support
 */
 
 /* light */
-body.admin-color-light .crm-container a.button,
-body.admin-color-light .crm-container a.button:link,
-body.admin-color-light .crm-container a.button:hover,
-body.admin-color-light .crm-container a.button:focus,
-body.admin-color-light .crm-container a.button:active,
-body.admin-color-light .crm-container input.crm-form-submit,
-body.admin-color-light .crm-container button.crm-form-submit,
-body.admin-color-light .crm-container input[type=button],
-body.admin-color-light .crm-container button.crm-button,
-body.admin-color-light .crm-container button.crmMailing-btn-primary.crm-button,
-body.admin-color-light .ui-dialog .ui-dialog-buttonpane button,
-body.admin-color-light .crm-container > form > button.crm-button[type=submit],
-body.admin-color-light .crm-container > form > a.button.cancel,
-body.admin-color-light .ui-widget.crm-container .crm-container button.ui-widget,
-body.admin-color-light #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body.admin-color-light #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-light #crm-container .crm-inline-edit.add-new .crm-edit-help,
-body.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button:link,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container input.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container button.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container input[type=button],
+body.toplevel_page_CiviCRM.admin-color-light .crm-container button.crm-button,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container button.crmMailing-btn-primary.crm-button,
+body.toplevel_page_CiviCRM.admin-color-light .ui-dialog.crm-container .ui-dialog-buttonpane button,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container > form > button.crm-button[type=submit],
+body.toplevel_page_CiviCRM.admin-color-light .crm-container > form > a.button.cancel,
+body.toplevel_page_CiviCRM.admin-color-light .ui-widget.crm-container .crm-container button.ui-widget,
+body.toplevel_page_CiviCRM.admin-color-light #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-light #crm-container div.crm-inline-edit .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-light #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #04a4cc;
 	 border-color: #037c9a #036881 #036881;
@@ -6337,15 +6338,15 @@ body.admin-color-light #crm-notification-container div.ui-notify-message .notify
 	 text-shadow: 0 -1px 1px #036881, 1px 0 1px #036881, 0 1px 1px #036881, -1px 0 1px #036881;
 }
 
-body.admin-color-light .crm-container a.button:hover,
-body.admin-color-light .crm-container a.button:focus,
-body.admin-color-light .crm-container a.button:active,
-body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:hover,
-body.admin-color-light .ui-dialog .ui-dialog-buttonpane button:focus,
-body.admin-color-light #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-light #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
-body.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-light .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-light .ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+body.toplevel_page_CiviCRM.admin-color-light .ui-dialog.crm-container .ui-dialog-buttonpane button:focus,
+body.toplevel_page_CiviCRM.admin-color-light #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-light #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.toplevel_page_CiviCRM.admin-color-light #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #04b0db;
 	 border-color: #036881;
@@ -6356,24 +6357,24 @@ body.admin-color-light #crm-notification-container div.ui-notify-message .notify
 
 
 /* blue */
-body.admin-color-blue .crm-container a.button,
-body.admin-color-blue .crm-container a.button:link,
-body.admin-color-blue .crm-container a.button:hover,
-body.admin-color-blue .crm-container a.button:focus,
-body.admin-color-blue .crm-container a.button:active,
-body.admin-color-blue .crm-container input.crm-form-submit,
-body.admin-color-blue .crm-container button.crm-form-submit,
-body.admin-color-blue .crm-container input[type=button],
-body.admin-color-blue .crm-container button.crm-button,
-body.admin-color-blue .crm-container button.crmMailing-btn-primary.crm-button,
-body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button,
-body.admin-color-blue .crm-container > form > button.crm-button[type=submit],
-body.admin-color-blue .crm-container > form > a.button.cancel,
-body.admin-color-blue .ui-widget.crm-container .crm-container button.ui-widget,
-body.admin-color-blue #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body.admin-color-blue #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-blue #crm-container .crm-inline-edit.add-new .crm-edit-help,
-body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button:link,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container input.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container button.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container input[type=button],
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container button.crm-button,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container button.crmMailing-btn-primary.crm-button,
+body.toplevel_page_CiviCRM.admin-color-blue .ui-dialog.crm-container .ui-dialog-buttonpane button,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container > form > button.crm-button[type=submit],
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container > form > a.button.cancel,
+body.toplevel_page_CiviCRM.admin-color-blue .ui-widget.crm-container .crm-container button.ui-widget,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-container div.crm-inline-edit .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #e1a948;
 	 border-color: #d39323 #bd831f #bd831f;
@@ -6382,15 +6383,15 @@ body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-
 	 text-shadow: 0 -1px 1px #bd831f, 1px 0 1px #bd831f, 0 1px 1px #bd831f, -1px 0 1px #bd831f;
 }
 
-body.admin-color-blue .crm-container a.button:hover,
-body.admin-color-blue .crm-container a.button:focus,
-body.admin-color-blue .crm-container a.button:active,
-body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:hover,
-body.admin-color-blue .ui-dialog .ui-dialog-buttonpane button:focus,
-body.admin-color-blue #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-blue #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
-body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-blue .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-blue .ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+body.toplevel_page_CiviCRM.admin-color-blue .ui-dialog.crm-container .ui-dialog-buttonpane button:focus,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.toplevel_page_CiviCRM.admin-color-blue #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #e3af55;
 	 border-color: #bd831f;
@@ -6401,24 +6402,24 @@ body.admin-color-blue #crm-notification-container div.ui-notify-message .notify-
 
 
 /* coffee */
-body.admin-color-coffee .crm-container a.button,
-body.admin-color-coffee .crm-container a.button:link,
-body.admin-color-coffee .crm-container a.button:hover,
-body.admin-color-coffee .crm-container a.button:focus,
-body.admin-color-coffee .crm-container a.button:active,
-body.admin-color-coffee .crm-container input.crm-form-submit,
-body.admin-color-coffee .crm-container button.crm-form-submit,
-body.admin-color-coffee .crm-container input[type=button],
-body.admin-color-coffee .crm-container button.crm-button,
-body.admin-color-coffee .crm-container button.crmMailing-btn-primary.crm-button,
-body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button,
-body.admin-color-coffee .crm-container > form > button.crm-button[type=submit],
-body.admin-color-coffee .crm-container > form > a.button.cancel,
-body.admin-color-coffee .ui-widget.crm-container .crm-container button.ui-widget,
-body.admin-color-coffee #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body.admin-color-coffee #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-coffee #crm-container .crm-inline-edit.add-new .crm-edit-help,
-body.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button:link,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container input.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container button.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container input[type=button],
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container button.crm-button,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container button.crmMailing-btn-primary.crm-button,
+body.toplevel_page_CiviCRM.admin-color-coffee .ui-dialog.crm-container .ui-dialog-buttonpane button,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container > form > button.crm-button[type=submit],
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container > form > a.button.cancel,
+body.toplevel_page_CiviCRM.admin-color-coffee .ui-widget.crm-container .crm-container button.ui-widget,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-container div.crm-inline-edit .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #c7a589;
 	 border-color: #b78b66 #ae7d55 #ae7d55;
@@ -6427,15 +6428,15 @@ body.admin-color-coffee #crm-notification-container div.ui-notify-message .notif
 	 text-shadow: 0 -1px 1px #ae7d55, 1px 0 1px #ae7d55, 0 1px 1px #ae7d55, -1px 0 1px #ae7d55;
 }
 
-body.admin-color-coffee .crm-container a.button:hover,
-body.admin-color-coffee .crm-container a.button:focus,
-body.admin-color-coffee .crm-container a.button:active,
-body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:hover,
-body.admin-color-coffee .ui-dialog .ui-dialog-buttonpane button:focus,
-body.admin-color-coffee #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-coffee #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
-body.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-coffee .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-coffee .ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+body.toplevel_page_CiviCRM.admin-color-coffee .ui-dialog.crm-container .ui-dialog-buttonpane button:focus,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.toplevel_page_CiviCRM.admin-color-coffee #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #ccad93;
 	 border-color: #ae7d55;
@@ -6446,24 +6447,24 @@ body.admin-color-coffee #crm-notification-container div.ui-notify-message .notif
 
 
 /* ectoplasm */
-body.admin-color-ectoplasm .crm-container a.button,
-body.admin-color-ectoplasm .crm-container a.button:link,
-body.admin-color-ectoplasm .crm-container a.button:hover,
-body.admin-color-ectoplasm .crm-container a.button:focus,
-body.admin-color-ectoplasm .crm-container a.button:active,
-body.admin-color-ectoplasm .crm-container input.crm-form-submit,
-body.admin-color-ectoplasm .crm-container button.crm-form-submit,
-body.admin-color-ectoplasm .crm-container input[type=button],
-body.admin-color-ectoplasm .crm-container button.crm-button,
-body.admin-color-ectoplasm .crm-container button.crmMailing-btn-primary.crm-button,
-body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button,
-body.admin-color-ectoplasm .crm-container > form > button.crm-button[type=submit],
-body.admin-color-ectoplasm .crm-container > form > a.button.cancel,
-body.admin-color-ectoplasm .ui-widget.crm-container .crm-container button.ui-widget,
-body.admin-color-ectoplasm #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body.admin-color-ectoplasm #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-ectoplasm #crm-container .crm-inline-edit.add-new .crm-edit-help,
-body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button:link,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container input.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container button.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container input[type=button],
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container button.crm-button,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container button.crmMailing-btn-primary.crm-button,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .ui-dialog.crm-container .ui-dialog-buttonpane button,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container > form > button.crm-button[type=submit],
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container > form > a.button.cancel,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .ui-widget.crm-container .crm-container button.ui-widget,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-container div.crm-inline-edit .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #a3b745;
 	 border-color: #829237 #727f30 #727f30;
@@ -6472,15 +6473,15 @@ body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .no
 	 text-shadow: 0 -1px 1px #727f30, 1px 0 1px #727f30, 0 1px 1px #727f30, -1px 0 1px #727f30;
 }
 
-body.admin-color-ectoplasm .crm-container a.button:hover,
-body.admin-color-ectoplasm .crm-container a.button:focus,
-body.admin-color-ectoplasm .crm-container a.button:active,
-body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:hover,
-body.admin-color-ectoplasm .ui-dialog .ui-dialog-buttonpane button:focus,
-body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
-body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm .ui-dialog.crm-container .ui-dialog-buttonpane button:focus,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.toplevel_page_CiviCRM.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #a9bd4f;
 	 border-color: #727f30;
@@ -6491,24 +6492,24 @@ body.admin-color-ectoplasm #crm-notification-container div.ui-notify-message .no
 
 
 /* midnight */
-body.admin-color-midnight .crm-container a.button,
-body.admin-color-midnight .crm-container a.button:link,
-body.admin-color-midnight .crm-container a.button:hover,
-body.admin-color-midnight .crm-container a.button:focus,
-body.admin-color-midnight .crm-container a.button:active,
-body.admin-color-midnight .crm-container input.crm-form-submit,
-body.admin-color-midnight .crm-container button.crm-form-submit,
-body.admin-color-midnight .crm-container input[type=button],
-body.admin-color-midnight .crm-container button.crm-button,
-body.admin-color-midnight .crm-container button.crmMailing-btn-primary.crm-button,
-body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button,
-body.admin-color-midnight .crm-container > form > button.crm-button[type=submit],
-body.admin-color-midnight .crm-container > form > a.button.cancel,
-body.admin-color-midnight .ui-widget.crm-container .crm-container button.ui-widget,
-body.admin-color-midnight #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body.admin-color-midnight #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-midnight #crm-container .crm-inline-edit.add-new .crm-edit-help,
-body.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button:link,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container input.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container button.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container input[type=button],
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container button.crm-button,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container button.crmMailing-btn-primary.crm-button,
+body.toplevel_page_CiviCRM.admin-color-midnight .ui-dialog.crm-container .ui-dialog-buttonpane button,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container > form > button.crm-button[type=submit],
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container > form > a.button.cancel,
+body.toplevel_page_CiviCRM.admin-color-midnight .ui-widget.crm-container .crm-container button.ui-widget,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-container div.crm-inline-edit .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #e14d43;
 	 border-color: #d02c21 #ba281e #ba281e;
@@ -6517,15 +6518,15 @@ body.admin-color-midnight #crm-notification-container div.ui-notify-message .not
 	 text-shadow: 0 -1px 1px #ba281e, 1px 0 1px #ba281e, 0 1px 1px #ba281e, -1px 0 1px #ba281e;
 }
 
-body.admin-color-midnight .crm-container a.button:hover,
-body.admin-color-midnight .crm-container a.button:focus,
-body.admin-color-midnight .crm-container a.button:active,
-body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:hover,
-body.admin-color-midnight .ui-dialog .ui-dialog-buttonpane button:focus,
-body.admin-color-midnight #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-midnight #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
-body.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-midnight .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-midnight .ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+body.toplevel_page_CiviCRM.admin-color-midnight .ui-dialog.crm-container .ui-dialog-buttonpane button:focus,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.toplevel_page_CiviCRM.admin-color-midnight #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #e35950;
 	 border-color: #ba281e;
@@ -6536,24 +6537,24 @@ body.admin-color-midnight #crm-notification-container div.ui-notify-message .not
 
 
 /* ocean */
-body.admin-color-ocean .crm-container a.button,
-body.admin-color-ocean .crm-container a.button:link,
-body.admin-color-ocean .crm-container a.button:hover,
-body.admin-color-ocean .crm-container a.button:focus,
-body.admin-color-ocean .crm-container a.button:active,
-body.admin-color-ocean .crm-container input.crm-form-submit,
-body.admin-color-ocean .crm-container button.crm-form-submit,
-body.admin-color-ocean .crm-container input[type=button],
-body.admin-color-ocean .crm-container button.crm-button,
-body.admin-color-ocean .crm-container button.crmMailing-btn-primary.crm-button,
-body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button,
-body.admin-color-ocean .crm-container > form > button.crm-button[type=submit],
-body.admin-color-ocean .crm-container > form > a.button.cancel,
-body.admin-color-ocean .ui-widget.crm-container .crm-container button.ui-widget,
-body.admin-color-ocean #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body.admin-color-ocean #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-ocean #crm-container .crm-inline-edit.add-new .crm-edit-help,
-body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button:link,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container input.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container button.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container input[type=button],
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container button.crm-button,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container button.crmMailing-btn-primary.crm-button,
+body.toplevel_page_CiviCRM.admin-color-ocean .ui-dialog.crm-container .ui-dialog-buttonpane button,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container > form > button.crm-button[type=submit],
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container > form > a.button.cancel,
+body.toplevel_page_CiviCRM.admin-color-ocean .ui-widget.crm-container .crm-container button.ui-widget,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-container div.crm-inline-edit .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #9ebaa0;
 	 border-color: #80a583 #719a74 #719a74;
@@ -6562,15 +6563,15 @@ body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify
 	 text-shadow: 0 -1px 1px #719a74, 1px 0 1px #719a74, 0 1px 1px #719a74, -1px 0 1px #719a74;
 }
 
-body.admin-color-ocean .crm-container a.button:hover,
-body.admin-color-ocean .crm-container a.button:focus,
-body.admin-color-ocean .crm-container a.button:active,
-body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:hover,
-body.admin-color-ocean .ui-dialog .ui-dialog-buttonpane button:focus,
-body.admin-color-ocean #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-ocean #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
-body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-ocean .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-ocean .ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+body.toplevel_page_CiviCRM.admin-color-ocean .ui-dialog.crm-container .ui-dialog-buttonpane button:focus,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.toplevel_page_CiviCRM.admin-color-ocean #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #a7c0a9;
 	 border-color: #719a74;
@@ -6581,24 +6582,24 @@ body.admin-color-ocean #crm-notification-container div.ui-notify-message .notify
 
 
 /* sunrise */
-body.admin-color-sunrise .crm-container a.button,
-body.admin-color-sunrise .crm-container a.button:link,
-body.admin-color-sunrise .crm-container a.button:hover,
-body.admin-color-sunrise .crm-container a.button:focus,
-body.admin-color-sunrise .crm-container a.button:active,
-body.admin-color-sunrise .crm-container input.crm-form-submit,
-body.admin-color-sunrise .crm-container button.crm-form-submit,
-body.admin-color-sunrise .crm-container input[type=button],
-body.admin-color-sunrise .crm-container button.crm-button,
-body.admin-color-sunrise .crm-container button.crmMailing-btn-primary.crm-button,
-body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button,
-body.admin-color-sunrise .crm-container > form > button.crm-button[type=submit],
-body.admin-color-sunrise .crm-container > form > a.button.cancel,
-body.admin-color-sunrise .ui-widget.crm-container .crm-container button.ui-widget,
-body.admin-color-sunrise #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
-body.admin-color-sunrise #crm-container div.crm-inline-edit .crm-edit-help,
-body.admin-color-sunrise #crm-container .crm-inline-edit.add-new .crm-edit-help,
-body.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button:link,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container input.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container button.crm-form-submit,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container input[type=button],
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container button.crm-button,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container button.crmMailing-btn-primary.crm-button,
+body.toplevel_page_CiviCRM.admin-color-sunrise .ui-dialog.crm-container .ui-dialog-buttonpane button,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container > form > button.crm-button[type=submit],
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container > form > a.button.cancel,
+body.toplevel_page_CiviCRM.admin-color-sunrise .ui-widget.crm-container .crm-container button.ui-widget,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-container .crm-address-block+.crm-address-block .add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-container div.crm-inline-edit .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-container .crm-inline-edit.add-new .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]
 {
 	 background: #dd823b;
 	 border-color: #c36922 #ad5d1e #ad5d1e;
@@ -6607,15 +6608,15 @@ body.admin-color-sunrise #crm-notification-container div.ui-notify-message .noti
 	 text-shadow: 0 -1px 1px #ad5d1e, 1px 0 1px #ad5d1e, 0 1px 1px #ad5d1e, -1px 0 1px #ad5d1e;
 }
 
-body.admin-color-sunrise .crm-container a.button:hover,
-body.admin-color-sunrise .crm-container a.button:focus,
-body.admin-color-sunrise .crm-container a.button:active,
-body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:hover,
-body.admin-color-sunrise .ui-dialog .ui-dialog-buttonpane button:focus,
-body.admin-color-sunrise #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-sunrise #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
-body.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
-body.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button:hover,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button:focus,
+body.toplevel_page_CiviCRM.admin-color-sunrise .crm-container a.button:active,
+body.toplevel_page_CiviCRM.admin-color-sunrise .ui-dialog.crm-container .ui-dialog-buttonpane button:hover,
+body.toplevel_page_CiviCRM.admin-color-sunrise .ui-dialog.crm-container .ui-dialog-buttonpane button:focus,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-container .crm-edit-ready .crm-summary-block .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-container .crm-edit-ready .crm-inline-edit:hover .crm-edit-help,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:hover,
+body.toplevel_page_CiviCRM.admin-color-sunrise #crm-notification-container div.ui-notify-message .notify-content a[role="button"]:focus
 {
 	 background: #df8a48;
 	 border-color: #ad5d1e;
@@ -6640,18 +6641,18 @@ body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel,
 body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:hover,
 body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:focus,
 body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:active,
-body.wp-admin .ui-dialog input.crm-form-submit.cancel,
-body.wp-admin .ui-dialog input.crm-form-submit.cancel:hover,
-body.wp-admin .ui-dialog input.crm-form-submit.cancel:focus,
-body.wp-admin .ui-dialog input.crm-form-submit.cancel:active,
+body.wp-admin .ui-dialog.crm-container input.crm-form-submit.cancel,
+body.wp-admin .ui-dialog.crm-container input.crm-form-submit.cancel:hover,
+body.wp-admin .ui-dialog.crm-container input.crm-form-submit.cancel:focus,
+body.wp-admin .ui-dialog.crm-container input.crm-form-submit.cancel:active,
 body.wp-admin #crm-container.crm-container button.crm-form-submit.cancel,
 body.wp-admin #crm-container.crm-container button.crm-form-submit.cancel:hover,
 body.wp-admin #crm-container.crm-container button.crm-form-submit.cancel:focus,
 body.wp-admin #crm-container.crm-container button.crm-form-submit.cancel:active,
-body.wp-admin .ui-dialog button.crm-form-submit.cancel,
-body.wp-admin .ui-dialog button.crm-form-submit.cancel:hover,
-body.wp-admin .ui-dialog button.crm-form-submit.cancel:focus,
-body.wp-admin .ui-dialog button.crm-form-submit.cancel:active,
+body.wp-admin .ui-dialog.crm-container button.crm-form-submit.cancel,
+body.wp-admin .ui-dialog.crm-container button.crm-form-submit.cancel:hover,
+body.wp-admin .ui-dialog.crm-container button.crm-form-submit.cancel:focus,
+body.wp-admin .ui-dialog.crm-container button.crm-form-submit.cancel:active,
 body.wp-admin button.ui-button[data-identifier*="_cancel"],
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:hover,
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:focus,
@@ -6678,15 +6679,15 @@ body.wp-admin #crm-container.crm-container a.button.cancel:active,
 body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:hover,
 body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:focus,
 body.wp-admin #crm-container.crm-container input.crm-form-submit.cancel:active,
-body.wp-admin .ui-dialog input.crm-form-submit.cancel:hover,
-body.wp-admin .ui-dialog input.crm-form-submit.cancel:focus,
-body.wp-admin .ui-dialog input.crm-form-submit.cancel:active,
+body.wp-admin .ui-dialog.crm-container input.crm-form-submit.cancel:hover,
+body.wp-admin .ui-dialog.crm-container input.crm-form-submit.cancel:focus,
+body.wp-admin .ui-dialog.crm-container input.crm-form-submit.cancel:active,
 body.wp-admin #crm-container.crm-container button.crm-form-submit.cancel:hover,
 body.wp-admin #crm-container.crm-container button.crm-form-submit.cancel:focus,
 body.wp-admin #crm-container.crm-container button.crm-form-submit.cancel:active,
-body.wp-admin .ui-dialog button.crm-form-submit.cancel:hover,
-body.wp-admin .ui-dialog button.crm-form-submit.cancel:focus,
-body.wp-admin .ui-dialog button.crm-form-submit.cancel:active,
+body.wp-admin .ui-dialog.crm-container button.crm-form-submit.cancel:hover,
+body.wp-admin .ui-dialog.crm-container button.crm-form-submit.cancel:focus,
+body.wp-admin .ui-dialog.crm-container button.crm-form-submit.cancel:active,
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:hover,
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:focus,
 body.wp-admin button.ui-button[data-identifier*="_cancel"]:active,
