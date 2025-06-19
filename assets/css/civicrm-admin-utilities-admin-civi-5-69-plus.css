@@ -238,3 +238,66 @@ Advanced Search amends.
 {
 	margin: 0;
 }
+
+/*
+--------------------------------------------------------------------------------
+Event Registration amends.
+--------------------------------------------------------------------------------
+*/
+.crm-container #registration_blocks details
+{
+    margin-bottom: 1em;
+}
+
+.crm-container #registration_blocks details summary
+{
+    cursor: pointer;
+    padding: 8px;
+	line-height: 150%;
+    font-weight: bold;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background-color: #fafafa;
+	background-image: none;
+}
+
+.crm-container #registration_blocks details summary:hover
+{
+	background-color: #eee;
+}
+
+.crm-container #registration_blocks details summary:focus-visible
+{
+    color: #043959;
+    box-shadow: 0 0 0 1px #4f94d4,0 0 2px 1px rgba(79,148,212,.8);
+    outline: 1px solid transparent
+}
+
+.crm-container #registration_blocks details[open] summary
+{
+	margin-bottom: 0;
+}
+
+.crm-container #registration_blocks details .crm-accordion-body,
+.crm-container #registration_blocks #mail .crm-accordion-wrapper
+{
+	padding: 12px 8px 1px;
+}
+
+/* Nest the "Confirmation Email" <details> element */
+.crm-container #registration_blocks details details
+{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.crm-container #registration_blocks #thankyou,
+.crm-container #registration_blocks #mail
+{
+	border: 1px solid #e5e5e5;
+}
+
+.crm-container #registration_blocks #thankyou > .crm-accordion-body
+{
+	border: none;
+}
