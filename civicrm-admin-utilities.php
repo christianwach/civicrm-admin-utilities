@@ -21,16 +21,6 @@ defined( 'ABSPATH' ) || exit;
 // Set our version here.
 define( 'CIVICRM_ADMIN_UTILITIES_VERSION', '1.0.8a' );
 
-// Trigger logging of API failures (mostly).
-if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_LOG' ) ) {
-	define( 'CIVICRM_ADMIN_UTILITIES_LOG', false );
-}
-
-// Trigger logging of 'civicrm_pre' and 'civicrm_post'.
-if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
-	define( 'CIVICRM_ADMIN_UTILITIES_DEBUG', false );
-}
-
 // Store reference to this file.
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_FILE' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_FILE', __FILE__ );
@@ -457,8 +447,8 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function log_error( $data = [] ) {
 
-		// Skip if not logging.
-		if ( CIVICRM_ADMIN_UTILITIES_LOG === false ) {
+		// Skip if not debugging.
+		if ( ! defined( 'WP_DEBUG' ) || false === WP_DEBUG ) {
 			return;
 		}
 
