@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.8 =
+
+* Targets new multisite is_enabled setting
+* Misc style fixes for recent version of CiviCRM
+
 = 1.0.7 =
 
 * Adds a setting to enable auto-loading of Afforms outside content
