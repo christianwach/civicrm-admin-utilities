@@ -473,6 +473,16 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			'core' // Vertical placement: options are 'core', 'high', 'low'.
 		);
 
+		/**
+		 * Broadcast that the metaboxes have been added.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param string $screen_id The Screen indentifier.
+		 * @param array $data The array of metabox data.
+		 */
+		do_action( 'cau/multidomain/network/settings/page/meta_boxes_added', $screen_id, $data );
+
 	}
 
 	/**

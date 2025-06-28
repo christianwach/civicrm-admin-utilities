@@ -1282,6 +1282,16 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
+		/**
+		 * Broadcast that the metaboxes have been added.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param string $screen_id The Screen indentifier.
+		 * @param array $data The array of metabox data.
+		 */
+		do_action( 'cau/single/admin/meta_boxes_added', $screen_id, $data );
+
 	}
 
 	/**

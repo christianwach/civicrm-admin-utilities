@@ -804,6 +804,9 @@ class CiviCRM_Admin_Utilities_Multisite {
 			return;
 		}
 
+		// Init data to pass to meta boxes.
+		$data = [];
+
 		// Create Submit metabox.
 		add_meta_box(
 			'submitdiv',
@@ -883,6 +886,16 @@ class CiviCRM_Admin_Utilities_Multisite {
 			'normal', // Column: options are 'normal' and 'side'.
 			'core' // Vertical placement: options are 'core', 'high', 'low'.
 		);
+
+		/**
+		 * Broadcast that the metaboxes have been added.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param string $screen_id The Screen indentifier.
+		 * @param array $data The array of metabox data.
+		 */
+		do_action( 'cau/network/settings/page/meta_boxes_added', $screen_id, $data );
 
 	}
 
