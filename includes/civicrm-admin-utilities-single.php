@@ -1160,6 +1160,16 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
+		/**
+		 * Filters the array of data to be shared with all metaboxes.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param array $data The empty default array of metabox data.
+		 * @param string $screen_id The Screen indentifier.
+		 */
+		$data = apply_filters( 'cau/single/admin/meta_boxes_data', [], $screen_id );
+
 		// Create Submit metabox.
 		add_meta_box(
 			'submitdiv',

@@ -424,9 +424,6 @@ class CiviCRM_Admin_Utilities_Multidomain {
 			return;
 		}
 
-		// Init data to pass to meta boxes.
-		$data = [];
-
 		// Get domains.
 		$data['domains'] = $this->domains_get();
 
@@ -435,6 +432,16 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		if ( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
 			$data['multisite'] = true;
 		}
+
+		/**
+		 * Filters the array of data to be shared with all metaboxes.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param array $data The default array of metabox data.
+		 * @param string $screen_id The Screen indentifier.
+		 */
+		$data = apply_filters( 'cau/multidomain/network/settings/page/meta_boxes_data', $data, $screen_id );
 
 		// Create CiviCRM Network Settings metabox.
 		add_meta_box(
