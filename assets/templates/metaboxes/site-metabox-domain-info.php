@@ -36,9 +36,10 @@ defined( 'ABSPATH' ) || exit;
 		<?php
 
 		printf(
-			/* translators: %s: The URL of the CiviCRM setting page. */
-			esc_html__( 'Multisite is not enabled on this CiviCRM Domain. Change <a href="%s">the setting in CiviCRM</a> to enable it.', 'civicrm-admin-utilities' ),
-			esc_url( $metabox['args']['multisite_url'] )
+			/* translators: 1: The opening anchor tag, 2: The closing anchor tag. */
+			esc_html__( 'Multisite is not enabled on this CiviCRM Domain. Change %1$sthe setting in CiviCRM%2$s to enable it.', 'civicrm-admin-utilities' ),
+			'<a href="' . $metabox['args']['multisite_url'] . '">', /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */
+			'</a>'
 		);
 
 		?>
