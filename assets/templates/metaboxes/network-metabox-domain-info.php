@@ -31,31 +31,24 @@ defined( 'ABSPATH' ) || exit;
 <?php endif; ?>
 
 <?php if ( ! empty( $metabox['args']['domains'] ) ) : ?>
+	<table class="form-table">
+		<?php foreach ( $metabox['args']['domains'] as $civicrm_domain ) : ?>
+		<tr>
+			<th scope="row">
+				<?php echo esc_html( $civicrm_domain['name'] ); ?>
+			</th>
+			<td>
+				<?php
 
-<table class="form-table">
+				echo sprintf(
+					/* translators: %s: The ID of the CiviCRM Domain. */
+					esc_html__( 'ID %s', 'civicrm-admin-utilities' ),
+					'<span class="cau_domain_id">' . esc_html( $civicrm_domain['id'] ) . '</span>'
+				);
 
-	<?php foreach ( $metabox['args']['domains'] as $civicrm_domain ) : ?>
-
-	<tr>
-		<th scope="row">
-			<?php echo esc_html( $civicrm_domain['name'] ); ?>
-		</th>
-
-		<td>
-			<?php
-
-			echo sprintf(
-				/* translators: %s: The ID of the CiviCRM Domain. */
-				esc_html__( 'ID %s', 'civicrm-admin-utilities' ),
-				'<span class="cau_domain_id">' . esc_html( $civicrm_domain['id'] ) . '</span>'
-			);
-
-			?>
-		</td>
-	</tr>
-
-	<?php endforeach; ?>
-
-</table>
-
+				?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
 <?php endif; ?>
