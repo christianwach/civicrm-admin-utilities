@@ -429,8 +429,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Check if "CiviCRM Multisite" extension is active.
 		$data['multisite'] = false;
-		$enabled           = $this->plugin->is_extension_enabled( 'org.civicrm.multisite' );
-		if ( ! empty( $enabled ) ) {
+		if ( ! empty( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) ) {
 			$data['multisite'] = true;
 		}
 
@@ -734,8 +733,7 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Check if "CiviCRM Multisite" extension is active.
 		$data['multisite'] = false;
-		$enabled           = $this->plugin->is_extension_enabled( 'org.civicrm.multisite' );
-		if ( ! empty( $enabled ) ) {
+		if ( ! empty( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) ) {
 			$data['multisite'] = true;
 		}
 
