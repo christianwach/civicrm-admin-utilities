@@ -429,7 +429,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Check if "CiviCRM Multisite" extension is active.
 		$data['multisite'] = false;
-		if ( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
+		$enabled = $this->plugin->is_extension_enabled( 'org.civicrm.multisite' );
+		if ( ! empty( $enabled ) ) {
 			$data['multisite'] = true;
 		}
 
@@ -733,7 +734,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 
 		// Check if "CiviCRM Multisite" extension is active.
 		$data['multisite'] = false;
-		if ( $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
+		$enabled = $this->plugin->is_extension_enabled( 'org.civicrm.multisite' );
+		if ( ! empty( $enabled ) ) {
 			$data['multisite'] = true;
 		}
 
@@ -1347,7 +1349,8 @@ class CiviCRM_Admin_Utilities_Multidomain {
 		}
 
 		// Bail if "CiviCRM Multisite" extension is not active.
-		if ( ! $this->plugin->is_extension_enabled( 'org.civicrm.multisite' ) ) {
+		$enabled = $this->plugin->is_extension_enabled( 'org.civicrm.multisite' );
+		if ( empty( $enabled ) ) {
 			return __( 'CiviCRM Multisite extension must be enabled.', 'civicrm-admin-utilities' );
 		}
 

@@ -389,52 +389,50 @@ class CiviCRM_Admin_Utilities {
 	}
 
 	/**
-	 * Check if a CiviCRM Extension is installed and active.
+	 * Checks if a CiviCRM Extension is installed and active.
 	 *
 	 * @since 0.6.2
 	 *
 	 * @param str $full_name The full name of the extension.
-	 * @return bool $installed True if extension is installed, false otherwise.
+	 * @return array|bool $extension The array of Extension data, an empty array if not found, or false on error.
 	 */
 	public function is_extension_enabled( $full_name ) {
 
-		// Bail if CiviCRM is not active.
+		// Bail if no CiviCRM.
 		if ( ! $this->is_civicrm_initialised() ) {
 			return false;
 		}
 
-		// Assume not installed.
-		$installed = false;
+		try {
 
-		// Build params.
-		$params = [
-			'version'    => 3,
-			'sequential' => 1,
-			'full_name'  => $full_name,
-		];
+			// Call the API.
+			$result = \Civi\Api4\Extension::get( false )
+				->addSelect( '*' )
+				->addWhere( 'key', '=', $full_name )
+				->addWhere( 'status', '=', 'installed' )
+				->setLimit( 1 )
+				->execute();
 
-		// Query API for extension.
-		$result = civicrm_api( 'Extension', 'get', $params );
-
-		// Bail if there's an error.
-		if ( ! empty( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
-			return $installed;
+		} catch ( CRM_Core_Exception $e ) {
+			$log = [
+				'method'    => __METHOD__,
+				'error'     => $e->getMessage(),
+				'backtrace' => $e->getTraceAsString(),
+			];
+			$this->plugin->log_error( $log );
+			return false;
 		}
 
-		// Bail if not found.
-		if ( empty( $result['values'] ) ) {
-			return $installed;
+		// Return empty array if not found.
+		if ( 0 === $result->count() ) {
+			return [];
 		}
 
-		// Double check.
-		foreach ( $result['values'] as $extension ) {
-			if ( $extension['key'] === $full_name ) {
-				$installed = true;
-			}
-		}
+		// The first result is what we're after.
+		$extension = $result->first();
 
 		// --<
-		return $installed;
+		return $extension;
 
 	}
 
