@@ -66,7 +66,9 @@
 			},
 			minimumInputLength: 3,
 			templateResult: format_result,
-			templateSelection: format_response
+			templateSelection: format_response,
+			placeholder: CAU_Site_Domain.localisation.placeholder_group,
+			allowClear: true
 
 		});
 
@@ -110,7 +112,28 @@
 			},
 			minimumInputLength: 3,
 			templateResult: format_result,
-			templateSelection: format_response
+			templateSelection: format_response,
+			placeholder: CAU_Site_Domain.localisation.placeholder_org
+
+		});
+
+		/**
+		 * Domain Org Select2 change handler.
+		 *
+		 * @since 0.6.2
+		 *
+		 * @param {Object} event The Select2 event object.
+		 */
+		org.on( 'select2:select', function ( event ) {
+
+			// Toggle visibility of "Domain Name" row.
+			if ( event instanceof $.Event ) {
+				if ( event.params.data.id == CAU_Site_Domain.settings.domain_org_id ) {
+					$('.cau_domain_name_selector').hide();
+				} else {
+					$('.cau_domain_name_selector').show();
+				}
+			}
 
 		});
 
@@ -134,13 +157,13 @@
 		// Declare vars.
 		var markup;
 
-		// Construct basic group info.
+		// Construct basic info.
 		markup = '<div style="clear:both;">' +
 				'<div class="select2_results_name">' +
 					'<span style="font-weight:600;">' + data.name + '</span></em>' +
 				'</div>';
 
-		// Add group description, if available.
+		// Add description, if available.
 		if (data.description) {
 			markup += '<div class="select2_results_description" style="font-size:.9em;line-height:1.4;">'
 						+ data.description +

@@ -1,8 +1,8 @@
 <?php
 /**
- * Multidomain Settings Template.
+ * Site Settings "Domain" tab page Template.
  *
- * Handles markup for the Multidomain Settings page.
+ * Handles markup for the Site Settings "Domain" tab page.
  *
  * @package CiviCRM_Admin_Utilities
  * @since 0.8.1
@@ -46,7 +46,7 @@ defined( 'ABSPATH' ) || exit;
 	</h2>
 
 	<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
-	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->page_multidomain_submit_url_get(); ?>">
+	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->form_submit_url_get(); ?>">
 
 		<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
 		<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>

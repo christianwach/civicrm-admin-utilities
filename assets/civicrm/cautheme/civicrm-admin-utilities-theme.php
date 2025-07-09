@@ -81,7 +81,7 @@ class CiviCRM_Admin_Utilities_Theme {
 
 		// Bail if no CiviCRM.
 		if ( ! doing_action( 'civicrm_config' ) ) {
-      if ( ! $this->plugin->is_civicrm_initialised() ) {
+      if ( ! $this->plugin->civicrm->is_initialised() ) {
         return false;
       }
 		}

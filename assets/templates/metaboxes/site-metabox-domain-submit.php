@@ -1,8 +1,8 @@
 <?php
 /**
- * Site Settings "Domain Submit" metabox Template.
+ * Site Settings Domain tab "Settings Submit" metabox Template.
  *
- * Handles markup for the Site Settings "Domain Submit" metabox.
+ * Handles markup for the Site Settings Domain tab "Settings Submit" metabox.
  *
  * @package CiviCRM_Admin_Utilities
  * @since 0.8.1
@@ -17,6 +17,12 @@ defined( 'ABSPATH' ) || exit;
 	<div id="minor-publishing">
 		<div id="misc-publishing-actions">
 			<div class="misc-pub-section">
+				<ul style="margin: 0;">
+					<?php /* phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
+					<li><a href="<?php echo $metabox['args']['domain_url']; ?>"><?php esc_html_e( 'Multi Site Settings', 'civicrm-admin-utilities' ); ?></a></li>
+					<li><a href="<?php echo $metabox['args']['resource_url']; ?>"><?php esc_html_e( 'CiviCRM Resource URLs', 'civicrm-admin-utilities' ); ?></a></li>
+					<?php /* phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
+				</ul>
 			</div>
 		</div>
 		<div class="clear"></div>

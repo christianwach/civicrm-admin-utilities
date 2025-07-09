@@ -12,37 +12,47 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * CiviCRM Admin Utilities UFMatch Class.
+ * CiviCRM UFMatch Class.
  *
  * A class that encapsulates User-Contact matching functionality.
  *
  * @since 0.6.8
  */
-class CiviCRM_Admin_Utilities_UFMatch {
+class CAU_CiviCRM_UFMatch {
 
 	/**
 	 * Plugin object.
 	 *
 	 * @since 0.6.8
 	 * @access public
-	 * @var object
+	 * @var CiviCRM_Admin_Utilities
 	 */
 	public $plugin;
+
+	/**
+	 * CiviCRM object.
+	 *
+	 * @since 1.0.9
+	 * @access public
+	 * @var CAU_CiviCRM
+	 */
+	public $civicrm;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.6.8
 	 *
-	 * @param object $plugin The plugin object.
+	 * @param CAU_CiviCRM $parent The parent object.
 	 */
-	public function __construct( $plugin ) {
+	public function __construct( $parent ) {
 
-		// Store reference to plugin.
-		$this->plugin = $plugin;
+		// Store references.
+		$this->civicrm = $parent;
+		$this->plugin  = $parent->plugin;
 
-		// Initialise when plugin is loaded.
-		add_action( 'civicrm_admin_utilities_loaded', [ $this, 'initialise' ] );
+		// Initialise when the CiviCRM class is loaded.
+		add_action( 'cau/class/civicrm/loaded', [ $this, 'initialise' ] );
 
 	}
 
@@ -84,7 +94,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function contacts_get( $args ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -132,7 +142,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function contact_get_by_id( $contact_id ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -184,7 +194,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function contact_id_get_by_user_id( $user_id, $domain_id = '' ) {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -381,7 +391,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function entry_create( $contact_id, $user_id, $username, $domain_id = '' ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -436,7 +446,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function entry_delete( $ufmatch_id ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -486,7 +496,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function entry_ids_get_all( $domain_id = '' ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -558,7 +568,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function entry_get_by_contact_id( $contact_id, $domain_id = '' ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -632,7 +642,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function entry_get_by_user_id( $user_id, $domain_id = '' ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -706,7 +716,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function entry_get_by_user_email( $email, $domain_id = '' ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -781,7 +791,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function dedupe_rules_get( $contact_type = '' ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return [];
 		}
 
@@ -857,7 +867,7 @@ class CiviCRM_Admin_Utilities_UFMatch {
 	public function dedupe_contact( $contact, $contact_type, $dedupe_rule_id ) {
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->civicrm->is_initialised() ) {
 			return false;
 		}
 

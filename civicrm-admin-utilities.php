@@ -46,15 +46,6 @@ if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 class CiviCRM_Admin_Utilities {
 
 	/**
-	 * UFMatch utility object.
-	 *
-	 * @since 0.6.8
-	 * @access public
-	 * @var object
-	 */
-	public $ufmatch;
-
-	/**
 	 * Single Site WordPress object.
 	 *
 	 * @since 0.5.4
@@ -100,14 +91,23 @@ class CiviCRM_Admin_Utilities {
 	public $multidomain;
 
 	/**
+	 * CiviCRM object.
+	 *
+	 * @since 1.0.9
+	 * @access public
+	 * @var CAU_CiviCRM
+	 */
+	public $civicrm;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 */
 	public function __construct() {
 
-		// Initialise.
-		add_action( 'plugins_loaded', [ $this, 'initialise' ] );
+		// Initialise after CiviCRM.
+		add_action( 'plugins_loaded', [ $this, 'initialise' ], 20 );
 
 	}
 
@@ -124,8 +124,8 @@ class CiviCRM_Admin_Utilities {
 			return;
 		}
 
-		// Enable translation.
-		$this->enable_translation();
+		// ALways enable translation.
+		add_action( 'init', [ $this, 'enable_translation' ] );
 
 		// Bail if CiviCRM plugin is not present.
 		if ( ! function_exists( 'civi_wp' ) ) {
@@ -133,20 +133,13 @@ class CiviCRM_Admin_Utilities {
 		}
 
 		// Bail if CiviCRM is not fully installed.
-		if ( ! defined( 'CIVICRM_INSTALLED' ) ) {
-			return;
-		}
-		if ( ! CIVICRM_INSTALLED ) {
+		if ( ! defined( 'CIVICRM_INSTALLED' ) || ! CIVICRM_INSTALLED ) {
 			return;
 		}
 
-		// Include files.
+		// Bootstrap plugin.
 		$this->include_files();
-
-		// Set up objects and references.
 		$this->setup_objects();
-
-		// Finally, register hooks.
 		$this->register_hooks();
 
 		/**
@@ -169,7 +162,7 @@ class CiviCRM_Admin_Utilities {
 	private function include_files() {
 
 		// Load our common classes.
-		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-ufmatch.php';
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm.php';
 
 		// Load our admin utility classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/admin/class-cau-admin-batch.php';
@@ -183,10 +176,10 @@ class CiviCRM_Admin_Utilities {
 		// Load our Theme "Extension" class.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'assets/civicrm/cautheme/civicrm-admin-utilities-theme.php';
 
-		// Load our Multisite classes.
+		// Load our Multisite and Multidomain classes.
 		if ( is_multisite() ) {
 			require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multisite.php';
-			require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/civicrm-admin-utilities-multidomain.php';
+			require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/admin/multidomain/class-admin-multidomain-loader.php';
 		}
 
 	}
@@ -199,7 +192,7 @@ class CiviCRM_Admin_Utilities {
 	private function setup_objects() {
 
 		// Always instantiate common classes.
-		$this->ufmatch = new CiviCRM_Admin_Utilities_UFMatch( $this );
+		$this->civicrm = new CAU_CiviCRM( $this );
 
 		// Always instantiate Single Site classes.
 		$this->single       = new CiviCRM_Admin_Utilities_Single( $this );
@@ -211,7 +204,7 @@ class CiviCRM_Admin_Utilities {
 		// Maybe instantiate Multisite classes.
 		if ( is_multisite() ) {
 			$this->multisite   = new CiviCRM_Admin_Utilities_Multisite( $this );
-			$this->multidomain = new CiviCRM_Admin_Utilities_Multidomain( $this );
+			$this->multidomain = new CAU_Admin_Multidomain_Loader( $this );
 		}
 
 	}
@@ -312,127 +305,6 @@ class CiviCRM_Admin_Utilities {
 
 		// --<
 		return $is_network_active;
-
-	}
-
-	/**
-	 * Check if CiviCRM is initialised.
-	 *
-	 * @since 0.1
-	 * @since 0.5.4 Moved to this class.
-	 *
-	 * @return bool True if CiviCRM initialised, false otherwise.
-	 */
-	public function is_civicrm_initialised() {
-
-		// Init only when CiviCRM is fully installed.
-		if ( ! defined( 'CIVICRM_INSTALLED' ) ) {
-			return false;
-		}
-		if ( ! CIVICRM_INSTALLED ) {
-			return false;
-		}
-
-		// Bail if no CiviCRM init function.
-		if ( ! function_exists( 'civi_wp' ) ) {
-			return false;
-		}
-
-		// Try and initialise CiviCRM.
-		return civi_wp()->initialize();
-
-	}
-
-	/**
-	 * Check if CiviCRM is network activated.
-	 *
-	 * @since 0.5.4
-	 *
-	 * @return bool $civicrm_network_active True if network activated, false otherwise.
-	 */
-	public function is_civicrm_network_activated() {
-
-		// Only need to test once.
-		static $civicrm_network_active;
-
-		// Have we done this already?
-		if ( isset( $civicrm_network_active ) ) {
-			return $civicrm_network_active;
-		}
-
-		// If not Multisite, it cannot be.
-		if ( ! is_multisite() ) {
-			$civicrm_network_active = false;
-			return $civicrm_network_active;
-		}
-
-		// If CiviCRM's constant is not defined, we'll never know.
-		if ( ! defined( 'CIVICRM_PLUGIN_FILE' ) ) {
-			$civicrm_network_active = false;
-			return $civicrm_network_active;
-		}
-
-		// Make sure plugin file is included when outside admin.
-		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once ABSPATH . '/wp-admin/includes/plugin.php';
-		}
-
-		// Get path from 'plugins' directory to CiviCRM's directory.
-		$civicrm = plugin_basename( CIVICRM_PLUGIN_FILE );
-
-		// Test if network active.
-		$civicrm_network_active = is_plugin_active_for_network( $civicrm );
-
-		// --<
-		return $civicrm_network_active;
-
-	}
-
-	/**
-	 * Checks if a CiviCRM Extension is installed and active.
-	 *
-	 * @since 0.6.2
-	 *
-	 * @param str $full_name The full name of the extension.
-	 * @return array|bool $extension The array of Extension data, an empty array if not found, or false on error.
-	 */
-	public function is_extension_enabled( $full_name ) {
-
-		// Bail if no CiviCRM.
-		if ( ! $this->is_civicrm_initialised() ) {
-			return false;
-		}
-
-		try {
-
-			// Call the API.
-			$result = \Civi\Api4\Extension::get( false )
-				->addSelect( '*' )
-				->addWhere( 'key', '=', $full_name )
-				->addWhere( 'status', '=', 'installed' )
-				->setLimit( 1 )
-				->execute();
-
-		} catch ( CRM_Core_Exception $e ) {
-			$log = [
-				'method'    => __METHOD__,
-				'error'     => $e->getMessage(),
-				'backtrace' => $e->getTraceAsString(),
-			];
-			$this->plugin->log_error( $log );
-			return false;
-		}
-
-		// Return empty array if not found.
-		if ( 0 === $result->count() ) {
-			return [];
-		}
-
-		// The first result is what we're after.
-		$extension = $result->first();
-
-		// --<
-		return $extension;
 
 	}
 

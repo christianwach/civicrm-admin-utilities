@@ -159,6 +159,13 @@ class CiviCRM_Admin_Utilities_Single {
 		// Register hooks.
 		$this->register_hooks();
 
+		/**
+		 * Fires when this class is loaded.
+		 *
+		 * @since 1.0.9
+		 */
+		do_action( 'cau/single/loaded' );
+
 	}
 
 	/**
@@ -469,7 +476,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function user_actions( $actions, $user ) {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return $actions;
 		}
 
@@ -484,7 +491,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Get contact ID.
-		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
+		$contact_id = $this->plugin->civicrm->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
 		if ( false === $contact_id ) {
@@ -524,7 +531,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function profile_extras( $user ) {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -539,7 +546,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Get contact ID.
-		$contact_id = $this->plugin->ufmatch->contact_id_get_by_user_id( $user->ID );
+		$contact_id = $this->plugin->civicrm->ufmatch->contact_id_get_by_user_id( $user->ID );
 
 		// Bail if we don't get one for some reason.
 		if ( false === $contact_id ) {
@@ -1156,7 +1163,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -1498,7 +1505,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function meta_box_afform_render() {
 
 		// Bail if CiviCRM fails to initialise.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -1624,7 +1631,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function clear_caches() {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -1787,7 +1794,7 @@ class CiviCRM_Admin_Utilities_Single {
 			}
 
 			// Amend styles when CiviCRM 5.27+ is detected.
-			if ( $this->plugin->is_civicrm_initialised() ) {
+			if ( $this->plugin->civicrm->is_initialised() ) {
 				$version = CRM_Utils_System::version();
 				if ( version_compare( $version, '5.27', '>=' ) ) {
 					wp_enqueue_style(
@@ -1813,7 +1820,7 @@ class CiviCRM_Admin_Utilities_Single {
 				);
 
 				// Amend styles when CiviCRM 5.69+ is detected.
-				if ( $this->plugin->is_civicrm_initialised() ) {
+				if ( $this->plugin->civicrm->is_initialised() ) {
 					$version = CRM_Utils_System::version();
 					if ( version_compare( $version, '5.69', '>=' ) ) {
 						wp_enqueue_style(
@@ -1850,7 +1857,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function resources_disable() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -1924,7 +1931,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function resource_disable( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -1954,7 +1961,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function resource_get_url( $extension = 'civicrm', $file = 'css/civicrm.css' ) {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -1983,7 +1990,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function custom_css_disable() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -2032,7 +2039,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$shoreditch = false;
 
 		// Init CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return $shoreditch;
 		}
 
@@ -2061,7 +2068,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function kam_is_active() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -2132,7 +2139,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function civi_button_remove() {
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -2200,7 +2207,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 
@@ -2452,7 +2459,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$link = '';
 
 		// Init CiviCRM or bail.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return $link;
 		}
 
@@ -2484,7 +2491,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function check_permission( $permission ) {
 
 		// Always deny if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -2794,7 +2801,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -2833,7 +2840,7 @@ class CiviCRM_Admin_Utilities_Single {
 	public function paypal_predates_problem() {
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return false;
 		}
 
@@ -3066,7 +3073,7 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Bail if no CiviCRM.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 

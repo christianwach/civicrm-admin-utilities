@@ -140,6 +140,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 		// Register hooks.
 		$this->register_hooks();
 
+		/**
+		 * Fires when this class is loaded.
+		 *
+		 * @since 1.0.9
+		 */
+		do_action( 'cau/network/loaded' );
+
 	}
 
 	/**
@@ -374,6 +381,15 @@ class CiviCRM_Admin_Utilities_Multisite {
 
 		}
 
+		/**
+		 * Fires just before the upgraded settings are saved.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param bool $save True if settings should be saved, false otherwise.
+		 */
+		$save = apply_filters( 'cau/network/settings/upgrade', $save );
+
 		// Save settings if need be.
 		if ( true === $save ) {
 			$this->settings_save();
@@ -389,7 +405,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 	public function register_hooks() {
 
 		// If CiviCRM is network activated.
-		if ( $this->plugin->is_civicrm_network_activated() ) {
+		if ( $this->plugin->civicrm->is_network_activated() ) {
 
 			// Hook in after the CiviCRM menu hook has been registered.
 			add_action( 'init', [ $this, 'civicrm_on_main_site_only' ], 20 );
@@ -732,7 +748,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$civicrm_restricted = '';
 
 		// If CiviCRM is network activated.
-		if ( $this->plugin->is_civicrm_network_activated() ) {
+		if ( $this->plugin->civicrm->is_network_activated() ) {
 
 			// Init main site only checkbox.
 			$main_site_only = 0;

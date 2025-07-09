@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 <!-- assets/templates/templates/metaboxes/network-metabox-network-settings.php -->
-<?php if ( $this->plugin->is_civicrm_network_activated() ) : ?>
+<?php if ( $this->plugin->civicrm->is_network_activated() ) : ?>
 
 	<table class="form-table">
 

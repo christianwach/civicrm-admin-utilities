@@ -383,7 +383,7 @@ class CiviCRM_Admin_Utilities_Single_Users {
 		}
 
 		// Bail if CiviCRM is not active.
-		if ( ! $this->plugin->is_civicrm_initialised() ) {
+		if ( ! $this->plugin->civicrm->is_initialised() ) {
 			return;
 		}
 

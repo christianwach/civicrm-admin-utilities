@@ -123,7 +123,7 @@ class CAU_Single_Users_List_Table extends WP_Users_List_Table {
 		];
 
 		// Get all UFMatch records.
-		$ufmatch_all = civicrm_au()->ufmatch->entry_ids_get_all();
+		$ufmatch_all = civicrm_au()->civicrm->ufmatch->entry_ids_get_all();
 
 		// Build a reference array.
 		$ufmatch_linked = [];

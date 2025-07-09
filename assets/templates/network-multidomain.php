@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 	?>
 
 	<div class="updated">
-		<?php if ( $this->plugin->is_civicrm_network_activated() ) : ?>
+		<?php if ( $this->plugin->civicrm->is_network_activated() ) : ?>
 			<p><?php esc_html_e( 'CiviCRM is network-activated.', 'civicrm-admin-utilities' ); ?></p>
 		<?php else : ?>
 			<p><?php esc_html_e( 'CiviCRM is not network-activated.', 'civicrm-admin-utilities' ); ?></p>
@@ -55,7 +55,7 @@ defined( 'ABSPATH' ) || exit;
 	</h2>
 
 	<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
-	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->page_network_submit_url_get(); ?>">
+	<form method="post" id="civicrm_admin_utilities_settings_form" action="<?php echo $this->form_submit_url_get(); ?>">
 
 		<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
 		<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
