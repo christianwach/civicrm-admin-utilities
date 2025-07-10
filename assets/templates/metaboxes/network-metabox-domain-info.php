@@ -31,12 +31,14 @@ defined( 'ABSPATH' ) || exit;
 <?php endif; ?>
 
 <?php if ( ! empty( $metabox['args']['domains'] ) ) : ?>
-	<div class="notice notice-warning inline">
-		<p>
-			<?php esc_html_e( 'Each CiviCRM Domain should be assigned to a unique WordPress Site.', 'civicrm-admin-utilities' ); ?><br>
-			<?php esc_html_e( 'If you follow a link to a CiviCRM Domain and you see "Sorry, you are not allowed to access this page" then it means you have not yet enabled CiviCRM on that Site.', 'civicrm-admin-utilities' ); ?>
-		</p>
-	</div>
+	<?php if ( $metabox['args']['multisite'] ) : ?>
+		<div class="notice notice-warning inline">
+			<p>
+				<?php esc_html_e( 'Each CiviCRM Domain should be assigned to a unique WordPress Site.', 'civicrm-admin-utilities' ); ?><br>
+				<?php esc_html_e( 'If you follow a link to a CiviCRM Domain and you see "Sorry, you are not allowed to access this page" then it means you have not yet enabled CiviCRM on that Site.', 'civicrm-admin-utilities' ); ?>
+			</p>
+		</div>
+	<?php endif; ?>
 
 	<table class="wp-list-table widefat striped">
 		<thead>
@@ -45,7 +47,9 @@ defined( 'ABSPATH' ) || exit;
 				<th scope="col"><?php esc_html_e( 'Domain ID', 'civicrm-admin-utilities' ); ?></th>
 				<th scope="col"><?php esc_html_e( 'Domain Group', 'civicrm-admin-utilities' ); ?></th>
 				<th scope="col"><?php esc_html_e( 'Domain Organisation', 'civicrm-admin-utilities' ); ?></th>
-				<th scope="col"><?php esc_html_e( 'Assigned to WordPress Site', 'civicrm-admin-utilities' ); ?></th>
+				<?php if ( $metabox['args']['multisite'] ) : ?>
+					<th scope="col"><?php esc_html_e( 'Assigned to WordPress Site', 'civicrm-admin-utilities' ); ?></th>
+				<?php endif; ?>
 			</tr>
 		</thead>
 		<tbody>
@@ -78,15 +82,17 @@ defined( 'ABSPATH' ) || exit;
 				<td style="vertical-align: middle;"><?php echo esc_html( $civicrm_domain['domain_id'] ); ?></td>
 				<td style="vertical-align: middle;"><?php echo esc_html( $civicrm_domain['domain_group'] ); ?></td>
 				<td style="vertical-align: middle;"><?php echo esc_html( $civicrm_domain['domain_org'] ); ?></td>
-				<td>
-					<select id="cau_site_id-<?php echo esc_attr( $civicrm_domain['domain_id'] ); ?>" name="cau_site_id-<?php echo esc_attr( $civicrm_domain['domain_id'] ); ?>" class="cau_site_id_select" style="min-width: 15em;">
-						<?php if ( ! empty( $civicrm_domain['site_id'] ) ) : ?>
-							<option value="<?php echo esc_attr( $civicrm_domain['site_id'] ); ?>" selected="selected"><?php echo esc_html( $civicrm_domain['site_name'] ); ?></option>
-						<?php else : ?>
-							<option value="" selected="selected"><?php esc_html_e( 'Select a WordPress Site', 'civicrm-admin-utilities' ); ?></option>
-						<?php endif; ?>
-					</select>
-				</td>
+				<?php if ( $metabox['args']['multisite'] ) : ?>
+					<td>
+						<select id="cau_site_id-<?php echo esc_attr( $civicrm_domain['domain_id'] ); ?>" name="cau_site_id-<?php echo esc_attr( $civicrm_domain['domain_id'] ); ?>" class="cau_site_id_select" style="min-width: 15em;">
+							<?php if ( ! empty( $civicrm_domain['site_id'] ) ) : ?>
+								<option value="<?php echo esc_attr( $civicrm_domain['site_id'] ); ?>" selected="selected"><?php echo esc_html( $civicrm_domain['site_name'] ); ?></option>
+							<?php else : ?>
+								<option value="" selected="selected"><?php esc_html_e( 'Select a WordPress Site', 'civicrm-admin-utilities' ); ?></option>
+							<?php endif; ?>
+						</select>
+					</td>
+				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		</tbody>

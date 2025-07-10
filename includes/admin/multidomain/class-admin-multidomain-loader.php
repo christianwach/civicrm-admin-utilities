@@ -64,19 +64,12 @@ class CAU_Admin_Multidomain_Loader {
 		add_action( 'civicrm_admin_utilities_loaded', [ $this, 'initialise' ] );
 
 		/*
-		 * Append to Multisite default settings.
+		 * Append to and upgrade Multisite default settings.
 		 *
-		 * This filter must be added prior to `register_hooks()` because the
+		 * These filters must be added prior to `register_hooks()` because the
 		 * Multisite class will have already loaded its settings by then.
 		 */
 		add_filter( 'civicrm_admin_utilities_network_settings_default', [ $this, 'settings_get_defaults' ] );
-
-		/*
-		 * Upgrade Multisite default settings.
-		 *
-		 * This filter must be added prior to `register_hooks()` because the
-		 * Multisite class will have already loaded its settings by then.
-		 */
 		add_filter( 'cau/network/settings/upgrade', [ $this, 'settings_upgrade' ] );
 
 	}
@@ -150,56 +143,6 @@ class CAU_Admin_Multidomain_Loader {
 
 		// Listen for changes to the CiviCRM Domain Organisation ID.
 		add_action( 'civicrm_post', [ $this, 'setting_changed_domain_org' ], 10, 4 );
-
-	}
-
-	// -------------------------------------------------------------------------
-
-	/**
-	 * Acts on changes to the CiviCRM Domain Organisation ID.
-	 *
-	 * @since 1.0.9
-	 *
-	 * @param string  $op The type of database operation.
-	 * @param string  $object_name The type of object.
-	 * @param integer $object_id The ID of the object.
-	 * @param object  $object_ref The object.
-	 */
-	public function setting_changed_domain_org( $op, $object_name, $object_id, $object_ref ) {
-
-		// Bail if not a Domain.
-		if ( 'Domain' !== $object_name ) {
-			return;
-		}
-
-		// Bail if it's not a Domain object.
-		if ( ! ( $object_ref instanceof CRM_Core_BAO_Domain ) ) {
-			return;
-		}
-
-		// Make sure Domain ID is an integer.
-		$domain_id = (int) $object_id;
-
-		// Make sure there is a Contact ID property.
-		if ( ! isset( $object_ref->contact_id ) ) {
-			return;
-		}
-
-		// Update the reference data for this Domain.
-		$data = $this->reference_data_get( $domain_id );
-		if ( empty( $object_ref->contact_id ) ) {
-			$this->reference_data_remove( $domain_id, [ 'org_id' ], true );
-		} else {
-			$changing = false;
-			if ( empty( $data['org_id'] ) ) {
-				$changing = true;
-			} elseif ( (int) $data['org_id'] !== (int) $object_ref->contact_id ) {
-				$changing = true;
-			}
-			if ( $changing ) {
-				$this->reference_data_update( $domain_id, 'org_id', $object_ref->contact_id, true );
-			}
-		}
 
 	}
 
@@ -473,6 +416,54 @@ class CAU_Admin_Multidomain_Loader {
 			}
 			if ( $changing ) {
 				$this->reference_data_update( $domain_id, 'group_id', $value, true );
+			}
+		}
+
+	}
+
+	/**
+	 * Acts on changes to the CiviCRM Domain Organisation ID.
+	 *
+	 * @since 1.0.9
+	 *
+	 * @param string  $op The type of database operation.
+	 * @param string  $object_name The type of object.
+	 * @param integer $object_id The ID of the object.
+	 * @param object  $object_ref The object.
+	 */
+	public function setting_changed_domain_org( $op, $object_name, $object_id, $object_ref ) {
+
+		// Bail if not a Domain.
+		if ( 'Domain' !== $object_name ) {
+			return;
+		}
+
+		// Bail if it's not a Domain object.
+		if ( ! ( $object_ref instanceof CRM_Core_BAO_Domain ) ) {
+			return;
+		}
+
+		// Make sure Domain ID is an integer.
+		$domain_id = (int) $object_id;
+
+		// Make sure there is a Contact ID property.
+		if ( ! isset( $object_ref->contact_id ) ) {
+			return;
+		}
+
+		// Update the reference data for this Domain.
+		$data = $this->reference_data_get( $domain_id );
+		if ( empty( $object_ref->contact_id ) ) {
+			$this->reference_data_remove( $domain_id, [ 'org_id' ], true );
+		} else {
+			$changing = false;
+			if ( empty( $data['org_id'] ) ) {
+				$changing = true;
+			} elseif ( (int) $data['org_id'] !== (int) $object_ref->contact_id ) {
+				$changing = true;
+			}
+			if ( $changing ) {
+				$this->reference_data_update( $domain_id, 'org_id', $object_ref->contact_id, true );
 			}
 		}
 
