@@ -24,17 +24,19 @@ global $civicrm_setting, $civicrm_paths;
 
 	<table class="form-table">
 
-		<tr>
-			<th scope="row">
-				<label class="civicrm_admin_utilities_settings_label" for="cau_domain_mapped">
-					<?php esc_html_e( 'WordPress Site', 'civicrm-admin-utilities' ); ?>
-				</label>
-			</th>
-			<td>
-				<input type="checkbox" id="cau_domain_mapped" name="cau_domain_mapped" value="1"<?php checked( 1, $metabox['args']['domain_mapped'] ); ?>> <label class="civicrm_admin_utilities_settings_label" for="cau_domain_mapped"><?php esc_html_e( 'Assign this Domain to the current WordPress Site', 'civicrm-admin-utilities' ); ?></label>
-				<p class="description"><?php esc_html_e( 'You can bulk apply these mappings on the "Domains" tab of the CiviCRM Admin Utilities Network Settings screen.', 'civicrm-admin-utilities' ); ?><br>
-			</td>
-		</tr>
+		<?php if ( $metabox['args']['multisite'] && $metabox['args']['action_exists'] ) : ?>
+			<tr>
+				<th scope="row">
+					<label class="civicrm_admin_utilities_settings_label" for="cau_domain_mapped">
+						<?php esc_html_e( 'WordPress Site', 'civicrm-admin-utilities' ); ?>
+					</label>
+				</th>
+				<td>
+					<input type="checkbox" id="cau_domain_mapped" name="cau_domain_mapped" value="1"<?php checked( 1, $metabox['args']['domain_mapped'] ); ?>> <label class="civicrm_admin_utilities_settings_label" for="cau_domain_mapped"><?php esc_html_e( 'Assign this Domain to the current WordPress Site', 'civicrm-admin-utilities' ); ?></label>
+					<p class="description"><?php esc_html_e( 'You can bulk apply these mappings on the "Domains" tab of the CiviCRM Admin Utilities Network Settings screen.', 'civicrm-admin-utilities' ); ?><br>
+				</td>
+			</tr>
+		<?php endif; ?>
 
 		<tr>
 			<th scope="row">

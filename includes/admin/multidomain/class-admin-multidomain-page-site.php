@@ -474,6 +474,12 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 			$data['multisite'] = true;
 		}
 
+		// Check if required CiviCRM action exists.
+		$data['action_exists'] = false;
+		if ( $this->multidomain->action_exists ) {
+			$data['action_exists'] = true;
+		}
+
 		// Get the "Organization Address and Contact Info" page URL.
 		$data['domain_org_url'] = $this->plugin->single->get_link( 'civicrm/admin/domain', 'action=update&reset=1' );
 
@@ -527,16 +533,21 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 			$data
 		);
 
-		// Create "Domain Paths and URLs" metabox.
-		add_meta_box(
-			'civicrm_au_domain_paths',
-			__( 'Domain Paths and URLs', 'civicrm-admin-utilities' ),
-			[ $this, 'meta_box_paths_render' ], // Callback.
-			$screen_id, // Screen ID.
-			'normal', // Column: options are 'normal' and 'side'.
-			'core', // Vertical placement: options are 'core', 'high', 'low'.
-			$data
-		);
+		// Check if required CiviCRM action exists.
+		if ( $this->multidomain->action_exists ) {
+
+			// Create "Domain Paths and URLs" metabox.
+			add_meta_box(
+				'civicrm_au_domain_paths',
+				__( 'Domain Paths and URLs', 'civicrm-admin-utilities' ),
+				[ $this, 'meta_box_paths_render' ], // Callback.
+				$screen_id, // Screen ID.
+				'normal', // Column: options are 'normal' and 'side'.
+				'core', // Vertical placement: options are 'core', 'high', 'low'.
+				$data
+			);
+
+		}
 
 		// Create Submit metabox.
 		add_meta_box(
@@ -705,7 +716,9 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 		if ( $domain_org_changing && ! empty( $existing_domain_id ) ) {
 			$overwrite = 'overwrite' === $name_overwrite ? true : false;
 			$domain    = $this->plugin->civicrm->domain->org_update( $existing_domain_id, $domain_org_id, $overwrite );
-			$this->multidomain->reference_data_update( $existing_domain_id, 'org_id', $domain_org_id );
+			if ( $this->multidomain->action_exists ) {
+				$this->multidomain->reference_data_update( $existing_domain_id, 'org_id', $domain_org_id );
+			}
 		}
 
 		// Update the Domain Group if it is changing.
@@ -715,46 +728,57 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 			$this->plugin->civicrm->setting_set( 'domain_group_id', $domain_group_id_setting );
 			// All Contacts in the previous Domain Group must be reassigned to the new Domain Group.
 			$this->plugin->civicrm->domain->group_contacts_update( $existing_domain_group_id, $domain_group_id );
-			$this->multidomain->reference_data_update( $existing_domain_id, 'group_id', $domain_group_id );
+			if ( $this->multidomain->action_exists ) {
+				$this->multidomain->reference_data_update( $existing_domain_id, 'group_id', $domain_group_id );
+			}
 		}
 
 		// Create, update or delete the "GroupOrganization" if we didn't get an error.
 		$this->group_orgs_update( $args );
 
 		// Add or remove mapping between CiviCRM Domain and WordPress Site.
-		if ( empty( $domain_mapped ) && ! empty( $existing_domain_id ) ) {
-			$this->multidomain->mapping_site_remove( $existing_domain_id, get_current_blog_id() );
-		} else {
-			$this->multidomain->mapping_site_assign( $existing_domain_id, get_current_blog_id() );
+		if ( $this->multidomain->action_exists ) {
+			if ( empty( $domain_mapped ) && ! empty( $existing_domain_id ) ) {
+				$this->multidomain->mapping_site_remove( $existing_domain_id, get_current_blog_id() );
+			} else {
+				$this->multidomain->mapping_site_assign( $existing_domain_id, get_current_blog_id() );
+			}
 		}
 
 		// Update reference data.
-		if ( empty( $domain_mapped ) && ! empty( $existing_domain_id ) ) {
-			$this->multidomain->reference_data_remove( $existing_domain_id, [ 'site_id' ] );
-		} else {
-			$this->multidomain->reference_data_update( $existing_domain_id, 'site_id', get_current_blog_id() );
+		if ( $this->multidomain->action_exists ) {
+			if ( empty( $domain_mapped ) && ! empty( $existing_domain_id ) ) {
+				$this->multidomain->reference_data_remove( $existing_domain_id, [ 'site_id' ] );
+			} else {
+				$this->multidomain->reference_data_update( $existing_domain_id, 'site_id', get_current_blog_id() );
+			}
 		}
 
-		// Sanitise "Domain Paths" inputs.
-		$core_url       = isset( $_POST['cau_civicrm_core_url'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_civicrm_core_url'] ) ) : '';
-		$extensions_dir = isset( $_POST['cau_civicrm_extensions_dir'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_civicrm_extensions_dir'] ) ) : '';
-		$extensions_url = isset( $_POST['cau_civicrm_extensions_url'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_civicrm_extensions_url'] ) ) : '';
+		// Check if required CiviCRM action exists.
+		if ( $this->multidomain->action_exists ) {
 
-		// Enforce trailing slashes - or not.
-		$core_url       = untrailingslashit( $core_url );
-		$extensions_dir = ! empty( $extensions_dir ) ? trailingslashit( $extensions_dir ) : '';
-		$extensions_url = ! empty( $extensions_url ) ? trailingslashit( $extensions_url ) : '';
+			// Sanitise "Domain Paths" inputs.
+			$core_url       = isset( $_POST['cau_civicrm_core_url'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_civicrm_core_url'] ) ) : '';
+			$extensions_dir = isset( $_POST['cau_civicrm_extensions_dir'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_civicrm_extensions_dir'] ) ) : '';
+			$extensions_url = isset( $_POST['cau_civicrm_extensions_url'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_civicrm_extensions_url'] ) ) : '';
 
-		// Wrap them in an array.
-		$paths = [
-			'core_url'        => $core_url,
-			'extensions_url'  => $extensions_url,
-			'extensions_path' => $extensions_dir,
-		];
+			// Enforce trailing slashes - or not.
+			$core_url       = untrailingslashit( $core_url );
+			$extensions_dir = ! empty( $extensions_dir ) ? trailingslashit( $extensions_dir ) : '';
+			$extensions_url = ! empty( $extensions_url ) ? trailingslashit( $extensions_url ) : '';
 
-		// Assign them to the current Domain ID.
-		if ( ! empty( $existing_domain_id ) ) {
-			$this->plugin->multidomain->paths_set( $existing_domain_id, $paths );
+			// Wrap them in an array.
+			$paths = [
+				'core_url'        => $core_url,
+				'extensions_url'  => $extensions_url,
+				'extensions_path' => $extensions_dir,
+			];
+
+			// Assign them to the current Domain ID.
+			if ( ! empty( $existing_domain_id ) ) {
+				$this->plugin->multidomain->paths_set( $existing_domain_id, $paths );
+			}
+
 		}
 
 		// Save the settings.
@@ -802,24 +826,29 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 				// Create a "GroupOrganization" entry for the Domain Group.
 				$group_org = $this->plugin->civicrm->domain->group_org_create( $args['domain_group_id'], $args['domain_org_id'] );
 
-				// Handle any Groups that may have shared an old Domain Organisation.
-				$group_ids = $this->multidomain->groups_orphaned_get( $args['existing_domain_id'] );
-				if ( ! empty( $group_ids ) ) {
+				// Only handle Orphaned Groups when the action exists.
+				if ( $this->multidomain->action_exists ) {
 
-					// Create their "GroupOrganization" entries.
-					$errors = [];
-					foreach ( $group_ids as $group_id ) {
-						$group_org = $this->plugin->civicrm->domain->group_org_create( $group_id, $args['domain_org_id'] );
-						if ( empty( $group_org ) ) {
-							$errors[] = $group_id;
+					// Get all Groups that may have shared an old Domain Organisation.
+					$group_ids = $this->multidomain->groups_orphaned_get( $args['existing_domain_id'] );
+					if ( ! empty( $group_ids ) ) {
+
+						// Create their "GroupOrganization" entries.
+						$errors = [];
+						foreach ( $group_ids as $group_id ) {
+							$group_org = $this->plugin->civicrm->domain->group_org_create( $group_id, $args['domain_org_id'] );
+							if ( empty( $group_org ) ) {
+								$errors[] = $group_id;
+							}
 						}
-					}
 
-					// Delete the saved Orphaned Groups data.
-					$this->multidomain->groups_orphaned_remove( $args['existing_domain_id'] );
-					if ( ! empty( $errors ) ) {
-						// We could try again later, or show something in the UI.
-						$this->multidomain->groups_orphaned_set( $args['existing_domain_id'], $errors );
+						// Delete the saved Orphaned Groups data.
+						$this->multidomain->groups_orphaned_remove( $args['existing_domain_id'] );
+						if ( ! empty( $errors ) ) {
+							// We could try again later, or show something in the UI.
+							$this->multidomain->groups_orphaned_set( $args['existing_domain_id'], $errors );
+						}
+
 					}
 
 				}
@@ -847,12 +876,17 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 			// Handle any Groups that share the current Domain Organisation.
 			$group_orgs = $this->plugin->civicrm->domain->group_orgs_get( null, $args['domain_org_id'] );
 			if ( ! empty( $group_orgs ) ) {
-				// Save the Group IDs.
-				$group_ids = wp_list_pluck( $group_orgs, 'group_id' );
-				$this->multidomain->groups_orphaned_set( $args['existing_domain_id'], $group_ids );
+
+				// Only save Orphaned Groups when the action exists.
+				if ( $this->multidomain->action_exists ) {
+					$group_ids = wp_list_pluck( $group_orgs, 'group_id' );
+					$this->multidomain->groups_orphaned_set( $args['existing_domain_id'], $group_ids );
+				}
+
 				// Delete their "GroupOrganization" entries.
 				$group_org_ids = wp_list_pluck( $group_orgs, 'id' );
 				$group_orgs    = $this->plugin->civicrm->domain->group_orgs_delete( $group_org_ids );
+
 			}
 
 		}

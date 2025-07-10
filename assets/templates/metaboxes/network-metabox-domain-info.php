@@ -47,7 +47,7 @@ defined( 'ABSPATH' ) || exit;
 				<th scope="col"><?php esc_html_e( 'Domain ID', 'civicrm-admin-utilities' ); ?></th>
 				<th scope="col"><?php esc_html_e( 'Domain Group', 'civicrm-admin-utilities' ); ?></th>
 				<th scope="col"><?php esc_html_e( 'Domain Organisation', 'civicrm-admin-utilities' ); ?></th>
-				<?php if ( $metabox['args']['multisite'] ) : ?>
+				<?php if ( $metabox['args']['multisite'] && $metabox['args']['action_exists'] ) : ?>
 					<th scope="col"><?php esc_html_e( 'Assigned to WordPress Site', 'civicrm-admin-utilities' ); ?></th>
 				<?php endif; ?>
 			</tr>
@@ -82,7 +82,7 @@ defined( 'ABSPATH' ) || exit;
 				<td style="vertical-align: middle;"><?php echo esc_html( $civicrm_domain['domain_id'] ); ?></td>
 				<td style="vertical-align: middle;"><?php echo esc_html( $civicrm_domain['domain_group'] ); ?></td>
 				<td style="vertical-align: middle;"><?php echo esc_html( $civicrm_domain['domain_org'] ); ?></td>
-				<?php if ( $metabox['args']['multisite'] ) : ?>
+				<?php if ( $metabox['args']['multisite'] && $metabox['args']['action_exists'] ) : ?>
 					<td>
 						<select id="cau_site_id-<?php echo esc_attr( $civicrm_domain['domain_id'] ); ?>" name="cau_site_id-<?php echo esc_attr( $civicrm_domain['domain_id'] ); ?>" class="cau_site_id_select" style="min-width: 15em;">
 							<?php if ( ! empty( $civicrm_domain['site_id'] ) ) : ?>

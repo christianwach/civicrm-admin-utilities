@@ -49,6 +49,18 @@ class CAU_Admin_Multidomain_Loader {
 	public $site;
 
 	/**
+	 * Action exists flag.
+	 *
+	 * Gets set in the callback to the `civicrm_before_settings_file_load` action
+	 * which is required for the new Multidomain system to work.
+	 *
+	 * @since 1.0.9
+	 * @access public
+	 * @var bool
+	 */
+	public $action_exists = false;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.5.4
@@ -251,6 +263,9 @@ class CAU_Admin_Multidomain_Loader {
 	 */
 	public function settings_file_load_pre() {
 
+		// Set property whatever.
+		$this->action_exists = true;
+
 		// Get the Domain ID assigned to this WordPress Site.
 		$domain_id = $this->mapping_domain_get( get_current_blog_id() );
 
@@ -376,6 +391,11 @@ class CAU_Admin_Multidomain_Loader {
 	 */
 	public function setting_changed_domain_group( $dao ) {
 
+		// Check if required CiviCRM action exists.
+		if ( ! $this->action_exists ) {
+			return;
+		}
+
 		// Bail if not a setting.
 		if ( ! ( $dao instanceof CRM_Core_DAO_Setting ) ) {
 			return;
@@ -432,6 +452,11 @@ class CAU_Admin_Multidomain_Loader {
 	 * @param object  $object_ref The object.
 	 */
 	public function setting_changed_domain_org( $op, $object_name, $object_id, $object_ref ) {
+
+		// Check if required CiviCRM action exists.
+		if ( ! $this->action_exists ) {
+			return;
+		}
 
 		// Bail if not a Domain.
 		if ( 'Domain' !== $object_name ) {

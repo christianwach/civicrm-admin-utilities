@@ -434,6 +434,12 @@ class CAU_Admin_Multidomain_Page_Network extends CAU_Admin_Multidomain_Page_Base
 			$data['multisite'] = true;
 		}
 
+		// Check if required CiviCRM action exists.
+		$data['action_exists'] = false;
+		if ( $this->multidomain->action_exists ) {
+			$data['action_exists'] = true;
+		}
+
 		/**
 		 * Filters the array of data to be shared with all metaboxes.
 		 *
@@ -581,61 +587,66 @@ class CAU_Admin_Multidomain_Page_Network extends CAU_Admin_Multidomain_Page_Base
 		// Check that we trust the source of the data.
 		check_admin_referer( 'cau_network_multidomain_action', 'cau_network_multidomain_nonce' );
 
-		// Get data for all Domains.
-		$domains = $this->domains_data_get();
+		// Skip if we don't have the necessary action.
+		if ( $this->multidomain->action_exists ) {
 
-		/**
-		 * Fires when the Network Multidomain update process is finished.
-		 *
-		 * @since 1.0.9
-		 */
-		do_action( 'cau/multidomain/network/settings/form_save/pre' );
+			// Get data for all Domains.
+			$domains = $this->domains_data_get();
 
-		// Save mappings and reference data for each CiviCRM Domain.
-		foreach ( $domains as $domain ) {
+			/**
+			 * Fires when the Network Multidomain update process is finished.
+			 *
+			 * @since 1.0.9
+			 */
+			do_action( 'cau/multidomain/network/settings/form_save/pre' );
 
-			// Make sure the Domain ID is an integer.
-			$domain_id = (int) $domain['domain_id'];
+			// Save mappings and reference data for each CiviCRM Domain.
+			foreach ( $domains as $domain ) {
 
-			// Sanitise new Site ID input.
-			$key     = 'cau_site_id-' . $domain_id;
-			$site_id = isset( $_POST[ $key ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : false;
+				// Make sure the Domain ID is an integer.
+				$domain_id = (int) $domain['domain_id'];
 
-			// Update mappings.
-			if ( empty( $site_id ) ) {
-				$this->multidomain->mapping_site_remove( $domain_id, (int) $domain['site_id'] );
-			} elseif ( $site_id !== (int) $domain['site_id'] ) {
-				$this->multidomain->mapping_site_remove( $domain_id, (int) $domain['site_id'] );
-				$this->multidomain->mapping_site_assign( $domain_id, $site_id );
-			} else {
-				$this->multidomain->mapping_site_assign( $domain_id, $site_id );
+				// Sanitise new Site ID input.
+				$key     = 'cau_site_id-' . $domain_id;
+				$site_id = isset( $_POST[ $key ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : false;
+
+				// Update mappings.
+				if ( empty( $site_id ) ) {
+					$this->multidomain->mapping_site_remove( $domain_id, (int) $domain['site_id'] );
+				} elseif ( $site_id !== (int) $domain['site_id'] ) {
+					$this->multidomain->mapping_site_remove( $domain_id, (int) $domain['site_id'] );
+					$this->multidomain->mapping_site_assign( $domain_id, $site_id );
+				} else {
+					$this->multidomain->mapping_site_assign( $domain_id, $site_id );
+				}
+
+				// Update Site ID in reference data.
+				if ( empty( $site_id ) ) {
+					$this->multidomain->reference_data_remove( $domain_id, [ 'site_id' ] );
+				} else {
+					$this->multidomain->reference_data_update( $domain_id, 'site_id', $site_id );
+				}
+
+				// Update Domain Group ID in reference data.
+				if ( empty( $domain['domain_group_id'] ) ) {
+					$this->multidomain->reference_data_remove( $domain_id, [ 'group_id' ] );
+				} else {
+					$this->multidomain->reference_data_update( $domain_id, 'group_id', (int) $domain['domain_group_id'] );
+				}
+
+				// Update Domain Organisation ID in reference data.
+				if ( empty( $domain['domain_org_id'] ) ) {
+					$this->multidomain->reference_data_remove( $domain_id, [ 'org_id' ] );
+				} else {
+					$this->multidomain->reference_data_update( $domain_id, 'org_id', (int) $domain['domain_org_id'] );
+				}
+
 			}
 
-			// Update Site ID in reference data.
-			if ( empty( $site_id ) ) {
-				$this->multidomain->reference_data_remove( $domain_id, [ 'site_id' ] );
-			} else {
-				$this->multidomain->reference_data_update( $domain_id, 'site_id', $site_id );
-			}
-
-			// Update Domain Group ID in reference data.
-			if ( empty( $domain['domain_group_id'] ) ) {
-				$this->multidomain->reference_data_remove( $domain_id, [ 'group_id' ] );
-			} else {
-				$this->multidomain->reference_data_update( $domain_id, 'group_id', (int) $domain['domain_group_id'] );
-			}
-
-			// Update Domain Organisation ID in reference data.
-			if ( empty( $domain['domain_org_id'] ) ) {
-				$this->multidomain->reference_data_remove( $domain_id, [ 'org_id' ] );
-			} else {
-				$this->multidomain->reference_data_update( $domain_id, 'org_id', (int) $domain['domain_org_id'] );
-			}
+			// Save the settings.
+			$this->plugin->multisite->settings_save();
 
 		}
-
-		// Save the settings.
-		$this->plugin->multisite->settings_save();
 
 		// Sanitise new Domain input.
 		$domain_name = isset( $_POST['cau_domain_name'] ) ? sanitize_text_field( wp_unslash( $_POST['cau_domain_name'] ) ) : '';
@@ -653,7 +664,7 @@ class CAU_Admin_Multidomain_Page_Network extends CAU_Admin_Multidomain_Page_Base
 				$domain = $this->plugin->civicrm->domain->get_by_id( $domain_id );
 
 				// When there's no error.
-				if ( ! empty( $domain ) ) {
+				if ( ! empty( $domain ) && $this->multidomain->action_exists ) {
 
 					// Get Domain info.
 					$site_id      = $this->multidomain->mapping_site_get( $domain_id );
