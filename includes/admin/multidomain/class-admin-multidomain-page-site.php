@@ -594,18 +594,6 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-domain-submit.php';
 	}
 
-	/**
-	 * Render "Useful Links" meta box on Admin screen.
-	 *
-	 * @since 1.0.9
-	 *
-	 * @param mixed $unused Unused param.
-	 * @param array $metabox Array containing id, title, callback, and args elements.
-	 */
-	public function meta_box_links_render( $unused = null, $metabox = [] ) {
-		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-domain-links.php';
-	}
-
 	// -------------------------------------------------------------------------
 
 	/**
