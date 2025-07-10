@@ -301,6 +301,36 @@ class CAU_CiviCRM_Domain {
 
 	}
 
+	/**
+	 * Deletes a Domain created with the "MultisiteDomain" API.
+	 *
+	 * This is a non-functional placeholder that simply details what the process
+	 * of deleting a Domain might be.
+	 *
+	 * Neither CiviCRM nor the Multisite Extension has code through which a
+	 * Domain can be deleted - most likely because it is an operation that could
+	 * delete critical data. Therefore we would ideally check the Domain before
+	 * deleting it to make sure there is no data that is associated with it -
+	 * otherwise things get complicated very quickly.
+	 *
+	 * There is a multi-stage process to reverse what has been created via the
+	 * domain_create() method above. The stages are:
+	 *
+	 * 1) Delete the Navigation Menu.
+	 * 2) Delete the Setting which defines the Domain Group.
+	 * 3) Delete the Domain Group.
+	 * 4) Delete the Domain Org.
+	 * 5) Delete the Domain.
+	 *
+	 * @since 1.0.9
+	 *
+	 * @param int $id The ID of the Domain.
+	 * @return int|bool The ID of the deleted Domain, or false on failure.
+	 */
+	public function multisite_delete( $id ) {
+		return false;
+	}
+
 	// -------------------------------------------------------------------------
 
 	/**
