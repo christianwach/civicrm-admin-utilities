@@ -260,8 +260,13 @@ class CAU_Admin_Multidomain_Page_Site extends CAU_Admin_Multidomain_Page_Base {
 	 */
 	public function admin_help_get() {
 
-		// Stub help text, to be developed further.
-		$help = '<p>' . __( 'Domain Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin.', 'civicrm-admin-utilities' ) . '</p>';
+		// Build path to help template.
+		$template = CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/wordpress/settings/help/page-multidomain-site-help.php';
+
+		// Use contents of help template.
+		ob_start();
+		require_once $template;
+		$help = ob_get_clean();
 
 		// --<
 		return $help;

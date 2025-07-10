@@ -233,7 +233,7 @@ class CAU_Admin_Multidomain_Page_Network extends CAU_Admin_Multidomain_Page_Base
 		// Build tab args.
 		$args = [
 			'id'      => 'cau_network_multidomain',
-			'title'   => __( 'CiviCRM Admin Utilities Domain', 'civicrm-admin-utilities' ),
+			'title'   => __( 'Domains', 'civicrm-admin-utilities' ),
 			'content' => $this->admin_help_get(),
 		];
 
@@ -254,8 +254,13 @@ class CAU_Admin_Multidomain_Page_Network extends CAU_Admin_Multidomain_Page_Base
 	 */
 	public function admin_help_get() {
 
-		// Stub help text, to be developed further.
-		$help = '<p>' . __( 'For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin.', 'civicrm-admin-utilities' ) . '</p>';
+		// Build path to help template.
+		$template = CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/wordpress/settings/help/page-multidomain-network-help.php';
+
+		// Use contents of help template.
+		ob_start();
+		require_once $template;
+		$help = ob_get_clean();
 
 		// --<
 		return $help;
