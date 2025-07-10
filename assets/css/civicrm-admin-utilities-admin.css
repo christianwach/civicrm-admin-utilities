@@ -1067,6 +1067,19 @@ div.crm-container .crm-content label.error
 	border: none;
 }
 
+.crm-container .crm-contribution-view-form-block .crm-grid-table.total_amount-section
+{
+	border: none;
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	background-color: #fafafa;
+}
+
+.crm-container .crm-contribution-view-form-block .crm-grid-table.total_amount-section .crm-grid-cell
+{
+	padding: 8px;
+}
+
 .crm-container .crm-section,
 .crm-container div.crm-field-wrapper {
 	margin-bottom: 1em;
@@ -1696,7 +1709,8 @@ div.crm-container .crm-content label.error
 	border: none;
 }
 
-#crm-container .float-left {
+#crm-container .float-left
+{
 	float: left;
 	padding: 4px 0;
 	clear: none;
@@ -1706,7 +1720,9 @@ div.crm-container .crm-content label.error
 	margin-left: 1em;
 }
 
-#crm-container .float-right {
+.crm-container .float-right,
+#crm-container .float-right
+{
 	float: right;
 	width: auto;
 	padding: 4px 0;
@@ -1719,9 +1735,17 @@ div.crm-container .crm-content label.error
 	text-align: right;
 }
 
-#crm-container .element-right {
+.crm-container .element-right,
+#crm-container .element-right
+{
 	float: right;
 	margin-right: 35px;
+}
+
+.crm-container .css_right,
+.crm-container .pull-right,
+{
+	float: right;
 }
 
 /* search page styles */
