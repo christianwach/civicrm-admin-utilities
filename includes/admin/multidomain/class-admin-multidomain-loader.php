@@ -751,7 +751,7 @@ class CAU_Admin_Multidomain_Loader {
 				return $mappings['wp-to-cv'];
 			}
 			if ( 'cv-to-wp' === $direction ) {
-				return $mappings['wp-to-cv'];
+				return $mappings['cv-to-wp'];
 			}
 		}
 
