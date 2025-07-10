@@ -120,7 +120,7 @@
 		/**
 		 * Domain Org Select2 change handler.
 		 *
-		 * @since 0.6.2
+		 * @since 1.0.9
 		 *
 		 * @param {Object} event The Select2 event object.
 		 */

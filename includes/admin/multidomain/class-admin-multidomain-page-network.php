@@ -181,8 +181,12 @@ class CAU_Admin_Multidomain_Page_Network extends CAU_Admin_Multidomain_Page_Base
 			true
 		);
 
-		// Get as many sites as we feel comfortable with.
-		$data = $this->sites_data_get();
+		// Get the Sites on the current Network.
+		$sites = $this->sites_data_get();
+
+		// Get the Sites that have already been assigned.
+		$domains_data = $this->multidomain->reference_data_get_all();
+		$sites_used   = ! empty( $domains_data ) ? array_column( $domains_data, 'site_id' ) : [];
 
 		// Localisation array.
 		$vars = [
@@ -190,7 +194,10 @@ class CAU_Admin_Multidomain_Page_Network extends CAU_Admin_Multidomain_Page_Base
 				'placeholder' => esc_html__( 'Select a WordPress Site', 'civicrm-admin-utilities' ),
 			],
 			'settings'     => [
-				'data' => $data,
+				'sites'   => $sites,
+				'used'    => $sites_used,
+				'options' => [],
+				'bridge'  => 0,
 			],
 		];
 

@@ -23,74 +23,112 @@
 	$(document).ready( function() {
 
 		// Declare vars.
-		var site = $('.cau_site_id_select');
-
-		console.log( 'sites', CAU_Network_Domain.settings.data );
+		var sites = $('.cau_site_id_select');
 
 		/**
 		 * WordPress Site Select2 init.
 		 *
 		 * @since 1.0.9
 		 */
-		site.select2({
-
-			data: CAU_Network_Domain.settings.data,
+		sites.select2({
+			data: CAU_Network_Domain.settings.sites,
 			placeholder: CAU_Network_Domain.localisation.placeholder,
 			allowClear: true
+		});
+
+		/**
+		 * Remove options for used Sites.
+		 *
+		 * @since 1.0.9
+		 */
+		sites.each( function(i) {
+
+			var selected = $(this).find(':selected').val(),
+				select = $(this),
+				option;
+
+			// Remove each used Site in turn.
+			if ( CAU_Network_Domain.settings.used.length ) {
+				$.each( CAU_Network_Domain.settings.used, function( index, value ) {
+					option = select.find( "option[value='" + value + "']" );
+					if ( option.length ) {
+						if ( value != selected ) {
+							CAU_Network_Domain.settings.options[ option.val() ] = option;
+							option.detach();
+						}
+					}
+				});
+			}
+
+		});
+
+		/**
+		 * WordPress Site Select2 change handler.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param {Object} event The Select2 event object.
+		 */
+		sites.on( 'select2:selecting', function ( event ) {
+
+			// Sanity check.
+			if ( ! ( event instanceof $.Event ) ) {
+				return;
+			}
+
+			// Save previous value for later use.
+			CAU_Network_Domain.settings.bridge = $(this).val();
+
+		});
+
+		/**
+		 * WordPress Site Select2 change handler.
+		 *
+		 * @since 1.0.9
+		 *
+		 * @param {Object} event The Select2 event object.
+		 */
+		sites.on( 'select2:select', function ( event ) {
+
+			// Sanity check.
+			if ( ! ( event instanceof $.Event ) ) {
+				return;
+			}
+
+			var current, current_val, previous_val, previous = false, selected;
+
+			current = $(this);
+			current_val = $(this).val();
+			previous_val = CAU_Network_Domain.settings.bridge;
+			if ( CAU_Network_Domain.settings.options.length ) {
+				previous = CAU_Network_Domain.settings.options[ previous_val ];
+			}
+
+			sites.each( function(i) {
+
+				// Remove current from all but this.
+				selected = $(this).find(':selected').val()
+				if ( current_val != selected ) {
+					option = $(this).find( "option[value='" + current_val + "']" );
+					if ( option.length ) {
+						CAU_Network_Domain.settings.options[ option.val() ] = option;
+						option.detach();
+					}
+				}
+
+				// Make previous available to all that don't have it.
+				option = $(this).find( "option[value='" + previous_val + "']" );
+				if ( ! option.length ) {
+					$(this).append( previous ).trigger( 'change' );
+				}
+
+			});
+
+			// Reset bridging variable.
+			CAU_Network_Domain.settings.bridge = 0;
 
 		});
 
 	});
-
-	/**
-	 * Select2 format results for display in dropdown.
-	 *
-	 * @since 1.0.9
-	 *
-	 * @param {Object} data The results data.
-	 * @return {String} markup The results markup.
-	 */
-	function format_result( data ) {
-
-		// Bail if still loading.
-		if ( data.loading ) {
-			return data.name;
-		}
-
-		// Declare vars.
-		var markup;
-
-		// Construct basic info.
-		markup = '<div style="clear:both;">' +
-				'<div class="select2_results_name">' +
-					'<span style="font-weight:600;">' + data.name + '</span></em>' +
-				'</div>';
-
-		// Add description, if available.
-		if (data.description) {
-			markup += '<div class="select2_results_description" style="font-size:.9em;line-height:1.4;">'
-						+ data.description +
-					'</div>';
-		}
-
-		// Close markup.
-		markup += '</div>';
-
-		// --<
-		return markup;
-
-	}
-
-	/**
-	 * Select2 format response.
-	 *
-	 * @since 1.0.9
-	 *
-	 * @param {Object} data The results data.
-	 * @return {String} The expected response.
-	 */
-	function format_response( data ) {
-		return data.name || data.text;
-	}
 
 } )( jQuery );

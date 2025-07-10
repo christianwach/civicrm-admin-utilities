@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 <?php if ( ! empty( $metabox['args']['domains'] ) ) : ?>
 	<div class="notice notice-warning inline">
 		<p>
-			<?php esc_html_e( 'Each CiviCRM Domain should be assigned to a unique WordPress Site. This is not enforced, but it is strongly recommended.', 'civicrm-admin-utilities' ); ?><br>
+			<?php esc_html_e( 'Each CiviCRM Domain should be assigned to a unique WordPress Site.', 'civicrm-admin-utilities' ); ?><br>
 			<?php esc_html_e( 'If you follow a link to a CiviCRM Domain and you see "Sorry, you are not allowed to access this page" then it means you have not yet enabled CiviCRM on that Site.', 'civicrm-admin-utilities' ); ?>
 		</p>
 	</div>
