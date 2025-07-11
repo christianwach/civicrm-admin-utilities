@@ -17,8 +17,9 @@ defined( 'ABSPATH' ) || exit;
 	<?php
 
 	printf(
-		/* translators: 1: Opening anchor tag, 2: Closing anchor tag. */
-		esc_html__( 'For detailed instructions on how to set up multiple CiviCRM Domains on WordPress Multisite, please refer to %1$sthe installation guide%2$s in the CiviCRM documentation.', 'civicrm-admin-utilities' ),
+		/* translators: 1: Opening anchor tag with link to docs, 2: Opening anchor tag with link to setup, 3: Closing anchor tag. */
+		esc_html__( 'For detailed instructions on how to set up multiple %1$sCiviCRM Domains%3$s on WordPress Multisite, please refer to %2$sthe installation guide%3$s in the CiviCRM documentation.', 'civicrm-admin-utilities' ),
+		'<a href="' . esc_url( 'https://docs.civicrm.org/sysadmin/en/latest/setup/multisite/' ) . '" target="_blank">',
 		'<a href="' . esc_url( 'https://docs.civicrm.org/installation/en/latest/multisite/wordpress/' ) . '" target="_blank">',
 		'</a>'
 	);
