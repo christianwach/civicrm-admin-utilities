@@ -998,7 +998,7 @@ class CAU_CiviCRM_Domain {
 	 * @since 1.0.9
 	 *
 	 * @param array $group_org_ids The array of CiviCRM "Group Organisation" IDs.
-	 * @return array|bool $group_org_id The ID of the deleted "GroupOrganization", or false on error.
+	 * @return array|bool $group_orgs The IDs of the deleted "GroupOrganizations", or false on error.
 	 */
 	public function group_orgs_delete( $group_org_ids ) {
 
