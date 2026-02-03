@@ -1,0 +1,102 @@
+/**
+ * CiviCRM style overrides for CiviCRM 6.10+.
+ *
+ * Implements changes in admin styling introduced in CiviCRM 6.10.
+ *
+ * @package WordPress
+ * @subpackage CiviCRM_Admin_Utilities
+ */
+
+/*
+--------------------------------------------------------------------------------
+Support for Bootstrap dashboard.
+--------------------------------------------------------------------------------
+*/
+
+/* Available Dashlets */
+#bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset {
+	padding: 4px 0;
+    margin: 10px 0;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset legend {
+	margin-bottom: 0;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset legend a {
+	font-size: 14px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset legend .crm-form-text {
+	font-size: 16px;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset h3 {
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+}
+
+#bootstrap-theme #civicrm-dashboard .ui-sortable-placeholder
+{
+	position: relative;
+	height: 66px !important;
+	width: 230px;
+	vertical-align: bottom;
+}
+
+/* Dashlets General */
+#bootstrap-theme #civicrm-dashboard .crm-flex-box .crm-dashlet-header h3 {
+	font-size: 1.3em;
+	padding: 0;
+	margin: 0;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-flex-box h2 {
+	font-size: 1.3em;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-flex-box table {
+	border: 1px solid #efefef;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-flex-box table th,
+#bootstrap-theme #civicrm-dashboard .crm-flex-box table td {
+	padding: 6px;
+	vertical-align: top;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-flex-box table td.label {
+	display: table-cell;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-flex-box table td a {
+	text-decoration: underline;
+}
+
+/* "Getting Started" Dashlet */
+#bootstrap-theme #civicrm-dashboard .crm-flex-box #civicrm-getting-started h3 {
+	font-size: 1.3em;
+	margin: 1em 0 0.5em;
+}
+
+/*
+--------------------------------------------------------------------------------
+Misc fixes.
+--------------------------------------------------------------------------------
+*/
+
+.crm-option-label-pair {
+	display: inline;
+	margin-left: 1em;
+}
+
+.crm-option-label-pair:first-child {
+	margin-left: 0em;
+}
+
+.crm-case-common-form-block-case_status_id .crm-option-label-pair:first-child {
+	margin-left: 1em;
+}
