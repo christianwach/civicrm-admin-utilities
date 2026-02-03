@@ -71,6 +71,11 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.0.9 =
+
+* Improved support for CiviCRM Multisite/Multidomain setups
+* Misc style fixes for recent versions of CiviCRM
+
 = 1.0.8 =
 
 * Targets new multisite is_enabled setting
