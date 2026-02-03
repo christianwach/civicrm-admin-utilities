@@ -398,6 +398,40 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	border: none;
 }
 
+/* oAuth table */
+#bootstrap-theme oauth-provider-list table,
+#bootstrap-theme oauth-provider-list > table
+{
+	margin: 5px 0;
+}
+
+#bootstrap-theme oauth-provider-list table,
+#bootstrap-theme oauth-provider-list > table
+{
+	background-color: #fff;
+}
+
+#bootstrap-theme oauth-provider-list table th,
+#bootstrap-theme oauth-provider-list table td,
+#bootstrap-theme oauth-provider-list > table th,
+#bootstrap-theme oauth-provider-list > table td
+{
+	padding: 8px;
+}
+
+#bootstrap-theme oauth-provider-list table td,
+#bootstrap-theme oauth-provider-list > table td
+{
+	border-bottom: 1px solid #ddd;
+}
+
+#bootstrap-theme oauth-client-creator .form-horizontal .form-group
+{
+	margin-right: 0;
+	margin-left: 0;
+}
+
+
 
 /*
 --------------------------------------------------------------------------------
