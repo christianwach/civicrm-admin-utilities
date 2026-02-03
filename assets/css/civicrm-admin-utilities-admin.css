@@ -425,7 +425,8 @@ body #bootstrap-theme.crm-search .api4-clause-fieldset fieldset
 	border-bottom: 1px solid #ddd;
 }
 
-#bootstrap-theme oauth-client-creator .form-horizontal .form-group
+#bootstrap-theme oauth-client-creator .form-horizontal .form-group,
+#bootstrap-theme oauth-client-editor .form-horizontal .form-group
 {
 	margin-right: 0;
 	margin-left: 0;
