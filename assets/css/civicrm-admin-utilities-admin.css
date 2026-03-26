@@ -50,6 +50,12 @@ html body.wp-admin:not(.toolbar)
 	background: #f0f0f1;
 }
 
+/* Radstock does not support Toggles */
+.crm-form-toggle-text
+{
+	display: none;
+}
+
 
 
 /*
