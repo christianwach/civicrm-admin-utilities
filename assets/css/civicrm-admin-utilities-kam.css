@@ -4,38 +4,37 @@
  * Implements more appropriate and consistent styling for the CiviCRM admin menu
  * when the uk.squiffle.kam Extension is present.
  *
- * @package WordPress
- * @subpackage CiviCRM_Admin_Utilities
+ * @package CiviCRM_Admin_Utilities
  */
 
 
 
-/* When menu in content area, give page some room */
+/* When menu in content area, give page some room. */
 body #crm-container > #civicrm-menu-nav
 {
 	margin-bottom: 12px;
 }
 
-/* Sub-arrows could do with a slight tweak */
+/* Sub-arrows could do with a slight tweak. */
 body #civicrm-menu li li .sub-arrow:before
 {
 	margin-top: 2px;
 }
 
-/* Transparent background for toggle button */
+/* Transparent background for toggle button. */
 body #civicrm-menu-nav .crm-menubar-toggle-btn
 {
 	background: transparent;
 }
 
-/* Don't show bottom border */
+/* Don't show bottom border. */
 @media (min-width: 768px) {
 	body > #civicrm-menu-nav #civicrm-menu {
 		border-bottom: none;
 	}
 }
 
-/* Modify the Access Keys popover */
+/* Modify the Access Keys popover. */
 body #crmAccessKeyList span
 {
 	background: #e5e5e5;
@@ -47,9 +46,9 @@ body #crmAccessKeyList span
 
 
 /*
---------------------------------------------------------------------------------
-Default Colours
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+Default Colours.
+------------------------------------------------------------------------------------------
 */
 
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm
@@ -83,7 +82,6 @@ body > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 	color: #00b9eb;
 }
 
-/* Remove hover behaviour */
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -106,12 +104,64 @@ body > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 
 
 /*
---------------------------------------------------------------------------------
-WordPress Admin Themes support
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+WordPress Admin Themes support.
+------------------------------------------------------------------------------------------
 */
 
-/* light */
+/* Fresh - default prior to WordPress 7.0. */
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm
+{
+	background: #23282d;
+}
+
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
+{
+	color: #f0f0f1;
+}
+
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
+{
+	color: #c3c4c7;
+	color: rgba(240, 246, 252, 0.7);
+}
+
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
+{
+	color: #72aee6;
+}
+
+/* Remove hover behaviour. */
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
+{
+	color: #72aee6;
+    background-color: #2c3338;
+}
+
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
+{
+	border-color: #111;
+}
+
+
+
+/* Light. */
 body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #e5e5e5;
@@ -141,7 +191,6 @@ body.admin-color-light > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-pos
 	color: #04a4cc;
 }
 
-/* Remove hover behaviour */
 body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-light > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-light > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -163,7 +212,7 @@ body.admin-color-light > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border
 
 
 
-/* modern */
+/* Modern - changed in WordPress 6.9, default in WordPress 7.0. */
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	 background: #1e1e1e;
@@ -180,7 +229,8 @@ body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
-	color: #fff;
+	color: #bcbcbc;
+	color: rgb(187.5, 187.5, 187.5);
 }
 
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
@@ -192,7 +242,6 @@ body.admin-color-modern > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-po
 	color: #33f078;
 }
 
-/* Remove hover behaviour */
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -212,9 +261,60 @@ body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-borde
 	border-color: #303030;
 }
 
+/* WordPress 6.9 update. */
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm
+{
+	 background: #1e1e1e;
+}
+
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
+{
+	 color: #fff;
+}
+
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
+{
+	color: #bcbcbc;
+	color: rgb(187.5, 187.5, 187.5);
+}
+
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
+{
+	color: #7b90ff;
+}
+
+/* Remove hover behaviour. */
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
+{
+	color: #7b90ff;
+	background-color: #0c0c0c;
+	background-color: rgb(12.15, 12.15, 12.15);
+}
+
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
+{
+	border-color: #303030;
+}
 
 
-/* blue */
+
+/* Blue. */
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #52accc;
@@ -243,7 +343,7 @@ body.admin-color-blue > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-posi
 	color: #fff;
 }
 
-/* Remove hover behaviour */
+/* Remove hover behaviour. */
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-blue > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -265,7 +365,7 @@ body.admin-color-blue > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-
 
 
 
-/* coffee */
+/* Coffee. */
 body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #59524c;
@@ -294,7 +394,7 @@ body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-po
 	color: #c7a589;
 }
 
-/* Remove hover behaviour */
+/* Remove hover behaviour. */
 body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -316,7 +416,7 @@ body.admin-color-coffee > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-borde
 
 
 
-/* ectoplasm */
+/* Ectoplasm. */
 body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	 background: #523f6d;
@@ -345,7 +445,7 @@ body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle
 	color: #a3b745;
 }
 
-/* Remove hover behaviour */
+/* Remove hover behaviour. */
 body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -367,7 +467,7 @@ body.admin-color-ectoplasm > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-bo
 
 
 
-/* midnight */
+/* Midnight. */
 body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	 background: #363b3f;
@@ -396,7 +496,7 @@ body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-
 	color: #e14d43;
 }
 
-/* Remove hover behaviour */
+/* Remove hover behaviour. */
 body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -418,7 +518,7 @@ body.admin-color-midnight > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-bor
 
 
 
-/* ocean */
+/* Ocean. */
 body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	 background: #738e96;
@@ -447,7 +547,7 @@ body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-pos
 	color: #9ebaa0;
 }
 
-/* Remove hover behaviour */
+/* Remove hover behaviour. */
 body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
@@ -469,7 +569,7 @@ body.admin-color-ocean > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border
 
 
 
-/* sunrise */
+/* Sunrise. */
 body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
 	background: #cf4944;
@@ -498,7 +598,7 @@ body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-p
 	color: #f7e3d3;
 }
 
-/* Remove hover behaviour */
+/* Remove hover behaviour. */
 body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
 body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body.admin-color-sunrise > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,

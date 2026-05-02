@@ -1,0 +1,200 @@
+/**
+ * WordPress 7.x+ styles for the CiviCRM menu.
+ *
+ * Implements WordPress 7.x+ styles and colours in the CiviCRM menu.
+ *
+ * Compatible with WordPress admin colour schemes.
+ *
+ * @package CiviCRM_Admin_Utilities
+ * @since 1.1.1
+ */
+
+/*
+------------------------------------------------------------------------------------------
+CiviCRM admin menu fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* When menu in content area, give page some room. */
+body #crm-container > #civicrm-menu-nav
+{
+	margin-bottom: 12px;
+}
+
+/* Sub-arrows could do with a slight tweak. */
+body #civicrm-menu li li .sub-arrow:before
+{
+	margin-top: 2px;
+}
+
+/* Transparent background for toggle button. */
+body #civicrm-menu-nav .crm-menubar-toggle-btn
+{
+	background: transparent;
+}
+
+/* Don't show bottom border. */
+@media (min-width: 768px) {
+	body > #civicrm-menu-nav #civicrm-menu {
+		border-bottom: none;
+	}
+}
+
+/*
+------------------------------------------------------------------------------------------
+CiviCRM admin menu styles.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-wp-menu-background-color: #23282d;
+	--crm-wp-menu-default-color: #f0f0f1;
+	--crm-wp-menu-link-color: #c3c4c7;
+	--crm-wp-menu-link-color-rgb: rgba(240, 246, 252, 0.7);
+	--crm-wp-menu-text-color-hover: #72aee6;
+	--crm-wp-menu-link-background-color: #32373c;
+	--crm-wp-menu-separator-color: #000;
+}
+
+body.admin-color-fresh {
+	--crm-wp-menu-background-color: #23282d;
+	--crm-wp-menu-default-color: #f0f0f1;
+	--crm-wp-menu-link-color: #c3c4c7;
+	--crm-wp-menu-link-color-rgb: rgba(240, 246, 252, 0.7);
+	--crm-wp-menu-text-color-hover: #72aee6;
+	--crm-wp-menu-link-background-color: #32373c;
+	--crm-wp-menu-separator-color: #000;
+}
+
+body.admin-color-light {
+	--crm-wp-menu-background-color: #e5e5e5;
+	--crm-wp-menu-default-color: #333;
+	--crm-wp-menu-link-color: #686868;
+	--crm-wp-menu-link-color-rgb: rgb(104.4, 104.4, 104.4);
+	--crm-wp-menu-text-color-hover: #04a4cc;
+	--crm-wp-menu-link-background-color: #fff;
+	--crm-wp-menu-separator-color: #ededed;
+}
+
+body.admin-color-modern {
+	--crm-wp-menu-background-color: #1e1e1e;
+	--crm-wp-menu-default-color: #fff;
+	--crm-wp-menu-link-color: #bcbcbc;
+	--crm-wp-menu-link-color-rgb: rgb(187.5, 187.5, 187.5);
+	--crm-wp-menu-text-color-hover: #7b90ff;
+	--crm-wp-menu-link-background-color: #0c0c0c;
+	--crm-wp-menu-separator-color: #303030;
+}
+
+body.admin-color-blue {
+	--crm-wp-menu-background-color: #52accc;
+	--crm-wp-menu-default-color: #fff;
+	--crm-wp-menu-link-color: #e2ecf1;
+	--crm-wp-menu-link-color-rgb: rgb(226, 236, 241);
+	--crm-wp-menu-text-color-hover: #fff;
+	--crm-wp-menu-link-background-color: #4796b3;
+	--crm-wp-menu-separator-color: #3b85a0;
+}
+
+body.admin-color-coffee {
+	--crm-wp-menu-background-color: #59524c;
+	--crm-wp-menu-default-color: #fff;
+	--crm-wp-menu-link-color: #cdcbc9;
+	--crm-wp-menu-link-color-rgb: rgb(205.2, 203.1, 201.3);
+	--crm-wp-menu-text-color-hover: #c7a589;
+	--crm-wp-menu-link-background-color: #46403c;
+	--crm-wp-menu-separator-color: #2f2b28;
+}
+
+body.admin-color-ectoplasm {
+	--crm-wp-menu-background-color: #523f6d;
+	--crm-wp-menu-default-color: #fff;
+	--crm-wp-menu-link-color: #cbc5d3;
+	--crm-wp-menu-link-color-rgb: rgb(203.1, 197.4, 211.2);
+	--crm-wp-menu-text-color-hover: #a3b745;
+	--crm-wp-menu-link-background-color: #413256;
+	--crm-wp-menu-separator-color: #2f2b28;
+}
+
+body.admin-color-midnight {
+	--crm-wp-menu-background-color: #363b3f;
+	--crm-wp-menu-default-color: #fff;
+	--crm-wp-menu-link-color: #cbc5d3;
+	--crm-wp-menu-link-color-rgb: rgb(194.7, 196.2, 197.4);
+	--crm-wp-menu-text-color-hover: #e14d43;
+	--crm-wp-menu-link-background-color: #26292c;
+	--crm-wp-menu-separator-color: #000;
+}
+
+body.admin-color-ocean {
+	--crm-wp-menu-background-color: #738e96;
+	--crm-wp-menu-default-color: #fff;
+	--crm-wp-menu-link-color: #d5dde0;
+	--crm-wp-menu-link-color-rgb: rgb(213, 221.1, 223.5);
+	--crm-wp-menu-text-color-hover: #9ebaa0;
+	--crm-wp-menu-link-background-color: #627c83;
+	--crm-wp-menu-separator-color: #556c72;
+}
+
+body.admin-color-sunrise {
+	--crm-wp-menu-background-color: #cf4944;
+	--crm-wp-menu-default-color: #fff;
+	--crm-wp-menu-link-color: #f1c8c7;
+	--crm-wp-menu-link-color-rgb: rgb(240.6, 200.4, 198.9);
+	--crm-wp-menu-text-color-hover: #f7e3d3;
+	--crm-wp-menu-link-background-color: #be3631;
+	--crm-wp-menu-separator-color: #a12c26;
+}
+
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm
+{
+	background-color: var(--crm-wp-menu-background-color);
+}
+
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
+{
+	color: var(--crm-wp-menu-default-color);
+	background-color: transparent;
+}
+
+body > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a.highlighted .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
+body > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
+{
+	color: var(--crm-wp-menu-link-color);
+	color: var(--crm-wp-menu-link-color-rgb);
+}
+
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm a:hover,
+body > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
+body > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
+{
+	color: var(--crm-wp-menu-text-color-hover);
+}
+
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
+body > #civicrm-menu-nav #civicrm-menu li a.highlighted,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
+{
+	color: var(--crm-wp-menu-text-color-hover);
+	background-color: var(--crm-wp-menu-link-background-color);
+}
+
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
+body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
+body > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
+body > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
+body > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
+body > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
+{
+	border-color: var(--crm-wp-menu-separator-color);
+	border-width: 1px;
+}

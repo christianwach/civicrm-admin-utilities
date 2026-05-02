@@ -1701,6 +1701,8 @@ class CiviCRM_Admin_Utilities_Single {
 	 */
 	public function admin_scripts_enqueue() {
 
+		global $wp_version;
+
 		/*
 		 * We should only load our styles on the CiviCRM admin screen and on any
 		 * Post Types where the CiviCRM Shortcode button is visible.
@@ -1736,7 +1738,11 @@ class CiviCRM_Admin_Utilities_Single {
 
 			// Use specific CSS file for KAM if active.
 			if ( $this->kam_is_active() ) {
-				$css = 'civicrm-admin-utilities-kam.css';
+				if ( version_compare( $wp_version, '6.9.99999', '>' ) ) {
+					$css = 'civicrm-admin-utilities-kam-7-plus.css';
+				} else {
+					$css = 'civicrm-admin-utilities-kam.css';
+				}
 			}
 
 			// Add menu stylesheet.
@@ -1782,7 +1788,6 @@ class CiviCRM_Admin_Utilities_Single {
 			);
 
 			// Amend styles when WordPress 5.3+ is detected.
-			global $wp_version;
 			if ( version_compare( $wp_version, '5.2.99999', '>' ) ) {
 				wp_enqueue_style(
 					'civicrm_admin_utilities_admin_override_53plus',
