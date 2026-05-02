@@ -1217,7 +1217,7 @@ class CiviCRM_Admin_Utilities_Single {
 		// Create CiviCRM Admin Appearance metabox.
 		add_meta_box(
 			'civicrm_au_appearance',
-			__( 'CiviCRM Admin Appearance', 'civicrm-admin-utilities' ),
+			__( 'CiviCRM Backend Appearance', 'civicrm-admin-utilities' ),
 			[ $this, 'meta_box_appearance_render' ], // Callback.
 			$screen_id, // Screen ID.
 			'normal', // Column: options are 'normal' and 'side'.

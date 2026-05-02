@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 <!-- assets/templates/templates/metaboxes/site-metabox-appearance.php -->
-<p><?php esc_html_e( 'These options apply styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin Theme, then check the box for "CiviCRM Menu" and leave "CiviCRM Admin Theme" unchecked.', 'civicrm-admin-utilities' ); ?></p>
+<p><?php esc_html_e( 'These options apply modifications that improve the appearance of CiviCRM Backend screens.', 'civicrm-admin-utilities' ); ?></p>
 
 <table class="form-table">
 
@@ -40,15 +40,17 @@ defined( 'ABSPATH' ) || exit;
 		<th scope="row"><?php esc_html_e( 'CiviCRM Menu', 'civicrm-admin-utilities' ); ?></th>
 		<td>
 			<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_menu" id="civicrm_admin_utilities_menu" value="1"<?php checked( 1, $prettify_menu ); ?> />
-			<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu"><?php esc_html_e( 'Apply style fixes to the CiviCRM menu.', 'civicrm-admin-utilities' ); ?></label>
+			<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_menu"><?php esc_html_e( 'Apply WordPress styles to the CiviCRM Menu.', 'civicrm-admin-utilities' ); ?></label>
+			<p class="description"><?php esc_html_e( 'Checking this applies styles from the WordPress "Administration Colour Scheme" to the CiviCRM Menu regardless of which CiviCRM "Backend Theme" is active. Note that this will not apply styles when the "Menubar position" option is set to "Above content area" in CiviCRM.', 'civicrm-admin-utilities' ); ?><br>
 		</td>
 	</tr>
 
 	<tr>
-		<th scope="row"><?php esc_html_e( 'CiviCRM Admin Theme', 'civicrm-admin-utilities' ); ?></th>
+		<th scope="row"><?php esc_html_e( 'CiviCRM Backend Theme', 'civicrm-admin-utilities' ); ?></th>
 		<td>
 			<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_styles_admin" id="civicrm_admin_utilities_styles_admin" value="1"<?php checked( 1, $admin_css ); ?> />
 			<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_styles_admin"><?php esc_html_e( 'Enable the CiviCRM Admin Utilities "Radstock" Theme.', 'civicrm-admin-utilities' ); ?></label>
+			<p class="description"><?php esc_html_e( 'Note that although the Radstock Theme can be chosen as the "Frontend Theme" in CiviCRM, none of its styles will be loaded on Public Pages.', 'civicrm-admin-utilities' ); ?><br>
 			<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 			<div class="theme-compare-wrapper theme-compare-dashboard" style="margin: 1em 0 0.4em 0;<?php echo $theme_preview; ?>">
 				<div id="theme-compare-dashboard" class="twentytwenty-container" style="max-width: 720px;">
