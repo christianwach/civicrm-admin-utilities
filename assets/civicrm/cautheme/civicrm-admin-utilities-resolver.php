@@ -1,19 +1,19 @@
 <?php
-
-/*
- +--------------------------------------------------------------------+
- | Copyright CiviCRM LLC. All rights reserved.                        |
- |                                                                    |
- | This work is published under the GNU AGPLv3 license with some      |
- | permitted exceptions and without any warranty. For full license    |
- | and copyright information, see https://civicrm.org/licensing       |
- +--------------------------------------------------------------------+
+/**
+ * Radstock Theme Resolver Class.
+ *
+ * Handles resolving resources for the CiviCRM Admin Utilities "Radstock" Theme.
+ *
+ * @package CiviCRM_Admin_Utilities
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 /**
- * CiviCRM Admin Utilities Theme class.
+ * CiviCRM Admin Utilities Radstock Theme Resolver class.
  *
- * A class for resolving resource "CiviCRM Admin Utilities" Theme.
+ * A class for resolving resources in the CiviCRM Admin Utilities "Radstock" Theme.
  *
  * @package CiviCRM_Admin_Utilities
  * @since 0.7.4

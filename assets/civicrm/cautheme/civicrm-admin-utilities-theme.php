@@ -1,11 +1,19 @@
 <?php
+/**
+ * Radstock Theme Class.
+ *
+ * Handles a CivicCRM Theme called "Radstock (CAU)".
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
 
-//use CRM_CAUTheme_ExtensionUtil as E;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 /**
- * CiviCRM Admin Utilities Theme class.
+ * CiviCRM Admin Utilities Radstock Theme class.
  *
- * A class for encapsulating a "CiviCRM Admin Utilities" Theme.
+ * A class for encapsulating the CiviCRM Admin Utilities "Radstock" Theme.
  *
  * @package CiviCRM_Admin_Utilities
  * @since 0.7.4
@@ -17,7 +25,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    * @access public
-   * @var object
+   * @var CiviCRM_Admin_Utilities
    */
   public $plugin;
 
@@ -35,7 +43,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    *
-   * @param object $plugin The plugin object.
+   * @param CiviCRM_Admin_Utilities $plugin The plugin object.
    */
   public function __construct( $plugin ) {
 
@@ -145,7 +153,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    *
-   * @param object $bundle The bundle of Theme resources.
+   * @param CRM_Core_Resources_Bundle $bundle The bundle of Theme resources.
    */
   public function modify_bundle( CRM_Core_Resources_Bundle $bundle ) {
 
@@ -197,7 +205,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.8
    *
-   * @return str $theme The current Theme "slug", empty otherwise.
+   * @return string $theme The current Theme "slug", empty otherwise.
    */
   public function get_theme() {
 
@@ -209,8 +217,8 @@ class CiviCRM_Admin_Utilities_Theme {
     // Switch setting to our Theme or the default.
     $params = [
       'version' => 3,
-      'name' => 'theme_backend',
-      'group' => 'CiviCRM Preferences',
+      'name'    => 'theme_backend',
+      'group'   => 'CiviCRM Preferences',
     ];
 
     // Get the setting.
@@ -299,7 +307,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    *
-   * @param str $action The action to perform  - either 'enable' or 'disable'.
+   * @param string $action The action to perform  - either 'enable' or 'disable'.
    */
   public function toggle( $action = 'enable' ) {
 
@@ -340,7 +348,7 @@ class CiviCRM_Admin_Utilities_Theme {
    *
    * @since 0.7.4
    *
-   * @param obj $dao The CiviCRM database access object.
+   * @param CRM_Core_DAO_Setting $dao The CiviCRM database access object.
    */
   public function settings_change( $dao ) {
 
