@@ -25,8 +25,15 @@ Support for Bootstrap dashboard.
 
 #bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset legend a {
 	font-size: 14px;
-	padding-top: 6px;
+	padding-top: 12px;
 	padding-bottom: 6px;
+	border: none;
+}
+
+#bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset legend a:focus {
+	outline: none;
+	border: none;
+	box-shadow: none;
 }
 
 #bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset legend .crm-form-text {
