@@ -71,6 +71,10 @@ Network Administrators can now set site defaults for any further activations of 
 
 == Changelog ==
 
+= 1.1.1 =
+
+* Misc style fixes for recent versions of CiviCRM
+
 = 1.1.0 =
 
 * Misc style fixes for recent versions of CiviCRM
