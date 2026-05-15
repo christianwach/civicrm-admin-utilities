@@ -88,15 +88,20 @@ Misc fixes.
 --------------------------------------------------------------------------------
 */
 
+.crm-container .crm-multiple-checkbox-radio-options {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 .crm-option-label-pair {
 	display: inline;
-	margin-left: 1em;
+	margin-right: 1em;
 }
 
-.crm-option-label-pair:first-child {
-	margin-left: 0em;
+.crm-option-label-pair:last-child {
+	margin-right: 0em;
 }
 
-.crm-case-common-form-block-case_status_id .crm-option-label-pair:first-child {
-	margin-left: 1em;
+.crm-case-common-form-block-case_status_id .crm-option-label-pair:last-child {
+	margin-right: 1em;
 }
