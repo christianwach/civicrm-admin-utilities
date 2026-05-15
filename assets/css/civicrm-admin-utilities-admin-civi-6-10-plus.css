@@ -114,3 +114,45 @@ Misc fixes.
 	flex: 0 0 calc((100% - (var(--crm-opts-per-line) - 1) * var(--gap)) / var(--crm-opts-per-line));
 }
 
+
+
+/* "Reset all selections", "Advanced Search" and helpicon. */
+#search-status .float-right.right a,
+#search-status > a.crm-selection-reset {
+/* 	margin-top: 0.65rem; */
+	padding: 0.1rem 0.5rem;
+}
+
+#search-status > a.crm-selection-reset {
+	margin-top: 0.2rem;
+}
+
+/* "Reset all selections", "Advanced Search" hover state. */
+#search-status .float-right.right a:not(.helpicon):hover,
+#search-status > a.crm-selection-reset:hover {
+	text-decoration: none;
+}
+
+/* "Reset all selections", "Advanced Search" focus state. */
+#search-status .float-right.right a:not(.helpicon):focus,
+#search-status > a.crm-selection-reset:focus {
+	border-radius: 2px;
+	text-decoration: none;
+}
+
+/* "Advanced Search" and helpicon. */
+#search-status .float-right.right a {
+	display: inline-block;
+}
+
+/* Tweaks to helpicon. */
+#search-status .float-right.right a.helpicon {
+	padding: 0;
+	padding-inline-start: 4px;
+	margin-right: 12px;
+}
+
+/* Make helpicon inline. */
+#search-status .float-right.right br {
+	display: none;
+}
