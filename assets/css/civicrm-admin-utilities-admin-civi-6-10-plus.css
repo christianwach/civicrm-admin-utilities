@@ -16,7 +16,7 @@ Support for Bootstrap dashboard.
 /* Available Dashlets */
 #bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset {
 	padding: 4px 0;
-    margin: 10px 0;
+	margin: 10px 0;
 }
 
 #bootstrap-theme #civicrm-dashboard .crm-inactive-dashlet-fieldset legend {
@@ -155,4 +155,24 @@ Misc fixes.
 /* Make helpicon inline. */
 #search-status .float-right.right br {
 	display: none;
+}
+
+
+
+/* APIv4 fixes. */
+.crm-container #bootstrap-theme.api4-explorer-page fieldset,
+.crm-container #bootstrap-theme.api4-explorer-page .api4-clause-fieldset fieldset {
+	background: #fafafa;
+	background: rgb(0 0 0 / 2.5%);
+	margin-top: 0;
+}
+
+
+
+/* SearchKit fixes. */
+.crm-container #bootstrap-theme.crm-search div[role="tabpanel"] {
+	padding: 12px;
+	background: #fff;
+	border: 1px solid #dddddd;
+	border-top: none;
 }
