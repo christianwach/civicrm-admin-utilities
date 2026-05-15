@@ -88,20 +88,22 @@ Misc fixes.
 --------------------------------------------------------------------------------
 */
 
+/* Implement "Options Per Line" setting. */
 .crm-container .crm-multiple-checkbox-radio-options {
+	--gap: 1em;
+	--checkbox-width: 2em;
 	display: flex;
 	flex-wrap: wrap;
+	gap: var(--gap);
 }
 
-.crm-option-label-pair {
-	display: inline;
-	margin-right: 1em;
+.crm-container .crm-multiple-checkbox-radio-options .crm-option-label-pair {
+	display: grid;
+	grid-template-columns: var(--checkbox-width) 1fr;
+	align-items: baseline;
 }
 
-.crm-option-label-pair:last-child {
-	margin-right: 0em;
+.crm-container .crm-multiple-checkbox-radio-options.crm-options-per-line .crm-option-label-pair {
+	flex: 0 0 calc((100% - (var(--crm-opts-per-line) - 1) * var(--gap)) / var(--crm-opts-per-line));
 }
 
-.crm-case-common-form-block-case_status_id .crm-option-label-pair:last-child {
-	margin-right: 1em;
-}
