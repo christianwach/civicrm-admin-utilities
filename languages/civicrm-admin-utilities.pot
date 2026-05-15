@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 1.1.0a\n"
+"Project-Id-Version: CiviCRM Admin Utilities 1.1.1a\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-29T13:35:21+00:00\n"
+"POT-Creation-Date: 2026-05-15T15:34:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: civicrm-admin-utilities\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: includes/civicrm-admin-utilities-multisite.php:507
 #: includes/civicrm-admin-utilities-multisite.php:569
 #: includes/civicrm-admin-utilities-single.php:923
-#: includes/civicrm-admin-utilities-single.php:2439
+#: includes/civicrm-admin-utilities-single.php:2444
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -52,11 +52,11 @@ msgstr ""
 msgid "https://haystack.co.uk"
 msgstr ""
 
-#: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:128
+#: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:136
 msgid "Radstock (CAU)"
 msgstr ""
 
-#: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:129
+#: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:137
 msgid "Gives CiviCRM a look-and-feel that is closer to WordPress"
 msgstr ""
 
@@ -221,7 +221,7 @@ msgid "If you have added any Form Builder Blocks to places outside the content o
 msgstr ""
 
 #: assets/templates/metaboxes/site-metabox-appearance.php:16
-msgid "These options apply styles that make CiviCRM Admin pages look better. If you only want to fix the appearance of the CiviCRM Menu and keep the default CiviCRM Admin Theme, then check the box for \"CiviCRM Menu\" and leave \"CiviCRM Admin Theme\" unchecked."
+msgid "These options apply modifications that improve the appearance of CiviCRM Backend screens."
 msgstr ""
 
 #: assets/templates/metaboxes/site-metabox-appearance.php:21
@@ -247,15 +247,23 @@ msgid "CiviCRM Menu"
 msgstr ""
 
 #: assets/templates/metaboxes/site-metabox-appearance.php:43
-msgid "Apply style fixes to the CiviCRM menu."
+msgid "Apply WordPress styles to the CiviCRM Menu."
 msgstr ""
 
-#: assets/templates/metaboxes/site-metabox-appearance.php:48
-msgid "CiviCRM Admin Theme"
+#: assets/templates/metaboxes/site-metabox-appearance.php:44
+msgid "Checking this applies styles from the WordPress \"Administration Colour Scheme\" to the CiviCRM Menu regardless of which CiviCRM \"Backend Theme\" is active. Note that this will not apply styles when the \"Menubar position\" option is set to \"Above content area\" in CiviCRM."
 msgstr ""
 
-#: assets/templates/metaboxes/site-metabox-appearance.php:51
+#: assets/templates/metaboxes/site-metabox-appearance.php:49
+msgid "CiviCRM Backend Theme"
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:52
 msgid "Enable the CiviCRM Admin Utilities \"Radstock\" Theme."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:53
+msgid "Note that although the Radstock Theme can be chosen as the \"Frontend Theme\" in CiviCRM, none of its styles will be loaded on Public Pages."
 msgstr ""
 
 #: assets/templates/metaboxes/site-metabox-contacts.php:19
@@ -741,7 +749,6 @@ msgid "CiviCRM Access"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-multisite.php:856
-#: includes/civicrm-admin-utilities-single.php:1220
 msgid "CiviCRM Admin Appearance"
 msgstr ""
 
@@ -783,7 +790,7 @@ msgid "Users"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-single.php:516
-#: includes/civicrm-admin-utilities-single.php:2249
+#: includes/civicrm-admin-utilities-single.php:2254
 msgid "CiviCRM"
 msgstr ""
 
@@ -795,6 +802,10 @@ msgstr ""
 msgid "Site Settings: For further information about using CiviCRM Admin Utilities, please refer to the readme.txt file that comes with this plugin."
 msgstr ""
 
+#: includes/civicrm-admin-utilities-single.php:1220
+msgid "CiviCRM Backend Appearance"
+msgstr ""
+
 #: includes/civicrm-admin-utilities-single.php:1270
 msgid "Form Builder Blocks"
 msgstr ""
@@ -803,56 +814,56 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2271
+#: includes/civicrm-admin-utilities-single.php:2276
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2280
+#: includes/civicrm-admin-utilities-single.php:2285
 msgid "All Contacts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2289
+#: includes/civicrm-admin-utilities-single.php:2294
 msgid "Advanced Search"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2318
+#: includes/civicrm-admin-utilities-single.php:2323
 msgid "Manage Groups"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2330
+#: includes/civicrm-admin-utilities-single.php:2335
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2343
+#: includes/civicrm-admin-utilities-single.php:2348
 msgid "Membership Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2356
+#: includes/civicrm-admin-utilities-single.php:2361
 msgid "Events Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2369
+#: includes/civicrm-admin-utilities-single.php:2374
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2382
+#: includes/civicrm-admin-utilities-single.php:2387
 msgid "Report Listing"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2395
+#: includes/civicrm-admin-utilities-single.php:2400
 msgid "Cases Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2407
+#: includes/civicrm-admin-utilities-single.php:2412
 msgid "Admin Console"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2418
+#: includes/civicrm-admin-utilities-single.php:2423
 msgid "Manage Extensions"
 msgstr ""
 
 #. translators: %s: The Contact's first name
-#: includes/civicrm-admin-utilities-single.php:2743
+#: includes/civicrm-admin-utilities-single.php:2748
 #, php-format
 msgid "Hi %s, welcome to CiviCRM"
 msgstr ""
