@@ -1,0 +1,700 @@
+/**
+ * Wellow Brook theme for RiverLea in CiviCRM.
+ *
+ * Implements a theme as a RiverLea Stream in CiviCRM that is more in keeping with WordPress.
+ *
+ * Named after Wellow Brook, which runs through Radstock.
+ *
+ * * Font defaults.
+ * * Anchor defaults.
+ * * Icon elements.
+ * * Accordions.
+ * * Misc Page fixes.
+ * * Action Menu fixes.
+ * * Pagination.
+ * * Access Keys.
+ * * Status in footer.
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+
+
+/* Undo the RiverLea modification. */
+body.toplevel_page_CiviCRM #wpcontent {
+	padding-left: 20px;
+}
+
+/* Restore WordPress default. */
+body.wp-admin .crm-container {
+	--crm-page-padding: 10px 20px 0 2px;
+}
+
+
+
+/* Background Colours. */
+:root {
+	--crm-page-bg-color: #f0f0f1;
+	--crm-container-bg-color: transparent;
+	--crm-contact-header-bg-color: transparent;
+	--crm-tabs-bg-color: transparent;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Font defaults.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-font-size: 13px;
+	--crm-text-color: #3c434a;
+	--crm-heading-color: #1d2327;
+	--crm-heading-bg-color: transparent;
+	--crm-heading-radius: 0;
+}
+
+.crm-container h1,
+#bootstrap-theme h1 {
+    font-size: 23px;
+    font-weight: 400;
+    margin: 0;
+    padding: 9px 0 4px;
+    line-height: 1.3;
+}
+
+#bootstrap-theme h1 {
+    padding-bottom: 12px;
+}
+
+.crm-container h3,
+#bootstrap-theme h3:not(.crm-dashlet-header h3) {
+	font-size: 1.3em;
+	--crm-heading-padding: 0.75rem 0;
+	--crm-heading-bg-color: transparent;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Anchor defaults.
+------------------------------------------------------------------------------------------
+*/
+
+:root,
+body.admin-color-modern {
+	--crm-link-color: #3858e9;
+	--crm-link-hover-color: rgb(23.6923076923, 58.1538461538, 214.3076923077);
+	--crm-focus-color: rgb(23.6923076923, 58.1538461538, 214.3076923077);
+}
+
+body.admin-color-fresh {
+	--crm-link-color: #2271b1;
+	--crm-link-hover-color: #135e96;
+	--crm-focus-color: #135e96;
+}
+
+body.admin-color-light,
+body.admin-color-blue,
+body.admin-color-coffee,
+body.admin-color-ectoplasm,
+body.admin-color-midnight,
+body.admin-color-ocean,
+body.admin-color-sunrise {
+	--crm-link-color: #0073aa;
+	--crm-link-hover-color: rgb(0, 149.5, 221);
+	--crm-focus-color: rgb(0, 149.5, 221);
+}
+
+.crm-container a:focus {
+	outline: none;
+	text-decoration: none;
+}
+
+.crm-container a:focus,
+.crm-container a:focus-visible {
+	border-radius: 2px;
+	box-shadow: 0 0 0 1px transparent, 0 0 0 var(--wp-admin-border-width-focus, 2.5px) var(--wp-admin-theme-color);
+	outline: 2px solid transparent;
+	text-decoration: none;
+}
+
+/* In general, set link icons to WordPress theme colour. */
+.crm-container a:focus-visible .crm-i {
+	color: var(--wp-admin-theme-color);
+	font-weight: bold;
+}
+
+/* Except for buttons, including "action link" and "crm submit". */
+.crm-container a.button:focus-visible .crm-i,
+.crm-container a.crm-button:focus-visible .crm-i,
+.crm-container .crm-submit-buttons a:focus-visible .crm-i,
+.crm-container .action-link a:focus-visible .crm-i {
+	color: var(--crm-wp-button-primary-color-hover)
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Icon Elements.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container a.helpicon,
+.crm-container .help a.helpicon {
+	font-weight: 600;
+	padding-inline-start: 3px;
+	margin-inline: 0;
+	border-radius: 50%;
+	min-width: 1.15rem;
+}
+
+.crm-container h3 a.helpicon {
+	padding-inline-start: 4px;
+	line-height: 1.45;
+}
+
+.crm-container .crm-wizard a.helpicon {
+	padding-inline: 3px;
+}
+
+.crm-container a.helpicon:hover,
+.crm-container a.helpicon:focus,
+.crm-container .help a.helpicon:hover,
+.crm-container .help a.helpicon:focus {
+	outline: none;
+}
+
+.crm-container a.helpicon:focus,
+.crm-container .help a.helpicon:focus {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+/* Make the Inactive Dashlets help icon circular. */
+.crm-container .crm-inactive-dashlet-fieldset a.helpicon {
+	line-height: 1.45;
+}
+
+/* Make the Inactive Dashlets help icon circular. */
+.crm-container .crm-form-block.crmCaseType a.helpicon {
+	padding-inline-end: 2.5px;
+}
+
+/* Make icons bold on hover. */
+.crm-i:hover,
+.crm-tooltip-active .crm-i {
+	font-weight: 600;
+}
+
+
+
+/* Wizard Bar fixes. */
+.crm-container ul.wizard-bar > li::after,
+.crm_wizard__title ul > li::after {
+	right: -19px;
+}
+
+/* Make exclamation triangle in descriptions red by default. */
+.description .crm-i.fa-exclamation-triangle {
+	color: var(--crm-danger-color);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Accordions.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-accordion-radius: 0;
+	--crm-accordion-gap: var(--crm-l-small-2) 0 0;
+	--crm-accordion-gap: var(--crm-l-medium) 0 0;
+
+	--crm-accordion-header-weight: bold;
+	--crm-accordion-header-bg-color: #fafafa;
+	--crm-accordion-header-color: #3c434a;
+	--crm-accordion-header-bg-active-color: #fafafa;
+	--crm-accordion-header-border: 1px solid #e5e5e5;
+	--crm-accordion-header-border-width: 1px;
+	--crm-accordion-header-padding: 8px;
+
+	--crm-accordion2-header-weight: var(--crm-accordion-header-weight);
+	--crm-accordion2-header-color: var(--crm-accordion-header-color);
+	--crm-accordion2-header-border: 1px solid #e5e5e5;
+	--crm-accordion2-header-border-width: 1px;
+	--crm-accordion2-header-padding: 8px;
+	--crm-accordion2-header-bg-color: var(--crm-accordion-header-bg-color);
+	--crm-accordion2-header-bg-active-color: #fafafa;
+
+	--crm-accordion2-body-bg-color: #fff;
+	--crm-accordion2-body-padding: 12px 8px 1px;
+}
+
+.crm-container .crm-accordion-bold summary,
+.crm-container .crm-accordion-light summary {
+	outline: none;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+}
+
+.crm-container details > summary:focus-visible {
+	border-color: var(--wp-admin-theme-color);
+}
+
+.crm-container details > summary:hover::before,
+.crm-container details > summary:focus-visible::before {
+	color: var(--wp-admin-theme-color);
+}
+
+.crm-container details.crm-accordion-settings summary {
+	box-shadow: none;
+}
+
+.crm-container details summary.ng-binding:focus,
+.crm-container details summary.ng-binding:focus-visible {
+	outline: none;
+	border-color: var(--wp-admin-theme-color);
+}
+
+.crm-container .crm-accordion-bold > .crm-accordion-body,
+.crm-container .crm-accordion-light > .crm-accordion-body {
+	border: var(--crm-accordion2-header-border);
+	border-top: none;
+	background: #fff;
+}
+
+/* Specific accordions. */
+.crm-container .crm-report-instanceList-form-block {
+	--crm-padding-inset: 0;
+}
+
+/* RiverLea accordions that should look like accordions but don't. */
+/* @see riverlea/core/css/components/_page.css */
+.crm-container .crm-contribution-contributionpage-premium-form-block details,
+.crm-container .crm-contribution-contributionpage-widget-form-block details,
+.crm-container .crm-activity-form-block details,
+.crm-container .crm-contactEmail-form-block details,
+.crm-container .crm-contribution-form-block details,
+.crm-container .crm-pledge-form-block details,
+.crm-container .crm-payment-form-block details,
+.crm-container .crm-import-preview-form-block details,
+.crm-container .crm-event-manage-eventinfo-form-block details,
+.crm-container .crm-wizard-step,
+.crm-container .CRM_Admin_Form_MessageTemplates details,
+.crm-container .crm-case-caseview-form-block details,
+.crm-container .crm-case-activity-form-block details {
+	margin-bottom: var(--crm-l-medium);
+	margin: var(--crm-l-medium) 0;
+}
+
+/* RiverLea nested accordion overrides. */
+/* @see riverlea/core/css/components/_accordion.css */
+.crm-container #registration_blocks summary,
+.crm-container #email-section summary {
+	outline: none;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	font-weight: var(--crm-accordion2-header-weight);
+    background-color: var(--crm-accordion2-header-bg-color);
+    color: var(--crm-accordion2-header-color);
+    border: var(--crm-accordion2-header-border);
+    border-width: var(--crm-accordion2-header-border-width);
+    padding: var(--crm-accordion2-header-padding);
+}
+
+.crm-container #registration_blocks details > summary:hover::before,
+.crm-container #registration_blocks details > summary:focus-visible::before,
+.crm-container #email-section details > summary:hover::before,
+.crm-container #email-section details > summary:focus-visible::before {
+	color: var(--wp-admin-theme-color);
+}
+
+.crm-container #registration_blocks details summary:focus,
+.crm-container #registration_blocks details summary:focus-visible,
+.crm-container #email-section details summary:focus,
+.crm-container #email-section details summary:focus-visible {
+	border-color: var(--wp-admin-theme-color);
+}
+
+.crm-container #registration_blocks .crm-accordion-wrapper {
+	padding: var(--crm-accordion-body-padding);
+}
+
+.crm-container #registration_blocks .crm-accordion-body,
+.crm-container #registration_blocks .crm-accordion-wrapper,
+.crm-container #email-section .crm-accordion-body {
+	border: var(--crm-accordion2-header-border);
+	border-top: none;
+	background: #fff;
+}
+
+.crm-container #registration_blocks .crm-accordion-wrapper .form-layout-compressed,
+.crm-container #registration_blocks .crm-accordion-body .form-layout-compressed {
+	margin: 0;
+}
+
+
+
+/* Cases table Activities opener. */
+.crm-container .crm-search-display-subsearch-dropdown {
+	margin-top: 0;
+}
+
+.crm-container .crm-search-display-subsearch-dropdown summary {
+	padding-top: 0;
+}
+
+.crm-container .crm-search-display-subsearch-dropdown summary .crm-i:hover {
+	font-weight: 400;
+}
+
+#bootstrap-theme .crm-search-display-table .crm-search-display-subsearch-dropdown[open] summary,
+#bootstrap-theme .crm-search-display-table .crm-search-display-subsearch-dropdown-body {
+	background: var(--crm-paper);
+}
+
+
+
+/* CiviRules "Filters" accordion fixes. */
+.crm-container #bootstrap-theme afsearch-manage-civi-rules details.af-container {
+	background-color: var(--crm-accordion2-body-bg-color);
+	border-radius: var(--crm-accordion-radius);
+	margin: var(--crm-accordion-gap);
+	box-shadow: none;
+	border: var(--crm-accordion2-header-border);
+}
+
+
+.crm-container #bootstrap-theme afsearch-manage-civi-rules .af-container-style-pane > .af-title {
+	color: var(--crm-accordion2-header-color);
+	background-color: var(--crm-accordion2-header-bg-active-color);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	outline: none;
+	font-weight: var(--crm-accordion2-header-weight);
+	border-bottom: var(--crm-accordion2-header-border);
+	border-width: var(--crm-accordion2-header-border-width);
+	padding: var(--crm-accordion2-header-padding);
+}
+
+/* CiviRules has no "crm-accordion-body" wrapper. */
+.crm-container #bootstrap-theme afsearch-manage-civi-rules .af-container-style-pane > .af-container.af-layout-cols {
+	margin: 0 8px 1px;
+}
+
+.crm-container #bootstrap-theme afsearch-manage-civi-rules .af-container-style-pane > .af-container.af-layout-inline {
+	margin: 12px 8px 1px;
+}
+
+
+
+/* Contact Page Custom Field accordions. */
+.crm-container #contact-summary .crm-accordion-light,
+.crm-container #Contact .crm-accordion-light {
+	background-color: var(--crm-accordion2-body-bg-color);
+	border-radius: var(--crm-accordion-radius);
+	margin: var(--crm-accordion-gap);
+}
+
+.crm-container #contact-summary .crm-accordion-light > summary,
+.crm-container #Contact .crm-accordion-light > summary {
+	outline: none;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	font-weight: var(--crm-accordion2-header-weight);
+	background-color: var(--crm-accordion2-header-bg-color);
+    color: var(--crm-accordion2-header-color);
+    border: var(--crm-accordion2-header-border);
+    border-width: var(--crm-accordion2-header-border-width);
+    padding: var(--crm-accordion2-header-padding);
+}
+
+.crm-container #contact-summary .crm-accordion-light > summary:focus-visible,
+.crm-container #Contact .crm-accordion-light > summary:focus-visible {
+	border-color: var(--wp-admin-theme-color);
+}
+
+.crm-container #contact-summary .crm-accordion-light > summary:hover::before,
+.crm-container #contact-summary .crm-accordion-light > summary:focus-visible::before,
+.crm-container #Contact .crm-accordion-light > summary:hover::before,
+.crm-container #Contact .crm-accordion-light > summary:focus-visible::before {
+	color: var(--wp-admin-theme-color);
+}
+
+
+
+/* "New Event Registration" Custom Fields accordion container. */
+.crm-container .crm-participant-form-block-customData {
+	margin: var(--crm-padding-reg) 0;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Legacy "Search Builder" page fixes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container .crm-search_builder-accordion .crm-search-block h3 {
+	margin: 0;
+	padding: 0;
+}
+
+.crm-container .crm-search_builder-accordion h3.crm-search-builder-add-block button {
+	font-weight: 400;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+"Access Control" page fixes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container #crm-main-content-wrapper .nowrap #adminAccess,
+.crm-container #crm-main-content-wrapper .nowrap #editACLRoles,
+.crm-container #crm-main-content-wrapper .nowrap #editRoleAssignments,
+.crm-container #crm-main-content-wrapper .nowrap #editACLs {
+	padding: var(--crm-l-small);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+"Scheduled Jobs Log" page fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Make Code result more distinctive. */
+.crm-container .crm-joblog-data pre {
+	background: #f5f5f5;
+    border: var(--crm-table-outside-border);
+}
+
+/* Make links in label tds less bold. */
+.crm-container td.label label + br + a {
+	font-weight: normal;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+"Help spread the word" panel fixes.
+------------------------------------------------------------------------------------------
+*/
+
+body.wp-admin .crm-container .crm-socialnetwork p {
+	margin: var(--crm-l-reg) 0;
+}
+
+body.wp-admin .crm-container .crm-socialnetwork p br:first-child {
+	display: none;
+}
+
+.crm-container a.crm-event-feed-link {
+	padding: var(--crm-l-medium) var(--crm-l-medium) var(--crm-l-medium) 0;
+}
+
+.crm-container a.crm-event-feed-link:hover .crm-i {
+	font-weight: 600;
+}
+
+.crm-container a.crm-event-feed-link:focus-visible .crm-i {
+	color: var(--wp-admin-theme-color);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Actions Menu fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Actions menus. */
+#crm-event-links-list,
+#crm-contribpage-links-list,
+#crm-create-new-list,
+#crm-participant-list,
+#crm-contact-actions-list {
+	border: none;
+	top: calc(var(--crm-wp-btn-height) + 7px);
+	--crm-dropdown2-color: #000;
+	--crm-dropdown2-bg-color: #fff;
+	--crm-secondary-text-color: #000;
+}
+
+.crm-container .ac_results-inner,
+.crm-container .crm-event-links-list-inner,
+.crm-container .crm-contribpage-links-list-inner,
+.crm-container .crm-contact-actions-list-inner,
+.crm-container .crm-participant-list-inner {
+	margin: 0;
+	padding: 0;
+}
+
+.crm-container .crm-contact_actions-list {
+	border-left: var(--crm-panel-border);
+	border-right: var(--crm-panel-border);
+}
+
+#crm-event-links-list ul a,
+#crm-contribpage-links-list ul a,
+#crm-create-new-list ul a,
+#crm-participant-list ul a,
+#crm-contact-actions-list ul a {
+	border-radius: 0;
+	padding: var(--crm-l-small-2);
+}
+
+#crm-event-links-list ul a:hover,
+#crm-contribpage-links-list ul a:hover,
+#crm-create-new-list ul a:hover,
+#crm-participant-list ul a:hover,
+#crm-contact-actions-list ul a:hover {
+	background-color: #f1f1f1;
+}
+
+#crm-contact-actions-list a.delete {
+	border-radius: 0;
+}
+
+#crm-event-links-list ul a:hover .crm-i::before,
+#crm-contribpage-links-list ul a:hover .crm-i::before,
+#crm-create-new-list ul a:hover .crm-i::before,
+#crm-participant-list ul a:hover .crm-i::before,
+#crm-contact-actions-list ul a:hover .crm-i::before,
+#crm-contact-actions-list a.delete:hover .crm-i.fa-trash::before {
+	font-weight: 600;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Pagination fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Let's have larger text. */
+.crm-container .pagination {
+	font-size: var(--crm-l-reg);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Tooltip fixes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-summary-group,
+.crm-container .crm-tooltip table,
+.crm-container .crm-tooltip table tr,
+.crm-container .crm-tooltip table tr td {
+	background-color: #fff;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Access Keys.
+------------------------------------------------------------------------------------------
+*/
+
+/* Modify the Access Keys section. */
+.crm-container #access {
+	padding-top: 0.5rem;
+}
+
+/* Modify the Access Keys popover. */
+body #crmAccessKeyList span
+{
+	background: #e5e5e5;
+	border: 1px groove #eee;
+	color: #006799;
+	border-radius: 3px;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Status at foot of page.
+------------------------------------------------------------------------------------------
+*/
+
+/* Give link container a bit more emphasis. */
+.crm-container #civicrm-footer .status {
+	border: none;
+	padding: 4px;
+	padding-inline-end: 4px;
+	padding-inline-start: 7px;
+}
+
+/* Make link behave a bit like a button. */
+.crm-container #civicrm-footer .status a,
+.crm-container #civicrm-footer .status a:hover,
+.crm-container #civicrm-footer .status a:focus,
+.crm-container #civicrm-footer .status a:focus-visible,
+.crm-container #civicrm-footer .status a:active {
+	color: var(--crm-wp-button-primary-color);
+	text-decoration: none;
+	outline: none;
+	box-shadow: none;
+	font-weight: 600;
+}
+
+/* When it's showing all's well, i.e. "Notice" or "OK". */
+.crm-container #civicrm-footer .status.crm-status-none,
+.crm-container #civicrm-footer .status.crm-ok {
+	background: var(--crm-success-color);
+}
+
+.crm-container #civicrm-footer .status.crm-status-none:has(a:hover),
+.crm-container #civicrm-footer .status.crm-ok:has(a:hover) {
+	background: color-mix(in srgb, var(--crm-success-color) 87.5%, #000 12.5%);
+	color: var(--crm-wp-button-primary-color);
+}
+
+.crm-container #civicrm-footer .status.crm-status-none:has(a:focus),
+.crm-container #civicrm-footer .status.crm-ok:has(a:focus) {
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--crm-success-color);
+}
+
+/* When it's showing a warning. */
+.crm-container #civicrm-footer .status.crm-warning {
+	--crm-alert-success-border-color: #eba12d;
+	background: var(--crm-alert-success-border-color);
+}
+
+.crm-container #civicrm-footer .status.crm-warning:has(a:hover) {
+	background: color-mix(in srgb, var(--crm-alert-success-border-color) 87.5%, #000 12.5%);
+	color: var(--crm-wp-button-primary-color);
+}
+
+.crm-container #civicrm-footer .status.crm-warning:has(a:focus) {
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--crm-alert-success-border-color);
+}
+
+/* When it's showing an error. */
+.crm-container #civicrm-footer .status.crm-error {
+}
+
+.crm-container #civicrm-footer .status.crm-error:has(a:hover) {
+	background: color-mix(in srgb, var(--crm-btn-danger-bg-color) 87.5%, #000 12.5%);
+	color: var(--crm-wp-button-primary-color);
+}
+
+.crm-container #civicrm-footer .status.crm-error:has(a:focus) {
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--crm-btn-danger-bg-color);
+}
+

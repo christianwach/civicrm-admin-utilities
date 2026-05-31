@@ -1,0 +1,1328 @@
+/**
+ * Tab and Panel styles.
+ *
+ * Implements styles on screens that use Tabs and Panels, e.g.
+ *
+ * * Contact Screen.
+ * * Contact Layout Editor.
+ * * Edit Event.
+ * * Configure Survey.
+ * * Configure Contribution.
+ * * Reports.
+ * * APIv3 Explorer.
+ * * APIv4 Explorer.
+ * * SearchKit Saved Searches.
+ * * FormBuilder.
+ * * CiviCRM Extensions.
+ * * CiviCRM Dashboard.
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+/*
+------------------------------------------------------------------------------------------
+WordPress-style Tabs.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	/* Tab-related. */
+	--crm-tab-hover-bg-color: #fff;
+	--crm-tabs-radius: 0;
+	--crm-tabs-padding: 0;
+	--crm-tab-radius: 0;
+	--crm-tab-bg-active: #fff;
+	--crm-tab-not-active-border: 1px solid #d3d3d3;
+	/* Contact-related. */
+	--crm-contact-border: none;
+	--crm-contact-header-padding: 0 0 0.5rem 0;
+	--crm-contact-tabs-padding: 0;
+	--crm-contact-tab-padding: 8px 9px;
+	--crm-contact-panel-border: 1px solid #aaa;
+	--crm-contact-label-bg-color: #f5f5f5;
+	--crm-contact-summary-row-bg-color: #fafafa;
+	/* TODO: move to _forms.css */
+	--crm-input-border-radius: 2px;
+}
+
+/* Force not-yet-rendered Tabs to load horizontally. */
+.crm-container .nav-tabs > li,
+.crm-container .ui-tabs .ui-tabs-nav > li,
+.crm-container #mainTabContainer > ul > li,
+.crm-container .crm-contact-page #mainTabContainer .crm-contact-tabs-list > li {
+	border: var(--crm-tab-not-active-border);
+	border-bottom: none;
+	border-bottom: var(--crm-contact-panel-border);
+	display: inline-block;
+	margin: 0;
+}
+
+/* Tab ul element must have no margin. */
+.crm-container #mainTabContainer ul.ui-tabs-nav {
+	margin: 0;
+}
+
+/* Active Tab List Item. */
+.crm-container .nav-tabs li.active,
+.crm-container .nav-tabs li.active:hover,
+.crm-container .ui-tabs .ui-tabs-nav li.ui-state-active,
+.crm-container .ui-tabs .ui-tabs-nav li.ui-tabs-active,
+.crm-container .ui-tabs ul.ui-tabs-nav > li.ui-state-active,
+.crm-container .ui-tabs ul.ui-tabs-nav > li.ui-tabs-active,
+.crm-container #mainTabContainer.ui-tabs > .ui-tabs-nav > li.ui-tabs-active,
+.crm-container #mainTabContainer.ui-tabs > .ui-tabs-nav > li.ui-state-active,
+.crm-container .ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-tabs-active,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-tabs-active,
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-tabs-active {
+	outline: none;
+	border: var(--crm-contact-panel-border);
+	border-bottom-color: var(--crm-contact-panel-bg-color);
+}
+
+/* Active Tab List Item focus. */
+.crm-container .nav-tabs li.active a:not(:has(.crm-i)):focus-visible,
+.crm-container .nav-tabs li.active a:focus-visible .crm-i,
+.crm-container .ui-tabs .ui-tabs-nav li.ui-state-focus,
+.crm-container .ui-tabs .ui-tabs-nav li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container .ui-tabs .ui-tabs-nav li.ui-state-focus a .crm-i,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-state-focus,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-state-focus a .crm-i,
+.crm-container .ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus,
+.crm-container .ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container .ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a .crm-i,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a .crm-i,
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a .crm-i {
+	outline: none;
+	color: var(--wp-admin-theme-color);
+}
+
+.crm-container .nav-tabs li.active a:focus-visible .crm-i,
+.crm-container .ui-tabs .ui-tabs-nav li.ui-state-focus a .crm-i,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-state-focus a .crm-i,
+.crm-container .ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a .crm-i,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a .crm-i,
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a .crm-i {
+	outline: none;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.crm-container .nav-tabs li.active a:not(:has(.crm-i)):focus-visible,
+.crm-container .ui-tabs .ui-tabs-nav li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container .ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a:not(:has(.crm-i)),
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-state-focus a:not(:has(.crm-i)) {
+	outline: none;
+	text-decoration: underline;
+}
+
+/* Active Tab anchor defaults. */
+.crm-container .nav-tabs li.active a,
+.crm-container .nav-tabs li.active a:hover,
+.crm-container .nav-tabs li.active a:focus,
+.crm-container .ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+.crm-container .ui-tabs .ui-tabs-nav li:hover a,
+.crm-container .ui-tabs .ui-tabs-nav li:focus a,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li:hover a,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li:focus a,
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li.ui-tabs-active a,
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li:hover a,
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li:focus a {
+	outline: none;
+	box-shadow: none;
+}
+
+/* The Tab "link" or trigger. */
+.crm-container .ui-tabs .ui-tabs-nav li .ui-tabs-anchor,
+.crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li .ui-tabs-anchor,
+.crm-container .crm-contact-page #mainTabContainer .crm-contact-tabs-list li .ui-tabs-anchor {
+	white-space: nowrap;
+    border-radius: 0;
+    display: grid;
+	grid-template-columns: min-content auto min-content;
+    width: var(--crm-contact-tab-width);
+    gap: var(--crm-l-medium);
+    align-items: center;
+    float: var(--crm-contact-tab-align);
+    padding: var(--crm-contact-tab-padding);
+    border: var(--crm-contact-tab-border);
+    text-align: var(--crm-contact-tab-align);
+}
+
+/* Bootstrap trigger needs separate handling. */
+.crm-container .ui-tabs ul.ui-tabs-nav a:not(.button),
+.crm-container .nav-tabs > li > a, .crm-container .panel-heading .nav-tabs > li > a,
+.crm-container ul.nav-tabs li.fluid-width-tab a,
+.crm-container .nav-tabs li a.ng-binding {
+    padding: var(--crm-contact-tab-padding);
+    border: var(--crm-contact-tab-border);
+    text-align: var(--crm-contact-tab-align);
+	line-height: 1.6;
+}
+
+
+
+/* The Tab "count" element. */
+.crm-container .ui-tabs ul.ui-tabs-nav a em,
+.crm-container #mainTabContainer ul.ui-tabs-nav a em {
+	--crm-primary-color: var(--wp-admin-theme-color);
+	--crm-tab-count-bg-color: var(--wp-admin-theme-color);
+	--crm-tab-count-color: var(--crm-primary-text-color);
+	--crm-contact-tab-count-bg-color: var(--wp-admin-theme-color);
+	--crm-contact-tab-count-color: var(--crm-primary-text-color);
+}
+
+/* Hide "count" when empty. */
+.crm-container li.crm-count-0 a.ui-tabs-anchor em,
+.crm-container #mainTabContainer li.crm-count-0 a.ui-tabs-anchor em {
+	display: none;
+}
+
+/* Alter grid when there is a hidden "count". */
+.crm-container .crm-contact-page #mainTabContainer .crm-contact-tabs-list li.crm-count-0 a.ui-tabs-anchor {
+	grid-template-columns: min-content auto;
+}
+
+/* Bootstrap Tab "count" element. */
+.crm-container .nav-tabs a .badge {
+	--crm-tab-count-color: var(--crm-primary-text-color);
+	--crm-tab-count-bg-color: var(--wp-admin-theme-color);
+	border-radius: 50%;
+	line-height: 1.6;
+}
+
+/* Bootstrap Tab "editable" element layout. */
+.crm-container span[crm-ui-editable] {
+	line-height: var(--crm-l-reg-1);
+	line-height: 1.1;
+}
+
+/* Bootstrap Tab "editable" element focus. */
+.crm-container span[crm-ui-editable]:focus {
+	outline-color: var(--crm-wp-button-secondary-box-focus);
+}
+
+/* "Message Templates" Tab backgrund. */
+.crm-container #bootstrap-theme nav.bg-info {
+	background-color: transparent;
+}
+
+#tab-mailinglabels,
+#tab-namebadge {
+	border: none;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+WordPress style Panels.
+------------------------------------------------------------------------------------------
+*/
+
+/* Raise Main Panel under bottom pixel of Tabs */
+.crm-container #bootstrap-theme > div[role="tabpanel"],
+.crm-container .ui-tabs > div[role="tabpanel"],
+.crm-container #bootstrap-theme > div[ng-show="$ctrl.tab === 'segment'"],
+#mainTabContainer .ui-tabs-panel,
+#mainTabContainer .crm-contact-tabs-list ~ .ui-tabs-panel {
+	margin-top: -1px;
+}
+
+/* Panels need a border. */
+.crm-container #bootstrap-theme > div[role="tabpanel"],
+.crm-container #bootstrap-theme > div[ng-show="$ctrl.tab === 'segment'"],
+.crm-container .ui-tabs .ui-tabs-panel {
+	border: var(--crm-contact-panel-border);
+}
+
+/* "Profiles" screen panels are too cramped. */
+.crm-container .ui-tabs > div[role="tabpanel"] > .crm-content-block {
+	padding-top: var(--crm-l-medium);
+	margin-left: var(--crm-l-small);
+	margin-right: var(--crm-l-small);
+}
+
+/* FormBuilder admin list has no enclosing div :( */
+#bootstrap-theme.afadmin-list > div.form-inline,
+#bootstrap-theme.afadmin-list > table {
+	margin-top: -1px;
+	border: var(--crm-contact-panel-border);
+	border-bottom: none;
+}
+
+#bootstrap-theme.afadmin-list > table {
+	border-top: none;
+	width: 100%;
+	/* Maybe scroll on overflow? */
+	/* 	display: block; */
+	/* 	overflow-y: scroll; */
+}
+
+#bootstrap-theme #afGuiEditor .panel-heading:has(.nav-tabs) {
+	position: relative;
+	z-index: 2;
+}
+
+
+
+/* FormBuilder Edit Form Panel. */
+#bootstrap-theme #afGuiEditor .panel-body {
+	border: var(--crm-contact-panel-border) !important;
+	border-top: var(--crm-contact-panel-border) !important;
+	border-radius: 0;
+	margin-top: -1px;
+	z-index: 1;
+	scrollbar-width: thin;
+}
+
+/* Prevent overflow-x scroll by simulating "screen-reader-text" class. */
+#bootstrap-theme #afGuiEditor-palette .form-group label[for="af_config_form_permission_operator"] {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	/* Many screen reader and browser combinations announce broken words as they would appear visually. */
+	word-wrap: normal !important;
+	word-break: normal !important;
+}
+
+/* APIv4 Explorer. */
+#bootstrap-theme.api4-explorer-page .panel-heading:has(.nav-tabs) {
+	background: var(--crm-page-bg-color);
+	margin: -1px -1px 0px -1px;
+	position: relative;
+	z-index: 2;
+}
+
+.crm-container .api4-explorer-page .panel:has(.nav.nav-tabs) {
+	border: var(--crm-contact-panel-border);
+	border-top: none;
+}
+
+.api4-explorer-row .explorer-code-panel .nav.nav-tabs,
+.api4-explorer-row .explorer-result-panel .nav.nav-tabs {
+	margin-bottom: -1px;
+}
+
+.api4-explorer-row .explorer-code-panel .panel-body,
+.api4-explorer-row .explorer-result-panel .panel-body {
+	border-top: var(--crm-contact-panel-border);
+	margin-top: 0;
+	border-radius: 0;
+}
+
+
+
+/* Campaign Dashboard. */
+.crm-container .crm-tab-panel {
+	background: #fff;
+	border: var(--crm-contact-panel-border) !important;
+	border-top: var(--crm-contact-panel-border) !important;
+	border-radius: 0;
+	margin-top: -1px;
+	padding: var(--crm-contact-tab-padding);
+}
+
+
+
+/* "System Status" fixes. */
+.crm-container #crm-status-list {
+	margin-top: 8px;
+}
+
+.crm-container .ui-tabs > div[role="tabpanel"] {
+	border-radius: 0;
+}
+
+
+
+
+/* "New Mailing" wizard fixes. */
+.crm-container .ui-tabs > div[role="tabpanel"] > .ui-tabs-panel {
+	border: none;
+}
+
+
+
+/* Spinner during Panel load process. */
+.crm-container .blockUI.blockOverlay::before,
+.crm-container .contact_panel .blockUI.blockOverlay::before {
+	width: 2em;
+	height: 2em;
+	top: 40%;
+	margin: -5px;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Contact Page fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Attempt to keep tabs from wrapping by reducing grid gap. */
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li a {
+	gap: var(--crm-l-small);
+}
+
+.crm-container .crm-contact-page #mainTabContainer.ui-tabs .ui-tabs-nav.crm-contact-tabs-list li a > em {
+	margin-left: var(--crm-l-xsmall);
+}
+
+.crm-actions-ribbon ul#actions {
+	--crm-contact-header-padding: 0 0 0.75rem 0;
+}
+
+.crm-contact-page {
+	--crm-input-inline-edit-bg-color: #fafafa;
+}
+
+.crm-container #contact-summary table.crm-inline-edit-form tr,
+.crm-container #contact-summary table.crm-inline-edit-form tr:hover {
+	background-color: transparent;
+}
+
+#contactname-block .crm-inline-edit.form {
+	margin-bottom: 0.75rem;
+}
+
+#crm-contactname-content .crm-summary-display_name {
+	--crm-contact-header-padding: 0.5rem 0;
+}
+
+/* Align buttons as per OS. */
+#crm-contactname-content .crm-inline-button {
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 8px;
+}
+
+/* Editable sections. */
+.crm-container .crm-inline-edit.form,
+.crm-container .crm-inline-edit.form:hover {
+	cursor: default;
+	border: 1px solid var(--wp-admin-theme-color);
+}
+
+/* Give Save & Cancel buttons a bit more room. */
+.crm-container .crm-inline-edit.form .crm-inline-button button {
+	margin-right: var(--crm-l-small);
+}
+
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Contact Layout Editor fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Admin screen. */
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-default > .panel-heading {
+	height: var(--crm-l-large-2);
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-heading h2 {
+	line-height: 2.45rem;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-heading .panel-title form {
+	top: 0;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-heading .form-inline {
+	padding: 0;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-heading .btn-group {
+	top: 0;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-heading .btn {
+	padding: var(--crm-btn-icon-padding) var(--crm-btn-padding-inline) var(--crm-btn-icon-padding) 0;
+	border: var(--crm-btn-border);
+	height: var(--crm-wp-btn-height);
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-heading .btn i {
+	margin-left: 0;
+}
+
+/* Show... To... */
+.crm-container #bootstrap-theme #contactLayoutEditor .navbar,
+.crm-container #bootstrap-theme #contactLayoutEditor .navbar-default {
+	border-bottom: var(--crm-panel-border);
+	background-color: #f1f1f1;
+	color: #000;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .navbar label,
+.crm-container #bootstrap-theme #contactLayoutEditor .navbar-default label {
+    padding: 0;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn {
+    color: var(--crm-c-darkest);
+    background: transparent;
+    padding: 0;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus,
+.crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus-visible {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	font-weight: 600;
+    color: var(--crm-c-darkest);
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus .crm-i::before,
+.crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus-visible .crm-i::before {
+	font-weight: 600;
+    color: var(--crm-c-darkest);
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus .crm-i.fa-trash::before,
+.crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus-visible .crm-i.fa-trash::before {
+    color: var(--crm-danger-color);
+}
+
+.crm-container #cse-block-container #cse-palette-col > h4 {
+	padding: 20px 10px;
+}
+
+.crm-container #cse-block-container #cse-palette-col > h4 .btn-group {
+	top: -10px;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-body > .alert,
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-body > div > .alert,
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-body > div > contact-layout-edit-tabs {
+	display: block;
+	margin: 15px 20px;
+}
+
+.crm-container #bootstrap-theme #contactLayoutEditor .panel-body > .alert {
+	margin-bottom: 0;
+}
+
+.crm-container #cse-tabs-container {
+	background-color: transparent;
+    padding: 0 0 var(--crm-l-small) 0;
+}
+
+.crm-container #cse-rows .cse-drop {
+	padding-top: 30px;
+}
+
+.crm-container #cse-rows button.cse-remove-col,
+.crm-container #bootstrap-theme #cse-rows button.btn-primary-outline,
+.crm-container #bootstrap-theme #cse-rows button.btn-danger-outline,
+.crm-container #bootstrap-theme #cse-rows button.btn-success-outline,
+.crm-container #bootstrap-theme #cse-palette-col button.btn-primary-outline,
+.crm-container #bootstrap-theme #cse-palette-col button.btn-success-outline {
+	background: transparent;
+	padding-right: 0;
+    color: var(--crm-c-darkest);
+}
+
+.crm-container #bootstrap-theme #cse-rows button.btn-info-outline .crm-i {
+    color: var(--crm-c-darkest);
+}
+
+.crm-container #bootstrap-theme #cse-rows button.btn-info-outline span {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.crm-container #bootstrap-theme #cse-rows button.btn-danger-outline .crm-i {
+    color: var(--crm-danger-color);
+}
+
+.crm-container #bootstrap-theme #cse-palette-col .cse-block button {
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-top: -4px;
+}
+
+/* Contact screen. */
+.crm-container #contact-summary .contact_panel .collapsible-title,
+.crm-container #contact-summary .contact_panel .crm-collapsible .collapsible-title {
+	padding: var(--crm-accordion-header-padding);
+	font-size: var(--crm-l-reg-1);
+	font-weight: 400;
+    color: var(--crm-c-gray-700);
+    line-height: 1;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+/* Nested collapsible accordion headers, e.g. for Address Custom Fields. */
+.crm-container #contact-summary .contact_panel .crm-summary-block .crm-accordion-light .collapsible-title {
+	font-size: var(--crm-l-reg);
+}
+
+.crm-container #contact-summary .contact_panel .crm-summary-block .crm-accordion-light.collapsed .collapsible-title::before {
+	transform: none;
+}
+
+.crm-container #contact-summary div.contact_panel .crm-summary-block {
+	padding: 0;
+}
+
+.crm-container #contact-summary div.contact_panel .crm-inline-edit-form td {
+	vertical-align: middle;
+}
+
+.crm-container #contact-summary div.contact_panel .crm-inline-edit-form td.label {
+	padding-bottom: 0;
+}
+
+.crm-container #contact-summary div.contact_panel .crm-inline-edit-form td.label label {
+	margin-bottom: 0;
+}
+
+.crm-container #mainTabContainer .crm-summary-block .crm-container-snippet table,
+.crm-container #mainTabContainer .crm-summary-block .crm-container-snippet table tr {
+	background: transparent;
+}
+
+/* Fix "crm-summary-row" content padding. */
+.crm-inline-edit-form div.crm-summary-row div.crm-content {
+	padding: var(--crm-l-medium);
+	line-height: 1.8;
+}
+
+
+
+
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Configure Event Page fixes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container #event-fees #map-field table#map-field-table {
+	border: 1px solid var(--crm-border-color);
+}
+
+.crm-container table#map-field-table,
+.crm-container table#map-field-table tr,
+.crm-container table#map-field-table tr td {
+	background-color: #fafafa;
+}
+
+.crm-container table#map-field-table tr.columnheader td {
+	background-color: var(--crm-page-bg-color);
+}
+
+.crm-container table#map-field-table tr td:last-child {
+	vertical-align: middle;
+}
+
+.crm-container #event-fees #map-field #discount #discountLink {
+	margin: var(--crm-l-medium) 0;
+}
+
+.crm-container #event-fees #map-field #discount table {
+	border: 1px solid var(--crm-border-color);
+	width: auto;
+}
+
+.crm-container #map-field #discount table,
+.crm-container #map-field #discount table tr,
+.crm-container #map-field #discount table tr td {
+	background-color: #fafafa;
+}
+
+.crm-container #map-field #discount table tr.columnheader td {
+	background-color: var(--crm-page-bg-color);
+}
+
+.crm-container #map-field #discount table tr td:last-child {
+	vertical-align: middle;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Configure Survey fixes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container #showoption #multiple table#optionField {
+	border: 1px solid var(--crm-border-color);
+	margin-top: var(--crm-l-reg);
+}
+
+.crm-container #showoption #multiple table#optionField tbody tr:first-child {
+	background-color: #fafafa !important;
+	border-bottom: 2px solid var(--crm-border-color);
+}
+
+.crm-container #showoption #multiple table#optionField tbody td {
+	vertical-align: middle;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+CiviCRM Contribution Summary.
+------------------------------------------------------------------------------------------
+*/
+
+#ContributionCharts #chartData {
+	margin-top: -1px;
+	border: var(--crm-contact-panel-border);
+}
+
+/* "Hide" unnecessary (and invalid) nested ID. */
+#ContributionCharts #chartData #chartData {
+    padding: 0;
+    border: 0;
+}
+
+#ContributionCharts #chartData > .form-layout-compressed {
+    padding: 0;
+    margin: 0;
+}
+
+#ContributionCharts #chartData > .form-layout-compressed > table {
+    padding: 0;
+    margin: 0;
+}
+
+#ContributionCharts #chartData > .form-layout-compressed > table td {
+	vertical-align: middle;
+}
+
+#ContributionCharts ul.ui-tabs-nav .float-right {
+	top: -1rem;
+}
+
+#ContributionCharts ul.ui-tabs-nav li.crm-tab-button {
+	padding: 0;
+}
+
+#ContributionCharts ul.ui-tabs-nav li.crm-tab-button a {
+	padding: var(--crm-tab-padding);
+}
+
+#ContributionCharts ul.ui-tabs-nav li.crm-tab-button a:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+#ContributionCharts ul.ui-tabs-nav li.crm-tab-button a:focus-visible {
+	box-shadow: 0 0 0 1px transparent, 0 0 0 var(--wp-admin-border-width-focus, 2.5px) var(--wp-admin-theme-color);
+    outline: 2px solid transparent;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Reports screen.
+------------------------------------------------------------------------------------------
+*/
+
+/* Remove the accordion discovery tab. */
+.crm-container .crm-report-field-form-block .ui-tabs-collapsible > ul.ui-tabs-nav::before {
+	display: none;
+}
+
+/* Modify the actions table. */
+.crm-container .crm-report-form-block .crm-tasks table,
+.crm-container .crm-report-form-block .crm-tasks table tbody,
+.crm-container .crm-report-form-block .crm-tasks table tbody tr,
+.crm-container .crm-report-form-block .crm-tasks table tbody tr td {
+	background: transparent;
+	border: none;
+}
+
+.crm-container .crm-report-form-block .crm-tasks table tbody tr td .form-layout-compressed {
+	margin: 0;
+}
+
+.crm-container .crm-report-form-block .crm-tasks table tbody tr td .form-layout-compressed td {
+	padding-top: 0;
+}
+
+/* Modify the statistics table. */
+.crm-container table.report-layout th.statistics {
+    width: 10%;
+    white-space: nowrap;
+    border-bottom: none;
+    background: #ededed;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+APIv3 Explorer Page fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Add some style to Params table. */
+.crm-container #api-explorer table#api-params-table:not(.foo) {
+	border: var(--crm-table-outside-border);
+	background: #f9f9f9;
+	margin-bottom: var(--crm-l-medium);
+}
+
+/* Make "Fields to return" wider. */
+#api-params-table .api-return-row input.api-param-value,
+#api-params-table .api-return-row .select2-container.api-param-value {
+	width: 50% !important;
+}
+
+/*  */
+#api-params-table .api-param-row .api-param-name,
+#api-params-table .api-param-row .api-param-value {
+	width: 90% !important;
+}
+
+/* Make delete param button red. */
+#api-params tr:hover td > a .crm-i.fa-times,
+#api-params tr td > a .crm-i.fa-times {
+	color: var(--crm-icon-danger-color);
+}
+
+#api-param-buttons {
+    margin-bottom: var(--crm-l-reg-2);
+}
+
+/* "Code" section. */
+#api-generated td {
+	border: 1px solid #aaa;
+}
+
+#api-generated td table.api-rest-params {
+	margin: 0;
+}
+
+#api-generated td table.api-rest-params td {
+	border: none;
+	padding: 0;
+}
+
+#api-generated caption {
+	text-align: left;
+	margin-bottom: 0.5rem;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+APIv4 Explorer Page fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Localised variables. */
+.crm-container .api4-explorer-page {
+	--crm-form-fieldset-border-width: 1px;
+	--crm-form-fieldset-padding: 0.8rem;
+}
+
+/* Slightly darken AND/OR badge */
+.api4-explorer-page .api4-clause-badge .badge {
+	opacity: 0.7;
+}
+
+/* Give code containers a bit of style. */
+.api4-explorer-page .api4-explorer-row pre {
+	word-break: break-all;
+	white-space: pre-wrap;
+	background: #fafafa;
+	border: 1px solid #aaa;
+	margin: 4px 0 16px;
+	padding: 12px;
+}
+
+/* Darken Params Panel fieldsets. */
+#bootstrap-theme.api4-explorer-page fieldset {
+	background: #fafafa;
+	background: rgb(0 0 0 / 2.25%);
+	margin-top: 0;
+}
+
+/* Fix Params Panel legends. */
+#bootstrap-theme.api4-explorer-page legend {
+	text-transform: capitalize;
+}
+
+/* Fix Info Panel text wrapping. */
+.crm-container .api4-explorer-page .panel-info .panel-body {
+	word-break: break-all;
+}
+
+/* Match Info Panel header to Params Panel header. */
+.crm-container .api4-explorer-page .panel-info > .panel-heading {
+	color: var(--crm-text-color);
+    background-color: var(--crm-layer1-bg-color);
+}
+
+/* Match Info Panel heading to Params Panel heading */
+#bootstrap-theme.api4-explorer-page .api4-explorer-row .panel-info > .panel-heading h3 {
+	color: var(--crm-text-color);
+	line-height: 2.45rem;
+	font-weight: 600;
+}
+
+/* Prevent Result Panel format select from altering Tab height. */
+#bootstrap-theme .explorer-result-panel .form-inline .form-control {
+	height: 30px !important;
+	min-height: 30px;
+	line-height: 2;
+}
+
+/* Result Panel does not need line numbers. */
+.crm-container .api4-explorer-page .explorer-result-panel ol.linenums {
+	list-style-type: none;
+	padding-inline-start: 0;
+	margin: 0;
+}
+
+/* Fix cramped spacing of top-level elements. */
+.crm-container .api4-explorer-page .panel-body > div.api4-input.form-inline {
+    padding: 0 0 var(--crm-l-reg);
+}
+
+/* Fix gap to the right of "And" dropdown buttons. */
+#bootstrap-theme.api4-explorer-page button.btn.btn-info.dropdown-toggle {
+    padding-right: var(--crm-l-xsmall);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+FormBuilder fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Make fieldset legends more obvious. */
+.crm-container #afGuiEditor fieldset legend {
+	font-size: var(--crm-l-reg);
+	padding-top: var(--crm-l-reg);
+	margin-bottom: var(--crm-l-reg);
+}
+
+/* The Entity palette is an exception. */
+.crm-container #afGuiEditor fieldset.af-gui-entity-palette legend {
+	margin-bottom: 0;
+}
+.crm-container #afGuiEditor .af-gui-entity-palette-select-list:focus {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+/* Make room for helpicon focus state. */
+.crm-container #afGuiEditor-palette .form-group label {
+	padding-bottom: var(--crm-l-xsmall-1);
+}
+
+/* Unless followed directly by a "form-inline" element. */
+.crm-container #afGuiEditor-palette .form-group label:has(+ .form-inline) {
+	padding-bottom: 0;
+}
+
+/* Entity "Values:" column delete buttons. */
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times) {
+	font-weight: 600;
+    border-radius: 50%;
+	padding-inline: var(--crm-l-radius);
+	padding-block: 0;
+}
+
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):active,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):hover,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):focus,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):focus-visible,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):active .fa-times,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):hover .fa-times,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):focus .fa-times,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):focus-visible .fa-times {
+	color: var(--crm-danger-color);
+	background: transparent;
+}
+
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):focus,
+.crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times):focus-visible {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--crm-danger-color);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+SearchKit fixes.
+------------------------------------------------------------------------------------------
+*/
+
+/* Localised variables. */
+.crm-container .crm-search {
+	--crm-form-fieldset-border-width: 1px;
+	--crm-form-fieldset-padding: 0.8rem;
+}
+
+/* Slightly darken AND/OR badge */
+.crm-search .api4-clause-badge .badge {
+	opacity: 0.7;
+}
+
+/* Make nested fieldsets inline with AND/OR labels. */
+.crm-search .api4-clause-fieldset fieldset {
+	width: calc(100% - 9ch);
+}
+
+/* Darken fieldsets. */
+#bootstrap-theme.crm-search fieldset {
+	background: #fafafa;
+	background: rgb(0 0 0 / 2.25%);
+	margin-top: 0;
+	padding: var(--crm-l-medium);
+	margin-bottom: var(--crm-l-medium);
+	border: 1px solid var(--crm-form-fieldset-border-color);
+}
+
+/* Columns fieldset has buttons directly above - make some room. */
+#bootstrap-theme.crm-search fieldset.crm-search-admin-edit-columns-wrapper,
+#bootstrap-theme.crm-search fieldset.crm-search-admin-edit-columns {
+	margin-top: var(--crm-l-medium);
+}
+
+/* Make draggable fieldsets clearer. */
+#bootstrap-theme.crm-search fieldset.crm-draggable {
+	background: #fafafa;
+	background: rgb(0 0 0 / 2.25%);
+	border: 1px solid var(--crm-form-fieldset-border-color);
+}
+
+/* Remove background from draggable conditions. */
+#bootstrap-theme.crm-search fieldset div.api4-input.ui-sortable-helper {
+  background-color: transparent;
+}
+
+/* Reset legend element to reveal fieldset border. */
+#bootstrap-theme.crm-search fieldset legend {
+	width: auto;
+	padding-inline: var(--crm-l-small);
+}
+
+/* Darken accordions in "Display Settings" fieldset. */
+#bootstrap-theme.crm-search .crm-accordion-bold > summary {
+	background-color: #ededed;
+}
+
+/* Fix gap to the right of "And" dropdown buttons. */
+#bootstrap-theme.crm-search button.btn.btn-info.dropdown-toggle {
+    padding-right: var(--crm-l-xsmall);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+CiviCRM Extensions screen.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container table.dataTable.display tbody tr.extension-installed {
+	--crm-alert-success-bg-color: hsl(from var(--crm-success-color) h s calc(l + 65));
+}
+
+.crm-container .ui-tabs #extensions-main,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel {
+	border: var(--crm-contact-panel-border);
+	padding: var(--crm-l-medium-2)
+}
+
+.crm-container .ui-tabs #extensions-main table.dataTable,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable {
+	border: var(--crm-table-outside-border);
+	margin-bottom: 0;
+}
+
+.crm-container .ui-tabs #extensions-main table.dataTable th:focus,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable th:focus {
+	outline: none;
+}
+
+.crm-container .ui-tabs #extensions-main table.crm-info-panel,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel,
+.crm-container .ui-tabs #extensions-main table.crm-info-panel tbody,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tbody,
+.crm-container .ui-tabs #extensions-main table.crm-info-panel tr,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tr,
+.crm-container .ui-tabs #extensions-main table.crm-info-panel td,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel td {
+	background: var(--crm-striped-bg-color) !important;
+}
+
+/* Let's scrap the hover - it's too distracting. */
+.crm-container .ui-tabs #extensions-main table.crm-info-panel tr:hover,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tr:hover {
+
+}
+
+.crm-container .ui-tabs #extensions-main table.crm-info-panel {
+	margin: 0;
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+}
+
+.crm-container .ui-tabs #extensions-main table.dataTable td,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable td {
+	vertical-align: top;
+}
+
+.crm-container #extensions {
+	--crm-accordion2-body-bg-color: transparent;
+}
+
+.crm-container .ui-tabs #extensions-main table.dataTable td.crm-extensions-label,
+.crm-container .ui-tabs #extensions-main table.dataTable td.crm-extensions-label .crm-accordion-light {
+    padding: 0;
+    margin: 0;
+}
+
+.crm-container #extensions-main table.dataTable .crm-accordion-light,
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light {
+	background: transparent;
+	margin: var(--crm-l-medium) 0 0;
+}
+
+.crm-container #extensions-main table.dataTable .crm-accordion-light summary,
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light summary {
+	border: 1px solid transparent;
+	box-shadow: none;
+	margin: 0 0 var(--crm-l-medium);
+    margin: 0;
+	padding: var(--crm-l-medium);
+}
+
+.crm-container #extensions-main table.dataTable .crm-accordion-light[open] summary,
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light[open] summary {
+	background: #eee;
+	border-right-color: var(--crm-border-color);
+}
+
+.crm-container #extensions-main table.dataTable .crm-accordion-light summary:focus-visible,
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light summary:focus-visible {
+	border: 1px solid var(--wp-admin-theme-color);
+}
+
+/* Override jQuery datatable styles. */
+.crm-container #extensions-main table.dataTable tbody th,
+.crm-container #extensions-addnew table.dataTable tbody th,
+.crm-container #extensions-main table.dataTable tbody td,
+.crm-container #extensions-addnew table.dataTable tbody td {
+	padding: var(--crm-l-small) var(--crm-l-medium);
+}
+
+.crm-container #extensions-main table.dataTable table tbody td,
+.crm-container #extensions-addnew table.dataTable table tbody td {
+	padding: var(--crm-l-medium);
+}
+
+.crm-container table.dataTable .crm-extensions-upgrade {
+	--crm-alert-warning-bg-color: #fef8ee;
+	--crm-alert-warning-border-color: #f0b849;
+	background-color: var(--crm-alert-warning-bg-color);
+	border: var(--crm-alert-border-width) solid var(--crm-alert-warning-border-color);
+	border-radius: 0;
+	border-left-width: 4px;
+	color: var(--crm-alert-success-text-color) !important;
+	font-style: normal;
+	font-size: var(--crm-font-size);
+	padding: var(--crm-padding-medium);
+	margin: var(--crm-padding-medium) 0;
+	box-shadow: 0 0 1px rgba(0, 0, 0, .5);
+}
+
+.crm-container table.dataTable .crm-extensions-upgrade::before {
+	display: inline-block;
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome";
+    font-weight: 400;
+    color: var(--crm-alert-warning-border-color);
+	margin-right: var(--crm-padding-small);
+    content: "\f071";
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+CiviCRM Dashboard.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-dashlet-dashlets-bg-color: #fafafa;
+	--crm-dashlet-dashlets-shadow: var(--crm-shadow-popup);
+	--crm-dashlet-radius: 8px;
+}
+
+/* Community messages. */
+.crm-container .civicrm-community-messages details {
+	margin: 0;
+}
+
+.crm-container .civicrm-community-messages summary {
+	padding: 0;
+}
+
+.crm-container .civicrm-community-messages summary:focus,
+.crm-container .civicrm-community-messages summary:focus-visible {
+	outline: none;
+}
+
+.crm-container .civicrm-community-messages > a.civicrm-community-message-dismiss::before {
+	color: var(--crm-danger-color) !important;
+}
+
+.crm-container .civicrm-community-messages > a.civicrm-community-message-dismiss:hover {
+	opacity: 1;
+}
+
+
+/* Inactive Dashlets. */
+#civicrm-dashboard .crm-inactive-dashlet {
+	box-shadow: var(--crm-dashlet-dashlets-shadow);
+}
+
+/* Dashlets. */
+#civicrm-dashboard .crm-dashlet {
+	padding: 0;
+	background: var(--crm-paper);
+	border: var(--crm-wp-metabox-heading-border-bottom);
+	border-radius: 8px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	overflow: hidden;
+}
+
+/* Dashlet headers. */
+#civicrm-dashboard .crm-dashlet-header {
+	padding: 0;
+	align-items: center;
+}
+
+/* Dashlet header title. */
+#civicrm-dashboard .crm-dashlet-header h3 {
+	color: #1d2327;
+	padding: 12px 16px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+#civicrm-dashboard .crm-dashlet-header > a {
+	height: 1.62rem;
+	width: 1.62rem;
+	padding: 0;
+	padding-top: 0.25rem;
+	font-size: 14px;
+	text-align: center;
+}
+
+#civicrm-dashboard .crm-dashlet-header > a:active,
+#civicrm-dashboard .crm-dashlet-header > a:focus {
+    box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+    border-radius: 50%;
+    outline: 2px solid transparent;
+}
+
+#civicrm-dashboard .crm-dashlet-header > a:has(.fa-trash, .fa-times):active,
+#civicrm-dashboard .crm-dashlet-header > a:has(.fa-trash, .fa-times):focus {
+    box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--crm-danger-color);
+}
+
+#civicrm-dashboard .crm-dashlet-header > a:active .fa-trash,
+#civicrm-dashboard .crm-dashlet-header > a:focus .fa-trash,
+#civicrm-dashboard .crm-dashlet-header > a:active .fa-times,
+#civicrm-dashboard .crm-dashlet-header > a:focus .fa-times {
+	color: var(--crm-danger-color);
+}
+
+#civicrm-dashboard .crm-dashlet-header a.crm-dashlet-collapse {
+	order: unset;
+}
+
+/* Match WordPress with caret down. */
+#civicrm-dashboard .crm-dashlet-header .fa-caret-right:before {
+	content: '\f0d8';
+}
+
+
+
+/* Pad content area in all dashlets. */
+#civicrm-dashboard .crm-dashlet-content {
+	border-top: var(--crm-wp-metabox-heading-border-bottom);
+	padding: var(--crm-l-medium-2);
+}
+
+
+
+/* Pad the News Panel. */
+#civicrm-news-feed .ui-tabs-panel {
+	padding: var(--crm-l-medium-2);
+}
+
+#civicrm-news-feed .crm-accordion-bold {
+	margin: 0 0 var(--crm-l-medium-2);
+}
+
+#civicrm-news-feed .crm-accordion-bold:last-child {
+	margin-bottom: 0;
+}
+
+
+
+/* Inactive Dashlets Panel. */
+#civicrm-dashboard .crm-inactive-dashlet-fieldset legend {
+	margin-bottom: var(--crm-l-medium-2);
+}
+
+#civicrm-dashboard .crm-inactive-dashlet-fieldset legend > a {
+	margin-top: 10px;
+	display: inline-block;
+}
+
+#civicrm-dashboard .crm-inactive-dashlet-fieldset legend > a:focus-visible {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+#civicrm-dashboard .crm-inactive-dashlet-fieldset .crm-dashboard-droppable {
+	box-shadow: none;
+	border: var(--crm-wp-metabox-heading-border-bottom);
+}
+
+#civicrm-dashboard .ui-sortable-placeholder {
+	height: 64px !important;
+	width: 340px;
+	vertical-align: bottom;
+	border: 2px dashed #666;
+}

@@ -48,6 +48,15 @@ class CAU_CiviCRM {
 	public $domain;
 
 	/**
+	 * Theme object.
+	 *
+	 * @since 1.1.2
+	 * @access public
+	 * @var CAU_CiviCRM_Theme
+	 */
+	public $theme;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.9
@@ -94,6 +103,7 @@ class CAU_CiviCRM {
 		// Include class files.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm-ufmatch.php';
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm-domain.php';
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm-theme.php';
 
 	}
 
@@ -107,6 +117,7 @@ class CAU_CiviCRM {
 		// Initialise objects.
 		$this->ufmatch = new CAU_CiviCRM_UFMatch( $this );
 		$this->domain  = new CAU_CiviCRM_Domain( $this );
+		$this->theme   = new CAU_CiviCRM_Theme( $this );
 
 	}
 

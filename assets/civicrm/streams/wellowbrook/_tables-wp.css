@@ -1,0 +1,620 @@
+/**
+ * WordPress-style tables.
+ *
+ * Implements WordPress-style tables in the Wellow Brook theme.
+ *
+ * * Tables generally.
+ * * Specific tables.
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+/*
+------------------------------------------------------------------------------------------
+Tables.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-table-padding: var(--crm-l-medium-2);
+}
+
+/* Apply vertical align. */
+.crm-container table tbody {
+	vertical-align: top;
+}
+
+/* Table column header focus. */
+.crm-container a.sorting:focus-visible::after,
+.crm-container a.sorting_asc:focus-visible::after,
+.crm-container a.sorting_desc:focus-visible::after,
+.crm-container th.crm-sortable-col i.crm-search-table-column-sort-icon:focus-visible::before,
+.crm-container table.dataTable thead th.sorting:focus-visible::before,
+.crm-container table.dataTable thead th.sorting_asc:focus-visible::before,
+.crm-container table.dataTable thead th.sorting_desc:focus-visible::before,
+.jstree-default .jstree-icon:focus-visible {
+	color: var(--wp-admin-theme-color);
+}
+
+/* Table column header focus. */
+.crm-container th:has(a.sorting:focus-visible),
+.crm-container th:has(a.sorting_asc:focus-visible),
+.crm-container th:has(a.sorting_desc:focus-visible),
+.crm-container th.crm-sortable-col:has(i.crm-search-table-column-sort-icon:focus-visible),
+.crm-container table.dataTable thead th.sorting:focus-visible,
+.crm-container table.dataTable thead th.sorting_asc:focus-visible,
+.crm-container table.dataTable thead th.sorting_desc:focus-visible,
+.jstree-default .jstree-icon:focus-visible {
+	box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+/* Keep action buttons on the same line in table rows. */
+#bootstrap-theme td.text-right:has(.btn + .btn) {
+	flex-wrap: unset;
+}
+
+/* "Primary" links in table rows. */
+.crm-container .crm-search-results td > a:not(.action-item),
+.crm-container .crm-event-search-results td > a:not(.action-item) {
+	font-weight: 600;
+}
+
+/* Override jQuery datatable styles. */
+.crm-container table.dataTable tbody th,
+.crm-container table.dataTable tbody td {
+	padding: var(--crm-table-padding);
+}
+
+/* Possibly unreliable fixes to "Processing" overlay. */
+.crm-container .dataTables_wrapper .dataTables_processing {
+	top: 65%;
+	padding-top: 10px;
+}
+
+
+
+/* "Batch Data Entry for Contributions" pseudo-table. */
+/* TODO: wrap "crm-batch-entry-table" in a scrollable container. */
+.crm-container .CRM_Batch_Form_Entry .batch-entry.form-item {
+	overflow-y: scroll;
+}
+
+
+
+/* Fix "New Membership" screen table. */
+.crm-container .CRM_Member_Form_Membership .view-content .form-layout-compressed,
+.crm-container .CRM_Member_Form_Membership .view-content .form-layout-compressed tr {
+	background: transparent;
+	border-bottom: none;
+}
+
+
+
+/* Search Status Table. */
+.crm-search-form .crm-search-form-block {
+	margin-bottom: 0;
+}
+
+#search-status table.form-layout-compressed {
+	background: var(--crm-container-bg-color);
+	width: auto;
+}
+
+#search-status table.form-layout-compressed:not(thead) tr {
+	background: var(--crm-container-bg-color);
+}
+
+#search-status table.form-layout-compressed:not(thead) td {
+	padding-left: 0.5rem;
+}
+
+/* "Reset all selections", "Advanced Search" and helpicon. */
+#search-status .float-right.right a,
+#search-status > a.crm-selection-reset {
+	margin-top: 0.65rem;
+	padding: var(--crm-btn-small-padding);
+	margin-right: 0.5rem;
+}
+
+/* "Reset all selections", "Advanced Search" hover state. */
+#search-status .float-right.right a:not(.helpicon):hover,
+#search-status > a.crm-selection-reset:hover {
+	background: #dcdbdb;
+    color: #000 !important;
+	text-decoration: none;
+}
+
+/* "Reset all selections", "Advanced Search" focus state. */
+#search-status .float-right.right a:not(.helpicon):focus,
+#search-status > a.crm-selection-reset:focus {
+	border-radius: 2px;
+	box-shadow: 0 0 0 1px transparent, 0 0 0 var(--wp-admin-border-width-focus, 2.5px) var(--wp-admin-theme-color);
+	outline: 2px solid transparent;
+	text-decoration: none;
+}
+
+/* "Advanced Search" and helpicon. */
+#search-status .float-right.right a {
+	margin-top: 0.65rem;
+	display: inline-block;
+}
+
+/* Tweaks to helpicon. */
+#search-status .float-right.right a.helpicon {
+	padding: 0;
+	padding-inline-start: 4px;
+	margin-right: 12px;
+}
+
+/* Make helpicon inline. */
+#search-status .float-right.right br {
+	display: none;
+}
+
+
+
+/* "Find Contributions" summary table. */
+#search-status .form-layout-compressed .form-layout-compressed {
+	border: var(--crm-table-outside-border);
+	background: var(--crm-table-bg-color);
+	box-shadow: var(--crm-shadow-block);
+	margin: 0;
+}
+
+
+
+/* Non-AdminUI "Find Mailings" table. */
+form.CRM_Mailing_Form_Search > .crm-search-form-block {
+	margin-bottom: var(--crm-l-reg);
+	background: var(--crm-paper) !important;
+	border: var(--crm-table-outside-border);
+	border-radius: 0;
+}
+
+form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
+	margin-bottom: 0;
+}
+
+/* Lessen the margin on compressed layout tables. */
+.crm-container table.form-layout-compressed {
+	margin-bottom: var(--crm-l-reg);
+}
+
+/* Lose the margin on compressed layout tables in accordions. */
+.crm-container .crm-accordion-body table.form-layout-compressed {
+	margin: 0;
+}
+
+
+
+/* Non-AdminUI "Manage Groups" table. */
+.crm-container #searchForm table {
+	border: none;
+}
+
+/* Make room for "Update Smart Group Counts" button. */
+.crm-container .crm-group-search-form-block .crm-search_builder-accordion,
+.crm-container .crm-group-search-form-block .crm-search_builder-accordion + .css_right {
+	margin-bottom: var(--crm-l-reg);
+}
+
+/* Don't wrap "Created By" -it's kinda ugly. */
+.crm-container table.dataTable thead th.sorting.crm-group-created_by {
+	white-space: nowrap;
+}
+
+/* Tweak "Description" vertical position. */
+.crm-container table.dataTable thead th.sorting_disabled.crm-group-description {
+	padding-top: var(--crm-l-medium-1);
+	padding-bottom: var(--crm-l-medium);
+}
+
+
+/* Non-AdminUI "Find Mailings" table. */
+.crm-search-form .crm-accordion-body .crm-accordion-body .form-layout-compressed {
+	margin: 0;
+}
+
+
+
+/* "Find Cases" table. */
+.crm-container .crm-case-common-form-block-case_status_id {
+	line-height: 2;
+}
+
+.crm-container .crm-case-common-form-block-case_status_id label[for="case_status_id"] {
+	line-height: 1;
+}
+
+
+
+/* "Credit to PCP" table. */
+.crm-container.ui-dialog details table.crm-contribution-form-table-credit_to_pcp {
+	border: none;
+}
+
+
+
+/* Dedupe Rules "table". */
+.crm-container #DedupeRules .crm-dedupe-rules-form-block > table > tbody > tr,
+.crm-container #DedupeRules .crm-dedupe-rules-form-block > table > tbody > tr > td {
+	background: transparent !important;
+}
+
+/* Dedupe Rules weights table. */
+.crm-container #DedupeRules .crm-dedupe-rules-form-block:not(#foo) > table > tbody > tr > td > table:not(#foo) {
+	border: var(--crm-table-outside-border);
+}
+
+.crm-container #DedupeRules .crm-dedupe-rules-form-block:not(#foo) > table > tbody > tr > td > table:not(#foo) tr {
+	border-bottom: var(--crm-table-outside-border);
+}
+
+.crm-container #DedupeRules .crm-dedupe-rules-form-block:not(#foo) > table > tbody > tr > td > table:not(#foo):has(.status),
+.crm-container #DedupeRules .crm-dedupe-rules-form-block:not(#foo) > table > tbody > tr > td > table:not(#foo) tr:has(.status) {
+	border: none;
+}
+
+.crm-container .crm-dedupe-find-form-block-group_id td.label {
+	vertical-align: middle;
+}
+
+
+
+/* New Contribution "table". */
+.crm-container #crm-main-content-wrapper #Contribution table,
+.crm-container #crm-main-content-wrapper #Contribution table:not(thead) tr {
+	background: transparent;
+	border: none;
+}
+
+
+
+/* Dark column headers. */
+.crm-container tr.columnheader-dark th {
+	background-color: #e9e9e9;
+	color: var(--crm-table-header-color);
+}
+
+
+
+/* Table Pager. */
+.crm-container .crm-pager {
+	background: #fafafa;
+	padding: 1rem;
+}
+
+.crm-container .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+	border: 1px solid #979797;
+	padding: 0.5em 1em;
+}
+
+/* Search Results Table. */
+.crm-search-results .form-item.float-right {
+	border: none;
+}
+
+/* "Rows per page" label. */
+.crm-search-results .form-item.float-right label {
+	padding-right: 0;
+}
+
+
+
+/* Legacy sticky header table row. */
+.crm-container table thead.sticky .sticky-header {
+	height: 44px;
+}
+
+.wp-toolbar body.crm-menubar-over-cms-menu .crm-container table thead.sticky .sticky-header {
+	top: 40px !important;
+}
+
+.wp-toolbar body.crm-menubar-below-cms-menu .crm-container table thead.sticky .sticky-header {
+	top: 72px !important;
+}
+
+
+
+/* WordPress Permissions table sticky header */
+.wp-toolbar body.wp-admin.crm-menubar-over-cms-menu .crm-sticky thead {
+	--crm-menubar-bottom: 40px;
+}
+
+.wp-toolbar body.wp-admin.crm-menubar-below-cms-menu .crm-sticky thead {
+	--crm-menubar-bottom: 72px;
+}
+
+.crm-container .CRM_ACL_Form_WordPress_Permissions .crm-sticky thead > tr > th {
+	white-space: nowrap;
+}
+
+
+
+/* Contact links in tables. */
+.crm-container table a:not(.crm-summary-link):has(> i.crm-i.fa-user),
+.crm-container table a:not(.crm-summary-link):has(> i.crm-i.fa-home),
+.crm-container table a:not(.crm-summary-link):has(> i.crm-i.fa-building) {
+	margin-inline-start: -0.25rem;
+}
+
+.crm-container table a:not(.crm-summary-link) > i.crm-i.fa-user,
+.crm-container table a:not(.crm-summary-link) > i.crm-i.fa-home,
+.crm-container table a:not(.crm-summary-link) > i.crm-i.fa-building {
+	padding-inline-start: 0.25rem;
+}
+
+
+/* Bootstrap sticky header table row border is replaced by :after "border". */
+.crm-container table.crm-sticky-header > thead > tr,
+.ui-dialog table.crm-sticky-header > thead > tr {
+	border-bottom: none;
+}
+
+/* Fix Bootstrap sticky header position in dialogs. */
+.ui-dialog table.crm-sticky-header > thead > tr {
+	top: -9px;
+}
+
+/* Bootstrap sticky header table head border is replaced by :after "border". */
+.crm-container table.crm-sticky-header > thead > tr > th,
+.ui-dialog table.crm-sticky-header > thead > tr > th {
+	border-bottom: none;
+}
+
+/* Bootstrap sticky header border. */
+.crm-container table.crm-sticky-header > thead > tr > th:after,
+.ui-dialog table.crm-sticky-header > thead > tr > th:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	border-bottom: 1px solid var(--crm-border-color);
+	width: 100%;
+}
+
+
+
+/* Dropdowns common vars. */
+.crm-container .btn-group .dropdown-menu,
+.crm-container .btn.dropdown-toggle + .dropdown-menu,
+.crm-container .btn-slide {
+	--crm-dropdown-padding: 0;
+	--crm-dropdown-border: 0;
+	--crm-dropdown-color: var(--crm-text-color);
+	--crm-dropdown-bg-color: #fff;
+	--crm-l-small: 8px;
+	--crm-shadow-popup: 3px 3px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Fix icon widths. */
+.crm-container .dropdown-menu > li:not(.foo) > a i.crm-i,
+.crm-container .dropdown-menu > li:not(.disabled) > a i.crm-i {
+	width: 1.2rem;
+	padding-right: 4px;
+}
+
+/* Dropdowns in "standard" table rows. */
+.crm-container .btn-slide.btn-slide-active {
+	background: var(--crm-secondary-hover-color);
+	color: var(--crm-secondary-text-color);
+}
+
+.crm-container .btn-slide ul.panel {
+	top: 10px;
+}
+
+.crm-container .btn-slide ul.panel li a:hover {
+	background-color: #f1f1f1;
+}
+
+/* Remove "speech bubble" arrow thing from dropdown. */
+.crm-container .btn-slide ul.panel::before {
+	display: none;
+}
+
+/* Prevent slight jump when showing "caret down". */
+.crm-container .btn-slide::after {
+	min-width: 1.5ch;
+	display: inline-block;
+}
+
+/* Show "caret down" when active. */
+.crm-container .btn-slide.btn-slide-active::after {
+	content: "\f0d7";
+}
+
+.crm-container .btn-slide ul.panel li a.action-item.delete-contact {
+	color: var(--crm-danger-color);
+}
+
+
+
+/* Dropdowns in Bootstrap. */
+.crm-container .open > .dropdown-menu,
+.crm-container .open .btn.dropdown-toggle + .dropdown-menu {
+    gap: 0;
+	border-radius: 0;
+}
+
+/* Remove border radius locally. */
+.crm-container .dropdown-menu > li {
+	border-radius: 0;
+}
+
+/* Dropdown anchor defaults. */
+.crm-container .btn-group .dropdown-menu > li > a,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a {
+	padding: var(--crm-l-small);
+	display: block;
+}
+
+/* Dropdown anchors when hovered. */
+.crm-container .btn-group .dropdown-menu > li > a:hover,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a:hover {
+	background-color: #f1f1f1;
+	text-decoration: none;
+}
+
+/* Dropdown anchor icons when hovered. */
+.crm-container .btn-group .dropdown-menu > li > a:hover .crm-i,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a:hover .crm-i {
+	font-weight: 600;
+}
+
+/* Dropdown anchors when focussed. */
+.crm-container .btn-group .dropdown-menu > li > a:focus,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a:focus {
+	border-radius: 0;
+}
+
+/* Dropdown anchor icons when focussed. */
+.crm-container .btn-group .dropdown-menu > li > a:focus .crm-i,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a:focus .crm-i {
+	color: var(--wp-admin-theme-color);
+	font-weight: 600;
+}
+
+/* Dropdown anchor "Clone" option. */
+.crm-container .btn-group .dropdown-menu > li.bg-secondary > a:hover {
+	background: var(--crm-secondary-hover-color);
+	color: #fff !important;
+}
+
+.crm-container .btn-group .dropdown-menu > li.bg-secondary > a .crm-i {
+	color: #fff !important;
+}
+
+/* Dropdown anchor "Delete" option. */
+.crm-container .btn-group .dropdown-menu > li > a:has(.fa-trash),
+.crm-container .btn-group .dropdown-menu > li.bg-danger > a {
+	border-radius: 0;
+}
+
+.crm-container .btn-group .dropdown-menu > li > a:has(.fa-trash) {
+	color: #fff !important;
+	background-color: var(--crm-btn-danger-bg-color);
+}
+
+.crm-container .btn-group .dropdown-menu > li > a:has(.fa-trash):hover,
+.crm-container .btn-group .dropdown-menu > li > a:has(.fa-trash):focus {
+	background: color-mix(in srgb, var(--crm-danger-color) 87.5%, #000 12.5%);
+}
+
+/* Dropdown anchor "Delete" option behaviour. */
+.crm-container .btn-group .dropdown-menu > li > a:has(.fa-trash),
+.crm-container .btn-group .dropdown-menu > li > a:has(.fa-trash) .crm-i,
+.crm-container .btn-group .dropdown-menu > li > a:has(.fa-trash) .crm-i::before,
+.crm-container .btn-group .dropdown-menu > li.bg-danger > a:hover,
+.crm-container .btn-group .dropdown-menu > li.bg-danger > a:focus,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li.bg-danger > a:focus,
+.crm-container .btn-group .dropdown-menu > li.bg-danger > a:focus .crm-i,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li.bg-danger > a:focus .crm-i {
+	color: #fff !important;
+}
+
+/* Reduce padding on forms in Bootstrap dropdowns. */
+#bootstrap-theme .dropdown-menu li .form-inline,
+#bootstrap-theme .dropdown-menu li .form-inline a:not(.select2-choice) {
+    padding: var(--crm-padding-small);
+}
+
+/* Tags in SearchKit listings. */
+.crm-container .badge {
+	line-height: 1.7;
+}
+
+/* SearchKit draggable table rows have mismatched paddings. */
+#bootstrap-theme table tr td.form-inline {
+	padding: var(--crm-table-padding);
+}
+
+/* SearchKit draggable table rows should not be transparent. */
+#bootstrap-theme table tbody.ui-sortable tr.ui-sortable-helper {
+	background-color: #fff;
+	border-top: var(--crm-table-row-border);
+}
+
+/* Dropdown anchors when rendering Bootstrap buttons. */
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-primary,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-secondary,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-success,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-info,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-warning,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-danger {
+	border-radius: 0;
+}
+
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-primary:hover,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-secondary:hover,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-success:hover,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-info:hover,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-warning:hover,
+.crm-container .btn.dropdown-toggle + .dropdown-menu > li > a.bg-danger:hover {
+	color: #fff !important;
+}
+
+
+
+/* CiviCase Dashboard summary table. */
+.crm-container .CRM_Case_Form_Search table.report .columnheader th {
+    background: #e6e6e6;
+}
+
+.crm-container .CRM_Case_Form_Search table.report .crm-case-caseStatus th {
+	border-bottom: none;
+	background: #ededed;
+}
+
+.crm-container .CRM_Case_Form_Search .crm-datatable-pager-top {
+    margin-block: var(--crm-l-medium);
+}
+
+.crm-container .CRM_Case_Form_Search table.dataTable {
+    margin-bottom: var(--crm-l-medium);
+}
+
+.crm-container .CRM_Case_Form_Search .crm-datatable-pager-bottom {
+    margin-top: var(--crm-l-medium);
+    margin-bottom: var(--crm-l-medium);
+}
+
+.crm-container .CRM_Case_Form_Search .crm-accordion-body .form-layout-compressed {
+    margin: 0;
+}
+
+.crm-container .CRM_Case_Form_Search .crm-case-filter-recent {
+    margin-bottom: var(--crm-padding-reg);
+}
+
+.crm-container .case-control-panel > div:last-child p {
+    margin-top: var(--crm-l-medium);
+}
+
+.crm-container .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+	color: var(--crm-secondary-text-color) !important;
+}
+
+.crm-container .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:focus,
+.crm-container .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:focus-visible {
+	text-decoration: line-through !important;
+}
+
+.crm-container table.dataTable thead th:focus,
+.crm-container table.dataTable thead th:focus-visible {
+	outline: none;
+}
+
+
+
+/* Fix "Create New Report from Template" table layout. */
+.crm-container table.report-layout td > a {
+    float: left;
+}
+
+
+
+/* Bootstrap table fixes. */
+#bootstrap-theme .form-inline .form-group.pull-right {
+    margin-bottom: var(--crm-padding-medium);
+}

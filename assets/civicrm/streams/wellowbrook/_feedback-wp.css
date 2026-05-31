@@ -1,0 +1,159 @@
+/**
+ * WordPress-style feedback.
+ *
+ * Implements WordPress-style status message boxes and alert popups in the Wellow Brook theme.
+ *
+ * * Status message boxes.
+ * * Popup alert dialogs.
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+/*
+------------------------------------------------------------------------------------------
+WordPress style status message boxes.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-alert-border-width: 0;
+	--crm-alert-padding: 8px 12px;
+	--crm-alert-margin: 5px 0 15px;
+	--crm-alert-success-bg-color: #fff;
+	--crm-alert-success-border-color: #c3c4c7;
+	--crm-alert-success-text-color: #1e1e1e;
+	--crm-alert-info-text-color: #1e1e1e;
+	--crm-alert-danger-bg-color: #fcf0f0;
+	--crm-alert-danger-border-color: #cc1818;
+}
+
+/* Common styles. */
+.crm-container .help,
+.crm-container #help,
+.crm-container .status,
+.crm-container .messages,
+.crm-container .alert,
+.crm-container .alert-success {
+	border-left-width: 4px;
+	border-radius: 0;
+	line-height: 1.8;
+}
+
+/* Hide icons. */
+.crm-container .messages i.crm-i {
+	display: none;
+}
+
+/* WordPress equivalent: .updated, .help */
+.crm-container .messages,
+.crm-container .alert.alert-info,
+.crm-container #help,
+.crm-container .help {
+	--crm-alert-success-bg-color: #eff9f1;
+	--crm-alert-success-border-color: #4ab866;
+	--crm-alert-info-bg-color: #eff9f1;
+	--crm-alert-info-border-color: #4ab866;
+}
+
+/* WordPress equivalent: .notice-warning */
+.crm-container .alert,
+.crm-container .alert-warning,
+.crm-container .help-block.bg-warning,
+.crm-container .status {
+	--crm-alert-success-bg-color: #fef8ee;
+	--crm-alert-success-border-color: #f0b849;
+	--crm-alert-warning-bg-color: #fef8ee;
+	--crm-alert-warning-border-color: #f0b849;
+}
+
+/* Searchkit has a non-standard warning for "Bypass permissions". */
+#bootstrap-theme .help-block.bg-warning {
+	background-color: var(--crm-alert-warning-bg-color);
+	border: var(--crm-alert-border-width) solid var(--crm-alert-warning-border-color);
+	border-left-width: 4px;
+	color: var(--crm-alert-success-text-color) !important;
+	font-style: normal;
+	font-size: var(--crm-font-size);
+}
+
+/* WordPress equivalent: .notice-error, div.error */
+.crm-container .error {
+	--crm-alert-success-bg-color: #fcf0f0;
+	--crm-alert-success-border-color: #cc1818;
+}
+
+/* Remove ugly image. */
+.crm-container .messages.status.no-popup img {
+	display: none;
+}
+
+/* Set margins on paragraphs. */
+.crm-container div.help > p,
+.crm-container div.help > p:first-child {
+	margin: 0.5em 0;
+}
+
+.crm-container .messages.status {
+	padding: 14px 12px;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+WordPress style popup alert dialogs.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-notify-radius: 0;
+	--crm-notify-color: #1e1e1e;
+	--crm-notify-bg-color: #fff;
+	--crm-notify-accent-border-width: 0 0 0 4px;
+	--crm-notify-info-color: #4ab866;
+	--crm-notify-warning-color: #f0b849;
+}
+
+/* Make sure notifications sit above dialogs. */
+#crm-notification-container {
+	z-index: 12000;
+}
+
+/* Notification h1 tag. */
+#crm-notification-container div.ui-notify-message h1 {
+	padding: 0;
+	margin: 0 2ch var(--crm-l-small) 0; /* Supply a value for bottom margin. */
+}
+
+/* WordPress equivalent: .updated, .help */
+#crm-notification-container div.ui-notify-message-style.success,
+#crm-notification-container div.ui-notify-message-style.info {
+	--crm-notify-bg-color: #eff9f1;
+}
+
+/* WordPress equivalent: .notice-warning, div.warning */
+#crm-notification-container div.ui-notify-message-style.warning {
+	--crm-notify-bg-color: #fef8ee;
+}
+
+/* WordPress equivalent: .notice-error, div.error */
+#crm-notification-container div.ui-notify-message-style.alert,
+#crm-notification-container div.ui-notify-message-style.error {
+	--crm-notify-bg-color: #fcf0f0;
+}
+
+.crm-container #crm-notification-container span.batch-invalid::before,
+.crm-container #crm-notification-containerspan.batch-valid::before,
+.crm-container .messages.crm-empty-table::before,
+.crm-container #crm-notification-container div.ui-notify-message.error h1::before,
+.crm-container #crm-notification-container div.ui-notify-message.success h1::before,
+.crm-container #crm-notification-container div.ui-notify-message.info h1::before,
+.crm-container #crm-notification-container div.ui-notify-message.alert h1::before,
+.crm-container #crm-notification-container div.ui-notify-message.warning h1::before {
+	display: none;
+}
+
+#crm-notification-container div.ui-notify-message .notify-content {
+    margin-right: 5px;
+    overflow-x: scroll;
+}

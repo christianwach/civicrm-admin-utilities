@@ -1,0 +1,309 @@
+/**
+ * WordPress-style forms styled as metaboxes.
+ *
+ * Styles Form Pages to appear like WordPress metaboxes in the Wellow Brook theme.
+ *
+ * * CiviCRM Settings Pages.
+ * * Form Items.
+ * * Administration Console.
+ * * Settings - Outbound Mail.
+ * * Import Configuration.
+ * * Find Campaign.
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+:root {
+	--crm-wp-metabox-border: 1px solid #c3c4c7;
+	--crm-wp-metabox-heading-border-bottom:var(--crm-wp-metabox-border);
+}
+
+.crm-container .columnheader,
+.crm-setting-section,
+.crm-container #data-source-form-block,
+.crm-container .form-item {
+	--crm-heading-radius: 0;
+	--crm-heading-color: #1d2327;
+	--crm-heading-bg-color: #fff;
+	--crm-heading-margin: 0;
+	--crm-heading-padding: 8px 12px;
+}
+
+/* Embedded form-item blocks should not have a border. */
+.crm-container.ui-dialog .form-item,
+.crm-container .crm-accordion-body .form-item {
+	border: none;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Settings as metaboxes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-setting-section:has(> h3) {
+	margin: 0 0 20px;
+	background: var(--crm-paper);
+	border: var(--crm-wp-metabox-border);
+}
+
+.crm-setting-section h3 {
+	--crm-heading-padding: 8px 12px;
+	background: var(--crm-paper);
+	border-bottom: var(--crm-wp-metabox-heading-border-bottom);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.crm-container .crm-setting-section table.form-layout-compressed {
+	--crm-input-label-align: left;
+	margin-bottom: var(--crm-l-medium);
+	margin-left: var(--crm-l-medium);
+}
+
+.crm-container .crm-setting-section > .description {
+	margin-left: var(--crm-l-medium);
+	margin: var(--crm-l-medium);
+}
+
+.crm-option-label-pair {
+	display: inline;
+}
+
+select#editor_id {
+	float: left;
+	margin-right: 12px;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Form Items as metaboxes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container #data-source-form-block,
+.crm-container .form-item {
+	border: var(--crm-wp-metabox-border);
+	margin: 0 0 20px;
+}
+
+/* Nested Form Items should not be styled. */
+.crm-container .ui-tabs .form-item,
+.crm-container .form-item:has(.form-layout-compressed.ng-hide) {
+	border: none;
+	margin: 0;
+}
+
+/* Fix "Settings - Date Preferences" Form Item. */
+.crm-container > #crm-main-content-wrapper > .form-item,
+/* Fix "Default Organization Address" Form Item. */
+.crm-container .crm-edit-address-form .form-item,
+/* Fix "Headers, Footers, and Automated Messages" Form Item. */
+.crm-container #ltype > .form-item,
+/* Fix "Mail Accounts" Form Item. */
+.crm-container #mSettings > .form-item,
+/* Fix CiviMember "Recent Memberships" Form Item. */
+.crm-container .crm-petition-contact-profile > .form-item,
+/* Fix Petition Form Item. */
+.crm-container .CRM_Member_Form_Search.crm-search-form > .form-item {
+	border: none;
+}
+
+.crm-container #data-source-form-block h3,
+.crm-container .form-item h3 {
+	--crm-heading-padding: 8px 12px;
+	background: var(--crm-paper);
+	border-bottom: var(--crm-wp-metabox-heading-border-bottom);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.crm-container #data-source-form-block .crm-import_sql-form-block {
+	background: var(--crm-paper);
+	margin: 0;
+	padding: 0;
+}
+
+.crm-container #data-source-form-block table.form-layout:not(#foo),
+.crm-container #data-source-form-block table.form-layout-compressed:not(#foo),
+.crm-container .crm-form-block:not(#foo) .form-item table.form-layout:not(#foo),
+.crm-container .crm-form-block:not(#foo) .form-item table.form-layout-compressed:not(#foo) {
+	--crm-table-compressed-width: 100%;
+	background: var(--crm-paper);
+	margin: 0;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Administration Console as metaboxes.
+------------------------------------------------------------------------------------------
+*/
+
+#admin-section-Customize_Data_and_Screens,
+#admin-section-Communications,
+#admin-section-Localization,
+#admin-section-Users_and_Permissions,
+#admin-section-System_Settings,
+#admin-section-CiviEvent,
+#admin-section-CiviContribute,
+#admin-section-CiviMember,
+#admin-section-CiviMail,
+#admin-section-CiviCase,
+#admin-section-CiviReport,
+#admin-section-CiviCampaign {
+	border: var(--crm-wp-metabox-border);
+	background: var(--crm-paper);
+	margin: 0 0 20px;
+}
+
+#admin-section-Customize_Data_and_Screens h3,
+#admin-section-Communications h3,
+#admin-section-Localization h3,
+#admin-section-Users_and_Permissions h3,
+#admin-section-System_Settings h3,
+#admin-section-CiviEvent h3,
+#admin-section-CiviContribute h3,
+#admin-section-CiviMember h3,
+#admin-section-CiviMail h3,
+#admin-section-CiviCase h3,
+#admin-section-CiviReport h3,
+#admin-section-CiviCampaign h3 {
+	--crm-heading-padding: 8px 12px;
+	background: var(--crm-paper);
+	border-bottom: var(--crm-wp-metabox-heading-border-bottom);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+}
+
+#admin-section-Customize_Data_and_Screens .admin-section-items,
+#admin-section-Communications .admin-section-items,
+#admin-section-Localization .admin-section-items,
+#admin-section-Users_and_Permissions .admin-section-items,
+#admin-section-System_Settings .admin-section-items,
+#admin-section-CiviEvent .admin-section-items,
+#admin-section-CiviContribute .admin-section-items,
+#admin-section-CiviMember .admin-section-items,
+#admin-section-CiviMail .admin-section-items,
+#admin-section-CiviCase .admin-section-items,
+#admin-section-CiviReport .admin-section-items,
+#admin-section-CiviCampaign .admin-section-items {
+	padding: var(--crm-l-reg-2) var(--crm-l-reg) var(--crm-l-reg-4);
+}
+
+/* Give Admin Items more emphasis. */
+.admin-section-items dt {
+	font-size: 1rem;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Settings - Outbound Mail as metaboxes.
+------------------------------------------------------------------------------------------
+Needs template update.
+------------------------------------------------------------------------------------------
+*/
+
+/*
+.crm-container .crm-smtp-form-block > div {
+	padding: 0;
+	background: var(--crm-paper);
+	border: var(--crm-wp-metabox-border);
+	margin: 0 0 20px;
+}
+
+.crm-container .crm-smtp-form-block > div h3 {
+	--crm-heading-padding: 8px 12px;
+	background: var(--crm-paper);
+	border-bottom: var(--crm-wp-metabox-heading-border-bottom);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+}
+ */
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Import Configuration as metaboxes.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container .crm-form-block.crm-import-form-block,
+.crm-container .crm-import-form-block .crm-import-mappings-form-block {
+	padding: 0;
+}
+
+.crm-container .crm-import-form-block .crm-import-mappings-form-block hr {
+	display: none;
+}
+
+.crm-container .crm-import-mappings-form-block #import-options,
+.crm-container .crm-import-mappings-form-block #import-actions,
+.crm-container .crm-import-mappings-form-block #map-field,
+.crm-container .crm-import-mappings-form-block .columnheader {
+	border: var(--crm-wp-metabox-border);
+	background: var(--crm-paper);
+	margin: 0 0 20px;
+}
+
+.crm-container .crm-import-mappings-form-block #import-options h3,
+.crm-container .crm-import-mappings-form-block #import-actions h3,
+.crm-container .crm-import-mappings-form-block #map-field h3,
+.crm-container .crm-import-mappings-form-block .columnheader h3 {
+	--crm-heading-padding: 8px 12px;
+	background: var(--crm-paper);
+	border-bottom: var(--crm-wp-metabox-heading-border-bottom);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.crm-container .crm-import-mappings-form-block #import-options > div,
+.crm-container .crm-import-mappings-form-block #import-actions > div {
+	padding: var(--crm-table-padding);
+}
+
+.crm-container .crm-import-mappings-form-block #map-field > button {
+	margin: var(--crm-table-padding);
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Find Campaign Pages as metabox.
+------------------------------------------------------------------------------------------
+*/
+
+.CRM_PCP_Form_PCP #pcp.crm-pcp-search-form-block {
+	border: var(--crm-wp-metabox-border);
+	background: var(--crm-paper);
+	margin: 0 0 20px;
+	padding: 0 0 var(--crm-table-padding) 0;
+	border-radius: 0;
+}
+
+.CRM_PCP_Form_PCP #pcp.crm-pcp-search-form-block h3 {
+	--crm-heading-padding: 8px 12px;
+	background: var(--crm-paper);
+	border-bottom: var(--crm-wp-metabox-heading-border-bottom);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.CRM_PCP_Form_PCP #pcp.crm-pcp-search-form-block > table,
+.CRM_PCP_Form_PCP #pcp.crm-pcp-search-form-block > div {
+	margin: 0 var(--crm-table-padding);
+	margin-top: var(--crm-table-padding);
+}

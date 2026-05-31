@@ -1,0 +1,548 @@
+/**
+ * WordPress-style form elements.
+ *
+ * Implements WordPress-style form elements in the Wellow Brook theme.
+ *
+ * * Form elements.
+ * * Form elements in focus state.
+ * * Select2 Elements.
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+/*
+------------------------------------------------------------------------------------------
+Form Elements.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-input-height: 40px;
+	--crm-focus-color: var(--wp-admin-theme-color);
+}
+
+.crm-container .crm-form-block {
+	--crm-padding-inset: 0;
+}
+
+
+
+/* Fixed width Inputs. */
+.crm-container input[type="number"].two {
+	width: 4em !important;
+}
+
+.crm-container input[type="number"].four {
+	width: 6em !important;
+}
+
+.crm-container input[type="number"].six {
+	width: 8em !important;
+}
+
+.crm-container input[type="number"].eight {
+	width: 10em !important;
+}
+
+
+
+/* Standard Checkbox and Radio Inputs. */
+body.wp-admin .crm-container input[type="checkbox"],
+body.wp-admin .crm-container input[type="radio"] {
+	appearance: unset;
+	border-radius: 2px;
+	border-color: #1e1e1e;
+	height: 1rem;
+	width: 1rem;
+	margin: -.25rem .25rem 0 0;
+	transition: .05s border-color ease-in-out;
+	box-shadow: none;
+}
+
+body.wp-admin .crm-container input[type="radio"] {
+	display: inline-flex;
+	border-radius: 50%;
+	margin-right: 0.25rem;
+	align-items: center;
+	justify-content: center;
+}
+
+body.wp-admin .crm-container input[type="checkbox"]:checked,
+body.wp-admin .crm-container input[type="radio"]:checked {
+	background: var(--wp-admin-theme-color);
+	border-color: var(--wp-admin-theme-color);
+}
+
+body.wp-admin .crm-container input[type="checkbox"]:not(.crm-form-toggle):focus,
+body.wp-admin .crm-container input[type="radio"]:focus {
+	border-color: #1e1e1e;
+	box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--wp-admin-theme-color);
+}
+
+/* Checkbox (with fancy UI) default. */
+body.wp-admin .crm-container input.crm-form-toggle:focus {
+	box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--crm-input-toggle-disabled-bg);
+}
+
+/* Checkbox (with fancy UI) checked. */
+body.wp-admin .crm-container input.crm-form-toggle:checked:focus {
+	box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--wp-admin-theme-color);
+}
+
+
+
+/* Align Multiple Radio Fields. */
+.crm-container .crm-multiple-checkbox-radio-options {
+	align-content: center;
+	align-items: center;
+}
+
+/* Prevent vertical jump in CiviCRM Yes/No/None Fields. */
+.crm-container .crm-multiple-checkbox-radio-options .crm-option-label-pair {
+	align-items: center;
+}
+
+body.wp-admin .crm-container .crm-multiple-checkbox-radio-options .crm-option-label-pair input[type="radio"] {
+	margin-top: 0;
+}
+
+.crm-container .crm-multiple-checkbox-radio-options .crm-option-label-pair label {
+	padding: 0 0 0 var(--crm-l-xsmall-2);
+}
+
+
+
+/* Fix style of "clear" links. */
+.crm-container .crm-hover-button.crm-clear-link,
+.crm-container .crm-multiple-checkbox-radio-options .crm-clear-link {
+	border-radius: 50%;
+	padding-inline: var(--crm-l-radius);
+	padding-block: 0;
+	margin-inline-start: var(--crm-l-medium);
+}
+
+.crm-container .crm-hover-button.crm-clear-link:hover,
+.crm-container .crm-hover-button.crm-clear-link:focus,
+.crm-container .crm-multiple-checkbox-radio-options .crm-clear-link:hover,
+.crm-container .crm-multiple-checkbox-radio-options .crm-clear-link:focus {
+	padding-inline: var(--crm-l-radius);
+	padding-block: 0;
+	color: var(--crm-danger-color) !important;
+	box-shadow: none;
+}
+
+.crm-container .crm-hover-button.crm-clear-link:focus-visible,
+.crm-container .crm-multiple-checkbox-radio-options .crm-clear-link:focus-visible {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--crm-danger-color);
+}
+
+.crm-container .crm-hover-button.crm-clear-link:hover .crm-i::before,
+.crm-container .crm-hover-button.crm-clear-link:focus .crm-i::before,
+.crm-container .crm-hover-button.crm-clear-link:focus-visible .crm-i::before,
+.crm-container .crm-multiple-checkbox-radio-options .crm-clear-link:hover .crm-i::before,
+.crm-container .crm-multiple-checkbox-radio-options .crm-clear-link:focus .crm-i::before,
+.crm-container .crm-multiple-checkbox-radio-options .crm-clear-link:focus-visible .crm-i::before {
+	color: var(--crm-danger-color);
+}
+
+/* Tweak some that aren't behaving. */
+.crm-container .crm-search-form-block .crm-hover-button.crm-clear-link,
+.crm-container .crm-search-form-block .crm-hover-button.crm-clear-link:hover,
+.crm-container .crm-search-form-block .crm-hover-button.crm-clear-link:focus,
+.crm-container .crm-search-form-block .crm-hover-button.crm-clear-link:focus-visible {
+	padding-block: var(--crm-l-xsmall-1);
+}
+
+/* Date clear button. */
+.crm-container .crm-form-date-wrapper .crm-hover-button.crm-clear-link,
+.crm-container .crm-form-date-wrapper .crm-hover-button.crm-clear-link:hover,
+.crm-container .crm-form-date-wrapper .crm-hover-button.crm-clear-link:focus,
+.crm-container .crm-form-date-wrapper .crm-hover-button.crm-clear-link:focus-visible {
+	border-radius: 50%;
+	padding-inline: var(--crm-l-radius);
+	padding-block: 0;
+	text-decoration: none;
+	background: transparent;
+}
+
+.crm-container .crm-form-date-wrapper .crm-hover-button.crm-clear-link:focus,
+.crm-container .crm-form-date-wrapper .crm-hover-button.crm-clear-link:focus-visible {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--crm-danger-color);
+}
+
+
+
+/* Fix help icons in Search Blocks. */
+.crm-container label:has(+ .helpicon) {
+	padding-right: 0;
+}
+
+.crm-container label + .helpicon:not(:last-child) {
+	margin-right: var(--crm-l-medium-2);
+}
+
+
+
+/* Remove border on Batch Entry screen. */
+.CRM_Batch_Form_Entry .batch-entry.form-item {
+	border: none;
+}
+
+
+
+/* Remove border on Edit Your Personal Campaign Page screen. */
+.crm-container #crm-main-content-wrapper fieldset.crm-pcp-campaign-group {
+	border: none;
+}
+
+
+
+/* Style "help" pane on "Contribution Page Price Fields" screen. */
+.crm-container afsearch-administer-price-fields .af-container-style-pane.help {
+	padding-top: 12px !important;
+	box-shadow: none;
+}
+
+.crm-container #bootstrap-theme afsearch-administer-price-fields .af-container-style-pane.help > div > p {
+	margin: 0;
+}
+
+.crm-container #bootstrap-theme afsearch-administer-price-fields .crm-search-display .form-inline {
+	padding: 0;
+}
+
+
+
+/* Fix "Message Templates" screen. */
+.CRM_Admin_Form_MessageTemplates > .crm-form-block {
+	border: none;
+	padding: 0;
+}
+
+.CRM_Admin_Form_MessageTemplates > .crm-form-block > .form-item {
+	border: none;
+}
+
+.crm-container .CRM_Admin_Form_MessageTemplates .crm-form-block:not(#foo) .form-item table.form-layout-compressed:not(#foo) {
+	width: auto;
+	background: transparent;
+}
+
+
+
+/* Fix "New CiviCRM Profile" form layout. */
+.crm-container .CRM_UF_Form_Group .crm-uf_group-form-block > .crm-accordion-bold {
+	margin-bottom: var(--crm-l-medium);
+}
+
+.crm-container .CRM_UF_Form_Group .crm-uf_group-form-block > .crm-accordion-bold .crm-uf-advancesetting-form-block {
+	margin: 0;
+	padding: 0;
+}
+
+
+/* Fix "Find Respondents To Reserve" layout. */
+.crm-container .CRM_Campaign_Form_Search.crm-search-form .crm-search-form-block,
+.crm-container .CRM_Campaign_Form_Search.crm-search-form .crm-search-form-block > .crm-accordion-light {
+	margin: 0;
+	padding: 0;
+}
+
+.crm-container .CRM_Campaign_Form_Search.crm-search-form .crm-search-form-block .crm-results-block > fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+
+/* Fix Token dropdown layout. */
+.crm-container .crm-setting-block-address #address_format,
+.crm-container .crm-setting-block-address #mailing_format {
+	margin-top: var(--crm-l-medium);
+}
+
+
+
+/* Widen Resource URL fields. */
+.crm-setting-section-location input.crm-form-text {
+	width: var(--crm-input-large-width);
+}
+
+.crm-setting-section-location input#userFrameworkResourceURL {
+	width: 35em;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Form elements in focus state.
+------------------------------------------------------------------------------------------
+*/
+
+:root {
+	--crm-input-box-shadow: none;
+}
+
+.crm-container input[type="text"],
+.crm-container input[type="password"],
+.crm-container input[type="date"],
+.crm-container input[type="datetime"],
+.crm-container input[type="datetime-local"],
+.crm-container input[type="email"],
+.crm-container input[type="month"],
+.crm-container input[type="number"],
+.crm-container input[type="search"],
+.crm-container input[type="tel"],
+.crm-container input[type="time"],
+.crm-container input[type="url"],
+.crm-container input[type="week"] {
+	box-shadow: 0 0 0 transparent;
+	padding: 0 12px;
+	min-height: var(--crm-wp-btn-height);
+}
+
+.crm-container input[type="text"]:hover,
+.crm-container input[type="password"]:hover,
+.crm-container input[type="date"]:hover,
+.crm-container input[type="datetime"]:hover,
+.crm-container input[type="datetime-local"]:hover,
+.crm-container input[type="email"]:hover,
+.crm-container input[type="month"]:hover,
+.crm-container input[type="number"]:hover,
+.crm-container input[type="search"]:hover,
+.crm-container input[type="tel"]:hover,
+.crm-container input[type="time"]:hover,
+.crm-container input[type="url"]:hover,
+.crm-container input[type="week"]:hover {
+	color: #1e1e1e;
+	border-color: #1e1e1e;
+}
+
+.crm-container input[type="text"]:focus,
+.crm-container input[type="password"]:focus,
+.crm-container input[type="date"]:focus,
+.crm-container input[type="datetime"]:focus,
+.crm-container input[type="datetime-local"]:focus,
+.crm-container input[type="email"]:focus,
+.crm-container input[type="month"]:focus,
+.crm-container input[type="number"]:focus,
+.crm-container input[type="search"]:focus,
+.crm-container input[type="tel"]:focus,
+.crm-container input[type="time"]:focus,
+.crm-container input[type="url"]:focus,
+.crm-container input[type="week"]:focus {
+	border-color: var(--wp-admin-theme-color);
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+input.crm-form-text:focus,
+input.crm-form-password:focus,
+select.crm-form-multiselect:focus,
+select.crm-form-select:focus,
+.crm-icon-picker-button:focus,
+.crm-container input.form-control:focus,
+.crm-container input.dateplugin:focus,
+.crm-container .replace-plain:focus,
+.crm-container textarea:focus,
+.crm-container select[aria-controls]:focus,
+.crm-container .select2-container-active *:focus {
+	border-color: var(--wp-admin-theme-color);
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+.crm-container .select2-container {
+	border-radius: 3px;
+}
+
+.crm-container .select2-container a:hover,
+.crm-container .select2-container:not(.select2-container-disabled) a:hover {
+	color: #1e1e1e;
+	border-color: #1e1e1e;
+	text-decoration: none;
+}
+
+.crm-container .select2-container-active {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+.crm-container .select2-container-active a.select2-choice,
+.crm-container .select2-container-active .select2-choices {
+	border-color: var(--wp-admin-theme-color);
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+.crm-container .select2-container-active.select2-dropdown-open,
+.crm-container .select2-container-active.select2-dropdown-open a.select2-choice,
+.crm-container .select2-container-active.select2-dropdown-open .select2-choices {
+	box-shadow: none;
+}
+
+.crm-container .select2-container-active.select2-dropdown-open a.select2-choice,
+.crm-container .select2-container-active.select2-dropdown-open .select2-choices {
+	border-color: var(--crm-focus-color);
+}
+
+body.wp-admin.wp-core-ui .crm-container select:focus {
+	border-color: var(--wp-admin-theme-color);
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+}
+
+/* Remove padding and margin from empty fieldsets. */
+.crm-container .fieldset.af-container.af-layout-inline:not(legend) {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------
+Select2 Elements.
+------------------------------------------------------------------------------------------
+*/
+
+/* Widen Multi-Selects. */
+.crm-container .select2-container-multi {
+	min-width: 18em;
+}
+
+/* Fix caret-down in Multi-Selects. */
+.crm-container .select2-container-multi .select2-choices::before {
+	position: absolute;
+    right: var(--crm-l-small);
+    top: 8px;
+}
+
+.crm-container .select2-container .select2-choice,
+.crm-container .select2-container-multi .select2-choices {
+	min-height: var(--crm-wp-btn-height);
+	box-shadow: 0 0 0 transparent;
+}
+
+:root {
+	--crm-wp-select-bg: #fff url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%231e1e1e%22%2F%3E%3C%2Fsvg%3E) no-repeat right 8px top 55%;
+	--crm-wp-select-bg-size: 16px 16px;
+	--crm-wp-select-padding: 0 24px 0 12px;
+}
+
+body.wp-admin.wp-core-ui .crm-container select {
+	appearance: unset;
+	background: var(--crm-wp-select-bg);
+	background-size: var(--crm-wp-select-bg-size);
+	padding: var(--crm-wp-select-padding);
+}
+
+/* Focus on Select2 multi-selects are not helpful - the cursor should be enough. */
+.crm-container .select2-container.select2-container-multi .select2-input:focus {
+	box-shadow: none;
+}
+
+/* RiverLea restricts the width of Select2 dropdowns. Let's undo that. */
+.crm-container .select2-drop.select2-drop-active.crm-container {
+	max-width: 99%;
+}
+
+/* Widen "Available Languages" dropdown. */
+.crm-container .select2-container#s2id_uiLanguages {
+	width: var(--crm-input-large-width) !important;
+}
+
+
+
+/* Multi-select fixes. */
+.crm-container ul.crm-checkbox-list {
+	--crm-input-bg-color: #f5f5f5;
+	--crm-l-radius: 0;
+	--crm-border: 1px solid #868686;
+	padding: 4px;
+	height: auto;
+}
+
+.crm-container :is(.listing-box,.listing-box-tall) > div,
+.crm-container ul.crm-checkbox-list li {
+	padding: 6px;
+}
+
+.crm-container ul.crm-sortable-list li {
+	position: relative;
+	padding-left: 25px;
+}
+
+.crm-container ul.crm-sortable-list li::before {
+	display: block;
+	font-family: "FontAwesome";
+	content: "\f047";
+	position: absolute;
+	left: 6px;
+	top: 7px;
+	font-size: 11px;
+	color: grey;
+}
+
+/* Beat the specificity of RiverLea Core to make Multi-selects behave. */
+/* TODO: fix in RiverLea Core. */
+body .crm-container :is(.listing-box,.listing-box-tall) > div:has(input,input:checked),
+body .crm-container ul.crm-checkbox-list li:has(input,input:checked) {
+	--crm-input-bg-color: #fafafa;
+}
+
+/* Widen Contact Reference dropdown. */
+.crm-container .select2-container.crm-contact-ref {
+	min-width: 325px;
+}
+
+.select2-drop .crm-entityref-links a.crm-hover-button {
+    white-space: nowrap;
+    display: block;
+    margin: .25rem 0;
+}
+
+.select2-drop .crm-entityref-links a.crm-hover-button .crm-i {
+	margin-right: 0.25rem;
+}
+
+.crm-container .select2-container.select2-container-disabled .select2-choice {
+	cursor: not-allowed;
+}
+
+
+
+/* Widen Campaign Reference dropdown. */
+.crm-container .select2-container.crm-campaign-ref.crm-ajax-select {
+	min-width: 275px;
+}
+
+
+
+/* Manage Events screen layout modifications. */
+.CRM_Event_Form_SearchEvent .crm-content-block .float-right a {
+	padding: var(--crm-l-medium) var(--crm-l-medium) var(--crm-l-medium) 0;
+}
+
+.CRM_Event_Form_SearchEvent .crm-form-block {
+	margin-bottom: var(--crm-l-reg);
+}
+
+.CRM_Event_Form_SearchEvent .crm-form-block #id_fromToDates {
+	margin: 0;
+}
+
+.CRM_Event_Form_SearchEvent .crm-form-block .form-layout td.right {
+	padding-bottom: 0;
+}
+
+.CRM_Event_Form_SearchEvent .crm-form-block .form-layout {
+	margin-bottom: 0;
+}
+
+button#_qf_SearchEvent_refresh {
+    float: left;
+    margin-bottom: 8px;
+}
+
+
+
+.crm-container .select2-container.crm-auto-width {
+	width: auto !important;
+}

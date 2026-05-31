@@ -1,0 +1,409 @@
+/**
+ * WordPress style dialogs.
+ *
+ * Implements WordPress-style dialog styles and colours in the Wellow Brook theme.
+ *
+ * * jQuery popup dialogs.
+ *
+ * @package CiviCRM_Admin_Utilities
+ */
+
+.crm-container.ui-dialog {
+	--crm-dialog-radius: 0;
+	--crm-dialog-padding: 0;
+	--crm-dialog-header-radius: 0;
+	--crm-dialog-header-padding: 0 0 0 16px;
+	--crm-dialog-header-size: 22px;
+	--crm-dialog-header-color: var(--crm-heading-color);
+	--crm-dialog-header-bg-color: var(--crm-paper);
+	--crm-dialog-header-border-color: transparent transparent #dcdcde transparent;
+	--crm-dialog-header-border: 1px solid #dcdcde;
+	--crm-dialog-footer-border: var(--crm-dialog-header-border);
+}
+
+/* Dialog HTML element. */
+.crm-container .crm-dialog {
+	--crm-dialog-body-bg-color: var(--crm-paper);
+	border-width: 1px;
+}
+
+/* Dialog general. */
+.crm-container.ui-dialog {
+	z-index: 9998 !important;
+}
+
+/* Opaque dialog background. */
+.ui-widget-overlay {
+	background: #000;
+	opacity: 0.7;
+	z-index: 9997;
+}
+
+/* Hide subsequent dialog backgrounds. Not sure how reliable this is. */
+body > .ui-widget-overlay ~ .ui-widget-overlay {
+	display: none;
+}
+
+
+
+/* Dialog titlebar. */
+.crm-container.ui-dialog .ui-dialog-titlebar {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 2;
+	margin: 0;
+	gap: 0;
+	border: none;
+	border-bottom: var(--crm-dialog-header-border);
+}
+
+.crm-container.ui-dialog .ui-dialog-header .ui-dialog-title,
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+	font-weight: 600;
+}
+
+/* Square buttons at top right of dialog. */
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-times),
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-print),
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-expand),
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-compress),
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-times),
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-print),
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-expand),
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-compress) {
+	color: #646970;
+	padding: 0;
+	width: 36px;
+	height: 36px;
+	text-align: center;
+	background: none;
+	border: none;
+	cursor: pointer;
+	border-radius: 0;
+	min-height: 0;
+}
+
+/* Square button icons at top right of dialog. */
+.crm-container.ui-dialog .ui-dialog-header .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button-icon.ui-icon[class*=" fa-"] {
+	color: #646970;
+	font-size: 14px;
+	width: 36px;
+	height: 36px;
+	line-height: 2.5;
+}
+
+/* Square buttons at top right of dialog when focussed. */
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-times):focus,
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-print):focus,
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-expand):focus,
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-compress):focus,
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-times):focus,
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-print):focus,
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-expand):focus,
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-compress):focus {
+	box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color, #3858e9);
+}
+
+/* Square button icons at top right of dialog when button is hovered over. */
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-times):hover .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-print):hover .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-expand):hover .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-compress):hover .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-times):hover .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-print):hover .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-expand):hover .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-compress):hover .ui-button-icon.ui-icon[class*=" fa-"] {
+	color: var(--wp-admin-theme-color);
+}
+
+/* Square button icons at top right of dialog when button is focussed. */
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-times):focus .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-print):focus .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-expand):focus .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-header .ui-button:has(.fa-compress):focus .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-times):focus .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-print):focus .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-expand):focus .ui-button-icon.ui-icon[class*=" fa-"],
+.crm-container.ui-dialog .ui-dialog-titlebar .ui-button:has(.fa-compress):focus .ui-button-icon.ui-icon[class*=" fa-"] {
+	color: var(--wp-admin-theme-color);
+}
+
+
+
+/* Dialog content bottom = height of buttonset + padding. */
+.crm-container.ui-dialog:has(.ui-dialog-buttonpane) .ui-dialog-content {
+	margin-bottom: 56px;
+}
+
+/* Dialog buttonset - match order that most operating systems use. */
+.crm-container.ui-dialog .ui-dialog-buttonset {
+	padding: 8px;
+	justify-content: flex-start;
+	flex-direction: row-reverse;
+	float: none;
+}
+
+/* Set "Cancel" button defaults. */
+.crm-container.ui-dialog .ui-dialog-buttonset .ui-button .fa-times::before {
+	color: var(--crm-wp-button-secondary-color-focus);
+}
+
+/* Do not force "Cancel" button position. */
+.crm-container.ui-dialog .ui-dialog-buttonset .ui-button:has(.fa-times) {
+/* 	order: unset; */
+}
+
+/* Move option buttons e.g. "Custom Fields for this Set" to left. */
+.crm-container.ui-dialog .ui-dialog-buttonset .ui-button:has(.fa-th-list, .fa-pencil) {
+/* 	order: unset; */
+/* 	margin-right: auto; */
+}
+
+
+
+/* "Icon Picker" dialog needs font fixed. */
+.crm-container #crmIconPicker {
+	font-size: var(--crm-font-size);
+}
+
+
+
+/* "Activities" dialog needs Select2 dropdown widths to be fixed. */
+.crm-container.ui-widget .activity-search-options .medium,
+.crm-container.ui-widget .activity-search-options .crm-select2 {
+	width: 100% !important;
+}
+
+/* "Activities" dialog needs form block margins fixed. */
+.crm-container.ui-dialog .crm-form-block details {
+    margin: var(--crm-dialog-body-padding) 0;
+}
+
+
+
+/* "Activity" dialog needs special handling. */
+.crm-container.ui-dialog:has(.ui-widget-content > #Activity)  .ui-dialog-buttonset {
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: end;
+}
+
+/* "View Contribution" dialog needs special handling. */
+.crm-container.ui-dialog:has(.ui-widget-content > #ContributionView) .ui-dialog-buttonset {
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: end;
+}
+
+/* "View Membership" dialog needs special handling. */
+.crm-container.ui-dialog:has(.ui-widget-content > #MembershipView) .ui-dialog-buttonset {
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: end;
+}
+
+/* "View Event Registration for Contact" dialog needs special handling. */
+.crm-container.ui-dialog:has(.ui-widget-content > #ParticipantView) .ui-dialog-buttonset {
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: end;
+}
+
+
+
+/* "View Contribution" dialog "Edit" button. */
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-pencil),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-pencil),
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-pencil),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-pencil) {
+/* 	order: 1; */
+/* 	margin-right: 0; */
+}
+
+
+
+/* Make dialog "Delete" button look like Bootstrap. */
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-trash),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-trash),
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-trash),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-trash) {
+/* 	order: 2; */
+/* 	margin-right: auto; */
+	color: var(--crm-danger-color);
+	background: var(--crm-btn-danger-bg-color);
+    color: var(--crm-btn-danger-text-color);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-trash):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-trash):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-trash):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-trash):hover {
+	background: color-mix(in srgb, var(--crm-btn-danger-bg-color) 87.5%, #000 12.5%);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-trash):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-trash):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-trash):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-trash):focus-visible {
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--crm-btn-danger-bg-color);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button .fa-trash,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button .fa-trash,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button .fa-trash,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button .fa-trash {
+    --crm-icon-danger-color: #fff;
+}
+
+
+
+/* Make "Done" button appear primary. */
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-times),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button:has(.fa-times),
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button:has(.fa-times),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-times),
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-times),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-times) {
+/* 	order: 5; */
+	background: var(--crm-wp-button-primary-bg);
+	border: 1px solid var(--crm-wp-button-primary-border);
+	color: var(--crm-wp-button-primary-color);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-times):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-times):focus,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button:has(.fa-times):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button:has(.fa-times):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button:has(.fa-times):focus,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-times):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-times):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-times):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus {
+	background: var(--crm-wp-button-primary-bg-hover);
+	border-color: var(--crm-wp-button-primary-border-hover);
+	color: var(--crm-wp-button-primary-color-hover);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-times):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button:has(.fa-times):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:has(.fa-times):focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--crm-wp-button-primary-bg);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button .fa-times::before,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button .fa-times::before,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button .fa-times::before,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button .fa-times::before,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button .fa-times::before,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button .fa-times::before {
+	color: var(--crm-wp-button-primary-color);
+}
+
+
+
+/* Make all icons bold on hover and focus. */
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:hover .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:focus .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:focus-visible .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button:hover .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button:focus .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ActivityView) .ui-dialog-buttonset .ui-button:focus-visible .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button:hover .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button:focus .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #Preview) .ui-dialog-buttonset .ui-button:focus-visible .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:hover .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:focus .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:focus-visible .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:hover .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:focus .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button:focus-visible .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:hover .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:focus .crm-i,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button:focus-visible .crm-i {
+	font-weight: 600;
+}
+
+
+
+/* "View Contribution" dialog "Download Invoice" button. */
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-download) {
+/* 	order: 3; */
+}
+
+/* "View Contribution" dialog "Email Invoice" button. */
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-paper-plane) {
+/* 	order: 4; */
+/* 	margin-right: auto; */
+}
+
+/* Make "View Contribution" dialog "Download Invoice" and "Email Invoice" buttons appear secondary. */
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-download),
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-paper-plane) {
+	background: var(--crm-wp-button-secondary-bg);
+	border: 1px solid var(--crm-wp-button-secondary-border);
+	color: var(--crm-wp-button-secondary-color);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-download):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-download):focus,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-paper-plane):hover,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-paper-plane):focus {
+	background: var(--crm-wp-button-secondary-bg-hover);
+    border-color: var(--crm-wp-button-secondary-color-hover);
+    color: var(--crm-wp-button-secondary-color-hover);
+}
+
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-download):focus-visible,
+.crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-paper-plane):focus-visible {
+	background: var(--crm-wp-button-secondary-bg);
+	border-color: var(--crm-wp-button-secondary-border-focus);
+	box-shadow: 0 0 0 var(--crm-wp-button-secondary-border-width-focus, 1.5px) var(--crm-wp-button-secondary-box-focus);
+	color: var(--crm-wp-button-secondary-color-focus);
+	outline: 2px solid transparent;
+	outline-offset: 0;
+}
+
+
+
+/* "Print Contribution Receipts" dialog needs special handling. */
+.crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item {
+	border: none;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: row-reverse;
+	margin-bottom: 0;
+}
+
+/* Make "Cancel" button appear secondary. */
+.crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item button.cancel {
+	background: var(--crm-wp-button-secondary-bg);
+	border: 1px solid var(--crm-wp-button-secondary-border);
+	color: var(--crm-wp-button-secondary-color);
+	min-height: var(--crm-wp-btn-height);
+}
+
+.crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item button.cancel:hover,
+.crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item button.cancel:focus {
+	background: var(--crm-wp-button-secondary-bg-hover);
+    border-color: var(--crm-wp-button-secondary-color-hover);
+    color: var(--crm-wp-button-secondary-color-hover);
+}
+
+.crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item button.cancel:focus-visible {
+	background: var(--crm-wp-button-secondary-bg);
+	border-color: var(--crm-wp-button-secondary-border-focus);
+	box-shadow: 0 0 0 var(--crm-wp-button-secondary-border-width-focus, 1.5px) var(--crm-wp-button-secondary-box-focus);
+	color: var(--crm-wp-button-secondary-color-focus);
+	outline: 2px solid transparent;
+	outline-offset: 0;
+}
