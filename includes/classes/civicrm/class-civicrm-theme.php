@@ -48,6 +48,15 @@ class CAU_CiviCRM_Theme {
 	public $slug = 'wellowbrook';
 
 	/**
+	 * CiviCRM meets requirements flag.
+	 *
+	 * @since 1.1.2
+	 * @access public
+	 * @var bool
+	 */
+	public $version_okay = false;
+
+	/**
 	 * RiverLea enabled flag.
 	 *
 	 * @since 1.1.2
@@ -64,6 +73,12 @@ class CAU_CiviCRM_Theme {
 	 * @param CAU_CiviCRM $parent The parent object.
 	 */
 	public function __construct( $parent ) {
+
+		// Cannot be installed if WordPress is less than 7.0.
+		global $wp_version;
+		if ( ! version_compare( $wp_version, '7.0', '>=' ) ) {
+			return;
+		}
 
 		// Store references.
 		$this->civicrm = $parent;
@@ -115,13 +130,53 @@ class CAU_CiviCRM_Theme {
 	 */
 	private function register_hooks() {
 
-		add_action( 'admin_init', [ $this, 'wellowbrook_install' ], 10 );
+		// Install if not already installed.
+		add_action( 'admin_init', [ $this, 'wellowbrook_install' ], 50 );
+
+		// Implement theme when installed.
 		add_action( 'civicrm_themes', [ $this, 'register_theme' ], 10 );
 		add_action( 'civicrm_alterBundle', [ $this, 'modify_bundle' ], 100, 1 );
 
 	}
 
 	// -----------------------------------------------------------------------------------
+
+	/**
+	 * Checks if CivCRM meets requirements.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @return bool $version_okay True if CivCRM meets requirements, false otherwise.
+	 */
+	public function civicrm_version_okay() {
+
+		// No need to check more than once.
+		if ( true === $this->version_okay ) {
+			return true;
+		}
+
+		// Cannot be called during "civicrm_config".
+		if ( doing_action( 'civicrm_config' ) ) {
+			return false;
+		}
+
+		// Bail if no CiviCRM.
+		if ( ! $this->civicrm->is_initialised() ) {
+			return false;
+		}
+
+		// Set flag based on whether CiviCRM meets requirements.
+		$version = CRM_Utils_System::version();
+		if ( version_compare( $version, '6.14.1', '>=' ) ) {
+			$this->version_okay = true;
+		} else {
+			$this->version_okay = false;
+		}
+
+		// --<
+		return $this->version_okay;
+
+	}
 
 	/**
 	 * Checks if RiverLea is enabled.
@@ -137,11 +192,14 @@ class CAU_CiviCRM_Theme {
 			return true;
 		}
 
+		// Cannot be called during "civicrm_config".
+		if ( doing_action( 'civicrm_config' ) ) {
+			return false;
+		}
+
 		// Bail if no CiviCRM.
-		if ( ! doing_action( 'civicrm_config' ) ) {
-			if ( ! $this->civicrm->is_initialised() ) {
-				return false;
-			}
+		if ( ! $this->civicrm->is_initialised() ) {
+			return false;
 		}
 
 		// Set flag based on RiverLea whether is enabled.
@@ -167,6 +225,11 @@ class CAU_CiviCRM_Theme {
 
 		// Bail if no CiviCRM.
 		if ( ! $this->civicrm->is_initialised() ) {
+			return false;
+		}
+
+		// Cannot be installed if CiviCRM does not meet requirements.
+		if ( ! $this->civicrm_version_okay() ) {
 			return false;
 		}
 
@@ -217,6 +280,11 @@ class CAU_CiviCRM_Theme {
 
 		// Bail if no CiviCRM.
 		if ( ! $this->civicrm->is_initialised() ) {
+			return false;
+		}
+
+		// Cannot be installed if CiviCRM does not meet requirements.
+		if ( ! $this->civicrm_version_okay() ) {
 			return false;
 		}
 
@@ -319,6 +387,9 @@ class CAU_CiviCRM_Theme {
 
 		// We only need the ID.
 		$stream_id = $stream['id'] ?? false;
+		if ( false !== $stream_id ) {
+			$stream_id = (int) $stream_id;
+		}
 
 		// --<
 		return $stream_id;
@@ -333,6 +404,11 @@ class CAU_CiviCRM_Theme {
 	 * @param array $themes The array of themes.
 	 */
 	public function register_theme( &$themes ) {
+
+		// Cannot be registered if CiviCRM does not meet requirements.
+		if ( ! $this->civicrm_version_okay() ) {
+			return;
+		}
 
 		// Ignore unless RiverLea is enabled.
 		if ( ! $this->riverlea_enabled() ) {
@@ -363,15 +439,17 @@ class CAU_CiviCRM_Theme {
 	 */
 	public function modify_bundle( CRM_Core_Resources_Bundle $bundle ) {
 
+		// Ignore unless CiviCRM meets requirements.
+		if ( ! $this->civicrm_version_okay() ) {
+			return;
+		}
 		// Ignore unless RiverLea is enabled.
 		if ( ! $this->riverlea_enabled() ) {
 			return;
 		}
 
-		// Get the Theme identifier.
-		$theme = Civi::service( 'themes' )->getActiveThemeKey();
-
 		// Ignore unless Wellow Brook is enabled.
+		$theme = Civi::service( 'themes' )->getActiveThemeKey();
 		if ( 'wellowbrook' !== $theme ) {
 			return;
 		}
