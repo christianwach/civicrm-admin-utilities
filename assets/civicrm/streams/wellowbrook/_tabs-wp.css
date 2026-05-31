@@ -1286,6 +1286,19 @@ CiviCRM Dashboard.
 
 
 
+/* Un-pad the Resources Panel. */
+#civicrm-getting-started td {
+	padding: var(--crm-l-medium);
+}
+
+#bootstrap-theme #civicrm-getting-started .crm-content-block > h3 {
+	padding-bottom: var(--crm-l-small);
+	margin-bottom: var(--crm-l-small);
+	font-weight: 400;
+}
+
+
+
 /* Pad the News Panel. */
 #civicrm-news-feed .ui-tabs-panel {
 	padding: var(--crm-l-medium-2);
