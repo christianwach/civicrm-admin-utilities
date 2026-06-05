@@ -143,16 +143,16 @@ WordPress-style Tabs.
 .crm-container #mainTabContainer.ui-tabs .ui-tabs-nav li .ui-tabs-anchor,
 .crm-container .crm-contact-page #mainTabContainer .crm-contact-tabs-list li .ui-tabs-anchor {
 	white-space: nowrap;
-    border-radius: 0;
-    display: grid;
+	border-radius: 0;
+	display: grid;
 	grid-template-columns: min-content auto min-content;
-    width: var(--crm-contact-tab-width);
-    gap: var(--crm-l-medium);
-    align-items: center;
-    float: var(--crm-contact-tab-align);
-    padding: var(--crm-contact-tab-padding);
-    border: var(--crm-contact-tab-border);
-    text-align: var(--crm-contact-tab-align);
+	width: var(--crm-contact-tab-width);
+	gap: var(--crm-l-medium);
+	align-items: center;
+	float: var(--crm-contact-tab-align);
+	padding: var(--crm-contact-tab-padding);
+	border: var(--crm-contact-tab-border);
+	text-align: var(--crm-contact-tab-align);
 }
 
 /* Bootstrap trigger needs separate handling. */
@@ -160,9 +160,9 @@ WordPress-style Tabs.
 .crm-container .nav-tabs > li > a, .crm-container .panel-heading .nav-tabs > li > a,
 .crm-container ul.nav-tabs li.fluid-width-tab a,
 .crm-container .nav-tabs li a.ng-binding {
-    padding: var(--crm-contact-tab-padding);
-    border: var(--crm-contact-tab-border);
-    text-align: var(--crm-contact-tab-align);
+	padding: var(--crm-contact-tab-padding);
+	border: var(--crm-contact-tab-border);
+	text-align: var(--crm-contact-tab-align);
 	line-height: 1.6;
 }
 
@@ -471,13 +471,13 @@ Contact Layout Editor fixes.
 
 .crm-container #bootstrap-theme #contactLayoutEditor .navbar label,
 .crm-container #bootstrap-theme #contactLayoutEditor .navbar-default label {
-    padding: 0;
+	padding: 0;
 }
 
 .crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn {
-    color: var(--crm-c-darkest);
-    background: transparent;
-    padding: 0;
+	color: var(--crm-c-darkest);
+	background: transparent;
+	padding: 0;
 }
 
 .crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus,
@@ -486,18 +486,18 @@ Contact Layout Editor fixes.
 	border: none;
 	box-shadow: none;
 	font-weight: 600;
-    color: var(--crm-c-darkest);
+	color: var(--crm-c-darkest);
 }
 
 .crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus .crm-i::before,
 .crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus-visible .crm-i::before {
 	font-weight: 600;
-    color: var(--crm-c-darkest);
+	color: var(--crm-c-darkest);
 }
 
 .crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus .crm-i.fa-trash::before,
 .crm-container #bootstrap-theme #contactLayoutEditor #contactLayoutLayouts .cse-layout-item .btn:focus-visible .crm-i.fa-trash::before {
-    color: var(--crm-danger-color);
+	color: var(--crm-danger-color);
 }
 
 .crm-container #cse-block-container #cse-palette-col > h4 {
@@ -521,7 +521,7 @@ Contact Layout Editor fixes.
 
 .crm-container #cse-tabs-container {
 	background-color: transparent;
-    padding: 0 0 var(--crm-l-small) 0;
+	padding: 0 0 var(--crm-l-small) 0;
 }
 
 .crm-container #cse-rows .cse-drop {
@@ -536,22 +536,22 @@ Contact Layout Editor fixes.
 .crm-container #bootstrap-theme #cse-palette-col button.btn-success-outline {
 	background: transparent;
 	padding-right: 0;
-    color: var(--crm-c-darkest);
+	color: var(--crm-c-darkest);
 }
 
 .crm-container #bootstrap-theme #cse-rows button.btn-info-outline .crm-i {
-    color: var(--crm-c-darkest);
+	color: var(--crm-c-darkest);
 }
 
 .crm-container #bootstrap-theme #cse-rows button.btn-info-outline span {
 	display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }
 
 .crm-container #bootstrap-theme #cse-rows button.btn-danger-outline .crm-i {
-    color: var(--crm-danger-color);
+	color: var(--crm-danger-color);
 }
 
 .crm-container #bootstrap-theme #cse-palette-col .cse-block button {
@@ -566,11 +566,11 @@ Contact Layout Editor fixes.
 	padding: var(--crm-accordion-header-padding);
 	font-size: var(--crm-l-reg-1);
 	font-weight: 400;
-    color: var(--crm-c-gray-700);
-    line-height: 1;
-    margin: 0;
-    border: none;
-    box-shadow: none;
+	color: var(--crm-c-gray-700);
+	line-height: 1;
+	margin: 0;
+	border: none;
+	box-shadow: none;
 }
 
 /* Nested collapsible accordion headers, e.g. for Address Custom Fields. */
@@ -699,18 +699,18 @@ CiviCRM Contribution Summary.
 
 /* "Hide" unnecessary (and invalid) nested ID. */
 #ContributionCharts #chartData #chartData {
-    padding: 0;
-    border: 0;
+	padding: 0;
+	border: 0;
 }
 
 #ContributionCharts #chartData > .form-layout-compressed {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 #ContributionCharts #chartData > .form-layout-compressed > table {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 #ContributionCharts #chartData > .form-layout-compressed > table td {
@@ -736,7 +736,7 @@ CiviCRM Contribution Summary.
 
 #ContributionCharts ul.ui-tabs-nav li.crm-tab-button a:focus-visible {
 	box-shadow: 0 0 0 1px transparent, 0 0 0 var(--wp-admin-border-width-focus, 2.5px) var(--wp-admin-theme-color);
-    outline: 2px solid transparent;
+	outline: 2px solid transparent;
 }
 
 
@@ -771,10 +771,10 @@ Reports screen.
 
 /* Modify the statistics table. */
 .crm-container table.report-layout th.statistics {
-    width: 10%;
-    white-space: nowrap;
-    border-bottom: none;
-    background: #ededed;
+	width: 10%;
+	white-space: nowrap;
+	border-bottom: none;
+	background: #ededed;
 }
 
 
@@ -810,7 +810,7 @@ APIv3 Explorer Page fixes.
 }
 
 #api-param-buttons {
-    margin-bottom: var(--crm-l-reg-2);
+	margin-bottom: var(--crm-l-reg-2);
 }
 
 /* "Code" section. */
@@ -881,7 +881,7 @@ APIv4 Explorer Page fixes.
 /* Match Info Panel header to Params Panel header. */
 .crm-container .api4-explorer-page .panel-info > .panel-heading {
 	color: var(--crm-text-color);
-    background-color: var(--crm-layer1-bg-color);
+	background-color: var(--crm-layer1-bg-color);
 }
 
 /* Match Info Panel heading to Params Panel heading */
@@ -907,12 +907,12 @@ APIv4 Explorer Page fixes.
 
 /* Fix cramped spacing of top-level elements. */
 .crm-container .api4-explorer-page .panel-body > div.api4-input.form-inline {
-    padding: 0 0 var(--crm-l-reg);
+	padding: 0 0 var(--crm-l-reg);
 }
 
 /* Fix gap to the right of "And" dropdown buttons. */
 #bootstrap-theme.api4-explorer-page button.btn.btn-info.dropdown-toggle {
-    padding-right: var(--crm-l-xsmall);
+	padding-right: var(--crm-l-xsmall);
 }
 
 
@@ -951,7 +951,7 @@ FormBuilder fixes.
 /* Entity "Values:" column delete buttons. */
 .crm-container #afGuiEditor .af-gui-entity-values a:has(.fa-times) {
 	font-weight: 600;
-    border-radius: 50%;
+	border-radius: 50%;
 	padding-inline: var(--crm-l-radius);
 	padding-block: 0;
 }
@@ -1038,7 +1038,7 @@ SearchKit fixes.
 
 /* Fix gap to the right of "And" dropdown buttons. */
 #bootstrap-theme.crm-search button.btn.btn-info.dropdown-toggle {
-    padding-right: var(--crm-l-xsmall);
+	padding-right: var(--crm-l-xsmall);
 }
 
 
@@ -1147,8 +1147,8 @@ CiviCRM Extensions screen.
 .crm-container .ui-tabs #extensions-main table.dataTable td.crm-extensions-label .crm-accordion-light,
 .crm-container .ui-tabs #extensions-addnew table.dataTable td.crm-extensions-label .crm-accordion-light,
 .crm-container .ui-tabs #extensions-addother table.dataTable td.crm-extensions-label .crm-accordion-light {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light,
@@ -1163,7 +1163,7 @@ CiviCRM Extensions screen.
 .crm-container #extensions-addother table.dataTable .crm-accordion-light summary {
 	border: 1px solid transparent;
 	box-shadow: none;
-    margin: 0;
+	margin: 0;
 	padding: var(--crm-l-medium-1);
 	line-height: 1.75;
 }
@@ -1218,8 +1218,8 @@ CiviCRM Extensions screen.
 	font: normal 20px/1 'dashicons';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-    font-weight: 400;
-    color: var(--crm-danger-color);
+	font-weight: 400;
+	color: var(--crm-danger-color);
 	color: #d63638;
 	margin-right: var(--crm-padding-small);
 	vertical-align: bottom;
@@ -1230,8 +1230,8 @@ CiviCRM Extensions screen.
 /* Extension check mark and trophy icons. */
 .crm-container table.dataTable .crm-extensions-stage.fa-check-circle,
 .crm-container table.dataTable .crm-extensions-stage.fa-trophy {
-    font-weight: 600;
-    --crm-notify-success-color: #4ab866;
+	font-weight: 600;
+	--crm-notify-success-color: #4ab866;
 }
 
 
@@ -1312,14 +1312,14 @@ CiviCRM Dashboard.
 
 #civicrm-dashboard .crm-dashlet-header > a:active,
 #civicrm-dashboard .crm-dashlet-header > a:focus {
-    box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
-    border-radius: 50%;
-    outline: 2px solid transparent;
+	box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--wp-admin-theme-color);
+	border-radius: 50%;
+	outline: 2px solid transparent;
 }
 
 #civicrm-dashboard .crm-dashlet-header > a:has(.fa-trash, .fa-times):active,
 #civicrm-dashboard .crm-dashlet-header > a:has(.fa-trash, .fa-times):focus {
-    box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--crm-danger-color);
+	box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus, 1.5px) var(--crm-danger-color);
 }
 
 #civicrm-dashboard .crm-dashlet-header > a:active .fa-trash,

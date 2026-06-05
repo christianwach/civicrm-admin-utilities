@@ -191,7 +191,7 @@ Delete buttons.
 .crm-container a.crm-hover-button.crm-delete-inline:has(span.icon),
 .crm-container a.crm-hover-button.soft-credit-delete-link:has(span.icon) {
 	font-weight: 600;
-    border-radius: 50%;
+	border-radius: 50%;
 	padding-inline: var(--crm-l-radius);
 	padding-block: var(--crm-l-xsmall-2);
 }
@@ -229,7 +229,7 @@ Delete buttons.
 /* APIv4 inline delete button. */
 #bootstrap-theme.api4-explorer-page .crm-hover-button:has(.fa-times) {
 	font-weight: 600;
-    border-radius: 50%;
+	border-radius: 50%;
 	padding-inline: var(--crm-l-radius);
 	padding-block: var(--crm-l-xsmall);
 }
@@ -353,9 +353,9 @@ body.admin-color-sunrise {
 /* Broken "Find Contacts" button in "Dedupe Exceptions" screen. */
 .crm-container button.crm-button.filtercontacts span {
 	display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }
 
 
@@ -377,13 +377,13 @@ Other buttons.
 .crm-container a.crm-hover-button.action-item:has(.fa-pencil) {
 	padding-inline: var(--crm-l-radius);
 	padding-block: var(--crm-l-xsmall-2);
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 /* Table expand row buttons. */
 .crm-container a.crm-expand-row {
 	padding-inline: var(--crm-l-radius);
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 .crm-container a.crm-expand-row:focus {
@@ -408,7 +408,7 @@ Other buttons.
 	padding-inline: var(--crm-l-radius);
 	padding-block: var(--crm-l-xsmall-2);
 	margin-inline: var(--crm-l-radius);
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 /* Wrench hover button in multiple radio options. */
@@ -681,24 +681,24 @@ Bootstrap buttons.
 
 /* Fix input-group. */
 #bootstrap-theme .input-group-btn {
-    display: inline-flex;
-    max-width: fit-content;
-    align-items: center;
-    gap: 0;
+	display: inline-flex;
+	max-width: fit-content;
+	align-items: center;
+	gap: 0;
 }
 
 /* Fix button-group gap. */
 #bootstrap-theme .btn-group > a.btn {
-    z-index: 2;
+	z-index: 2;
 }
 
 #bootstrap-theme .btn-group .btn + .btn.dropdown-toggle {
-    z-index: 1;
+	z-index: 1;
 }
 
 #bootstrap-theme .btn-group .btn + .btn.dropdown-toggle:focus {
 	border-left-color: var(--crm-primary-hover-color);
-    z-index: 3;
+	z-index: 3;
 }
 
 /* "Settings Wheel" icon focus. */
@@ -849,13 +849,13 @@ Bootstrap buttons.
 /* Some SearchKit draggable fieldsets have "details" elements. */
 #bootstrap-theme .crm-search-admin-edit-columns fieldset.crm-draggable:has(> details) .btn.btn-xs.pull-right {
 	top: var(--crm-accordion-header-padding);
-    margin: 0;
+	margin: 0;
 }
 
 /* The ones that do not need different "top" declarations. */
 #bootstrap-theme .crm-search-admin-edit-columns fieldset.crm-draggable:has(> .form-inline) .btn.btn-xs.pull-right {
 	top: -1rem;
-    margin: 0;
+	margin: 0;
 }
 
 /* Give "View Display" button some room. */

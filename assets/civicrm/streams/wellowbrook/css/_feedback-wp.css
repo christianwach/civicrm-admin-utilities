@@ -156,6 +156,6 @@ WordPress style popup alert dialogs.
 }
 
 #crm-notification-container div.ui-notify-message .notify-content {
-    margin-right: 5px;
-    overflow-x: scroll;
+	margin-right: 5px;
+	overflow-x: scroll;
 }

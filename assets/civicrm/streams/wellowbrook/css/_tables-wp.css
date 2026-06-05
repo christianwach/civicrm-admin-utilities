@@ -120,7 +120,7 @@ Tables.
 #search-status .float-right.right a:not(.helpicon):hover,
 #search-status > a.crm-selection-reset:hover {
 	background: #dcdbdb;
-    color: #000 !important;
+	color: #000 !important;
 	text-decoration: none;
 }
 
@@ -433,7 +433,7 @@ form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
 /* Dropdowns in Bootstrap. */
 .crm-container .open > .dropdown-menu,
 .crm-container .open .btn.dropdown-toggle + .dropdown-menu {
-    gap: 0;
+	gap: 0;
 	border-radius: 0;
 }
 
@@ -516,7 +516,7 @@ form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
 /* Reduce padding on forms in Bootstrap dropdowns. */
 #bootstrap-theme .dropdown-menu li .form-inline,
 #bootstrap-theme .dropdown-menu li .form-inline a:not(.select2-choice) {
-    padding: var(--crm-padding-small);
+	padding: var(--crm-padding-small);
 }
 
 /* Tags in SearchKit listings. */
@@ -558,7 +558,7 @@ form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
 
 /* CiviCase Dashboard summary table. */
 .crm-container .CRM_Case_Form_Search table.report .columnheader th {
-    background: #e6e6e6;
+	background: #e6e6e6;
 }
 
 .crm-container .CRM_Case_Form_Search table.report .crm-case-caseStatus th {
@@ -567,28 +567,28 @@ form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
 }
 
 .crm-container .CRM_Case_Form_Search .crm-datatable-pager-top {
-    margin-block: var(--crm-l-medium);
+	margin-block: var(--crm-l-medium);
 }
 
 .crm-container .CRM_Case_Form_Search table.dataTable {
-    margin-bottom: var(--crm-l-medium);
+	margin-bottom: var(--crm-l-medium);
 }
 
 .crm-container .CRM_Case_Form_Search .crm-datatable-pager-bottom {
-    margin-top: var(--crm-l-medium);
-    margin-bottom: var(--crm-l-medium);
+	margin-top: var(--crm-l-medium);
+	margin-bottom: var(--crm-l-medium);
 }
 
 .crm-container .CRM_Case_Form_Search .crm-accordion-body .form-layout-compressed {
-    margin: 0;
+	margin: 0;
 }
 
 .crm-container .CRM_Case_Form_Search .crm-case-filter-recent {
-    margin-bottom: var(--crm-padding-reg);
+	margin-bottom: var(--crm-padding-reg);
 }
 
 .crm-container .case-control-panel > div:last-child p {
-    margin-top: var(--crm-l-medium);
+	margin-top: var(--crm-l-medium);
 }
 
 .crm-container .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
@@ -609,12 +609,12 @@ form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
 
 /* Fix "Create New Report from Template" table layout. */
 .crm-container table.report-layout td > a {
-    float: left;
+	float: left;
 }
 
 
 
 /* Bootstrap table fixes. */
 #bootstrap-theme .form-inline .form-group.pull-right {
-    margin-bottom: var(--crm-padding-medium);
+	margin-bottom: var(--crm-padding-medium);
 }

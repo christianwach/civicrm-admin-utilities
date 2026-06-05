@@ -177,7 +177,7 @@ body > .ui-widget-overlay ~ .ui-widget-overlay {
 
 /* "Activities" dialog needs form block margins fixed. */
 .crm-container.ui-dialog .crm-form-block details {
-    margin: var(--crm-dialog-body-padding) 0;
+	margin: var(--crm-dialog-body-padding) 0;
 }
 
 
@@ -232,7 +232,7 @@ body > .ui-widget-overlay ~ .ui-widget-overlay {
 /* 	margin-right: auto; */
 	color: var(--crm-danger-color);
 	background: var(--crm-btn-danger-bg-color);
-    color: var(--crm-btn-danger-text-color);
+	color: var(--crm-btn-danger-text-color);
 }
 
 .crm-container.ui-dialog:has(> .ui-widget-content > #Activity) .ui-dialog-buttonset .ui-button:has(.fa-trash):hover,
@@ -253,7 +253,7 @@ body > .ui-widget-overlay ~ .ui-widget-overlay {
 .crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button .fa-trash,
 .crm-container.ui-dialog:has(> .ui-widget-content > #MembershipView) .ui-dialog-buttonset .ui-button .fa-trash,
 .crm-container.ui-dialog:has(> .ui-widget-content > #ParticipantView) .ui-dialog-buttonset .ui-button .fa-trash {
-    --crm-icon-danger-color: #fff;
+	--crm-icon-danger-color: #fff;
 }
 
 
@@ -357,8 +357,8 @@ body > .ui-widget-overlay ~ .ui-widget-overlay {
 .crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-paper-plane):hover,
 .crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-paper-plane):focus {
 	background: var(--crm-wp-button-secondary-bg-hover);
-    border-color: var(--crm-wp-button-secondary-color-hover);
-    color: var(--crm-wp-button-secondary-color-hover);
+	border-color: var(--crm-wp-button-secondary-color-hover);
+	color: var(--crm-wp-button-secondary-color-hover);
 }
 
 .crm-container.ui-dialog:has(> .ui-widget-content > #ContributionView) .ui-dialog-buttonset .ui-button:has(.fa-download):focus-visible,
@@ -395,8 +395,8 @@ body > .ui-widget-overlay ~ .ui-widget-overlay {
 .crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item button.cancel:hover,
 .crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item button.cancel:focus {
 	background: var(--crm-wp-button-secondary-bg-hover);
-    border-color: var(--crm-wp-button-secondary-color-hover);
-    color: var(--crm-wp-button-secondary-color-hover);
+	border-color: var(--crm-wp-button-secondary-color-hover);
+	color: var(--crm-wp-button-secondary-color-hover);
 }
 
 .crm-container.ui-dialog:has(.ui-widget-content > #PDF) .form-item button.cancel:focus-visible {

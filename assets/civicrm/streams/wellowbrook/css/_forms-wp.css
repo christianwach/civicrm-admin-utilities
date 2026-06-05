@@ -390,8 +390,8 @@ body.wp-admin.wp-core-ui .crm-container select:focus {
 
 /* Remove padding and margin from empty fieldsets. */
 .crm-container .fieldset.af-container.af-layout-inline:not(legend) {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 
@@ -410,8 +410,8 @@ Select2 Elements.
 /* Fix caret-down in Multi-Selects. */
 .crm-container .select2-container-multi .select2-choices::before {
 	position: absolute;
-    right: var(--crm-l-small);
-    top: 8px;
+	right: var(--crm-l-small);
+	top: 8px;
 }
 
 .crm-container .select2-container .select2-choice,
@@ -493,9 +493,9 @@ body .crm-container ul.crm-checkbox-list li:has(input,input:checked) {
 }
 
 .select2-drop .crm-entityref-links a.crm-hover-button {
-    white-space: nowrap;
-    display: block;
-    margin: .25rem 0;
+	white-space: nowrap;
+	display: block;
+	margin: .25rem 0;
 }
 
 .select2-drop .crm-entityref-links a.crm-hover-button .crm-i {
@@ -537,8 +537,8 @@ body .crm-container ul.crm-checkbox-list li:has(input,input:checked) {
 }
 
 button#_qf_SearchEvent_refresh {
-    float: left;
-    margin-bottom: 8px;
+	float: left;
+	margin-bottom: 8px;
 }
 
 
