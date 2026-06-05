@@ -3258,8 +3258,8 @@ class CiviCRM_Admin_Utilities_Single {
 		$admin_bar_groups     = isset( $_POST[ $prefix . 'admin_bar_groups' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar_groups' ] ) ) : 0;
 		$fix_api_timezone     = isset( $_POST[ $prefix . 'fix_api_timezone' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_api_timezone' ] ) ) : 0;
 		$flush_cache          = isset( $_POST[ $prefix . 'cache' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'cache' ] ) ) : 0;
-		$theme_wellow         = isset( $_POST[ $prefix . 'theme_wellow' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'theme_wellow' ] ) ) : 0;
-		$theme_wellow_disable = isset( $_POST[ $prefix . 'theme_wellow_disable' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'theme_wellow_disable' ] ) ) : 0;
+		$wellow_enable        = isset( $_POST[ $prefix . 'wellow_enable' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'wellow_enable' ] ) ) : 0;
+		$wellow_disable       = isset( $_POST[ $prefix . 'wellow_disable' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'wellow_disable' ] ) ) : 0;
 
 		// Retrieve Post Types array.
 		$post_types = filter_input( INPUT_POST, $prefix . 'post_types', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
@@ -3449,13 +3449,13 @@ class CiviCRM_Admin_Utilities_Single {
 			$this->setting_set( 'afforms', [] );
 		}
 
-		// Flush cache if there's a change to the Wellow Brook theme setting.
-		if ( 1 === $theme_wellow || 1 === $theme_wellow_disable ) {
+		// Flush cache if there's a change to the Wellow Brook theme.
+		if ( 1 === $wellow_enable || 1 === $wellow_disable ) {
 			$force = true;
 		}
 
 		// Did we ask to enable the Wellow Brook theme?
-		if ( 1 === $theme_wellow ) {
+		if ( 1 === $wellow_enable ) {
 
 			/**
 			 * Fires when the Wellow Brook theme has been enabled.
@@ -3464,7 +3464,7 @@ class CiviCRM_Admin_Utilities_Single {
 			 */
 			do_action( 'cau/theme/wellow/enabled' );
 
-		} elseif ( 1 === $theme_wellow_disable ) {
+		} elseif ( 1 === $wellow_disable ) {
 
 			/**
 			 * Fires when the Wellow Brook theme has been disabled.

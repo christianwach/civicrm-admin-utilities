@@ -69,8 +69,8 @@ defined( 'ABSPATH' ) || exit;
 
 					<?php /* Show Upgrade to Wellow Brook. */ ?>
 
-					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_theme_wellow" id="civicrm_admin_utilities_theme_wellow" value="1" />
-					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_theme_wellow"><?php esc_html_e( 'Upgrade from Radstock to the CiviCRM Admin Utilities "Wellow Brook" Theme.', 'civicrm-admin-utilities' ); ?></label>
+					<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_wellow_enable" id="civicrm_admin_utilities_wellow_enable" value="1" />
+					<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_wellow_enable"><?php esc_html_e( 'Upgrade from Radstock to the CiviCRM Admin Utilities "Wellow Brook" Theme.', 'civicrm-admin-utilities' ); ?></label>
 
 					<p class="description"><?php esc_html_e( 'Like Radstock, Wellow Brook gives CiviCRM a look and feel that is similar to WordPress 7.0+ admin screens. It applies the "Administration Colour Scheme" chosen by the User to the CiviCRM interface and offers clear keyboard navigation cues.', 'civicrm-admin-utilities' ); ?></p>
 
@@ -90,8 +90,8 @@ defined( 'ABSPATH' ) || exit;
 
 						<?php /* Show Enable Wellow Brook. */ ?>
 
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_theme_wellow" id="civicrm_admin_utilities_theme_wellow" value="1" />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_theme_wellow"><?php esc_html_e( 'Enable the CiviCRM Admin Utilities "Wellow Brook" Theme.', 'civicrm-admin-utilities' ); ?></label>
+						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_wellow_enable" id="civicrm_admin_utilities_wellow_enable" value="1" />
+						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_wellow_enable"><?php esc_html_e( 'Enable the CiviCRM Admin Utilities "Wellow Brook" Theme.', 'civicrm-admin-utilities' ); ?></label>
 
 						<p class="description"><?php esc_html_e( 'The Wellow Brook theme is an update of the Radstock theme based on the RiverLea Theme Framework and gives CiviCRM a look and feel that is more in keeping with WordPress 7.0+ admin screens. It applies the "Administration Colour Scheme" chosen by the User to the CiviCRM interface and offers clear keyboard navigation cues.', 'civicrm-admin-utilities' ); ?></p>
 
@@ -113,8 +113,8 @@ defined( 'ABSPATH' ) || exit;
 					<?php else : ?>
 
 						<?php /* Show Disable Wellow Brook. */ ?>
-						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_theme_wellow_disable" id="civicrm_admin_utilities_theme_wellow_disable" value="1" />
-						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_theme_wellow_disable"><?php esc_html_e( 'Uninstall the CiviCRM Admin Utilities "Wellow Brook" Theme.', 'civicrm-admin-utilities' ); ?></label>
+						<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_wellow_disable" id="civicrm_admin_utilities_wellow_disable" value="1" />
+						<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_wellow_disable"><?php esc_html_e( 'Uninstall the CiviCRM Admin Utilities "Wellow Brook" Theme.', 'civicrm-admin-utilities' ); ?></label>
 
 					<?php endif; ?>
 
