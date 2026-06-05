@@ -379,18 +379,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
-		// Wellow Brook theme setting may not exist.
-		if ( ! $this->setting_exists( 'theme_wellow' ) ) {
-
-			// Add it from defaults.
-			if ( ! isset( $settings ) ) {
-				$settings = $this->settings_get_defaults();
-			}
-			$this->setting_set( 'theme_wellow', $settings['theme_wellow'] );
-			$save = true;
-
-		}
-
 		// If this is an upgrade.
 		if ( $this->is_upgrade ) {
 
@@ -3192,9 +3180,6 @@ class CiviCRM_Admin_Utilities_Single {
 		// List of Afforms outside content.
 		$settings['afforms'] = [];
 
-		// Wellow Brook theme.
-		$settings['theme_wellow'] = '0';
-
 		/**
 		 * Filter default settings.
 		 *
@@ -3465,14 +3450,12 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Flush cache if there's a change to the Wellow Brook theme setting.
-		$theme_wellow_active = $this->setting_get( 'theme_wellow', '0' );
-		if ( $theme_wellow !== (int) $theme_wellow_active || 1 === $theme_wellow_disable ) {
+		if ( 1 === $theme_wellow || 1 === $theme_wellow_disable ) {
 			$force = true;
 		}
 
 		// Did we ask to enable the Wellow Brook theme?
 		if ( 1 === $theme_wellow ) {
-			$this->setting_set( 'theme_wellow', '1' );
 
 			/**
 			 * Fires when the Wellow Brook theme has been enabled.
@@ -3482,7 +3465,6 @@ class CiviCRM_Admin_Utilities_Single {
 			do_action( 'cau/theme/wellow/enabled' );
 
 		} elseif ( 1 === $theme_wellow_disable ) {
-			$this->setting_set( 'theme_wellow', '0' );
 
 			/**
 			 * Fires when the Wellow Brook theme has been disabled.
