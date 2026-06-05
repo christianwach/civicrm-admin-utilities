@@ -798,7 +798,6 @@ APIv3 Explorer Page fixes.
 	width: 50% !important;
 }
 
-/*  */
 #api-params-table .api-param-row .api-param-name,
 #api-params-table .api-param-row .api-param-value {
 	width: 90% !important;
@@ -1050,8 +1049,31 @@ CiviCRM Extensions screen.
 ------------------------------------------------------------------------------------------
 */
 
-.crm-container table.dataTable.display tbody tr.extension-installed {
+/* Let's scrap the distracting hover. */
+.crm-container #extensions table.dataTable.display tbody tr.odd,
+.crm-container #extensions table.dataTable.display tbody tr.even {
+	background-color: #fff !important;
+}
+
+.crm-container #extensions table.dataTable.display tbody tr > .sorting_1 {
+	background-color: #f1f1f1 !important;
+}
+
+.crm-container #extensions table.dataTable.display tbody tr.extension-installed,
+.crm-container #extensions table.dataTable.display tbody tr.extension-installed > .sorting_1 {
 	--crm-alert-success-bg-color: hsl(from var(--crm-success-color) h s calc(l + 65));
+	--crm-alert-success-bg-color: #fff;
+	background-color: rgba(var(--wp-admin-theme-color--rgb), 0.08) !important;
+}
+
+/* Mimic WordPress plugins list. */
+.crm-container #extensions table.dataTable.display tbody tr summary {
+	border: none;
+	border-left: 4px solid transparent;
+}
+
+.crm-container #extensions table.dataTable.display tbody tr.extension-installed summary {
+	border-left: 4px solid var(--wp-admin-theme-color);
 }
 
 .crm-container #mainTabContainer.ui-tabs .crm-extensions-tabs-list.ui-tabs-nav li.ui-tabs-tab a {
@@ -1093,13 +1115,6 @@ CiviCRM Extensions screen.
 	background: var(--crm-striped-bg-color) !important;
 }
 
-/* Let's scrap the hover - it's too distracting. */
-.crm-container .ui-tabs #extensions-main table.crm-info-panel tr:hover,
-.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tr:hover,
-.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.crm-info-panel tr:hover {
-	/* Hmm, can this be done? */
-}
-
 .crm-container .ui-tabs #extensions-main table.crm-info-panel,
 .crm-container .ui-tabs #extensions-addnew table.crm-info-panel,
 .crm-container .ui-tabs #extensions-addother table.crm-info-panel {
@@ -1122,7 +1137,7 @@ CiviCRM Extensions screen.
 .crm-container .ui-tabs #extensions-main table.dataTable td,
 .crm-container .ui-tabs #extensions-addnew table.dataTable td,
 .crm-container .ui-tabs #extensions-addother table.dataTable td {
-	padding: var(--crm-l-medium);
+	padding: var(--crm-l-medium-1);
 }
 
 /* Allow "Extension" column to accommodate expanded summary. */
@@ -1140,7 +1155,7 @@ CiviCRM Extensions screen.
 .crm-container #extensions-addnew table.dataTable .crm-accordion-light,
 .crm-container #extensions-addother table.dataTable .crm-accordion-light {
 	background: transparent;
-	margin: var(--crm-l-medium) 0 0;
+	margin: var(--crm-l-medium-1) 0 0;
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light summary,
@@ -1148,22 +1163,22 @@ CiviCRM Extensions screen.
 .crm-container #extensions-addother table.dataTable .crm-accordion-light summary {
 	border: 1px solid transparent;
 	box-shadow: none;
-	margin: 0 0 var(--crm-l-medium);
     margin: 0;
-	padding: var(--crm-l-medium);
+	padding: var(--crm-l-medium-1);
+	line-height: 1.75;
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light[open] summary,
 .crm-container #extensions-addnew table.dataTable .crm-accordion-light[open] summary,
 .crm-container #extensions-addother table.dataTable .crm-accordion-light[open] summary {
 	background: #eee;
-	border-right-color: var(--crm-border-color);
+	border-right: 1px solid var(--crm-border-color);
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light summary:focus-visible,
 .crm-container #extensions-addnew table.dataTable .crm-accordion-light summary:focus-visible,
 .crm-container #extensions-addother table.dataTable .crm-accordion-light summary:focus-visible {
-	border: 1px solid var(--wp-admin-theme-color);
+	box-shadow: inset 0 0 0 1.5px var(--wp-admin-theme-color);
 }
 
 /* Override jQuery datatable styles. */
@@ -1193,18 +1208,23 @@ CiviCRM Extensions screen.
 	color: var(--crm-alert-success-text-color) !important;
 	font-style: normal;
 	font-size: var(--crm-font-size);
-	padding: var(--crm-padding-medium);
+	padding: var(--crm-padding-reg);
 	margin: var(--crm-padding-medium) 0;
 	box-shadow: 0 0 1px rgba(0, 0, 0, .5);
 }
 
 .crm-container table.dataTable .crm-extensions-upgrade::before {
 	display: inline-block;
-    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome";
+	font: normal 20px/1 'dashicons';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
     font-weight: 400;
-    color: var(--crm-alert-warning-border-color);
+    color: var(--crm-danger-color);
+	color: #d63638;
 	margin-right: var(--crm-padding-small);
-    content: "\f071";
+	vertical-align: bottom;
+	content: "\f463";
+	content: "\f463" / '';
 }
 
 /* Extension check mark and trophy icons. */
