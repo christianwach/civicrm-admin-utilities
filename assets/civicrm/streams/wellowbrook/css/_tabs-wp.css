@@ -1054,48 +1054,63 @@ CiviCRM Extensions screen.
 	--crm-alert-success-bg-color: hsl(from var(--crm-success-color) h s calc(l + 65));
 }
 
-.crm-container .ui-tabs #extensions-main,
-.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel {
+.crm-container #mainTabContainer.ui-tabs .crm-extensions-tabs-list.ui-tabs-nav li.ui-tabs-tab a {
+	grid-template-columns: min-content min-content;
+}
+
+.crm-container .ui-tabs #extensions-main.ui-tabs-panel,
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel {
 	border: var(--crm-contact-panel-border);
 	padding: var(--crm-l-medium-2)
 }
 
 .crm-container .ui-tabs #extensions-main table.dataTable,
-.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable {
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.dataTable {
 	border: var(--crm-table-outside-border);
 	margin-bottom: 0;
 }
 
 .crm-container .ui-tabs #extensions-main table.dataTable th:focus,
-.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable th:focus {
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable th:focus,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.dataTable th:focus {
 	outline: none;
 }
 
 .crm-container .ui-tabs #extensions-main table.crm-info-panel,
 .crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.crm-info-panel,
 .crm-container .ui-tabs #extensions-main table.crm-info-panel tbody,
 .crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tbody,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.crm-info-panel tbody,
 .crm-container .ui-tabs #extensions-main table.crm-info-panel tr,
 .crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tr,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.crm-info-panel tr,
 .crm-container .ui-tabs #extensions-main table.crm-info-panel td,
-.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel td {
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel td,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.crm-info-panel td {
 	background: var(--crm-striped-bg-color) !important;
 }
 
 /* Let's scrap the hover - it's too distracting. */
 .crm-container .ui-tabs #extensions-main table.crm-info-panel tr:hover,
-.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tr:hover {
-
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.crm-info-panel tr:hover,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.crm-info-panel tr:hover {
+	/* Hmm, can this be done? */
 }
 
-.crm-container .ui-tabs #extensions-main table.crm-info-panel {
+.crm-container .ui-tabs #extensions-main table.crm-info-panel,
+.crm-container .ui-tabs #extensions-addnew table.crm-info-panel,
+.crm-container .ui-tabs #extensions-addother table.crm-info-panel {
 	margin: 0;
 	border-left-color: transparent;
 	border-bottom-color: transparent;
 }
 
 .crm-container .ui-tabs #extensions-main table.dataTable td,
-.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable td {
+.crm-container .ui-tabs #extensions-addnew.ui-tabs-panel table.dataTable td,
+.crm-container .ui-tabs #extensions-addother.ui-tabs-panel table.dataTable td {
 	vertical-align: top;
 }
 
@@ -1103,20 +1118,34 @@ CiviCRM Extensions screen.
 	--crm-accordion2-body-bg-color: transparent;
 }
 
+/* Restyle the tables. */
+.crm-container .ui-tabs #extensions-main table.dataTable td,
+.crm-container .ui-tabs #extensions-addnew table.dataTable td,
+.crm-container .ui-tabs #extensions-addother table.dataTable td {
+	padding: var(--crm-l-medium);
+}
+
+/* Allow "Extension" column to accommodate expanded summary. */
 .crm-container .ui-tabs #extensions-main table.dataTable td.crm-extensions-label,
-.crm-container .ui-tabs #extensions-main table.dataTable td.crm-extensions-label .crm-accordion-light {
+.crm-container .ui-tabs #extensions-addnew table.dataTable td.crm-extensions-label,
+.crm-container .ui-tabs #extensions-addother table.dataTable td.crm-extensions-label,
+.crm-container .ui-tabs #extensions-main table.dataTable td.crm-extensions-label .crm-accordion-light,
+.crm-container .ui-tabs #extensions-addnew table.dataTable td.crm-extensions-label .crm-accordion-light,
+.crm-container .ui-tabs #extensions-addother table.dataTable td.crm-extensions-label .crm-accordion-light {
     padding: 0;
     margin: 0;
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light,
-.crm-container #extensions-addnew table.dataTable .crm-accordion-light {
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light,
+.crm-container #extensions-addother table.dataTable .crm-accordion-light {
 	background: transparent;
 	margin: var(--crm-l-medium) 0 0;
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light summary,
-.crm-container #extensions-addnew table.dataTable .crm-accordion-light summary {
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light summary,
+.crm-container #extensions-addother table.dataTable .crm-accordion-light summary {
 	border: 1px solid transparent;
 	box-shadow: none;
 	margin: 0 0 var(--crm-l-medium);
@@ -1125,29 +1154,35 @@ CiviCRM Extensions screen.
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light[open] summary,
-.crm-container #extensions-addnew table.dataTable .crm-accordion-light[open] summary {
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light[open] summary,
+.crm-container #extensions-addother table.dataTable .crm-accordion-light[open] summary {
 	background: #eee;
 	border-right-color: var(--crm-border-color);
 }
 
 .crm-container #extensions-main table.dataTable .crm-accordion-light summary:focus-visible,
-.crm-container #extensions-addnew table.dataTable .crm-accordion-light summary:focus-visible {
+.crm-container #extensions-addnew table.dataTable .crm-accordion-light summary:focus-visible,
+.crm-container #extensions-addother table.dataTable .crm-accordion-light summary:focus-visible {
 	border: 1px solid var(--wp-admin-theme-color);
 }
 
 /* Override jQuery datatable styles. */
 .crm-container #extensions-main table.dataTable tbody th,
 .crm-container #extensions-addnew table.dataTable tbody th,
+.crm-container #extensions-addother table.dataTable tbody th,
 .crm-container #extensions-main table.dataTable tbody td,
-.crm-container #extensions-addnew table.dataTable tbody td {
+.crm-container #extensions-addnew table.dataTable tbody td,
+.crm-container #extensions-addother table.dataTable tbody td {
 	padding: var(--crm-l-small) var(--crm-l-medium);
 }
 
 .crm-container #extensions-main table.dataTable table tbody td,
-.crm-container #extensions-addnew table.dataTable table tbody td {
+.crm-container #extensions-addnew table.dataTable table tbody td,
+.crm-container #extensions-addother table.dataTable table tbody td {
 	padding: var(--crm-l-medium);
 }
 
+/* Extension upgrade message box. */
 .crm-container table.dataTable .crm-extensions-upgrade {
 	--crm-alert-warning-bg-color: #fef8ee;
 	--crm-alert-warning-border-color: #f0b849;
@@ -1170,6 +1205,13 @@ CiviCRM Extensions screen.
     color: var(--crm-alert-warning-border-color);
 	margin-right: var(--crm-padding-small);
     content: "\f071";
+}
+
+/* Extension check mark and trophy icons. */
+.crm-container table.dataTable .crm-extensions-stage.fa-check-circle,
+.crm-container table.dataTable .crm-extensions-stage.fa-trophy {
+    font-weight: 600;
+    --crm-notify-success-color: #4ab866;
 }
 
 

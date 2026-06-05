@@ -89,7 +89,9 @@ WordPress style status message boxes.
 
 /* Set margins on paragraphs. */
 .crm-container div.help > p,
-.crm-container div.help > p:first-child {
+.crm-container div.alert > p,
+.crm-container div.help > p:first-child,
+.crm-container div.alert > p:first-child {
 	margin: 0.5em 0;
 }
 

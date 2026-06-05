@@ -74,9 +74,8 @@ class CAU_CiviCRM_Theme {
 	 */
 	public function __construct( $parent ) {
 
-		// Cannot be installed if WordPress is less than 7.0.
-		global $wp_version;
-		if ( ! version_compare( $wp_version, '7.0', '>=' ) ) {
+		// Cannot be installed if WordPress does not meet requirements.
+		if ( ! $this->wp_version_okay() ) {
 			return;
 		}
 
@@ -130,8 +129,9 @@ class CAU_CiviCRM_Theme {
 	 */
 	private function register_hooks() {
 
-		// Install if not already installed.
-		add_action( 'admin_init', [ $this, 'wellowbrook_install' ], 50 );
+		// Toggle theme activation.
+		add_action( 'cau/theme/wellow/enabled', [ $this, 'wellowbrook_enable' ] );
+		add_action( 'cau/theme/wellow/disabled', [ $this, 'wellowbrook_disable' ] );
 
 		// Implement theme when installed.
 		add_action( 'civicrm_themes', [ $this, 'register_theme' ], 10 );
@@ -140,6 +140,31 @@ class CAU_CiviCRM_Theme {
 	}
 
 	// -----------------------------------------------------------------------------------
+
+	/**
+	 * Checks if WordPress meets requirements.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @return bool $version_okay True if WordPress meets requirements, false otherwise.
+	 */
+	public function wp_version_okay() {
+
+		// Init return.
+		$version_okay = false;
+
+		// Cannot be installed if WordPress is less than 7.0.
+		global $wp_version;
+		if ( ! version_compare( $wp_version, '7.0', '>=' ) ) {
+			$version_okay = false;
+		} else {
+			$version_okay = true;
+		}
+
+		// --<
+		return $version_okay;
+
+	}
 
 	/**
 	 * Checks if CivCRM meets requirements.
@@ -178,6 +203,8 @@ class CAU_CiviCRM_Theme {
 
 	}
 
+	// -----------------------------------------------------------------------------------
+
 	/**
 	 * Checks if RiverLea is enabled.
 	 *
@@ -214,6 +241,140 @@ class CAU_CiviCRM_Theme {
 
 	}
 
+	// -----------------------------------------------------------------------------------
+
+	/**
+	 * Gets the active backend theme key.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @return string|bool $theme_key The active theme key, or false on failure.
+	 */
+	public function theme_active_get() {
+
+		// Bail if no CiviCRM.
+		if ( ! $this->civicrm->is_initialised() ) {
+			return false;
+		}
+
+		// Using CiviCRM service includes the "civicrm_activeTheme" hook.
+		$theme_key = Civi::service( 'themes' )->getActiveThemeKey();
+
+		// --<
+		return $theme_key;
+
+	}
+
+	/**
+	 * Sets the active backend theme key.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @param string $theme_key The theme key to set as the active backend theme.
+	 */
+	public function theme_active_set( $theme_key ) {
+
+		// Bail if no CiviCRM.
+		if ( ! $this->civicrm->is_initialised() ) {
+			return false;
+		}
+
+		// Set the backend theme directly.
+		Civi::settings()->set( 'theme_backend', $theme_key );
+
+	}
+
+	/**
+	 * Enables or disables our Theme.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @param string $action The action to perform  - either 'enable' or 'disable'.
+	 */
+	public function theme_active_toggle( $action = 'enable' ) {
+
+		// Bail if CiviCRM does not meet requirements.
+		if ( ! $this->civicrm_version_okay() ) {
+			return false;
+		}
+
+		// Bail if Wellow Brook is being enabled and RiverLea is not enabled.
+		if ( 'enable' === $action && ! $this->riverlea_enabled() ) {
+			return false;
+		}
+
+		// Bail when disabling and the backend Theme is not Wellow Brook.
+		$theme = $this->theme_active_get();
+		if ( 'disable' === $action && $theme !== $this->slug ) {
+			return;
+		}
+
+		// Set the backend theme.
+		$theme_key = 'enable' === $action ? $this->slug : 'default';
+		$this->theme_active_set( $theme_key );
+
+	}
+
+	// -----------------------------------------------------------------------------------
+
+	/**
+	 * Enables the Wellow Brook theme.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @return array|bool $stream The array of RiverLea Theme data, or false on failure.
+	 */
+	public function wellowbrook_enable() {
+
+		// Enable RiverLea if not already enabled.
+		if ( empty( $this->civicrm->extension_is_enabled( 'riverlea' ) ) ) {
+			if ( ! $this->civicrm->extension_enable( 'riverlea' ) ) {
+				return false;
+			}
+		}
+
+		// Install Wellow Brook.
+		$stream = $this->wellowbrook_install();
+
+		// Make Wellow Brook the active theme.
+		$this->theme_active_toggle( 'enable' );
+
+		// --<
+		return $stream;
+
+	}
+
+	/**
+	 * Disables the Wellow Brook theme.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @return int|bool $stream_id The ID of the deleted RiverLea Theme, or false on failure.
+	 */
+	public function wellowbrook_disable() {
+
+		// Uninstall Wellow Brook.
+		$stream_id = $this->wellowbrook_uninstall();
+
+		/*
+		// Disable RiverLea if not already disabled.
+		if ( ! empty( $this->civicrm->extension_is_enabled( 'riverlea' ) ) ) {
+			if ( ! $this->civicrm->extension_disable( 'riverlea' ) ) {
+				return false;
+			}
+		}
+		*/
+
+		// Make CiviCRM default the active theme.
+		$this->theme_active_toggle( 'disable' );
+
+		// --<
+		return $stream_id;
+
+	}
+
+	// -----------------------------------------------------------------------------------
+
 	/**
 	 * Checks if Wellow Brook is installed.
 	 *
@@ -248,7 +409,6 @@ class CAU_CiviCRM_Theme {
 		} catch ( CRM_Core_Exception $e ) {
 			$log = [
 				'method'    => __METHOD__,
-				'event_ids' => $event_ids,
 				'error'     => $e->getMessage(),
 				'backtrace' => $e->getTraceAsString(),
 			];
@@ -303,8 +463,8 @@ class CAU_CiviCRM_Theme {
 
 			$result = \Civi\Api4\RiverleaStream::create( false )
 				->addValue( 'name', $this->slug )
-				->addValue( 'label', __( 'Wellow Brook', 'civicrm-admin-utilities' ) )
-				->addValue( 'description', __( 'Gives CiviCRM a look-and-feel that is closer to WordPress.', 'civicrm-admin-utilities' ) )
+				->addValue( 'label', __( 'Wellow Brook (CAU)', 'civicrm-admin-utilities' ) )
+				->addValue( 'description', __( 'Gives CiviCRM a look-and-feel that is closer to WordPress 7.0+ admin screens.', 'civicrm-admin-utilities' ) )
 				->addValue( 'is_reserved', true )
 				->addValue( 'extension', 'riverlea' )
 				->addValue( 'file_prefix', 'streams/' . $this->slug . '/' )
@@ -314,7 +474,6 @@ class CAU_CiviCRM_Theme {
 		} catch ( CRM_Core_Exception $e ) {
 			$log = [
 				'method'    => __METHOD__,
-				'event_ids' => $event_ids,
 				'error'     => $e->getMessage(),
 				'backtrace' => $e->getTraceAsString(),
 			];
@@ -369,7 +528,6 @@ class CAU_CiviCRM_Theme {
 		} catch ( CRM_Core_Exception $e ) {
 			$log = [
 				'method'    => __METHOD__,
-				'event_ids' => $event_ids,
 				'error'     => $e->getMessage(),
 				'backtrace' => $e->getTraceAsString(),
 			];
@@ -396,6 +554,8 @@ class CAU_CiviCRM_Theme {
 
 	}
 
+	// -----------------------------------------------------------------------------------
+
 	/**
 	 * Register our Theme.
 	 *
@@ -405,20 +565,15 @@ class CAU_CiviCRM_Theme {
 	 */
 	public function register_theme( &$themes ) {
 
-		// Cannot be registered if CiviCRM does not meet requirements.
-		if ( ! $this->civicrm_version_okay() ) {
-			return;
-		}
-
-		// Ignore unless RiverLea is enabled.
-		if ( ! $this->riverlea_enabled() ) {
+		// Cannot be registered if Wellow Brook is not installed.
+		if ( ! $this->wellowbrook_installed() ) {
 			return;
 		}
 
 		// Add setup to themes array.
 		$themes[ $this->slug ] = [
 			'ext'          => $this->slug,
-			'title'        => __( 'Wellow Brook', 'civicrm-admin-utilities' ),
+			'title'        => __( 'Wellow Brook (CAU)', 'civicrm-admin-utilities' ),
 			'help'         => __( 'Gives CiviCRM a look-and-feel that is closer to WordPress', 'civicrm-admin-utilities' ),
 			'url_callback' => 'CAU_CiviCRM_Theme_Resolver::resolve',
 			'search_order' => [
@@ -439,12 +594,8 @@ class CAU_CiviCRM_Theme {
 	 */
 	public function modify_bundle( CRM_Core_Resources_Bundle $bundle ) {
 
-		// Ignore unless CiviCRM meets requirements.
-		if ( ! $this->civicrm_version_okay() ) {
-			return;
-		}
-		// Ignore unless RiverLea is enabled.
-		if ( ! $this->riverlea_enabled() ) {
+		// Ignore unless Wellow Brook is installed.
+		if ( ! $this->wellowbrook_installed() ) {
 			return;
 		}
 
@@ -461,7 +612,7 @@ class CAU_CiviCRM_Theme {
 
 		// Define version.
 		$version = '?version=' . CIVICRM_ADMIN_UTILITIES_VERSION;
-		if ( false !== CIVICRM_ADMIN_UTILITIES_VERSION && defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
+		if ( false !== CIVICRM_ADMIN_UTILITIES_DEBUG && defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
 			$version .= '-' . time();
 		}
 
@@ -488,7 +639,7 @@ class CAU_CiviCRM_Theme {
 
 			// Build snippet.
 			$snippet = [
-				'styleUrl' => CIVICRM_ADMIN_UTILITIES_URL . 'assets/civicrm/streams/' . $this->slug . '/' . $filename,
+				'styleUrl' => CIVICRM_ADMIN_UTILITIES_URL . 'assets/civicrm/streams/' . $this->slug . '/css/' . $filename,
 				'weight'   => $weight++,
 				'region'   => 'html-header',
 			];

@@ -36,6 +36,11 @@ if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_PATH', plugin_dir_path( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
 
+// Set this and `WP_DEBUG` to "true" for Wellow Brook development.
+if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
+	define( 'CIVICRM_ADMIN_UTILITIES_DEBUG', false );
+}
+
 /**
  * CiviCRM Admin Utilities Class.
  *
@@ -259,9 +264,14 @@ class CiviCRM_Admin_Utilities {
 		// Maybe init.
 		$this->initialise();
 
-		// Maybe deactivate our CiviCRM Theme.
+		// Maybe deactivate the "Radstock" CiviCRM Theme.
 		if ( ! empty( $this->theme ) ) {
 			$this->theme->deactivate_theme();
+		}
+
+		// Maybe uninstall and disable the "Wellow Brook" CiviCRM Theme.
+		if ( ! empty( $this->civicrm->theme ) ) {
+			$this->civicrm->theme->wellowbrook_disable();
 		}
 
 	}

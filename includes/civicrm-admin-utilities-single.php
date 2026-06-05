@@ -379,6 +379,18 @@ class CiviCRM_Admin_Utilities_Single {
 
 		}
 
+		// Wellow Brook theme setting may not exist.
+		if ( ! $this->setting_exists( 'theme_wellow' ) ) {
+
+			// Add it from defaults.
+			if ( ! isset( $settings ) ) {
+				$settings = $this->settings_get_defaults();
+			}
+			$this->setting_set( 'theme_wellow', $settings['theme_wellow'] );
+			$save = true;
+
+		}
+
 		// If this is an upgrade.
 		if ( $this->is_upgrade ) {
 
@@ -1360,12 +1372,29 @@ class CiviCRM_Admin_Utilities_Single {
 			$prettify_menu = 1;
 		}
 
-		// Init admin CSS checkbox and Theme preview visibility.
-		$admin_css     = 0;
-		$theme_preview = '';
+		// Init Radstock variables.
+		$theme_radstock   = 0;
+		$radstock_preview = '';
 		if ( $this->setting_get( 'css_admin', '0' ) === '1' ) {
-			$admin_css     = 1;
-			$theme_preview = ' display: none;';
+			$theme_radstock   = 1;
+			$radstock_preview = ' display: none;';
+		}
+
+		// Init Wellow Brook variables.
+		$wellow_capable = false;
+		if ( $this->plugin->civicrm->theme->wp_version_okay() ) {
+			$wellow_capable = true;
+			$theme_wellow   = 0;
+			if ( $this->plugin->civicrm->theme->wellowbrook_installed() ) {
+				$theme_wellow = 1;
+			}
+		}
+
+		// Check if RiverLea is enabled.
+		if ( empty( $this->plugin->civicrm->extension_is_enabled( 'riverlea' ) ) ) {
+			$riverlea_enabled = false;
+		} else {
+			$riverlea_enabled = true;
 		}
 
 		// Include template file.
@@ -3163,6 +3192,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// List of Afforms outside content.
 		$settings['afforms'] = [];
 
+		// Wellow Brook theme.
+		$settings['theme_wellow'] = '0';
+
 		/**
 		 * Filter default settings.
 		 *
@@ -3241,6 +3273,8 @@ class CiviCRM_Admin_Utilities_Single {
 		$admin_bar_groups     = isset( $_POST[ $prefix . 'admin_bar_groups' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar_groups' ] ) ) : 0;
 		$fix_api_timezone     = isset( $_POST[ $prefix . 'fix_api_timezone' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_api_timezone' ] ) ) : 0;
 		$flush_cache          = isset( $_POST[ $prefix . 'cache' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'cache' ] ) ) : 0;
+		$theme_wellow         = isset( $_POST[ $prefix . 'theme_wellow' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'theme_wellow' ] ) ) : 0;
+		$theme_wellow_disable = isset( $_POST[ $prefix . 'theme_wellow_disable' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'theme_wellow_disable' ] ) ) : 0;
 
 		// Retrieve Post Types array.
 		$post_types = filter_input( INPUT_POST, $prefix . 'post_types', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
@@ -3428,6 +3462,35 @@ class CiviCRM_Admin_Utilities_Single {
 
 		} else {
 			$this->setting_set( 'afforms', [] );
+		}
+
+		// Flush cache if there's a change to the Wellow Brook theme setting.
+		$theme_wellow_active = $this->setting_get( 'theme_wellow', '0' );
+		if ( $theme_wellow !== (int) $theme_wellow_active || 1 === $theme_wellow_disable ) {
+			$force = true;
+		}
+
+		// Did we ask to enable the Wellow Brook theme?
+		if ( 1 === $theme_wellow ) {
+			$this->setting_set( 'theme_wellow', '1' );
+
+			/**
+			 * Fires when the Wellow Brook theme has been enabled.
+			 *
+			 * @since 1.1.2
+			 */
+			do_action( 'cau/theme/wellow/enabled' );
+
+		} elseif ( 1 === $theme_wellow_disable ) {
+			$this->setting_set( 'theme_wellow', '0' );
+
+			/**
+			 * Fires when the Wellow Brook theme has been disabled.
+			 *
+			 * @since 1.1.2
+			 */
+			do_action( 'cau/theme/wellow/disabled' );
+
 		}
 
 		// Save options.

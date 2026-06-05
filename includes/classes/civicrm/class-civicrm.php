@@ -469,6 +469,128 @@ class CAU_CiviCRM {
 	}
 
 	/**
+	 * Enables a given CiviCRM Extension.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @param string $extension_key The fully qualified name (key) of the CiviCRM Extension, e.g. "org.civicoop.emailapi".
+	 * @return bool $enabled True if the Extension has been successfully enabled, or false on error.
+	 */
+	public function extension_enable( $extension_key = '' ) {
+
+		// Init return.
+		$enabled = false;
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->is_initialised() ) {
+			return $enabled;
+		}
+
+		// Sanity checks.
+		if ( ! is_string( $extension_key ) ) {
+			return $enabled;
+		}
+
+		// Construct params.
+		$params = [
+			'version' => 3,
+			'key'     => $extension_key,
+		];
+
+		// Create record via API.
+		$result = civicrm_api( 'Extension', 'enable', $params );
+
+		// Log and bail on failure.
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
+			$e     = new Exception();
+			$trace = $e->getTraceAsString();
+			$log   = [
+				'method'    => __METHOD__,
+				'params'    => $params,
+				'result'    => $result,
+				'backtrace' => $trace,
+			];
+			$this->plugin->log_error( $log );
+			return $enabled;
+		}
+
+		// Bail if there is no result value.
+		if ( empty( $result['values'] ) ) {
+			return $enabled;
+		}
+
+		// The result set should contain a numeric value.
+		if ( 1 === (int) $result['values'] ) {
+			$enabled = true;
+		}
+
+		// --<
+		return $enabled;
+
+	}
+
+	/**
+	 * Disables a given CiviCRM Extension.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @param string $extension_key The fully qualified name (key) of the CiviCRM Extension, e.g. "org.civicoop.emailapi".
+	 * @return bool $disabled True if the Extension has been successfully disabled, or false on error.
+	 */
+	public function extension_disable( $extension_key = '' ) {
+
+		// Init return.
+		$disabled = false;
+
+		// Bail if CiviCRM is not active.
+		if ( ! $this->is_initialised() ) {
+			return $disabled;
+		}
+
+		// Sanity checks.
+		if ( ! is_string( $extension_key ) ) {
+			return $disabled;
+		}
+
+		// Construct params.
+		$params = [
+			'version' => 3,
+			'key'     => $extension_key,
+		];
+
+		// Create record via API.
+		$result = civicrm_api( 'Extension', 'enable', $params );
+
+		// Log and bail on failure.
+		if ( isset( $result['is_error'] ) && 1 === (int) $result['is_error'] ) {
+			$e     = new Exception();
+			$trace = $e->getTraceAsString();
+			$log   = [
+				'method'    => __METHOD__,
+				'params'    => $params,
+				'result'    => $result,
+				'backtrace' => $trace,
+			];
+			$this->plugin->log_error( $log );
+			return $disabled;
+		}
+
+		// Bail if there is no result value.
+		if ( empty( $result['values'] ) ) {
+			return $disabled;
+		}
+
+		// The result set should contain a numeric value.
+		if ( 1 === (int) $result['values'] ) {
+			$disabled = true;
+		}
+
+		// --<
+		return $disabled;
+
+	}
+
+	/**
 	 * Gets the array of CiviCRM Extensions.
 	 *
 	 * @since 1.0.9
