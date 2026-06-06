@@ -1370,7 +1370,7 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// Init Wellow Brook variables.
 		$wellow_capable = false;
-		if ( $this->plugin->civicrm->theme->wp_version_okay() ) {
+		if ( $this->plugin->civicrm->theme->is_capable() ) {
 			$wellow_capable = true;
 			$theme_wellow   = 0;
 			if ( $this->plugin->civicrm->theme->wellowbrook_installed() ) {

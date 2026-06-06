@@ -142,6 +142,30 @@ class CAU_CiviCRM_Theme {
 	// -----------------------------------------------------------------------------------
 
 	/**
+	 * Checks if the system meets requirements.
+	 *
+	 * @since 1.1.2
+	 *
+	 * @return bool $is_capable True if the system meets requirements, false otherwise.
+	 */
+	public function is_capable() {
+
+		// Not capable if WordPress does not meet requirements.
+		if ( ! $this->wp_version_okay() ) {
+			return false;
+		}
+
+		// Not capable if CiviCRM does not meet requirements.
+		if ( ! $this->civicrm_version_okay() ) {
+			return false;
+		}
+
+		// Okay, we're good.
+		return true;
+
+	}
+
+	/**
 	 * Checks if WordPress meets requirements.
 	 *
 	 * @since 1.1.2
