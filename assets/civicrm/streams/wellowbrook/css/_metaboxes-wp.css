@@ -208,27 +208,14 @@ Administration Console as metaboxes.
 ------------------------------------------------------------------------------------------
 Settings - Outbound Mail as metaboxes.
 ------------------------------------------------------------------------------------------
-Needs template update.
+Targets new class in template update.
 ------------------------------------------------------------------------------------------
 */
 
-/*
-.crm-container .crm-smtp-form-block > div {
-	padding: 0;
-	background: var(--crm-paper);
-	border: var(--crm-wp-metabox-border);
-	margin: 0 0 20px;
+.crm-container .crm-smtp-form-block .crm-setting-section-smtp-mailer-config > div,
+.crm-container .crm-smtp-form-block .crm-setting-section-smtp-mailer-config > table {
+	margin: var(--crm-l-medium-2);
 }
-
-.crm-container .crm-smtp-form-block > div h3 {
-	--crm-heading-padding: 8px 12px;
-	background: var(--crm-paper);
-	border-bottom: var(--crm-wp-metabox-heading-border-bottom);
-	font-size: 14px;
-	font-weight: 600;
-	margin: 0;
-}
- */
 
 
 
