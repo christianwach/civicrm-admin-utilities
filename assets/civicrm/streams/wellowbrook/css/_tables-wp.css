@@ -17,6 +17,7 @@ Tables.
 
 :root {
 	--crm-table-padding: var(--crm-l-medium-2);
+	--crm-table-row-alternate-mix: 4%;
 }
 
 /* Apply vertical align. */
