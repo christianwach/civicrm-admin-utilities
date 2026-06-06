@@ -1401,3 +1401,50 @@ CiviCRM Dashboard.
 	vertical-align: bottom;
 	border: 2px dashed #666;
 }
+
+
+
+/*
+------------------------------------------------------------------------------------------
+OAuth2 Client Administration.
+------------------------------------------------------------------------------------------
+*/
+
+.crm-container oauth-provider-detail .panel-info > .panel-heading {
+	background: transparent;
+}
+
+.crm-container oauth-provider-detail .panel-info > .panel-body {
+	background: #fff;
+	border: var(--crm-contact-panel-border) !important;
+	border-top: var(--crm-contact-panel-border) !important;
+	border-radius: 0;
+	margin-top: -1px;
+	padding: var(--crm-contact-tab-padding);
+}
+
+#bootstrap-theme oauth-provider-detail .form-horizontal .form-group {
+	margin: 0;
+}
+
+#bootstrap-theme oauth-provider-detail .form-horizontal .form-group > div {
+	margin-bottom: var(--crm-l-medium-2);
+}
+
+#bootstrap-theme oauth-provider-detail .form-horizontal .form-group > div > label {
+	display: inline-block;
+	min-width: 10rem;
+}
+
+#bootstrap-theme oauth-provider-detail td:has(.btn-group) .btn-group {
+	display: grid;
+	grid-auto-flow: column;
+}
+
+#bootstrap-theme oauth-provider-detail .btn-group a {
+	margin-right: var(--crm-l-medium);
+}
+
+#bootstrap-theme oauth-provider-detail .btn-group a:last-child {
+	margin-right: 0;
+}
