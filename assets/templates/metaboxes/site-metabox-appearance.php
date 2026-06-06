@@ -101,7 +101,7 @@ defined( 'ABSPATH' ) || exit;
 
 						<?php /* Show Wellow Brook theme preview. */ ?>
 						<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
-						<div class="theme-compare-wrapper theme-compare-dashboard" style="margin: 1em 0 1em 0;<?php echo $wellow_preview; ?>">
+						<div class="theme-compare-wrapper theme-compare-dashboard" style="margin: 1em 0 1em 0;">
 							<div id="theme-compare-dashboard" class="twentytwenty-container" style="max-width: 720px;">
 								<img src="<?php echo esc_url( plugins_url( 'assets/civicrm/streams/wellowbrook/images/civicrm-minetta.jpg', CIVICRM_ADMIN_UTILITIES_FILE ) ); ?>">
 								<img src="<?php echo esc_url( plugins_url( 'assets/civicrm/streams/wellowbrook/images/civicrm-wellow.jpg', CIVICRM_ADMIN_UTILITIES_FILE ) ); ?>">
