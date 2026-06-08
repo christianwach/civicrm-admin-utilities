@@ -18,6 +18,7 @@ Tables.
 :root {
 	--crm-table-padding: var(--crm-l-medium-2);
 	--crm-table-row-alternate-mix: 4%;
+	--crm-filter-bg-color: #fafafa;
 }
 
 /* Apply vertical align. */
@@ -281,7 +282,7 @@ form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
 
 /* Table Pager. */
 .crm-container .crm-pager {
-	background: #fafafa;
+	background-color: var(--crm-filter-bg-color);
 	padding: 1rem;
 }
 
@@ -298,6 +299,18 @@ form.CRM_Mailing_Form_Search > .crm-search-form-block .form-layout {
 /* "Rows per page" label. */
 .crm-search-results .form-item.float-right label {
 	padding-right: 0;
+}
+
+
+
+/* Alpha Filter. */
+.crm-container #alpha-filter a:hover {
+	text-decoration: none;
+	background-color: var(--crm-layer2-bg-color);
+}
+
+.crm-container #alpha-filter a:focus-visible {
+	box-shadow: 0 0 0 1px transparent, 0 0 0 var(--wp-admin-border-width-focus, 2.5px) var(--wp-admin-theme-color);
 }
 
 
