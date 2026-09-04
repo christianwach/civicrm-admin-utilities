@@ -46,6 +46,13 @@ body > .ui-widget-overlay ~ .ui-widget-overlay {
 
 
 
+/* "Confirm" dialog needs width fixed. */
+.crm-container.ui-dialog.crm-confirm  .ui-dialog-titlebar {
+	width: 300px;
+}
+
+
+
 /* Dialog titlebar. */
 .crm-container.ui-dialog .ui-dialog-titlebar {
 	font-size: 18px;
