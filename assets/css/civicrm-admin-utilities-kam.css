@@ -9,6 +9,12 @@
 
 
 
+/*
+------------------------------------------------------------------------------------------
+CiviCRM admin menu fixes.
+------------------------------------------------------------------------------------------
+*/
+
 /* When menu in content area, give page some room. */
 body #crm-container > #civicrm-menu-nav
 {
@@ -53,12 +59,12 @@ Default Colours.
 
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
-	background-color: #23282d;
+	background-color: #1d2327;
 }
 
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
 {
-	color: #eee;
+	color: #f0f0f1;
 	background-color: transparent;
 }
 
@@ -70,7 +76,8 @@ body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
 body > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
 {
-	color: #b4b9be;
+	color: #c3c4c7;
+	color: rgba(240, 246, 252, 0.7);
 }
 
 body > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
@@ -79,7 +86,7 @@ body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:befor
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
 body > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
 {
-	color: #00b9eb;
+	color: #72aee6;
 }
 
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
@@ -87,7 +94,8 @@ body > #civicrm-menu-nav #civicrm-menu li a.highlighted,
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
 {
-	background-color: #32373c;
+	color: #72aee6;
+    background-color: #2c3338;
 }
 
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
@@ -97,7 +105,7 @@ body > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-
 body > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
 body > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
-	border-color: #000;
+	border-color: #111;
 	border-width: 1px;
 }
 
@@ -112,7 +120,7 @@ WordPress Admin Themes support.
 /* Fresh - default prior to WordPress 7.0. */
 body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm
 {
-	background: #23282d;
+	background: #1d2327;
 }
 
 body.admin-color-fresh > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
@@ -257,57 +265,6 @@ body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bot
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
 body.admin-color-modern > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
-{
-	border-color: #303030;
-}
-
-/* WordPress 6.9 update. */
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm
-{
-	 background: #1e1e1e;
-}
-
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm a
-{
-	 color: #fff;
-}
-
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:before,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li li .sub-arrow:after,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a i
-{
-	color: #bcbcbc;
-	color: rgb(187.5, 187.5, 187.5);
-}
-
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu .crm-quickSearchField:hover,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:before,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul li a:hover .sub-arrow:after,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu #crm-menubar-toggle-position a:hover i
-{
-	color: #7b90ff;
-}
-
-/* Remove hover behaviour. */
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm ul,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li a.highlighted,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:focus,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li a:hover
-{
-	color: #7b90ff;
-	background-color: #0c0c0c;
-	background-color: rgb(12.15, 12.15, 12.15);
-}
-
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.menu-separator,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu.sm-civicrm li.crm-menu-border-top,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom:not(:last-child),
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li:not(.crm-menu-border-bottom) + li.crm-menu-border-top,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
-body.admin-color-modern.branch-6-9 > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: #303030;
 }
