@@ -24,16 +24,22 @@
 		<exclude name="Squiz.PHP.CommentedOutCode.Found" />
 		<exclude name="Squiz.Commenting.BlockComment.HasEmptyLineBefore" />
 
+		<!-- Allow certain stylistic choices. -->
+		<exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody" />
+		<exclude name="PSR2.Methods.FunctionClosingBrace.SpacingBeforeClose" />
+		<exclude name="Universal.Files.SeparateFunctionsFromOO.Mixed" />
+		<exclude name="Universal.ControlStructures.DisallowLonelyIf.Found" />
+
 	</rule>
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="civicrm-admin-utilities" />
+			<property name="text_domain" value="civicrm-admin-utilities" />
 		</properties>
 	</rule>
 
 	<!-- Enforce short array syntax. -->
-	<rule ref="Generic.Arrays.DisallowShortArraySyntax.Found">
+	<rule ref="Universal.Arrays.DisallowShortArraySyntax.Found">
 		<severity>0</severity>
 	</rule>
 	<rule ref="Generic.Arrays.DisallowLongArraySyntax.Found" />
