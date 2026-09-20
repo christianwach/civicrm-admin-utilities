@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 			<p class="description"><?php esc_html_e( 'Checking this alters "CiviCRM Home" to become "Hi FirstName, welcome to CiviCRM".', 'civicrm-admin-utilities' ); ?><br>
 			<?php
 
-			echo sprintf(
+			printf(
 				/* translators: %s: The name of the filter wrapped in a <code> tag. */
 				esc_html__( 'The %s filter can be used to modify this further if required.', 'civicrm-admin-utilities' ),
 				'<code style="font-style: normal">civicrm_admin_utilities_dashboard_title</code>'

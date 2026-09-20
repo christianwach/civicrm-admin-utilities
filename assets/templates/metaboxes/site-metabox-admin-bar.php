@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 			<p class="description">
 			<?php
 
-			echo sprintf(
+			printf(
 				/* translators: %s: The name of the filter wrapped in a <code> tag. */
 				esc_html__( 'There is no permission or capability that can be checked to find out if a user has access to the "Manage Groups" screen. Check this to hide the menu item. More granular permissions can be applied via the %s filter if they are required, for example, on a per-user basis.', 'civicrm-admin-utilities' ),
 				'<code style="font-style: normal">civicrm_admin_utilities_manage_groups_menu_item</code>'

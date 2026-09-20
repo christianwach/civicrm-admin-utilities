@@ -1922,7 +1922,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 			// Sanitise array.
 			array_walk(
 				$post_types,
-				function( &$item ) {
+				function ( &$item ) {
 					$item = sanitize_text_field( wp_unslash( $item ) );
 				}
 			);

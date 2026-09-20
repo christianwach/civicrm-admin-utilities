@@ -640,7 +640,7 @@ abstract class CAU_Settings_Page_Base {
 			$classes[] = 'nav-tab-active';
 		}
 
-		echo sprintf(
+		printf(
 			'<a href="%1$s" class="%2$s">%3$s</a>',
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			$this->page_url_get(),
