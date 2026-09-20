@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the CiviCRM Admin Utilities plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CiviCRM Admin Utilities 1.1.1a\n"
+"Project-Id-Version: CiviCRM Admin Utilities 1.1.2a\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/civicrm-admin-utilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-15T15:34:46+00:00\n"
+"POT-Creation-Date: 2026-09-20T23:13:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: civicrm-admin-utilities\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: includes/civicrm-admin-utilities-multisite.php:507
 #: includes/civicrm-admin-utilities-multisite.php:569
 #: includes/civicrm-admin-utilities-single.php:923
-#: includes/civicrm-admin-utilities-single.php:2444
+#: includes/civicrm-admin-utilities-single.php:2393
 msgid "CiviCRM Admin Utilities"
 msgstr ""
 
@@ -57,6 +57,7 @@ msgid "Radstock (CAU)"
 msgstr ""
 
 #: assets/civicrm/cautheme/civicrm-admin-utilities-theme.php:137
+#: includes/classes/civicrm/class-civicrm-theme.php:599
 msgid "Gives CiviCRM a look-and-feel that is closer to WordPress"
 msgstr ""
 
@@ -258,12 +259,42 @@ msgstr ""
 msgid "CiviCRM Backend Theme"
 msgstr ""
 
-#: assets/templates/metaboxes/site-metabox-appearance.php:52
+#: assets/templates/metaboxes/site-metabox-appearance.php:56
 msgid "Enable the CiviCRM Admin Utilities \"Radstock\" Theme."
 msgstr ""
 
-#: assets/templates/metaboxes/site-metabox-appearance.php:53
+#: assets/templates/metaboxes/site-metabox-appearance.php:57
 msgid "Note that although the Radstock Theme can be chosen as the \"Frontend Theme\" in CiviCRM, none of its styles will be loaded on Public Pages."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:73
+msgid "Upgrade from Radstock to the CiviCRM Admin Utilities \"Wellow Brook\" Theme."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:75
+msgid "Like Radstock, Wellow Brook gives CiviCRM a look and feel that is similar to WordPress 7.0+ admin screens. It applies the \"Administration Colour Scheme\" chosen by the User to the CiviCRM interface and offers clear keyboard navigation cues."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:78
+#: assets/templates/metaboxes/site-metabox-appearance.php:99
+msgid "Enabling Wellow Brook will also enable the RiverLea Extension in CiviCRM."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:85
+#: assets/templates/metaboxes/site-metabox-appearance.php:111
+msgid "Note that although the Wellow Brook theme can be chosen as the \"Frontend Theme\" in CiviCRM, many of its styles are based on the CSS variables provided by the WordPress admin theme and these are not loaded on Public Pages. It is recommended that you choose a different RiverLea theme for the \"Frontend Theme\" setting in CiviCRM."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:94
+msgid "Enable the CiviCRM Admin Utilities \"Wellow Brook\" Theme."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:96
+msgid "The Wellow Brook theme is an update of the Radstock theme based on the RiverLea Theme Framework and gives CiviCRM a look and feel that is more in keeping with WordPress 7.0+ admin screens. It applies the \"Administration Colour Scheme\" chosen by the User to the CiviCRM interface and offers clear keyboard navigation cues."
+msgstr ""
+
+#: assets/templates/metaboxes/site-metabox-appearance.php:117
+msgid "Uninstall the CiviCRM Admin Utilities \"Wellow Brook\" Theme."
 msgstr ""
 
 #: assets/templates/metaboxes/site-metabox-contacts.php:19
@@ -533,8 +564,8 @@ msgstr ""
 #: assets/templates/site-multidomain.php:32
 #: assets/templates/site-settings.php:33
 #: assets/templates/site-users-table.php:21
-#: civicrm-admin-utilities.php:402
-#: civicrm-admin-utilities.php:408
+#: civicrm-admin-utilities.php:431
+#: civicrm-admin-utilities.php:437
 #: includes/admin/multidomain/class-admin-multidomain-page-network.php:483
 #: includes/admin/multidomain/class-admin-multidomain-page-site.php:555
 #: includes/civicrm-admin-utilities-multisite.php:709
@@ -608,7 +639,7 @@ msgstr ""
 msgid "Save your settings here."
 msgstr ""
 
-#: civicrm-admin-utilities.php:413
+#: civicrm-admin-utilities.php:442
 msgid "Donate!"
 msgstr ""
 
@@ -790,7 +821,7 @@ msgid "Users"
 msgstr ""
 
 #: includes/civicrm-admin-utilities-single.php:516
-#: includes/civicrm-admin-utilities-single.php:2254
+#: includes/civicrm-admin-utilities-single.php:2203
 msgid "CiviCRM"
 msgstr ""
 
@@ -814,56 +845,56 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2276
+#: includes/civicrm-admin-utilities-single.php:2225
 msgid "CiviCRM Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2285
+#: includes/civicrm-admin-utilities-single.php:2234
 msgid "All Contacts"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2294
+#: includes/civicrm-admin-utilities-single.php:2243
 msgid "Advanced Search"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2323
+#: includes/civicrm-admin-utilities-single.php:2272
 msgid "Manage Groups"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2335
+#: includes/civicrm-admin-utilities-single.php:2284
 msgid "Contribution Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2348
+#: includes/civicrm-admin-utilities-single.php:2297
 msgid "Membership Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2361
+#: includes/civicrm-admin-utilities-single.php:2310
 msgid "Events Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2374
+#: includes/civicrm-admin-utilities-single.php:2323
 msgid "Mailings Sent and Scheduled"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2387
+#: includes/civicrm-admin-utilities-single.php:2336
 msgid "Report Listing"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2400
+#: includes/civicrm-admin-utilities-single.php:2349
 msgid "Cases Dashboard"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2412
+#: includes/civicrm-admin-utilities-single.php:2361
 msgid "Admin Console"
 msgstr ""
 
-#: includes/civicrm-admin-utilities-single.php:2423
+#: includes/civicrm-admin-utilities-single.php:2372
 msgid "Manage Extensions"
 msgstr ""
 
 #. translators: %s: The Contact's first name
-#: includes/civicrm-admin-utilities-single.php:2748
+#: includes/civicrm-admin-utilities-single.php:2697
 #, php-format
 msgid "Hi %s, welcome to CiviCRM"
 msgstr ""
@@ -922,3 +953,12 @@ msgid "%s post by this author"
 msgid_plural "%s posts by this author"
 msgstr[0] ""
 msgstr[1] ""
+
+#: includes/classes/civicrm/class-civicrm-theme.php:488
+#: includes/classes/civicrm/class-civicrm-theme.php:598
+msgid "Wellow Brook (CAU)"
+msgstr ""
+
+#: includes/classes/civicrm/class-civicrm-theme.php:489
+msgid "Gives CiviCRM a look-and-feel that is closer to WordPress 7.0+ admin screens."
+msgstr ""
