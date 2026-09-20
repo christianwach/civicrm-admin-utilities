@@ -57,6 +57,15 @@ class CAU_CiviCRM {
 	public $theme;
 
 	/**
+	 * Menu object.
+	 *
+	 * @since 1.1.2
+	 * @access public
+	 * @var CAU_CiviCRM_Menu
+	 */
+	public $menu;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.9
@@ -80,6 +89,12 @@ class CAU_CiviCRM {
 	 */
 	public function initialise() {
 
+		// Only do this once.
+		static $done;
+		if ( isset( $done ) && true === $done ) {
+			return;
+		}
+
 		// Bootstrap this class.
 		$this->include_files();
 		$this->setup_objects();
@@ -91,6 +106,9 @@ class CAU_CiviCRM {
 		 */
 		do_action( 'cau/class/civicrm/loaded' );
 
+		// We're done.
+		$done = true;
+
 	}
 
 	/**
@@ -98,12 +116,13 @@ class CAU_CiviCRM {
 	 *
 	 * @since 1.0.9
 	 */
-	public function include_files() {
+	private function include_files() {
 
 		// Include class files.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm-ufmatch.php';
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm-domain.php';
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm-theme.php';
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm-menu.php';
 
 	}
 
@@ -112,12 +131,13 @@ class CAU_CiviCRM {
 	 *
 	 * @since 1.0.9
 	 */
-	public function setup_objects() {
+	private function setup_objects() {
 
 		// Initialise objects.
 		$this->ufmatch = new CAU_CiviCRM_UFMatch( $this );
 		$this->domain  = new CAU_CiviCRM_Domain( $this );
 		$this->theme   = new CAU_CiviCRM_Theme( $this );
+		$this->menu    = new CAU_CiviCRM_Menu( $this );
 
 	}
 
@@ -208,6 +228,11 @@ class CAU_CiviCRM {
 
 		static $version = false;
 
+		// Cannot be called during "civicrm_config".
+		if ( doing_action( 'civicrm_config' ) ) {
+			return false;
+		}
+
 		// Bail if no CiviCRM.
 		if ( ! $this->is_initialised() ) {
 			return false;
@@ -234,6 +259,11 @@ class CAU_CiviCRM {
 	 * @return CRM_Core_Config|bool $config The CiviCRM config if available, false on failure.
 	 */
 	public function config_get() {
+
+		// Cannot be called during "civicrm_config".
+		if ( doing_action( 'civicrm_config' ) ) {
+			return false;
+		}
 
 		// Bail if no CiviCRM.
 		if ( ! $this->is_initialised() ) {

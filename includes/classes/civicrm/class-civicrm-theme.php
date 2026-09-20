@@ -74,11 +74,6 @@ class CAU_CiviCRM_Theme {
 	 */
 	public function __construct( $parent ) {
 
-		// Cannot be installed if WordPress does not meet requirements.
-		if ( ! $this->wp_version_okay() ) {
-			return;
-		}
-
 		// Store references.
 		$this->civicrm = $parent;
 		$this->plugin  = $parent->plugin;
@@ -98,6 +93,12 @@ class CAU_CiviCRM_Theme {
 		// Only do this once.
 		static $done;
 		if ( isset( $done ) && true === $done ) {
+			return;
+		}
+
+		// Cannot be installed if WordPress does not meet requirements.
+		if ( ! $this->wp_version_okay() ) {
+			$done = true;
 			return;
 		}
 
@@ -177,9 +178,11 @@ class CAU_CiviCRM_Theme {
 		// Init return.
 		$version_okay = false;
 
+		// Try and get the true WordPress version.
+		$version = $this->plugin->wordpress->wp_version_get();
+
 		// Cannot be installed if WordPress is less than 7.0.
-		global $wp_version;
-		if ( ! version_compare( $wp_version, '7.0', '>=' ) ) {
+		if ( ! version_compare( $version, '7.0', '>=' ) ) {
 			$version_okay = false;
 		} else {
 			$version_okay = true;
@@ -204,18 +207,13 @@ class CAU_CiviCRM_Theme {
 			return true;
 		}
 
-		// Cannot be called during "civicrm_config".
-		if ( doing_action( 'civicrm_config' ) ) {
-			return false;
-		}
-
-		// Bail if no CiviCRM.
-		if ( ! $this->civicrm->is_initialised() ) {
+		// Get the CiviCRM version.
+		$version = $this->civicrm->version_get();
+		if ( false === $version ) {
 			return false;
 		}
 
 		// Set flag based on whether CiviCRM meets requirements.
-		$version = CRM_Utils_System::version();
 		if ( version_compare( $version, '6.14.1', '>=' ) ) {
 			$this->version_okay = true;
 		} else {
@@ -634,9 +632,10 @@ class CAU_CiviCRM_Theme {
 			return;
 		}
 
-		// Define version.
+		// Define version and maybe append timestamp.
 		$version = '?version=' . CIVICRM_ADMIN_UTILITIES_VERSION;
-		if ( false !== CIVICRM_ADMIN_UTILITIES_DEBUG && defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
+		$wp_debugging = defined( 'WP_DEBUG' ) && WP_DEBUG;
+		if ( CIVICRM_ADMIN_UTILITIES_DEBUG !== false && $wp_debugging ) {
 			$version .= '-' . time();
 		}
 

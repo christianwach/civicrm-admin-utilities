@@ -1747,32 +1747,6 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Bail if disabled.
-		if ( $this->setting_get( 'prettify_menu', '0' ) === '1' ) {
-
-			// Set default CSS file.
-			$css = 'civicrm-admin-utilities-menu.css';
-
-			// Use specific CSS file for KAM if active.
-			if ( $this->kam_is_active() ) {
-				if ( version_compare( $wp_version, '6.9.99999', '>' ) ) {
-					$css = 'civicrm-admin-utilities-kam-7-plus.css';
-				} else {
-					$css = 'civicrm-admin-utilities-kam.css';
-				}
-			}
-
-			// Add menu stylesheet.
-			wp_enqueue_style(
-				'civicrm_admin_utilities_admin_tweaks',
-				plugins_url( 'assets/css/' . $css, CIVICRM_ADMIN_UTILITIES_FILE ),
-				null,
-				CIVICRM_ADMIN_UTILITIES_VERSION, // Version.
-				'all' // Media.
-			);
-
-		}
-
 		// Use specific CSS file for Shoreditch if active.
 		if ( $this->shoreditch_is_active() ) {
 
@@ -2090,48 +2064,6 @@ class CiviCRM_Admin_Utilities_Single {
 
 		// --<
 		return $shoreditch;
-
-	}
-
-	/**
-	 * Determine if the Keyboard Accessible Menu Extension is being used.
-	 *
-	 * @since 0.4.3
-	 * @since 0.5.4 Moved from plugin class.
-	 *
-	 * @return bool True if KAM Extension is active, false otherwise.
-	 */
-	public function kam_is_active() {
-
-		// Kick out if no CiviCRM.
-		if ( ! $this->plugin->civicrm->is_initialised() ) {
-			return false;
-		}
-
-		// Get current version of CiviCRM.
-		$civicrm_version = CRM_Utils_System::version();
-
-		// Init parsed version.
-		$version = $civicrm_version;
-
-		// We only need the major and minor parts.
-		$version_tmp = explode( '.', $civicrm_version );
-		if ( isset( $version_tmp[1] ) ) {
-			$version = $version_tmp[0] . '.' . $version_tmp[1];
-		}
-
-		// KAM is included in core from 5.12 onwards.
-		if ( version_compare( $version, '5.12', '>=' ) ) {
-			return true;
-		}
-
-		// Kick out if no KAM function.
-		if ( ! function_exists( 'kam_civicrm_coreResourceList' ) ) {
-			return false;
-		}
-
-		// KAM must be present.
-		return true;
 
 	}
 
@@ -3412,7 +3344,7 @@ class CiviCRM_Admin_Utilities_Single {
 			// Sanitise array.
 			array_walk(
 				$post_types,
-				function( &$item ) {
+				function ( &$item ) {
 					$item = sanitize_text_field( wp_unslash( $item ) );
 				}
 			);
@@ -3437,7 +3369,7 @@ class CiviCRM_Admin_Utilities_Single {
 			// Sanitise array.
 			array_walk(
 				$afforms,
-				function( &$item ) {
+				function ( &$item ) {
 					$item = sanitize_text_field( wp_unslash( $item ) );
 				}
 			);

@@ -36,7 +36,14 @@ if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_PATH' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_PATH', plugin_dir_path( CIVICRM_ADMIN_UTILITIES_FILE ) );
 }
 
-// Set this and `WP_DEBUG` to "true" for Wellow Brook development.
+/*
+ * Set production debug flag.
+ *
+ * Setting this to true will write to the log even when WP_DEBUG is off, for example in
+ * production environments. This setting is ignored when WP_DEBUG is on.
+ *
+ * Set this and WP_DEBUG to "true" for Wellow Brook development.
+ */
 if ( ! defined( 'CIVICRM_ADMIN_UTILITIES_DEBUG' ) ) {
 	define( 'CIVICRM_ADMIN_UTILITIES_DEBUG', false );
 }
@@ -105,6 +112,15 @@ class CiviCRM_Admin_Utilities {
 	public $civicrm;
 
 	/**
+	 * WordPress object.
+	 *
+	 * @since 1.1.2
+	 * @access public
+	 * @var CAU_WordPress
+	 */
+	public $wordpress;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -168,6 +184,7 @@ class CiviCRM_Admin_Utilities {
 
 		// Load our common classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/civicrm/class-civicrm.php';
+		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/classes/wordpress/class-wordpress.php';
 
 		// Load our admin utility classes.
 		require CIVICRM_ADMIN_UTILITIES_PATH . 'includes/admin/class-cau-admin-batch.php';
@@ -197,13 +214,14 @@ class CiviCRM_Admin_Utilities {
 	private function setup_objects() {
 
 		// Always instantiate common classes.
-		$this->civicrm = new CAU_CiviCRM( $this );
+		$this->civicrm   = new CAU_CiviCRM( $this );
+		$this->wordpress = new CAU_WordPress( $this );
 
 		// Always instantiate Single Site classes.
 		$this->single       = new CiviCRM_Admin_Utilities_Single( $this );
 		$this->single_users = new CiviCRM_Admin_Utilities_Single_Users( $this );
 
-		// Always instantiate Theme class.
+		// Always instantiate Radstock Theme class.
 		$this->theme = new CiviCRM_Admin_Utilities_Theme( $this );
 
 		// Maybe instantiate Multisite classes.
@@ -327,8 +345,9 @@ class CiviCRM_Admin_Utilities {
 	 */
 	public function log_error( $data = [] ) {
 
-		// Skip if not debugging.
-		if ( ! defined( 'WP_DEBUG' ) || false === WP_DEBUG ) {
+		// Skip if not debugging in production, but allow if WP_DEBUG is on.
+		$wp_debugging = defined( 'WP_DEBUG' ) && WP_DEBUG;
+		if ( CIVICRM_ADMIN_UTILITIES_DEBUG === false && ! $wp_debugging ) {
 			return;
 		}
 
@@ -404,7 +423,7 @@ function civicrm_admin_utilities_action_links( $links, $file ) {
 	}
 
 	// Add settings link.
-	if ( plugin_basename( dirname( __FILE__ ) . '/civicrm-admin-utilities.php' ) === $file ) {
+	if ( plugin_basename( __DIR__ . '/civicrm-admin-utilities.php' ) === $file ) {
 
 		// Add settings link if network activated and viewing network admin.
 		if ( civicrm_au()->is_network_activated() && is_network_admin() ) {

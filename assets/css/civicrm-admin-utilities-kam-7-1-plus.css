@@ -1,12 +1,12 @@
 /**
- * WordPress 7.0.x+ styles for the CiviCRM menu.
+ * WordPress 7.1+ styles for the CiviCRM menu.
  *
- * Implements WordPress 7.0.x+ styles and colours in the CiviCRM menu.
+ * Implements WordPress 7.1+ styles and colours in the CiviCRM menu.
  *
  * Compatible with WordPress admin colour schemes.
  *
  * @package CiviCRM_Admin_Utilities
- * @since 1.1.1
+ * @since 1.1.2
  */
 
 /*
@@ -53,27 +53,6 @@ CiviCRM admin menu styles.
 	--crm-wp-menu-link-color-rgb: rgba(240, 246, 252, 0.7);
 	--crm-wp-menu-text-color-hover: #72aee6;
 	--crm-wp-menu-link-background-color: #32373c;
-	--crm-wp-menu-separator-color: #000;
-}
-
-body.admin-color-fresh {
-	--crm-wp-menu-background-color: #23282d;
-	--crm-wp-menu-default-color: #f0f0f1;
-	--crm-wp-menu-link-color: #c3c4c7;
-	--crm-wp-menu-link-color-rgb: rgba(240, 246, 252, 0.7);
-	--crm-wp-menu-text-color-hover: #72aee6;
-	--crm-wp-menu-link-background-color: #32373c;
-	--crm-wp-menu-separator-color: #000;
-}
-
-body.admin-color-light {
-	--crm-wp-menu-background-color: #e5e5e5;
-	--crm-wp-menu-default-color: #333;
-	--crm-wp-menu-link-color: #686868;
-	--crm-wp-menu-link-color-rgb: rgb(104.4, 104.4, 104.4);
-	--crm-wp-menu-text-color-hover: #04a4cc;
-	--crm-wp-menu-link-background-color: #fff;
-	--crm-wp-menu-separator-color: #ededed;
 }
 
 body.admin-color-modern {
@@ -83,67 +62,78 @@ body.admin-color-modern {
 	--crm-wp-menu-link-color-rgb: rgb(187.5, 187.5, 187.5);
 	--crm-wp-menu-text-color-hover: #7b90ff;
 	--crm-wp-menu-link-background-color: #0c0c0c;
-	--crm-wp-menu-separator-color: #303030;
+}
+
+body.admin-color-fresh {
+	--crm-wp-menu-background-color: #1d2327;
+	--crm-wp-menu-default-color: #f0f0f1;
+	--crm-wp-menu-link-color: #c3c4c7;
+	--crm-wp-menu-link-color-rgb: rgba(240, 246, 252, 0.7);
+	--crm-wp-menu-text-color-hover: #72aee6;
+	--crm-wp-menu-link-background-color: #2c3338;
+}
+
+body.admin-color-light {
+	--crm-wp-menu-background-color: #e5e5e5;
+	--crm-wp-menu-default-color: #333;
+	--crm-wp-menu-link-color: #686868;
+	--crm-wp-menu-link-color-rgb: rgb(104.4, 104.4, 104.4);
+	--crm-wp-menu-text-color-hover: #007cba;
+	--crm-wp-menu-link-background-color: #fff;
 }
 
 body.admin-color-blue {
-	--crm-wp-menu-background-color: #52accc;
+	--crm-wp-menu-background-color: #245278;
 	--crm-wp-menu-default-color: #fff;
 	--crm-wp-menu-link-color: #e2ecf1;
-	--crm-wp-menu-link-color-rgb: rgb(226, 236, 241);
+	--crm-wp-menu-link-color-rgb: rgb(226 236 241);
 	--crm-wp-menu-text-color-hover: #fff;
-	--crm-wp-menu-link-background-color: #4796b3;
-	--crm-wp-menu-separator-color: #3b85a0;
+	--crm-wp-menu-link-background-color: rgb(27.7615384615, 63.2346153846, 92.5384615385);
 }
 
 body.admin-color-coffee {
-	--crm-wp-menu-background-color: #59524c;
+	--crm-wp-menu-background-color: #5c4c40;
 	--crm-wp-menu-default-color: #fff;
-	--crm-wp-menu-link-color: #cdcbc9;
-	--crm-wp-menu-link-color-rgb: rgb(205.2, 203.1, 201.3);
-	--crm-wp-menu-text-color-hover: #c7a589;
-	--crm-wp-menu-link-background-color: #46403c;
-	--crm-wp-menu-separator-color: #2f2b28;
+	--crm-wp-menu-link-color: #cec9c6;
+	--crm-wp-menu-link-color-rgb: rgb(206.1, 201.3, 197.7);
+	--crm-wp-menu-text-color-hover: #fff;
+	--crm-wp-menu-link-background-color: rgb(70.9461538462, 58.6076923077, 49.3538461538);
 }
 
 body.admin-color-ectoplasm {
-	--crm-wp-menu-background-color: #523f6d;
+	--crm-wp-menu-background-color: #4b3369;
 	--crm-wp-menu-default-color: #fff;
-	--crm-wp-menu-link-color: #cbc5d3;
-	--crm-wp-menu-link-color-rgb: rgb(203.1, 197.4, 211.2);
-	--crm-wp-menu-text-color-hover: #a3b745;
-	--crm-wp-menu-link-background-color: #413256;
-	--crm-wp-menu-separator-color: #2f2b28;
+	--crm-wp-menu-link-color: #c9c2d2;
+	--crm-wp-menu-link-color-rgb: rgb(200.7, 193.8, 210);
+	--crm-wp-menu-text-color-hover: #fff;
+	--crm-wp-menu-link-background-color: rgb(57.0653846154, 39.3288461538, 80.9711538462);
 }
 
 body.admin-color-midnight {
 	--crm-wp-menu-background-color: #363b3f;
 	--crm-wp-menu-default-color: #fff;
-	--crm-wp-menu-link-color: #cbc5d3;
-	--crm-wp-menu-link-color-rgb: rgb(194.7, 196.2, 197.4);
-	--crm-wp-menu-text-color-hover: #e14d43;
-	--crm-wp-menu-link-background-color: #26292c;
-	--crm-wp-menu-separator-color: #000;
+	--crm-wp-menu-link-color: #c2c5c6;
+	--crm-wp-menu-link-color-rgb: rgb(193.8, 196.5, 198.3);
+	--crm-wp-menu-text-color-hover: #fff;
+	--crm-wp-menu-link-background-color: rgb(35.4384615385, 41.6923076923, 45.8615384615);
 }
 
 body.admin-color-ocean {
-	--crm-wp-menu-background-color: #738e96;
+	--crm-wp-menu-background-color: #39535a;
 	--crm-wp-menu-default-color: #fff;
-	--crm-wp-menu-link-color: #d5dde0;
-	--crm-wp-menu-link-color-rgb: rgb(213, 221.1, 223.5);
-	--crm-wp-menu-text-color-hover: #9ebaa0;
-	--crm-wp-menu-link-background-color: #627c83;
-	--crm-wp-menu-separator-color: #556c72;
+	--crm-wp-menu-link-color: #c4cbce;
+	--crm-wp-menu-link-color-rgb: rgb(195.6, 203.4, 205.5);
+	--crm-wp-menu-text-color-hover: #fff;
+	--crm-wp-menu-link-background-color: rgb(43.1571428571, 62.8428571429, 68.1428571429);
 }
 
 body.admin-color-sunrise {
-	--crm-wp-menu-background-color: #cf4944;
+	--crm-wp-menu-background-color: #8a312d;
 	--crm-wp-menu-default-color: #fff;
-	--crm-wp-menu-link-color: #f1c8c7;
-	--crm-wp-menu-link-color-rgb: rgb(240.6, 200.4, 198.9);
-	--crm-wp-menu-text-color-hover: #f7e3d3;
-	--crm-wp-menu-link-background-color: #be3631;
-	--crm-wp-menu-separator-color: #a12c26;
+	--crm-wp-menu-link-color: #dcc1c0;
+	--crm-wp-menu-link-color-rgb: rgb(219.9, 193.2, 192);
+	--crm-wp-menu-text-color-hover: #fff;
+	--crm-wp-menu-link-background-color: rgb(111.0786885246, 39.4409836066, 36.2213114754);
 }
 
 body > #civicrm-menu-nav #civicrm-menu.sm-civicrm
@@ -196,5 +186,7 @@ body > #civicrm-menu-nav #civicrm-menu li.crm-menu-border-bottom + li,
 body > #civicrm-menu-nav #civicrm-menu li + li.crm-menu-border-top
 {
 	border-color: var(--crm-wp-menu-separator-color);
+	/* Make same as background for now. */
+	border-color: var(--crm-wp-menu-link-background-color);
 	border-width: 1px;
 }
