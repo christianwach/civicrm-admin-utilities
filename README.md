@@ -30,9 +30,15 @@ Please note: this is the development repository for *CiviCRM Admin Utilities*. I
 * Allows suppression of the "change of email" notification when a CiviCRM Contact's primary email is changed
 * Gives an overview of the relationships between Users and Contacts via the "Manage Users" screen
 
-### CiviCRM Admin Theme
+### "Wellow Brook" RiverLea Stream
 
-Version 0.5 introduces a new theme for CiviCRM admin screens that is more in keeping with WordPress. It can be enabled on the CiviCRM Admin Utilities settings page. Feedback is welcome - please [open an issue](https://github.com/christianwach/civicrm-admin-utilities/issues) if you find any bugs or have suggestions for improvements.
+Version 1.1.2 introduces a new theme (RiverLea Stream) for CiviCRM admin screens that is more in keeping with WordPress and respects the Administration Colour Scheme that you have chosen on your WordPress Profile screen. It can be enabled on the CiviCRM Admin Utilities settings page.
+
+Feedback is welcome - please [open an issue](https://github.com/christianwach/civicrm-admin-utilities/issues) if you find any bugs or have suggestions for improvements.
+
+### "Radstock" CiviCRM Admin Theme
+
+Version 0.5 introduced a theme for CiviCRM admin screens that was more aligned with WordPress styles. If you have enabled Radstock it will stay enabled, but it is recommended that you upgrade to Wellow Brook because Radstock will no longer be supported in future.
 
 ### Notes
 
@@ -58,7 +64,7 @@ If you have cloned the code from GitHub, it is assumed that you know what you're
 
 ### Setup
 
-In single-site installs, you can adjust this plugin's settings by visiting "Settings" --> "CiviCRM Admin Utilities". If you install this plugin in multisite, you'll find its network settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities". If you have CiviCRM network-enabled, then you should also network-enable this plugin.
+In single-site installs, you can adjust this plugin's settings by visiting "CiviCRM" --> "Admin Utilities". If you install this plugin in multisite, you'll find its network settings page at "Network Admin" --> "Settings" --> "CiviCRM Admin Utilities". If you have CiviCRM network-enabled, then you should also network-enable this plugin.
 
 ### Upgrading from 0.3.3 or earlier
 
