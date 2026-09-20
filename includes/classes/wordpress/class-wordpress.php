@@ -117,6 +117,8 @@ class CAU_WordPress {
 	/**
 	 * Gets the WordPress major version.
 	 *
+	 * A major WordPress version is actually a dot version, i.e. 6.9, 7.0, 7.1, etc.
+	 *
 	 * @since 1.1.2
 	 *
 	 * @return string $version The WordPress major version.
@@ -126,9 +128,20 @@ class CAU_WordPress {
 		// Try and get the true WordPress version.
 		$core_version = $this->wp_version_get();
 
-		// Parse out the WordPress major version.
-		$current = explode( '.', $core_version );
-		$version = $current[0] . '.' . $current[1];
+		// Nightly build versions have two hyphens and a commit number.
+		if ( preg_match( '/-\w+-\d+/', $core_version ) ) {
+
+			// Retrieve the major version number.
+			preg_match( '/^\d+.\d+/', $core_version, $major_version );
+			$version = $major_version[0];
+
+		} else {
+
+			// Build the WordPress major version.
+			$current = explode( '.', $core_version );
+			$version = $current[0] . '.' . $current[1];
+
+		}
 
 		// --<
 		return $version;
