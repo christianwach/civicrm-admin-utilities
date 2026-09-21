@@ -1880,12 +1880,16 @@ class CiviCRM_Admin_Utilities_Single {
 			return;
 		}
 
-		// Dequeue the ACF stylesheets.
-		wp_dequeue_style( 'acf-global' );
+		// Dequeue the ACF stylesheet.
+		if ( defined( 'ACF_VERSION' ) ) {
+			wp_dequeue_style( 'acf-global' );
+		}
 
 		// Dequeue the ACF Extended stylesheets.
-		wp_dequeue_style( 'acf-extended-admin' );
-		wp_dequeue_style( 'acf-extended-admin-input' );
+		if ( defined( 'ACFE_VERSION' ) ) {
+			wp_dequeue_style( 'acf-extended-admin' );
+			wp_dequeue_style( 'acf-extended-admin-input' );
+		}
 
 	}
 
