@@ -460,6 +460,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Add Afform Angular modules when required.
 		add_action( 'wp', [ $this, 'afform_scripts' ] );
 
+		// Maybe dequeue various stylesheets.
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts_dequeue' ], 100 );
+
 	}
 
 	// -------------------------------------------------------------------------
@@ -1853,6 +1856,36 @@ class CiviCRM_Admin_Utilities_Single {
 			do_action( 'civicrm_admin_utilities_admin_overridden' );
 
 		}
+
+	}
+
+	/**
+	 * Dequeues stylesheets on the CiviCRM admin screen.
+	 *
+	 * Some plugins enqueue their stylesheets throughout WordPress admin. These can
+	 * interfere with RiverLea and/or other CiviCRM admin themes. Let's get rid.
+	 *
+	 * Currently dequeues:
+	 *
+	 * * Advanced Custom Fields global CSS file.
+	 * * ACF Extended admin CSS files.
+	 *
+	 * @since 1.1.3
+	 */
+	public function admin_scripts_dequeue() {
+
+		// Only dequeue on the CiviCRM admin screen.
+		$screen = get_current_screen();
+		if ( 'toplevel_page_CiviCRM' !== $screen->id ) {
+			return;
+		}
+
+		// Dequeue the ACF stylesheets.
+		wp_dequeue_style( 'acf-global' );
+
+		// Dequeue the ACF Extended stylesheets.
+		wp_dequeue_style( 'acf-extended-admin' );
+		wp_dequeue_style( 'acf-extended-admin-input' );
 
 	}
 
