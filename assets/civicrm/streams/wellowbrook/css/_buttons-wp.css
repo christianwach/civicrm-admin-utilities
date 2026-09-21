@@ -511,6 +511,10 @@ Other buttons.
 	box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--crm-btn-cancel-bg-color);
 }
 
+.crm-container .crm-submit-buttons a:has(.fa-trash) .crm-i.fa-trash::before {
+	color: var(--crm-btn-cancel-text-color);
+}
+
 
 
 /* Apply style to "Help spread the word" buttons. */
