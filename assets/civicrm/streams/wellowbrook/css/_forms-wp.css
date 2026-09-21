@@ -29,19 +29,19 @@ Form Elements.
 
 /* Fixed width Inputs. */
 .crm-container input[type="number"].two {
-	width: 4em !important;
+	width: 5em !important;
 }
 
 .crm-container input[type="number"].four {
-	width: 6em !important;
+	width: 7em !important;
 }
 
 .crm-container input[type="number"].six {
-	width: 8em !important;
+	width: 9em !important;
 }
 
 .crm-container input[type="number"].eight {
-	width: 10em !important;
+	width: 11em !important;
 }
 
 
