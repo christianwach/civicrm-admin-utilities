@@ -415,9 +415,15 @@ Select2 Elements.
 }
 
 .crm-container .select2-container .select2-choice,
-.crm-container .select2-container-multi .select2-choices {
+.crm-container .select2-container-multi .select2-choices,
+.crm-container .select2-container-multi .html-adjust .select2-choices,
+.crm-container .select2-container-multi .html-adjust .select2-choices,
+.crm-container .select2-container-multi ul.select2-choices,
+.crm-container .select2-container-multi ol.select2-choices {
 	min-height: var(--crm-wp-btn-height);
 	box-shadow: 0 0 0 transparent;
+	padding: 2px var(--crm-l-small);
+	margin: 0;
 }
 
 :root {
