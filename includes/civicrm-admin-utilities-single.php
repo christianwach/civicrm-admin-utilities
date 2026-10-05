@@ -1492,6 +1492,9 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Init hide "Manage Groups" admin bar menu item checkbox.
+		// Include CiviCRM navigation in the native command palette.
+		$command_palette = $this->setting_get( 'command_palette', '0' );
+
 		$admin_bar_groups = 0;
 		if ( $this->setting_get( 'admin_bar_groups', '0' ) === '1' ) {
 			$admin_bar_groups = 1;
@@ -3140,6 +3143,9 @@ class CiviCRM_Admin_Utilities_Single {
 		// Do not hide "Manage Groups" menu item from Shortcuts Menu.
 		$settings['admin_bar_groups'] = '0';
 
+		// Keep command palette integration opt-in.
+		$settings['command_palette'] = '0';
+
 		// Init post types with defaults.
 		$settings['post_types'] = [ 'post', 'page' ];
 
@@ -3225,6 +3231,7 @@ class CiviCRM_Admin_Utilities_Single {
 		$fix_soft_delete      = isset( $_POST[ $prefix . 'fix_soft_delete' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_soft_delete' ] ) ) : 0;
 		$admin_bar            = isset( $_POST[ $prefix . 'admin_bar' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar' ] ) ) : 0;
 		$admin_bar_groups     = isset( $_POST[ $prefix . 'admin_bar_groups' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar_groups' ] ) ) : 0;
+		$command_palette     = isset( $_POST[ $prefix . 'command_palette' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'command_palette' ] ) ) : 0;
 		$fix_api_timezone     = isset( $_POST[ $prefix . 'fix_api_timezone' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_api_timezone' ] ) ) : 0;
 		$flush_cache          = isset( $_POST[ $prefix . 'cache' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'cache' ] ) ) : 0;
 		$wellow_enable        = isset( $_POST[ $prefix . 'wellow_enable' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'wellow_enable' ] ) ) : 0;
@@ -3369,6 +3376,8 @@ class CiviCRM_Admin_Utilities_Single {
 		}
 
 		// Did we ask to hide the "Manage Groups" menu item from the shortcuts menu?
+		$this->setting_set( 'command_palette', 1 === $command_palette ? '1' : '0' );
+
 		if ( 1 === $admin_bar_groups ) {
 			$this->setting_set( 'admin_bar_groups', '1' );
 		} else {

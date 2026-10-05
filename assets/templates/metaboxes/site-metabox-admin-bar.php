@@ -43,4 +43,13 @@ defined( 'ABSPATH' ) || exit;
 		</td>
 	</tr>
 
+	<tr>
+		<th scope="row"><?php esc_html_e( 'CiviCRM Menu Search', 'civicrm-admin-utilities' ); ?></th>
+		<td>
+			<input type="checkbox" class="settings-checkbox" name="civicrm_admin_utilities_command_palette" id="civicrm_admin_utilities_command_palette" value="1"<?php checked( 1, $command_palette ); ?> />
+			<label class="civicrm_admin_utilities_settings_label" for="civicrm_admin_utilities_command_palette"><?php esc_html_e( 'Include CiviCRM menu items in the WordPress command palette.', 'civicrm-admin-utilities' ); ?></label>
+			<p class="description"><?php esc_html_e( 'Use Menu in the admin bar or Ctrl+K / ⌘K. Requires WordPress 6.9 or later.', 'civicrm-admin-utilities' ); ?></p>
+		</td>
+	</tr>
+
 </table>

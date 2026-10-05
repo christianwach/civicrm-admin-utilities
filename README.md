@@ -24,6 +24,7 @@ Please note: this is the development repository for *CiviCRM Admin Utilities*. I
 * Fixes the appearance of the WordPress Access Control form where necessary
 * Offers options to prevent various CiviCRM Stylesheets from loading on the front-end
 * Adds a handy CiviCRM Shortcuts menu to the WordPress Admin Bar
+* Offers integrated CiviCRM menu search within the WordPress command palette
 * Allows you to choose which Post Types the CiviCRM shortcode button appears on
 * In WordPress multisite, allows you to hide CiviCRM on sub-sites
 * Allows you to remove "administer CiviCRM" capabilities from sub-site administrators
