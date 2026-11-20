@@ -85,7 +85,11 @@ class CAU_CiviCRM_Command_Palette {
 	private function register_hooks() {
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'command_palette_enqueue' ], 20 );
+
+		/*
+		// Disable modifying the core command pallette menu item.
 		add_action( 'admin_bar_menu', [ $this, 'command_palette_label' ], 2001 );
+		*/
 
 	}
 
