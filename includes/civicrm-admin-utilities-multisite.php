@@ -1075,13 +1075,13 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Init hide "Manage Groups" admin bar menu item checkbox.
-		// Include CiviCRM navigation in the native command palette.
-		$command_palette = $this->setting_get( 'command_palette', '0' );
-
 		$admin_bar_groups = 0;
 		if ( $this->setting_get( 'admin_bar_groups', '0' ) === '1' ) {
 			$admin_bar_groups = 1;
 		}
+
+		// Include CiviCRM navigation in the native command palette.
+		$command_palette = $this->setting_get( 'command_palette', '0' );
 
 		// Include template file.
 		include CIVICRM_ADMIN_UTILITIES_PATH . 'assets/templates/metaboxes/site-metabox-admin-bar.php';
@@ -1816,7 +1816,7 @@ class CiviCRM_Admin_Utilities_Multisite {
 		$fix_soft_delete      = isset( $_POST[ $prefix . 'fix_soft_delete' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_soft_delete' ] ) ) : 0;
 		$admin_bar            = isset( $_POST[ $prefix . 'admin_bar' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar' ] ) ) : 0;
 		$admin_bar_groups     = isset( $_POST[ $prefix . 'admin_bar_groups' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'admin_bar_groups' ] ) ) : 0;
-		$command_palette     = isset( $_POST[ $prefix . 'command_palette' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'command_palette' ] ) ) : 0;
+		$command_palette      = isset( $_POST[ $prefix . 'command_palette' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'command_palette' ] ) ) : 0;
 		$fix_api_timezone     = isset( $_POST[ $prefix . 'fix_api_timezone' ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ $prefix . 'fix_api_timezone' ] ) ) : 0;
 
 		// Retrieve Post Types array.
@@ -1917,13 +1917,14 @@ class CiviCRM_Admin_Utilities_Multisite {
 		}
 
 		// Did we ask to hide the "Manage Groups" menu item from the shortcuts menu?
-		$this->setting_set( 'command_palette', 1 === $command_palette ? '1' : '0' );
-
 		if ( 1 === $admin_bar_groups ) {
 			$this->setting_set( 'admin_bar_groups', '1' );
 		} else {
 			$this->setting_set( 'admin_bar_groups', '0' );
 		}
+
+		// Did we ask to enable the command pallette?
+		$this->setting_set( 'command_palette', 1 === $command_palette ? '1' : '0' );
 
 		// Which post types are we enabling the CiviCRM button on?
 		if ( ! empty( $post_types ) ) {

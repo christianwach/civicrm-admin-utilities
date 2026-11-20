@@ -68,6 +68,8 @@ class CAU_CiviCRM {
 	/**
 	 * WordPress command palette integration.
 	 *
+	 * @since 1.1.3
+	 * @access public
 	 * @var CAU_CiviCRM_Command_Palette
 	 */
 	public $command_palette;
@@ -142,10 +144,10 @@ class CAU_CiviCRM {
 	private function setup_objects() {
 
 		// Initialise objects.
-		$this->ufmatch = new CAU_CiviCRM_UFMatch( $this );
-		$this->domain  = new CAU_CiviCRM_Domain( $this );
-		$this->theme   = new CAU_CiviCRM_Theme( $this );
-		$this->menu    = new CAU_CiviCRM_Menu( $this );
+		$this->ufmatch         = new CAU_CiviCRM_UFMatch( $this );
+		$this->domain          = new CAU_CiviCRM_Domain( $this );
+		$this->theme           = new CAU_CiviCRM_Theme( $this );
+		$this->menu            = new CAU_CiviCRM_Menu( $this );
 		$this->command_palette = new CAU_CiviCRM_Command_Palette( $this );
 
 	}
